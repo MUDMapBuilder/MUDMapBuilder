@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net7.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\Myra\src\Myra\Myra.FNA.Core.csproj" />
+    <ProjectReference Include="..\MUDMapBuilder\MUDMapBuilder.csproj" />
+  </ItemGroup>
+</Project>

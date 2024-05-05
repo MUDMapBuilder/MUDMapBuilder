@@ -1,27 +1,26 @@
-﻿using AbarimMUD.Data;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace MUDMapBuilder
 {
 	public class MMBRoom
 	{
-		private Dictionary<Direction, Point> _connections = new Dictionary<Direction, Point>();
+		private Dictionary<MMBDirection, Point> _connections = new Dictionary<MMBDirection, Point>();
 
-		public Room Room { get; private set; }
+		public IMMBRoom Room { get; private set; }
 		public Point Position { get; internal set; }
 
-		internal MMBRoom(Room room)
+		internal MMBRoom(IMMBRoom room)
 		{
 			Room = room;
 		}
 
-		public void Connect(Direction direction, Point pos)
+		internal void Connect(MMBDirection direction, Point pos)
 		{
 			_connections[direction] = pos;
 		}
 
-		public bool IsConnected(Direction direction, Point pos)
+		internal bool IsConnected(MMBDirection direction, Point pos)
 		{
 			Point connectedPos;
 			if (!_connections.TryGetValue(direction, out connectedPos))

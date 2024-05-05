@@ -4,6 +4,7 @@ using Myra;
 using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
 using System.IO;
+using System.Linq;
 
 namespace MUDMapBuilder.Sample.UI
 {
@@ -35,7 +36,8 @@ namespace MUDMapBuilder.Sample.UI
 
 		public void Rebuild(int? maxSteps = null)
 		{
-			var grid = MapBuilder.BuildGrid(_map, maxSteps);
+			var rooms = (from r in _map.Rooms select new RoomWrapper(r)).ToArray();
+			var grid = MapBuilder.BuildGrid(rooms, maxSteps);
 			if (maxSteps == null)
 			{
 				MaxSteps = grid.Steps;

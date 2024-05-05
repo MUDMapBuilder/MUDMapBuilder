@@ -1,5 +1,4 @@
-﻿using AbarimMUD.Data;
-using GoRogue;
+﻿using GoRogue;
 using GoRogue.MapViews;
 using GoRogue.Pathing;
 using SkiaSharp;
@@ -8,7 +7,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using Direction = AbarimMUD.Data.Direction;
 using Rectangle = System.Drawing.Rectangle;
 
 namespace MUDMapBuilder
@@ -85,21 +83,19 @@ namespace MUDMapBuilder
 							canvas.DrawRect(rect.X, rect.Y, _cellsWidths[x], RoomHeight, paint);
 
 							// Draw connections
-							foreach (var roomExit in mMBRoom.Room.Exits)
+							var exitDirs = mMBRoom.Room.ExitsDirections;
+							for (var i = 0; i < exitDirs.Length; ++i)
 							{
-								if (roomExit.TargetRoom == null)
-								{
-									continue;
-								}
-
-								var targetRoom = GetByRoom(roomExit.TargetRoom);
+								var exitDir = exitDirs[i];
+								var exitRoom = mMBRoom.Room.GetRoomByExit(exitDir);
+								var targetRoom = GetRoomById(exitRoom.Id);
 								if (targetRoom == null)
 								{
 									continue;
 								}
 
 								var targetPos = targetRoom.Position;
-								if (AreRoomsConnected(new Point(x, y), targetPos, roomExit.Direction))
+								if (AreRoomsConnected(new Point(x, y), targetPos, exitDir))
 								{
 									// Connection is drawn already
 									continue;
@@ -111,9 +107,9 @@ namespace MUDMapBuilder
 								Point? startCheck = null;
 								Point? endCheck = null;
 
-								switch (roomExit.Direction)
+								switch (exitDir)
 								{
-									case Direction.North:
+									case MMBDirection.North:
 										if (y - targetPos.Y == 1)
 										{
 											straightConnection = true;
@@ -124,7 +120,7 @@ namespace MUDMapBuilder
 											endCheck = new Point(targetPos.X, targetPos.Y + 1);
 										}
 										break;
-									case Direction.East:
+									case MMBDirection.East:
 										if (targetPos.X - x == 1)
 										{
 											straightConnection = true;
@@ -135,7 +131,7 @@ namespace MUDMapBuilder
 											endCheck = new Point(targetPos.X - 1, targetPos.Y);
 										}
 										break;
-									case Direction.South:
+									case MMBDirection.South:
 										if (targetPos.Y - y == 1)
 										{
 											straightConnection = true;
@@ -146,7 +142,7 @@ namespace MUDMapBuilder
 											endCheck = new Point(targetPos.X, targetPos.Y - 1);
 										}
 										break;
-									case Direction.West:
+									case MMBDirection.West:
 										if (x - targetPos.X == 1)
 										{
 											straightConnection = true;
@@ -157,7 +153,7 @@ namespace MUDMapBuilder
 											endCheck = new Point(targetPos.X - 1, targetPos.Y);
 										}
 										break;
-									case Direction.Up:
+									case MMBDirection.Up:
 										if (targetPos.X - x == 1)
 										{
 											straightConnection = true;
@@ -168,7 +164,7 @@ namespace MUDMapBuilder
 											endCheck = new Point(targetPos.X - 1, targetPos.Y + 1);
 										}
 										break;
-									case Direction.Down:
+									case MMBDirection.Down:
 										if (x - targetPos.X == 1)
 										{
 											straightConnection = true;
@@ -203,8 +199,8 @@ namespace MUDMapBuilder
 								{
 									// Source and target room are close to each other, hence draw the simple line
 									var targetRect = GetRoomRect(targetPos);
-									var sourceScreen = GetConnectionPoint(rect, roomExit.Direction);
-									var targetScreen = GetConnectionPoint(targetRect, roomExit.Direction.GetOppositeDirection());
+									var sourceScreen = GetConnectionPoint(rect, exitDir);
+									var targetScreen = GetConnectionPoint(targetRect, exitDir.GetOppositeDirection());
 									canvas.DrawLine(sourceScreen.X, sourceScreen.Y, targetScreen.X, targetScreen.Y, paint);
 								}
 								else
@@ -212,8 +208,8 @@ namespace MUDMapBuilder
 									// In other case we might have to use A* to draw the path
 									// Basic idea is to consider every cell(spaces between rooms are cells too) as grid 2x2
 									// Where 1 means center
-									var aStarSourceCoords = new Point(x, y).ToAStarCoord() + roomExit.Direction.ToAStarCoord();
-									var aStarTargetCoords = targetPos.ToAStarCoord() + roomExit.Direction.GetOppositeDirection().ToAStarCoord();
+									var aStarSourceCoords = new Point(x, y).ToAStarCoord() + exitDir.ToAStarCoord();
+									var aStarTargetCoords = targetPos.ToAStarCoord() + exitDir.GetOppositeDirection().ToAStarCoord();
 
 									var aStarView = new AStarView(this);
 									var pathFinder = new AStar(aStarView, Distance.MANHATTAN);
@@ -221,9 +217,9 @@ namespace MUDMapBuilder
 									var steps = path.Steps.ToArray();
 
 									var src = aStarSourceCoords;
-									for (var i = 0; i < steps.Length; i++)
+									for (var j = 0; j < steps.Length; j++)
 									{
-										var dest = steps[i];
+										var dest = steps[j];
 
 										var sourceScreen = ToScreenCoord(src);
 										var targetScreen = ToScreenCoord(dest);
@@ -233,7 +229,7 @@ namespace MUDMapBuilder
 									}
 								}
 
-								mMBRoom.Connect(roomExit.Direction, targetPos);
+								mMBRoom.Connect(exitDir, targetPos);
 							}
 
 							paint.StrokeWidth = 1;
@@ -313,21 +309,21 @@ namespace MUDMapBuilder
 			return new Point(screenX, screenY);
 		}
 
-		private static Point GetConnectionPoint(Rectangle rect, Direction direction)
+		private static Point GetConnectionPoint(Rectangle rect, MMBDirection direction)
 		{
 			switch (direction)
 			{
-				case Direction.North:
+				case MMBDirection.North:
 					return new Point(rect.X + rect.Width / 2, rect.Y);
-				case Direction.East:
+				case MMBDirection.East:
 					return new Point(rect.Right, rect.Y + rect.Height / 2);
-				case Direction.South:
+				case MMBDirection.South:
 					return new Point(rect.X + rect.Width / 2, rect.Bottom);
-				case Direction.West:
+				case MMBDirection.West:
 					return new Point(rect.Left, rect.Y + rect.Height / 2);
-				case Direction.Up:
+				case MMBDirection.Up:
 					return new Point(rect.Right, rect.Y);
-				case Direction.Down:
+				case MMBDirection.Down:
 					return new Point(rect.X, rect.Bottom);
 			}
 
@@ -385,21 +381,21 @@ namespace MUDMapBuilder
 
 	internal static class MMBGridImageExtensions
 	{
-		public static Coord ToAStarCoord(this Direction direction)
+		public static Coord ToAStarCoord(this MMBDirection direction)
 		{
 			switch (direction)
 			{
-				case Direction.North:
+				case MMBDirection.North:
 					return new Coord(1, 0);
-				case Direction.East:
+				case MMBDirection.East:
 					return new Coord(2, 1);
-				case Direction.South:
+				case MMBDirection.South:
 					return new Coord(1, 2);
-				case Direction.West:
+				case MMBDirection.West:
 					return new Coord(0, 1);
-				case Direction.Up:
+				case MMBDirection.Up:
 					return new Coord(2, 0);
-				case Direction.Down:
+				case MMBDirection.Down:
 					return new Coord(0, 2);
 			}
 

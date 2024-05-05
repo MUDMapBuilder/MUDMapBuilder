@@ -1,6 +1,4 @@
-﻿using AbarimMUD.Data;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
 using System.Text;
 
@@ -33,13 +31,13 @@ namespace MUDMapBuilder
 			Steps = steps;
 		}
 
-		public MMBRoom GetByRoom(Room room)
+		public MMBRoom GetRoomById(int id)
 		{
 			for (var x = 0; x < Width; ++x)
 			{
 				for (var y = 0; y < Height; ++y)
 				{
-					if (this[x, y] != null && this[x, y].Room == room)
+					if (this[x, y] != null && this[x, y].Room.Id == id)
 					{
 						return this[x, y];
 					}
@@ -49,7 +47,7 @@ namespace MUDMapBuilder
 			return null;
 		}
 
-		public bool AreRoomsConnected(Point a, Point b, Direction direction)
+		public bool AreRoomsConnected(Point a, Point b, MMBDirection direction)
 		{
 			var room = this[a];
 			if (room.IsConnected(direction, b))

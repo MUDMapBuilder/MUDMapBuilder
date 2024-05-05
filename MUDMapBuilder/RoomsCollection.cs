@@ -1,5 +1,4 @@
-﻿using AbarimMUD.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,45 +7,45 @@ namespace MUDMapBuilder
 {
 	internal class RoomsCollection: List<MMBRoom>
 	{
-		public void PushRoom(Point pos, Direction dir)
+		public void PushRoom(Point pos, MMBDirection dir)
 		{
 			foreach (var room in this)
 			{
 				var roomPos = room.Position;
 				switch (dir)
 				{
-					case Direction.North:
+					case MMBDirection.North:
 						if (roomPos.Y <= pos.Y)
 						{
 							--roomPos.Y;
 						}
 						break;
-					case Direction.East:
+					case MMBDirection.East:
 						if (roomPos.X >= pos.X)
 						{
 							++roomPos.X;
 						}
 						break;
-					case Direction.South:
+					case MMBDirection.South:
 						if (roomPos.Y >= pos.Y)
 						{
 							++roomPos.Y;
 						}
 						break;
-					case Direction.West:
+					case MMBDirection.West:
 						if (roomPos.X <= pos.X)
 						{
 							--roomPos.X;
 						}
 						break;
-					case Direction.Up:
+					case MMBDirection.Up:
 						if (roomPos.Y <= pos.Y || roomPos.X >= pos.X)
 						{
 							--roomPos.Y;
 							++roomPos.X;
 						}
 						break;
-					case Direction.Down:
+					case MMBDirection.Down:
 						if (roomPos.Y >= pos.Y || roomPos.X <= pos.X)
 						{
 							++roomPos.Y;
@@ -80,10 +79,10 @@ namespace MUDMapBuilder
 			return false;
 		}
 
-		public MMBRoom GetRoom(Room room) => (from r in this where r.Room == room select r).FirstOrDefault();
+		public MMBRoom GetRoomById(int id) => (from r in this where r.Room.Id == id select r).FirstOrDefault();
 		public MMBRoom GetRoomByPosition(Point pos) => (from r in this where r.Position == pos select r).FirstOrDefault();
 
-		public void PullRoom(MMBRoom firstRoom, Direction direction, int steps)
+		public void PullRoom(MMBRoom firstRoom, MMBDirection direction, int steps)
 		{
 			var initialPos = firstRoom.Position;
 			var delta = direction.GetDelta();
@@ -106,14 +105,12 @@ namespace MUDMapBuilder
 				pos.Y += delta.Y * steps;
 				room.Position = pos;
 
-				foreach(var exit in room.Room.Exits)
+				var exitDirs = room.Room.ExitsDirections;
+				for (var i = 0; i < exitDirs.Length; ++i)
 				{
-					if (exit.TargetRoom == null)
-					{
-						continue;
-					}
-
-					var targetRoom = GetRoom(exit.TargetRoom);
+					var exitDir = exitDirs[i];
+					var exitRoom = room.Room.GetRoomByExit(exitDir);
+					var targetRoom = GetRoomById(exitRoom.Id);
 					if (targetRoom == null || toProcess.Contains(targetRoom) || processed.Contains(targetRoom))
 					{
 						continue;
@@ -123,20 +120,20 @@ namespace MUDMapBuilder
 					var add = false;
 					switch (direction)
 					{
-						case Direction.North:
+						case MMBDirection.North:
 							add = targetPos.Y >= initialPos.Y;
 							break;
-						case Direction.East:
+						case MMBDirection.East:
 							add = targetPos.X <= initialPos.X;
 							break;
-						case Direction.South:
+						case MMBDirection.South:
 							add = targetPos.Y <= initialPos.Y;
 							break;
-						case Direction.West:
+						case MMBDirection.West:
 							add = targetPos.X >= initialPos.X;
 							break;
-						case Direction.Up:
-						case Direction.Down:
+						case MMBDirection.Up:
+						case MMBDirection.Down:
 							throw new NotImplementedException();
 					}
 

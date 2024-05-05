@@ -1,17 +1,15 @@
-﻿using AbarimMUD.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 
 namespace MUDMapBuilder
 {
 	public static class MapBuilder
 	{
-		public static MMBGrid BuildGrid(Area area, int? maxSteps = null)
+		public static MMBGrid BuildGrid(IMMBRoom[] sourceRooms, int? maxSteps = null)
 		{
 			var toProcess = new List<MMBRoom>();
-			var firstRoom = new MMBRoom(area.Rooms[0])
+			var firstRoom = new MMBRoom(sourceRooms[0])
 			{
 				Position = new Point(0, 0)
 			};
@@ -32,15 +30,18 @@ namespace MUDMapBuilder
 				var room = toProcess[0];
 				toProcess.RemoveAt(0);
 
-				foreach (var exit in room.Room.Exits)
+				var exitDirs = room.Room.ExitsDirections;
+				for (var i = 0; i < exitDirs.Length; ++i)
 				{
-					if (exit.TargetRoom == null || exit.TargetRoom.AreaId != area.Id || rooms.GetRoom(exit.TargetRoom) != null)
+					var exitDir = exitDirs[i];
+					var exitRoom = room.Room.GetRoomByExit(exitDir);
+					if (rooms.GetRoomById(exitRoom.Id) != null)
 					{
 						continue;
 					}
 
 					pos = room.Position;
-					var delta = exit.Direction.GetDelta();
+					var delta = exitDir.GetDelta();
 					var newPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 
 					while (true)
@@ -51,10 +52,10 @@ namespace MUDMapBuilder
 							break;
 						}
 
-						rooms.PushRoom(newPos, exit.Direction);
+						rooms.PushRoom(newPos, exitDir);
 					}
 
-					var mbRoom = new MMBRoom(exit.TargetRoom)
+					var mbRoom = new MMBRoom(exitRoom)
 					{
 						Position = newPos
 					};
@@ -69,20 +70,19 @@ namespace MUDMapBuilder
 			foreach (var room in rooms)
 			{
 				pos = room.Position;
-				foreach (var exit in room.Room.Exits)
+				var exitDirs = room.Room.ExitsDirections;
+				for (var i = 0; i < exitDirs.Length; ++i)
 				{
-					if (exit.TargetRoom == null)
-					{
-						continue;
-					}
+					var exitDir = exitDirs[i];
+					var exitRoom = room.Room.GetRoomByExit(exitDir);
 
-					var targetRoom = rooms.GetRoom(exit.TargetRoom);
+					var targetRoom = rooms.GetRoomById(exitRoom.Id);
 					if (targetRoom == null)
 					{
 						continue;
 					}
 
-					var delta = exit.Direction.GetDelta();
+					var delta = exitDir.GetDelta();
 					var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 					if (targetRoom.Position == desiredPos)
 					{
@@ -90,8 +90,7 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					var targetExitsCount = (from ex in exit.TargetRoom.Exits where ex.TargetRoom != null && ex.TargetRoom.AreaId == area.Id select ex).Count();
-					if (targetExitsCount > 1)
+					if (exitRoom.ExitsDirections.Length > 1)
 					{
 						continue;
 					}
@@ -118,20 +117,18 @@ namespace MUDMapBuilder
 				foreach (var room in rooms)
 				{
 					pos = room.Position;
-					foreach (var exit in room.Room.Exits)
+					var exitDirs = room.Room.ExitsDirections;
+					for (var i = 0; i < exitDirs.Length; ++i)
 					{
-						if (exit.TargetRoom == null)
-						{
-							continue;
-						}
-
-						var targetRoom = rooms.GetRoom(exit.TargetRoom);
+						var exitDir = exitDirs[i];
+						var exitRoom = room.Room.GetRoomByExit(exitDir);
+						var targetRoom = rooms.GetRoomById(exitRoom.Id);
 						if (targetRoom == null)
 						{
 							continue;
 						}
 
-						var delta = exit.Direction.GetDelta();
+						var delta = exitDir.GetDelta();
 						var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 						if (targetRoom.Position == desiredPos)
 						{
@@ -141,10 +138,10 @@ namespace MUDMapBuilder
 
 						// Skip if direction is Up/Down or the target room isn't straighly positioned
 						var steps = 0;
-						switch (exit.Direction)
+						switch (exitDir)
 						{
-							case Direction.North:
-							case Direction.South:
+							case MMBDirection.North:
+							case MMBDirection.South:
 								if (targetRoom.Position.X - pos.X != 0)
 								{
 									continue;
@@ -152,8 +149,8 @@ namespace MUDMapBuilder
 
 								steps = Math.Abs(targetRoom.Position.Y - pos.Y) - 1;
 								break;
-							case Direction.West:
-							case Direction.East:
+							case MMBDirection.West:
+							case MMBDirection.East:
 								if (targetRoom.Position.Y - pos.Y != 0)
 								{
 									continue;
@@ -161,8 +158,8 @@ namespace MUDMapBuilder
 
 								steps = Math.Abs(targetRoom.Position.X - pos.X) - 1;
 								break;
-							case Direction.Up:
-							case Direction.Down:
+							case MMBDirection.Up:
+							case MMBDirection.Down:
 								// Skip Up/Down for now
 								continue;
 						}
@@ -170,8 +167,8 @@ namespace MUDMapBuilder
 						while (steps > 0)
 						{
 							var clone = rooms.Clone();
-							var targetRoomClone = clone.GetRoom(targetRoom.Room);
-							clone.PullRoom(targetRoomClone, exit.Direction.GetOppositeDirection(), steps);
+							var targetRoomClone = targetRoom.Clone();
+							clone.PullRoom(targetRoomClone, exitDir.GetOppositeDirection(), steps);
 
 							if (!clone.HasOverlaps())
 							{
@@ -262,25 +259,44 @@ namespace MUDMapBuilder
 
 	internal static class MapBuilderExtensions
 	{
-		public static Point GetDelta(this Direction direction)
+		public static Point GetDelta(this MMBDirection direction)
 		{
 			switch (direction)
 			{
-				case Direction.East:
+				case MMBDirection.East:
 					return new Point(1, 0);
-				case Direction.West:
+				case MMBDirection.West:
 					return new Point(-1, 0);
-				case Direction.North:
+				case MMBDirection.North:
 					return new Point(0, -1);
-				case Direction.South:
+				case MMBDirection.South:
 					return new Point(0, 1);
-				case Direction.Up:
+				case MMBDirection.Up:
 					return new Point(1, -1);
-				case Direction.Down:
+				case MMBDirection.Down:
 					return new Point(-1, 1);
 			}
 
 			throw new Exception($"Unknown direction {direction}");
+		}
+
+		public static MMBDirection GetOppositeDirection(this MMBDirection direction)
+		{
+			switch (direction)
+			{
+				case MMBDirection.East:
+					return MMBDirection.West;
+				case MMBDirection.West:
+					return MMBDirection.East;
+				case MMBDirection.North:
+					return MMBDirection.South;
+				case MMBDirection.South:
+					return MMBDirection.North;
+				case MMBDirection.Up:
+					return MMBDirection.Down;
+				default:
+					return MMBDirection.Up;
+			}
 		}
 	}
 }

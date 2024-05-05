@@ -87,12 +87,18 @@ namespace MUDMapBuilder
 							// Draw connections
 							foreach (var roomExit in mMBRoom.Room.Exits)
 							{
-								if (roomExit.TargetRoom == null || roomExit.TargetRoom.Tag == null)
+								if (roomExit.TargetRoom == null)
 								{
 									continue;
 								}
 
-								var targetPos = (Point)roomExit.TargetRoom.Tag;
+								var targetRoom = GetByRoom(roomExit.TargetRoom);
+								if (targetRoom == null)
+								{
+									continue;
+								}
+
+								var targetPos = targetRoom.Position;
 								if (AreRoomsConnected(new Point(x, y), targetPos, roomExit.Direction))
 								{
 									// Connection is drawn already

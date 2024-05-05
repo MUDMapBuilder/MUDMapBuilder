@@ -1,145 +1,83 @@
 ﻿using AbarimMUD.Data;
-using GoRogue.MapViews;
-using GoRogue;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using Direction = AbarimMUD.Data.Direction;
-using Rectangle = System.Drawing.Rectangle;
-using System.Numerics;
 
 namespace MUDMapBuilder
 {
 	public class MapBuilder
 	{
 		private Area _area;
+		private readonly List<MMBRoom> _rooms = new List<MMBRoom>();
 
-		private RoomExit GetExit(Room room, Direction dir)
+		private void PushRoom(Point pos, Direction dir)
 		{
-			var result = (from ex in room.Exits where ex.TargetRoom != null && ex.TargetRoom.AreaId == _area.Id && ex.Direction == dir select ex).FirstOrDefault();
-
-			return result;
-		}
-
-		private Room GetRoomByPoint(Point p)
-		{
-			foreach (var room in _area.Rooms)
+			foreach (var room in _rooms)
 			{
-				if (room.Tag == null)
-				{
-					continue;
-				}
-
-				var pos = (Point)room.Tag;
-
-				if (pos == p)
-				{
-					return room;
-				}
-			}
-
-			return null;
-		}
-
-		private void PushRoom(Room firstRoom, Direction dir)
-		{
-			// Push other rooms
-			var pos = (Point)firstRoom.Tag;
-
-			var toProcess = new List<Room>();
-			var processed = new List<Room>();
-			toProcess.Add(firstRoom);
-
-			while (toProcess.Count > 0)
-			{
-				var room = toProcess[0];
-				toProcess.RemoveAt(0);
-				processed.Add(room);
-
-				var roomPos = (Point)room.Tag;
+				var roomPos = room.Position;
 				switch (dir)
 				{
 					case Direction.North:
-						--roomPos.Y;
+						if (roomPos.Y <= pos.Y)
+						{
+							--roomPos.Y;
+						}
 						break;
 					case Direction.East:
-						++roomPos.X;
+						if (roomPos.X >= pos.X)
+						{
+							++roomPos.X;
+						}
 						break;
 					case Direction.South:
-						++roomPos.Y;
+						if (roomPos.Y >= pos.Y)
+						{
+							++roomPos.Y;
+						}
 						break;
 					case Direction.West:
-						--roomPos.X;
+						if (roomPos.X <= pos.X)
+						{
+							--roomPos.X;
+						}
 						break;
 					case Direction.Up:
-						--roomPos.Y;
-						++roomPos.X;
+						if (roomPos.Y <= pos.Y || roomPos.X >= pos.X)
+						{
+							--roomPos.Y;
+							++roomPos.X;
+						}
 						break;
 					case Direction.Down:
-						++roomPos.Y;
-						--roomPos.X;
+						if (roomPos.Y >= pos.Y || roomPos.X <= pos.X)
+						{
+							++roomPos.Y;
+							--roomPos.X;
+						}
 						break;
 				}
 
-				room.Tag = roomPos;
-
-				foreach (var exit in room.Exits)
-				{
-					if (exit.TargetRoom == null || exit.TargetRoom.AreaId != _area.Id || exit.TargetRoom.Tag == null ||
-						toProcess.Contains(exit.TargetRoom) || processed.Contains(exit.TargetRoom))
-					{
-						continue;
-					}
-
-					roomPos = (Point)exit.TargetRoom.Tag;
-
-					var add = false;
-					switch (dir)
-					{
-						case Direction.North:
-							add = roomPos.Y <= pos.Y;
-							break;
-						case Direction.East:
-							add = roomPos.X >= pos.X;
-							break;
-						case Direction.South:
-							add = roomPos.Y >= pos.Y;
-							break;
-						case Direction.West:
-							add = roomPos.X <= pos.X;
-							break;
-						case Direction.Up:
-							add = roomPos.Y <= pos.Y || roomPos.X >= pos.X;
-							break;
-						case Direction.Down:
-							add = roomPos.Y >= pos.Y || roomPos.X <= pos.X;
-							break;
-					}
-
-					if (add)
-					{
-						toProcess.Add(exit.TargetRoom);
-					}
-				}
+				room.Position = roomPos;
 			}
 		}
+
+		private MMBRoom GetRoom(Room room) => (from r in _rooms where r.Room == room select r).FirstOrDefault();
+		private MMBRoom GetRoomByPosition(Point pos) => (from r in _rooms where r.Position == pos select r).FirstOrDefault();
 
 		public MMBGrid BuildGrid(Area area, int? maxSteps = null)
 		{
 			_area = area;
 
-			// Reset rooms' tags
-			foreach (var room in area.Rooms)
+			var toProcess = new List<MMBRoom>();
+			var firstRoom = new MMBRoom(area.Rooms[0])
 			{
-				room.Tag = null;
-			}
+				Position = new Point(0, 0)
+			};
+			toProcess.Add(firstRoom);
+			_rooms.Add(firstRoom);
 
-			var toProcess = new List<Room>();
-
-			area.Rooms[0].Tag = new Point(0, 0);
-			toProcess.Add(area.Rooms[0]);
-
+			// First run: we move through room's exits, assigning each room a 2d coordinate
+			// If there are overlaps, then we expand the grid in the direction of movement
 			var step = 1;
 
 			Point pos;
@@ -148,93 +86,85 @@ namespace MUDMapBuilder
 				var room = toProcess[0];
 				toProcess.RemoveAt(0);
 
-				foreach (var exit in room.Exits)
+				foreach (var exit in room.Room.Exits)
 				{
-					if (exit.TargetRoom == null || exit.TargetRoom.AreaId != _area.Id || exit.TargetRoom.Tag != null)
+					if (exit.TargetRoom == null || exit.TargetRoom.AreaId != _area.Id || GetRoom(exit.TargetRoom) != null)
 					{
 						continue;
 					}
 
-					pos = (Point)(room.Tag);
+					pos = room.Position;
 					var delta = exit.Direction.GetDelta();
 					var newPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 
 					while (true)
 					{
 						// Check if this pos is used already
-						var intersectRoom = (from r in _area.Rooms where r != exit.TargetRoom && r.Tag != null && ((Point)r.Tag) == newPos select r).FirstOrDefault();
-						if (intersectRoom == null)
+						if (GetRoomByPosition(newPos) == null)
 						{
 							break;
 						}
 
-						PushRoom(intersectRoom, exit.Direction);
+						PushRoom(newPos, exit.Direction);
 					}
 
-					exit.TargetRoom.Tag = newPos;
-					toProcess.Add(exit.TargetRoom);
+					var mbRoom = new MMBRoom(exit.TargetRoom)
+					{
+						Position = newPos
+					};
+					toProcess.Add(mbRoom);
+					_rooms.Add(mbRoom);
 				}
 
 				++step;
 			}
 
-			// Next run: if it is possible to place interconnected rooms with single exits next to each other, do it
-			foreach (var room in _area.Rooms)
-			{
-				if (room.Tag == null)
-				{
-					continue;
-				}
+			// Second run: if it is possible to place interconnected rooms with single exits next to each other, do it
+			/*			foreach (var room in _rooms)
+						{
+							pos = room.Position;
+							foreach (var exit in room.Exits)
+							{
+								if (exit.TargetRoom == null || exit.TargetRoom.AreaId != _area.Id || exit.TargetRoom.Tag == null)
+								{
+									continue;
+								}
 
-				pos = (Point)room.Tag;
+								var targetExitsCount = (from ex in exit.TargetRoom.Exits where ex.TargetRoom != null && ex.TargetRoom.AreaId == _area.Id select ex).Count();
+								if (targetExitsCount > 1)
+								{
+									continue;
+								}
 
-				foreach (var exit in room.Exits)
-				{
-					if (exit.TargetRoom == null || exit.TargetRoom.AreaId != _area.Id || exit.TargetRoom.Tag == null)
-					{
-						continue;
-					}
+								var targetPos = (Point)exit.TargetRoom.Tag;
+								var delta = exit.Direction.GetDelta();
+								var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 
-					var targetExitsCount = (from ex in exit.TargetRoom.Exits where ex.TargetRoom != null && ex.TargetRoom.AreaId == _area.Id select ex).Count();
-					if (targetExitsCount > 1)
-					{
-						continue;
-					}
+								if (targetPos == desiredPos)
+								{
+									// Target room is already next to the source
+									continue;
+								}
 
-					var targetPos = (Point)exit.TargetRoom.Tag;
-					var delta = exit.Direction.GetDelta();
-					var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
+								// Check if the spot is free
+								var usedByRoom = GetRoomByPoint(desiredPos);
+								if (usedByRoom != null)
+								{
+									// Spot is occupied
+									continue;
+								}
 
-					if (targetPos == desiredPos)
-					{
-						// Target room is already next to the source
-						continue;
-					}
-
-					// Check if the spot is free
-					var usedByRoom = GetRoomByPoint(desiredPos);
-					if (usedByRoom != null)
-					{
-						// Spot is occupied
-						continue;
-					}
-
-					// Place target room next to source
-					exit.TargetRoom.Tag = desiredPos;
-				}
-			}
+								// Place target room next to source
+								exit.TargetRoom.Tag = desiredPos;
+							}
+						}*/
 
 			// Determine minimum point
 			var min = new Point();
 			var minSet = false;
-			foreach (var room in _area.Rooms)
+			foreach (var room in _rooms)
 			{
-				if (room.Tag == null)
-				{
-					continue;
-				}
-
-				pos = (Point)room.Tag;
+				pos = room.Position;
 				if (!minSet)
 				{
 					min = new Point(pos.X, pos.Y);
@@ -253,31 +183,22 @@ namespace MUDMapBuilder
 			}
 
 			// Shift everything so it begins from 0,0
-			Point shift = new Point(min.X < 0 ? -min.X : 0, min.Y < 0 ? -min.Y : 0);
-			foreach (var room in _area.Rooms)
+			foreach (var room in _rooms)
 			{
-				if (room.Tag == null)
-				{
-					continue;
-				}
+				pos = room.Position;
 
-				pos = (Point)room.Tag;
+				pos.X -= min.X;
+				pos.Y -= min.Y;
 
-				pos.X += shift.X;
-				pos.Y += shift.Y;
-				room.Tag = pos;
+				room.Position = pos;
 			}
 
 			// Determine size
 			Point max = new Point(0, 0);
-			foreach (var room in _area.Rooms)
+			foreach (var room in _rooms)
 			{
-				if (room.Tag == null)
-				{
-					continue;
-				}
+				pos = room.Position;
 
-				pos = (Point)room.Tag;
 				if (pos.X > max.X)
 				{
 					max.X = pos.X;
@@ -297,13 +218,13 @@ namespace MUDMapBuilder
 			{
 				for (var y = 0; y < max.Y; ++y)
 				{
-					var room = GetRoomByPoint(new Point(x, y));
+					var room = GetRoomByPosition(new Point(x, y));
 					if (room == null)
 					{
 						continue;
 					}
 
-					grid[x, y] = new MMBRoom(room);
+					grid[x, y] = room;
 				}
 			}
 

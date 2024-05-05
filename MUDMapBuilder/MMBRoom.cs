@@ -9,6 +9,7 @@ namespace MUDMapBuilder
 		private Dictionary<Direction, Point> _connections = new Dictionary<Direction, Point>();
 
 		public Room Room { get; private set; }
+		public Point Position { get; internal set; }
 
 		internal MMBRoom(Room room)
 		{
@@ -30,5 +31,10 @@ namespace MUDMapBuilder
 
 			return connectedPos == pos;
 		}
+
+		public MMBRoom Clone() => new MMBRoom(Room)
+		{
+			Position = Position
+		};
 	}
 }

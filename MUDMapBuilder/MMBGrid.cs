@@ -32,6 +32,22 @@ namespace MUDMapBuilder
 			Steps = steps;
 		}
 
+		public MMBRoom GetByRoom(Room room)
+		{
+			for (var x = 0; x < Width; ++x)
+			{
+				for (var y = 0; y < Height; ++y)
+				{
+					if (this[x, y] != null && this[x, y].Room == room)
+					{
+						return this[x, y];
+					}
+				}
+			}
+
+			return null;
+		}
+
 		public bool AreRoomsConnected(Point a, Point b, Direction direction)
 		{
 			var room = this[a];
@@ -64,6 +80,21 @@ namespace MUDMapBuilder
 			}
 
 			return sb.ToString();
+		}
+
+		public MMBGrid Clone()
+		{
+			var result = new MMBGrid(new Point(Width, Height), Steps);
+
+			for (var x = 0; x < Width; ++x)
+			{
+				for (var y = 0; y < Height; ++y)
+				{
+
+				}
+			}
+
+			return result;
 		}
 	}
 

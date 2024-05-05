@@ -36,5 +36,7 @@ namespace MUDMapBuilder
 		{
 			Position = Position
 		};
+
+		public override string ToString() => $"{Room}, {Position}";
 	}
 }

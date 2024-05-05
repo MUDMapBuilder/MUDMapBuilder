@@ -35,8 +35,7 @@ namespace MUDMapBuilder.Sample.UI
 
 		public void Rebuild(int? maxSteps = null)
 		{
-			var mapBuilder = new MapBuilder();
-			var grid = mapBuilder.BuildGrid(_map, maxSteps);
+			var grid = MapBuilder.BuildGrid(_map, maxSteps);
 			if (maxSteps == null)
 			{
 				MaxSteps = grid.Steps;

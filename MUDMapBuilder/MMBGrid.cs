@@ -1,5 +1,6 @@
 ﻿using AbarimMUD.Data;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
@@ -80,45 +81,6 @@ namespace MUDMapBuilder
 			}
 
 			return sb.ToString();
-		}
-
-		public MMBGrid Clone()
-		{
-			var result = new MMBGrid(new Point(Width, Height), Steps);
-
-			for (var x = 0; x < Width; ++x)
-			{
-				for (var y = 0; y < Height; ++y)
-				{
-
-				}
-			}
-
-			return result;
-		}
-	}
-
-	internal static class MMBGridExtensions
-	{
-		public static Point GetDelta(this Direction direction)
-		{
-			switch (direction)
-			{
-				case Direction.East:
-					return new Point(1, 0);
-				case Direction.West:
-					return new Point(-1, 0);
-				case Direction.North:
-					return new Point(0, -1);
-				case Direction.South:
-					return new Point(0, 1);
-				case Direction.Up:
-					return new Point(1, -1);
-				case Direction.Down:
-					return new Point(-1, 1);
-			}
-
-			throw new Exception($"Unknown direction {direction}");
 		}
 	}
 }

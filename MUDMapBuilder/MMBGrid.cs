@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MUDMapBuilder
 {
-	public class MMBGrid
+	public partial class MMBGrid
 	{
 		private readonly MMBRoom[,] _cellData;
 
@@ -24,9 +24,12 @@ namespace MUDMapBuilder
 		public int Width => _cellData.GetLength(0);
 		public int Height => _cellData.GetLength(1);
 
-		public MMBGrid(Point size)
+		public int Steps { get; }
+
+		internal MMBGrid(Point size, int steps)
 		{
 			_cellData = new MMBRoom[size.X, size.Y];
+			Steps = steps;
 		}
 
 		public bool AreRoomsConnected(Point a, Point b, Direction direction)
@@ -61,6 +64,30 @@ namespace MUDMapBuilder
 			}
 
 			return sb.ToString();
+		}
+	}
+
+	internal static class MMBGridExtensions
+	{
+		public static Point GetDelta(this Direction direction)
+		{
+			switch (direction)
+			{
+				case Direction.East:
+					return new Point(1, 0);
+				case Direction.West:
+					return new Point(-1, 0);
+				case Direction.North:
+					return new Point(0, -1);
+				case Direction.South:
+					return new Point(0, 1);
+				case Direction.Up:
+					return new Point(1, -1);
+				case Direction.Down:
+					return new Point(-1, 1);
+			}
+
+			throw new Exception($"Unknown direction {direction}");
 		}
 	}
 }

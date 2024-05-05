@@ -9,7 +9,13 @@ namespace MUDMapBuilder.Sample.UI
 		public Area Map
 		{
 			get => _mapViewer.Map;
-			set => _mapViewer.Map = value;
+			set
+			{
+				_mapViewer.Map = value;
+				_spinButtonStep.Minimum = 1;
+				_spinButtonStep.Maximum = _mapViewer.MaxSteps;
+				_spinButtonStep.Value = _mapViewer.MaxSteps;
+			}
 		}
 
 		public MainForm()
@@ -18,6 +24,11 @@ namespace MUDMapBuilder.Sample.UI
 
 			_mapViewer = new MapViewer();
 			_panelMap.Content = _mapViewer;
+
+			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
+			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _mapViewer.MaxSteps;
+
+			_spinButtonStep.ValueChanged += (s, e) => _mapViewer.Rebuild((int)_spinButtonStep.Value.Value);
 		}
 	}
 }

@@ -17,7 +17,7 @@ namespace MUDMapBuilder.Sample
 
 		private Desktop _desktop;
 		private MainForm _mainForm;
-		
+
 		public ViewerGame()
 		{
 			_graphics = new GraphicsDeviceManager(this)

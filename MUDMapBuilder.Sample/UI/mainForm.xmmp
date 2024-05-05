@@ -3,11 +3,12 @@
   <Panel>
     <VerticalStackPanel Spacing="8">
       <HorizontalStackPanel Spacing="8">
-        <Button Id="_buttonReset">
-          <Label Text="Reset" />
+        <Button Id="_buttonStart">
+          <Label Text="&lt;&lt;" />
         </Button>
-        <Button Id="_buttonStep">
-          <Label Text="Step" />
+        <SpinButton Width="50" Id="_spinButtonStep" />
+        <Button Id="_buttonEnd">
+          <Label Text="&gt;&gt;" />
         </Button>
       </HorizontalStackPanel>
       <ScrollViewer Id="_panelMap" StackPanel.ProportionType="Fill" />

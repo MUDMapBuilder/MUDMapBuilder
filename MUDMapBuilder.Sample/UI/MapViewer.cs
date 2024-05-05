@@ -1,12 +1,13 @@
 ﻿using AbarimMUD.Data;
-using Microsoft.Xna.Framework;
-using Myra.Graphics2D;
-using Myra.Graphics2D.Brushes;
+using Microsoft.Xna.Framework.Graphics;
+using Myra;
+using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
+using System.IO;
 
 namespace MUDMapBuilder.Sample.UI
 {
-	public class MapViewer : Grid
+	public class MapViewer : Image
 	{
 		private Area _map;
 
@@ -26,44 +27,27 @@ namespace MUDMapBuilder.Sample.UI
 			}
 		}
 
+		public int MaxSteps { get; private set; }
+
 		public MapViewer()
 		{
-			DefaultColumnProportion = Proportion.Auto;
-			DefaultRowProportion = Proportion.Auto;
-			ColumnSpacing = 8;
-			RowSpacing = 8;
 		}
 
-		private void Rebuild()
+		public void Rebuild(int? maxSteps = null)
 		{
-			Widgets.Clear();
-
 			var mapBuilder = new MapBuilder();
-			var grid = mapBuilder.BuildGrid(_map);
-
-			for (var x = 0; x < grid.Width; x++)
+			var grid = mapBuilder.BuildGrid(_map, maxSteps);
+			if (maxSteps == null)
 			{
-				for (var y = 0; y < grid.Height; y++)
-				{
-					var room = grid[x, y];
-					if (room == null)
-					{
-						continue;
-					}
+				MaxSteps = grid.Steps;
+			}
 
-					var label = new Label
-					{
-						Text = room.Room.Name,
-						TextColor = Color.Black,
-						BorderThickness = new Thickness(2),
-						Border = new SolidBrush(Color.Black),
-						Padding = new Thickness(4),
-					};
+			var png = grid.BuildPng();
 
-					Grid.SetColumn(label, x);
-					Grid.SetRow(label, y);
-					Widgets.Add(label);
-				}
+			using (var ms = new MemoryStream(png))
+			{
+				var texture = Texture2D.FromStream(MyraEnvironment.GraphicsDevice, ms);
+				Renderable = new TextureRegion(texture);
 			}
 		}
 	}

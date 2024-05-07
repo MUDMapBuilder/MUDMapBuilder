@@ -34,10 +34,10 @@ namespace MUDMapBuilder.Sample.UI
 		{
 		}
 
-		public void Rebuild(int? maxSteps = null)
+		public void Rebuild(int? maxSteps = null, int? compactRuns = null)
 		{
 			var rooms = (from r in _map.Rooms select new RoomWrapper(r)).ToArray();
-			var grid = MapBuilder.BuildGrid(rooms, maxSteps);
+			var grid = MapBuilder.BuildGrid(rooms, maxSteps, compactRuns);
 			if (maxSteps == null)
 			{
 				MaxSteps = grid.Steps;

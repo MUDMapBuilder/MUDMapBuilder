@@ -6,8 +6,17 @@
         <Button Id="_buttonStart">
           <Label Text="&lt;&lt;" />
         </Button>
-        <SpinButton Width="50" Id="_spinButtonStep" />
+        <SpinButton Integer="True" Width="50" Id="_spinButtonStep" />
         <Button Id="_buttonEnd">
+          <Label Text="&gt;&gt;" />
+        </Button>
+      </HorizontalStackPanel>
+      <HorizontalStackPanel Spacing="8">
+        <Button Id="_buttonZeroCompact">
+          <Label Text="&lt;&lt;" />
+        </Button>
+        <SpinButton Maximum="1000" Minimum="0" Integer="True" Width="50" Id="_spinButtonCompact" />
+        <Button Id="_buttonMaximumCompact">
           <Label Text="&gt;&gt;" />
         </Button>
       </HorizontalStackPanel>

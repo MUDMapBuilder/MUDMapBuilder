@@ -41,7 +41,7 @@ namespace MUDMapBuilder
 							continue;
 						}
 
-						var sz = (int)(paint.MeasureText(room.Room.Name) + TextPadding * 2 + 0.5f);
+						var sz = (int)(paint.MeasureText(room.Room.ToString()) + TextPadding * 2 + 0.5f);
 						if (sz > _cellsWidths[x])
 						{
 							_cellsWidths[x] = sz;
@@ -233,7 +233,7 @@ namespace MUDMapBuilder
 							}
 
 							paint.StrokeWidth = 1;
-							canvas.DrawText(mMBRoom.Room.Name, rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
+							canvas.DrawText(mMBRoom.Room.ToString(), rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
 						}
 					}
 

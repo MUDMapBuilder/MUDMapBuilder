@@ -7,6 +7,7 @@ namespace MUDMapBuilder
 	{
 		private Dictionary<MMBDirection, Point> _connections = new Dictionary<MMBDirection, Point>();
 
+		public int Id => Room.Id;
 		public IMMBRoom Room { get; private set; }
 		public Point Position { get; internal set; }
 

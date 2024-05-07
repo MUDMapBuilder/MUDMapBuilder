@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace MUDMapBuilder
 {
 	public static class MapBuilder
 	{
-		public static MMBGrid BuildGrid(IMMBRoom[] sourceRooms, int? maxSteps = null)
+		private static readonly MMBDirection[] PushDirections = new MMBDirection[]
+		{
+			MMBDirection.North, MMBDirection.South, MMBDirection.West, MMBDirection.East
+		};
+
+		public static MMBGrid BuildGrid(IMMBRoom[] sourceRooms, int? maxSteps = null, int? maxCompactRuns = null)
 		{
 			var toProcess = new List<MMBRoom>();
 			var firstRoom = new MMBRoom(sourceRooms[0])
@@ -22,8 +28,8 @@ namespace MUDMapBuilder
 
 			// First run: we move through room's exits, assigning each room a 2d coordinate
 			// If there are overlaps, then we expand the grid in the direction of movement
+			int vc;
 			var step = 1;
-
 			Point pos;
 			while (toProcess.Count > 0 && (maxSteps == null || maxSteps.Value > step))
 			{
@@ -44,15 +50,35 @@ namespace MUDMapBuilder
 					var delta = exitDir.GetDelta();
 					var newPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 
-					while (true)
-					{
-						// Check if this pos is used already
-						if (rooms.GetRoomByPosition(newPos) == null)
-						{
-							break;
-						}
 
-						rooms.PushRoom(newPos, exitDir);
+					vc = rooms.CalculateBrokenConnections();
+
+					// Check if this pos is used already
+					var expandGrid = false;
+					var existingRoom = rooms.GetRoomByPosition(newPos);
+					if (existingRoom != null)
+					{
+						expandGrid = true;
+					} else
+					{
+						//
+						var cloneRooms = rooms.Clone();
+						var cloneRoom = new MMBRoom(exitRoom)
+						{
+							Position = newPos
+						};
+
+						cloneRooms.Add(cloneRoom);
+						if (cloneRooms.CalculateBrokenConnections() > vc)
+						{
+							expandGrid = true;
+						}
+					}
+
+					if (expandGrid)
+					{
+						// Push rooms in the movement direction
+						rooms.ExpandGrid(newPos, delta);
 					}
 
 					var mbRoom = new MMBRoom(exitRoom)
@@ -66,7 +92,7 @@ namespace MUDMapBuilder
 				++step;
 			}
 
-			// Second run: if it is possible to place interconnected rooms with single exits next to each other, do it
+			// Next run: if it is possible to place interconnected rooms with single exits next to each other, do it
 			foreach (var room in rooms)
 			{
 				pos = room.Position;
@@ -82,6 +108,11 @@ namespace MUDMapBuilder
 						continue;
 					}
 
+					if (exitRoom.ExitsDirections.Length > 1)
+					{
+						continue;
+					}
+
 					var delta = exitDir.GetDelta();
 					var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 					if (targetRoom.Position == desiredPos)
@@ -89,13 +120,6 @@ namespace MUDMapBuilder
 						// The target room is already at desired pos
 						continue;
 					}
-
-					if (exitRoom.ExitsDirections.Length > 1)
-					{
-						continue;
-					}
-
-					var targetPos = targetRoom.Position;
 
 					// Check if the spot is free
 					var usedByRoom = rooms.GetRoomByPosition(desiredPos);
@@ -110,79 +134,146 @@ namespace MUDMapBuilder
 				}
 			}
 
-			// Third run: Try to make the map more compact
-			for (var it = 0; it < 10; ++it)
+			// Next run: Try to move each move 10 times in each direction in vain hope of minimizing amount of broken connections
+			vc = rooms.CalculateBrokenConnections();
+
+			if (vc > 0)
 			{
-				// 10 compact iterations
+				var newRooms = rooms;
 				foreach (var room in rooms)
 				{
-					pos = room.Position;
-					var exitDirs = room.Room.ExitsDirections;
-					for (var i = 0; i < exitDirs.Length; ++i)
+					for (var st = 1; st < 10; ++st)
 					{
-						var exitDir = exitDirs[i];
-						var exitRoom = room.Room.GetRoomByExit(exitDir);
-						var targetRoom = rooms.GetRoomById(exitRoom.Id);
-						if (targetRoom == null)
+						for (var j = 0; j < PushDirections.Length; ++j)
 						{
-							continue;
-						}
+							var clone = newRooms.Clone();
+							var cloneRoom = clone.GetRoomById(room.Id);
 
-						var delta = exitDir.GetDelta();
-						var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
-						if (targetRoom.Position == desiredPos)
-						{
-							// The target room is already at desired pos
-							continue;
-						}
-
-						// Skip if direction is Up/Down or the target room isn't straighly positioned
-						var steps = 0;
-						switch (exitDir)
-						{
-							case MMBDirection.North:
-							case MMBDirection.South:
-								if (targetRoom.Position.X - pos.X != 0)
-								{
-									continue;
-								}
-
-								steps = Math.Abs(targetRoom.Position.Y - pos.Y) - 1;
-								break;
-							case MMBDirection.West:
-							case MMBDirection.East:
-								if (targetRoom.Position.Y - pos.Y != 0)
-								{
-									continue;
-								}
-
-								steps = Math.Abs(targetRoom.Position.X - pos.X) - 1;
-								break;
-							case MMBDirection.Up:
-							case MMBDirection.Down:
-								// Skip Up/Down for now
-								continue;
-						}
-
-						while (steps > 0)
-						{
-							var clone = rooms.Clone();
-							var targetRoomClone = targetRoom.Clone();
-							clone.PullRoom(targetRoomClone, exitDir.GetOppositeDirection(), steps);
-
-							if (!clone.HasOverlaps())
+							if (cloneRoom.Id == 1563)
 							{
-								rooms = clone;
-								goto nextiter;
+								var k = 5;
 							}
+							clone.PushRoom(cloneRoom, PushDirections[j], st);
 
-							--steps;
+							var c = clone.CalculateBrokenConnections();
+							if (c < vc)
+							{
+								newRooms = clone;
+								vc = c;
+
+								if (vc == 0)
+								{
+									goto finish;
+								}
+							}
 						}
 					}
 				}
 
-			nextiter:;
+			finish:;
+				rooms = newRooms;
 			}
+
+			// Third run: Try to make the map more compact
+			/*			var compactRuns = maxCompactRuns ?? 10;
+						for (var it = 0; it < compactRuns; ++it)
+						{
+							for(var i = 0; i < rooms.Count; ++i)
+							{
+								var room = rooms[i];
+								pos = room.Position;
+								var exitDirs = room.Room.ExitsDirections;
+								for (var j = 0; j < exitDirs.Length; ++j)
+								{
+									var exitDir = exitDirs[j];
+
+									// Works only with East and South directions
+									if (exitDir != MMBDirection.East && exitDir != MMBDirection.South)
+									{
+										continue;
+									}
+
+									var exitRoom = room.Room.GetRoomByExit(exitDir);
+									var targetRoom = rooms.GetRoomById(exitRoom.Id);
+									if (targetRoom == null)
+									{
+										continue;
+									}
+
+									var delta = exitDir.GetDelta();
+									var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
+									if (targetRoom.Position == desiredPos)
+									{
+										// The target room is already at desired pos
+										continue;
+									}
+
+									// Skip if direction is Up/Down or the target room isn't straighly positioned
+									var steps = 0;
+									switch (exitDir)
+									{
+										case MMBDirection.North:
+										case MMBDirection.South:
+											if (targetRoom.Position.X - pos.X != 0)
+											{
+												continue;
+											}
+
+											steps = Math.Abs(targetRoom.Position.Y - pos.Y) - 1;
+											break;
+										case MMBDirection.West:
+										case MMBDirection.East:
+											if (targetRoom.Position.Y - pos.Y != 0)
+											{
+												continue;
+											}
+
+											steps = Math.Abs(targetRoom.Position.X - pos.X) - 1;
+											break;
+										case MMBDirection.Up:
+										case MMBDirection.Down:
+											// Skip Up/Down for now
+											continue;
+									}
+
+									// Determine best amount of steps
+									var vc = rooms.CalculateBrokenConnections();
+									int? bestSteps = null;
+									while (steps > 0)
+									{
+										var cloneRooms = rooms.Clone();
+										var sourceRoomClone = cloneRooms.GetRoomById(room.Id);
+										var targetRoomClone = cloneRooms.GetRoomById(targetRoom.Id);
+
+										delta = exitDir.GetOppositeDirection().GetDelta();
+										delta.X *= steps;
+										delta.Y *= steps;
+										cloneRooms.ApplyForceToRoom(sourceRoomClone, targetRoomClone, delta);
+
+										var vc2 = cloneRooms.CalculateBrokenConnections();
+										if ((vc2 <= vc && bestSteps == null) || vc2 < vc)
+										{
+											bestSteps = steps;
+											vc2 = vc;
+										}
+
+										--steps;
+									}
+
+									if (bestSteps != null)
+									{
+										delta = exitDir.GetOppositeDirection().GetDelta();
+										delta.X *= bestSteps.Value;
+										delta.Y *= bestSteps.Value;
+
+										rooms.ApplyForceToRoom(room, targetRoom, delta);
+										goto nextiter;
+									}
+								}
+							}
+
+						nextiter:;
+						}*/
 
 			// Determine minimum point
 			var min = new Point();
@@ -298,5 +389,24 @@ namespace MUDMapBuilder
 					return MMBDirection.Up;
 			}
 		}
+
+		public static bool IsConnectedTo(this IMMBRoom room1, IMMBRoom room2)
+		{
+			var exitDirs = room1.ExitsDirections;
+			for (var i = 0; i < exitDirs.Length; ++i)
+			{
+				var exitDir = exitDirs[i];
+				var exitRoom = room1.GetRoomByExit(exitDir);
+
+				if (exitRoom.Id == room2.Id)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public static int CalculateArea(this Rectangle r) => r.Width * r.Height;
 	}
 }

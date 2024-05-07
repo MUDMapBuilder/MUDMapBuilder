@@ -288,30 +288,28 @@ namespace MUDMapBuilder
 			return isStraight;
 		}
 
-		public void ApplyForceToRoom(MMBRoom sourceRoom, MMBRoom firstRoom, Point firstForceVector)
+		public void ApplyForceToRoom(MMBRoom sourceRoom, MMBRoom firstRoom, MMBDirection direction, int steps)
 		{
 			// First run: determine which rooms to push
-			var toProcess = new List<Tuple<MMBRoom, Point>>
+			var toProcess = new List<MMBRoom>
 			{
-				new Tuple<MMBRoom, Point>(firstRoom, firstForceVector)
+				firstRoom
 			};
 
-			var roomsToPush = new Dictionary<int, Tuple<MMBRoom, Point>>();
+			var roomsToPush = new Dictionary<int, MMBRoom>();
 
 			while (toProcess.Count > 0)
 			{
-				var tuple = toProcess[0];
+				var room = toProcess[0];
+				var pos = room.Position;
 				toProcess.RemoveAt(0);
 
-				var room = tuple.Item1;
-				roomsToPush[tuple.Item1.Id] = tuple;
+				roomsToPush[room.Id] = room;
 
 				// Process neighbour rooms
 				var exitDirs = room.Room.ExitsDirections;
 				for (var i = 0; i < exitDirs.Length; ++i)
 				{
-					var forceVector = tuple.Item2;
-
 					var exitDir = exitDirs[i];
 					var exitRoom = room.Room.GetRoomByExit(exitDir);
 
@@ -327,55 +325,39 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					// Weaken the force depending on the direction
-					switch (exitDir)
+					var add = false;
+					var targetPos = targetRoom.Position;
+
+					if (Math.Abs(targetPos.X - pos.X) == 1 || Math.Abs(targetPos.Y - pos.Y) == 1)
 					{
-						case MMBDirection.North:
-							if (forceVector.Y > 0)
-							{
-								forceVector.Y = 0;
-							}
-							break;
-
-						case MMBDirection.South:
-							if (forceVector.Y < 0)
-							{
-								forceVector.Y = 0;
-							}
-							break;
-
-						case MMBDirection.West:
-							if (forceVector.X > 0)
-							{
-								forceVector.X = 0;
-							}
-							break;
-
-						case MMBDirection.East:
-							if (forceVector.X < 0)
-							{
-								forceVector.X = 0;
-							}
-
-							break;
-
-						case MMBDirection.Up:
-						case MMBDirection.Down:
-							break;
+						// Single size connections are always added
+						add = true;
+					} else if (exitDir == MMBDirection.West || exitDir == MMBDirection.East)
+					{
+						add = direction == MMBDirection.North || direction == MMBDirection.South;
+					} else if (exitDir == MMBDirection.North ||  exitDir == MMBDirection.South)
+					{
+						add = direction == MMBDirection.West || direction == MMBDirection.East;
+					}
+					else if (exitDir == MMBDirection.Up || exitDir == MMBDirection.Down)
+					{
+						add = true;
 					}
 
-					if (forceVector.X != 0 || forceVector.Y != 0)
+					if (add)
 					{
-						toProcess.Add(new Tuple<MMBRoom, Point>(targetRoom, forceVector));
+						toProcess.Add(targetRoom);
 					}
 				}
 			}
 
+			var forceVector = direction.GetDelta();
+			forceVector.X *= steps;
+			forceVector.Y *= steps;
 			foreach (var pair in roomsToPush)
 			{
 				// If there's existing room, then put it on older position
-				var room = pair.Value.Item1;
-				var forceVector = pair.Value.Item2;
+				var room = pair.Value;
 				var newPos = new Point(room.Position.X + forceVector.X, room.Position.Y + forceVector.Y);
 
 				var existingRoom = GetRoomByPosition(newPos);
@@ -386,6 +368,8 @@ namespace MUDMapBuilder
 
 				room.Position = newPos;
 			}
+
+			InvalidateGrid();
 		}
 
 		private Obstacle GetObstacle(Point checkPos)

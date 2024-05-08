@@ -1,6 +1,4 @@
-﻿using GoRogue;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using static MUDMapBuilder.RoomsCollection;
 
@@ -8,10 +6,40 @@ namespace MUDMapBuilder
 {
 	public static class MapBuilder
 	{
-		private static readonly MMBDirection[] PushDirections = new MMBDirection[]
+		private static RoomsCollection FixRoom(RoomsCollection rooms, MMBRoom room, MMBRoom targetRoom, MMBDirection exitDir)
 		{
-			MMBDirection.North, MMBDirection.South, MMBDirection.West, MMBDirection.East
-		};
+			var sourcePos = room.Position;
+			var targetPos = targetRoom.Position;
+			var desiredPos = new Point();
+			switch (exitDir)
+			{
+				case MMBDirection.North:
+					desiredPos = new Point(sourcePos.X, targetPos.Y < sourcePos.Y ? targetPos.Y : sourcePos.Y - 1);
+					break;
+				case MMBDirection.South:
+					desiredPos = new Point(sourcePos.X, targetPos.Y > sourcePos.Y ? targetPos.Y : sourcePos.Y + 1);
+					break;
+				case MMBDirection.East:
+					desiredPos = new Point(targetPos.X > sourcePos.X ? targetPos.X : sourcePos.X + 1, sourcePos.Y);
+					break;
+				case MMBDirection.West:
+					desiredPos = new Point(targetPos.X < sourcePos.X ? targetPos.X : sourcePos.X - 1, sourcePos.Y);
+					break;
+				case MMBDirection.Up:
+					break;
+				case MMBDirection.Down:
+					break;
+			}
+
+			var d = new Point(desiredPos.X - targetPos.X, desiredPos.Y - targetPos.Y);
+
+			var clone = rooms.Clone();
+			var targetRoomClone = clone.GetRoomById(targetRoom.Id);
+
+			clone.PushRoom(targetRoomClone, d);
+
+			return clone;
+		}
 
 		public static RoomsCollection Build(IMMBRoom[] sourceRooms, int? maxSteps = null, int? maxCompactRuns = null)
 		{
@@ -29,7 +57,6 @@ namespace MUDMapBuilder
 
 			// First run: we move through room's exits, assigning each room a 2d coordinate
 			// If there are overlaps, then we expand the grid in the direction of movement
-			int vc;
 			var step = 1;
 			Point pos;
 			while (toProcess.Count > 0 && (maxSteps == null || maxSteps.Value > step))
@@ -52,7 +79,7 @@ namespace MUDMapBuilder
 					var newPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 
 
-					vc = rooms.CalculateBrokenConnections();
+					var vc = rooms.CalculateBrokenConnections().Count;
 
 					// Expand grid either if the new position is occupied by a room
 					// Or if it breaks existing connection
@@ -72,7 +99,7 @@ namespace MUDMapBuilder
 						};
 
 						cloneRooms.Add(cloneRoom);
-						if (cloneRooms.CalculateBrokenConnections() > vc)
+						if (cloneRooms.CalculateBrokenConnections().Count > vc)
 						{
 							expandGrid = true;
 						}
@@ -95,14 +122,17 @@ namespace MUDMapBuilder
 				++step;
 			}
 
-			rooms.FixPlacementOfSingleExitRooms();
-
-			// Next run: try to straighten the connections
-/*			for (var it = 0; it < 10; ++it)
+			var runsLeft = 10;
+			while (runsLeft > 0)
 			{
 				rooms.FixPlacementOfSingleExitRooms();
+				var vc = rooms.CalculateBrokenConnections();
 
-				vc = rooms.CalculateBrokenConnections();
+				if (vc.Count == 0)
+				{
+					break;
+				}
+
 				var roomsCount = rooms.Count;
 				for (var i = 0; i < roomsCount; ++i)
 				{
@@ -131,53 +161,46 @@ namespace MUDMapBuilder
 
 					if (brokenType == ConnectionBrokenType.NotStraight)
 					{
-						var sourcePos = room.Position;
-						var targetPos = targetRoom.Position;
-						var desiredPos = new Point();
-						switch (exitDir)
-						{
-							case MMBDirection.North:
-								desiredPos = new Point(sourcePos.X, targetPos.Y < sourcePos.Y ? targetPos.Y : sourcePos.Y - 1);
-								break;
-							case MMBDirection.South:
-								desiredPos = new Point(sourcePos.X, targetPos.Y > sourcePos.Y ? targetPos.Y : targetPos.Y + 1);
-								break;
-							case MMBDirection.East:
-								desiredPos = new Point(targetPos.X > sourcePos.X ? targetPos.X : sourcePos.X + 1, sourcePos.Y);
-								break;
-							case MMBDirection.West:
-								desiredPos = new Point(targetPos.X < sourcePos.X ? targetPos.X : sourcePos.X - 1, sourcePos.Y);
-								break;
-							case MMBDirection.Up:
-								break;
-							case MMBDirection.Down:
-								break;
-						}
-
-						var d = new Point(desiredPos.X - targetPos.X, desiredPos.Y - targetPos.Y);
-
-						var clone = rooms.Clone();
-						var targetRoomClone = clone.GetRoomById(targetRoom.Id);
-
-						clone.PushRoom(targetRoomClone, d);
+						var clone = FixRoom(rooms, room, targetRoom, exitDir);
 
 						var sourceRoomClone = clone.GetRoomById(room.Id);
+						var targetRoomClone = clone.GetRoomById(targetRoom.Id);
 						brokenType = clone.CheckConnectionBroken(sourceRoomClone, targetRoomClone, exitDir);
 
 						var c = clone.CalculateBrokenConnections();
-						if (brokenType == ConnectionBrokenType.NotBroken && c <= vc)
+						if (brokenType == ConnectionBrokenType.NotBroken &&
+							c.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
+							c.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount)
 						{
 							// Connection was fixed
 							rooms = clone;
-							vc = c;
+							goto finish;
+						}
+
+						// Now try the other way around
+						clone = FixRoom(rooms, targetRoom, room, exitDir.GetOppositeDirection());
+
+						sourceRoomClone = clone.GetRoomById(targetRoomClone.Id);
+						targetRoomClone = clone.GetRoomById(room.Id);
+
+						brokenType = clone.CheckConnectionBroken(sourceRoomClone, targetRoomClone, exitDir.GetOppositeDirection());
+
+						c = clone.CalculateBrokenConnections();
+						if (brokenType == ConnectionBrokenType.NotBroken &&
+							c.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
+							c.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount)
+						{
+							// Connection was fixed
+							rooms = clone;
+							goto finish;
 						}
 					}
 					else if (brokenType == ConnectionBrokenType.HasObstacles)
 					{
 						var deltas = new List<Point>();
-						for(var x = -5; x <= 5; ++x)
+						for (var x = -5; x <= 5; ++x)
 						{
-							for(var y = -5; y <= 5; ++y)
+							for (var y = -5; y <= 5; ++y)
 							{
 								if (x == 0 && y == 0)
 								{
@@ -191,7 +214,7 @@ namespace MUDMapBuilder
 						foreach (var d in deltas)
 						{
 							var clone = rooms.Clone();
-							var targetRoomClone = clone.GetRoomById(room.Id);
+							var targetRoomClone = clone.GetRoomById(targetRoom.Id);
 
 							clone.PushRoom(targetRoomClone, d);
 
@@ -199,16 +222,26 @@ namespace MUDMapBuilder
 							brokenType = clone.CheckConnectionBroken(sourceRoomClone, targetRoomClone, exitDir);
 
 							var c = clone.CalculateBrokenConnections();
-							if (brokenType == ConnectionBrokenType.NotBroken && c <= vc)
+							if (brokenType == ConnectionBrokenType.NotBroken &&
+								c.ConnectionsWithObstaclesCount < vc.ConnectionsWithObstaclesCount)
 							{
 								// Connection was fixed
 								rooms = clone;
-								vc = c;
+								goto finish;
 							}
 						}
 					}
 				}
-			}*/
+			finish:;
+
+				var vc2 = rooms.CalculateBrokenConnections();
+
+				// If amount of broken connections hasn't changed, decrease amount of runs
+				if (vc2.Count >= vc.Count)
+				{
+					--runsLeft;
+				}
+			}
 
 			// Third run: Try to make the map more compact
 			/*			var compactRuns = maxCompactRuns ?? 10;

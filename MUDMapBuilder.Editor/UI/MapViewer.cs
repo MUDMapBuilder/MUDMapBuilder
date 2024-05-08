@@ -1,12 +1,15 @@
 ﻿using AbarimMUD.Data;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Myra;
+using Myra.Graphics2D.Brushes;
 using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
+
+using Point = System.Drawing.Point;
 
 namespace MUDMapBuilder.Editor.UI
 {
@@ -15,7 +18,7 @@ namespace MUDMapBuilder.Editor.UI
 		private Area _map;
 		private RoomsCollection _rooms;
 		private MMBImageResult _imageResult;
-		private int _brokenConnections = 0;
+		private BrokenConnectionsInfo _brokenConnections = null;
 
 		public Area Map
 		{
@@ -35,7 +38,7 @@ namespace MUDMapBuilder.Editor.UI
 
 		public int MaxSteps { get; private set; }
 
-		public int BrokenConnections
+		public BrokenConnectionsInfo BrokenConnections
 		{
 			get => _brokenConnections;
 
@@ -48,7 +51,6 @@ namespace MUDMapBuilder.Editor.UI
 
 				_brokenConnections = value;
 				BrokenConnectionsChanged?.Invoke(this, EventArgs.Empty);
-
 			}
 		}
 
@@ -56,6 +58,7 @@ namespace MUDMapBuilder.Editor.UI
 
 		public MapViewer()
 		{
+			Background = new SolidBrush(Color.White);
 		}
 
 		public void Rebuild(int? maxSteps = null, int? compactRuns = null)
@@ -80,7 +83,7 @@ namespace MUDMapBuilder.Editor.UI
 				Renderable = new TextureRegion(texture);
 			}
 
-			foreach(var room in _rooms)
+			foreach (var room in _rooms)
 			{
 				room.Mark = false;
 			}
@@ -96,7 +99,7 @@ namespace MUDMapBuilder.Editor.UI
 
 			var room = _rooms.GetRoomById(selectedRoomId.Value);
 			var roomsToMark = _rooms.MeasurePushRoom(room, forceVector);
-			foreach(var pair in roomsToMark)
+			foreach (var pair in roomsToMark)
 			{
 				room = _rooms.GetRoomById(pair.Key);
 				room.Mark = true;

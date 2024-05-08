@@ -56,13 +56,21 @@ namespace MUDMapBuilder.Editor.UI
 			_buttonPush.Click += (s, e) => _mapViewer.PushRoom(ForceVector);
 
 			_mapViewer.BrokenConnectionsChanged += (s, e) => UpdateBrokenConnections();
-			
+
 			UpdateBrokenConnections();
 		}
 
 		private void UpdateBrokenConnections()
 		{
-			_labelBrokenConnections.Text = $"Broken Connections: {_mapViewer.BrokenConnections}";
+			if (_mapViewer.BrokenConnections != null)
+			{
+				_labelNonStraightConnections.Text = $"Non Straight Connections: {_mapViewer.BrokenConnections.NonStraightConnectionsCount}";
+				_labelConnectionsWithObstacles.Text = $"Connections With Obstacles: {_mapViewer.BrokenConnections.ConnectionsWithObstaclesCount}";
+			} else
+			{
+				_labelNonStraightConnections.Text = "";
+				_labelConnectionsWithObstacles.Text = "";
+			}
 		}
 
 		public void Invalidate()

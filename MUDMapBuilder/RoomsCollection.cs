@@ -488,9 +488,10 @@ namespace MUDMapBuilder
 			return ConnectionBrokenType.NotBroken;
 		}
 
-		public int CalculateBrokenConnections()
+		public BrokenConnectionsInfo CalculateBrokenConnections()
 		{
-			var result = 0;
+			var nonStraightConnections = 0;
+			var connectionsWithObstacles = 0;
 
 			foreach (var room in _rooms)
 			{
@@ -507,14 +508,20 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					if (CheckConnectionBroken(room, targetRoom, exitDir) != ConnectionBrokenType.NotBroken)
+					var brokenType = CheckConnectionBroken(room, targetRoom, exitDir);
+					switch (brokenType)
 					{
-						++result;
+						case ConnectionBrokenType.NotStraight:
+							++nonStraightConnections;
+							break;
+						case ConnectionBrokenType.HasObstacles:
+							++connectionsWithObstacles;
+							break;
 					}
 				}
 			}
 
-			return result;
+			return new BrokenConnectionsInfo(nonStraightConnections, connectionsWithObstacles);
 		}
 
 		public Rectangle CalculateRectangle()

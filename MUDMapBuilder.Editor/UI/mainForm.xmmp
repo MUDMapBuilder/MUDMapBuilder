@@ -21,7 +21,7 @@
         </Button>
       </HorizontalStackPanel>
       <Label Text="Non-Straight Connections: 10" TextColor="#4BD961FF" Id="_labelNonStraightConnections" />
-      <Label Text="Connections With Obstacles: 10" TextColor="#4BD961FF" Id="_label" />
+      <Label Text="Connections With Obstacles: 10" TextColor="#4BD961FF" Id="_labelConnectionsWithObstacles" />
       <HorizontalStackPanel Spacing="8">
         <Label Text="Force X:" TextColor="#4BD961FF" />
         <SpinButton Maximum="10" Minimum="-10" Integer="True" Width="59" Id="_spinPushForceX" />

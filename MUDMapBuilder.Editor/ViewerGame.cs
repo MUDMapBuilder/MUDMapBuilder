@@ -5,7 +5,6 @@ using MUDMapBuilder.Editor.UI;
 using AbarimMUD.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Myra.Graphics2D.Brushes;
 
 namespace MUDMapBuilder.Editor
 {
@@ -51,8 +50,6 @@ namespace MUDMapBuilder.Editor
 			MyraEnvironment.Game = this;
 
 			_desktop = new Desktop();
-			_desktop.Background = new SolidBrush(Color.White);
-
 			_mainForm = new MainForm();
 			_desktop.Root = _mainForm;
 

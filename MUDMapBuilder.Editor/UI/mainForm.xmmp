@@ -11,21 +11,12 @@
           <Label Text="&gt;&gt;" />
         </Button>
       </HorizontalStackPanel>
+      <Label Text="Non-Straight Connections: 10" Id="_labelNonStraightConnections" />
+      <Label Text="Connections With Obstacles: 10" Id="_labelConnectionsWithObstacles" />
       <HorizontalStackPanel Spacing="8">
-        <Button Id="_buttonZeroCompact">
-          <Label Text="&lt;&lt;" />
-        </Button>
-        <SpinButton Maximum="1000" Minimum="0" Integer="True" Width="50" Id="_spinButtonCompact" />
-        <Button Id="_buttonMaximumCompact">
-          <Label Text="&gt;&gt;" />
-        </Button>
-      </HorizontalStackPanel>
-      <Label Text="Non-Straight Connections: 10" TextColor="#4BD961FF" Id="_labelNonStraightConnections" />
-      <Label Text="Connections With Obstacles: 10" TextColor="#4BD961FF" Id="_labelConnectionsWithObstacles" />
-      <HorizontalStackPanel Spacing="8">
-        <Label Text="Force X:" TextColor="#4BD961FF" />
+        <Label Text="Force X:" />
         <SpinButton Maximum="10" Minimum="-10" Integer="True" Width="59" Id="_spinPushForceX" />
-        <Label Text="Force Y:" TextColor="#4CD961FF" />
+        <Label Text="Force Y:" />
         <SpinButton Maximum="10" Minimum="-10" Integer="True" Width="59" Id="_spinPushForceY" />
         <Button Id="_buttonMeasure">
           <Label Text="Measure" />

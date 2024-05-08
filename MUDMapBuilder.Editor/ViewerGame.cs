@@ -63,7 +63,6 @@ namespace MUDMapBuilder.Editor
 			if (_state != null)
 			{
 				_mainForm.Step = _state.Step;
-				_mainForm.CompactRuns = _state.CompactRuns;
 			}
 		}
 
@@ -89,7 +88,6 @@ namespace MUDMapBuilder.Editor
 				Size = new Point(GraphicsDevice.PresentationParameters.BackBufferWidth,
 					GraphicsDevice.PresentationParameters.BackBufferHeight),
 				Step = _mainForm.Step,
-				CompactRuns = _mainForm.CompactRuns,
 			};
 
 			state.Save();

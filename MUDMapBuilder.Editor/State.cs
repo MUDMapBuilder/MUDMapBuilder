@@ -21,7 +21,6 @@ namespace MUDMapBuilder.Editor
 
 		public Point Size { get; set; }
 		public int Step { get; set; }
-		public int CompactRuns { get; set; }
 
 		public State()
 		{
@@ -60,11 +59,9 @@ namespace MUDMapBuilder.Editor
 		public override string ToString()
 		{
 			return string.Format("Size = {0}\n" +
-								 "Step = {1}\n" +
-								 "CompactRuns = {2}",
+								 "Step = {1}\n",
 				Size,
-				Step,
-				CompactRuns);
+				Step);
 		}
 	}
 }

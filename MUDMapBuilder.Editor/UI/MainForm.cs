@@ -27,19 +27,11 @@ namespace MUDMapBuilder.Editor.UI
 			set => _spinButtonStep.Value = value;
 		}
 
-		public int CompactRuns
-		{
-			get => (int)_spinButtonCompact.Value;
-			set => _spinButtonCompact.Value = value;
-		}
-
 		public System.Drawing.Point ForceVector => new System.Drawing.Point((int)_spinPushForceX.Value, (int)(_spinPushForceY.Value));
 
 		public MainForm()
 		{
 			BuildUI();
-
-			_spinButtonCompact.Value = 5;
 
 			_mapViewer = new MapViewer();
 			_panelMap.Content = _mapViewer;
@@ -47,10 +39,6 @@ namespace MUDMapBuilder.Editor.UI
 			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
 			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _mapViewer.MaxSteps;
 			_spinButtonStep.ValueChanged += (s, e) => Invalidate();
-
-			_buttonZeroCompact.Click += (s, e) => _spinButtonCompact.Value = _spinButtonCompact.Minimum;
-			_buttonMaximumCompact.Click += (s, e) => _spinButtonCompact.Value = _spinButtonCompact.Maximum;
-			_spinButtonCompact.ValueChanged += (s, e) => Invalidate();
 
 			_buttonMeasure.Click += (s, e) => _mapViewer.MeasurePushRoom(ForceVector);
 			_buttonPush.Click += (s, e) => _mapViewer.PushRoom(ForceVector);
@@ -84,7 +72,7 @@ namespace MUDMapBuilder.Editor.UI
 
 			if (_dirty)
 			{
-				_mapViewer.Rebuild((int)_spinButtonStep.Value.Value, (int)_spinButtonCompact.Value);
+				_mapViewer.Rebuild((int)_spinButtonStep.Value.Value);
 				_dirty = false;
 			}
 		}

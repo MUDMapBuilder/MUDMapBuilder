@@ -61,10 +61,10 @@ namespace MUDMapBuilder.Editor.UI
 			Background = new SolidBrush(Color.White);
 		}
 
-		public void Rebuild(int? maxSteps = null, int? compactRuns = null)
+		public void Rebuild(int? maxSteps = null)
 		{
 			var rooms = (from r in _map.Rooms select new RoomWrapper(r)).ToArray();
-			_rooms = MapBuilder.Build(rooms, maxSteps, compactRuns);
+			_rooms = MapBuilder.Build(rooms, maxSteps);
 			BrokenConnections = _rooms.CalculateBrokenConnections();
 			if (maxSteps == null)
 			{

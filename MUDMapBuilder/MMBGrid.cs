@@ -23,7 +23,7 @@ namespace MUDMapBuilder
 		public int Width => _cellData.GetLength(0);
 		public int Height => _cellData.GetLength(1);
 
-		public int Steps { get; internal set; }
+		public int? SelectedRoomId { get; internal set; }
 
 		internal MMBGrid(int width, int height)
 		{

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using static MUDMapBuilder.RoomsCollection;
 
 namespace MUDMapBuilder
@@ -13,7 +12,7 @@ namespace MUDMapBuilder
 			MMBDirection.North, MMBDirection.South, MMBDirection.West, MMBDirection.East
 		};
 
-		public static MMBGrid BuildGrid(IMMBRoom[] sourceRooms, int? maxSteps = null, int? maxCompactRuns = null)
+		public static RoomsCollection Build(IMMBRoom[] sourceRooms, int? maxSteps = null, int? maxCompactRuns = null)
 		{
 			var toProcess = new List<MMBRoom>();
 			var firstRoom = new MMBRoom(sourceRooms[0])
@@ -344,10 +343,9 @@ namespace MUDMapBuilder
 						nextiter:;
 						}*/
 
-			var result = rooms.Grid;
-			result.Steps = step;
+			rooms.Steps = step;
 
-			return result;
+			return rooms;
 		}
 	}
 }

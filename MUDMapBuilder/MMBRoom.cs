@@ -2,13 +2,13 @@
 
 namespace MUDMapBuilder
 {
-	internal class MMBRoom
+	public class MMBRoom
 	{
 		private Point _position;
 
 		public int Id => Room.Id;
 
-		public RoomsCollection Rooms { get; set; }
+		public RoomsCollection Rooms { get; internal set; }
 		public IMMBRoom Room { get; }
 		public Point Position
 		{
@@ -27,6 +27,7 @@ namespace MUDMapBuilder
 				}
 			}
 		}
+		public bool Mark { get; set; }
 
 		public MMBRoom(IMMBRoom room)
 		{

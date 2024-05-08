@@ -11,7 +11,7 @@ namespace MUDMapBuilder.Editor.UI
 	public class MapViewer : Image
 	{
 		private Area _map;
-		private MMBGrid _grid;
+		private RoomsCollection _rooms;
 		private MMBImageResult _imageResult;
 
 		public Area Map
@@ -39,10 +39,10 @@ namespace MUDMapBuilder.Editor.UI
 		public void Rebuild(int? maxSteps = null, int? compactRuns = null)
 		{
 			var rooms = (from r in _map.Rooms select new RoomWrapper(r)).ToArray();
-			_grid = MapBuilder.BuildGrid(rooms, maxSteps, compactRuns);
+			_rooms = MapBuilder.Build(rooms, maxSteps, compactRuns);
 			if (maxSteps == null)
 			{
-				MaxSteps = _grid.Steps;
+				MaxSteps = _rooms.Steps;
 			}
 
 			Redraw();
@@ -50,12 +50,51 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void Redraw()
 		{
-			_imageResult = _grid.BuildPng();
+			_imageResult = _rooms.Grid.BuildPng();
 			using (var ms = new MemoryStream(_imageResult.PngData))
 			{
 				var texture = Texture2D.FromStream(MyraEnvironment.GraphicsDevice, ms);
 				Renderable = new TextureRegion(texture);
 			}
+
+			foreach(var room in _rooms)
+			{
+				room.Mark = false;
+			}
+		}
+
+		public void MeasurePushRoom(MMBDirection direction)
+		{
+			var selectedRoomId = _rooms.Grid.SelectedRoomId;
+			if (selectedRoomId == null)
+			{
+				return;
+			}
+
+			var room = _rooms.GetRoomById(selectedRoomId.Value);
+			var roomsToMark = _rooms.MeasurePushRoom(room, direction);
+			foreach(var pair in roomsToMark)
+			{
+				pair.Value.Mark = true;
+			}
+
+			_rooms.InvalidateGrid();
+
+			Redraw();
+		}
+
+		public void PushRoom(MMBDirection direction)
+		{
+			var selectedRoomId = _rooms.Grid.SelectedRoomId;
+			if (selectedRoomId == null)
+			{
+				return;
+			}
+
+			var room = _rooms.GetRoomById(selectedRoomId.Value);
+			_rooms.PushRoom(room, direction, 1);
+
+			Redraw();
 		}
 
 		public override void OnTouchDown()
@@ -63,11 +102,11 @@ namespace MUDMapBuilder.Editor.UI
 			base.OnTouchDown();
 
 			var pos = LocalTouchPosition.Value;
-			foreach(var room in _imageResult.Rooms)
+			foreach (var room in _imageResult.Rooms)
 			{
 				if (room.Rectangle.Contains(pos.X, pos.Y))
 				{
-					_grid.SelectedRoomId = room.Room.Id;
+					_rooms.SelectedRoomId = room.Room.Id;
 					Redraw();
 					break;
 				}

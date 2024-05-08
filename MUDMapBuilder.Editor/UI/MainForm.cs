@@ -48,6 +48,16 @@ namespace MUDMapBuilder.Editor.UI
 			_buttonZeroCompact.Click += (s, e) => _spinButtonCompact.Value = _spinButtonCompact.Minimum;
 			_buttonMaximumCompact.Click += (s, e) => _spinButtonCompact.Value = _spinButtonCompact.Maximum;
 			_spinButtonCompact.ValueChanged += (s, e) => Invalidate();
+
+			_buttonMeasurePushWest.Click += (s, e) => _mapViewer.MeasurePushRoom(MMBDirection.West);
+			_buttonMeasurePushEast.Click += (s, e) => _mapViewer.MeasurePushRoom(MMBDirection.East);
+			_buttonMeasurePushNorth.Click += (s, e) => _mapViewer.MeasurePushRoom(MMBDirection.North);
+			_buttonMeasurePushSouth.Click += (s, e) => _mapViewer.MeasurePushRoom(MMBDirection.South);
+
+			_buttonPushWest.Click += (s, e) => _mapViewer.PushRoom(MMBDirection.West);
+			_buttonPushEast.Click += (s, e) => _mapViewer.PushRoom(MMBDirection.East);
+			_buttonPushNorth.Click += (s, e) => _mapViewer.PushRoom(MMBDirection.North);
+			_buttonPushSouth.Click += (s, e) => _mapViewer.PushRoom(MMBDirection.South);
 		}
 
 		public void Invalidate()

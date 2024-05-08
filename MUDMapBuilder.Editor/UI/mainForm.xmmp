@@ -20,6 +20,34 @@
           <Label Text="&gt;&gt;" />
         </Button>
       </HorizontalStackPanel>
+      <HorizontalStackPanel Spacing="8">
+        <Button Id="_buttonMeasurePushWest">
+          <Label Text="Measure Push West" />
+        </Button>
+        <Button Id="_buttonMeasurePushEast">
+          <Label Text="Measure Push East" />
+        </Button>
+        <Button Id="_buttonMeasurePushNorth">
+          <Label Text="Measure Push North" />
+        </Button>
+        <Button Id="_buttonMeasurePushSouth">
+          <Label Text="Measure Push South" />
+        </Button>
+      </HorizontalStackPanel>
+      <HorizontalStackPanel Spacing="8">
+        <Button Id="_buttonPushWest">
+          <Label Text="Push West" />
+        </Button>
+        <Button Id="_buttonPushEast">
+          <Label Text="Push East" />
+        </Button>
+        <Button Id="_buttonPushNorth">
+          <Label Text="Push North" />
+        </Button>
+        <Button Id="_buttonPushSouth">
+          <Label Text="Push South" />
+        </Button>
+      </HorizontalStackPanel>
       <ScrollViewer Id="_panelMap" StackPanel.ProportionType="Fill" />
     </VerticalStackPanel>
   </Panel>

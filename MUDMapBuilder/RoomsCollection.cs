@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MUDMapBuilder
 {
-	internal class RoomsCollection : IEnumerable<MMBRoom>
+	public class RoomsCollection : IEnumerable<MMBRoom>
 	{
 		public enum ConnectionBrokenType
 		{
@@ -14,6 +14,11 @@ namespace MUDMapBuilder
 			NotStraight,
 			HasObstacles
 		}
+
+		private readonly List<MMBRoom> _rooms = new List<MMBRoom>();
+		private MMBGrid _grid;
+		private Point _min;
+		private int? _selectedRoomId;
 
 		public int Count => _rooms.Count;
 
@@ -26,12 +31,26 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public MMBRoom this[int index] => _rooms[index];
-		private readonly List<MMBRoom> _rooms = new List<MMBRoom>();
-		private MMBGrid _grid;
-		private Point _min;
+		public int Steps { get; internal set; }
 
-		public void Add(MMBRoom room)
+		internal MMBRoom this[int index] => _rooms[index];
+
+		public int? SelectedRoomId
+		{
+			get => _selectedRoomId;
+
+			set
+			{
+				_selectedRoomId = value;
+
+				if (_grid != null)
+				{
+					_grid.SelectedRoomId = value;
+				}
+			}
+		}
+
+		internal void Add(MMBRoom room)
 		{
 			room.Rooms = this;
 
@@ -39,7 +58,7 @@ namespace MUDMapBuilder
 			InvalidateGrid();
 		}
 
-		internal void InvalidateGrid()
+		public void InvalidateGrid()
 		{
 			_grid = null;
 		}
@@ -54,13 +73,19 @@ namespace MUDMapBuilder
 			var rect = CalculateRectangle();
 
 			_min = new Point(rect.X, rect.Y);
-			_grid = new MMBGrid(rect.Width, rect.Height);
+			_grid = new MMBGrid(rect.Width, rect.Height)
+			{
+				SelectedRoomId = SelectedRoomId
+			};
 
 			// First run: add rooms
 			foreach (var room in _rooms)
 			{
 				var coord = new Point(room.Position.X - rect.X, room.Position.Y - rect.Y);
-				_grid[coord.X, coord.Y] = new MMBRoomCell(room.Room, coord);
+				_grid[coord.X, coord.Y] = new MMBRoomCell(room.Room, coord)
+				{
+					Mark = room.Mark
+				};
 			}
 
 			// Second run: add connections
@@ -144,7 +169,7 @@ namespace MUDMapBuilder
 		public MMBRoom GetRoomById(int id) => (from r in _rooms where r.Id == id select r).FirstOrDefault();
 		public MMBRoom GetRoomByPosition(Point pos) => (from r in _rooms where r.Position == pos select r).FirstOrDefault();
 
-		public void PushRoom(MMBRoom firstRoom, MMBDirection direction, int steps)
+		public Dictionary<int, MMBRoom> MeasurePushRoom(MMBRoom firstRoom, MMBDirection direction)
 		{
 			var initialPos = firstRoom.Position;
 
@@ -205,6 +230,13 @@ namespace MUDMapBuilder
 					}
 				}
 			}
+
+			return roomsToPush;
+		}
+
+		public void PushRoom(MMBRoom firstRoom, MMBDirection direction, int steps)
+		{
+			var roomsToPush = MeasurePushRoom(firstRoom, direction);
 
 			// Do the push
 			var delta = direction.GetDelta();

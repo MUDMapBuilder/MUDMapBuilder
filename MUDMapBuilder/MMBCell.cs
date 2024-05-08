@@ -24,6 +24,7 @@ namespace MUDMapBuilder
 
 		public IMMBRoom Room { get; }
 		public int Id => Room.Id;
+		public bool Mark { get; internal set; }
 
 		internal MMBRoomCell(IMMBRoom room, Point position) : base(position)
 		{

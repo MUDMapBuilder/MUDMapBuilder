@@ -19,9 +19,6 @@ namespace MUDMapBuilder
 		private static readonly Point RoomSpace = new Point(32, 32);
 		private int[] _cellsWidths;
 
-		public int? SelectedRoomId { get; set; }
-
-
 		public MMBImageResult BuildPng()
 		{
 			var roomInfos = new List<MMBImageRoomInfo>();
@@ -88,13 +85,22 @@ namespace MUDMapBuilder
 							var rect = GetRoomRect(new Point(x, y));
 							paint.StrokeWidth = 2;
 
+							SKColor? newColor = null;
 							if (room.Id == SelectedRoomId)
+							{
+								newColor = SKColors.Green;
+							} else if (room.Mark)
+							{
+								newColor = SKColors.GreenYellow;
+							}
+
+							if (newColor != null)
 							{
 								var oldColor = paint.Color;
 
 								try
 								{
-									paint.Color = SKColors.Green;
+									paint.Color = newColor.Value;
 									canvas.DrawRect(rect.X, rect.Y, rect.Width, rect.Height, paint);
 								}
 								finally

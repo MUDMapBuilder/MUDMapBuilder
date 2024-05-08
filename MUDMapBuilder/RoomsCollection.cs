@@ -8,6 +8,13 @@ namespace MUDMapBuilder
 {
 	internal class RoomsCollection : IEnumerable<MMBRoom>
 	{
+		public enum ConnectionBrokenType
+		{
+			NotBroken,
+			NotStraight,
+			HasObstacles
+		}
+
 		private class Obstacle
 		{
 		}
@@ -53,6 +60,10 @@ namespace MUDMapBuilder
 				_rooms.Add(new Tuple<MMBRoom, MMBRoom>(room1 , room2));
 			}
 		}
+
+		public int Count => _rooms.Count;
+
+		public MMBRoom this[int index] => _rooms[index];
 
 
 		private readonly List<MMBRoom> _rooms = new List<MMBRoom>();
@@ -258,7 +269,7 @@ namespace MUDMapBuilder
 			InvalidateGrid();
 		}
 
-		private static bool IsConnectionStraight(Point sourcePos, Point targetPos, MMBDirection exitDir)
+		public static bool IsConnectionStraight(Point sourcePos, Point targetPos, MMBDirection exitDir)
 		{
 			var isStraight = false;
 			switch (exitDir)
@@ -380,6 +391,75 @@ namespace MUDMapBuilder
 			checkPos.Y -= _min.Y;
 
 			return _obstacleGrid[checkPos.X, checkPos.Y];
+		}
+
+		public ConnectionBrokenType IsConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir)
+		{
+			var pos = sourceRoom.Position;
+			var targetPos = targetRoom.Position;
+			var isStraight = false;
+			switch (exitDir)
+			{
+				case MMBDirection.North:
+					isStraight = targetPos.X - pos.X == 0 && targetPos.Y < pos.Y;
+					break;
+
+				case MMBDirection.South:
+					isStraight = targetPos.X - pos.X == 0 && targetPos.Y > pos.Y;
+					break;
+
+				case MMBDirection.West:
+					isStraight = targetPos.X < pos.X && targetPos.Y - pos.Y == 0;
+					break;
+
+				case MMBDirection.East:
+					isStraight = targetPos.X > pos.X && targetPos.Y - pos.Y == 0;
+					break;
+
+				case MMBDirection.Up:
+				case MMBDirection.Down:
+					// Skip Up/Down for now
+					return ConnectionBrokenType.NotBroken;
+			}
+
+			if (!isStraight)
+			{
+				return ConnectionBrokenType.NotStraight;
+			}
+			else
+			{
+				// Check there are no obstacles on the path
+				var delta = exitDir.GetDelta();
+				var p = new Point(pos.X + delta.X, pos.Y + delta.Y);
+				var noObstacles = true;
+				while (p.X != targetPos.X || p.Y != targetPos.Y)
+				{
+					var obstacle = GetObstacle(p);
+					var asRoomObstacle = obstacle as RoomObstacle;
+					if (asRoomObstacle != null)
+					{
+						noObstacles = false;
+						break;
+					}
+
+					var asConnectionsObstacle = obstacle as ConnectionsObstacle;
+					if (asConnectionsObstacle != null && asConnectionsObstacle.Count > 1)
+					{
+						noObstacles = false;
+						break;
+					}
+
+					p.X += delta.X;
+					p.Y += delta.Y;
+				}
+
+				if (!noObstacles)
+				{
+					return ConnectionBrokenType.HasObstacles;
+				}
+			}
+
+			return ConnectionBrokenType.NotBroken;
 		}
 
 		public int CalculateBrokenConnections()
@@ -516,6 +596,52 @@ namespace MUDMapBuilder
 			}
 
 			return new Rectangle(min.X, min.Y, max.X - min.X + 1, max.Y - min.Y + 1);
+		}
+
+		public void FixPlacementOfSingleExitRooms()
+		{
+			foreach (var room in _rooms)
+			{
+				var pos = room.Position;
+				var exitDirs = room.Room.ExitsDirections;
+				for (var i = 0; i < exitDirs.Length; ++i)
+				{
+					var exitDir = exitDirs[i];
+					var exitRoom = room.Room.GetRoomByExit(exitDir);
+
+					var targetRoom = GetRoomById(exitRoom.Id);
+					if (targetRoom == null)
+					{
+						continue;
+					}
+
+					if (exitRoom.ExitsDirections.Length > 1)
+					{
+						continue;
+					}
+
+					var delta = exitDir.GetDelta();
+					var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
+					if (targetRoom.Position == desiredPos)
+					{
+						// The target room is already at desired pos
+						continue;
+					}
+
+					// Check if the spot is free
+					var usedByRoom = GetRoomByPosition(desiredPos);
+					if (usedByRoom != null)
+					{
+						// Spot is occupied
+						continue;
+					}
+
+					// Place target room next to source
+					targetRoom.Position = desiredPos;
+				}
+			}
+
+			InvalidateGrid();
 		}
 
 		public int CalculateArea() => CalculateRectangle().CalculateArea();

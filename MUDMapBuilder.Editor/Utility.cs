@@ -1,11 +1,24 @@
 ﻿using AbarimMUD.Data;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
+using System.Reflection;
 
-namespace MUDMapBuilder.Sample
+namespace MUDMapBuilder.Editor
 {
 	internal static class Utility
 	{
+		public static string ExecutingAssemblyDirectory
+		{
+			get
+			{
+				string codeBase = Assembly.GetExecutingAssembly().Location;
+				UriBuilder uri = new UriBuilder(codeBase);
+				string path = Uri.UnescapeDataString(uri.Path);
+				return Path.GetDirectoryName(path);
+			}
+		}
+
 		public static readonly Random Random = new Random();
 
 		public static MMBDirection ToMBBDirection(this Direction direction)

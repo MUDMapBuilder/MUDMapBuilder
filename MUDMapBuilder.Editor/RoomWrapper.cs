@@ -1,7 +1,7 @@
 ﻿using AbarimMUD.Data;
 using System.Linq;
 
-namespace MUDMapBuilder.Sample
+namespace MUDMapBuilder.Editor
 {
 	internal class RoomWrapper : IMMBRoom
 	{

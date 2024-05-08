@@ -1,6 +1,6 @@
 ﻿using AbarimMUD.Data;
 
-namespace MUDMapBuilder.Sample
+namespace MUDMapBuilder.Editor
 {
 	public static class Database
 	{

@@ -1,4 +1,4 @@
-﻿namespace MUDMapBuilder.Sample
+﻿namespace MUDMapBuilder.Editor
 {
 	class Program
 	{

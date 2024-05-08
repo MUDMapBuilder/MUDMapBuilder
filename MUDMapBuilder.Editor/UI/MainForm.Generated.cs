@@ -20,7 +20,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 #endif
 
-namespace MUDMapBuilder.Sample.UI
+namespace MUDMapBuilder.Editor.UI
 {
 	partial class MainForm: Panel
 	{

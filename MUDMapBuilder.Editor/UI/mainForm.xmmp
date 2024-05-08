@@ -1,5 +1,5 @@
 <Project>
-  <Project.ExportOptions Namespace="MUDMapBuilder.Sample.UI" Class="MainForm" OutputPath="D:\Projects\MUDMapBuilder.NET\MUDMapBuilder.Sample\UI" />
+  <Project.ExportOptions Namespace="MUDMapBuilder.Editor.UI" Class="MainForm" OutputPath="D:\Projects\MUDMapBuilder.NET\MUDMapBuilder.Editor\UI" />
   <Panel>
     <VerticalStackPanel Spacing="8">
       <HorizontalStackPanel Spacing="8">

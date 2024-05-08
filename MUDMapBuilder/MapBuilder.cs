@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using static MUDMapBuilder.RoomsCollection;
 
 namespace MUDMapBuilder
 {
@@ -93,86 +94,156 @@ namespace MUDMapBuilder
 				++step;
 			}
 
-			// Next run: if it is possible to place interconnected rooms with single exits next to each other, do it
-			foreach (var room in rooms)
-			{
-				pos = room.Position;
-				var exitDirs = room.Room.ExitsDirections;
-				for (var i = 0; i < exitDirs.Length; ++i)
-				{
-					var exitDir = exitDirs[i];
-					var exitRoom = room.Room.GetRoomByExit(exitDir);
+			rooms.FixPlacementOfSingleExitRooms();
 
-					var targetRoom = rooms.GetRoomById(exitRoom.Id);
-					if (targetRoom == null)
-					{
-						continue;
-					}
-
-					if (exitRoom.ExitsDirections.Length > 1)
-					{
-						continue;
-					}
-
-					var delta = exitDir.GetDelta();
-					var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
-					if (targetRoom.Position == desiredPos)
-					{
-						// The target room is already at desired pos
-						continue;
-					}
-
-					// Check if the spot is free
-					var usedByRoom = rooms.GetRoomByPosition(desiredPos);
-					if (usedByRoom != null)
-					{
-						// Spot is occupied
-						continue;
-					}
-
-					// Place target room next to source
-					targetRoom.Position = desiredPos;
-				}
-			}
-
-			// Next run: Try to move each move 10 times in each direction in vain hope of minimizing amount of broken connections
+			// Next run: Try to move each room with broken connections 10 times in each direction
+			// in the vain hope of minimizing overall amount of broken connections
 			vc = rooms.CalculateBrokenConnections();
-
 			if (vc > 0)
 			{
-				var newRooms = rooms;
-				foreach (var room in rooms)
+				var roomsCount = rooms.Count;
+				for(var i = 0; i < roomsCount; ++i)
 				{
-					for (var st = 1; st < 10; ++st)
+					rooms.FixPlacementOfSingleExitRooms();
+					var room = rooms[i];
+					var brokenType = ConnectionBrokenType.NotBroken;
+					var exitDirs = room.Room.ExitsDirections;
+					var exitDir = MMBDirection.West;
+					MMBRoom targetRoom = null;
+					for (var j = 0; j < exitDirs.Length; ++j)
 					{
-						for (var j = 0; j < PushDirections.Length; ++j)
+						exitDir = exitDirs[j];
+
+						var exitRoom = room.Room.GetRoomByExit(exitDir);
+						targetRoom = rooms.GetRoomById(exitRoom.Id);
+						if (targetRoom == null)
 						{
-							var clone = newRooms.Clone();
+							continue;
+						}
+
+						brokenType = rooms.IsConnectionBroken(room, targetRoom, exitDir);
+						if (brokenType != ConnectionBrokenType.NotBroken)
+						{
+							break;
+						}
+					}
+
+					if (brokenType == ConnectionBrokenType.NotStraight)
+					{
+						var sourcePos = room.Position;
+						var targetPos = targetRoom.Position;
+						var desiredPos = new Point();
+						switch (exitDir)
+						{
+							case MMBDirection.North:
+								desiredPos = new Point(sourcePos.X, targetPos.Y < sourcePos.Y ? targetPos.Y : sourcePos.Y - 1);
+								break;
+							case MMBDirection.South:
+								desiredPos = new Point(sourcePos.X, targetPos.Y > sourcePos.Y ? targetPos.Y : targetPos.Y + 1);
+								break;
+							case MMBDirection.East:
+								desiredPos = new Point(targetPos.X > targetPos.X ? targetPos.X : sourcePos.X + 1, sourcePos.Y);
+								break;
+							case MMBDirection.West:
+								desiredPos = new Point(targetPos.X < targetPos.X ? targetPos.X : sourcePos.X - 1, sourcePos.Y);
+								break;
+							case MMBDirection.Up:
+								break;
+							case MMBDirection.Down:
+								break;
+						}
+
+						var d = new Point(desiredPos.X - targetPos.X, desiredPos.Y - targetPos.Y);
+
+						var clone = rooms.Clone();
+						var cloneRoom = clone.GetRoomById(targetRoom.Id);
+
+						if (d.Y < 0)
+						{
+							clone.PushRoom(cloneRoom, MMBDirection.North, Math.Abs(d.Y));
+						}
+						else if (d.Y > 0)
+						{
+							clone.PushRoom(cloneRoom, MMBDirection.South, Math.Abs(d.Y));
+						}
+
+						if (d.X < 0)
+						{
+							clone.PushRoom(cloneRoom, MMBDirection.West, Math.Abs(d.X));
+						}
+						else if (d.X > 0)
+						{
+							clone.PushRoom(cloneRoom, MMBDirection.East, Math.Abs(d.X));
+						}
+
+						var c = clone.CalculateBrokenConnections();
+						if (c < vc)
+						{
+							rooms = clone;
+							vc = c;
+
+							if (vc == 0)
+							{
+								goto finish;
+							}
+						}
+
+					} else if (brokenType == ConnectionBrokenType.HasObstacles)
+					{
+						var deltas = new List<Point>();
+						for (var radius = 1; radius <= 10; ++radius)
+						{
+							for(var k = 0; k < PushDirections.Length; ++k)
+							{
+								var delta = PushDirections[k].GetDelta();
+								delta.X *= radius;
+								delta.Y *= radius;
+
+								deltas.Add(delta);
+							}
+						}
+
+						foreach (var d in deltas)
+						{
+							var clone = rooms.Clone();
 							var cloneRoom = clone.GetRoomById(room.Id);
 
-							if (cloneRoom.Id == 1563)
+							if (d.Y < 0)
 							{
-								var k = 5;
+								clone.PushRoom(cloneRoom, MMBDirection.North, Math.Abs(d.Y));
 							}
-							clone.PushRoom(cloneRoom, PushDirections[j], st);
+							else if (d.Y > 0)
+							{
+								clone.PushRoom(cloneRoom, MMBDirection.South, Math.Abs(d.Y));
+							}
+
+							if (d.X < 0)
+							{
+								clone.PushRoom(cloneRoom, MMBDirection.West, Math.Abs(d.X));
+							}
+							else if (d.X > 0)
+							{
+								clone.PushRoom(cloneRoom, MMBDirection.East, Math.Abs(d.X));
+							}
 
 							var c = clone.CalculateBrokenConnections();
 							if (c < vc)
 							{
-								newRooms = clone;
+								rooms = clone;
 								vc = c;
 
 								if (vc == 0)
 								{
 									goto finish;
 								}
+
+								break;
 							}
 						}
 					}
 				}
 
 			finish:;
-				rooms = newRooms;
 			}
 
 			// Third run: Try to make the map more compact
@@ -181,11 +252,6 @@ namespace MUDMapBuilder
 			{
 				foreach (var room in rooms)
 				{
-					if (it == 4 && room.Id == 1496)
-					{
-						var k = 5;
-					}
-
 					pos = room.Position;
 					var exitDirs = room.Room.ExitsDirections;
 					for (var j = 0; j < exitDirs.Length; ++j)

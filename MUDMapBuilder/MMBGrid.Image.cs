@@ -3,6 +3,7 @@ using GoRogue.MapViews;
 using GoRogue.Pathing;
 using SkiaSharp;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -18,9 +19,13 @@ namespace MUDMapBuilder
 		private static readonly Point RoomSpace = new Point(32, 32);
 		private int[] _cellsWidths;
 
+		public int? SelectedRoomId { get; set; }
 
-		public byte[] BuildPng()
+
+		public MMBImageResult BuildPng()
 		{
+			var roomInfos = new List<MMBImageRoomInfo>();
+
 			byte[] imageBytes = null;
 			using (SKPaint paint = new SKPaint())
 			{
@@ -40,6 +45,8 @@ namespace MUDMapBuilder
 						{
 							continue;
 						}
+
+						room.ClearConnections();
 
 						var sz = (int)(paint.MeasureText(room.Room.ToString()) + TextPadding * 2 + 0.5f);
 						if (sz > _cellsWidths[x])
@@ -80,7 +87,26 @@ namespace MUDMapBuilder
 							// Draw room
 							var rect = GetRoomRect(new Point(x, y));
 							paint.StrokeWidth = 2;
-							canvas.DrawRect(rect.X, rect.Y, _cellsWidths[x], RoomHeight, paint);
+
+							if (mMBRoom.Id == SelectedRoomId)
+							{
+								var oldColor = paint.Color;
+
+								try
+								{
+									paint.Color = SKColors.Green;
+									canvas.DrawRect(rect.X, rect.Y, rect.Width, rect.Height, paint);
+								}
+								finally
+								{
+									paint.Color = oldColor;
+								}
+							} else
+							{
+								canvas.DrawRect(rect.X, rect.Y, rect.Width, rect.Height, paint);
+							}
+
+							roomInfos.Add(new MMBImageRoomInfo(mMBRoom.Room, rect));
 
 							// Draw connections
 							var exitDirs = mMBRoom.Room.ExitsDirections;
@@ -247,7 +273,7 @@ namespace MUDMapBuilder
 
 			}
 
-			return imageBytes;
+			return new MMBImageResult(imageBytes, roomInfos.ToArray());
 		}
 
 		private Rectangle GetRoomRect(Point pos)

@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XNAssets.FNA.Core", "..\XNA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Myra.FNA.Core", "..\Myra\src\Myra\Myra.FNA.Core.csproj", "{A94E5FE4-8870-4FEB-AF53-F146DD56FDBD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUDMapBuilder.Sample", "MUDMapBuilder.Sample\MUDMapBuilder.Sample.csproj", "{7388813F-FEDA-491E-9D5D-42D101D2343A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUDMapBuilder.Editor", "MUDMapBuilder.Editor\MUDMapBuilder.Editor.csproj", "{C2A1A40F-FF02-4F43-8333-DAD5622DAC37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,14 +73,14 @@ Global
 		{A94E5FE4-8870-4FEB-AF53-F146DD56FDBD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A94E5FE4-8870-4FEB-AF53-F146DD56FDBD}.Release|x64.ActiveCfg = Release|Any CPU
 		{A94E5FE4-8870-4FEB-AF53-F146DD56FDBD}.Release|x64.Build.0 = Release|Any CPU
-		{7388813F-FEDA-491E-9D5D-42D101D2343A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7388813F-FEDA-491E-9D5D-42D101D2343A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7388813F-FEDA-491E-9D5D-42D101D2343A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7388813F-FEDA-491E-9D5D-42D101D2343A}.Debug|x64.Build.0 = Debug|Any CPU
-		{7388813F-FEDA-491E-9D5D-42D101D2343A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7388813F-FEDA-491E-9D5D-42D101D2343A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7388813F-FEDA-491E-9D5D-42D101D2343A}.Release|x64.ActiveCfg = Release|Any CPU
-		{7388813F-FEDA-491E-9D5D-42D101D2343A}.Release|x64.Build.0 = Release|Any CPU
+		{C2A1A40F-FF02-4F43-8333-DAD5622DAC37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2A1A40F-FF02-4F43-8333-DAD5622DAC37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2A1A40F-FF02-4F43-8333-DAD5622DAC37}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C2A1A40F-FF02-4F43-8333-DAD5622DAC37}.Debug|x64.Build.0 = Debug|Any CPU
+		{C2A1A40F-FF02-4F43-8333-DAD5622DAC37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2A1A40F-FF02-4F43-8333-DAD5622DAC37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2A1A40F-FF02-4F43-8333-DAD5622DAC37}.Release|x64.ActiveCfg = Release|Any CPU
+		{C2A1A40F-FF02-4F43-8333-DAD5622DAC37}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

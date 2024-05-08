@@ -16,6 +16,8 @@ namespace MUDMapBuilder
 			Room = room;
 		}
 
+		internal void ClearConnections() => _connections.Clear();
+
 		internal void Connect(MMBDirection direction, Point pos)
 		{
 			_connections[direction] = pos;

@@ -82,6 +82,13 @@ namespace MUDMapBuilder
 			foreach (var room in _rooms)
 			{
 				var coord = new Point(room.Position.X - rect.X, room.Position.Y - rect.Y);
+
+				var asRoom = _grid[coord] as MMBRoomCell;
+				if (asRoom != null)
+				{
+					var k = 5;
+				}
+
 				_grid[coord.X, coord.Y] = new MMBRoomCell(room.Room, coord)
 				{
 					Mark = room.Mark
@@ -169,30 +176,34 @@ namespace MUDMapBuilder
 		public MMBRoom GetRoomById(int id) => (from r in _rooms where r.Id == id select r).FirstOrDefault();
 		public MMBRoom GetRoomByPosition(Point pos) => (from r in _rooms where r.Position == pos select r).FirstOrDefault();
 
-		public Dictionary<int, MMBRoom> MeasurePushRoom(MMBRoom firstRoom, MMBDirection direction)
+		public Dictionary<int, Point> MeasurePushRoom(MMBRoom firstRoom, Point firstForceVector)
 		{
-			var initialPos = firstRoom.Position;
+			var roomsToPush = new Dictionary<int, Point>();
 
-			// Collect rooms to pull
-			var toProcess = new List<MMBRoom>
+			var toProcess = new List<Tuple<MMBRoom, Point>>
 			{
-				firstRoom
+				new Tuple<MMBRoom, Point>(firstRoom, firstForceVector)
 			};
-
-			var roomsToPush = new Dictionary<int, MMBRoom>();
 			while (toProcess.Count > 0)
 			{
-				var room = toProcess[0];
+				var item = toProcess[0];
+				var room = item.Item1;
+				var pos = room.Position;
 				toProcess.RemoveAt(0);
-				roomsToPush[room.Id] = room;
 
+				roomsToPush[room.Id] = item.Item2;
+
+				// Process neighbour rooms
 				var exitDirs = room.Room.ExitsDirections;
 				for (var i = 0; i < exitDirs.Length; ++i)
 				{
+					var forceVector = item.Item2;
+
 					var exitDir = exitDirs[i];
 					var exitRoom = room.Room.GetRoomByExit(exitDir);
+
 					var targetRoom = GetRoomById(exitRoom.Id);
-					if (targetRoom == null || roomsToPush.ContainsKey(targetRoom.Id))
+					if (targetRoom == null || roomsToPush.ContainsKey(exitRoom.Id))
 					{
 						continue;
 					}
@@ -204,29 +215,44 @@ namespace MUDMapBuilder
 					}
 
 					var targetPos = targetRoom.Position;
-					var add = false;
-					switch (direction)
+					switch (exitDir)
 					{
 						case MMBDirection.North:
-							add = targetPos.Y <= initialPos.Y;
+							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
+							if (forceVector.Y > 0)
+							{
+								forceVector.Y = 0;
+							}
 							break;
+
 						case MMBDirection.East:
-							add = targetPos.X >= initialPos.X;
+							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
+							if (forceVector.X < 0)
+							{
+								forceVector.X = 0;
+							}
 							break;
+
 						case MMBDirection.South:
-							add = targetPos.Y >= initialPos.Y;
+							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
+							if (forceVector.Y < 0)
+							{
+								forceVector.Y = 0;
+							}
 							break;
+
 						case MMBDirection.West:
-							add = targetPos.X <= initialPos.X;
+							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
+							if (forceVector.X > 0)
+							{
+								forceVector.X = 0;
+							}
 							break;
-						case MMBDirection.Up:
-						case MMBDirection.Down:
-							throw new NotImplementedException();
 					}
 
-					if (add)
+					if (forceVector.X != 0 || forceVector.Y != 0)
 					{
-						toProcess.Add(targetRoom);
+						toProcess.Add(new Tuple<MMBRoom, Point>(targetRoom, forceVector));
 					}
 				}
 			}
@@ -234,27 +260,36 @@ namespace MUDMapBuilder
 			return roomsToPush;
 		}
 
-		public void PushRoom(MMBRoom firstRoom, MMBDirection direction, int steps)
+		public void PushRoom(MMBRoom firstRoom, Point firstForceVector)
 		{
-			var roomsToPush = MeasurePushRoom(firstRoom, direction);
+			var roomsToPush = MeasurePushRoom(firstRoom, firstForceVector);
 
-			// Do the push
-			var delta = direction.GetDelta();
-			delta.X *= steps;
-			delta.Y *= steps;
-			foreach (var pair in roomsToPush)
+			// Process rooms in special order so rooms dont get placed on each other
+			while (roomsToPush.Count > 0)
 			{
-				// If there's existing room, then put it on older position
-				var room = pair.Value;
-				var newPos = new Point(room.Position.X + delta.X, room.Position.Y + delta.Y);
-
-				var existingRoom = GetRoomByPosition(newPos);
-				if (existingRoom != null && !roomsToPush.ContainsKey(existingRoom.Id))
+				foreach (var pair in roomsToPush)
 				{
-					existingRoom.Position = room.Position;
-				}
+					var room = GetRoomById(pair.Key);
+					var delta = pair.Value;
 
-				room.Position = newPos;
+					var newPos = new Point(room.Position.X + delta.X, room.Position.Y + delta.Y);
+
+					var existingRoom = GetRoomByPosition(newPos);
+					if (existingRoom != null)
+					{
+						if (roomsToPush.ContainsKey(existingRoom.Id))
+						{
+							continue;
+						}
+
+						// Place existing room on the older position
+						existingRoom.Position = room.Position;
+					}
+
+					room.Position = newPos;
+					roomsToPush.Remove(pair.Key);
+					break;
+				}
 			}
 		}
 
@@ -384,7 +419,7 @@ namespace MUDMapBuilder
 			return _grid[checkPos.X, checkPos.Y];
 		}
 
-		public ConnectionBrokenType IsConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir)
+		public ConnectionBrokenType CheckConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir)
 		{
 			var pos = sourceRoom.Position;
 			var targetPos = targetRoom.Position;
@@ -433,12 +468,12 @@ namespace MUDMapBuilder
 						break;
 					}
 
-					var asConnectionsCell = cell as MMBConnectionsCell;
-					if (asConnectionsCell != null && asConnectionsCell.Count > 1)
-					{
-						noObstacles = false;
-						break;
-					}
+					/*					var asConnectionsCell = cell as MMBConnectionsCell;
+										if (asConnectionsCell != null && asConnectionsCell.Count > 1)
+										{
+											noObstacles = false;
+											break;
+										}*/
 
 					p.X += delta.X;
 					p.Y += delta.Y;
@@ -472,7 +507,7 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					if (IsConnectionBroken(room, targetRoom, exitDir) != ConnectionBrokenType.NotBroken)
+					if (CheckConnectionBroken(room, targetRoom, exitDir) != ConnectionBrokenType.NotBroken)
 					{
 						++result;
 					}

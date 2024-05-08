@@ -20,32 +20,18 @@
           <Label Text="&gt;&gt;" />
         </Button>
       </HorizontalStackPanel>
+      <Label Text="Non-Straight Connections: 10" TextColor="#4BD961FF" Id="_labelNonStraightConnections" />
+      <Label Text="Connections With Obstacles: 10" TextColor="#4BD961FF" Id="_label" />
       <HorizontalStackPanel Spacing="8">
-        <Button Id="_buttonMeasurePushWest">
-          <Label Text="Measure Push West" />
+        <Label Text="Force X:" TextColor="#4BD961FF" />
+        <SpinButton Maximum="10" Minimum="-10" Integer="True" Width="59" Id="_spinPushForceX" />
+        <Label Text="Force Y:" TextColor="#4CD961FF" />
+        <SpinButton Maximum="10" Minimum="-10" Integer="True" Width="59" Id="_spinPushForceY" />
+        <Button Id="_buttonMeasure">
+          <Label Text="Measure" />
         </Button>
-        <Button Id="_buttonMeasurePushEast">
-          <Label Text="Measure Push East" />
-        </Button>
-        <Button Id="_buttonMeasurePushNorth">
-          <Label Text="Measure Push North" />
-        </Button>
-        <Button Id="_buttonMeasurePushSouth">
-          <Label Text="Measure Push South" />
-        </Button>
-      </HorizontalStackPanel>
-      <HorizontalStackPanel Spacing="8">
-        <Button Id="_buttonPushWest">
-          <Label Text="Push West" />
-        </Button>
-        <Button Id="_buttonPushEast">
-          <Label Text="Push East" />
-        </Button>
-        <Button Id="_buttonPushNorth">
-          <Label Text="Push North" />
-        </Button>
-        <Button Id="_buttonPushSouth">
-          <Label Text="Push South" />
+        <Button Id="_buttonPush">
+          <Label Text="Push" />
         </Button>
       </HorizontalStackPanel>
       <ScrollViewer Id="_panelMap" StackPanel.ProportionType="Fill" />

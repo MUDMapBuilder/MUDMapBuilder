@@ -1,4 +1,5 @@
 using AbarimMUD.Data;
+using Microsoft.Xna.Framework;
 using Myra.Graphics2D;
 
 namespace MUDMapBuilder.Editor.UI
@@ -32,6 +33,8 @@ namespace MUDMapBuilder.Editor.UI
 			set => _spinButtonCompact.Value = value;
 		}
 
+		public System.Drawing.Point ForceVector => new System.Drawing.Point((int)_spinPushForceX.Value, (int)(_spinPushForceY.Value));
+
 		public MainForm()
 		{
 			BuildUI();
@@ -49,15 +52,17 @@ namespace MUDMapBuilder.Editor.UI
 			_buttonMaximumCompact.Click += (s, e) => _spinButtonCompact.Value = _spinButtonCompact.Maximum;
 			_spinButtonCompact.ValueChanged += (s, e) => Invalidate();
 
-			_buttonMeasurePushWest.Click += (s, e) => _mapViewer.MeasurePushRoom(MMBDirection.West);
-			_buttonMeasurePushEast.Click += (s, e) => _mapViewer.MeasurePushRoom(MMBDirection.East);
-			_buttonMeasurePushNorth.Click += (s, e) => _mapViewer.MeasurePushRoom(MMBDirection.North);
-			_buttonMeasurePushSouth.Click += (s, e) => _mapViewer.MeasurePushRoom(MMBDirection.South);
+			_buttonMeasure.Click += (s, e) => _mapViewer.MeasurePushRoom(ForceVector);
+			_buttonPush.Click += (s, e) => _mapViewer.PushRoom(ForceVector);
 
-			_buttonPushWest.Click += (s, e) => _mapViewer.PushRoom(MMBDirection.West);
-			_buttonPushEast.Click += (s, e) => _mapViewer.PushRoom(MMBDirection.East);
-			_buttonPushNorth.Click += (s, e) => _mapViewer.PushRoom(MMBDirection.North);
-			_buttonPushSouth.Click += (s, e) => _mapViewer.PushRoom(MMBDirection.South);
+			_mapViewer.BrokenConnectionsChanged += (s, e) => UpdateBrokenConnections();
+			
+			UpdateBrokenConnections();
+		}
+
+		private void UpdateBrokenConnections()
+		{
+			_labelBrokenConnections.Text = $"Broken Connections: {_mapViewer.BrokenConnections}";
 		}
 
 		public void Invalidate()

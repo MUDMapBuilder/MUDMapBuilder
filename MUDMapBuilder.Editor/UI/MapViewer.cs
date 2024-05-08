@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Myra;
 using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
+using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 
@@ -13,6 +15,7 @@ namespace MUDMapBuilder.Editor.UI
 		private Area _map;
 		private RoomsCollection _rooms;
 		private MMBImageResult _imageResult;
+		private int _brokenConnections = 0;
 
 		public Area Map
 		{
@@ -32,6 +35,25 @@ namespace MUDMapBuilder.Editor.UI
 
 		public int MaxSteps { get; private set; }
 
+		public int BrokenConnections
+		{
+			get => _brokenConnections;
+
+			set
+			{
+				if (value == _brokenConnections)
+				{
+					return;
+				}
+
+				_brokenConnections = value;
+				BrokenConnectionsChanged?.Invoke(this, EventArgs.Empty);
+
+			}
+		}
+
+		public event EventHandler BrokenConnectionsChanged;
+
 		public MapViewer()
 		{
 		}
@@ -40,6 +62,7 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			var rooms = (from r in _map.Rooms select new RoomWrapper(r)).ToArray();
 			_rooms = MapBuilder.Build(rooms, maxSteps, compactRuns);
+			BrokenConnections = _rooms.CalculateBrokenConnections();
 			if (maxSteps == null)
 			{
 				MaxSteps = _rooms.Steps;
@@ -63,19 +86,20 @@ namespace MUDMapBuilder.Editor.UI
 			}
 		}
 
-		public void MeasurePushRoom(MMBDirection direction)
+		public void MeasurePushRoom(Point forceVector)
 		{
 			var selectedRoomId = _rooms.Grid.SelectedRoomId;
-			if (selectedRoomId == null)
+			if (selectedRoomId == null || forceVector == Point.Empty)
 			{
 				return;
 			}
 
 			var room = _rooms.GetRoomById(selectedRoomId.Value);
-			var roomsToMark = _rooms.MeasurePushRoom(room, direction);
+			var roomsToMark = _rooms.MeasurePushRoom(room, forceVector);
 			foreach(var pair in roomsToMark)
 			{
-				pair.Value.Mark = true;
+				room = _rooms.GetRoomById(pair.Key);
+				room.Mark = true;
 			}
 
 			_rooms.InvalidateGrid();
@@ -83,16 +107,17 @@ namespace MUDMapBuilder.Editor.UI
 			Redraw();
 		}
 
-		public void PushRoom(MMBDirection direction)
+		public void PushRoom(Point forceVector)
 		{
 			var selectedRoomId = _rooms.Grid.SelectedRoomId;
-			if (selectedRoomId == null)
+			if (selectedRoomId == null || forceVector == Point.Empty)
 			{
 				return;
 			}
 
 			var room = _rooms.GetRoomById(selectedRoomId.Value);
-			_rooms.PushRoom(room, direction, 1);
+			_rooms.PushRoom(room, forceVector);
+			BrokenConnections = _rooms.CalculateBrokenConnections();
 
 			Redraw();
 		}

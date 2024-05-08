@@ -1,37 +1,36 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace MUDMapBuilder
 {
-	public class MMBRoom
+	internal class MMBRoom
 	{
-		private Dictionary<MMBDirection, Point> _connections = new Dictionary<MMBDirection, Point>();
+		private Point _position;
 
 		public int Id => Room.Id;
-		public IMMBRoom Room { get; private set; }
-		public Point Position { get; internal set; }
 
-		internal MMBRoom(IMMBRoom room)
+		public RoomsCollection Rooms { get; set; }
+		public IMMBRoom Room { get; }
+		public Point Position
+		{
+			get => _position;
+			set
+			{
+				if (_position == value)
+				{
+					return;
+				}
+
+				_position = value;
+				if (Rooms != null)
+				{
+					Rooms.InvalidateGrid();
+				}
+			}
+		}
+
+		public MMBRoom(IMMBRoom room)
 		{
 			Room = room;
-		}
-
-		internal void ClearConnections() => _connections.Clear();
-
-		internal void Connect(MMBDirection direction, Point pos)
-		{
-			_connections[direction] = pos;
-		}
-
-		internal bool IsConnected(MMBDirection direction, Point pos)
-		{
-			Point connectedPos;
-			if (!_connections.TryGetValue(direction, out connectedPos))
-			{
-				return false;
-			}
-
-			return connectedPos == pos;
 		}
 
 		public MMBRoom Clone() => new MMBRoom(Room)

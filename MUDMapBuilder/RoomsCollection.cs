@@ -15,91 +15,59 @@ namespace MUDMapBuilder
 			HasObstacles
 		}
 
-		private class Obstacle
-		{
-		}
-
-		private class RoomObstacle: Obstacle
-		{
-			public MMBRoom Room { get; }
-
-			public RoomObstacle(MMBRoom room)
-			{
-				Room = room;
-			}
-		}
-
-		private class ConnectionsObstacle: Obstacle
-		{
-			private List<Tuple<MMBRoom, MMBRoom>> _rooms = new List<Tuple<MMBRoom, MMBRoom>>();
-
-			public int Count => _rooms.Count;
-
-			public bool HasPair(MMBRoom room1, MMBRoom room2)
-			{
-				foreach (var r in _rooms)
-				{
-					if ((r.Item1 == room2 && r.Item2 == room1) ||
-						(r.Item1 == room2 && r.Item2 == room1))
-					{
-						// Already added
-						return true;
-					}
-				}
-
-				return false;
-			}
-
-			public void AddPair(MMBRoom room1, MMBRoom room2)
-			{
-				if (HasPair(room1, room2))
-				{
-					return;
-				}
-
-				_rooms.Add(new Tuple<MMBRoom, MMBRoom>(room1 , room2));
-			}
-		}
-
 		public int Count => _rooms.Count;
 
+		public MMBGrid Grid
+		{
+			get
+			{
+				UpdateGrid();
+				return _grid;
+			}
+		}
+
 		public MMBRoom this[int index] => _rooms[index];
-
-
 		private readonly List<MMBRoom> _rooms = new List<MMBRoom>();
-		private Obstacle[,] _obstacleGrid = null;
+		private MMBGrid _grid;
 		private Point _min;
 
 		public void Add(MMBRoom room)
 		{
+			room.Rooms = this;
+
 			_rooms.Add(room);
 			InvalidateGrid();
 		}
 
-		public void InvalidateGrid()
+		internal void InvalidateGrid()
 		{
-			_obstacleGrid = null;
+			_grid = null;
 		}
 
 		private void UpdateGrid()
 		{
-			if (_obstacleGrid != null)
+			if (_grid != null)
 			{
 				return;
 			}
 
 			var rect = CalculateRectangle();
 
-			_min = rect.Location;
-			_obstacleGrid = new Obstacle[rect.Width, rect.Height];
+			_min = new Point(rect.X, rect.Y);
+			_grid = new MMBGrid(rect.Width, rect.Height);
 
+			// First run: add rooms
 			foreach (var room in _rooms)
 			{
 				var coord = new Point(room.Position.X - rect.X, room.Position.Y - rect.Y);
+				_grid[coord.X, coord.Y] = new MMBRoomCell(room.Room, coord);
+			}
 
-				_obstacleGrid[coord.X, coord.Y] = new RoomObstacle(room);
-
-				var pos = room.Position;
+			// Second run: add connections
+			foreach (var room in _rooms)
+			{
+				var sourceGridRoom = _grid.GetRoomById(room.Id);
+				var gridStartPos = sourceGridRoom.Position;
 
 				var exitDirs = room.Room.ExitsDirections;
 				for (var i = 0; i < exitDirs.Length; ++i)
@@ -111,43 +79,34 @@ namespace MUDMapBuilder
 					}
 
 					var exitRoom = room.Room.GetRoomByExit(exitDir);
-
-					var targetRoom = GetRoomById(exitRoom.Id);
-					if (targetRoom == null)
+					var targetGridRoom = _grid.GetRoomById(exitRoom.Id);
+					if (targetGridRoom == null)
 					{
 						continue;
 					}
 
-					var targetPos = targetRoom.Position;
-					if (!IsConnectionStraight(pos, targetPos, exitDir))
+					var gridTargetPos = targetGridRoom.Position;
+					if (!IsConnectionStraight(gridStartPos, gridTargetPos, exitDir))
 					{
 						continue;
 					}
 
 					var delta = exitDir.GetDelta();
-
-					var gridStartPos = pos;
-					gridStartPos.X -= _min.X;
-					gridStartPos.Y -= _min.Y;
-
-					var gridTargetPos = targetPos;
-					gridTargetPos.X -= _min.X;
-					gridTargetPos.Y -= _min.Y;
 					for (var sourcePos = gridStartPos; sourcePos != gridTargetPos; sourcePos.X += delta.X, sourcePos.Y += delta.Y)
 					{
-						if (_obstacleGrid[sourcePos.X, sourcePos.Y] is RoomObstacle)
+						if (_grid[sourcePos.X, sourcePos.Y] is MMBRoomCell)
 						{
 							continue;
 						}
 
-						var connectionsObstacle = (ConnectionsObstacle)_obstacleGrid[sourcePos.X, sourcePos.Y];
+						var connectionsObstacle = (MMBConnectionsCell)_grid[sourcePos];
 						if (connectionsObstacle == null)
 						{
-							connectionsObstacle = new ConnectionsObstacle();
-							_obstacleGrid[sourcePos.X, sourcePos.Y] = connectionsObstacle;
+							connectionsObstacle = new MMBConnectionsCell(sourcePos);
+							_grid[sourcePos] = connectionsObstacle;
 						}
 
-						connectionsObstacle.AddPair(room, targetRoom);
+						connectionsObstacle.AddPair(sourceGridRoom, targetGridRoom);
 					}
 				}
 			}
@@ -265,8 +224,6 @@ namespace MUDMapBuilder
 
 				room.Position = newPos;
 			}
-
-			InvalidateGrid();
 		}
 
 		public static bool IsConnectionStraight(Point sourcePos, Point targetPos, MMBDirection exitDir)
@@ -343,10 +300,12 @@ namespace MUDMapBuilder
 					{
 						// Single size connections are always added
 						add = true;
-					} else if (exitDir == MMBDirection.West || exitDir == MMBDirection.East)
+					}
+					else if (exitDir == MMBDirection.West || exitDir == MMBDirection.East)
 					{
 						add = direction == MMBDirection.North || direction == MMBDirection.South;
-					} else if (exitDir == MMBDirection.North ||  exitDir == MMBDirection.South)
+					}
+					else if (exitDir == MMBDirection.North || exitDir == MMBDirection.South)
 					{
 						add = direction == MMBDirection.West || direction == MMBDirection.East;
 					}
@@ -383,14 +342,14 @@ namespace MUDMapBuilder
 			InvalidateGrid();
 		}
 
-		private Obstacle GetObstacle(Point checkPos)
+		private MMBCell GetCell(Point checkPos)
 		{
 			UpdateGrid();
 
 			checkPos.X -= _min.X;
 			checkPos.Y -= _min.Y;
 
-			return _obstacleGrid[checkPos.X, checkPos.Y];
+			return _grid[checkPos.X, checkPos.Y];
 		}
 
 		public ConnectionBrokenType IsConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir)
@@ -434,16 +393,16 @@ namespace MUDMapBuilder
 				var noObstacles = true;
 				while (p.X != targetPos.X || p.Y != targetPos.Y)
 				{
-					var obstacle = GetObstacle(p);
-					var asRoomObstacle = obstacle as RoomObstacle;
-					if (asRoomObstacle != null)
+					var cell = GetCell(p);
+					var asRoomCell = cell as MMBRoomCell;
+					if (asRoomCell != null)
 					{
 						noObstacles = false;
 						break;
 					}
 
-					var asConnectionsObstacle = obstacle as ConnectionsObstacle;
-					if (asConnectionsObstacle != null && asConnectionsObstacle.Count > 1)
+					var asConnectionsCell = cell as MMBConnectionsCell;
+					if (asConnectionsCell != null && asConnectionsCell.Count > 1)
 					{
 						noObstacles = false;
 						break;
@@ -481,67 +440,9 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					var targetPos = targetRoom.Position;
-					var isStraight = false;
-					switch (exitDir)
-					{
-						case MMBDirection.North:
-							isStraight = targetPos.X - pos.X == 0 && targetPos.Y < pos.Y;
-							break;
-
-						case MMBDirection.South:
-							isStraight = targetPos.X - pos.X == 0 && targetPos.Y > pos.Y;
-							break;
-
-						case MMBDirection.West:
-							isStraight = targetPos.X < pos.X && targetPos.Y - pos.Y == 0;
-							break;
-
-						case MMBDirection.East:
-							isStraight = targetPos.X > pos.X && targetPos.Y - pos.Y == 0;
-							break;
-
-						case MMBDirection.Up:
-						case MMBDirection.Down:
-							// Skip Up/Down for now
-							continue;
-					}
-
-					if (!isStraight)
+					if (IsConnectionBroken(room, targetRoom, exitDir) != ConnectionBrokenType.NotBroken)
 					{
 						++result;
-					}
-					else
-					{
-						// Check there are no obstacles on the path
-						var delta = exitDir.GetDelta();
-						var p = new Point(pos.X + delta.X, pos.Y + delta.Y);
-						var noObstacles = true;
-						while (p.X != targetPos.X || p.Y != targetPos.Y)
-						{
-							var obstacle = GetObstacle(p);
-							var asRoomObstacle = obstacle as RoomObstacle;
-							if (asRoomObstacle != null)
-							{
-								noObstacles = false;
-								break;
-							}
-
-							var asConnectionsObstacle = obstacle as ConnectionsObstacle;
-							if (asConnectionsObstacle != null && asConnectionsObstacle.Count > 1)
-							{
-								noObstacles = false;
-								break;
-							}
-
-							p.X += delta.X;
-							p.Y += delta.Y;
-						}
-
-						if (!noObstacles)
-						{
-							++result;
-						}
 					}
 				}
 			}

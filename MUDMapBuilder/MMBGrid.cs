@@ -6,15 +6,15 @@ namespace MUDMapBuilder
 {
 	public partial class MMBGrid
 	{
-		private readonly MMBRoom[,] _cellData;
+		private readonly MMBCell[,] _cellData;
 
-		public MMBRoom this[Point coord]
+		public MMBCell this[Point coord]
 		{
 			get => _cellData[coord.X, coord.Y];
 			set => _cellData[coord.X, coord.Y] = value;
 		}
 
-		public MMBRoom this[int x, int y]
+		public MMBCell this[int x, int y]
 		{
 			get => _cellData[x, y];
 			set => _cellData[x, y] = value;
@@ -23,23 +23,28 @@ namespace MUDMapBuilder
 		public int Width => _cellData.GetLength(0);
 		public int Height => _cellData.GetLength(1);
 
-		public int Steps { get; }
+		public int Steps { get; internal set; }
 
-		internal MMBGrid(Point size, int steps)
+		internal MMBGrid(int width, int height)
 		{
-			_cellData = new MMBRoom[size.X, size.Y];
-			Steps = steps;
+			_cellData = new MMBCell[width, height];
 		}
 
-		public MMBRoom GetRoomById(int id)
+		public MMBRoomCell GetRoomById(int id)
 		{
 			for (var x = 0; x < Width; ++x)
 			{
 				for (var y = 0; y < Height; ++y)
 				{
-					if (this[x, y] != null && this[x, y].Room.Id == id)
+					var asRoom = this[x, y] as MMBRoomCell;
+					if (asRoom == null)
 					{
-						return this[x, y];
+						continue;
+					}
+
+					if (asRoom.Id == id)
+					{
+						return asRoom;
 					}
 				}
 			}
@@ -49,14 +54,14 @@ namespace MUDMapBuilder
 
 		public bool AreRoomsConnected(Point a, Point b, MMBDirection direction)
 		{
-			var room = this[a];
-			if (room.IsConnected(direction, b))
+			var room = (MMBRoomCell)this[a];
+			if (room.HasDrawnConnection(direction, b))
 			{
 				return true;
 			}
 
-			room = this[b];
-			if (room.IsConnected(direction.GetOppositeDirection(), a))
+			room = (MMBRoomCell)this[b];
+			if (room.HasDrawnConnection(direction.GetOppositeDirection(), a))
 			{
 				return true;
 			}

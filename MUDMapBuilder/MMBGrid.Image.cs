@@ -40,13 +40,13 @@ namespace MUDMapBuilder
 				{
 					for (var y = 0; y < Height; ++y)
 					{
-						var room = this[x, y];
+						var room = this[x, y] as MMBRoomCell;
 						if (room == null)
 						{
 							continue;
 						}
 
-						room.ClearConnections();
+						room.ClearDrawnConnections();
 
 						var sz = (int)(paint.MeasureText(room.Room.ToString()) + TextPadding * 2 + 0.5f);
 						if (sz > _cellsWidths[x])
@@ -78,8 +78,8 @@ namespace MUDMapBuilder
 					{
 						for (var y = 0; y < Height; ++y)
 						{
-							var mMBRoom = this[x, y];
-							if (mMBRoom == null)
+							var room = this[x, y] as MMBRoomCell;
+							if (room == null)
 							{
 								continue;
 							}
@@ -88,7 +88,7 @@ namespace MUDMapBuilder
 							var rect = GetRoomRect(new Point(x, y));
 							paint.StrokeWidth = 2;
 
-							if (mMBRoom.Id == SelectedRoomId)
+							if (room.Id == SelectedRoomId)
 							{
 								var oldColor = paint.Color;
 
@@ -101,19 +101,20 @@ namespace MUDMapBuilder
 								{
 									paint.Color = oldColor;
 								}
-							} else
+							}
+							else
 							{
 								canvas.DrawRect(rect.X, rect.Y, rect.Width, rect.Height, paint);
 							}
 
-							roomInfos.Add(new MMBImageRoomInfo(mMBRoom.Room, rect));
+							roomInfos.Add(new MMBImageRoomInfo(room.Room, rect));
 
 							// Draw connections
-							var exitDirs = mMBRoom.Room.ExitsDirections;
+							var exitDirs = room.Room.ExitsDirections;
 							for (var i = 0; i < exitDirs.Length; ++i)
 							{
 								var exitDir = exitDirs[i];
-								var exitRoom = mMBRoom.Room.GetRoomByExit(exitDir);
+								var exitRoom = room.Room.GetRoomByExit(exitDir);
 								var targetRoom = GetRoomById(exitRoom.Id);
 								if (targetRoom == null)
 								{
@@ -210,7 +211,7 @@ namespace MUDMapBuilder
 									{
 										for (var checkY = Math.Min(startCheck.Value.Y, endCheck.Value.Y); checkY <= Math.Max(startCheck.Value.Y, endCheck.Value.Y); ++checkY)
 										{
-											if (this[checkX, checkY] != null)
+											if (this[checkX, checkY] is MMBRoomCell)
 											{
 												straightConnection = false;
 												goto finishCheck;
@@ -255,11 +256,11 @@ namespace MUDMapBuilder
 									}
 								}
 
-								mMBRoom.Connect(exitDir, targetPos);
+								room.AddDrawnConnection(exitDir, targetPos);
 							}
 
 							paint.StrokeWidth = 1;
-							canvas.DrawText(mMBRoom.Room.ToString(), rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
+							canvas.DrawText(room.Room.ToString(), rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
 						}
 					}
 

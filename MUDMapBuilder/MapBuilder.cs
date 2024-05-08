@@ -161,39 +161,51 @@ namespace MUDMapBuilder
 
 					if (brokenType == ConnectionBrokenType.NotStraight)
 					{
-						var clone = FixRoom(rooms, room, targetRoom, exitDir);
+						var clone1 = FixRoom(rooms, room, targetRoom, exitDir);
 
-						var sourceRoomClone = clone.GetRoomById(room.Id);
-						var targetRoomClone = clone.GetRoomById(targetRoom.Id);
-						brokenType = clone.CheckConnectionBroken(sourceRoomClone, targetRoomClone, exitDir);
+						var sourceRoomClone = clone1.GetRoomById(room.Id);
+						var targetRoomClone = clone1.GetRoomById(targetRoom.Id);
+						brokenType = clone1.CheckConnectionBroken(sourceRoomClone, targetRoomClone, exitDir);
 
-						var c = clone.CalculateBrokenConnections();
+						var c1 = clone1.CalculateBrokenConnections();
 						if (brokenType == ConnectionBrokenType.NotBroken &&
-							c.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
-							c.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount)
+							c1.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
+							c1.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount)
 						{
 							// Connection was fixed
-							rooms = clone;
+							rooms = clone1;
 							goto finish;
 						}
 
 						// Now try the other way around
-						clone = FixRoom(rooms, targetRoom, room, exitDir.GetOppositeDirection());
+						var clone2 = FixRoom(rooms, targetRoom, room, exitDir.GetOppositeDirection());
 
-						sourceRoomClone = clone.GetRoomById(targetRoomClone.Id);
-						targetRoomClone = clone.GetRoomById(room.Id);
+						sourceRoomClone = clone2.GetRoomById(targetRoomClone.Id);
+						targetRoomClone = clone2.GetRoomById(room.Id);
 
-						brokenType = clone.CheckConnectionBroken(sourceRoomClone, targetRoomClone, exitDir.GetOppositeDirection());
+						brokenType = clone2.CheckConnectionBroken(sourceRoomClone, targetRoomClone, exitDir.GetOppositeDirection());
 
-						c = clone.CalculateBrokenConnections();
+						var c2 = clone2.CalculateBrokenConnections();
 						if (brokenType == ConnectionBrokenType.NotBroken &&
-							c.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
-							c.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount)
+							c2.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
+							c2.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount)
 						{
 							// Connection was fixed
-							rooms = clone;
+							rooms = clone2;
 							goto finish;
 						}
+
+						// If neither ways are obviously good, then we select one that is better
+						if (c1.ConnectionsWithObstaclesCount < c2.ConnectionsWithObstaclesCount ||
+							(c1.ConnectionsWithObstaclesCount == c2.ConnectionsWithObstaclesCount &&
+							c1.NonStraightConnectionsCount < c2.NonStraightConnectionsCount))
+						{
+							rooms = clone1;
+							goto finish;
+						}
+
+						rooms = clone2;
+						goto finish;
 					}
 					else if (brokenType == ConnectionBrokenType.HasObstacles)
 					{

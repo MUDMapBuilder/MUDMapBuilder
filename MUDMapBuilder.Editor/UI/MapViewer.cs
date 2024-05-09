@@ -60,10 +60,6 @@ namespace MUDMapBuilder.Editor.UI
 			}
 		}
 
-		public int? Steps { get; set; }
-		public bool Straighten { get; set; } = true;
-		public bool Compact { get; set; } = true;
-
 		public BrokenConnectionsInfo BrokenConnections
 		{
 			get => _brokenConnections;
@@ -88,7 +84,7 @@ namespace MUDMapBuilder.Editor.UI
 			Background = new SolidBrush(Color.White);
 		}
 
-		public void Rebuild()
+		public void Rebuild(BuildOptions options)
 		{
 			_rooms = null;
 			_imageResult = null;
@@ -96,13 +92,6 @@ namespace MUDMapBuilder.Editor.UI
 
 			if (_area != null)
 			{
-				var options = new BuildOptions
-				{
-					Steps = Steps,
-					Straighten = Straighten,
-					Compact = Compact
-				};
-				
 				_rooms = MapBuilder.Build(_area.Rooms.ToArray(), options);
 				BrokenConnections = _rooms.CalculateBrokenConnections();
 			}

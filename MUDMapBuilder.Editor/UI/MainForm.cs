@@ -71,7 +71,7 @@ namespace MUDMapBuilder.Editor.UI
 					}
 
 					// "Ok" or Enter
-					LoadArea(dialog.FilePath);
+					LoadArea(dialog.FilePath, true);
 				};
 
 				dialog.ShowModal(Desktop);
@@ -79,23 +79,9 @@ namespace MUDMapBuilder.Editor.UI
 
 			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
 			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _mapViewer.MaxSteps;
-			_spinButtonStep.ValueChanged += (s, e) =>
-			{
-				_mapViewer.Steps = (int)_spinButtonStep.Value;
-				_mapViewer.Rebuild();
-			};
-
-			_checkButtonStraighten.IsCheckedChanged += (s, e) =>
-			{
-				_mapViewer.Straighten = _checkButtonStraighten.IsChecked;
-				_mapViewer.Rebuild();
-			};
-
-			_checkButtonCompact.IsCheckedChanged += (s, e) =>
-			{
-				_mapViewer.Compact = _checkButtonCompact.IsChecked;
-				_mapViewer.Rebuild();
-			};
+			_spinButtonStep.ValueChanged += (s, e) => RebuildMap();
+			_checkButtonStraighten.IsCheckedChanged += (s, e) => RebuildMap();
+			_checkButtonCompact.IsCheckedChanged += (s, e) => RebuildMap();
 
 			_buttonMeasure.Click += (s, e) => _mapViewer.MeasurePushRoom(ForceVector);
 			_buttonPush.Click += (s, e) => _mapViewer.PushRoom(ForceVector);
@@ -103,6 +89,18 @@ namespace MUDMapBuilder.Editor.UI
 			_mapViewer.BrokenConnectionsChanged += (s, e) => UpdateBrokenConnections();
 
 			UpdateEnabled();
+		}
+
+		private void RebuildMap()
+		{
+			var options = new BuildOptions
+			{
+				Steps = (int)_spinButtonStep.Value,
+				Straighten = _checkButtonStraighten.IsChecked,
+				Compact = _checkButtonCompact.IsChecked,
+			};
+
+			_mapViewer.Rebuild(options);
 		}
 
 		private void UpdateBrokenConnections()
@@ -134,13 +132,21 @@ namespace MUDMapBuilder.Editor.UI
 			UpdateBrokenConnections();
 		}
 
-		public void LoadArea(string path)
+		public void LoadArea(string path, bool setStepsToMax = false)
 		{
 			try
 			{
 				var data = File.ReadAllText(path);
 				_mapViewer.Area = Area.Parse(data);
-				_mapViewer.Rebuild();
+
+				if (setStepsToMax)
+				{
+					_spinButtonStep.Value = _mapViewer.MaxSteps;
+				}
+				else
+				{
+					RebuildMap();
+				}
 
 				ViewerGame.Instance.FilePath = path;
 				UpdateEnabled();

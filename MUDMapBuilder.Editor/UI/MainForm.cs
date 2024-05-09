@@ -1,20 +1,22 @@
-using AbarimMUD.Data;
-using Microsoft.Xna.Framework;
-using Myra.Graphics2D;
+using MUDMapBuilder.Editor.Data;
+using Myra.Graphics2D.UI;
+using Myra.Graphics2D.UI.File;
+using System;
+using System.Drawing;
+using System.IO;
 
 namespace MUDMapBuilder.Editor.UI
 {
 	public partial class MainForm
 	{
 		private readonly MapViewer _mapViewer;
-		private bool _dirty = true;
 
-		public Area Map
+		public Area Area
 		{
-			get => _mapViewer.Map;
+			get => _mapViewer.Area;
 			set
 			{
-				_mapViewer.Map = value;
+				_mapViewer.Area = value;
 				_spinButtonStep.Minimum = 1;
 				_spinButtonStep.Maximum = _mapViewer.MaxSteps;
 				_spinButtonStep.Value = _mapViewer.MaxSteps;
@@ -27,7 +29,19 @@ namespace MUDMapBuilder.Editor.UI
 			set => _spinButtonStep.Value = value;
 		}
 
-		public System.Drawing.Point ForceVector => new System.Drawing.Point((int)_spinPushForceX.Value, (int)(_spinPushForceY.Value));
+		public bool Straighten
+		{
+			get => _checkButtonStraighten.IsChecked;
+			set => _checkButtonStraighten.IsChecked = value;
+		}
+
+		public bool Compact
+		{
+			get => _checkButtonCompact.IsChecked;
+			set => _checkButtonCompact.IsChecked = value;
+		}
+
+		public Point ForceVector => new Point((int)_spinPushForceX.Value, (int)(_spinPushForceY.Value));
 
 		public MainForm()
 		{
@@ -36,16 +50,59 @@ namespace MUDMapBuilder.Editor.UI
 			_mapViewer = new MapViewer();
 			_panelMap.Content = _mapViewer;
 
+			_buttonOpen.Click += (s, e) =>
+			{
+				FileDialog dialog = new FileDialog(FileDialogMode.OpenFile)
+				{
+					Filter = "*.json"
+				};
+
+				if (!string.IsNullOrEmpty(ViewerGame.Instance.FilePath))
+				{
+					dialog.Folder = Path.GetDirectoryName(ViewerGame.Instance.FilePath);
+				}
+
+				dialog.Closed += (s, a) =>
+				{
+					if (!dialog.Result)
+					{
+						// "Cancel" or Escape
+						return;
+					}
+
+					// "Ok" or Enter
+					LoadArea(dialog.FilePath);
+				};
+
+				dialog.ShowModal(Desktop);
+			};
+
 			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
 			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _mapViewer.MaxSteps;
-			_spinButtonStep.ValueChanged += (s, e) => Invalidate();
+			_spinButtonStep.ValueChanged += (s, e) =>
+			{
+				_mapViewer.Steps = (int)_spinButtonStep.Value;
+				_mapViewer.Rebuild();
+			};
+
+			_checkButtonStraighten.IsCheckedChanged += (s, e) =>
+			{
+				_mapViewer.Straighten = _checkButtonStraighten.IsChecked;
+				_mapViewer.Rebuild();
+			};
+
+			_checkButtonCompact.IsCheckedChanged += (s, e) =>
+			{
+				_mapViewer.Compact = _checkButtonCompact.IsChecked;
+				_mapViewer.Rebuild();
+			};
 
 			_buttonMeasure.Click += (s, e) => _mapViewer.MeasurePushRoom(ForceVector);
 			_buttonPush.Click += (s, e) => _mapViewer.PushRoom(ForceVector);
 
 			_mapViewer.BrokenConnectionsChanged += (s, e) => UpdateBrokenConnections();
 
-			UpdateBrokenConnections();
+			UpdateEnabled();
 		}
 
 		private void UpdateBrokenConnections()
@@ -54,26 +111,44 @@ namespace MUDMapBuilder.Editor.UI
 			{
 				_labelNonStraightConnections.Text = $"Non Straight Connections: {_mapViewer.BrokenConnections.NonStraightConnectionsCount}";
 				_labelConnectionsWithObstacles.Text = $"Connections With Obstacles: {_mapViewer.BrokenConnections.ConnectionsWithObstaclesCount}";
-			} else
+			}
+			else
 			{
 				_labelNonStraightConnections.Text = "";
 				_labelConnectionsWithObstacles.Text = "";
 			}
 		}
 
-		public void Invalidate()
+		private void UpdateEnabled()
 		{
-			_dirty = true;
+			var enabled = Area != null;
+
+			_buttonSave.Enabled = enabled;
+			_buttonStart.Enabled = enabled;
+			_buttonEnd.Enabled = enabled;
+			_spinButtonStep.Enabled = enabled;
+			_spinPushForceX.Enabled = enabled;
+			_spinPushForceY.Enabled = enabled;
+			_buttonMeasure.Enabled = enabled;
+			_buttonPush.Enabled = enabled;
+			UpdateBrokenConnections();
 		}
 
-		public override void InternalRender(RenderContext context)
+		public void LoadArea(string path)
 		{
-			base.InternalRender(context);
-
-			if (_dirty)
+			try
 			{
-				_mapViewer.Rebuild((int)_spinButtonStep.Value.Value);
-				_dirty = false;
+				var data = File.ReadAllText(path);
+				_mapViewer.Area = Area.Parse(data);
+				_mapViewer.Rebuild();
+
+				ViewerGame.Instance.FilePath = path;
+				UpdateEnabled();
+			}
+			catch (Exception ex)
+			{
+				var dialog = Dialog.CreateMessageBox("Error", ex.ToString());
+				dialog.ShowModal(Desktop);
 			}
 		}
 	}

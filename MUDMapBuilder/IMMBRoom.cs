@@ -1,4 +1,6 @@
-﻿namespace MUDMapBuilder
+﻿using System.Collections.Generic;
+
+namespace MUDMapBuilder
 {
 	public enum MMBDirection
 	{
@@ -14,7 +16,6 @@
 	{
 		int Id { get; }
 		string Name { get; }
-		MMBDirection[] ExitsDirections { get; }
-		IMMBRoom GetRoomByExit(MMBDirection direction);
+		public IReadOnlyDictionary<MMBDirection, IMMBRoom> Exits { get; }
 	}
 }

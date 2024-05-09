@@ -8,7 +8,7 @@ namespace MUDMapBuilder.Editor
 {
 	public class State
 	{
-		public const string StateFileName = "NursiaEditor.config";
+		public const string StateFileName = "MUDMapBuilder.Editor.config";
 
 		public static string StateFilePath
 		{
@@ -20,7 +20,10 @@ namespace MUDMapBuilder.Editor
 		}
 
 		public Point Size { get; set; }
+		public string EditedFile { get; set; }
 		public int Step { get; set; }
+		public bool Straighten { get; set; }
+		public bool Compact { get; set; }
 
 		public State()
 		{
@@ -54,14 +57,6 @@ namespace MUDMapBuilder.Editor
 			}
 
 			return state;
-		}
-
-		public override string ToString()
-		{
-			return string.Format("Size = {0}\n" +
-								 "Step = {1}\n",
-				Size,
-				Step);
 		}
 	}
 }

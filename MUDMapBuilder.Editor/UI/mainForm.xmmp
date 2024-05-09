@@ -3,6 +3,14 @@
   <Panel>
     <VerticalStackPanel Spacing="8">
       <HorizontalStackPanel Spacing="8">
+        <Button Id="_buttonOpen">
+          <Label Text="Open" />
+        </Button>
+        <Button Id="_buttonSave">
+          <Label Text="Save" />
+        </Button>
+      </HorizontalStackPanel>
+      <HorizontalStackPanel Spacing="8">
         <Button Id="_buttonStart">
           <Label Text="&lt;&lt;" />
         </Button>
@@ -10,6 +18,12 @@
         <Button Id="_buttonEnd">
           <Label Text="&gt;&gt;" />
         </Button>
+        <CheckButton IsChecked="True" Id="_checkButtonStraighten">
+          <Label Text="Straighten" />
+        </CheckButton>
+        <CheckButton IsChecked="True" Id="_checkButtonCompact">
+          <Label Text="Compact" />
+        </CheckButton>
       </HorizontalStackPanel>
       <Label Text="Non-Straight Connections: 10" Id="_labelNonStraightConnections" />
       <Label Text="Connections With Obstacles: 10" Id="_labelConnectionsWithObstacles" />

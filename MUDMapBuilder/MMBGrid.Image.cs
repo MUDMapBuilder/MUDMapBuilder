@@ -89,7 +89,8 @@ namespace MUDMapBuilder
 							if (room.Id == SelectedRoomId)
 							{
 								newColor = SKColors.Green;
-							} else if (room.Mark)
+							}
+							else if (room.Mark)
 							{
 								newColor = SKColors.GreenYellow;
 							}
@@ -116,11 +117,10 @@ namespace MUDMapBuilder
 							roomInfos.Add(new MMBImageRoomInfo(room.Room, rect));
 
 							// Draw connections
-							var exitDirs = room.Room.ExitsDirections;
-							for (var i = 0; i < exitDirs.Length; ++i)
+							foreach (var pair in room.Room.Exits)
 							{
-								var exitDir = exitDirs[i];
-								var exitRoom = room.Room.GetRoomByExit(exitDir);
+								var exitDir = pair.Key;
+								var exitRoom = pair.Value;
 								var targetRoom = GetRoomById(exitRoom.Id);
 								if (targetRoom == null)
 								{

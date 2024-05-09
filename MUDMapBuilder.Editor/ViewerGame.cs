@@ -2,24 +2,29 @@
 using Microsoft.Xna.Framework;
 using Myra;
 using MUDMapBuilder.Editor.UI;
-using AbarimMUD.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace MUDMapBuilder.Editor
 {
 	public class ViewerGame : Game
 	{
-		private const int MapId = 27;
-
 		private readonly GraphicsDeviceManager _graphics;
 
 		private Desktop _desktop;
 		private MainForm _mainForm;
 		private readonly State _state;
 
+		public static ViewerGame Instance { get; private set; }
+
+		public string FilePath
+		{
+			get => Window.Title;
+			set => Window.Title = value;
+		}
+
 		public ViewerGame()
 		{
+			Instance = this;
+
 			// Restore state
 			_state = State.Load();
 
@@ -53,15 +58,12 @@ namespace MUDMapBuilder.Editor
 			_mainForm = new MainForm();
 			_desktop.Root = _mainForm;
 
-			Area map;
-			using (var db = Database.CreateDataContext())
-			{
-				map = (from m in db.Areas.Include(m => m.Rooms).ThenInclude(r => r.Exits) where m.Id == MapId select m).First();
-			}
-
-			_mainForm.Map = map;
 			if (_state != null)
 			{
+				_mainForm.Step = _state.Step;
+				_mainForm.Straighten = _state.Straighten;
+				_mainForm.Compact = _state.Compact;
+				_mainForm.LoadArea(_state.EditedFile);
 				_mainForm.Step = _state.Step;
 			}
 		}
@@ -87,7 +89,10 @@ namespace MUDMapBuilder.Editor
 			{
 				Size = new Point(GraphicsDevice.PresentationParameters.BackBufferWidth,
 					GraphicsDevice.PresentationParameters.BackBufferHeight),
+				EditedFile = FilePath,
 				Step = _mainForm.Step,
+				Straighten = _mainForm.Straighten,
+				Compact = _mainForm.Compact,
 			};
 
 			state.Save();

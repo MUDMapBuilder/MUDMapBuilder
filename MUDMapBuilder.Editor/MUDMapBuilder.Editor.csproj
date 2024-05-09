@@ -9,7 +9,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\AbarimMUD\AbarimMUD.Common\AbarimMUD.Common.csproj" />
     <ProjectReference Include="..\..\Myra\src\Myra\Myra.FNA.Core.csproj" />
     <ProjectReference Include="..\MUDMapBuilder\MUDMapBuilder.csproj" />
   </ItemGroup>

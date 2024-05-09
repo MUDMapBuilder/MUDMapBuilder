@@ -1,13 +1,12 @@
-﻿using AbarimMUD.Data;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MUDMapBuilder.Editor.Data;
 using Myra;
 using Myra.Graphics2D.Brushes;
 using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
 using System;
 using System.IO;
-using System.Linq;
 
 using Point = System.Drawing.Point;
 
@@ -15,28 +14,55 @@ namespace MUDMapBuilder.Editor.UI
 {
 	public class MapViewer : Image
 	{
-		private Area _map;
+		private Area _area;
 		private RoomsCollection _rooms;
 		private MMBImageResult _imageResult;
+		private int _maxSteps = 0;
 		private BrokenConnectionsInfo _brokenConnections = null;
 
-		public Area Map
+		public Area Area
 		{
-			get => _map;
+			get => _area;
 
 			set
 			{
-				if (value == _map)
+				if (value == _area)
 				{
 					return;
 				}
 
-				_map = value;
-				Rebuild();
+				_area = value;
+
+				// Set max steps
+				var roomsArray = _area.Rooms.ToArray();
+				var rooms = MapBuilder.Build(roomsArray, new BuildOptions
+				{
+					Straighten = false,
+					Compact = false,
+				});
+				MaxSteps = rooms.Steps;
 			}
 		}
 
-		public int MaxSteps { get; private set; }
+		public int MaxSteps
+		{
+			get => _maxSteps;
+
+			private set
+			{
+				if (value == _maxSteps)
+				{
+					return;
+				}
+
+				_maxSteps = value;
+				MaxStepsChanged?.Invoke(this, EventArgs.Empty);
+			}
+		}
+
+		public int? Steps { get; set; }
+		public bool Straighten { get; set; } = true;
+		public bool Compact { get; set; } = true;
 
 		public BrokenConnectionsInfo BrokenConnections
 		{
@@ -54,6 +80,7 @@ namespace MUDMapBuilder.Editor.UI
 			}
 		}
 
+		public event EventHandler MaxStepsChanged;
 		public event EventHandler BrokenConnectionsChanged;
 
 		public MapViewer()
@@ -61,14 +88,23 @@ namespace MUDMapBuilder.Editor.UI
 			Background = new SolidBrush(Color.White);
 		}
 
-		public void Rebuild(int? maxSteps = null)
+		public void Rebuild()
 		{
-			var rooms = (from r in _map.Rooms select new RoomWrapper(r)).ToArray();
-			_rooms = MapBuilder.Build(rooms, maxSteps);
-			BrokenConnections = _rooms.CalculateBrokenConnections();
-			if (maxSteps == null)
+			_rooms = null;
+			_imageResult = null;
+			BrokenConnections = new BrokenConnectionsInfo(0, 0);
+
+			if (_area != null)
 			{
-				MaxSteps = _rooms.Steps;
+				var options = new BuildOptions
+				{
+					Steps = Steps,
+					Straighten = Straighten,
+					Compact = Compact
+				};
+				
+				_rooms = MapBuilder.Build(_area.Rooms.ToArray(), options);
+				BrokenConnections = _rooms.CalculateBrokenConnections();
 			}
 
 			Redraw();
@@ -76,16 +112,20 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void Redraw()
 		{
-			_imageResult = _rooms.Grid.BuildPng();
-			using (var ms = new MemoryStream(_imageResult.PngData))
-			{
-				var texture = Texture2D.FromStream(MyraEnvironment.GraphicsDevice, ms);
-				Renderable = new TextureRegion(texture);
-			}
+			Renderable = null;
 
-			foreach (var room in _rooms)
+			if (_rooms != null)
 			{
-				room.Mark = false;
+				_imageResult = _rooms.Grid.BuildPng();
+				using (var ms = new MemoryStream(_imageResult.PngData))
+				{
+					var texture = Texture2D.FromStream(MyraEnvironment.GraphicsDevice, ms);
+					Renderable = new TextureRegion(texture);
+				}
+				foreach (var room in _rooms)
+				{
+					room.Mark = false;
+				}
 			}
 		}
 

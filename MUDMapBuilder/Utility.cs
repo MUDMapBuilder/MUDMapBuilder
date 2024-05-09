@@ -49,13 +49,9 @@ namespace MUDMapBuilder
 
 		public static bool IsConnectedTo(this IMMBRoom room1, IMMBRoom room2)
 		{
-			var exitDirs = room1.ExitsDirections;
-			for (var i = 0; i < exitDirs.Length; ++i)
+			foreach (var pair in room1.Exits)
 			{
-				var exitDir = exitDirs[i];
-				var exitRoom = room1.GetRoomByExit(exitDir);
-
-				if (exitRoom.Id == room2.Id)
+				if (pair.Value.Id == room2.Id)
 				{
 					return true;
 				}

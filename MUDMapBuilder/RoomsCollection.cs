@@ -82,13 +82,6 @@ namespace MUDMapBuilder
 			foreach (var room in _rooms)
 			{
 				var coord = new Point(room.Position.X - rect.X, room.Position.Y - rect.Y);
-
-				var asRoom = _grid[coord] as MMBRoomCell;
-				if (asRoom != null)
-				{
-					var k = 5;
-				}
-
 				_grid[coord.X, coord.Y] = new MMBRoomCell(room.Room, coord)
 				{
 					Mark = room.Mark
@@ -101,16 +94,15 @@ namespace MUDMapBuilder
 				var sourceGridRoom = _grid.GetRoomById(room.Id);
 				var gridStartPos = sourceGridRoom.Position;
 
-				var exitDirs = room.Room.ExitsDirections;
-				for (var i = 0; i < exitDirs.Length; ++i)
+				foreach (var pair in room.Room.Exits)
 				{
-					var exitDir = exitDirs[i];
+					var exitDir = pair.Key;
+					var exitRoom = pair.Value;
 					if (exitDir == MMBDirection.Up || exitDir == MMBDirection.Down)
 					{
 						continue;
 					}
 
-					var exitRoom = room.Room.GetRoomByExit(exitDir);
 					var targetGridRoom = _grid.GetRoomById(exitRoom.Id);
 					if (targetGridRoom == null)
 					{
@@ -194,13 +186,11 @@ namespace MUDMapBuilder
 				roomsToPush[room.Id] = item.Item2;
 
 				// Process neighbour rooms
-				var exitDirs = room.Room.ExitsDirections;
-				for (var i = 0; i < exitDirs.Length; ++i)
+				foreach (var pair in room.Room.Exits)
 				{
+					var exitDir = pair.Key;
+					var exitRoom = pair.Value;
 					var forceVector = item.Item2;
-
-					var exitDir = exitDirs[i];
-					var exitRoom = room.Room.GetRoomByExit(exitDir);
 
 					var targetRoom = GetRoomById(exitRoom.Id);
 					if (targetRoom == null || roomsToPush.ContainsKey(exitRoom.Id))
@@ -410,11 +400,10 @@ namespace MUDMapBuilder
 			foreach (var room in _rooms)
 			{
 				var pos = room.Position;
-				var exitDirs = room.Room.ExitsDirections;
-				for (var i = 0; i < exitDirs.Length; ++i)
+				foreach (var pair in room.Room.Exits)
 				{
-					var exitDir = exitDirs[i];
-					var exitRoom = room.Room.GetRoomByExit(exitDir);
+					var exitDir = pair.Key;
+					var exitRoom = pair.Value;
 
 					var targetRoom = GetRoomById(exitRoom.Id);
 					if (targetRoom == null)
@@ -492,11 +481,10 @@ namespace MUDMapBuilder
 			foreach (var room in _rooms)
 			{
 				var pos = room.Position;
-				var exitDirs = room.Room.ExitsDirections;
-				for (var i = 0; i < exitDirs.Length; ++i)
+				foreach (var pair in room.Room.Exits)
 				{
-					var exitDir = exitDirs[i];
-					var exitRoom = room.Room.GetRoomByExit(exitDir);
+					var exitDir = pair.Key;
+					var exitRoom = pair.Value;
 
 					var targetRoom = GetRoomById(exitRoom.Id);
 					if (targetRoom == null)
@@ -504,7 +492,7 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					if (exitRoom.ExitsDirections.Length > 1)
+					if (exitRoom.Exits.Count > 1)
 					{
 						continue;
 					}

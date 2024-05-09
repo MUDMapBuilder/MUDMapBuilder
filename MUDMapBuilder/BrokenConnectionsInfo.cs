@@ -6,7 +6,7 @@
 		public int ConnectionsWithObstaclesCount { get; }
 		public int Count => NonStraightConnectionsCount + ConnectionsWithObstaclesCount;
 
-		internal BrokenConnectionsInfo(int nonStraightConnectionsCount, int connectionsWithObstaclesCount)
+		public BrokenConnectionsInfo(int nonStraightConnectionsCount, int connectionsWithObstaclesCount)
 		{
 			NonStraightConnectionsCount = nonStraightConnectionsCount;
 			ConnectionsWithObstaclesCount = connectionsWithObstaclesCount;

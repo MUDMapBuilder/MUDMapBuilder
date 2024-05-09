@@ -169,7 +169,7 @@ namespace MUDMapBuilder
 										{
 											straightConnection = true;
 										}
-										else if (targetPos.Y - 1 > 1)
+										else if (targetPos.Y - y > 1)
 										{
 											startCheck = new Point(x, y + 1);
 											endCheck = new Point(targetPos.X, targetPos.Y - 1);

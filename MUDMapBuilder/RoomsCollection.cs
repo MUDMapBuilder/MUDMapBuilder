@@ -238,6 +238,36 @@ namespace MUDMapBuilder
 								forceVector.X = 0;
 							}
 							break;
+
+						case MMBDirection.Up:
+							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
+							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
+
+							if (forceVector.X < 0)
+							{
+								forceVector.X = 0;
+							}
+
+							if (forceVector.Y > 0)
+							{
+								forceVector.Y = 0;
+							}
+							break;
+
+						case MMBDirection.Down:
+							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
+							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
+
+							if (forceVector.X > 0)
+							{
+								forceVector.X = 0;
+							}
+							if (forceVector.Y < 0)
+							{
+								forceVector.Y = 0;
+							}
+
+							break;
 					}
 
 					if (forceVector.X != 0 || forceVector.Y != 0)
@@ -305,8 +335,11 @@ namespace MUDMapBuilder
 					break;
 
 				case MMBDirection.Up:
+					isStraight = targetPos.X > sourcePos.X && targetPos.Y < sourcePos.Y;
+					break;
+
 				case MMBDirection.Down:
-					isStraight = true;
+					isStraight = targetPos.X < sourcePos.X && targetPos.Y > sourcePos.Y;
 					break;
 			}
 
@@ -325,33 +358,17 @@ namespace MUDMapBuilder
 
 		public ConnectionBrokenType CheckConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir)
 		{
-			var pos = sourceRoom.Position;
+			var sourcePos = sourceRoom.Position;
 			var targetPos = targetRoom.Position;
-			var isStraight = false;
-			switch (exitDir)
+
+			var delta = exitDir.GetDelta();
+			var desiredPos = new Point(sourcePos.X + delta.X, sourcePos.Y + delta.Y);
+			if (desiredPos == targetPos)
 			{
-				case MMBDirection.North:
-					isStraight = targetPos.X - pos.X == 0 && targetPos.Y < pos.Y;
-					break;
-
-				case MMBDirection.South:
-					isStraight = targetPos.X - pos.X == 0 && targetPos.Y > pos.Y;
-					break;
-
-				case MMBDirection.West:
-					isStraight = targetPos.X < pos.X && targetPos.Y - pos.Y == 0;
-					break;
-
-				case MMBDirection.East:
-					isStraight = targetPos.X > pos.X && targetPos.Y - pos.Y == 0;
-					break;
-
-				case MMBDirection.Up:
-				case MMBDirection.Down:
-					// Skip Up/Down for now
-					return ConnectionBrokenType.NotBroken;
+				return ConnectionBrokenType.NotBroken;
 			}
 
+			var isStraight = IsConnectionStraight(sourcePos, targetPos, exitDir);
 			if (!isStraight)
 			{
 				return ConnectionBrokenType.NotStraight;
@@ -359,30 +376,65 @@ namespace MUDMapBuilder
 			else
 			{
 				// Check there are no obstacles on the path
-				var delta = exitDir.GetDelta();
-				var p = new Point(pos.X + delta.X, pos.Y + delta.Y);
 				var noObstacles = true;
-				while (p.X != targetPos.X || p.Y != targetPos.Y)
+				var startCheck = sourcePos;
+				var endCheck = targetPos;
+				switch (exitDir)
 				{
-					var cell = GetCell(p);
-					var asRoomCell = cell as MMBRoomCell;
-					if (asRoomCell != null)
-					{
-						noObstacles = false;
+					case MMBDirection.North:
+						startCheck = new Point(sourcePos.X, sourcePos.Y - 1);
+						endCheck = new Point(targetPos.X, targetPos.Y + 1);
 						break;
-					}
-
-					/*					var asConnectionsCell = cell as MMBConnectionsCell;
-										if (asConnectionsCell != null && asConnectionsCell.Count > 1)
-										{
-											noObstacles = false;
-											break;
-										}*/
-
-					p.X += delta.X;
-					p.Y += delta.Y;
+					case MMBDirection.East:
+						startCheck = new Point(sourcePos.X + 1, sourcePos.Y);
+						endCheck = new Point(targetPos.X - 1, targetPos.Y);
+						break;
+					case MMBDirection.South:
+						startCheck = new Point(sourcePos.X, sourcePos.Y + 1);
+						endCheck = new Point(targetPos.X, targetPos.Y - 1);
+						break;
+					case MMBDirection.West:
+						startCheck = new Point(sourcePos.X - 1, sourcePos.Y);
+						endCheck = new Point(targetPos.X + 1, targetPos.Y);
+						break;
+					case MMBDirection.Up:
+						startCheck = new Point(sourcePos.X + 1, sourcePos.Y - 1);
+						endCheck = new Point(targetPos.X - 1, targetPos.Y + 1);
+						break;
+					case MMBDirection.Down:
+						startCheck = new Point(sourcePos.X - 1, sourcePos.Y + 1);
+						endCheck = new Point(targetPos.X + 1, targetPos.Y - 1);
+						break;
 				}
 
+				for (var x = Math.Min(startCheck.X, endCheck.X); x <= Math.Max(startCheck.X, endCheck.X); ++x)
+				{
+					for (var y = Math.Min(startCheck.Y, endCheck.Y); y <= Math.Max(startCheck.Y, endCheck.Y); ++y)
+					{
+						var pos = new Point(x, y);
+						if (pos == sourcePos || pos == targetPos)
+						{
+							continue;
+						}
+
+						var cell = GetCell(pos);
+						var asRoomCell = cell as MMBRoomCell;
+						if (asRoomCell != null)
+						{
+							noObstacles = false;
+							goto finish;
+						}
+
+						/*					var asConnectionsCell = cell as MMBConnectionsCell;
+											if (asConnectionsCell != null && asConnectionsCell.Count > 1)
+											{
+												noObstacles = false;
+												break;
+											}*/
+					}
+				}
+
+			finish:;
 				if (!noObstacles)
 				{
 					return ConnectionBrokenType.HasObstacles;

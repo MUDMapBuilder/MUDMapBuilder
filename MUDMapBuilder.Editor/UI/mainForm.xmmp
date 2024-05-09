@@ -25,6 +25,15 @@
           <Label Text="Compact" />
         </CheckButton>
       </HorizontalStackPanel>
+      <HorizontalStackPanel Spacing="8">
+        <Button Id="_buttonStartDebugSteps">
+          <Label Text="&lt;&lt;" />
+        </Button>
+        <SpinButton Integer="True" Width="50" Id="_spinButtonDebugStep" />
+        <Button Id="_buttonEndSteps">
+          <Label Text="&gt;&gt;" />
+        </Button>
+      </HorizontalStackPanel>
       <Label Text="Non-Straight Connections: 10" Id="_labelNonStraightConnections" />
       <Label Text="Connections With Obstacles: 10" Id="_labelConnectionsWithObstacles" />
       <HorizontalStackPanel Spacing="8">

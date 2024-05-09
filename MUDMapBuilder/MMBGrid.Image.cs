@@ -182,8 +182,8 @@ namespace MUDMapBuilder
 										}
 										else if (x - targetPos.X > 1)
 										{
-											startCheck = new Point(x + 1, y);
-											endCheck = new Point(targetPos.X - 1, targetPos.Y);
+											startCheck = new Point(x - 1, y);
+											endCheck = new Point(targetPos.X + 1, targetPos.Y);
 										}
 										break;
 									case MMBDirection.Up:

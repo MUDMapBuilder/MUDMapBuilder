@@ -133,7 +133,6 @@ namespace MUDMapBuilder
 				var runsLeft = 10;
 				while (runsLeft > 0)
 				{
-					rooms.FixPlacementOfSingleExitRooms();
 					var vc = rooms.CalculateBrokenConnections();
 
 					if (vc.Count == 0)
@@ -261,7 +260,6 @@ namespace MUDMapBuilder
 				}
 			}
 
-
 			if (options.Compact)
 			{
 				// Compact run: Try to make the map more compact
@@ -276,8 +274,7 @@ namespace MUDMapBuilder
 							var exitDir = pair.Key;
 							var exitRoom = pair.Value;
 
-							// Works only with East and South directions
-							if (exitDir != MMBDirection.East && exitDir != MMBDirection.South)
+							if (exitDir != MMBDirection.East && exitDir != MMBDirection.South && exitDir != MMBDirection.Up)
 							{
 								continue;
 							}
@@ -297,44 +294,60 @@ namespace MUDMapBuilder
 							}
 
 							// Skip if direction is Up/Down or the target room isn't straighly positioned
-							var steps = 0;
+							var deltas = new List<Point>();
 							switch (exitDir)
 							{
 								case MMBDirection.North:
 								case MMBDirection.South:
-									if (targetRoom.Position.X - pos.X != 0)
 									{
-										continue;
-									}
+										if (targetRoom.Position.X - pos.X != 0)
+										{
+											continue;
+										}
 
-									steps = Math.Abs(targetRoom.Position.Y - pos.Y) - 1;
+										var steps = Math.Abs(targetRoom.Position.Y - pos.Y) - 1;
+										for(var j = steps; j >= 1; --j)
+										{
+											delta = exitDir.GetOppositeDirection().GetDelta();
+											delta.X *= j;
+											delta.Y *= j;
+											deltas.Add(delta);
+										}
+									}
 									break;
 								case MMBDirection.West:
 								case MMBDirection.East:
-									if (targetRoom.Position.Y - pos.Y != 0)
 									{
-										continue;
-									}
+										if (targetRoom.Position.Y - pos.Y != 0)
+										{
+											continue;
+										}
 
-									steps = Math.Abs(targetRoom.Position.X - pos.X) - 1;
+										var steps = Math.Abs(targetRoom.Position.X - pos.X) - 1;
+										for (var j = steps; j >= 1; --j)
+										{
+											delta = exitDir.GetOppositeDirection().GetDelta();
+											delta.X *= j;
+											delta.Y *= j;
+											deltas.Add(delta);
+										}
+									}
 									break;
 								case MMBDirection.Up:
 								case MMBDirection.Down:
-									// Skip Up/Down for now
-									continue;
+									delta = new Point(desiredPos.X - targetRoom.Position.X, desiredPos.Y - targetRoom.Position.Y);
+									deltas.Add(delta);
+									break;
 							}
 
-							// Determine best amount of steps
 							var vc = rooms.CalculateBrokenConnections();
-							while (steps > 0)
+							for(var j = 0; j < deltas.Count; ++j)
 							{
 								var cloneRooms = rooms.Clone();
 								var targetRoomClone = cloneRooms.GetRoomById(targetRoom.Id);
 
-								var v = exitDir.GetOppositeDirection().GetDelta();
-								v.X *= steps;
-								v.Y *= steps;
-								cloneRooms.PushRoom(targetRoomClone, v);
+								delta = deltas[j];
+								cloneRooms.PushRoom(targetRoomClone, delta);
 
 								var vc2 = cloneRooms.CalculateBrokenConnections();
 								if (vc2.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount &&
@@ -343,13 +356,13 @@ namespace MUDMapBuilder
 									rooms = cloneRooms;
 									break;
 								}
-
-								--steps;
 							}
 						}
 					}
 				}
 			}
+
+//			rooms.FixPlacementOfSingleExitRooms();
 
 			rooms.Steps = step;
 

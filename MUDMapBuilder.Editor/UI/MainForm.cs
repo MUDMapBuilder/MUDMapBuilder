@@ -29,16 +29,28 @@ namespace MUDMapBuilder.Editor.UI
 			set => _spinButtonStep.Value = value;
 		}
 
-		public bool Straighten
+		public AlgorithmUsage StraightenUsage
 		{
-			get => _checkButtonStraighten.IsChecked;
-			set => _checkButtonStraighten.IsChecked = value;
+			get => (AlgorithmUsage)_comboStraighten.SelectedIndex.Value;
+			set => _comboStraighten.SelectedIndex = (int)value;
 		}
 
-		public bool Compact
+		public int StraightenSteps
 		{
-			get => _checkButtonCompact.IsChecked;
-			set => _checkButtonCompact.IsChecked = value;
+			get => (int)_spinButtonStraightenSteps.Value;
+			set => _spinButtonStraightenSteps.Value = value;
+		}
+
+		public AlgorithmUsage CompactUsage
+		{
+			get => (AlgorithmUsage)_comboCompact.SelectedIndex.Value;
+			set => _comboCompact.SelectedIndex = (int)value;
+		}
+
+		public int CompactSteps
+		{
+			get => (int)_spinButtonCompactSteps.Value;
+			set => _spinButtonCompactSteps.Value = value;
 		}
 
 		public Point ForceVector => new Point((int)_spinPushForceX.Value, (int)(_spinPushForceY.Value));
@@ -46,6 +58,9 @@ namespace MUDMapBuilder.Editor.UI
 		public MainForm()
 		{
 			BuildUI();
+
+			_comboStraighten.SelectedIndex = 1;
+			_comboCompact.SelectedIndex = 1;
 
 			_mapViewer = new MapViewer();
 			_panelMap.Content = _mapViewer;
@@ -80,13 +95,40 @@ namespace MUDMapBuilder.Editor.UI
 			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
 			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _mapViewer.MaxSteps;
 			_spinButtonStep.ValueChanged += (s, e) => RebuildMap();
-			_checkButtonStraighten.IsCheckedChanged += (s, e) => RebuildMap();
-			_checkButtonCompact.IsCheckedChanged += (s, e) => RebuildMap();
+			_comboStraighten.SelectedIndexChanged += (s, e) =>
+			{
+				if (_comboStraighten.SelectedIndex != 2)
+				{
+					_spinButtonStraightenSteps.Value = 0;
+				}
+				UpdateEnabled();
+				RebuildMap();
+			};
+			_spinButtonStraightenSteps.ValueChanged += (s, e) => RebuildMap();
+
+			_comboCompact.SelectedIndexChanged += (s, e) =>
+			{
+				if (_comboCompact.SelectedIndex != 2)
+				{
+					_spinButtonCompactSteps.Value = 0;
+				}
+				UpdateEnabled();
+				RebuildMap();
+			};
+			_spinButtonCompactSteps.ValueChanged += (s, e) => RebuildMap();
 
 			_buttonMeasure.Click += (s, e) => _mapViewer.MeasurePushRoom(ForceVector);
 			_buttonPush.Click += (s, e) => _mapViewer.PushRoom(ForceVector);
 
 			_mapViewer.BrokenConnectionsChanged += (s, e) => UpdateBrokenConnections();
+			_mapViewer.MaxStraightenStepsChanged += (s, e) =>
+			{
+				_labelMaxStraightenSteps.Text = $"Max Straighten Steps: {_mapViewer.MaxStraightenSteps}";
+			};
+			_mapViewer.MaxCompactStepsChanged += (s, e) =>
+			{
+				_labelMaxCompactSteps.Text = $"Max Compact Steps: {_mapViewer.MaxCompactSteps}";
+			};
 
 			UpdateEnabled();
 		}
@@ -96,8 +138,10 @@ namespace MUDMapBuilder.Editor.UI
 			var options = new BuildOptions
 			{
 				Steps = (int)_spinButtonStep.Value,
-				Straighten = _checkButtonStraighten.IsChecked,
-				Compact = _checkButtonCompact.IsChecked,
+				StraightenUsage = StraightenUsage,
+				StraightenSteps = StraightenSteps,
+				CompactUsage = CompactUsage,
+				CompactSteps = CompactSteps,
 			};
 
 			_mapViewer.Rebuild(options);
@@ -129,6 +173,9 @@ namespace MUDMapBuilder.Editor.UI
 			_spinPushForceY.Enabled = enabled;
 			_buttonMeasure.Enabled = enabled;
 			_buttonPush.Enabled = enabled;
+			_spinButtonStraightenSteps.Enabled = _comboStraighten.SelectedIndex == 2;
+			_spinButtonCompactSteps.Enabled = _comboCompact.SelectedIndex == 2;
+
 			UpdateBrokenConnections();
 		}
 

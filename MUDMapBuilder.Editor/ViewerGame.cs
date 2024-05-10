@@ -60,9 +60,11 @@ namespace MUDMapBuilder.Editor
 
 			if (_state != null)
 			{
-				_mainForm.Step = _state.Step;
-				_mainForm.Straighten = _state.Straighten;
-				_mainForm.Compact = _state.Compact;
+				_mainForm.StraightenUsage = _state.StraightenUsage;
+				_mainForm.StraightenSteps = _state.StraightenSteps;
+				_mainForm.CompactUsage = _state.CompactUsage;
+				_mainForm.CompactSteps = _state.CompactSteps;
+
 				_mainForm.LoadArea(_state.EditedFile);
 				_mainForm.Step = _state.Step;
 			}
@@ -91,8 +93,10 @@ namespace MUDMapBuilder.Editor
 					GraphicsDevice.PresentationParameters.BackBufferHeight),
 				EditedFile = FilePath,
 				Step = _mainForm.Step,
-				Straighten = _mainForm.Straighten,
-				Compact = _mainForm.Compact,
+				StraightenUsage = _mainForm.StraightenUsage,
+				StraightenSteps = _mainForm.StraightenSteps,
+				CompactUsage = _mainForm.CompactUsage,
+				CompactSteps = _mainForm.CompactSteps,
 			};
 
 			state.Save();

@@ -22,8 +22,10 @@ namespace MUDMapBuilder.Editor
 		public Point Size { get; set; }
 		public string EditedFile { get; set; }
 		public int Step { get; set; }
-		public bool Straighten { get; set; }
-		public bool Compact { get; set; }
+		public AlgorithmUsage StraightenUsage { get; set; } = AlgorithmUsage.Use;
+		public int StraightenSteps { get; set; }
+		public AlgorithmUsage CompactUsage { get; set; } = AlgorithmUsage.Use;
+		public int CompactSteps { get; set; }
 
 		public State()
 		{

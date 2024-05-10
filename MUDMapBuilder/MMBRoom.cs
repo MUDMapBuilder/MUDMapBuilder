@@ -5,6 +5,7 @@ namespace MUDMapBuilder
 	public class MMBRoom
 	{
 		private Point _position;
+		private Point? _forceMark;
 
 		public int Id => Room.Id;
 
@@ -28,6 +29,23 @@ namespace MUDMapBuilder
 			}
 		}
 		public bool Mark { get; set; }
+		internal Point? ForceMark
+		{
+			get => _forceMark;
+			set
+			{
+				if (value == _forceMark)
+				{
+					return;
+				}
+
+				_forceMark = value;
+				if (Rooms != null)
+				{
+					Rooms.InvalidateGrid();
+				}
+			}
+		}
 
 		public MMBRoom(IMMBRoom room)
 		{
@@ -36,7 +54,8 @@ namespace MUDMapBuilder
 
 		public MMBRoom Clone() => new MMBRoom(Room)
 		{
-			Position = Position
+			Position = Position,
+			ForceMark = ForceMark,
 		};
 
 		public override string ToString() => $"{Room}, {Position}";

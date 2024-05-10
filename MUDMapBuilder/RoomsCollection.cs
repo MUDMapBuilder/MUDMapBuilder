@@ -31,7 +31,9 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public int Steps { get; internal set; }
+		public int MaxRunSteps { get; internal set; }
+		public int MaxStraightenSteps { get; internal set; }
+		public int MaxCompactSteps { get; internal set; }
 
 		internal MMBRoom this[int index] => _rooms[index];
 
@@ -84,7 +86,8 @@ namespace MUDMapBuilder
 				var coord = new Point(room.Position.X - rect.X, room.Position.Y - rect.Y);
 				_grid[coord.X, coord.Y] = new MMBRoomCell(room.Room, coord)
 				{
-					Mark = room.Mark
+					Mark = room.Mark,
+					ForceMark = room.ForceMark,
 				};
 			}
 

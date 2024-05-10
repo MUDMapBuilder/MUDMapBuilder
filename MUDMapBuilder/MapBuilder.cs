@@ -1,13 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using static MUDMapBuilder.RoomsCollection;
 
 namespace MUDMapBuilder
 {
 	public static class MapBuilder
 	{
-		private static RoomsCollection FixRoom(RoomsCollection rooms, MMBRoom room, MMBRoom targetRoom, MMBDirection exitDir)
+		private class FixRoomResult
+		{
+			public Point ForceVector { get; }
+			public BrokenConnectionsInfo BrokenConnectionsInfo { get; }
+
+			public FixRoomResult(Point forceVector, BrokenConnectionsInfo brokenConnectionsInfo)
+			{
+				ForceVector = forceVector;
+				BrokenConnectionsInfo = brokenConnectionsInfo;
+			}
+		}
+
+		private static FixRoomResult FixRoom(RoomsCollection rooms, MMBRoom room, MMBRoom targetRoom, MMBDirection exitDir)
 		{
 			var sourcePos = room.Position;
 			var targetPos = targetRoom.Position;
@@ -27,8 +40,10 @@ namespace MUDMapBuilder
 					desiredPos = new Point(targetPos.X < sourcePos.X ? targetPos.X : sourcePos.X - 1, sourcePos.Y);
 					break;
 				case MMBDirection.Up:
+					desiredPos = new Point(targetPos.X > sourcePos.X ? targetPos.X : sourcePos.X + 1, targetPos.Y < sourcePos.Y ? targetPos.Y : sourcePos.Y - 1);
 					break;
 				case MMBDirection.Down:
+					desiredPos = new Point(targetPos.X < sourcePos.X ? targetPos.X : sourcePos.X - 1, targetPos.Y > sourcePos.Y ? targetPos.Y : sourcePos.Y + 1);
 					break;
 			}
 
@@ -39,7 +54,9 @@ namespace MUDMapBuilder
 
 			clone.PushRoom(targetRoomClone, d);
 
-			return clone;
+			var vc = clone.CalculateBrokenConnections();
+
+			return new FixRoomResult(d, vc);
 		}
 
 		public static RoomsCollection Build(IMMBRoom[] sourceRooms, BuildOptions options = null)
@@ -63,9 +80,9 @@ namespace MUDMapBuilder
 
 			// First run: we move through room's exits, assigning each room a 2d coordinate
 			// If there are overlaps, then we expand the grid in the direction of movement
-			var step = 1;
+			var runSteps = 1;
 			Point pos;
-			while (toProcess.Count > 0 && (options.Steps == null || options.Steps.Value > step))
+			while (toProcess.Count > 0 && (options.Steps == null || options.Steps.Value > runSteps))
 			{
 				var room = toProcess[0];
 				toProcess.RemoveAt(0);
@@ -124,22 +141,26 @@ namespace MUDMapBuilder
 					rooms.Add(newRoom);
 				}
 
-				++step;
+				++runSteps;
 			}
 
-			if (options.Straighten)
+			var straightenSteps = 0;
+			if (options.StraightenUsage != AlgorithmUsage.DoNotUse)
 			{
 				// Straighten run: try to make room connections more straight
+				var connections = new List<Tuple<int, int>>();
 				var runsLeft = 10;
 				while (runsLeft > 0)
 				{
 					var vc = rooms.CalculateBrokenConnections();
-
+						
 					if (vc.Count == 0)
 					{
 						break;
 					}
 
+					int? pushRoomId = null;
+					var forceVector = Point.Empty;
 					var roomsCount = rooms.Count;
 					for (var i = 0; i < roomsCount; ++i)
 					{
@@ -157,6 +178,23 @@ namespace MUDMapBuilder
 								continue;
 							}
 
+							var connectionExists = false;
+							foreach(var c in connections)
+							{
+								if (c.Item1 == room.Id && c.Item2 == exitRoom.Id ||
+									c.Item1 == exitRoom.Id && c.Item2 == room.Id)
+								{
+									connectionExists = true;
+									break;
+								}
+							}
+
+							// connectionExists = false;
+							if (connectionExists)
+							{
+								continue;
+							}
+
 							brokenType = rooms.CheckConnectionBroken(room, targetRoom, exitDir);
 							if (brokenType != ConnectionBrokenType.NotBroken)
 							{
@@ -166,37 +204,27 @@ namespace MUDMapBuilder
 
 						if (brokenType == ConnectionBrokenType.NotStraight)
 						{
-							var clone1 = FixRoom(rooms, room, targetRoom, exitDir);
+							connections.Add(new Tuple<int, int>(room.Id, targetRoom.Id));
 
-							var sourceRoomClone = clone1.GetRoomById(room.Id);
-							var targetRoomClone = clone1.GetRoomById(targetRoom.Id);
-							brokenType = clone1.CheckConnectionBroken(sourceRoomClone, targetRoomClone, exitDir);
-
-							var c1 = clone1.CalculateBrokenConnections();
-							if (brokenType == ConnectionBrokenType.NotBroken &&
-								c1.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
+							var fixRoom1 = FixRoom(rooms, room, targetRoom, exitDir);
+							var c1 = fixRoom1.BrokenConnectionsInfo;
+							if (c1.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
 								c1.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount)
 							{
-								// Connection was fixed
-								rooms = clone1;
+								pushRoomId = targetRoom.Id;
+								forceVector = fixRoom1.ForceVector;
 								goto finish;
 							}
 
 							// Now try the other way around
-							var clone2 = FixRoom(rooms, targetRoom, room, exitDir.GetOppositeDirection());
+							var fixRoom2 = FixRoom(rooms, targetRoom, room, exitDir.GetOppositeDirection());
 
-							sourceRoomClone = clone2.GetRoomById(targetRoomClone.Id);
-							targetRoomClone = clone2.GetRoomById(room.Id);
-
-							brokenType = clone2.CheckConnectionBroken(sourceRoomClone, targetRoomClone, exitDir.GetOppositeDirection());
-
-							var c2 = clone2.CalculateBrokenConnections();
-							if (brokenType == ConnectionBrokenType.NotBroken &&
-								c2.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
+							var c2 = fixRoom2.BrokenConnectionsInfo;
+							if (c2.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
 								c2.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount)
 							{
-								// Connection was fixed
-								rooms = clone2;
+								pushRoomId = room.Id;
+								forceVector = fixRoom2.ForceVector;
 								goto finish;
 							}
 
@@ -205,11 +233,13 @@ namespace MUDMapBuilder
 								(c1.ConnectionsWithObstaclesCount == c2.ConnectionsWithObstaclesCount &&
 								c1.NonStraightConnectionsCount < c2.NonStraightConnectionsCount))
 							{
-								rooms = clone1;
+								pushRoomId = targetRoom.Id;
+								forceVector = fixRoom1.ForceVector;
 								goto finish;
 							}
 
-							rooms = clone2;
+							pushRoomId = room.Id;
+							forceVector = fixRoom2.ForceVector;
 							goto finish;
 						}
 						else if (brokenType == ConnectionBrokenType.HasObstacles)
@@ -242,13 +272,34 @@ namespace MUDMapBuilder
 								if (brokenType == ConnectionBrokenType.NotBroken &&
 									c.ConnectionsWithObstaclesCount < vc.ConnectionsWithObstaclesCount)
 								{
-									rooms = clone;
+									pushRoomId = targetRoom.Id;
+									forceVector = d;
 									goto finish;
 								}
 							}
 						}
 					}
 				finish:;
+
+					if (pushRoomId != null)
+					{
+						var room = rooms.GetRoomById(pushRoomId.Value);
+						room.ForceMark = forceVector;
+
+						++straightenSteps;
+						if (options.EndStraighten(straightenSteps))
+						{
+							break;
+						}
+
+						room.ForceMark = null;
+						rooms.PushRoom(room, forceVector);
+						++straightenSteps;
+						if (options.EndStraighten(straightenSteps))
+						{
+							break;
+						}
+					}
 
 					var vc2 = rooms.CalculateBrokenConnections();
 
@@ -260,7 +311,7 @@ namespace MUDMapBuilder
 				}
 			}
 
-			if (options.Compact)
+			if (options.CompactUsage != AlgorithmUsage.DoNotUse)
 			{
 				// Compact run: Try to make the map more compact
 				for (var it = 0; it < 10; ++it)
@@ -306,7 +357,7 @@ namespace MUDMapBuilder
 										}
 
 										var steps = Math.Abs(targetRoom.Position.Y - pos.Y) - 1;
-										for(var j = steps; j >= 1; --j)
+										for (var j = steps; j >= 1; --j)
 										{
 											delta = exitDir.GetOppositeDirection().GetDelta();
 											delta.X *= j;
@@ -341,7 +392,7 @@ namespace MUDMapBuilder
 							}
 
 							var vc = rooms.CalculateBrokenConnections();
-							for(var j = 0; j < deltas.Count; ++j)
+							for (var j = 0; j < deltas.Count; ++j)
 							{
 								var cloneRooms = rooms.Clone();
 								var targetRoomClone = cloneRooms.GetRoomById(targetRoom.Id);
@@ -362,9 +413,10 @@ namespace MUDMapBuilder
 				}
 			}
 
-//			rooms.FixPlacementOfSingleExitRooms();
+			//			rooms.FixPlacementOfSingleExitRooms();
 
-			rooms.Steps = step;
+			rooms.MaxRunSteps = runSteps;
+			rooms.MaxStraightenSteps = straightenSteps;
 
 			return rooms;
 		}

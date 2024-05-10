@@ -18,24 +18,23 @@
         <Button Id="_buttonEnd">
           <Label Text="&gt;&gt;" />
         </Button>
-        <CheckButton IsChecked="True" Id="_checkButtonStraighten">
-          <Label Text="Straighten" />
-        </CheckButton>
-        <CheckButton IsChecked="True" Id="_checkButtonCompact">
-          <Label Text="Compact" />
-        </CheckButton>
-      </HorizontalStackPanel>
-      <HorizontalStackPanel Spacing="8">
-        <Button Id="_buttonStartDebugSteps">
-          <Label Text="&lt;&lt;" />
-        </Button>
-        <SpinButton Integer="True" Width="50" Id="_spinButtonDebugStep" />
-        <Button Id="_buttonEndSteps">
-          <Label Text="&gt;&gt;" />
-        </Button>
+        <ComboView Id="_comboStraighten">
+          <Label Text="Do Not Straighten" />
+          <Label Text="Straighten Without Limit" />
+          <Label Text="Straighten With Limit" />
+        </ComboView>
+        <SpinButton Integer="True" Width="50" Id="_spinButtonStraightenSteps" />
+        <ComboView Id="_comboCompact">
+          <Label Text="Do Not Compact" />
+          <Label Text="Compact Without Limit" />
+          <Label Text="Compact With Limit" />
+        </ComboView>
+        <SpinButton Integer="True" Width="50" Id="_spinButtonCompactSteps" />
       </HorizontalStackPanel>
       <Label Text="Non-Straight Connections: 10" Id="_labelNonStraightConnections" />
       <Label Text="Connections With Obstacles: 10" Id="_labelConnectionsWithObstacles" />
+      <Label Text="Max Straighten Steps: 100" Id="_labelMaxStraightenSteps" />
+      <Label Text="Max Compact Steps: 100" Id="_labelMaxCompactSteps" />
       <HorizontalStackPanel Spacing="8">
         <Label Text="Force X:" />
         <SpinButton Maximum="10" Minimum="-10" Integer="True" Width="59" Id="_spinPushForceX" />

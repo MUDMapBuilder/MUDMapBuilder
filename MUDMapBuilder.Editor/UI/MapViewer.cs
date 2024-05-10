@@ -17,7 +17,7 @@ namespace MUDMapBuilder.Editor.UI
 		private Area _area;
 		private RoomsCollection _rooms;
 		private MMBImageResult _imageResult;
-		private int _maxSteps = 0;
+		private int _maxSteps = 0, _maxStraightenSteps = 0, _maxCompactSteps = 0;
 		private BrokenConnectionsInfo _brokenConnections = null;
 
 		public Area Area
@@ -37,10 +37,10 @@ namespace MUDMapBuilder.Editor.UI
 				var roomsArray = _area.Rooms.ToArray();
 				var rooms = MapBuilder.Build(roomsArray, new BuildOptions
 				{
-					Straighten = false,
-					Compact = false,
+					StraightenUsage = AlgorithmUsage.DoNotUse,
+					CompactUsage = AlgorithmUsage.DoNotUse,
 				});
-				MaxSteps = rooms.Steps;
+				MaxSteps = rooms.MaxRunSteps;
 			}
 		}
 
@@ -57,6 +57,38 @@ namespace MUDMapBuilder.Editor.UI
 
 				_maxSteps = value;
 				MaxStepsChanged?.Invoke(this, EventArgs.Empty);
+			}
+		}
+
+		public int MaxStraightenSteps
+		{
+			get => _maxStraightenSteps;
+
+			private set
+			{
+				if (value == _maxStraightenSteps)
+				{
+					return;
+				}
+
+				_maxStraightenSteps = value;
+				MaxStraightenStepsChanged?.Invoke(this, EventArgs.Empty);
+			}
+		}
+
+		public int MaxCompactSteps
+		{
+			get => _maxCompactSteps;
+
+			private set
+			{
+				if (value == _maxCompactSteps)
+				{
+					return;
+				}
+
+				_maxCompactSteps = value;
+				MaxCompactStepsChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -77,6 +109,8 @@ namespace MUDMapBuilder.Editor.UI
 		}
 
 		public event EventHandler MaxStepsChanged;
+		public event EventHandler MaxStraightenStepsChanged;
+		public event EventHandler MaxCompactStepsChanged;
 		public event EventHandler BrokenConnectionsChanged;
 
 		public MapViewer()
@@ -93,6 +127,8 @@ namespace MUDMapBuilder.Editor.UI
 			if (_area != null)
 			{
 				_rooms = MapBuilder.Build(_area.Rooms.ToArray(), options);
+				MaxStraightenSteps = _rooms.MaxStraightenSteps;
+				MaxCompactSteps = _rooms.MaxCompactSteps;
 				BrokenConnections = _rooms.CalculateBrokenConnections();
 			}
 

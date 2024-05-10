@@ -267,6 +267,33 @@ namespace MUDMapBuilder
 
 							paint.StrokeWidth = 1;
 							canvas.DrawText(room.Room.ToString(), rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
+
+							if (room.ForceMark != null)
+							{
+
+								var sourceScreen = ToScreen(room.Position);
+								var tt = new Point(room.Position.X + room.ForceMark.Value.X, room.Position.Y + room.ForceMark.Value.Y);
+								var addX = 0;
+								if (tt.X >= 0 && tt.X < _cellsWidths.Length)
+								{
+									addX = _cellsWidths[tt.X] / 2;
+								}
+								var targetScreen = ToScreen(tt);
+
+								var oldColor = paint.Color;
+								try
+								{
+									paint.Color = SKColors.DarkGreen;
+									canvas.DrawLine(sourceScreen.X + rect.Width / 2, 
+										sourceScreen.Y + RoomHeight / 2, 
+										targetScreen.X + addX, 
+										targetScreen.Y + RoomHeight / 2, paint);
+								}
+								finally
+								{
+									paint.Color = oldColor;
+								}
+							}
 						}
 					}
 
@@ -283,7 +310,7 @@ namespace MUDMapBuilder
 			return new MMBImageResult(imageBytes, roomInfos.ToArray());
 		}
 
-		private Rectangle GetRoomRect(Point pos)
+		private Point ToScreen(Point pos)
 		{
 			var screenX = RoomSpace.X;
 			for (var x = 0; x < pos.X; ++x)
@@ -292,7 +319,14 @@ namespace MUDMapBuilder
 				screenX += RoomSpace.X;
 			}
 
-			return new Rectangle(screenX, pos.Y * RoomHeight + (pos.Y + 1) * RoomSpace.Y, _cellsWidths[pos.X], RoomHeight);
+			return new Point(screenX, pos.Y * RoomHeight + (pos.Y + 1) * RoomSpace.Y);
+		}
+
+
+		private Rectangle GetRoomRect(Point pos)
+		{
+			var screen = ToScreen(pos);
+			return new Rectangle(screen.X, screen.Y, _cellsWidths[pos.X], RoomHeight);
 		}
 
 		private Point ToScreenCoord(Coord coord)

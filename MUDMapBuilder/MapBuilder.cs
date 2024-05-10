@@ -20,7 +20,7 @@ namespace MUDMapBuilder
 			}
 		}
 
-		private static FixRoomResult FixRoom(RoomsCollection rooms, MMBRoom room, MMBRoom targetRoom, MMBDirection exitDir)
+/*		private static FixRoomResult FixRoom(RoomsCollection rooms, MMBRoom room, MMBRoom targetRoom, MMBDirection exitDir)
 		{
 			var sourcePos = room.Position;
 			var targetPos = targetRoom.Position;
@@ -57,7 +57,7 @@ namespace MUDMapBuilder
 			var vc = clone.CalculateBrokenConnections();
 
 			return new FixRoomResult(d, vc);
-		}
+		}*/
 
 		public static RoomsCollection Build(IMMBRoom[] sourceRooms, BuildOptions options = null)
 		{
@@ -100,36 +100,11 @@ namespace MUDMapBuilder
 					var delta = exitDir.GetDelta();
 					var newPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 
-
-					var vc = rooms.CalculateBrokenConnections().Count;
-
 					// Expand grid either if the new position is occupied by a room
-					// Or if it breaks existing connection
-					var expandGrid = false;
+					// Push rooms in the movement direction
 					var existingRoom = rooms.GetRoomByPosition(newPos);
 					if (existingRoom != null)
 					{
-						expandGrid = true;
-					}
-					else
-					{
-						//
-						var cloneRooms = rooms.Clone();
-						var cloneRoom = new MMBRoom(exitRoom)
-						{
-							Position = newPos
-						};
-
-						cloneRooms.Add(cloneRoom);
-						if (cloneRooms.CalculateBrokenConnections().Count > vc)
-						{
-							expandGrid = true;
-						}
-					}
-
-					if (expandGrid)
-					{
-						// Push rooms in the movement direction
 						rooms.ExpandGrid(newPos, delta);
 					}
 
@@ -145,7 +120,7 @@ namespace MUDMapBuilder
 			}
 
 			var straightenSteps = 0;
-			if (options.StraightenUsage != AlgorithmUsage.DoNotUse)
+/*			if (options.StraightenUsage != AlgorithmUsage.DoNotUse)
 			{
 				// Straighten run: try to make room connections more straight
 				var connections = new List<Tuple<int, int>>();
@@ -411,9 +386,7 @@ namespace MUDMapBuilder
 						}
 					}
 				}
-			}
-
-			//			rooms.FixPlacementOfSingleExitRooms();
+			}*/
 
 			rooms.MaxRunSteps = runSteps;
 			rooms.MaxStraightenSteps = straightenSteps;

@@ -18,14 +18,6 @@
 
 		public int StraightenSteps { get; set; }
 
-		/// <summary>
-		/// Perform run to make the map more compact
-		/// </summary>
-		public AlgorithmUsage CompactUsage { get; set; } = AlgorithmUsage.Use;
-
-		public int CompactSteps { get; set; }
-
-
 		internal bool EndStraighten(int maxSteps)
 		{
 			if (StraightenUsage != AlgorithmUsage.LimitSteps)
@@ -43,8 +35,6 @@
 				Steps = Steps,
 				StraightenUsage = StraightenUsage,
 				StraightenSteps = StraightenSteps,
-				CompactUsage = CompactUsage,
-				CompactSteps = CompactSteps
 			};
 		}
 	}

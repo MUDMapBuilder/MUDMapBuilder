@@ -2,14 +2,18 @@
   <Project.ExportOptions Namespace="MUDMapBuilder.Editor.UI" Class="MainForm" OutputPath="D:\Projects\MUDMapBuilder.NET\MUDMapBuilder.Editor\UI" />
   <Panel>
     <VerticalStackPanel Spacing="8">
-      <HorizontalStackPanel Spacing="8">
-        <Button Id="_buttonOpen">
-          <Label Text="Open" />
-        </Button>
-        <Button Id="_buttonSave">
-          <Label Text="Save" />
-        </Button>
-      </HorizontalStackPanel>
+      <HorizontalMenu Id="_mainMenu" >
+        <MenuItem Text="&amp;File">
+          <MenuItem Text="&amp;Open" ShortcutText="Ctrl+O" Id="_menuItemFileOpen" />
+          <MenuItem Text="&amp;Save" ShortcutText="Ctrl+S" Id="_menuItemFileSave" />
+          <MenuItem Text="S&amp;ave As..." Id="_menuItemFileSaveAs" />
+          <MenuSeparator />
+          <MenuItem Text="&amp;Import..." ShortcutText="Ctrl+I" Id="_menuItemImport" />
+        </MenuItem>
+        <MenuItem Text="&amp;Help">
+          <MenuItem Text="&amp;About" Id="_menuHelpAbout" />
+        </MenuItem>
+      </HorizontalMenu>
       <HorizontalStackPanel Spacing="8">
         <Button Id="_buttonStart">
           <Label Text="&lt;&lt;" />
@@ -24,17 +28,7 @@
           <Label Text="Straighten With Limit" />
         </ComboView>
         <SpinButton Integer="True" Width="50" Id="_spinButtonStraightenSteps" />
-        <ComboView Id="_comboCompact">
-          <Label Text="Do Not Compact" />
-          <Label Text="Compact Without Limit" />
-          <Label Text="Compact With Limit" />
-        </ComboView>
-        <SpinButton Integer="True" Width="50" Id="_spinButtonCompactSteps" />
       </HorizontalStackPanel>
-      <Label Text="Non-Straight Connections: 10" Id="_labelNonStraightConnections" />
-      <Label Text="Connections With Obstacles: 10" Id="_labelConnectionsWithObstacles" />
-      <Label Text="Max Straighten Steps: 100" Id="_labelMaxStraightenSteps" />
-      <Label Text="Max Compact Steps: 100" Id="_labelMaxCompactSteps" />
       <HorizontalStackPanel Spacing="8">
         <Label Text="Force X:" />
         <SpinButton Maximum="10" Minimum="-10" Integer="True" Width="59" Id="_spinPushForceX" />
@@ -47,7 +41,15 @@
           <Label Text="Push" />
         </Button>
       </HorizontalStackPanel>
-      <ScrollViewer Id="_panelMap" StackPanel.ProportionType="Fill" />
+      <Panel StackPanel.ProportionType="Fill">
+        <ScrollViewer Id="_panelMap" />
+        <VerticalStackPanel Spacing="8" Id="_panelConnectionIssues">
+          <Label Text="Connections With Obstacles: 10" TextColor="#FE3930FF" Id="_labelConnectionsWithObstacles" />
+          <Label Text="Non-Straight Connections: 10" TextColor="#FFCC01FF" Id="_labelNonStraightConnections" />
+          <Label Text="Long Connections: 10" TextColor="#4BD961FF" Id="_labelLongConnections" />
+          <Label Text="Max Straighten Steps: 100" Id="_labelMaxStraightenSteps" />
+        </VerticalStackPanel>
+      </Panel>
     </VerticalStackPanel>
   </Panel>
 </Project>

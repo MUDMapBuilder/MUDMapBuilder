@@ -41,18 +41,6 @@ namespace MUDMapBuilder.Editor.UI
 			set => _spinButtonStraightenSteps.Value = value;
 		}
 
-		public AlgorithmUsage CompactUsage
-		{
-			get => (AlgorithmUsage)_comboCompact.SelectedIndex.Value;
-			set => _comboCompact.SelectedIndex = (int)value;
-		}
-
-		public int CompactSteps
-		{
-			get => (int)_spinButtonCompactSteps.Value;
-			set => _spinButtonCompactSteps.Value = value;
-		}
-
 		public Point ForceVector => new Point((int)_spinPushForceX.Value, (int)(_spinPushForceY.Value));
 
 		public MainForm()
@@ -60,37 +48,11 @@ namespace MUDMapBuilder.Editor.UI
 			BuildUI();
 
 			_comboStraighten.SelectedIndex = 1;
-			_comboCompact.SelectedIndex = 1;
 
 			_mapViewer = new MapViewer();
 			_panelMap.Content = _mapViewer;
 
-			_buttonOpen.Click += (s, e) =>
-			{
-				FileDialog dialog = new FileDialog(FileDialogMode.OpenFile)
-				{
-					Filter = "*.json"
-				};
-
-				if (!string.IsNullOrEmpty(ViewerGame.Instance.FilePath))
-				{
-					dialog.Folder = Path.GetDirectoryName(ViewerGame.Instance.FilePath);
-				}
-
-				dialog.Closed += (s, a) =>
-				{
-					if (!dialog.Result)
-					{
-						// "Cancel" or Escape
-						return;
-					}
-
-					// "Ok" or Enter
-					LoadArea(dialog.FilePath, true);
-				};
-
-				dialog.ShowModal(Desktop);
-			};
+			_menuItemImport.Selected += (s, e) => OnMenuFileImportSelected();
 
 			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
 			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _mapViewer.MaxSteps;
@@ -106,17 +68,6 @@ namespace MUDMapBuilder.Editor.UI
 			};
 			_spinButtonStraightenSteps.ValueChanged += (s, e) => RebuildMap();
 
-			_comboCompact.SelectedIndexChanged += (s, e) =>
-			{
-				if (_comboCompact.SelectedIndex != 2)
-				{
-					_spinButtonCompactSteps.Value = 0;
-				}
-				UpdateEnabled();
-				RebuildMap();
-			};
-			_spinButtonCompactSteps.ValueChanged += (s, e) => RebuildMap();
-
 			_buttonMeasure.Click += (s, e) => _mapViewer.MeasurePushRoom(ForceVector);
 			_buttonPush.Click += (s, e) => _mapViewer.PushRoom(ForceVector);
 
@@ -125,12 +76,35 @@ namespace MUDMapBuilder.Editor.UI
 			{
 				_labelMaxStraightenSteps.Text = $"Max Straighten Steps: {_mapViewer.MaxStraightenSteps}";
 			};
-			_mapViewer.MaxCompactStepsChanged += (s, e) =>
-			{
-				_labelMaxCompactSteps.Text = $"Max Compact Steps: {_mapViewer.MaxCompactSteps}";
-			};
 
 			UpdateEnabled();
+		}
+
+		public void OnMenuFileImportSelected()
+		{
+			FileDialog dialog = new FileDialog(FileDialogMode.OpenFile)
+			{
+				Filter = "*.json"
+			};
+
+			if (!string.IsNullOrEmpty(ViewerGame.Instance.FilePath))
+			{
+				dialog.Folder = Path.GetDirectoryName(ViewerGame.Instance.FilePath);
+			}
+
+			dialog.Closed += (s, a) =>
+			{
+				if (!dialog.Result)
+				{
+					// "Cancel" or Escape
+					return;
+				}
+
+				// "Ok" or Enter
+				ImportArea(dialog.FilePath, true);
+			};
+
+			dialog.ShowModal(Desktop);
 		}
 
 		private void RebuildMap()
@@ -140,8 +114,6 @@ namespace MUDMapBuilder.Editor.UI
 				Steps = (int)_spinButtonStep.Value,
 				StraightenUsage = StraightenUsage,
 				StraightenSteps = StraightenSteps,
-				CompactUsage = CompactUsage,
-				CompactSteps = CompactSteps,
 			};
 
 			_mapViewer.Rebuild(options);
@@ -151,13 +123,15 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			if (_mapViewer.BrokenConnections != null)
 			{
-				_labelNonStraightConnections.Text = $"Non Straight Connections: {_mapViewer.BrokenConnections.NonStraightConnectionsCount}";
-				_labelConnectionsWithObstacles.Text = $"Connections With Obstacles: {_mapViewer.BrokenConnections.ConnectionsWithObstaclesCount}";
+				_labelNonStraightConnections.Text = $"Non Straight Connections: {_mapViewer.BrokenConnections.NonStraight.Count}";
+				_labelConnectionsWithObstacles.Text = $"Connections With Obstacles: {_mapViewer.BrokenConnections.WithObstacles.Count}";
+				_labelLongConnections.Text = $"Long Connections: {_mapViewer.BrokenConnections.Long.Count}";
 			}
 			else
 			{
 				_labelNonStraightConnections.Text = "";
 				_labelConnectionsWithObstacles.Text = "";
+				_labelLongConnections.Text = "";
 			}
 		}
 
@@ -165,7 +139,8 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			var enabled = Area != null;
 
-			_buttonSave.Enabled = enabled;
+			_menuItemFileSave.Enabled = enabled;
+			_menuItemFileSaveAs.Enabled = enabled;
 			_buttonStart.Enabled = enabled;
 			_buttonEnd.Enabled = enabled;
 			_spinButtonStep.Enabled = enabled;
@@ -174,12 +149,11 @@ namespace MUDMapBuilder.Editor.UI
 			_buttonMeasure.Enabled = enabled;
 			_buttonPush.Enabled = enabled;
 			_spinButtonStraightenSteps.Enabled = _comboStraighten.SelectedIndex == 2;
-			_spinButtonCompactSteps.Enabled = _comboCompact.SelectedIndex == 2;
 
 			UpdateBrokenConnections();
 		}
 
-		public void LoadArea(string path, bool setStepsToMax = false)
+		public void ImportArea(string path, bool setStepsToMax = false)
 		{
 			try
 			{

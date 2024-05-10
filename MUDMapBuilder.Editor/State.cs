@@ -24,8 +24,6 @@ namespace MUDMapBuilder.Editor
 		public int Step { get; set; }
 		public AlgorithmUsage StraightenUsage { get; set; } = AlgorithmUsage.Use;
 		public int StraightenSteps { get; set; }
-		public AlgorithmUsage CompactUsage { get; set; } = AlgorithmUsage.Use;
-		public int CompactSteps { get; set; }
 
 		public State()
 		{

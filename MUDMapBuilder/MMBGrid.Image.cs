@@ -14,6 +14,11 @@ namespace MUDMapBuilder
 {
 	partial class MMBGrid
 	{
+		private static readonly SKColor DefaultColor = SKColors.Black;
+		private static readonly SKColor ConnectionWithObstacles = SKColors.Red;
+		private static readonly SKColor NonStraightConnection = SKColors.Yellow;
+		private static readonly SKColor LongConnection = SKColors.Green;
+
 		private const int RoomHeight = 32;
 		private const int TextPadding = 8;
 		private static readonly Point RoomSpace = new Point(32, 32);
@@ -85,35 +90,20 @@ namespace MUDMapBuilder
 							var rect = GetRoomRect(new Point(x, y));
 							paint.StrokeWidth = 2;
 
-							SKColor? newColor = null;
 							if (room.Id == SelectedRoomId)
 							{
-								newColor = SKColors.Green;
+								paint.Color = SKColors.Green;
 							}
 							else if (room.Mark)
 							{
-								newColor = SKColors.GreenYellow;
-							}
-
-							if (newColor != null)
-							{
-								var oldColor = paint.Color;
-
-								try
-								{
-									paint.Color = newColor.Value;
-									canvas.DrawRect(rect.X, rect.Y, rect.Width, rect.Height, paint);
-								}
-								finally
-								{
-									paint.Color = oldColor;
-								}
+								paint.Color = SKColors.GreenYellow;
 							}
 							else
 							{
-								canvas.DrawRect(rect.X, rect.Y, rect.Width, rect.Height, paint);
+								paint.Color = DefaultColor;
 							}
 
+							canvas.DrawRect(rect.X, rect.Y, rect.Width, rect.Height, paint);
 							roomInfos.Add(new MMBImageRoomInfo(room.Room, rect));
 
 							// Draw connections
@@ -134,102 +124,22 @@ namespace MUDMapBuilder
 									continue;
 								}
 
-								// Check if the straight connection could be drawn
-								var straightConnection = false;
-
-								Point? startCheck = null;
-								Point? endCheck = null;
-
-								switch (exitDir)
+								if (BrokenConnections.WithObstacles.Find(room.Id, targetRoom.Id, exitDir) == null)
 								{
-									case MMBDirection.North:
-										if (y - targetPos.Y == 1)
-										{
-											straightConnection = true;
-										}
-										else if (y - targetPos.Y > 1)
-										{
-											startCheck = new Point(x, y - 1);
-											endCheck = new Point(targetPos.X, targetPos.Y + 1);
-										}
-										break;
-									case MMBDirection.East:
-										if (targetPos.X - x == 1)
-										{
-											straightConnection = true;
-										}
-										else if (targetPos.X - x > 1)
-										{
-											startCheck = new Point(x + 1, y);
-											endCheck = new Point(targetPos.X - 1, targetPos.Y);
-										}
-										break;
-									case MMBDirection.South:
-										if (targetPos.Y - y == 1)
-										{
-											straightConnection = true;
-										}
-										else if (targetPos.Y - y > 1)
-										{
-											startCheck = new Point(x, y + 1);
-											endCheck = new Point(targetPos.X, targetPos.Y - 1);
-										}
-										break;
-									case MMBDirection.West:
-										if (x - targetPos.X == 1)
-										{
-											straightConnection = true;
-										}
-										else if (x - targetPos.X > 1)
-										{
-											startCheck = new Point(x - 1, y);
-											endCheck = new Point(targetPos.X + 1, targetPos.Y);
-										}
-										break;
-									case MMBDirection.Up:
-										if (targetPos.X - x == 1)
-										{
-											straightConnection = true;
-										}
-										else if (y - targetPos.Y >= 1 && targetPos.X - x >= 1)
-										{
-											startCheck = new Point(x + 1, y - 1);
-											endCheck = new Point(targetPos.X - 1, targetPos.Y + 1);
-										}
-										break;
-									case MMBDirection.Down:
-										if (x - targetPos.X == 1)
-										{
-											straightConnection = true;
-										}
-										else if (targetPos.Y - y >= 1 && x - targetPos.X >= 1)
-										{
-											startCheck = new Point(x - 1, y + 1);
-											endCheck = new Point(targetPos.X + 1, targetPos.Y - 1);
-										}
-										break;
-								}
-
-								if (startCheck != null && endCheck != null)
-								{
-									straightConnection = true;
-									for (var checkX = Math.Min(startCheck.Value.X, endCheck.Value.X); checkX <= Math.Max(startCheck.Value.X, endCheck.Value.X); ++checkX)
+									if (BrokenConnections.NonStraight.Find(room.Id, targetRoom.Id, exitDir) != null)
 									{
-										for (var checkY = Math.Min(startCheck.Value.Y, endCheck.Value.Y); checkY <= Math.Max(startCheck.Value.Y, endCheck.Value.Y); ++checkY)
-										{
-											if (this[checkX, checkY] is MMBRoomCell)
-											{
-												straightConnection = false;
-												goto finishCheck;
-											}
-										}
+										paint.Color = NonStraightConnection;
+									}
+									else if (BrokenConnections.Long.Find(room.Id, targetRoom.Id, exitDir) != null)
+									{
+										paint.Color = LongConnection;
+									}
+									else
+									{
+										paint.Color = DefaultColor;
 									}
 
-								finishCheck:;
-								}
-
-								if (straightConnection)
-								{
+									// Straight connection
 									// Source and target room are close to each other, hence draw the simple line
 									var targetRect = GetRoomRect(targetPos);
 									var sourceScreen = GetConnectionPoint(rect, exitDir);
@@ -238,6 +148,8 @@ namespace MUDMapBuilder
 								}
 								else
 								{
+									paint.Color = ConnectionWithObstacles;
+
 									// In other case we might have to use A* to draw the path
 									// Basic idea is to consider every cell(spaces between rooms are cells too) as grid 2x2
 									// Where 1 means center
@@ -265,12 +177,12 @@ namespace MUDMapBuilder
 								room.AddDrawnConnection(exitDir, targetPos);
 							}
 
+							paint.Color = DefaultColor;
 							paint.StrokeWidth = 1;
 							canvas.DrawText(room.Room.ToString(), rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
 
 							if (room.ForceMark != null)
 							{
-
 								var sourceScreen = ToScreen(room.Position);
 								var tt = new Point(room.Position.X + room.ForceMark.Value.X, room.Position.Y + room.ForceMark.Value.Y);
 								var addX = 0;
@@ -280,19 +192,11 @@ namespace MUDMapBuilder
 								}
 								var targetScreen = ToScreen(tt);
 
-								var oldColor = paint.Color;
-								try
-								{
-									paint.Color = SKColors.DarkGreen;
-									canvas.DrawLine(sourceScreen.X + rect.Width / 2, 
-										sourceScreen.Y + RoomHeight / 2, 
-										targetScreen.X + addX, 
-										targetScreen.Y + RoomHeight / 2, paint);
-								}
-								finally
-								{
-									paint.Color = oldColor;
-								}
+								paint.Color = SKColors.DarkGreen;
+								canvas.DrawLine(sourceScreen.X + rect.Width / 2,
+									sourceScreen.Y + RoomHeight / 2,
+									targetScreen.X + addX,
+									targetScreen.Y + RoomHeight / 2, paint);
 							}
 						}
 					}

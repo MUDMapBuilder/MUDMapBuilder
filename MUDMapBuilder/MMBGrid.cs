@@ -24,6 +24,7 @@ namespace MUDMapBuilder
 		public int Height => _cellData.GetLength(1);
 
 		public int? SelectedRoomId { get; internal set; }
+		public BrokenConnectionsInfo BrokenConnections { get; internal set; }
 
 		internal MMBGrid(int width, int height)
 		{

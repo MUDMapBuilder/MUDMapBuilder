@@ -8,11 +8,12 @@ namespace MUDMapBuilder
 {
 	public class RoomsCollection : IEnumerable<MMBRoom>
 	{
-		public enum ConnectionBrokenType
+		private enum ConnectionBrokenType
 		{
-			NotBroken,
+			Normal,
 			NotStraight,
-			HasObstacles
+			HasObstacles,
+			Long
 		}
 
 		private readonly List<MMBRoom> _rooms = new List<MMBRoom>();
@@ -137,6 +138,8 @@ namespace MUDMapBuilder
 					}
 				}
 			}
+
+			_grid.BrokenConnections = CalculateBrokenConnections();
 		}
 
 		public void ExpandGrid(Point pos, Point vec)
@@ -359,7 +362,7 @@ namespace MUDMapBuilder
 			return _grid[checkPos.X, checkPos.Y];
 		}
 
-		public ConnectionBrokenType CheckConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir)
+		private ConnectionBrokenType CheckConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir)
 		{
 			var sourcePos = sourceRoom.Position;
 			var targetPos = targetRoom.Position;
@@ -368,7 +371,7 @@ namespace MUDMapBuilder
 			var desiredPos = new Point(sourcePos.X + delta.X, sourcePos.Y + delta.Y);
 			if (desiredPos == targetPos)
 			{
-				return ConnectionBrokenType.NotBroken;
+				return ConnectionBrokenType.Normal;
 			}
 
 			var isStraight = IsConnectionStraight(sourcePos, targetPos, exitDir);
@@ -444,13 +447,12 @@ namespace MUDMapBuilder
 				}
 			}
 
-			return ConnectionBrokenType.NotBroken;
+			return ConnectionBrokenType.Long;
 		}
 
-		public BrokenConnectionsInfo CalculateBrokenConnections()
+		private BrokenConnectionsInfo CalculateBrokenConnections()
 		{
-			var nonStraightConnections = 0;
-			var connectionsWithObstacles = 0;
+			var result = new BrokenConnectionsInfo();
 
 			foreach (var room in _rooms)
 			{
@@ -470,16 +472,19 @@ namespace MUDMapBuilder
 					switch (brokenType)
 					{
 						case ConnectionBrokenType.NotStraight:
-							++nonStraightConnections;
+							result.NonStraight.Add(room.Id, targetRoom.Id, exitDir);
 							break;
 						case ConnectionBrokenType.HasObstacles:
-							++connectionsWithObstacles;
+							result.WithObstacles.Add(room.Id, targetRoom.Id, exitDir);
+							break;
+						case ConnectionBrokenType.Long:
+							result.Long.Add(room.Id, targetRoom.Id, exitDir);
 							break;
 					}
 				}
 			}
 
-			return new BrokenConnectionsInfo(nonStraightConnections, connectionsWithObstacles);
+			return result;
 		}
 
 		public Rectangle CalculateRectangle()

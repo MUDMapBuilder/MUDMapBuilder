@@ -17,7 +17,7 @@ namespace MUDMapBuilder.Editor.UI
 		private Area _area;
 		private RoomsCollection _rooms;
 		private MMBImageResult _imageResult;
-		private int _maxSteps = 0, _maxStraightenSteps = 0, _maxCompactSteps = 0;
+		private int _maxSteps = 0, _maxStraightenSteps = 0;
 		private BrokenConnectionsInfo _brokenConnections = null;
 
 		public Area Area
@@ -38,7 +38,6 @@ namespace MUDMapBuilder.Editor.UI
 				var rooms = MapBuilder.Build(roomsArray, new BuildOptions
 				{
 					StraightenUsage = AlgorithmUsage.DoNotUse,
-					CompactUsage = AlgorithmUsage.DoNotUse,
 				});
 				MaxSteps = rooms.MaxRunSteps;
 			}
@@ -76,22 +75,6 @@ namespace MUDMapBuilder.Editor.UI
 			}
 		}
 
-		public int MaxCompactSteps
-		{
-			get => _maxCompactSteps;
-
-			private set
-			{
-				if (value == _maxCompactSteps)
-				{
-					return;
-				}
-
-				_maxCompactSteps = value;
-				MaxCompactStepsChanged?.Invoke(this, EventArgs.Empty);
-			}
-		}
-
 		public BrokenConnectionsInfo BrokenConnections
 		{
 			get => _brokenConnections;
@@ -110,7 +93,6 @@ namespace MUDMapBuilder.Editor.UI
 
 		public event EventHandler MaxStepsChanged;
 		public event EventHandler MaxStraightenStepsChanged;
-		public event EventHandler MaxCompactStepsChanged;
 		public event EventHandler BrokenConnectionsChanged;
 
 		public MapViewer()
@@ -122,14 +104,12 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			_rooms = null;
 			_imageResult = null;
-			BrokenConnections = new BrokenConnectionsInfo(0, 0);
 
 			if (_area != null)
 			{
 				_rooms = MapBuilder.Build(_area.Rooms.ToArray(), options);
 				MaxStraightenSteps = _rooms.MaxStraightenSteps;
-				MaxCompactSteps = _rooms.MaxCompactSteps;
-				BrokenConnections = _rooms.CalculateBrokenConnections();
+				BrokenConnections = _rooms.Grid.BrokenConnections;
 			}
 
 			Redraw();
@@ -185,7 +165,7 @@ namespace MUDMapBuilder.Editor.UI
 
 			var room = _rooms.GetRoomById(selectedRoomId.Value);
 			_rooms.PushRoom(room, forceVector);
-			BrokenConnections = _rooms.CalculateBrokenConnections();
+			BrokenConnections = _rooms.Grid.BrokenConnections;
 
 			Redraw();
 		}

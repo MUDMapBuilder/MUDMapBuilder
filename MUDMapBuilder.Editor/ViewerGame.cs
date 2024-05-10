@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Myra;
 using MUDMapBuilder.Editor.UI;
+using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace MUDMapBuilder.Editor
 {
@@ -58,14 +60,28 @@ namespace MUDMapBuilder.Editor
 			_mainForm = new MainForm();
 			_desktop.Root = _mainForm;
 
+			_desktop.KeyDown += (s, a) =>
+			{
+				if (_desktop.HasModalWidget || _mainForm._mainMenu.IsOpen)
+				{
+					return;
+				}
+
+				if (_desktop.IsKeyDown(Keys.LeftControl) || _desktop.IsKeyDown(Keys.RightControl))
+				{
+					if (_desktop.IsKeyDown(Keys.I))
+					{
+						_mainForm.OnMenuFileImportSelected();
+					}
+				}
+			};
+
 			if (_state != null)
 			{
 				_mainForm.StraightenUsage = _state.StraightenUsage;
 				_mainForm.StraightenSteps = _state.StraightenSteps;
-				_mainForm.CompactUsage = _state.CompactUsage;
-				_mainForm.CompactSteps = _state.CompactSteps;
 
-				_mainForm.LoadArea(_state.EditedFile);
+				_mainForm.ImportArea(_state.EditedFile);
 				_mainForm.Step = _state.Step;
 			}
 		}
@@ -95,8 +111,6 @@ namespace MUDMapBuilder.Editor
 				Step = _mainForm.Step,
 				StraightenUsage = _mainForm.StraightenUsage,
 				StraightenSteps = _mainForm.StraightenSteps,
-				CompactUsage = _mainForm.CompactUsage,
-				CompactSteps = _mainForm.CompactSteps,
 			};
 
 			state.Save();

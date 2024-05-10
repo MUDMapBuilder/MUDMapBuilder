@@ -2,14 +2,8 @@
 {
 	public class BrokenConnectionsInfo
 	{
-		public int NonStraightConnectionsCount { get; }
-		public int ConnectionsWithObstaclesCount { get; }
-		public int Count => NonStraightConnectionsCount + ConnectionsWithObstaclesCount;
-
-		public BrokenConnectionsInfo(int nonStraightConnectionsCount, int connectionsWithObstaclesCount)
-		{
-			NonStraightConnectionsCount = nonStraightConnectionsCount;
-			ConnectionsWithObstaclesCount = connectionsWithObstaclesCount;
-		}
+		public MMBConnectionsList WithObstacles { get; } = new MMBConnectionsList();
+		public MMBConnectionsList NonStraight { get; } = new MMBConnectionsList();
+		public MMBConnectionsList Long { get; } = new MMBConnectionsList();
 	}
 }

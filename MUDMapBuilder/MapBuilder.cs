@@ -1,31 +1,61 @@
-﻿using System;
+﻿using SkiaSharp;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
-using static MUDMapBuilder.RoomsCollection;
+using System.Linq;
 
 namespace MUDMapBuilder
 {
-	public static class MapBuilder
+	public class MapBuilder
 	{
-		private class FixRoomResult
+		private enum PositioningType
 		{
-			public Point ForceVector { get; }
-			public BrokenConnectionsInfo BrokenConnectionsInfo { get; }
+			Straight,
+			Obstacles,
+			NonStraight,
+			CompletelyIncorrect
+		}
 
-			public FixRoomResult(Point forceVector, BrokenConnectionsInfo brokenConnectionsInfo)
+		private enum StraightenRoomResult
+		{
+			Success,
+			Fail,
+			OutOfSteps
+		}
+
+		private class StraightenConnectionResult
+		{
+			public Point DesiredPos { get; private set; }
+			public bool RoomRemoved { get; private set; }
+			public int NonStraightConnectionsFixed { get; private set; }
+
+			public StraightenConnectionResult(Point desiredPos, bool roomRemoved, int nonStraightConnectionsFixed)
 			{
-				ForceVector = forceVector;
-				BrokenConnectionsInfo = brokenConnectionsInfo;
+				DesiredPos = desiredPos;
+				RoomRemoved = roomRemoved;
+				NonStraightConnectionsFixed = nonStraightConnectionsFixed;
 			}
 		}
 
-/*		private static FixRoomResult FixRoom(RoomsCollection rooms, MMBRoom room, MMBRoom targetRoom, MMBDirection exitDir)
+		private readonly IMMBRoom[] _sourceRooms;
+		private readonly BuildOptions _options;
+		private readonly List<MMBRoom> _toProcess = new List<MMBRoom>();
+		private readonly HashSet<int> _removedRooms = new HashSet<int>();
+		private readonly RoomsCollection _rooms = new RoomsCollection();
+		private int _runSteps = 1;
+
+		private RoomsCollection Rooms => _rooms;
+
+		private MapBuilder(IMMBRoom[] sourceRooms, BuildOptions options)
 		{
-			var sourcePos = room.Position;
-			var targetPos = targetRoom.Position;
+			_sourceRooms = sourceRooms;
+			_options = options ?? new BuildOptions();
+		}
+
+		private static Point CalculateDesiredPosition(Point sourcePos, Point targetPos, MMBDirection direction)
+		{
 			var desiredPos = new Point();
-			switch (exitDir)
+			switch (direction)
 			{
 				case MMBDirection.North:
 					desiredPos = new Point(sourcePos.X, targetPos.Y < sourcePos.Y ? targetPos.Y : sourcePos.Y - 1);
@@ -45,353 +75,301 @@ namespace MUDMapBuilder
 				case MMBDirection.Down:
 					desiredPos = new Point(targetPos.X < sourcePos.X ? targetPos.X : sourcePos.X - 1, targetPos.Y > sourcePos.Y ? targetPos.Y : sourcePos.Y + 1);
 					break;
+				default:
+					throw new Exception($"Unknown direction {direction}");
 			}
 
-			var d = new Point(desiredPos.X - targetPos.X, desiredPos.Y - targetPos.Y);
+			return desiredPos;
+		}
 
-			var clone = rooms.Clone();
-			var targetRoomClone = clone.GetRoomById(targetRoom.Id);
-
-			clone.PushRoom(targetRoomClone, d);
-
-			var vc = clone.CalculateBrokenConnections();
-
-			return new FixRoomResult(d, vc);
-		}*/
-
-		public static RoomsCollection Build(IMMBRoom[] sourceRooms, BuildOptions options = null)
+		private bool AddRunStep()
 		{
-			if (options == null)
+			++_runSteps;
+			return _options.MaxSteps > _runSteps;
+		}
+
+		private StraightenConnectionResult TryStraightenConnection(int sourceRoomId, int targetRoomId, MMBDirection direction)
+		{
+			var roomRemoved = false;
+			var rooms = _rooms.Clone();
+			var vc = rooms.Grid.BrokenConnections;
+
+			var sourceRoom = rooms.GetRoomById(sourceRoomId);
+			var targetRoom = rooms.GetRoomById(targetRoomId);
+			var sourcePos = sourceRoom.Position;
+			var targetPos = targetRoom.Position;
+			var desiredPos = CalculateDesiredPosition(sourcePos, targetPos, direction);
+			var existingRoom = rooms.GetRoomByPosition(desiredPos);
+			if (existingRoom != null)
 			{
-				options = new BuildOptions();
+				rooms.Remove(existingRoom.Id);
+				roomRemoved = true;
 			}
 
-			var toProcess = new List<MMBRoom>();
-			var firstRoom = new MMBRoom(sourceRooms[0])
+			targetRoom.Position = desiredPos;
+			var vc2 = rooms.Grid.BrokenConnections;
+
+			var connectionsFixed = vc.NonStraight.Count - vc2.NonStraight.Count;
+
+			return new StraightenConnectionResult(desiredPos, roomRemoved, connectionsFixed);
+		}
+
+		private bool RemoveRoom(MMBRoom room)
+		{
+			room.MarkColor = SKColors.Red;
+			if (!AddRunStep())
+			{
+				return false;
+			}
+
+			_rooms.Remove(room.Id);
+			_toProcess.Remove(room);
+			_removedRooms.Add(room.Id);
+
+			return AddRunStep();
+		}
+
+		private bool MoveRoom(MMBRoom room, Point desiredPos)
+		{
+			var existingRoom = _rooms.GetRoomByPosition(desiredPos);
+			if (existingRoom != null)
+			{
+				if (!RemoveRoom(existingRoom))
+				{
+					return false;
+				}
+			}
+
+			var targetPos = room.Position;
+			var delta = new Point(desiredPos.X - targetPos.X, desiredPos.Y - targetPos.Y);
+			room.ForceMark = delta;
+			if (!AddRunStep())
+			{
+				return false;
+			}
+
+			room.ForceMark = null;
+			room.Position = desiredPos;
+			if (!AddRunStep())
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		private StraightenRoomResult StraightenConnection(MMBRoom room1, MMBRoom room2, MMBDirection direction)
+		{
+			// Try to move room2
+			var result1 = TryStraightenConnection(room1.Id, room2.Id, direction);
+			var result2 = TryStraightenConnection(room2.Id, room1.Id, direction.GetOppositeDirection());
+
+			if (result1.NonStraightConnectionsFixed <= 0 && result2.NonStraightConnectionsFixed <= 0)
+			{
+				return StraightenRoomResult.Fail;
+			}
+
+			if (result1.NonStraightConnectionsFixed > result2.NonStraightConnectionsFixed)
+			{
+				if (!MoveRoom(room2, result1.DesiredPos))
+				{
+					return StraightenRoomResult.OutOfSteps;
+				}
+
+				return StraightenRoomResult.Success;
+			}
+
+			if (!MoveRoom(room1, result2.DesiredPos))
+			{
+				return StraightenRoomResult.OutOfSteps;
+			}
+
+			return StraightenRoomResult.Success;
+		}
+
+		private void Process()
+		{
+			var firstRoom = new MMBRoom(_sourceRooms[0])
 			{
 				Position = new Point(0, 0)
 			};
-			toProcess.Add(firstRoom);
+			_toProcess.Add(firstRoom);
+			_rooms.Add(firstRoom);
 
-			var rooms = new RoomsCollection
+			while (_toProcess.Count > 0 && _options.MaxSteps > _runSteps)
 			{
-				firstRoom
-			};
-
-			// First run: we move through room's exits, assigning each room a 2d coordinate
-			// If there are overlaps, then we expand the grid in the direction of movement
-			var runSteps = 1;
-			Point pos;
-			while (toProcess.Count > 0 && (options.Steps == null || options.Steps.Value > runSteps))
-			{
-				var room = toProcess[0];
-				toProcess.RemoveAt(0);
-
-				foreach (var pair in room.Room.Exits)
+				if (_runSteps == 312)
 				{
-					var exitDir = pair.Key;
-					var exitRoom = pair.Value;
-					if (rooms.GetRoomById(exitRoom.Id) != null)
-					{
-						continue;
-					}
-
-					pos = room.Position;
-					var delta = exitDir.GetDelta();
-					var newPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
-
-					// Expand grid either if the new position is occupied by a room
-					// Push rooms in the movement direction
-					var existingRoom = rooms.GetRoomByPosition(newPos);
-					if (existingRoom != null)
-					{
-						rooms.ExpandGrid(newPos, delta);
-					}
-
-					var newRoom = new MMBRoom(exitRoom)
-					{
-						Position = newPos
-					};
-					toProcess.Add(newRoom);
-					rooms.Add(newRoom);
+					var k = 5;
 				}
 
-				++runSteps;
-			}
-
-			var straightenSteps = 0;
-/*			if (options.StraightenUsage != AlgorithmUsage.DoNotUse)
-			{
-				// Straighten run: try to make room connections more straight
-				var connections = new List<Tuple<int, int>>();
-				var runsLeft = 10;
-				while (runsLeft > 0)
+				while (_toProcess.Count > 0 && _options.MaxSteps > _runSteps)
 				{
-					var vc = rooms.CalculateBrokenConnections();
-						
-					if (vc.Count == 0)
-					{
-						break;
-					}
 
-					int? pushRoomId = null;
-					var forceVector = Point.Empty;
-					var roomsCount = rooms.Count;
-					for (var i = 0; i < roomsCount; ++i)
+					_rooms.FixPlacementOfSingleExitRooms();
+
+					var room = _toProcess[0];
+					_toProcess.RemoveAt(0);
+
+					foreach (var pair in room.Room.Exits)
 					{
-						var room = rooms[i];
-						var brokenType = ConnectionBrokenType.NotBroken;
-						var exitDir = MMBDirection.West;
-						MMBRoom targetRoom = null;
-						foreach (var pair in room.Room.Exits)
+						var exitDir = pair.Key;
+						var exitRoom = pair.Value;
+						if (_rooms.GetRoomById(exitRoom.Id) != null)
 						{
-							exitDir = pair.Key;
-							var exitRoom = pair.Value;
-							targetRoom = rooms.GetRoomById(exitRoom.Id);
-							if (targetRoom == null)
-							{
-								continue;
-							}
+							continue;
+						}
 
-							var connectionExists = false;
-							foreach(var c in connections)
-							{
-								if (c.Item1 == room.Id && c.Item2 == exitRoom.Id ||
-									c.Item1 == exitRoom.Id && c.Item2 == room.Id)
-								{
-									connectionExists = true;
-									break;
-								}
-							}
+						var pos = room.Position;
+						var delta = exitDir.GetDelta();
+						var newPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 
-							// connectionExists = false;
-							if (connectionExists)
-							{
-								continue;
-							}
+						var vc = _rooms.Grid.BrokenConnections;
 
-							brokenType = rooms.CheckConnectionBroken(room, targetRoom, exitDir);
-							if (brokenType != ConnectionBrokenType.NotBroken)
+						// Expand grid either if the new position is occupied by a room
+						// Or if it breaks existing connection
+						var expandGrid = false;
+						var existingRoom = _rooms.GetRoomByPosition(newPos);
+						if (existingRoom != null)
+						{
+							expandGrid = true;
+						}
+						else
+						{
+							//
+							var cloneRooms = _rooms.Clone();
+							var cloneRoom = new MMBRoom(exitRoom)
 							{
-								break;
+								Position = newPos
+							};
+
+							cloneRooms.Add(cloneRoom);
+							if (cloneRooms.Grid.BrokenConnections.WithObstacles.Count > vc.WithObstacles.Count)
+							{
+								expandGrid = true;
 							}
 						}
 
-						if (brokenType == ConnectionBrokenType.NotStraight)
+						if (expandGrid)
 						{
-							connections.Add(new Tuple<int, int>(room.Id, targetRoom.Id));
-
-							var fixRoom1 = FixRoom(rooms, room, targetRoom, exitDir);
-							var c1 = fixRoom1.BrokenConnectionsInfo;
-							if (c1.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
-								c1.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount)
+							// Push rooms in the movement direction
+							_rooms.ExpandGrid(newPos, delta);
+							if (!AddRunStep())
 							{
-								pushRoomId = targetRoom.Id;
-								forceVector = fixRoom1.ForceVector;
 								goto finish;
 							}
+						}
 
-							// Now try the other way around
-							var fixRoom2 = FixRoom(rooms, targetRoom, room, exitDir.GetOppositeDirection());
+						var newRoom = new MMBRoom(exitRoom)
+						{
+							Position = newPos
+						};
+						_toProcess.Add(newRoom);
+						_rooms.Add(newRoom);
 
-							var c2 = fixRoom2.BrokenConnectionsInfo;
-							if (c2.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount &&
-								c2.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount)
-							{
-								pushRoomId = room.Id;
-								forceVector = fixRoom2.ForceVector;
-								goto finish;
-							}
-
-							// If neither ways are obviously good, then we select one that is better
-							if (c1.ConnectionsWithObstaclesCount < c2.ConnectionsWithObstaclesCount ||
-								(c1.ConnectionsWithObstaclesCount == c2.ConnectionsWithObstaclesCount &&
-								c1.NonStraightConnectionsCount < c2.NonStraightConnectionsCount))
-							{
-								pushRoomId = targetRoom.Id;
-								forceVector = fixRoom1.ForceVector;
-								goto finish;
-							}
-
-							pushRoomId = room.Id;
-							forceVector = fixRoom2.ForceVector;
+						if (!AddRunStep())
+						{
 							goto finish;
 						}
-						else if (brokenType == ConnectionBrokenType.HasObstacles)
+
+						vc = _rooms.BrokenConnections;
+
+						// Connections fix run
+						while(vc.WithObstacles.Count > 0)
 						{
-							var deltas = new List<Point>();
-							for (var x = -5; x <= 5; ++x)
+							var wo = vc.WithObstacles[0];
+
+							foreach (var o in wo.Obstacles)
 							{
-								for (var y = -5; y <= 5; ++y)
+								if (!RemoveRoom(_rooms.GetRoomById(o)))
 								{
-									if (x == 0 && y == 0)
-									{
-										continue;
-									}
-
-									deltas.Add(new Point(x, y));
-								}
-							}
-
-							foreach (var d in deltas)
-							{
-								var clone = rooms.Clone();
-								var targetRoomClone = clone.GetRoomById(targetRoom.Id);
-
-								clone.PushRoom(targetRoomClone, d);
-
-								var sourceRoomClone = clone.GetRoomById(room.Id);
-								brokenType = clone.CheckConnectionBroken(sourceRoomClone, targetRoomClone, exitDir);
-
-								var c = clone.CalculateBrokenConnections();
-								if (brokenType == ConnectionBrokenType.NotBroken &&
-									c.ConnectionsWithObstaclesCount < vc.ConnectionsWithObstaclesCount)
-								{
-									pushRoomId = targetRoom.Id;
-									forceVector = d;
 									goto finish;
 								}
 							}
+
+							vc = _rooms.BrokenConnections;
+						}
+
+
+						while(vc.NonStraight.Count > 0)
+						{
+							var ns = vc.NonStraight[0];
+							vc.NonStraight.RemoveAt(0);
+
+							// Try to straighten it
+							var room1 = _rooms.GetRoomById(ns.SourceRoomId);
+							var room2 = _rooms.GetRoomById(ns.TargetRoomId);
+							var srr = StraightenConnection(room1, room2, ns.Direction);
+							switch (srr)
+							{
+								case StraightenRoomResult.Success:
+									break;
+
+								case StraightenRoomResult.Fail:
+									var roomToRemove = room1;
+									if (room1.Id == newRoom.Id)
+									{
+										roomToRemove = room2;
+									}
+									
+									if (!RemoveRoom(roomToRemove))
+									{
+										goto finish;
+									}
+									break;
+
+								case StraightenRoomResult.OutOfSteps:
+									goto finish;
+							}
+
+							vc = _rooms.BrokenConnections;
 						}
 					}
-				finish:;
+				}
 
-					if (pushRoomId != null)
+				if (!AddRunStep())
+				{
+					break;
+				}
+
+				// Update removed rooms
+				foreach (var room in _rooms)
+				{
+					if (_removedRooms.Contains(room.Id))
 					{
-						var room = rooms.GetRoomById(pushRoomId.Value);
-						room.ForceMark = forceVector;
-
-						++straightenSteps;
-						if (options.EndStraighten(straightenSteps))
-						{
-							break;
-						}
-
-						room.ForceMark = null;
-						rooms.PushRoom(room, forceVector);
-						++straightenSteps;
-						if (options.EndStraighten(straightenSteps))
-						{
-							break;
-						}
+						_removedRooms.Remove(room.Id);
 					}
+				}
 
-					var vc2 = rooms.CalculateBrokenConnections();
-
-					// If amount of broken connections hasn't changed, decrease amount of runs
-					if (vc2.Count >= vc.Count)
+				foreach (var roomId in _removedRooms)
+				{
+					// Find connected room that is processed
+					var sourceRoom = (from s in _sourceRooms where s.Id == roomId select s).First();
+					foreach (var pair in sourceRoom.Exits)
 					{
-						--runsLeft;
+						var exitRoom = pair.Value;
+						var connectedRoom = _rooms.GetRoomById(exitRoom.Id);
+						if (connectedRoom == null || _toProcess.Contains(connectedRoom))
+						{
+							continue;
+						}
+
+						_toProcess.Add(connectedRoom);
 					}
 				}
 			}
 
-			if (options.CompactUsage != AlgorithmUsage.DoNotUse)
-			{
-				// Compact run: Try to make the map more compact
-				for (var it = 0; it < 10; ++it)
-				{
-					for (var i = 0; i < rooms.Count; ++i)
-					{
-						var room = rooms[i];
-						pos = room.Position;
-						foreach (var pair in room.Room.Exits)
-						{
-							var exitDir = pair.Key;
-							var exitRoom = pair.Value;
+		finish:;
+			_rooms.FixPlacementOfSingleExitRooms();
+			_rooms.MaxRunSteps = _runSteps;
+		}
 
-							if (exitDir != MMBDirection.East && exitDir != MMBDirection.South && exitDir != MMBDirection.Up)
-							{
-								continue;
-							}
+		public static RoomsCollection Build(IMMBRoom[] sourceRooms, BuildOptions options = null)
+		{
+			var mapBuilder = new MapBuilder(sourceRooms, options);
+			mapBuilder.Process();
 
-							var targetRoom = rooms.GetRoomById(exitRoom.Id);
-							if (targetRoom == null)
-							{
-								continue;
-							}
-
-							var delta = exitDir.GetDelta();
-							var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
-							if (targetRoom.Position == desiredPos)
-							{
-								// The target room is already at desired pos
-								continue;
-							}
-
-							// Skip if direction is Up/Down or the target room isn't straighly positioned
-							var deltas = new List<Point>();
-							switch (exitDir)
-							{
-								case MMBDirection.North:
-								case MMBDirection.South:
-									{
-										if (targetRoom.Position.X - pos.X != 0)
-										{
-											continue;
-										}
-
-										var steps = Math.Abs(targetRoom.Position.Y - pos.Y) - 1;
-										for (var j = steps; j >= 1; --j)
-										{
-											delta = exitDir.GetOppositeDirection().GetDelta();
-											delta.X *= j;
-											delta.Y *= j;
-											deltas.Add(delta);
-										}
-									}
-									break;
-								case MMBDirection.West:
-								case MMBDirection.East:
-									{
-										if (targetRoom.Position.Y - pos.Y != 0)
-										{
-											continue;
-										}
-
-										var steps = Math.Abs(targetRoom.Position.X - pos.X) - 1;
-										for (var j = steps; j >= 1; --j)
-										{
-											delta = exitDir.GetOppositeDirection().GetDelta();
-											delta.X *= j;
-											delta.Y *= j;
-											deltas.Add(delta);
-										}
-									}
-									break;
-								case MMBDirection.Up:
-								case MMBDirection.Down:
-									delta = new Point(desiredPos.X - targetRoom.Position.X, desiredPos.Y - targetRoom.Position.Y);
-									deltas.Add(delta);
-									break;
-							}
-
-							var vc = rooms.CalculateBrokenConnections();
-							for (var j = 0; j < deltas.Count; ++j)
-							{
-								var cloneRooms = rooms.Clone();
-								var targetRoomClone = cloneRooms.GetRoomById(targetRoom.Id);
-
-								delta = deltas[j];
-								cloneRooms.PushRoom(targetRoomClone, delta);
-
-								var vc2 = cloneRooms.CalculateBrokenConnections();
-								if (vc2.NonStraightConnectionsCount <= vc.NonStraightConnectionsCount &&
-									vc2.ConnectionsWithObstaclesCount <= vc.ConnectionsWithObstaclesCount)
-								{
-									rooms = cloneRooms;
-									break;
-								}
-							}
-						}
-					}
-				}
-			}*/
-
-			rooms.MaxRunSteps = runSteps;
-			rooms.MaxStraightenSteps = straightenSteps;
-
-			return rooms;
+			return mapBuilder.Rooms;
 		}
 	}
 }

@@ -5,6 +5,7 @@ using Myra;
 using Myra.Graphics2D.Brushes;
 using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
+using SkiaSharp;
 using System;
 using System.IO;
 
@@ -17,8 +18,8 @@ namespace MUDMapBuilder.Editor.UI
 		private Area _area;
 		private RoomsCollection _rooms;
 		private MMBImageResult _imageResult;
-		private int _maxSteps = 0, _maxStraightenSteps = 0;
-		private BrokenConnectionsInfo _brokenConnections = null;
+
+		public int MaxSteps { get; private set; }
 
 		public Area Area
 		{
@@ -38,63 +39,14 @@ namespace MUDMapBuilder.Editor.UI
 				var rooms = MapBuilder.Build(roomsArray, new BuildOptions
 				{
 					StraightenUsage = AlgorithmUsage.DoNotUse,
+					MaxSteps = 100
 				});
 				MaxSteps = rooms.MaxRunSteps;
 			}
 		}
 
-		public int MaxSteps
-		{
-			get => _maxSteps;
-
-			private set
-			{
-				if (value == _maxSteps)
-				{
-					return;
-				}
-
-				_maxSteps = value;
-				MaxStepsChanged?.Invoke(this, EventArgs.Empty);
-			}
-		}
-
-		public int MaxStraightenSteps
-		{
-			get => _maxStraightenSteps;
-
-			private set
-			{
-				if (value == _maxStraightenSteps)
-				{
-					return;
-				}
-
-				_maxStraightenSteps = value;
-				MaxStraightenStepsChanged?.Invoke(this, EventArgs.Empty);
-			}
-		}
-
-		public BrokenConnectionsInfo BrokenConnections
-		{
-			get => _brokenConnections;
-
-			set
-			{
-				if (value == _brokenConnections)
-				{
-					return;
-				}
-
-				_brokenConnections = value;
-				BrokenConnectionsChanged?.Invoke(this, EventArgs.Empty);
-			}
-		}
-
-		public event EventHandler MaxStepsChanged;
-		public event EventHandler MaxStraightenStepsChanged;
-		public event EventHandler BrokenConnectionsChanged;
-
+		public RoomsCollection Rooms => _rooms;
+		
 		public MapViewer()
 		{
 			Background = new SolidBrush(Color.White);
@@ -108,8 +60,6 @@ namespace MUDMapBuilder.Editor.UI
 			if (_area != null)
 			{
 				_rooms = MapBuilder.Build(_area.Rooms.ToArray(), options);
-				MaxStraightenSteps = _rooms.MaxStraightenSteps;
-				BrokenConnections = _rooms.Grid.BrokenConnections;
 			}
 
 			Redraw();
@@ -129,7 +79,7 @@ namespace MUDMapBuilder.Editor.UI
 				}
 				foreach (var room in _rooms)
 				{
-					room.Mark = false;
+					room.MarkColor = null;
 				}
 			}
 		}
@@ -147,7 +97,7 @@ namespace MUDMapBuilder.Editor.UI
 			foreach (var pair in roomsToMark)
 			{
 				room = _rooms.GetRoomById(pair.Key);
-				room.Mark = true;
+				room.MarkColor = SKColors.Green;
 			}
 
 			_rooms.InvalidateGrid();
@@ -165,7 +115,6 @@ namespace MUDMapBuilder.Editor.UI
 
 			var room = _rooms.GetRoomById(selectedRoomId.Value);
 			_rooms.PushRoom(room, forceVector);
-			BrokenConnections = _rooms.Grid.BrokenConnections;
 
 			Redraw();
 		}

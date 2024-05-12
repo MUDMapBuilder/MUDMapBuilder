@@ -8,6 +8,26 @@ namespace MUDMapBuilder
 		private readonly List<MMBConnection> _connections = new List<MMBConnection>();
 
 		public int Count => _connections.Count;
+		public MMBConnection this[int index] => _connections[index];
+
+		public MMBConnection Find(int sourceRoomId, int targetRoomId)
+		{
+			foreach (var connection in _connections)
+			{
+				if (connection.SourceRoomId == sourceRoomId && connection.TargetRoomId == targetRoomId)
+				{
+					return connection;
+				}
+
+				// Check existance of opposite connection
+				if (connection.SourceRoomId == targetRoomId && connection.TargetRoomId == sourceRoomId)
+				{
+					return connection;
+				}
+			}
+
+			return null;
+		}
 
 		public MMBConnection Find(int sourceRoomId, int targetRoomId, MMBDirection direction)
 		{
@@ -52,6 +72,10 @@ namespace MUDMapBuilder
 
 			return connection;
 		}
+
+		public void Remove(MMBConnection connection) => _connections.Remove(connection);
+
+		public void RemoveAt(int index) => _connections.RemoveAt(index);
 
 		public IEnumerator<MMBConnection> GetEnumerator() => _connections.GetEnumerator();
 

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using SkiaSharp;
+using System.Drawing;
 
 namespace MUDMapBuilder
 {
@@ -28,7 +29,7 @@ namespace MUDMapBuilder
 				}
 			}
 		}
-		public bool Mark { get; set; }
+		public SKColor? MarkColor { get; set; }
 		internal Point? ForceMark
 		{
 			get => _forceMark;
@@ -55,6 +56,7 @@ namespace MUDMapBuilder
 		public MMBRoom Clone() => new MMBRoom(Room)
 		{
 			Position = Position,
+			MarkColor = MarkColor,
 			ForceMark = ForceMark,
 		};
 

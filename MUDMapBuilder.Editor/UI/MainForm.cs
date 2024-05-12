@@ -71,12 +71,6 @@ namespace MUDMapBuilder.Editor.UI
 			_buttonMeasure.Click += (s, e) => _mapViewer.MeasurePushRoom(ForceVector);
 			_buttonPush.Click += (s, e) => _mapViewer.PushRoom(ForceVector);
 
-			_mapViewer.BrokenConnectionsChanged += (s, e) => UpdateBrokenConnections();
-			_mapViewer.MaxStraightenStepsChanged += (s, e) =>
-			{
-				_labelMaxStraightenSteps.Text = $"Max Straighten Steps: {_mapViewer.MaxStraightenSteps}";
-			};
-
 			UpdateEnabled();
 		}
 
@@ -111,24 +105,33 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			var options = new BuildOptions
 			{
-				Steps = (int)_spinButtonStep.Value,
+				MaxSteps = (int)_spinButtonStep.Value,
 				StraightenUsage = StraightenUsage,
 				StraightenSteps = StraightenSteps,
 			};
 
 			_mapViewer.Rebuild(options);
+			UpdateNumbers();
 		}
 
-		private void UpdateBrokenConnections()
+		private void UpdateNumbers()
 		{
-			if (_mapViewer.BrokenConnections != null)
+
+
+			if (_mapViewer.Rooms != null)
 			{
-				_labelNonStraightConnections.Text = $"Non Straight Connections: {_mapViewer.BrokenConnections.NonStraight.Count}";
-				_labelConnectionsWithObstacles.Text = $"Connections With Obstacles: {_mapViewer.BrokenConnections.WithObstacles.Count}";
-				_labelLongConnections.Text = $"Long Connections: {_mapViewer.BrokenConnections.Long.Count}";
+				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.Count}";
+				_labelGridSize.Text = $"Grid Size: {_mapViewer.Rooms.Grid.Width}x{_mapViewer.Rooms.Grid.Height}";
+
+				var brokenConnections = _mapViewer.Rooms.BrokenConnections;
+				_labelNonStraightConnections.Text = $"Non Straight Connections: {brokenConnections.NonStraight.Count}";
+				_labelConnectionsWithObstacles.Text = $"Connections With Obstacles: {brokenConnections.WithObstacles.Count}";
+				_labelLongConnections.Text = $"Long Connections: {brokenConnections.Long.Count}";
 			}
 			else
 			{
+				_labelRoomsCount.Text = "";
+				_labelGridSize.Text = "";
 				_labelNonStraightConnections.Text = "";
 				_labelConnectionsWithObstacles.Text = "";
 				_labelLongConnections.Text = "";
@@ -150,7 +153,7 @@ namespace MUDMapBuilder.Editor.UI
 			_buttonPush.Enabled = enabled;
 			_spinButtonStraightenSteps.Enabled = _comboStraighten.SelectedIndex == 2;
 
-			UpdateBrokenConnections();
+			UpdateNumbers();
 		}
 
 		public void ImportArea(string path, bool setStepsToMax = false)

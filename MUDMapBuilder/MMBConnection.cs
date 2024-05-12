@@ -1,4 +1,6 @@
-﻿namespace MUDMapBuilder
+﻿using System.Collections.Generic;
+
+namespace MUDMapBuilder
 {
 	public class MMBConnection
 	{
@@ -14,6 +16,12 @@
 		/// Determines whether the connection is two-way(most rooms' connections are like that)
 		/// </summary>
 		public bool TwoWay { get; set; }
+
+		/// <summary>
+		/// Ids of obstacles' rooms
+		/// </summary>
+		public HashSet<int> Obstacles { get; } = new HashSet<int>();
+
 
 		public MMBConnection(int sourceRoomId, int destinationRoomId, MMBDirection direction)
 		{

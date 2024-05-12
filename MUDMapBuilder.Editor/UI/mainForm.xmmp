@@ -2,7 +2,7 @@
   <Project.ExportOptions Namespace="MUDMapBuilder.Editor.UI" Class="MainForm" OutputPath="D:\Projects\MUDMapBuilder.NET\MUDMapBuilder.Editor\UI" />
   <Panel>
     <VerticalStackPanel Spacing="8">
-      <HorizontalMenu Id="_mainMenu" >
+      <HorizontalMenu Id="_mainMenu">
         <MenuItem Text="&amp;File">
           <MenuItem Text="&amp;Open" ShortcutText="Ctrl+O" Id="_menuItemFileOpen" />
           <MenuItem Text="&amp;Save" ShortcutText="Ctrl+S" Id="_menuItemFileSave" />
@@ -44,10 +44,11 @@
       <Panel StackPanel.ProportionType="Fill">
         <ScrollViewer Id="_panelMap" />
         <VerticalStackPanel Spacing="8" Id="_panelConnectionIssues">
+          <Label Text="Rooms: 10" TextColor="#5756D5FF" Id="_labelRoomsCount" />
+          <Label Text="Grid Size: 10x10" TextColor="#5756D5FF" Id="_labelGridSize" />
           <Label Text="Connections With Obstacles: 10" TextColor="#FE3930FF" Id="_labelConnectionsWithObstacles" />
           <Label Text="Non-Straight Connections: 10" TextColor="#FFCC01FF" Id="_labelNonStraightConnections" />
           <Label Text="Long Connections: 10" TextColor="#4BD961FF" Id="_labelLongConnections" />
-          <Label Text="Max Straighten Steps: 100" Id="_labelMaxStraightenSteps" />
         </VerticalStackPanel>
       </Panel>
     </VerticalStackPanel>

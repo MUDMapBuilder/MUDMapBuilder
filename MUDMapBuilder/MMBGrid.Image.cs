@@ -94,9 +94,9 @@ namespace MUDMapBuilder
 							{
 								paint.Color = SKColors.Green;
 							}
-							else if (room.Mark)
+							else if (room.MarkColor != null)
 							{
-								paint.Color = SKColors.GreenYellow;
+								paint.Color = room.MarkColor.Value;
 							}
 							else
 							{
@@ -216,6 +216,11 @@ namespace MUDMapBuilder
 
 		private Point ToScreen(Point pos)
 		{
+			if (pos.X >= _cellsWidths.Length)
+			{
+				pos.X = _cellsWidths.Length - 1;
+			}
+
 			var screenX = RoomSpace.X;
 			for (var x = 0; x < pos.X; ++x)
 			{

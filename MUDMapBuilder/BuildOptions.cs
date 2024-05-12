@@ -9,7 +9,7 @@
 
 	public class BuildOptions
 	{
-		public int? Steps { get; set; }
+		public int MaxSteps { get; set; } = 1000;
 
 		/// <summary>
 		/// Perform run to straighten rooms' connection
@@ -18,21 +18,21 @@
 
 		public int StraightenSteps { get; set; }
 
-		internal bool EndStraighten(int maxSteps)
+		internal bool EndStraighten(int steps)
 		{
 			if (StraightenUsage != AlgorithmUsage.LimitSteps)
 			{
 				return false;
 			}
 
-			return maxSteps >= StraightenSteps;
+			return steps >= StraightenSteps;
 		}
 
 		public BuildOptions Clone()
 		{
 			return new BuildOptions
 			{
-				Steps = Steps,
+				MaxSteps = MaxSteps,
 				StraightenUsage = StraightenUsage,
 				StraightenSteps = StraightenSteps,
 			};

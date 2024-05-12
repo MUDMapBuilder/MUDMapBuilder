@@ -35,6 +35,7 @@ namespace MUDMapBuilder
 		public int MaxRunSteps { get; internal set; }
 		public int MaxStraightenSteps { get; internal set; }
 		public int MaxCompactSteps { get; internal set; }
+		public BrokenConnectionsInfo BrokenConnections => Grid.BrokenConnections;
 
 		internal MMBRoom this[int index] => _rooms[index];
 
@@ -58,6 +59,15 @@ namespace MUDMapBuilder
 			room.Rooms = this;
 
 			_rooms.Add(room);
+			InvalidateGrid();
+		}
+
+		internal void Remove(int roomId)
+		{
+			var room = GetRoomById(roomId);
+			room.Rooms = null;
+			_rooms.Remove(room);
+
 			InvalidateGrid();
 		}
 
@@ -87,7 +97,7 @@ namespace MUDMapBuilder
 				var coord = new Point(room.Position.X - rect.X, room.Position.Y - rect.Y);
 				_grid[coord.X, coord.Y] = new MMBRoomCell(room.Room, coord)
 				{
-					Mark = room.Mark,
+					MarkColor = room.MarkColor,
 					ForceMark = room.ForceMark,
 				};
 			}
@@ -362,8 +372,9 @@ namespace MUDMapBuilder
 			return _grid[checkPos.X, checkPos.Y];
 		}
 
-		private ConnectionBrokenType CheckConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir)
+		private ConnectionBrokenType CheckConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir, out HashSet<int> obstacles)
 		{
+			obstacles = new HashSet<int>();
 			var sourcePos = sourceRoom.Position;
 			var targetPos = targetRoom.Position;
 
@@ -377,12 +388,13 @@ namespace MUDMapBuilder
 			var isStraight = IsConnectionStraight(sourcePos, targetPos, exitDir);
 			if (!isStraight)
 			{
+				// Even non-straight connection is considered straight
+				// If there's another straight connection between same rooms
 				return ConnectionBrokenType.NotStraight;
 			}
 			else
 			{
 				// Check there are no obstacles on the path
-				var noObstacles = true;
 				var startCheck = sourcePos;
 				var endCheck = targetPos;
 				switch (exitDir)
@@ -427,8 +439,7 @@ namespace MUDMapBuilder
 						var asRoomCell = cell as MMBRoomCell;
 						if (asRoomCell != null)
 						{
-							noObstacles = false;
-							goto finish;
+							obstacles.Add(asRoomCell.Room.Id);
 						}
 
 						/*					var asConnectionsCell = cell as MMBConnectionsCell;
@@ -440,8 +451,7 @@ namespace MUDMapBuilder
 					}
 				}
 
-			finish:;
-				if (!noObstacles)
+				if (obstacles.Count > 0)
 				{
 					return ConnectionBrokenType.HasObstacles;
 				}
@@ -468,20 +478,43 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					var brokenType = CheckConnectionBroken(room, targetRoom, exitDir);
+					HashSet<int> obstacles;
+					var brokenType = CheckConnectionBroken(room, targetRoom, exitDir, out obstacles);
 					switch (brokenType)
 					{
+						case ConnectionBrokenType.Normal:
+							result.Normal.Add(room.Id, targetRoom.Id, exitDir);
+							break;
 						case ConnectionBrokenType.NotStraight:
 							result.NonStraight.Add(room.Id, targetRoom.Id, exitDir);
 							break;
 						case ConnectionBrokenType.HasObstacles:
-							result.WithObstacles.Add(room.Id, targetRoom.Id, exitDir);
+							var conn = result.WithObstacles.Add(room.Id, targetRoom.Id, exitDir);
+							foreach(var o in obstacles)
+							{
+								conn.Obstacles.Add(o);
+							}
 							break;
 						case ConnectionBrokenType.Long:
 							result.Long.Add(room.Id, targetRoom.Id, exitDir);
 							break;
 					}
 				}
+			}
+
+			var toDelete = new List<MMBConnection>();
+			foreach(var vs in result.NonStraight)
+			{
+				if (result.Normal.Find(vs.SourceRoomId, vs.TargetRoomId) != null ||
+					result.Long.Find(vs.SourceRoomId, vs.TargetRoomId) != null)
+				{
+					toDelete.Add(vs);
+				}
+			}
+
+			foreach(var vs in toDelete)
+			{
+				result.NonStraight.Remove(vs);
 			}
 
 			return result;

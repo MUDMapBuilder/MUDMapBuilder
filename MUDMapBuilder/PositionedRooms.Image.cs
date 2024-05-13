@@ -1,18 +1,18 @@
-﻿using GoRogue;
-using GoRogue.MapViews;
+﻿using GoRogue.MapViews;
 using GoRogue.Pathing;
+using GoRogue;
 using SkiaSharp;
-using System;
 using System.Collections.Generic;
+using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Numerics;
+using System.Linq;
 using Rectangle = System.Drawing.Rectangle;
 
 namespace MUDMapBuilder
 {
-	partial class MMBGrid
+	partial class PositionedRooms
 	{
 		private static readonly SKColor DefaultColor = SKColors.Black;
 		private static readonly SKColor ConnectionWithObstacles = SKColors.Red;
@@ -24,11 +24,32 @@ namespace MUDMapBuilder
 		private static readonly Point RoomSpace = new Point(32, 32);
 		private int[] _cellsWidths;
 
+		private bool AreRoomsConnected(Point a, Point b, MMBDirection direction)
+		{
+			var room = GetRoomByZeroBasedPosition(a);
+			if (room.HasDrawnConnection(direction, b))
+			{
+				return true;
+			}
+
+			room = GetRoomByZeroBasedPosition(b);
+			if (room.HasDrawnConnection(direction.GetOppositeDirection(), a))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 		public MMBImageResult BuildPng()
 		{
 			var roomInfos = new List<MMBImageRoomInfo>();
 
 			byte[] imageBytes = null;
+
+			var mapRect = CalculateRectangle();
+			var width = mapRect.Width;
+			var height = mapRect.Height;
 			using (SKPaint paint = new SKPaint())
 			{
 				paint.Color = SKColors.Black;
@@ -37,12 +58,12 @@ namespace MUDMapBuilder
 				paint.TextAlign = SKTextAlign.Center;
 
 				// First grid run - determine cells width
-				_cellsWidths = new int[Width];
-				for (var x = 0; x < Width; ++x)
+				_cellsWidths = new int[width];
+				for (var x = 0; x < width; ++x)
 				{
-					for (var y = 0; y < Height; ++y)
+					for (var y = 0; y < height; ++y)
 					{
-						var room = this[x, y] as MMBRoomCell;
+						var room = GetRoomByZeroBasedPosition(x, y);
 						if (room == null)
 						{
 							continue;
@@ -66,21 +87,21 @@ namespace MUDMapBuilder
 					imageWidth += _cellsWidths[i];
 				}
 
-				imageWidth += (Width + 1) * RoomSpace.X;
+				imageWidth += (width + 1) * RoomSpace.X;
 
 				SKImageInfo imageInfo = new SKImageInfo(imageWidth,
-														Height * RoomHeight + (Height + 1) * RoomSpace.Y);
+														height * RoomHeight + (height + 1) * RoomSpace.Y);
 
 
 				using (SKSurface surface = SKSurface.Create(imageInfo))
 				{
 					SKCanvas canvas = surface.Canvas;
 
-					for (var x = 0; x < Width; ++x)
+					for (var x = 0; x < width; ++x)
 					{
-						for (var y = 0; y < Height; ++y)
+						for (var y = 0; y < height; ++y)
 						{
-							var room = this[x, y] as MMBRoomCell;
+							var room = GetRoomByZeroBasedPosition(x, y);
 							if (room == null)
 							{
 								continue;
@@ -117,7 +138,7 @@ namespace MUDMapBuilder
 									continue;
 								}
 
-								var targetPos = targetRoom.Position;
+								var targetPos = ToZeroBasedPosition(targetRoom.Position);
 								if (AreRoomsConnected(new Point(x, y), targetPos, exitDir))
 								{
 									// Connection is drawn already
@@ -231,7 +252,6 @@ namespace MUDMapBuilder
 			return new Point(screenX, pos.Y * RoomHeight + (pos.Y + 1) * RoomSpace.Y);
 		}
 
-
 		private Rectangle GetRoomRect(Point pos)
 		{
 			var screen = ToScreen(pos);
@@ -308,7 +328,7 @@ namespace MUDMapBuilder
 
 		private class AStarView : IMapView<bool>
 		{
-			private readonly MMBGrid _grid;
+			private readonly PositionedRooms _rooms;
 
 			public bool this[Coord pos] => CheckMove(pos.ToVector2());
 
@@ -316,13 +336,13 @@ namespace MUDMapBuilder
 
 			public bool this[int x, int y] => CheckMove(new Vector2(x, y));
 
-			public int Height => _grid.Height * 4 + 2;
+			public int Height => _rooms.Height * 4 + 2;
 
-			public int Width => _grid.Width * 4 + 2;
+			public int Width => _rooms.Width * 4 + 2;
 
-			public AStarView(MMBGrid grid)
+			public AStarView(PositionedRooms grid)
 			{
-				_grid = grid;
+				_rooms = grid;
 			}
 
 			public bool CheckMove(Vector2 coord)
@@ -348,7 +368,7 @@ namespace MUDMapBuilder
 
 				// Cell
 				var gridPoint = new Point((int)(coord.X / 4), (int)(coord.Y / 4));
-				var room = _grid[gridPoint];
+				var room = _rooms.GetRoomByZeroBasedPosition(gridPoint);
 
 				return room == null;
 			}

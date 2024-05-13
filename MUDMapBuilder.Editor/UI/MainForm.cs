@@ -81,7 +81,7 @@ namespace MUDMapBuilder.Editor.UI
 			if (_mapViewer.Rooms != null)
 			{
 				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.Count}/{_mapViewer.Result.TotalRooms}";
-				_labelGridSize.Text = $"Grid Size: {_mapViewer.Rooms.Grid.Width}x{_mapViewer.Rooms.Grid.Height}";
+				_labelGridSize.Text = $"Grid Size: {_mapViewer.Rooms.Width}x{_mapViewer.Rooms.Height}";
 
 				var brokenConnections = _mapViewer.Rooms.BrokenConnections;
 				_labelNonStraightConnections.Text = $"Non Straight Connections: {brokenConnections.NonStraight.Count}";

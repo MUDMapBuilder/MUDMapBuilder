@@ -56,10 +56,8 @@ namespace MUDMapBuilder
 		private readonly List<MMBRoom> _toProcess = new List<MMBRoom>();
 		private readonly HashSet<int> _removedRooms = new HashSet<int>();
 		private readonly Dictionary<int, List<RemoveRoomRecord>> _removalHistory = new Dictionary<int, List<RemoveRoomRecord>>();
-		private readonly RoomsCollection _rooms = new RoomsCollection();
-		private readonly List<RoomsCollection> _history = new List<RoomsCollection>();
-
-		private RoomsCollection Rooms => _rooms;
+		private readonly PositionedRooms _rooms = new PositionedRooms();
+		private readonly List<PositionedRooms> _history = new List<PositionedRooms>();
 
 		private MapBuilder(IMMBRoom[] sourceRooms, BuildOptions options)
 		{
@@ -107,7 +105,7 @@ namespace MUDMapBuilder
 		{
 			var roomRemoved = false;
 			var rooms = _rooms.Clone();
-			var vc = rooms.Grid.BrokenConnections;
+			var vc = rooms.BrokenConnections;
 
 			var sourceRoom = rooms.GetRoomById(sourceRoomId);
 			var targetRoom = rooms.GetRoomById(targetRoomId);
@@ -122,7 +120,7 @@ namespace MUDMapBuilder
 			}
 
 			targetRoom.Position = desiredPos;
-			var vc2 = rooms.Grid.BrokenConnections;
+			var vc2 = rooms.BrokenConnections;
 
 			var connectionsFixed = vc.NonStraight.Count - vc2.NonStraight.Count;
 
@@ -140,10 +138,6 @@ namespace MUDMapBuilder
 			var remove = (from r in removes where r.Position == room.Position select r).FirstOrDefault();
 
 			// Prevent cycles by forbidding to remove rooms twice in same configurations
-			if (remove != null)
-			{
-				var k = 5;
-			}
 			return remove == null;
 		}
 
@@ -303,7 +297,7 @@ namespace MUDMapBuilder
 						var delta = exitDir.GetDelta();
 						var newPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 
-						var vc = _rooms.Grid.BrokenConnections;
+						var vc = _rooms.BrokenConnections;
 
 						// Expand grid either if the new position is occupied by a room
 						// Or if it breaks existing connection
@@ -323,7 +317,7 @@ namespace MUDMapBuilder
 							};
 
 							cloneRooms.Add(cloneRoom);
-							if (cloneRooms.Grid.BrokenConnections.WithObstacles.Count > vc.WithObstacles.Count)
+							if (cloneRooms.BrokenConnections.WithObstacles.Count > vc.WithObstacles.Count)
 							{
 								expandGrid = true;
 							}

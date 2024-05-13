@@ -2,11 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 
 namespace MUDMapBuilder
 {
-	public class RoomsCollection : IEnumerable<MMBRoom>
+	public partial class PositionedRooms : IEnumerable<MMBRoom>
 	{
 		private enum ConnectionBrokenType
 		{
@@ -17,138 +16,63 @@ namespace MUDMapBuilder
 		}
 
 		private readonly List<MMBRoom> _rooms = new List<MMBRoom>();
-		private MMBGrid _grid;
-		private Point _min;
-		private int? _selectedRoomId;
+		private readonly Dictionary<int, MMBRoom> _roomsByIds = new Dictionary<int, MMBRoom>();
+		private Rectangle _roomsRectangle;
+		private MMBRoom[,] _roomsByPositions = null;
+		private BrokenConnectionsInfo _brokenConnections;
 
 		public int Count => _rooms.Count;
 
-		public MMBGrid Grid
+		public BrokenConnectionsInfo BrokenConnections
 		{
 			get
 			{
-				UpdateGrid();
-				return _grid;
+				UpdatePositions();
+				return _brokenConnections;
 			}
 		}
 
-		public BrokenConnectionsInfo BrokenConnections => Grid.BrokenConnections;
+		public Rectangle RoomsRectangle
+		{
+			get
+			{
+				UpdatePositions();
+				return _roomsRectangle;
+			}
+		}
+
+		public int Width => RoomsRectangle.Width;
+		public int Height => RoomsRectangle.Height;
 
 		internal MMBRoom this[int index] => _rooms[index];
 
-		public int? SelectedRoomId
-		{
-			get => _selectedRoomId;
+		public int? SelectedRoomId { get; set; }
 
-			set
-			{
-				_selectedRoomId = value;
-
-				if (_grid != null)
-				{
-					_grid.SelectedRoomId = value;
-				}
-			}
-		}
-
-		private void OnRoomInvalid(object sender, EventArgs e) => InvalidateGrid();
+		private void OnRoomInvalid(object sender, EventArgs e) => InvalidatePositions();
 
 		internal void Add(MMBRoom room)
 		{
 			room.Invalid += OnRoomInvalid;
 
+			_roomsByIds[room.Id] = room;
 			_rooms.Add(room);
-			InvalidateGrid();
+			InvalidatePositions();
 		}
 
 		internal void Remove(int roomId)
 		{
 			var room = GetRoomById(roomId);
 			room.Invalid -= OnRoomInvalid;
+			_roomsByIds.Remove(roomId);
 			_rooms.Remove(room);
 
-			InvalidateGrid();
+			InvalidatePositions();
 		}
 
-		public void InvalidateGrid()
+		public void InvalidatePositions()
 		{
-			_grid = null;
-		}
-
-		private void UpdateGrid()
-		{
-			if (_grid != null)
-			{
-				return;
-			}
-
-			var rect = CalculateRectangle();
-
-			_min = new Point(rect.X, rect.Y);
-			_grid = new MMBGrid(rect.Width, rect.Height)
-			{
-				SelectedRoomId = SelectedRoomId
-			};
-
-			// First run: add rooms
-			foreach (var room in _rooms)
-			{
-				var coord = new Point(room.Position.X - rect.X, room.Position.Y - rect.Y);
-				_grid[coord.X, coord.Y] = new MMBRoomCell(room.Room, coord)
-				{
-					MarkColor = room.MarkColor,
-					ForceMark = room.ForceMark,
-				};
-			}
-
-			// Second run: add connections
-			foreach (var room in _rooms)
-			{
-				var sourceGridRoom = _grid.GetRoomById(room.Id);
-				var gridStartPos = sourceGridRoom.Position;
-
-				foreach (var pair in room.Room.Exits)
-				{
-					var exitDir = pair.Key;
-					var exitRoom = pair.Value;
-					if (exitDir == MMBDirection.Up || exitDir == MMBDirection.Down)
-					{
-						continue;
-					}
-
-					var targetGridRoom = _grid.GetRoomById(exitRoom.Id);
-					if (targetGridRoom == null)
-					{
-						continue;
-					}
-
-					var gridTargetPos = targetGridRoom.Position;
-					if (!IsConnectionStraight(gridStartPos, gridTargetPos, exitDir))
-					{
-						continue;
-					}
-
-					var delta = exitDir.GetDelta();
-					for (var sourcePos = gridStartPos; sourcePos != gridTargetPos; sourcePos.X += delta.X, sourcePos.Y += delta.Y)
-					{
-						if (_grid[sourcePos.X, sourcePos.Y] is MMBRoomCell)
-						{
-							continue;
-						}
-
-						var connectionsObstacle = (MMBConnectionsCell)_grid[sourcePos];
-						if (connectionsObstacle == null)
-						{
-							connectionsObstacle = new MMBConnectionsCell(sourcePos);
-							_grid[sourcePos] = connectionsObstacle;
-						}
-
-						connectionsObstacle.AddPair(sourceGridRoom, targetGridRoom);
-					}
-				}
-			}
-
-			_grid.BrokenConnections = CalculateBrokenConnections();
+			_roomsByPositions = null;
+			_brokenConnections = null;
 		}
 
 		public void ExpandGrid(Point pos, Point vec)
@@ -180,153 +104,49 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public MMBRoom GetRoomById(int id) => (from r in _rooms where r.Id == id select r).FirstOrDefault();
-		public MMBRoom GetRoomByPosition(Point pos) => (from r in _rooms where r.Position == pos select r).FirstOrDefault();
-
-		public Dictionary<int, Point> MeasurePushRoom(MMBRoom firstRoom, Point firstForceVector)
+		public MMBRoom GetRoomById(int id)
 		{
-			var roomsToPush = new Dictionary<int, Point>();
-
-			var toProcess = new List<Tuple<MMBRoom, Point>>
+			MMBRoom result;
+			if (!_roomsByIds.TryGetValue(id, out result))
 			{
-				new Tuple<MMBRoom, Point>(firstRoom, firstForceVector)
-			};
-			while (toProcess.Count > 0)
-			{
-				var item = toProcess[0];
-				var room = item.Item1;
-				var pos = room.Position;
-				toProcess.RemoveAt(0);
-
-				roomsToPush[room.Id] = item.Item2;
-
-				// Process neighbour rooms
-				foreach (var pair in room.Room.Exits)
-				{
-					var exitDir = pair.Key;
-					var exitRoom = pair.Value;
-					var forceVector = item.Item2;
-
-					var targetRoom = GetRoomById(exitRoom.Id);
-					if (targetRoom == null || roomsToPush.ContainsKey(exitRoom.Id))
-					{
-						continue;
-					}
-
-					if (!IsConnectionStraight(room.Position, targetRoom.Position, exitDir))
-					{
-						// Skip broken connections
-						continue;
-					}
-
-					var targetPos = targetRoom.Position;
-					switch (exitDir)
-					{
-						case MMBDirection.North:
-							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
-							if (forceVector.Y > 0)
-							{
-								forceVector.Y = 0;
-							}
-							break;
-
-						case MMBDirection.East:
-							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
-							if (forceVector.X < 0)
-							{
-								forceVector.X = 0;
-							}
-							break;
-
-						case MMBDirection.South:
-							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
-							if (forceVector.Y < 0)
-							{
-								forceVector.Y = 0;
-							}
-							break;
-
-						case MMBDirection.West:
-							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
-							if (forceVector.X > 0)
-							{
-								forceVector.X = 0;
-							}
-							break;
-
-						case MMBDirection.Up:
-							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
-							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
-
-							if (forceVector.X < 0)
-							{
-								forceVector.X = 0;
-							}
-
-							if (forceVector.Y > 0)
-							{
-								forceVector.Y = 0;
-							}
-							break;
-
-						case MMBDirection.Down:
-							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
-							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
-
-							if (forceVector.X > 0)
-							{
-								forceVector.X = 0;
-							}
-							if (forceVector.Y < 0)
-							{
-								forceVector.Y = 0;
-							}
-
-							break;
-					}
-
-					if (forceVector.X != 0 || forceVector.Y != 0)
-					{
-						toProcess.Add(new Tuple<MMBRoom, Point>(targetRoom, forceVector));
-					}
-				}
+				return null;
 			}
 
-			return roomsToPush;
+			return result;
 		}
 
-		public void PushRoom(MMBRoom firstRoom, Point firstForceVector)
+		public Point ToZeroBasedPosition(Point pos)
 		{
-			var roomsToPush = MeasurePushRoom(firstRoom, firstForceVector);
+			pos.X -= RoomsRectangle.X;
+			pos.Y -= RoomsRectangle.Y;
 
-			// Process rooms in special order so rooms dont get placed on each other
-			while (roomsToPush.Count > 0)
-			{
-				foreach (var pair in roomsToPush)
-				{
-					var room = GetRoomById(pair.Key);
-					var delta = pair.Value;
-
-					var newPos = new Point(room.Position.X + delta.X, room.Position.Y + delta.Y);
-
-					var existingRoom = GetRoomByPosition(newPos);
-					if (existingRoom != null)
-					{
-						if (roomsToPush.ContainsKey(existingRoom.Id))
-						{
-							continue;
-						}
-
-						// Place existing room on the older position
-						existingRoom.Position = room.Position;
-					}
-
-					room.Position = newPos;
-					roomsToPush.Remove(pair.Key);
-					break;
-				}
-			}
+			return pos;
 		}
+
+		public MMBRoom GetRoomByZeroBasedPosition(int x, int y)
+		{
+			UpdatePositions();
+
+			if (x < 0 || x >= Width ||
+				y < 0 || y >= Height)
+			{
+				return null;
+			}
+
+			return _roomsByPositions[x, y];
+		}
+
+		public MMBRoom GetRoomByZeroBasedPosition(Point pos) => GetRoomByZeroBasedPosition(pos.X, pos.Y);
+
+		public MMBRoom GetRoomByPosition(int x, int y)
+		{
+			x -= RoomsRectangle.X;
+			y -= RoomsRectangle.Y;
+
+			return GetRoomByZeroBasedPosition(x, y);
+		}
+
+		public MMBRoom GetRoomByPosition(Point pos) => GetRoomByPosition(pos.X, pos.Y);
 
 		public static bool IsConnectionStraight(Point sourcePos, Point targetPos, MMBDirection exitDir)
 		{
@@ -359,16 +179,6 @@ namespace MUDMapBuilder
 			}
 
 			return isStraight;
-		}
-
-		private MMBCell GetCell(Point checkPos)
-		{
-			UpdateGrid();
-
-			checkPos.X -= _min.X;
-			checkPos.Y -= _min.Y;
-
-			return _grid[checkPos.X, checkPos.Y];
 		}
 
 		private ConnectionBrokenType CheckConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir, out HashSet<int> obstacles)
@@ -439,11 +249,10 @@ namespace MUDMapBuilder
 							continue;
 						}
 
-						var cell = GetCell(pos);
-						var asRoomCell = cell as MMBRoomCell;
-						if (asRoomCell != null)
+						var room = GetRoomByPosition(pos);
+						if (room != null)
 						{
-							obstacles.Add(asRoomCell.Room.Id);
+							obstacles.Add(room.Room.Id);
 						}
 
 						/*					var asConnectionsCell = cell as MMBConnectionsCell;
@@ -524,7 +333,7 @@ namespace MUDMapBuilder
 			return result;
 		}
 
-		public Rectangle CalculateRectangle()
+		private Rectangle CalculateRectangle()
 		{
 			var min = new Point();
 			var max = new Point();
@@ -573,6 +382,27 @@ namespace MUDMapBuilder
 			return new Rectangle(min.X, min.Y, max.X - min.X + 1, max.Y - min.Y + 1);
 		}
 
+		private void UpdatePositions()
+		{
+			if (_roomsByPositions != null)
+			{
+				return;
+			}
+
+			_roomsRectangle = CalculateRectangle();
+
+			_roomsByPositions = new MMBRoom[_roomsRectangle.Width, _roomsRectangle.Height];
+
+			// Add rooms
+			foreach (var room in _rooms)
+			{
+				var coord = new Point(room.Position.X - _roomsRectangle.X, room.Position.Y - _roomsRectangle.Y);
+				_roomsByPositions[coord.X, coord.Y] = room;
+			}
+
+			_brokenConnections = CalculateBrokenConnections();
+		}
+
 		public void FixPlacementOfSingleExitRooms()
 		{
 			foreach (var room in _rooms)
@@ -614,15 +444,11 @@ namespace MUDMapBuilder
 					targetRoom.Position = desiredPos;
 				}
 			}
-
-			InvalidateGrid();
 		}
 
-		public int CalculateArea() => CalculateRectangle().CalculateArea();
-
-		public RoomsCollection Clone()
+		public PositionedRooms Clone()
 		{
-			var result = new RoomsCollection();
+			var result = new PositionedRooms();
 			foreach (var r in _rooms)
 			{
 				result.Add(r.Clone());
@@ -634,7 +460,6 @@ namespace MUDMapBuilder
 		public IEnumerator<MMBRoom> GetEnumerator() => _rooms.GetEnumerator();
 
 		IEnumerator IEnumerable.GetEnumerator() => _rooms.GetEnumerator();
-
 
 		public override int GetHashCode()
 		{

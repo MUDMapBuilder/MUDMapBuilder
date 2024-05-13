@@ -30,7 +30,7 @@ namespace MUDMapBuilder.Editor.UI
 			}
 		}
 
-		public RoomsCollection Rooms
+		public PositionedRooms Rooms
 		{
 			get
 			{
@@ -86,7 +86,7 @@ namespace MUDMapBuilder.Editor.UI
 			if (Result != null)
 			{
 				var rooms = Rooms;
-				_imageResult = rooms.Grid.BuildPng();
+				_imageResult = rooms.BuildPng();
 				using (var ms = new MemoryStream(_imageResult.PngData))
 				{
 					var texture = Texture2D.FromStream(MyraEnvironment.GraphicsDevice, ms);

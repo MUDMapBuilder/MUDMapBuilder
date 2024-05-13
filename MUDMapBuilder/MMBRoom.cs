@@ -1,11 +1,13 @@
 ﻿using SkiaSharp;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace MUDMapBuilder
 {
 	public class MMBRoom
 	{
+		private Dictionary<MMBDirection, Point> _drawnConnections = new Dictionary<MMBDirection, Point>();
 		private Point _position;
 		private SKColor? _markColor;
 		private Point? _forceMark;
@@ -63,6 +65,24 @@ namespace MUDMapBuilder
 		public MMBRoom(IMMBRoom room)
 		{
 			Room = room;
+		}
+
+		internal void ClearDrawnConnections() => _drawnConnections.Clear();
+
+		internal void AddDrawnConnection(MMBDirection direction, Point pos)
+		{
+			_drawnConnections[direction] = pos;
+		}
+
+		internal bool HasDrawnConnection(MMBDirection direction, Point pos)
+		{
+			Point connectedPos;
+			if (!_drawnConnections.TryGetValue(direction, out connectedPos))
+			{
+				return false;
+			}
+
+			return connectedPos == pos;
 		}
 
 		public MMBRoom Clone() => new MMBRoom(Room)

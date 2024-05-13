@@ -18,16 +18,10 @@
         <Button Id="_buttonStart">
           <Label Text="&lt;&lt;" />
         </Button>
-        <SpinButton Integer="True" Width="50" Id="_spinButtonStep" />
+        <SpinButton Maximum="1000" Minimum="1" Value="1" Integer="True" Width="50" Id="_spinButtonStep" />
         <Button Id="_buttonEnd">
           <Label Text="&gt;&gt;" />
         </Button>
-        <ComboView Id="_comboStraighten">
-          <Label Text="Do Not Straighten" />
-          <Label Text="Straighten Without Limit" />
-          <Label Text="Straighten With Limit" />
-        </ComboView>
-        <SpinButton Integer="True" Width="50" Id="_spinButtonStraightenSteps" />
       </HorizontalStackPanel>
       <HorizontalStackPanel Spacing="8">
         <Label Text="Force X:" />

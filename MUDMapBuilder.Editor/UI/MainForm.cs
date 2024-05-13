@@ -10,17 +10,11 @@ namespace MUDMapBuilder.Editor.UI
 	public partial class MainForm
 	{
 		private readonly MapViewer _mapViewer;
+		private bool _suspendStep = false;
 
 		public Area Area
 		{
 			get => _mapViewer.Area;
-			set
-			{
-				_mapViewer.Area = value;
-				_spinButtonStep.Minimum = 1;
-				_spinButtonStep.Maximum = _mapViewer.MaxSteps;
-				_spinButtonStep.Value = _mapViewer.MaxSteps;
-			}
 		}
 
 		public int Step
@@ -29,25 +23,11 @@ namespace MUDMapBuilder.Editor.UI
 			set => _spinButtonStep.Value = value;
 		}
 
-		public AlgorithmUsage StraightenUsage
-		{
-			get => (AlgorithmUsage)_comboStraighten.SelectedIndex.Value;
-			set => _comboStraighten.SelectedIndex = (int)value;
-		}
-
-		public int StraightenSteps
-		{
-			get => (int)_spinButtonStraightenSteps.Value;
-			set => _spinButtonStraightenSteps.Value = value;
-		}
-
 		public Point ForceVector => new Point((int)_spinPushForceX.Value, (int)(_spinPushForceY.Value));
 
 		public MainForm()
 		{
 			BuildUI();
-
-			_comboStraighten.SelectedIndex = 1;
 
 			_mapViewer = new MapViewer();
 			_panelMap.Content = _mapViewer;
@@ -55,18 +35,19 @@ namespace MUDMapBuilder.Editor.UI
 			_menuItemImport.Selected += (s, e) => OnMenuFileImportSelected();
 
 			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
-			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _mapViewer.MaxSteps;
-			_spinButtonStep.ValueChanged += (s, e) => RebuildMap();
-			_comboStraighten.SelectedIndexChanged += (s, e) =>
+			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _spinButtonStep.Maximum;
+			_spinButtonStep.ValueChanged += (s, e) =>
 			{
-				if (_comboStraighten.SelectedIndex != 2)
+				if (_suspendStep)
 				{
-					_spinButtonStraightenSteps.Value = 0;
+					return;
 				}
-				UpdateEnabled();
-				RebuildMap();
+
+				RebuildMap(new BuildOptions
+				{
+					MaxSteps = (int)_spinButtonStep.Value,
+				});
 			};
-			_spinButtonStraightenSteps.ValueChanged += (s, e) => RebuildMap();
 
 			_buttonMeasure.Click += (s, e) => _mapViewer.MeasurePushRoom(ForceVector);
 			_buttonPush.Click += (s, e) => _mapViewer.PushRoom(ForceVector);
@@ -95,32 +76,23 @@ namespace MUDMapBuilder.Editor.UI
 				}
 
 				// "Ok" or Enter
-				ImportArea(dialog.FilePath, true);
+				ImportArea(dialog.FilePath);
 			};
 
 			dialog.ShowModal(Desktop);
 		}
 
-		private void RebuildMap()
+		private void RebuildMap(BuildOptions options)
 		{
-			var options = new BuildOptions
-			{
-				MaxSteps = (int)_spinButtonStep.Value,
-				StraightenUsage = StraightenUsage,
-				StraightenSteps = StraightenSteps,
-			};
-
 			_mapViewer.Rebuild(options);
 			UpdateNumbers();
 		}
 
 		private void UpdateNumbers()
 		{
-
-
 			if (_mapViewer.Rooms != null)
 			{
-				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.Count}";
+				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.Count}/{_mapViewer.Rooms.TotalRooms}";
 				_labelGridSize.Text = $"Grid Size: {_mapViewer.Rooms.Grid.Width}x{_mapViewer.Rooms.Grid.Height}";
 
 				var brokenConnections = _mapViewer.Rooms.BrokenConnections;
@@ -151,25 +123,29 @@ namespace MUDMapBuilder.Editor.UI
 			_spinPushForceY.Enabled = enabled;
 			_buttonMeasure.Enabled = enabled;
 			_buttonPush.Enabled = enabled;
-			_spinButtonStraightenSteps.Enabled = _comboStraighten.SelectedIndex == 2;
 
 			UpdateNumbers();
 		}
 
-		public void ImportArea(string path, bool setStepsToMax = false)
+		public void ImportArea(string path)
 		{
 			try
 			{
 				var data = File.ReadAllText(path);
 				_mapViewer.Area = Area.Parse(data);
 
-				if (setStepsToMax)
+				RebuildMap(new BuildOptions());
+				var maxSteps = _mapViewer.Rooms.MaxRunSteps;
+
+				_spinButtonStep.Maximum = maxSteps;
+				try
 				{
-					_spinButtonStep.Value = _mapViewer.MaxSteps;
+					_suspendStep = true;
+					_spinButtonStep.Value = maxSteps;
 				}
-				else
+				finally
 				{
-					RebuildMap();
+					_suspendStep = false;
 				}
 
 				ViewerGame.Instance.FilePath = path;

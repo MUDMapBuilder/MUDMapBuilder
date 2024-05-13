@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using System;
 using System.Drawing;
 
 namespace MUDMapBuilder
@@ -6,11 +7,11 @@ namespace MUDMapBuilder
 	public class MMBRoom
 	{
 		private Point _position;
+		private SKColor? _markColor;
 		private Point? _forceMark;
 
 		public int Id => Room.Id;
 
-		public RoomsCollection Rooms { get; internal set; }
 		public IMMBRoom Room { get; }
 		public Point Position
 		{
@@ -23,13 +24,25 @@ namespace MUDMapBuilder
 				}
 
 				_position = value;
-				if (Rooms != null)
-				{
-					Rooms.InvalidateGrid();
-				}
+				FireInvalid();
 			}
 		}
-		public SKColor? MarkColor { get; set; }
+		public SKColor? MarkColor
+		{
+			get => _markColor;
+
+			set
+			{
+				if (value == _markColor)
+				{
+					return;
+				}
+
+				_markColor = value;
+				FireInvalid();
+			}
+		}
+
 		internal Point? ForceMark
 		{
 			get => _forceMark;
@@ -41,12 +54,11 @@ namespace MUDMapBuilder
 				}
 
 				_forceMark = value;
-				if (Rooms != null)
-				{
-					Rooms.InvalidateGrid();
-				}
+				FireInvalid();
 			}
 		}
+
+		public event EventHandler Invalid;
 
 		public MMBRoom(IMMBRoom room)
 		{
@@ -61,5 +73,7 @@ namespace MUDMapBuilder
 		};
 
 		public override string ToString() => $"{Room}, {Position}";
+
+		private void FireInvalid() => Invalid?.Invoke(this, EventArgs.Empty);
 	}
 }

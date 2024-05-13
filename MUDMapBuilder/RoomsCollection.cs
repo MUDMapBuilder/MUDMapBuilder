@@ -32,9 +32,8 @@ namespace MUDMapBuilder
 			}
 		}
 
+		public int TotalRooms { get; internal set; }
 		public int MaxRunSteps { get; internal set; }
-		public int MaxStraightenSteps { get; internal set; }
-		public int MaxCompactSteps { get; internal set; }
 		public BrokenConnectionsInfo BrokenConnections => Grid.BrokenConnections;
 
 		internal MMBRoom this[int index] => _rooms[index];
@@ -54,9 +53,11 @@ namespace MUDMapBuilder
 			}
 		}
 
+		private void OnRoomInvalid(object sender, EventArgs e) => InvalidateGrid();
+
 		internal void Add(MMBRoom room)
 		{
-			room.Rooms = this;
+			room.Invalid += OnRoomInvalid;
 
 			_rooms.Add(room);
 			InvalidateGrid();
@@ -65,7 +66,7 @@ namespace MUDMapBuilder
 		internal void Remove(int roomId)
 		{
 			var room = GetRoomById(roomId);
-			room.Rooms = null;
+			room.Invalid -= OnRoomInvalid;
 			_rooms.Remove(room);
 
 			InvalidateGrid();
@@ -394,6 +395,11 @@ namespace MUDMapBuilder
 			}
 			else
 			{
+				if (exitDir == MMBDirection.Up || exitDir == MMBDirection.Down)
+				{
+					return ConnectionBrokenType.Long;
+				}
+
 				// Check there are no obstacles on the path
 				var startCheck = sourcePos;
 				var endCheck = targetPos;

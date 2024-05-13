@@ -78,11 +78,14 @@ namespace MUDMapBuilder.Editor
 
 			if (_state != null)
 			{
-				_mainForm.StraightenUsage = _state.StraightenUsage;
-				_mainForm.StraightenSteps = _state.StraightenSteps;
-
-				_mainForm.ImportArea(_state.EditedFile);
-				_mainForm.Step = _state.Step;
+				try
+				{
+					_mainForm.ImportArea(_state.EditedFile);
+					_mainForm.Step = _state.Step;
+				}
+				catch(Exception)
+				{
+				}
 			}
 		}
 
@@ -109,8 +112,6 @@ namespace MUDMapBuilder.Editor
 					GraphicsDevice.PresentationParameters.BackBufferHeight),
 				EditedFile = FilePath,
 				Step = _mainForm.Step,
-				StraightenUsage = _mainForm.StraightenUsage,
-				StraightenSteps = _mainForm.StraightenSteps,
 			};
 
 			state.Save();

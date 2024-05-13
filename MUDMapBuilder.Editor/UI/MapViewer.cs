@@ -15,35 +15,10 @@ namespace MUDMapBuilder.Editor.UI
 {
 	public class MapViewer : Image
 	{
-		private Area _area;
 		private RoomsCollection _rooms;
 		private MMBImageResult _imageResult;
 
-		public int MaxSteps { get; private set; }
-
-		public Area Area
-		{
-			get => _area;
-
-			set
-			{
-				if (value == _area)
-				{
-					return;
-				}
-
-				_area = value;
-
-				// Set max steps
-				var roomsArray = _area.Rooms.ToArray();
-				var rooms = MapBuilder.Build(roomsArray, new BuildOptions
-				{
-					StraightenUsage = AlgorithmUsage.DoNotUse,
-					MaxSteps = 100
-				});
-				MaxSteps = rooms.MaxRunSteps;
-			}
-		}
+		public Area Area { get; set; }
 
 		public RoomsCollection Rooms => _rooms;
 		
@@ -57,9 +32,9 @@ namespace MUDMapBuilder.Editor.UI
 			_rooms = null;
 			_imageResult = null;
 
-			if (_area != null)
+			if (Area != null)
 			{
-				_rooms = MapBuilder.Build(_area.Rooms.ToArray(), options);
+				_rooms = MapBuilder.Build(Area.Rooms.ToArray(), options);
 			}
 
 			Redraw();

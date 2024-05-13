@@ -32,8 +32,6 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public int TotalRooms { get; internal set; }
-		public int MaxRunSteps { get; internal set; }
 		public BrokenConnectionsInfo BrokenConnections => Grid.BrokenConnections;
 
 		internal MMBRoom this[int index] => _rooms[index];
@@ -496,7 +494,7 @@ namespace MUDMapBuilder
 							break;
 						case ConnectionBrokenType.HasObstacles:
 							var conn = result.WithObstacles.Add(room.Id, targetRoom.Id, exitDir);
-							foreach(var o in obstacles)
+							foreach (var o in obstacles)
 							{
 								conn.Obstacles.Add(o);
 							}
@@ -509,7 +507,7 @@ namespace MUDMapBuilder
 			}
 
 			var toDelete = new List<MMBConnection>();
-			foreach(var vs in result.NonStraight)
+			foreach (var vs in result.NonStraight)
 			{
 				if (result.Normal.Find(vs.SourceRoomId, vs.TargetRoomId) != null ||
 					result.Long.Find(vs.SourceRoomId, vs.TargetRoomId) != null)
@@ -518,7 +516,7 @@ namespace MUDMapBuilder
 				}
 			}
 
-			foreach(var vs in toDelete)
+			foreach (var vs in toDelete)
 			{
 				result.NonStraight.Remove(vs);
 			}
@@ -636,5 +634,20 @@ namespace MUDMapBuilder
 		public IEnumerator<MMBRoom> GetEnumerator() => _rooms.GetEnumerator();
 
 		IEnumerator IEnumerable.GetEnumerator() => _rooms.GetEnumerator();
+
+
+		public override int GetHashCode()
+		{
+			var result = 0;
+
+			foreach (var room in _rooms)
+			{
+				result ^= room.Id;
+				result ^= (room.Position.X << 8);
+				result ^= (room.Position.Y << 16);
+			}
+
+			return result;
+		}
 	}
 }

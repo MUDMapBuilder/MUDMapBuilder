@@ -43,14 +43,8 @@ namespace MUDMapBuilder.Editor.UI
 					return;
 				}
 
-				RebuildMap(new BuildOptions
-				{
-					MaxSteps = (int)_spinButtonStep.Value,
-				});
+				_mapViewer.Step = (int)_spinButtonStep.Value;
 			};
-
-			_buttonMeasure.Click += (s, e) => _mapViewer.MeasurePushRoom(ForceVector);
-			_buttonPush.Click += (s, e) => _mapViewer.PushRoom(ForceVector);
 
 			UpdateEnabled();
 		}
@@ -82,17 +76,11 @@ namespace MUDMapBuilder.Editor.UI
 			dialog.ShowModal(Desktop);
 		}
 
-		private void RebuildMap(BuildOptions options)
-		{
-			_mapViewer.Rebuild(options);
-			UpdateNumbers();
-		}
-
 		private void UpdateNumbers()
 		{
 			if (_mapViewer.Rooms != null)
 			{
-				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.Count}/{_mapViewer.Rooms.TotalRooms}";
+				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.Count}/{_mapViewer.Result.TotalRooms}";
 				_labelGridSize.Text = $"Grid Size: {_mapViewer.Rooms.Grid.Width}x{_mapViewer.Rooms.Grid.Height}";
 
 				var brokenConnections = _mapViewer.Rooms.BrokenConnections;
@@ -133,9 +121,7 @@ namespace MUDMapBuilder.Editor.UI
 			{
 				var data = File.ReadAllText(path);
 				_mapViewer.Area = Area.Parse(data);
-
-				RebuildMap(new BuildOptions());
-				var maxSteps = _mapViewer.Rooms.MaxRunSteps;
+				var maxSteps = _mapViewer.Result.History.Length;
 
 				_spinButtonStep.Maximum = maxSteps;
 				try

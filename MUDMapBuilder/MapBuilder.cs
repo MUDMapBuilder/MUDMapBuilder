@@ -37,13 +37,27 @@ namespace MUDMapBuilder
 			}
 		}
 
+		private class RemoveRoomRecord
+		{
+			public int RoomId { get; private set; }
+			public Point Position { get; private set; }
+			public int HashCode { get; private set; }
+
+			public RemoveRoomRecord(int roomId, Point position, int hashCode)
+			{
+				RoomId = roomId;
+				Position = position;
+				HashCode = hashCode;
+			}
+		}
+
 		private readonly IMMBRoom[] _sourceRooms;
 		private readonly BuildOptions _options;
 		private readonly List<MMBRoom> _toProcess = new List<MMBRoom>();
 		private readonly HashSet<int> _removedRooms = new HashSet<int>();
-		private readonly Dictionary<int, List<Point>> _removedRoomsByPos = new Dictionary<int, List<Point>>();
+		private readonly Dictionary<int, List<RemoveRoomRecord>> _removalHistory = new Dictionary<int, List<RemoveRoomRecord>>();
 		private readonly RoomsCollection _rooms = new RoomsCollection();
-		private int _runSteps = 1;
+		private readonly List<RoomsCollection> _history = new List<RoomsCollection>();
 
 		private RoomsCollection Rooms => _rooms;
 
@@ -85,8 +99,8 @@ namespace MUDMapBuilder
 
 		private bool AddRunStep()
 		{
-			++_runSteps;
-			return _options.MaxSteps > _runSteps;
+			_history.Add(_rooms.Clone());
+			return _options.MaxSteps > _history.Count;
 		}
 
 		private StraightenConnectionResult TryStraightenConnection(int sourceRoomId, int targetRoomId, MMBDirection direction)
@@ -115,6 +129,24 @@ namespace MUDMapBuilder
 			return new StraightenConnectionResult(desiredPos, roomRemoved, connectionsFixed);
 		}
 
+		private bool CanRoomBeRemoved(MMBRoom room)
+		{
+			List<RemoveRoomRecord> removes;
+			if (!_removalHistory.TryGetValue(room.Id, out removes))
+			{
+				return true;
+			}
+
+			var remove = (from r in removes where r.Position == room.Position select r).FirstOrDefault();
+
+			// Prevent cycles by forbidding to remove rooms twice in same configurations
+			if (remove != null)
+			{
+				var k = 5;
+			}
+			return remove == null;
+		}
+
 		private bool RemoveRoom(MMBRoom room)
 		{
 			if (room == null)
@@ -130,9 +162,20 @@ namespace MUDMapBuilder
 			}
 
 			// Remove
+			var hashCode = _rooms.GetHashCode();
+
 			_rooms.Remove(room.Id);
 			_toProcess.Remove(room);
 			_removedRooms.Add(room.Id);
+
+			List<RemoveRoomRecord> removes;
+			if (!_removalHistory.TryGetValue(room.Id, out removes))
+			{
+				removes = new List<RemoveRoomRecord>();
+				_removalHistory[room.Id] = removes;
+			}
+
+			removes.Add(new RemoveRoomRecord(room.Id, room.Position, hashCode));
 
 			return AddRunStep();
 		}
@@ -227,11 +270,12 @@ namespace MUDMapBuilder
 			return result;
 		}
 
-		private void Process()
+		private MapBuilderResult Process()
 		{
 			// First run: calculate accessible rooms
-			_rooms.TotalRooms = CalculateAccessibleRooms();
+			var totalRooms = CalculateAccessibleRooms();
 
+			// Now do the actual placement
 			var firstRoom = new MMBRoom(_sourceRooms[0])
 			{
 				Position = new Point(0, 0)
@@ -239,9 +283,9 @@ namespace MUDMapBuilder
 			_toProcess.Add(firstRoom);
 			_rooms.Add(firstRoom);
 
-			while (_toProcess.Count > 0 && _options.MaxSteps > _runSteps)
+			while (_toProcess.Count > 0 && _options.MaxSteps > _history.Count)
 			{
-				while (_toProcess.Count > 0 && _options.MaxSteps > _runSteps)
+				while (_toProcess.Count > 0 && _options.MaxSteps > _history.Count)
 				{
 					var room = _toProcess[0];
 					_toProcess.RemoveAt(0);
@@ -312,7 +356,7 @@ namespace MUDMapBuilder
 						vc = _rooms.BrokenConnections;
 
 						// Connections fix run
-						while(vc.WithObstacles.Count > 0)
+						while (vc.WithObstacles.Count > 0)
 						{
 							var wo = vc.WithObstacles[0];
 
@@ -327,7 +371,7 @@ namespace MUDMapBuilder
 							vc = _rooms.BrokenConnections;
 						}
 
-						while(vc.NonStraight.Count > 0)
+						while (vc.NonStraight.Count > 0)
 						{
 							var ns = vc.NonStraight[0];
 							vc.NonStraight.RemoveAt(0);
@@ -343,30 +387,16 @@ namespace MUDMapBuilder
 
 								case StraightenRoomResult.Fail:
 									var roomToRemove = room1;
-									if (room1.Id == newRoom.Id)
+									if (room1.Id == newRoom.Id || !CanRoomBeRemoved(room1))
 									{
 										roomToRemove = room2;
 									}
 
-									List<Point> positions;
-									if (!_removedRoomsByPos.TryGetValue(roomToRemove.Id, out positions))
-									{
-										positions = new List<Point>();
-										_removedRoomsByPos[roomToRemove.Id] = positions;
-									}
-
-									if (positions.Contains(roomToRemove.Position))
-									{
-										// Don't allow same room to be removed from the same position twice
-										continue;
-									}
-									
-									if (!RemoveRoom(roomToRemove))
+									if (CanRoomBeRemoved(roomToRemove) && !RemoveRoom(roomToRemove))
 									{
 										goto finish;
 									}
 
-									positions.Add(roomToRemove.Position);
 									break;
 
 								case StraightenRoomResult.OutOfSteps:
@@ -411,15 +441,13 @@ namespace MUDMapBuilder
 			}
 
 		finish:;
-			_rooms.MaxRunSteps = _runSteps;
+			return new MapBuilderResult(_history.ToArray(), totalRooms);
 		}
 
-		public static RoomsCollection Build(IMMBRoom[] sourceRooms, BuildOptions options = null)
+		public static MapBuilderResult Build(IMMBRoom[] sourceRooms, BuildOptions options = null)
 		{
 			var mapBuilder = new MapBuilder(sourceRooms, options);
-			mapBuilder.Process();
-
-			return mapBuilder.Rooms;
+			return mapBuilder.Process();
 		}
 	}
 }

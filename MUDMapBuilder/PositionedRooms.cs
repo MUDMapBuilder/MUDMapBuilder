@@ -284,6 +284,10 @@ namespace MUDMapBuilder
 				{
 					var exitDir = pair.Key;
 					var exitRoom = pair.Value;
+					if (exitRoom.Id == room.Id)
+					{
+						continue;
+					}
 
 					var targetRoom = GetRoomById(exitRoom.Id);
 					if (targetRoom == null)
@@ -412,6 +416,10 @@ namespace MUDMapBuilder
 				{
 					var exitDir = pair.Key;
 					var exitRoom = pair.Value;
+					if (exitRoom.Id == room.Id)
+					{
+						continue;
+					}
 
 					var targetRoom = GetRoomById(exitRoom.Id);
 					if (targetRoom == null)

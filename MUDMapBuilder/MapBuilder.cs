@@ -288,7 +288,7 @@ namespace MUDMapBuilder
 					{
 						var exitDir = pair.Key;
 						var exitRoom = pair.Value;
-						if (_rooms.GetRoomById(exitRoom.Id) != null)
+						if (exitRoom.Id == room.Id || _rooms.GetRoomById(exitRoom.Id) != null)
 						{
 							continue;
 						}
@@ -431,6 +431,22 @@ namespace MUDMapBuilder
 
 						_toProcess.Add(connectedRoom);
 					}
+				}
+
+				// Finally deal with rooms that weren't reached
+				foreach(var sourceRoom in _sourceRooms)
+				{
+					if (_rooms.GetRoomById(sourceRoom.Id) != null ||
+						(from tp in _toProcess where tp.Room.Id == sourceRoom.Id select tp).FirstOrDefault() != null ||
+						_removedRooms.Contains(sourceRoom.Id)) 
+					{
+						// Room had been processed one way or other
+						continue;
+					}
+
+					// Unprocessed room
+					// Firstly check whether it connects to any existing room
+					var k = 5;
 				}
 			}
 

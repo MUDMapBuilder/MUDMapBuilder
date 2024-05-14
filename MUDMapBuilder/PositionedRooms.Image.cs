@@ -1,14 +1,8 @@
-﻿using GoRogue.MapViews;
-using GoRogue.Pathing;
-using GoRogue;
-using SkiaSharp;
+﻿using SkiaSharp;
 using System.Collections.Generic;
 using System;
 using System.Drawing;
 using System.IO;
-using System.Numerics;
-using System.Linq;
-using Rectangle = System.Drawing.Rectangle;
 
 namespace MUDMapBuilder
 {
@@ -145,21 +139,55 @@ namespace MUDMapBuilder
 									continue;
 								}
 
-								if (BrokenConnections.WithObstacles.Find(room.Id, targetRoom.Id, exitDir) == null)
-								{
-									if (BrokenConnections.NonStraight.Find(room.Id, targetRoom.Id, exitDir) != null)
-									{
-										paint.Color = NonStraightConnection;
-									}
-									else if (BrokenConnections.Long.Find(room.Id, targetRoom.Id, exitDir) != null)
-									{
-										paint.Color = LongConnection;
-									}
-									else
-									{
-										paint.Color = DefaultColor;
-									}
+								var oppositeDir = exitDir.GetOppositeDirection();
+								var isTwoWay = targetRoom.Room.Exits.ContainsKey(oppositeDir) &&
+									targetRoom.Room.Exits[oppositeDir].Id == room.Id;
 
+								if (isTwoWay)
+								{
+									paint.Color = DefaultColor;
+								}
+								else
+								{
+									paint.Color = SKColors.Magenta;
+								}
+
+								var isStraight = true;
+								switch (exitDir)
+								{
+									case MMBDirection.North:
+										if (x == targetPos.X && y < targetPos.Y)
+										{
+											isStraight = false;
+										}
+										break;
+									case MMBDirection.East:
+										if (x > targetPos.X && y == targetPos.Y)
+										{
+											isStraight = false;
+										}
+										break;
+									case MMBDirection.South:
+										if (x == targetPos.X && y > targetPos.Y)
+										{
+											isStraight = false;
+										}
+										break;
+									case MMBDirection.West:
+										if (x < targetPos.X && y == targetPos.Y)
+										{
+											isStraight = false;
+										}
+										break;
+								}
+
+								if (room.Id == targetRoom.Id)
+								{
+									isStraight = false;
+								}
+								
+								if (isStraight)
+								{
 									// Straight connection
 									// Source and target room are close to each other, hence draw the simple line
 									var targetRect = GetRoomRect(targetPos);
@@ -169,27 +197,19 @@ namespace MUDMapBuilder
 								}
 								else
 								{
-									paint.Color = ConnectionWithObstacles;
-
 									// In other case we might have to use A* to draw the path
 									// Basic idea is to consider every cell(spaces between rooms are cells too) as grid 2x2
 									// Where 1 means center
-									var aStarSourceCoords = new Point(x, y).ToAStarCoord() + exitDir.ToAStarCoord();
-									var aStarTargetCoords = targetPos.ToAStarCoord() + exitDir.GetOppositeDirection().ToAStarCoord();
+									var steps = BuildPath(new Point(x, y), targetPos, exitDir);
 
-									var aStarView = new AStarView(this);
-									var pathFinder = new AStar(aStarView, Distance.MANHATTAN);
-									var path = pathFinder.ShortestPath(aStarSourceCoords, aStarTargetCoords);
-									var steps = path.Steps.ToArray();
+									var src = steps[0];
 
-									var src = aStarSourceCoords;
-									for (var j = 0; j < steps.Length; j++)
+									var points = new List<SKPoint>();
+									for (var j = 1; j < steps.Count; j++)
 									{
 										var dest = steps[j];
 
-										var sourceScreen = ToScreenCoord(src);
-										var targetScreen = ToScreenCoord(dest);
-										canvas.DrawLine(sourceScreen.X, sourceScreen.Y, targetScreen.X, targetScreen.Y, paint);
+										canvas.DrawLine(src.X, src.Y, dest.X, dest.Y, paint);
 
 										src = dest;
 									}
@@ -235,6 +255,91 @@ namespace MUDMapBuilder
 			return new MMBImageResult(imageBytes, roomInfos.ToArray());
 		}
 
+		private List<Point> BuildPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction)
+		{
+			var sourceRoomRect = GetRoomRect(sourceGridPos);
+
+			// Add source connection point
+			var sourcePos = GetConnectionPoint(sourceRoomRect, direction);
+			var result = new List<Point>
+			{
+				sourcePos
+			};
+
+			var pathRadius = RoomSpace.X / 4;
+
+			// Firstly add direction movement
+			var delta = direction.GetDelta();
+			sourcePos.X += delta.X * pathRadius;
+			sourcePos.Y += delta.Y * pathRadius;
+			result.Add(sourcePos);
+
+			var targetRoomRect = GetRoomRect(targetGridPos);
+			var targetConnectionPos = GetConnectionPoint(targetRoomRect, direction.GetOppositeDirection());
+			var targetPos = targetConnectionPos;
+			delta = direction.GetOppositeDirection().GetDelta();
+			targetPos.X += delta.X * pathRadius;
+			targetPos.Y += delta.Y * pathRadius;
+
+			if (direction == MMBDirection.West || direction == MMBDirection.East)
+			{
+				if (sourceGridPos.Y == targetGridPos.Y)
+				{
+					// Go either up or down
+					if (targetPos.Y < sourcePos.Y)
+					{
+						sourcePos = new Point(sourcePos.X, sourcePos.Y - pathRadius);
+					}
+					else
+					{
+						sourcePos = new Point(sourcePos.X, sourcePos.Y + pathRadius);
+					}
+					result.Add(sourcePos);
+				}
+				else
+				{
+					// Half of the vertical movement
+					sourcePos = new Point(sourcePos.X, sourcePos.Y + (targetPos.Y - sourcePos.Y) / 2);
+					result.Add(sourcePos);
+				}
+
+				// Horizontal movement
+				sourcePos = new Point(targetPos.X, sourcePos.Y);
+				result.Add(sourcePos);
+			}
+			else
+			{
+				if (sourceGridPos.X == targetGridPos.X)
+				{
+					// Go either left or right
+					if (targetPos.X < sourcePos.X)
+					{
+						sourcePos = new Point(sourcePos.X - pathRadius, sourcePos.Y);
+					}
+					else
+					{
+						sourcePos = new Point(sourcePos.X + pathRadius, sourcePos.Y);
+					}
+					result.Add(sourcePos);
+				}
+				else
+				{
+					// Half of horizontal movement
+					sourcePos = new Point(sourcePos.X + (targetPos.X - sourcePos.X) / 2, sourcePos.Y);
+					result.Add(sourcePos);
+				}
+
+				// Vertical movement
+				sourcePos = new Point(sourcePos.X, targetPos.Y);
+				result.Add(sourcePos);
+			}
+
+			result.Add(targetPos);
+			result.Add(targetConnectionPos);
+
+			return result;
+		}
+
 		private Point ToScreen(Point pos)
 		{
 			if (pos.X >= _cellsWidths.Length)
@@ -258,53 +363,6 @@ namespace MUDMapBuilder
 			return new Rectangle(screen.X, screen.Y, _cellsWidths[pos.X], RoomHeight);
 		}
 
-		private Point ToScreenCoord(Coord coord)
-		{
-			// Shift by initial space
-			coord -= new Coord(2, 2);
-
-			// Determine grid coord
-			var gridCoord = new Point(coord.X / 4, coord.Y / 4);
-
-			// Calculate cell screen coords
-			var screenX = RoomSpace.X;
-			for (var x = 0; x < gridCoord.X; ++x)
-			{
-				screenX += _cellsWidths[x];
-				screenX += RoomSpace.X;
-			}
-
-			var screenY = gridCoord.Y * RoomHeight + (gridCoord.Y + 1) * RoomSpace.Y;
-
-			switch (coord.X % 4)
-			{
-				case 1:
-					screenX += _cellsWidths[gridCoord.X] / 2;
-					break;
-				case 2:
-					screenX += _cellsWidths[gridCoord.X];
-					break;
-				case 3:
-					screenX += _cellsWidths[gridCoord.X] + RoomSpace.X / 2;
-					break;
-			}
-
-			switch (coord.Y % 4)
-			{
-				case 1:
-					screenY += RoomHeight / 2;
-					break;
-				case 2:
-					screenY += RoomHeight;
-					break;
-				case 3:
-					screenY += RoomHeight + RoomSpace.Y / 2;
-					break;
-			}
-
-			return new Point(screenX, screenY);
-		}
-
 		private static Point GetConnectionPoint(Rectangle rect, MMBDirection direction)
 		{
 			switch (direction)
@@ -325,82 +383,5 @@ namespace MUDMapBuilder
 
 			throw new Exception($"Unknown direction {direction}");
 		}
-
-		private class AStarView : IMapView<bool>
-		{
-			private readonly PositionedRooms _rooms;
-
-			public bool this[Coord pos] => CheckMove(pos.ToVector2());
-
-			public bool this[int index1D] => throw new NotImplementedException();
-
-			public bool this[int x, int y] => CheckMove(new Vector2(x, y));
-
-			public int Height => _rooms.Height * 4 + 2;
-
-			public int Width => _rooms.Width * 4 + 2;
-
-			public AStarView(PositionedRooms grid)
-			{
-				_rooms = grid;
-			}
-
-			public bool CheckMove(Vector2 coord)
-			{
-				// Firstly determine whether wether we're at cell or space zone
-				if (coord.X < 2 || coord.Y < 2)
-				{
-					// Space
-					return true;
-				}
-
-				// Shift by initial space
-				coord.X -= 2;
-				coord.Y -= 2;
-
-				var cx = coord.X % 4;
-				var cy = coord.Y % 4;
-				if (cx > 2 || cy > 2)
-				{
-					// Space
-					return true;
-				}
-
-				// Cell
-				var gridPoint = new Point((int)(coord.X / 4), (int)(coord.Y / 4));
-				var room = _rooms.GetRoomByZeroBasedPosition(gridPoint);
-
-				return room == null;
-			}
-		}
-	}
-
-	internal static class MMBGridImageExtensions
-	{
-		public static Coord ToAStarCoord(this MMBDirection direction)
-		{
-			switch (direction)
-			{
-				case MMBDirection.North:
-					return new Coord(1, 0);
-				case MMBDirection.East:
-					return new Coord(2, 1);
-				case MMBDirection.South:
-					return new Coord(1, 2);
-				case MMBDirection.West:
-					return new Coord(0, 1);
-				case MMBDirection.Up:
-					return new Coord(2, 0);
-				case MMBDirection.Down:
-					return new Coord(0, 2);
-			}
-
-			throw new Exception($"Unknown direction {direction}");
-		}
-
-		public static Coord ToAStarCoord(this Point source) => new Coord(source.X * 4 + 2, source.Y * 4 + 2);
-		public static Point ToGridPoint(this Coord source) => new Point((source.X - 2) / 4, (source.Y - 2) / 4);
-		public static Vector2 ToVector2(this Coord source) => new Vector2(source.X, source.Y);
-		public static Coord ToCoord(this Vector2 source) => new Coord((int)source.X, (int)source.Y);
 	}
 }

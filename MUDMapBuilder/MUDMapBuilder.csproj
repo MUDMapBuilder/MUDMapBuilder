@@ -8,7 +8,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="GoRogue" Version="2.6.4" />
     <PackageReference Include="SkiaSharp" Version="2.88.8" />
   </ItemGroup>
 </Project>

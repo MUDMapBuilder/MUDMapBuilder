@@ -524,11 +524,6 @@ namespace MUDMapBuilder
 					}
 				}
 
-				if (endX < startX)
-				{
-					var k = 5;
-				}
-
 				_gridArea += (endX - startX + 1);
 			}
 		}
@@ -781,7 +776,6 @@ namespace MUDMapBuilder
 			else
 			{
 				// Vertical movement
-
 				int startY, endY;
 				if (exitDir == MMBDirection.North)
 				{

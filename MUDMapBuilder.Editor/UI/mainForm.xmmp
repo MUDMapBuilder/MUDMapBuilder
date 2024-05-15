@@ -27,15 +27,31 @@
         </Button>
       </HorizontalStackPanel>
       <HorizontalStackPanel Spacing="8">
-        <Label Text="Force X:" />
-        <SpinButton Maximum="10" Minimum="-10" Integer="True" Width="59" Id="_spinPushForceX" />
-        <Label Text="Force Y:" />
-        <SpinButton Maximum="10" Minimum="-10" Integer="True" Width="59" Id="_spinPushForceY" />
-        <Button Id="_buttonMeasure">
-          <Label Text="Measure" />
+        <Button Id="_buttonMeasureWest">
+          <Label Text="Measure West" />
         </Button>
-        <Button Id="_buttonPush">
-          <Label Text="Push" />
+        <Button Id="_buttonMeasureEast">
+          <Label Text="Measure East" />
+        </Button>
+        <Button Id="_buttonMeasureNorth">
+          <Label Text="Measure North" />
+        </Button>
+        <Button Id="_buttonMeasureSouth">
+          <Label Text="Measure South" />
+        </Button>
+      </HorizontalStackPanel>
+      <HorizontalStackPanel Spacing="8">
+        <Button Id="_buttonPushWest">
+          <Label Text="Push West" />
+        </Button>
+        <Button Id="_buttonPushEast">
+          <Label Text="Push East" />
+        </Button>
+        <Button Id="_buttonPushNorth">
+          <Label Text="Push North" />
+        </Button>
+        <Button Id="_buttonPushSouth">
+          <Label Text="Push South" />
         </Button>
       </HorizontalStackPanel>
       <Panel StackPanel.ProportionType="Fill">
@@ -43,6 +59,7 @@
         <VerticalStackPanel Spacing="8" Id="_panelConnectionIssues">
           <Label Text="Rooms: 10" TextColor="#0379FFFF" Id="_labelRoomsCount" />
           <Label Text="Grid Size: 10x10" TextColor="#0379FFFF" Id="_labelGridSize" />
+          <Label Text="Grid Area: 100" TextColor="#0379FFFF" Id="_labelGridArea" />
           <Label Text="Start Compact Step: 100" TextColor="#0379FFFF" Id="_labelStartCompactStep" />
           <Label Text="Connections With Obstacles: 10" TextColor="#FE3930FF" Id="_labelConnectionsWithObstacles" />
           <Label Text="Non-Straight Connections: 10" TextColor="#FFCC01FF" Id="_labelNonStraightConnections" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 
@@ -44,14 +45,7 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public int GridArea
-		{
-			get
-			{
-				UpdatePositions();
-				return _gridArea;
-			}
-		}
+		public int GridArea => _gridArea;
 
 		public int Width => RoomsRectangle.Width;
 		public int Height => RoomsRectangle.Height;
@@ -86,7 +80,7 @@ namespace MUDMapBuilder
 					room.Connections[exitDir] = exit.Value.Id;
 
 					var foundOpposite = false;
-					foreach(var targetRoomExit in targetRoom.Room.Exits)
+					foreach (var targetRoomExit in targetRoom.Room.Exits)
 					{
 						if (targetRoomExit.Value.Id == room.Id)
 						{
@@ -94,7 +88,7 @@ namespace MUDMapBuilder
 							break;
 						}
 					}
-					
+
 					if (!foundOpposite)
 					{
 						targetRoom.Connections[exitDir.GetOppositeDirection()] = room.Id;
@@ -395,9 +389,9 @@ namespace MUDMapBuilder
 			}
 
 			// Intersections
-			for(var x = 0; x < Width; ++x)
+			for (var x = 0; x < Width; ++x)
 			{
-				for(var y = 0; y < Height; ++y)
+				for (var y = 0; y < Height; ++y)
 				{
 					var connections = _connectionsGrid[x, y];
 					if (connections == null || connections.Count <= 1)
@@ -405,7 +399,7 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					foreach(var c in connections)
+					foreach (var c in connections)
 					{
 						result.Intersections.Add(c.SourceRoomId, c.TargetRoomId, c.Direction);
 					}
@@ -479,7 +473,7 @@ namespace MUDMapBuilder
 			}
 
 			_roomsRectangle = CalculateRectangle();
-			
+
 			_roomsByPositions = new MMBRoom[_roomsRectangle.Width, _roomsRectangle.Height];
 			_connectionsGrid = new MMBConnectionsList[_roomsRectangle.Width, _roomsRectangle.Height];
 
@@ -503,24 +497,39 @@ namespace MUDMapBuilder
 			_gridArea = 0;
 			for (var y = 0; y < Height; ++y)
 			{
-				var isData = false;
-				for (var x = 0; x < Width; ++x)
+				int startX, endX;
+				var found = false;
+				for (startX = 0; startX < Width; ++startX)
 				{
-					var room = GetRoomByZeroBasedPosition(x, y);
-					
-					if(!isData && room != null)
+					var room = GetRoomByZeroBasedPosition(startX, y);
+					if (room != null)
 					{
-						isData = true;
-					} else if(isData && room == null)
-					{
-						isData = false;
-					}
-
-					if (isData)
-					{
-						++_gridArea;
+						found = true;
+						break;
 					}
 				}
+
+				if (!found)
+				{
+					// Skip this line
+					continue;
+				}
+
+				for (endX = Width - 1; endX >= 0; --endX)
+				{
+					var room = GetRoomByZeroBasedPosition(endX, y);
+					if (room != null)
+					{
+						break;
+					}
+				}
+
+				if (endX < startX)
+				{
+					var k = 5;
+				}
+
+				_gridArea += (endX - startX + 1);
 			}
 		}
 
@@ -587,28 +596,369 @@ namespace MUDMapBuilder
 			return result;
 		}
 
+		public MeasurePushRoomResult MeasurePushRoom(int firstRoomId, Point firstForceVector)
+		{
+			// Determine rooms movement
+			var movedRooms = new Dictionary<int, Point>();
+
+			var firstRoom = GetRoomById(firstRoomId);
+			var toProcess = new List<Tuple<MMBRoom, Point>>
+			{
+				new Tuple<MMBRoom, Point>(firstRoom, firstForceVector)
+			};
+
+			while (toProcess.Count > 0)
+			{
+				var item = toProcess[0];
+				var room = item.Item1;
+				var pos = room.Position.Value;
+				toProcess.RemoveAt(0);
+
+				movedRooms[room.Id] = item.Item2;
+
+				// Process neighbour rooms
+				foreach (var pair in room.Connections)
+				{
+					var exitDir = pair.Key;
+					var forceVector = item.Item2;
+
+					var targetRoom = GetRoomById(pair.Value);
+					if (targetRoom == null || targetRoom.Position == null || movedRooms.ContainsKey(pair.Value))
+					{
+						continue;
+					}
+
+					if (!IsConnectionStraight(room.Position.Value, targetRoom.Position.Value, exitDir))
+					{
+						// Skip broken connections
+						continue;
+					}
+
+					var targetPos = targetRoom.Position.Value;
+					switch (exitDir)
+					{
+						case MMBDirection.North:
+							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
+							if (forceVector.Y > 0)
+							{
+								forceVector.Y = 0;
+							}
+							break;
+
+						case MMBDirection.East:
+							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
+							if (forceVector.X < 0)
+							{
+								forceVector.X = 0;
+							}
+							break;
+
+						case MMBDirection.South:
+							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
+							if (forceVector.Y < 0)
+							{
+								forceVector.Y = 0;
+							}
+							break;
+
+						case MMBDirection.West:
+							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
+							if (forceVector.X > 0)
+							{
+								forceVector.X = 0;
+							}
+							break;
+
+						case MMBDirection.Up:
+							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
+							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
+
+							if (forceVector.X < 0)
+							{
+								forceVector.X = 0;
+							}
+
+							if (forceVector.Y > 0)
+							{
+								forceVector.Y = 0;
+							}
+							break;
+
+						case MMBDirection.Down:
+							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
+							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
+
+							if (forceVector.X > 0)
+							{
+								forceVector.X = 0;
+							}
+							if (forceVector.Y < 0)
+							{
+								forceVector.Y = 0;
+							}
+
+							break;
+					}
+
+					if (forceVector.X != 0 || forceVector.Y != 0)
+					{
+						toProcess.Add(new Tuple<MMBRoom, Point>(targetRoom, forceVector));
+					}
+				}
+			}
+
+			// Determine deleted rooms
+			var movedRoomsList = new List<MeasurePushRoomMovement>();
+			var deletedRooms = new List<MMBRoom>();
+			foreach (var pair in movedRooms)
+			{
+				var room = GetRoomById(pair.Key);
+				var delta = pair.Value;
+
+				movedRoomsList.Add(new MeasurePushRoomMovement(room, delta));
+
+				var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
+
+				var existingRoom = GetRoomByPosition(newPos);
+				if (existingRoom != null && !movedRooms.ContainsKey(existingRoom.Id))
+				{
+					deletedRooms.Add(existingRoom);
+				}
+			}
+
+			return new MeasurePushRoomResult(movedRoomsList.ToArray(), deletedRooms.ToArray());
+		}
+
+		private void MeasureCompactPushAddConnectionNeighbours(MMBDirection pushDirection, MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir, HashSet<int> movedRooms, List<MMBRoom> toProcess)
+		{
+			var doCheck = ((pushDirection == MMBDirection.North || pushDirection == MMBDirection.South) &&
+						(exitDir == MMBDirection.West || exitDir == MMBDirection.East)) ||
+						((pushDirection == MMBDirection.West || pushDirection == MMBDirection.East) &&
+						(exitDir == MMBDirection.North || exitDir == MMBDirection.South));
+
+			if (!doCheck)
+			{
+				return;
+			}
+
+			var sourcePos = sourceRoom.Position.Value;
+			var targetPos = targetRoom.Position.Value;
+
+			if (exitDir == MMBDirection.West || exitDir == MMBDirection.East)
+			{
+				// Horizontal movement
+				int startX, endX;
+				if (exitDir == MMBDirection.West)
+				{
+					startX = sourcePos.X - 1;
+					endX = targetPos.X + 1;
+				}
+				else
+				{
+					startX = sourcePos.X + 1;
+					endX = targetPos.X - 1;
+				}
+
+				int y;
+				if (pushDirection == MMBDirection.North)
+				{
+					y = sourcePos.Y - 1;
+				}
+				else
+				{
+					y = sourcePos.Y + 1;
+				}
+
+				for (var x = startX; x <= endX; x++)
+				{
+					var neighbourRoom = GetRoomByPosition(new Point(x, y));
+					if (neighbourRoom != null && !movedRooms.Contains(neighbourRoom.Id))
+					{
+						toProcess.Add(neighbourRoom);
+					}
+				}
+			}
+			else
+			{
+				// Vertical movement
+
+				int startY, endY;
+				if (exitDir == MMBDirection.North)
+				{
+					startY = sourcePos.Y - 1;
+					endY = targetPos.Y + 1;
+				}
+				else
+				{
+					startY = sourcePos.Y + 1;
+					endY = targetPos.Y - 1;
+				}
+
+				int x;
+				if (pushDirection == MMBDirection.West)
+				{
+					x = sourcePos.X - 1;
+				}
+				else
+				{
+					x = sourcePos.X + 1;
+				}
+
+				for (var y = startY; y <= endY; y++)
+				{
+					var neighbourRoom = GetRoomByPosition(new Point(x, y));
+					if (neighbourRoom != null && !movedRooms.Contains(neighbourRoom.Id))
+					{
+						toProcess.Add(neighbourRoom);
+					}
+				}
+			}
+		}
+
+		public MeasurePushRoomResult MeasureCompactPushRoom(int firstRoomId, MMBDirection direction)
+		{
+			// Determine rooms movement
+			var delta = direction.GetDelta();
+			var movedRooms = new HashSet<int>();
+			var firstRoom = GetRoomById(firstRoomId);
+			var toProcess = new List<MMBRoom>
+			{
+				firstRoom
+			};
+
+			while (toProcess.Count > 0)
+			{
+				var room = toProcess[0];
+				toProcess.RemoveAt(0);
+
+				movedRooms.Add(room.Id);
+
+				// Process connected rooms
+				var sourcePos = room.Position.Value;
+				foreach (var pair in room.Connections)
+				{
+					var exitDir = pair.Key;
+					var targetRoom = GetRoomById(pair.Value);
+					if (targetRoom == null || targetRoom.Position == null || movedRooms.Contains(pair.Value))
+					{
+						continue;
+					}
+
+					if (!IsConnectionStraight(room.Position.Value, targetRoom.Position.Value, exitDir))
+					{
+						// Skip broken connections
+						continue;
+					}
+
+					var targetPos = targetRoom.Position.Value;
+
+					var doAdd = false;
+					switch (direction)
+					{
+						case MMBDirection.North:
+							doAdd = exitDir == MMBDirection.West || exitDir == MMBDirection.East ||
+								(exitDir == MMBDirection.Up && sourcePos.Y - targetPos.Y == 1);
+							break;
+						case MMBDirection.East:
+							doAdd = exitDir == MMBDirection.North || exitDir == MMBDirection.South ||
+								(exitDir == MMBDirection.Up && sourcePos.X - targetPos.X == -1);
+							break;
+						case MMBDirection.South:
+							doAdd = exitDir == MMBDirection.West || exitDir == MMBDirection.East ||
+								(exitDir == MMBDirection.Down && sourcePos.Y - targetPos.Y == -1);
+							break;
+						case MMBDirection.West:
+							doAdd = exitDir == MMBDirection.North || exitDir == MMBDirection.South ||
+								(exitDir == MMBDirection.Down && sourcePos.X - targetPos.X == 1);
+							break;
+					}
+
+					if (doAdd)
+					{
+						toProcess.Add(targetRoom);
+					}
+
+					// Add rooms neighbor to connection
+					MeasureCompactPushAddConnectionNeighbours(direction, room, targetRoom, exitDir, movedRooms, toProcess);
+				}
+
+				// Add neighbor room
+				var neighbourPos = new Point(sourcePos.X + delta.X, sourcePos.Y + delta.Y);
+				var neighbourRoom = GetRoomByPosition(neighbourPos);
+				if (neighbourRoom != null && !movedRooms.Contains(neighbourRoom.Id))
+				{
+					toProcess.Add(neighbourRoom);
+				}
+			}
+
+			// Determine deleted rooms
+			var movedRoomsList = new List<MeasurePushRoomMovement>();
+			var deletedRooms = new List<MMBRoom>();
+			foreach (var pair in movedRooms)
+			{
+				var room = GetRoomById(pair);
+
+				movedRoomsList.Add(new MeasurePushRoomMovement(room, delta));
+
+				var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
+
+				var existingRoom = GetRoomByPosition(newPos);
+				if (existingRoom != null && !movedRooms.Contains(existingRoom.Id))
+				{
+					deletedRooms.Add(existingRoom);
+				}
+			}
+
+			return new MeasurePushRoomResult(movedRoomsList.ToArray(), deletedRooms.ToArray());
+		}
+
+		public void ClearMarks()
+		{
+			foreach (var pair in _roomsByIds)
+			{
+				var room = pair.Value;
+				room.MarkColor = null;
+				room.ForceMark = null;
+			}
+		}
+
 		public IEnumerator<MMBRoom> GetEnumerator() => _roomsByIds.Values.GetEnumerator();
 
 		IEnumerator IEnumerable.GetEnumerator() => _roomsByIds.Values.GetEnumerator();
 
-		public override int GetHashCode()
+		public static bool AreEqual(PositionedRooms a, PositionedRooms b)
 		{
-			var result = 0;
-
-			foreach (var ri in _roomsByIds)
+			if (a.Width != b.Width || a.Height != b.Height)
 			{
-				var room = ri.Value;
-				if (room.Position == null)
-				{
-					continue;
-				}
-
-				result ^= room.Id;
-				result ^= (room.Position.Value.X << 8);
-				result ^= (room.Position.Value.Y << 16);
+				return false;
 			}
 
-			return result;
+			for (var x = 0; x < a.Width; ++x)
+			{
+				for (var y = 0; y < a.Height; ++y)
+				{
+					var roomA = a.GetRoomByZeroBasedPosition(x, y);
+					var roomB = b.GetRoomByZeroBasedPosition(x, y);
+
+					if (roomA == null && roomB == null)
+					{
+						continue;
+					}
+
+					if ((roomA == null && roomB != null) ||
+						(roomA != null && roomB == null))
+					{
+						return false;
+					}
+
+					if (roomA.Id != roomB.Id)
+					{
+						return false;
+					}
+				}
+			}
+
+			return true;
 		}
 	}
 }

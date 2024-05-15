@@ -13,9 +13,24 @@ namespace MUDMapBuilder.Editor.UI
 {
 	public class MapViewer : Image
 	{
+		private int? _selectedRoomId;
 		private Area _area;
 		private MMBImageResult _imageResult;
 		private int _step;
+
+		public int? SelectedRoomId
+		{
+			get => _selectedRoomId;
+
+			private set
+			{
+				if (value == _selectedRoomId) return;
+
+				_selectedRoomId = value;
+				Rooms.SelectedRoomId = value;
+				SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+			}
+		}
 
 		public MapBuilderResult Result { get; private set; }
 
@@ -60,6 +75,8 @@ namespace MUDMapBuilder.Editor.UI
 			}
 		}
 
+		public event EventHandler SelectedIndexChanged;
+
 		public MapViewer()
 		{
 			Background = new SolidBrush(Color.White);
@@ -79,7 +96,7 @@ namespace MUDMapBuilder.Editor.UI
 			Redraw();
 		}
 
-		private void Redraw()
+		public void Redraw()
 		{
 			Renderable = null;
 
@@ -103,7 +120,6 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			base.OnTouchDown();
 
-			var rooms = Rooms;
 			if (Rooms == null)
 			{
 				return;
@@ -114,7 +130,7 @@ namespace MUDMapBuilder.Editor.UI
 			{
 				if (room.Rectangle.Contains(pos.X, pos.Y))
 				{
-					rooms.SelectedRoomId = room.Room.Id;
+					SelectedRoomId = room.Room.Id;
 					Redraw();
 					break;
 				}

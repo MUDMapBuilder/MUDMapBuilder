@@ -46,7 +46,7 @@ namespace MUDMapBuilder
 			}
 		}
 
-		internal Point? ForceMark
+		public Point? ForceMark
 		{
 			get => _forceMark;
 			set

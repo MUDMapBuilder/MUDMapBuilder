@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 
@@ -37,25 +38,10 @@ namespace MUDMapBuilder
 			}
 		}
 
-		private class RemoveRoomRecord
-		{
-			public int RoomId { get; private set; }
-			public Point Position { get; private set; }
-			public int HashCode { get; private set; }
-
-			public RemoveRoomRecord(int roomId, Point position, int hashCode)
-			{
-				RoomId = roomId;
-				Position = position;
-				HashCode = hashCode;
-			}
-		}
-
 		private readonly IMMBRoom[] _sourceRooms;
 		private readonly BuildOptions _options;
 		private readonly List<MMBRoom> _toProcess = new List<MMBRoom>();
 		private readonly HashSet<int> _removedRooms = new HashSet<int>();
-		private readonly Dictionary<int, List<RemoveRoomRecord>> _removalHistory = new Dictionary<int, List<RemoveRoomRecord>>();
 		private PositionedRooms _rooms;
 		private readonly List<PositionedRooms> _history = new List<PositionedRooms>();
 
@@ -101,158 +87,25 @@ namespace MUDMapBuilder
 			return _options.MaxSteps > _history.Count;
 		}
 
-		private static Dictionary<int, Point> MeasurePushRoom(PositionedRooms rooms, int firstRoomId, Point firstForceVector)
-		{
-			var roomsToPush = new Dictionary<int, Point>();
-
-			var firstRoom = rooms.GetRoomById(firstRoomId);
-			var toProcess = new List<Tuple<MMBRoom, Point>>
-			{
-				new Tuple<MMBRoom, Point>(firstRoom, firstForceVector)
-			};
-
-			while (toProcess.Count > 0)
-			{
-				var item = toProcess[0];
-				var room = item.Item1;
-				var pos = room.Position.Value;
-				toProcess.RemoveAt(0);
-
-				roomsToPush[room.Id] = item.Item2;
-
-				// Process neighbour rooms
-				foreach (var pair in room.Room.Exits)
-				{
-					var exitDir = pair.Key;
-					var exitRoom = pair.Value;
-					var forceVector = item.Item2;
-
-					var targetRoom = rooms.GetRoomById(exitRoom.Id);
-					if (targetRoom == null || targetRoom.Position == null || roomsToPush.ContainsKey(exitRoom.Id))
-					{
-						continue;
-					}
-
-					if (!PositionedRooms.IsConnectionStraight(room.Position.Value, targetRoom.Position.Value, exitDir))
-					{
-						// Skip broken connections
-						continue;
-					}
-
-					var targetPos = targetRoom.Position.Value;
-					switch (exitDir)
-					{
-						case MMBDirection.North:
-							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
-							if (forceVector.Y > 0)
-							{
-								forceVector.Y = 0;
-							}
-							break;
-
-						case MMBDirection.East:
-							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
-							if (forceVector.X < 0)
-							{
-								forceVector.X = 0;
-							}
-							break;
-
-						case MMBDirection.South:
-							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
-							if (forceVector.Y < 0)
-							{
-								forceVector.Y = 0;
-							}
-							break;
-
-						case MMBDirection.West:
-							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
-							if (forceVector.X > 0)
-							{
-								forceVector.X = 0;
-							}
-							break;
-
-						case MMBDirection.Up:
-							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
-							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
-
-							if (forceVector.X < 0)
-							{
-								forceVector.X = 0;
-							}
-
-							if (forceVector.Y > 0)
-							{
-								forceVector.Y = 0;
-							}
-							break;
-
-						case MMBDirection.Down:
-							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
-							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
-
-							if (forceVector.X > 0)
-							{
-								forceVector.X = 0;
-							}
-							if (forceVector.Y < 0)
-							{
-								forceVector.Y = 0;
-							}
-
-							break;
-					}
-
-					if (forceVector.X != 0 || forceVector.Y != 0)
-					{
-						toProcess.Add(new Tuple<MMBRoom, Point>(targetRoom, forceVector));
-					}
-				}
-			}
-
-			return roomsToPush;
-		}
-
 		private bool PushRoom(PositionedRooms rooms, int firstRoomId, Point firstForceVector, bool measureRun, out int roomsRemoved)
 		{
-			var roomsToPush = MeasurePushRoom(rooms, firstRoomId, firstForceVector);
+			var measure = rooms.MeasurePushRoom(firstRoomId, firstForceVector);
 
-			var roomsToDelete = new List<MMBRoom>();
-			var roomsToMove = new List<Tuple<MMBRoom, Point>>();
-			foreach (var pair in roomsToPush)
-			{
-				var room = rooms.GetRoomById(pair.Key);
-				var delta = pair.Value;
-
-				var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
-
-				var existingRoom = rooms.GetRoomByPosition(newPos);
-				if (existingRoom != null && !roomsToPush.ContainsKey(existingRoom.Id))
-				{
-					roomsToDelete.Add(existingRoom);
-				}
-
-				roomsToMove.Add(new Tuple<MMBRoom, Point>(room, delta));
-			}
-
-			roomsRemoved = roomsToDelete.Count;
+			roomsRemoved = measure.DeletedRooms.Length;
 
 			if (!measureRun)
 			{
-				if (roomsToDelete.Count > 0)
+				if (measure.DeletedRooms.Length > 0)
 				{
-					return RemoveRooms(roomsToDelete.ToArray());
+					return RemoveRooms(measure.DeletedRooms);
 				}
 
 				// Mark for movement
-				foreach (var tuple in roomsToMove)
+				foreach (var m in measure.MovedRooms)
 				{
-					var room = tuple.Item1;
-					var delta = tuple.Item2;
+					var room = m.Room;
 					room.MarkColor = SKColors.YellowGreen;
-					room.ForceMark = delta;
+					room.ForceMark = m.Delta;
 				}
 
 				if (!AddRunStep())
@@ -261,13 +114,13 @@ namespace MUDMapBuilder
 				}
 
 				// Do the movement
-				foreach (var tuple in roomsToMove)
+				foreach (var m in measure.MovedRooms)
 				{
-					var room = tuple.Item1;
+					var room = m.Room;
 					room.MarkColor = null;
 					room.ForceMark = null;
 
-					var delta = tuple.Item2;
+					var delta = m.Delta;
 					var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
 					room.Position = newPos;
 				}
@@ -280,16 +133,16 @@ namespace MUDMapBuilder
 			else
 			{
 				// Remove
-				foreach (var room in roomsToDelete)
+				foreach (var room in measure.DeletedRooms)
 				{
 					room.Position = null;
 				}
 
 				// Move
-				foreach (var tuple in roomsToMove)
+				foreach (var m in measure.MovedRooms)
 				{
-					var room = tuple.Item1;
-					var delta = tuple.Item2;
+					var room = m.Room;
+					var delta = m.Delta;
 
 					var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
 					room.Position = newPos;
@@ -298,7 +151,6 @@ namespace MUDMapBuilder
 
 			return true;
 		}
-
 
 		private StraightenConnectionResult TryStraightenConnection(int sourceRoomId, int targetRoomId, MMBDirection direction)
 		{
@@ -318,20 +170,6 @@ namespace MUDMapBuilder
 			var vc2 = rooms.BrokenConnections;
 
 			return new StraightenConnectionResult(delta, roomsRemoved, vc2);
-		}
-
-		private bool CanRoomBeRemoved(MMBRoom room)
-		{
-			List<RemoveRoomRecord> removes;
-			if (!_removalHistory.TryGetValue(room.Id, out removes))
-			{
-				return true;
-			}
-
-			var remove = (from r in removes where r.Position == room.Position select r).FirstOrDefault();
-
-			// Prevent cycles by forbidding to remove rooms twice in same configurations
-			return remove == null;
 		}
 
 		private bool RemoveRooms(MMBRoom[] toRemove)
@@ -431,18 +269,6 @@ namespace MUDMapBuilder
 			// Remove
 			foreach (var room in roomsToRemove)
 			{
-
-				// Record the removal
-				List<RemoveRoomRecord> removes;
-				if (!_removalHistory.TryGetValue(room.Id, out removes))
-				{
-					removes = new List<RemoveRoomRecord>();
-					_removalHistory[room.Id] = removes;
-				}
-
-				var hashCode = _rooms.GetHashCode();
-				removes.Add(new RemoveRoomRecord(room.Id, room.Position.Value, hashCode));
-
 				// Remove
 				room.MarkColor = null;
 				room.Position = null;
@@ -519,6 +345,152 @@ namespace MUDMapBuilder
 			}
 
 			return StraightenRoomResult.Success;
+		}
+
+		private bool CompactRun(MMBDirection pushDirection)
+		{
+			// Firstly collect rooms
+			var roomsToPush = new List<MMBRoom>();
+			if (pushDirection == MMBDirection.West || pushDirection == MMBDirection.East)
+			{
+				for (var y = 0; y < _rooms.Height; ++y)
+				{
+					if (pushDirection == MMBDirection.West)
+					{
+						for (var x = _rooms.Width - 1; x >= 0; --x)
+						{
+							var room = _rooms.GetRoomByZeroBasedPosition(x, y);
+							if (room != null)
+							{
+								roomsToPush.Add(room);
+								break;
+							}
+						}
+					}
+					else
+					{
+						for (var x = 0; x < _rooms.Width; ++x)
+						{
+							var room = _rooms.GetRoomByZeroBasedPosition(x, y);
+							if (room != null)
+							{
+								roomsToPush.Add(room);
+								break;
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				for (var x = 0; x < _rooms.Width; ++x)
+				{
+					if (pushDirection == MMBDirection.North)
+					{
+						for (var y = _rooms.Height - 1; y >= 0; --y)
+						{
+							var room = _rooms.GetRoomByZeroBasedPosition(x, y);
+							if (room != null)
+							{
+								roomsToPush.Add(room);
+								break;
+							}
+						}
+					}
+					else
+					{
+						for (var y = 0; y < _rooms.Height; ++y)
+						{
+							var room = _rooms.GetRoomByZeroBasedPosition(x, y);
+							if (room != null)
+							{
+								roomsToPush.Add(room);
+								break;
+							}
+						}
+					}
+				}
+			}
+
+			// Now try to push every room in the provided direction until it's possible
+			foreach (var room in roomsToPush)
+			{
+				var continueToPush = true;
+				while (continueToPush)
+				{
+					continueToPush = false;
+					var measure = _rooms.MeasureCompactPushRoom(room.Id, pushDirection);
+					if (measure.DeletedRooms.Length > 0)
+					{
+						// Should never happen
+						Debug.Assert(false);
+					}
+					else
+					{
+						// Test push
+						var vc = _rooms.BrokenConnections;
+						var rooms = _rooms.Clone();
+
+						foreach (var m in measure.MovedRooms)
+						{
+							var newPos = new Point(m.Room.Position.Value.X + m.Delta.X,
+								m.Room.Position.Value.Y + m.Delta.Y);
+
+							var roomClone = rooms.GetRoomById(m.Room.Id);
+							roomClone.Position = newPos;
+						}
+
+						var vc2 = rooms.BrokenConnections;
+						if (vc2.WithObstacles.Count > vc.WithObstacles.Count ||
+							vc2.NonStraight.Count > vc.NonStraight.Count)
+						{
+							// Such push would break some room connections
+						}
+						else if (rooms.Width * rooms.Height > _rooms.Width * _rooms.Height)
+						{
+							// Such push would make the grid bigger
+						}
+						else if (PositionedRooms.AreEqual(rooms, _rooms))
+						{
+							// Such push wouldn't change anything
+						}
+						else
+						{
+							// Mark the movement
+							foreach (var m in measure.MovedRooms)
+							{
+								m.Room.ForceMark = m.Delta;
+							}
+
+							if (!AddRunStep())
+							{
+								return false;
+							}
+
+							// Do the move
+							_rooms.ClearMarks();
+							foreach (var m in measure.MovedRooms)
+							{
+								var newPos = new Point(m.Room.Position.Value.X + m.Delta.X,
+									m.Room.Position.Value.Y + m.Delta.Y);
+
+								m.Room.Position = newPos;
+							}
+
+							if (!AddRunStep())
+							{
+								return false;
+							}
+
+							continueToPush = true;
+						}
+					}
+				}
+			}
+
+			_rooms.FixPlacementOfSingleExitRooms();
+
+			return true;
 		}
 
 		private MapBuilderResult Process()
@@ -711,85 +683,26 @@ namespace MUDMapBuilder
 
 		finish:;
 			var startCompactStep = _history.Count;
-			for (var run = 0; run < 100; ++run)
+			if (!CompactRun(MMBDirection.East))
 			{
-				// 100 compact runs
-				vc = _rooms.BrokenConnections;
-				var thereWasPush = false;
-				for (var i = 0; i < vc.Long.Count; ++i)
-				{
-					var l = vc.Long[i];
-
-					var sourceRoom = _rooms.GetRoomById(l.SourceRoomId);
-					var targetRoom = _rooms.GetRoomById(l.TargetRoomId);
-					var sourcePos = sourceRoom.Position.Value;
-					var targetPos = targetRoom.Position.Value;
-
-					var dx = Math.Abs(targetPos.X - sourcePos.X) - 1;
-					var dy = Math.Abs(targetPos.Y - sourcePos.Y) - 1;
-					int length = (int)Math.Sqrt(dx * dx + dy * dy);
-
-					var dir = l.Direction;
-					for (var steps = length; steps >= 1; --steps)
-					{
-						var delta = dir.GetOppositeDirection().GetDelta();
-						delta.X *= steps;
-						delta.Y *= steps;
-
-						var rooms = _rooms.Clone();
-
-						// Measure the push
-						int roomsRemoved;
-						PushRoom(rooms, targetRoom.Id, delta, true, out roomsRemoved);
-
-						var vc2 = rooms.BrokenConnections;
-
-						if (vc2.WithObstacles.Count > vc.WithObstacles.Count ||
-							vc2.NonStraight.Count > vc.NonStraight.Count ||
-							vc2.Intersections.Count > vc.Intersections.Count ||
-							roomsRemoved > 0)
-						{
-							continue;
-						}
-
-						var doPush = false;
-						if (vc2.WithObstacles.Count < vc.WithObstacles.Count ||
-							vc2.NonStraight.Count < vc.NonStraight.Count ||
-							vc2.Intersections.Count < vc.Intersections.Count ||
-							rooms.GridArea < _rooms.GridArea)
-						{
-							doPush = true;
-						}
-
-						if (!doPush)
-						{
-							continue;
-						}
-
-						// Do the actual push
-						if (!PushRoom(_rooms, targetRoom.Id, delta, false, out roomsRemoved))
-						{
-							goto finish2;
-						}
-
-						thereWasPush = true;
-
-						break;
-					}
-
-					if (thereWasPush)
-					{
-						break;
-					}
-				}
-
-				if (!thereWasPush)
-				{
-					break;
-				}
+				goto finish2;
 			}
-		finish2:;
 
+			if (!CompactRun(MMBDirection.South))
+			{
+				goto finish2;
+			}
+			if (!CompactRun(MMBDirection.West))
+			{
+				goto finish2;
+			}
+
+			if (!CompactRun(MMBDirection.North))
+			{
+				goto finish2;
+			}
+
+		finish2:;
 			return new MapBuilderResult(_history.ToArray(), startCompactStep);
 		}
 

@@ -1,6 +1,7 @@
 using MUDMapBuilder.Editor.Data;
 using Myra.Graphics2D.UI;
 using Myra.Graphics2D.UI.File;
+using SkiaSharp;
 using System;
 using System.Drawing;
 using System.IO;
@@ -22,8 +23,6 @@ namespace MUDMapBuilder.Editor.UI
 			get => (int)_spinButtonStep.Value;
 			set => _spinButtonStep.Value = value;
 		}
-
-		public Point ForceVector => new Point((int)_spinPushForceX.Value, (int)(_spinPushForceY.Value));
 
 		public MainForm()
 		{
@@ -48,6 +47,115 @@ namespace MUDMapBuilder.Editor.UI
 				UpdateNumbers();
 			};
 
+			_mapViewer.SelectedIndexChanged += (s, e) => UpdateEnabled();
+
+			_buttonMeasureEast.Click += (s, e) => MeasureCompactPush(MMBDirection.East);
+			_buttonMeasureWest.Click += (s, e) => MeasureCompactPush(MMBDirection.West);
+			_buttonMeasureNorth.Click += (s, e) => MeasureCompactPush(MMBDirection.North);
+			_buttonMeasureSouth.Click += (s, e) => MeasureCompactPush(MMBDirection.South);
+
+			_buttonPushEast.Click += (s, e) => CompactPush(MMBDirection.East);
+			_buttonPushWest.Click += (s, e) => CompactPush(MMBDirection.West);
+			_buttonPushNorth.Click += (s, e) => CompactPush(MMBDirection.North);
+			_buttonPushSouth.Click += (s, e) => CompactPush(MMBDirection.South);
+
+			UpdateEnabled();
+		}
+
+		private void ClearRoomsMark()
+		{
+			if (_mapViewer.Rooms == null)
+			{
+				return;
+			}
+
+			foreach (var room in _mapViewer.Rooms)
+			{
+				room.MarkColor = null;
+				room.ForceMark = null;
+			}
+		}
+
+		private void MeasureCompactPush(MMBDirection direction)
+		{
+			ClearRoomsMark();
+
+			var measure = _mapViewer.Rooms.MeasureCompactPushRoom(_mapViewer.SelectedRoomId.Value, direction);
+			foreach (var r in measure.DeletedRooms)
+			{
+				r.MarkColor = SKColors.Red;
+			}
+
+			foreach (var m in measure.MovedRooms)
+			{
+				m.Room.MarkColor = SKColors.YellowGreen;
+				m.Room.ForceMark = m.Delta;
+			}
+
+			_mapViewer.Redraw();
+		}
+
+		private void CompactPush(MMBDirection direction)
+		{
+			ClearRoomsMark();
+
+			var measure = _mapViewer.Rooms.MeasureCompactPushRoom(_mapViewer.SelectedRoomId.Value, direction);
+			if (measure.DeletedRooms.Length > 0)
+			{
+				foreach (var r in measure.DeletedRooms)
+				{
+					r.MarkColor = SKColors.Red;
+				}
+
+				var dialog = Dialog.CreateMessageBox("Error", "Such push would overlap other rooms(marked as red)");
+				dialog.ShowModal(Desktop);
+			}
+			else
+			{
+				// Test push
+				var vc = _mapViewer.Rooms.BrokenConnections;
+				var rooms = _mapViewer.Rooms.Clone();
+
+				foreach (var m in measure.MovedRooms)
+				{
+					var newPos = new Point(m.Room.Position.Value.X + m.Delta.X,
+						m.Room.Position.Value.Y + m.Delta.Y);
+
+					var roomClone = rooms.GetRoomById(m.Room.Id);
+					roomClone.Position = newPos;
+				}
+
+				var vc2 = rooms.BrokenConnections;
+				if (vc2.WithObstacles.Count > vc.WithObstacles.Count ||
+					vc2.NonStraight.Count > vc.NonStraight.Count)
+				{
+					var dialog = Dialog.CreateMessageBox("Error", "Such push would break some room connections");
+					dialog.ShowModal(Desktop);
+				}
+				else if (rooms.GridArea > _mapViewer.Rooms.GridArea)
+				{
+					var dialog = Dialog.CreateMessageBox("Error", "Such push would make the grid bigger");
+					dialog.ShowModal(Desktop);
+				}
+				else if (PositionedRooms.AreEqual(rooms, _mapViewer.Rooms))
+				{
+					var dialog = Dialog.CreateMessageBox("Error", "Such push wouldn't change anything");
+					dialog.ShowModal(Desktop);
+				}
+				else
+				{
+					// Do the move
+					foreach (var m in measure.MovedRooms)
+					{
+						var newPos = new Point(m.Room.Position.Value.X + m.Delta.X,
+							m.Room.Position.Value.Y + m.Delta.Y);
+
+						m.Room.Position = newPos;
+					}
+				}
+			}
+
+			_mapViewer.Redraw();
 			UpdateEnabled();
 		}
 
@@ -84,6 +192,7 @@ namespace MUDMapBuilder.Editor.UI
 			{
 				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.PositionedRoomsCount}/{_mapViewer.Area.Rooms.Count}";
 				_labelGridSize.Text = $"Grid Size: {_mapViewer.Rooms.Width}x{_mapViewer.Rooms.Height}";
+				_labelGridArea.Text = $"Grid Area: {_mapViewer.Rooms.GridArea}";
 				_labelStartCompactStep.Text = $"Start Compact Step: {_mapViewer.Result.StartCompactStep}";
 
 				var brokenConnections = _mapViewer.Rooms.BrokenConnections;
@@ -96,6 +205,7 @@ namespace MUDMapBuilder.Editor.UI
 			{
 				_labelRoomsCount.Text = "";
 				_labelGridSize.Text = "";
+				_labelGridArea.Text = "";
 				_labelStartCompactStep.Text = "";
 				_labelIntersectedConnections.Text = "";
 				_labelNonStraightConnections.Text = "";
@@ -106,6 +216,8 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void UpdateEnabled()
 		{
+			ClearRoomsMark();
+
 			var enabled = Area != null;
 
 			_menuItemFileSave.Enabled = enabled;
@@ -114,10 +226,16 @@ namespace MUDMapBuilder.Editor.UI
 			_buttonToCompact.Enabled = enabled;
 			_buttonEnd.Enabled = enabled;
 			_spinButtonStep.Enabled = enabled;
-			_spinPushForceX.Enabled = enabled;
-			_spinPushForceY.Enabled = enabled;
-			_buttonMeasure.Enabled = enabled;
-			_buttonPush.Enabled = enabled;
+
+			enabled = enabled && _mapViewer.SelectedRoomId != null;
+			_buttonMeasureEast.Enabled = enabled;
+			_buttonMeasureWest.Enabled = enabled;
+			_buttonMeasureNorth.Enabled = enabled;
+			_buttonMeasureSouth.Enabled = enabled;
+			_buttonPushEast.Enabled = enabled;
+			_buttonPushWest.Enabled = enabled;
+			_buttonPushNorth.Enabled = enabled;
+			_buttonPushSouth.Enabled = enabled;
 
 			UpdateNumbers();
 		}

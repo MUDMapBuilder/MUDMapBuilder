@@ -683,23 +683,31 @@ namespace MUDMapBuilder
 
 		finish:;
 			var startCompactStep = _history.Count;
-			if (!CompactRun(MMBDirection.East))
-			{
-				goto finish2;
-			}
 
-			if (!CompactRun(MMBDirection.South))
+			var continueCompactRun = true;
+			while (continueCompactRun)
 			{
-				goto finish2;
-			}
-			if (!CompactRun(MMBDirection.West))
-			{
-				goto finish2;
-			}
+				var roomsClone = _rooms.Clone();
+				if (!CompactRun(MMBDirection.East))
+				{
+					goto finish2;
+				}
 
-			if (!CompactRun(MMBDirection.North))
-			{
-				goto finish2;
+				if (!CompactRun(MMBDirection.South))
+				{
+					goto finish2;
+				}
+				if (!CompactRun(MMBDirection.West))
+				{
+					goto finish2;
+				}
+
+				if (!CompactRun(MMBDirection.North))
+				{
+					goto finish2;
+				}
+
+				continueCompactRun = !PositionedRooms.AreEqual(roomsClone, _rooms);
 			}
 
 		finish2:;

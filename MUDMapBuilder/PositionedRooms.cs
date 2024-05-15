@@ -856,19 +856,19 @@ namespace MUDMapBuilder
 					switch (direction)
 					{
 						case MMBDirection.North:
-							doAdd = exitDir == MMBDirection.West || exitDir == MMBDirection.East ||
+							doAdd = exitDir == MMBDirection.West || exitDir == MMBDirection.East || exitDir == MMBDirection.South || exitDir == MMBDirection.Down ||
 								(exitDir == MMBDirection.Up && sourcePos.Y - targetPos.Y == 1);
 							break;
 						case MMBDirection.East:
-							doAdd = exitDir == MMBDirection.North || exitDir == MMBDirection.South ||
+							doAdd = exitDir == MMBDirection.North || exitDir == MMBDirection.South || exitDir == MMBDirection.West || exitDir == MMBDirection.Down ||
 								(exitDir == MMBDirection.Up && sourcePos.X - targetPos.X == -1);
 							break;
 						case MMBDirection.South:
-							doAdd = exitDir == MMBDirection.West || exitDir == MMBDirection.East ||
+							doAdd = exitDir == MMBDirection.West || exitDir == MMBDirection.East || exitDir == MMBDirection.North || exitDir == MMBDirection.Up ||
 								(exitDir == MMBDirection.Down && sourcePos.Y - targetPos.Y == -1);
 							break;
 						case MMBDirection.West:
-							doAdd = exitDir == MMBDirection.North || exitDir == MMBDirection.South ||
+							doAdd = exitDir == MMBDirection.North || exitDir == MMBDirection.South || exitDir == MMBDirection.East || exitDir == MMBDirection.Up ||
 								(exitDir == MMBDirection.Down && sourcePos.X - targetPos.X == 1);
 							break;
 					}

@@ -25,15 +25,15 @@ namespace MUDMapBuilder
 
 		private class StraightenConnectionResult
 		{
-			public Point DesiredPos { get; private set; }
-			public bool RoomRemoved { get; private set; }
-			public int NonStraightConnectionsFixed { get; private set; }
+			public Point Delta { get; private set; }
+			public int RoomsRemoved { get; private set; }
+			public BrokenConnectionsInfo BrokenConnections { get; private set; }
 
-			public StraightenConnectionResult(Point desiredPos, bool roomRemoved, int nonStraightConnectionsFixed)
+			public StraightenConnectionResult(Point delta, int roomsRemoved, BrokenConnectionsInfo brokenConnections)
 			{
-				DesiredPos = desiredPos;
-				RoomRemoved = roomRemoved;
-				NonStraightConnectionsFixed = nonStraightConnectionsFixed;
+				Delta = delta;
+				RoomsRemoved = roomsRemoved;
+				BrokenConnections = brokenConnections;
 			}
 		}
 
@@ -101,9 +101,206 @@ namespace MUDMapBuilder
 			return _options.MaxSteps > _history.Count;
 		}
 
+		private static Dictionary<int, Point> MeasurePushRoom(PositionedRooms rooms, int firstRoomId, Point firstForceVector)
+		{
+			var roomsToPush = new Dictionary<int, Point>();
+
+			var firstRoom = rooms.GetRoomById(firstRoomId);
+			var toProcess = new List<Tuple<MMBRoom, Point>>
+			{
+				new Tuple<MMBRoom, Point>(firstRoom, firstForceVector)
+			};
+
+			while (toProcess.Count > 0)
+			{
+				var item = toProcess[0];
+				var room = item.Item1;
+				var pos = room.Position.Value;
+				toProcess.RemoveAt(0);
+
+				roomsToPush[room.Id] = item.Item2;
+
+				// Process neighbour rooms
+				foreach (var pair in room.Room.Exits)
+				{
+					var exitDir = pair.Key;
+					var exitRoom = pair.Value;
+					var forceVector = item.Item2;
+
+					var targetRoom = rooms.GetRoomById(exitRoom.Id);
+					if (targetRoom == null || targetRoom.Position == null || roomsToPush.ContainsKey(exitRoom.Id))
+					{
+						continue;
+					}
+
+					if (!PositionedRooms.IsConnectionStraight(room.Position.Value, targetRoom.Position.Value, exitDir))
+					{
+						// Skip broken connections
+						continue;
+					}
+
+					var targetPos = targetRoom.Position.Value;
+					switch (exitDir)
+					{
+						case MMBDirection.North:
+							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
+							if (forceVector.Y > 0)
+							{
+								forceVector.Y = 0;
+							}
+							break;
+
+						case MMBDirection.East:
+							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
+							if (forceVector.X < 0)
+							{
+								forceVector.X = 0;
+							}
+							break;
+
+						case MMBDirection.South:
+							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
+							if (forceVector.Y < 0)
+							{
+								forceVector.Y = 0;
+							}
+							break;
+
+						case MMBDirection.West:
+							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
+							if (forceVector.X > 0)
+							{
+								forceVector.X = 0;
+							}
+							break;
+
+						case MMBDirection.Up:
+							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
+							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
+
+							if (forceVector.X < 0)
+							{
+								forceVector.X = 0;
+							}
+
+							if (forceVector.Y > 0)
+							{
+								forceVector.Y = 0;
+							}
+							break;
+
+						case MMBDirection.Down:
+							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
+							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
+
+							if (forceVector.X > 0)
+							{
+								forceVector.X = 0;
+							}
+							if (forceVector.Y < 0)
+							{
+								forceVector.Y = 0;
+							}
+
+							break;
+					}
+
+					if (forceVector.X != 0 || forceVector.Y != 0)
+					{
+						toProcess.Add(new Tuple<MMBRoom, Point>(targetRoom, forceVector));
+					}
+				}
+			}
+
+			return roomsToPush;
+		}
+
+		private bool PushRoom(PositionedRooms rooms, int firstRoomId, Point firstForceVector, bool measureRun, out int roomsRemoved)
+		{
+			var roomsToPush = MeasurePushRoom(rooms, firstRoomId, firstForceVector);
+
+			var roomsToDelete = new List<MMBRoom>();
+			var roomsToMove = new List<Tuple<MMBRoom, Point>>();
+			foreach (var pair in roomsToPush)
+			{
+				var room = rooms.GetRoomById(pair.Key);
+				var delta = pair.Value;
+
+				var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
+
+				var existingRoom = rooms.GetRoomByPosition(newPos);
+				if (existingRoom != null && !roomsToPush.ContainsKey(existingRoom.Id))
+				{
+					roomsToDelete.Add(existingRoom);
+				}
+
+				roomsToMove.Add(new Tuple<MMBRoom, Point>(room, delta));
+			}
+
+			roomsRemoved = roomsToDelete.Count;
+
+			if (!measureRun)
+			{
+				if (roomsToDelete.Count > 0)
+				{
+					return RemoveRooms(roomsToDelete.ToArray());
+				}
+
+				// Mark for movement
+				foreach (var tuple in roomsToMove)
+				{
+					var room = tuple.Item1;
+					var delta = tuple.Item2;
+					room.MarkColor = SKColors.YellowGreen;
+					room.ForceMark = delta;
+				}
+
+				if (!AddRunStep())
+				{
+					return false;
+				}
+
+				// Do the movement
+				foreach (var tuple in roomsToMove)
+				{
+					var room = tuple.Item1;
+					room.MarkColor = null;
+					room.ForceMark = null;
+
+					var delta = tuple.Item2;
+					var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
+					room.Position = newPos;
+				}
+
+				if (!AddRunStep())
+				{
+					return false;
+				}
+			} else
+			{
+				// Remove
+				foreach (var room in roomsToDelete)
+				{
+					room.Position = null;
+				}
+
+				// Move
+				foreach (var tuple in roomsToMove)
+				{
+					var room = tuple.Item1;
+					var delta = tuple.Item2;
+
+					var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
+					room.Position = newPos;
+				}
+			}
+
+			return true;
+		}
+
+
 		private StraightenConnectionResult TryStraightenConnection(int sourceRoomId, int targetRoomId, MMBDirection direction)
 		{
-			var roomRemoved = false;
 			var rooms = _rooms.Clone();
 			var vc = rooms.BrokenConnections;
 
@@ -112,19 +309,14 @@ namespace MUDMapBuilder
 			var sourcePos = sourceRoom.Position.Value;
 			var targetPos = targetRoom.Position.Value;
 			var desiredPos = CalculateDesiredPosition(sourcePos, targetPos, direction);
-			var existingRoom = rooms.GetRoomByPosition(desiredPos);
-			if (existingRoom != null)
-			{
-				existingRoom.Position = null;
-				roomRemoved = true;
-			}
+			var delta = new Point(desiredPos.X - targetPos.X, desiredPos.Y - targetPos.Y);
 
-			targetRoom.Position = desiredPos;
+			int roomsRemoved;
+			PushRoom(rooms, targetRoomId, delta, true, out roomsRemoved);
+
 			var vc2 = rooms.BrokenConnections;
 
-			var connectionsFixed = vc.NonStraight.Count - vc2.NonStraight.Count;
-
-			return new StraightenConnectionResult(desiredPos, roomRemoved, connectionsFixed);
+			return new StraightenConnectionResult(delta, roomsRemoved, vc2);
 		}
 
 		private bool CanRoomBeRemoved(MMBRoom room)
@@ -141,101 +333,100 @@ namespace MUDMapBuilder
 			return remove == null;
 		}
 
-		private bool RemoveRoom(MMBRoom room)
+		private bool RemoveRooms(MMBRoom[] rooms)
 		{
-			if (room == null)
-			{
-				return true;
-			}
-
 			// Mark
-			room.MarkColor = SKColors.Red;
+			foreach (var room in rooms)
+			{
+				room.MarkColor = SKColors.Red;
+			}
 			if (!AddRunStep())
 			{
 				return false;
 			}
 
-			// Record the removal
-			List<RemoveRoomRecord> removes;
-			if (!_removalHistory.TryGetValue(room.Id, out removes))
-			{
-				removes = new List<RemoveRoomRecord>();
-				_removalHistory[room.Id] = removes;
-			}
-
-			var hashCode = _rooms.GetHashCode();
-			removes.Add(new RemoveRoomRecord(room.Id, room.Position.Value, hashCode));
-
 			// Remove
-			room.MarkColor = null;
-			room.Position = null;
-			_toProcess.Remove(room);
-			_removedRooms.Add(room.Id);
+			foreach (var room in rooms)
+			{
+
+				// Record the removal
+				List<RemoveRoomRecord> removes;
+				if (!_removalHistory.TryGetValue(room.Id, out removes))
+				{
+					removes = new List<RemoveRoomRecord>();
+					_removalHistory[room.Id] = removes;
+				}
+
+				var hashCode = _rooms.GetHashCode();
+				removes.Add(new RemoveRoomRecord(room.Id, room.Position.Value, hashCode));
+
+				// Remove
+				room.MarkColor = null;
+				room.Position = null;
+				_toProcess.Remove(room);
+				_removedRooms.Add(room.Id);
+			}
 
 			return AddRunStep();
 		}
 
-		private bool MoveRoom(MMBRoom room, Point desiredPos)
-		{
-			var existingRoom = _rooms.GetRoomByPosition(desiredPos);
-			if (existingRoom != null)
-			{
-				if (!RemoveRoom(existingRoom))
-				{
-					return false;
-				}
-			}
-
-			var targetPos = room.Position.Value;
-			var delta = new Point(desiredPos.X - targetPos.X, desiredPos.Y - targetPos.Y);
-			room.ForceMark = delta;
-			if (!AddRunStep())
-			{
-				return false;
-			}
-
-			room.ForceMark = null;
-			room.Position = desiredPos;
-			if (!AddRunStep())
-			{
-				return false;
-			}
-
-			return true;
-		}
-
 		private StraightenRoomResult StraightenConnection(MMBRoom room1, MMBRoom room2, MMBDirection direction)
 		{
+			if (room1.Id == 2960 && room2.Id == 2970)
+			{
+				var k = 5;
+			}
+
 			// Try to move room2
+			var vc = _rooms.BrokenConnections;
 			var result1 = TryStraightenConnection(room1.Id, room2.Id, direction);
 			var result2 = TryStraightenConnection(room2.Id, room1.Id, direction.GetOppositeDirection());
 
-			if (result1.NonStraightConnectionsFixed <= 0 && result2.NonStraightConnectionsFixed <= 0)
+			var vc1 = result1.BrokenConnections;
+			var vc2 = result2.BrokenConnections;
+
+			if (vc.NonStraight.Count - vc1.NonStraight.Count <= 0 &&
+				vc.NonStraight.Count - vc2.NonStraight.Count <= 0)
 			{
+				// No connection had been fixed
 				return StraightenRoomResult.Fail;
 			}
 
 			// Determine which room of two to move
 			bool moveSecond;
-			if (result1.NonStraightConnectionsFixed > result2.NonStraightConnectionsFixed)
+
+			// First criteria - amount of non-obstacle connections fixed
+			if (vc1.WithObstacles.Count < vc2.WithObstacles.Count)
 			{
 				moveSecond = true;
-			} else if (result1.NonStraightConnectionsFixed < result2.NonStraightConnectionsFixed)
-			{
-				moveSecond = false;
-			} else if (!result1.RoomRemoved)
-			{
-				moveSecond = true;
-			} else
+			}
+			else if (vc1.WithObstacles.Count > vc2.WithObstacles.Count)
 			{
 				moveSecond = false;
 			}
+			else
+			{
+				// Second criteria - amount of non-straight connections fixed
+				if (vc1.NonStraight.Count < vc2.NonStraight.Count)
+				{
+					moveSecond = true;
+				}
+				else if (vc1.NonStraight.Count > vc2.NonStraight.Count)
+				{
+					moveSecond = false;
+				} else
+				{
+					// Third criteria - amount of removed rooms
+					moveSecond = result1.RoomsRemoved < result2.RoomsRemoved;
+				}
+			}
 
 			// Do the actual move
+			int roomsRemoved;
 			if (moveSecond) 
 			{
 				// Move room2
-				if (!MoveRoom(room2, result1.DesiredPos))
+				if (!PushRoom(_rooms, room2.Id, result1.Delta, false, out roomsRemoved))
 				{
 					return StraightenRoomResult.OutOfSteps;
 				}
@@ -244,7 +435,7 @@ namespace MUDMapBuilder
 			}
 
 			// Move room1
-			if (!MoveRoom(room1, result2.DesiredPos))
+			if (!PushRoom(_rooms, room1.Id, result2.Delta, false, out roomsRemoved))
 			{
 				return StraightenRoomResult.OutOfSteps;
 			}
@@ -264,11 +455,6 @@ namespace MUDMapBuilder
 			{
 				while (_toProcess.Count > 0 && _options.MaxSteps > _history.Count)
 				{
-					if (_history.Count >= 500)
-					{
-						var k = 5;
-					}
-
 					var room = _toProcess[0];
 					_toProcess.RemoveAt(0);
 
@@ -341,12 +527,10 @@ namespace MUDMapBuilder
 						{
 							var wo = vc.WithObstacles[0];
 
-							foreach (var o in wo.Obstacles)
+							var roomsToDelete = (from o in wo.Obstacles select _rooms.GetRoomById(o)).ToArray();
+							if (!RemoveRooms(roomsToDelete))
 							{
-								if (!RemoveRoom(_rooms.GetRoomById(o)))
-								{
-									goto finish;
-								}
+								goto finish;
 							}
 
 							vc = _rooms.BrokenConnections;
@@ -385,44 +569,6 @@ namespace MUDMapBuilder
 							{
 								break;
 							}
-						}
-
-						// Another non-straight fix run
-						// This time removing unfixable rooms
-						// Non-straight connections fix
-						while (vc.NonStraight.Count > 0)
-						{
-							var ns = vc.NonStraight[0];
-							vc.NonStraight.RemoveAt(0);
-
-							// Try to straighten it
-							var room1 = _rooms.GetRoomById(ns.SourceRoomId);
-							var room2 = _rooms.GetRoomById(ns.TargetRoomId);
-							var srr = StraightenConnection(room1, room2, ns.Direction);
-							switch (srr)
-							{
-								case StraightenRoomResult.Success:
-									break;
-
-								case StraightenRoomResult.Fail:
-									var roomToRemove = room1;
-									if (room1.Id == newRoom.Id || !CanRoomBeRemoved(room1))
-									{
-										roomToRemove = room2;
-									}
-
-									if (CanRoomBeRemoved(roomToRemove) && !RemoveRoom(roomToRemove))
-									{
-										goto finish;
-									}
-
-									break;
-
-								case StraightenRoomResult.OutOfSteps:
-									goto finish;
-							}
-
-							vc = _rooms.BrokenConnections;
 						}
 
 						if (room.Position == null)

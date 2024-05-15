@@ -80,12 +80,6 @@ namespace MUDMapBuilder
 						if (targetRoomExit.Value.Id == room.Id)
 						{
 							foundOpposite = true;
-
-							if (exitDir.GetOppositeDirection() != targetRoomExit.Key)
-							{
-								var k = 5;
-							}
-
 							break;
 						}
 					}

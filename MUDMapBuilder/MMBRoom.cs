@@ -8,14 +8,15 @@ namespace MUDMapBuilder
 	public class MMBRoom
 	{
 		private Dictionary<MMBDirection, Point> _drawnConnections = new Dictionary<MMBDirection, Point>();
-		private Point _position;
+		private Point? _position;
 		private SKColor? _markColor;
 		private Point? _forceMark;
 
 		public int Id => Room.Id;
 
 		public IMMBRoom Room { get; }
-		public Point Position
+
+		public Point? Position
 		{
 			get => _position;
 			set
@@ -60,6 +61,8 @@ namespace MUDMapBuilder
 			}
 		}
 
+		public Dictionary<MMBDirection, int> Connections { get; } = new Dictionary<MMBDirection, int>();
+
 		public event EventHandler Invalid;
 
 		public MMBRoom(IMMBRoom room)
@@ -85,12 +88,22 @@ namespace MUDMapBuilder
 			return connectedPos == pos;
 		}
 
-		public MMBRoom Clone() => new MMBRoom(Room)
+		public MMBRoom Clone()
 		{
-			Position = Position,
-			MarkColor = MarkColor,
-			ForceMark = ForceMark,
-		};
+			var result = new MMBRoom(Room)
+			{
+				Position = Position,
+				MarkColor = MarkColor,
+				ForceMark = ForceMark,
+			};
+
+			foreach (var pair in Connections)
+			{
+				result.Connections[pair.Key] = pair.Value;
+			}
+
+			return result;
+		}
 
 		public override string ToString() => $"{Room}, {Position}";
 

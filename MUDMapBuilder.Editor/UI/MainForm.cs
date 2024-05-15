@@ -44,6 +44,7 @@ namespace MUDMapBuilder.Editor.UI
 				}
 
 				_mapViewer.Step = (int)_spinButtonStep.Value;
+				UpdateNumbers();
 			};
 
 			UpdateEnabled();
@@ -80,7 +81,7 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			if (_mapViewer.Rooms != null)
 			{
-				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.Count}/{_mapViewer.Area.Rooms.Count}";
+				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.PositionedRoomsCount}/{_mapViewer.Area.Rooms.Count}";
 				_labelGridSize.Text = $"Grid Size: {_mapViewer.Rooms.Width}x{_mapViewer.Rooms.Height}";
 
 				var brokenConnections = _mapViewer.Rooms.BrokenConnections;

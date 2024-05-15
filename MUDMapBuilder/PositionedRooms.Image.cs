@@ -122,17 +122,21 @@ namespace MUDMapBuilder
 							roomInfos.Add(new MMBImageRoomInfo(room.Room, rect));
 
 							// Draw connections
-							foreach (var pair in room.Room.Exits)
+							foreach (var pair in room.Connections)
 							{
 								var exitDir = pair.Key;
-								var exitRoom = pair.Value;
-								var targetRoom = GetRoomById(exitRoom.Id);
-								if (targetRoom == null)
+								if (pair.Value == room.Id)
 								{
 									continue;
 								}
 
-								var targetPos = ToZeroBasedPosition(targetRoom.Position);
+								var targetRoom = GetRoomById(pair.Value);
+								if (targetRoom == null || targetRoom.Position == null)
+								{
+									continue;
+								}
+
+								var targetPos = ToZeroBasedPosition(targetRoom.Position.Value);
 								if (AreRoomsConnected(new Point(x, y), targetPos, exitDir))
 								{
 									// Connection is drawn already
@@ -185,7 +189,7 @@ namespace MUDMapBuilder
 								{
 									isStraight = false;
 								}
-								
+
 								if (isStraight)
 								{
 									// Straight connection
@@ -224,8 +228,8 @@ namespace MUDMapBuilder
 
 							if (room.ForceMark != null)
 							{
-								var sourceScreen = ToScreen(room.Position);
-								var tt = new Point(room.Position.X + room.ForceMark.Value.X, room.Position.Y + room.ForceMark.Value.Y);
+								var sourceScreen = ToScreen(new Point(x, y));
+								var tt = new Point(x + room.ForceMark.Value.X, y + room.ForceMark.Value.Y);
 								var addX = 0;
 								if (tt.X >= 0 && tt.X < _cellsWidths.Length)
 								{

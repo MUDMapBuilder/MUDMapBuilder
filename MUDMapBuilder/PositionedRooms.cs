@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace MUDMapBuilder
 {
@@ -15,13 +16,13 @@ namespace MUDMapBuilder
 			Long
 		}
 
-		private readonly List<MMBRoom> _rooms = new List<MMBRoom>();
 		private readonly Dictionary<int, MMBRoom> _roomsByIds = new Dictionary<int, MMBRoom>();
 		private Rectangle _roomsRectangle;
 		private MMBRoom[,] _roomsByPositions = null;
 		private BrokenConnectionsInfo _brokenConnections;
 
-		public int Count => _rooms.Count;
+		public int Count => _roomsByIds.Count;
+		public int PositionedRoomsCount => (from r in _roomsByIds.Values where r.Position != null select r).Count();
 
 		public BrokenConnectionsInfo BrokenConnections
 		{
@@ -44,28 +45,66 @@ namespace MUDMapBuilder
 		public int Width => RoomsRectangle.Width;
 		public int Height => RoomsRectangle.Height;
 
-		internal MMBRoom this[int index] => _rooms[index];
-
 		public int? SelectedRoomId { get; set; }
+
+		private PositionedRooms()
+		{
+		}
+
+		internal PositionedRooms(IMMBRoom[] sourceRooms)
+		{
+			// Create rooms
+			foreach (var r in sourceRooms)
+			{
+				Add(new MMBRoom(r));
+			}
+
+			// Set connections
+			foreach (var pair in _roomsByIds)
+			{
+				var room = pair.Value;
+				foreach (var exit in pair.Value.Room.Exits)
+				{
+					var targetRoom = GetRoomById(exit.Value.Id);
+					if (targetRoom == null)
+					{
+						continue;
+					}
+
+					var exitDir = exit.Key;
+					room.Connections[exitDir] = exit.Value.Id;
+
+					var foundOpposite = false;
+					foreach(var targetRoomExit in targetRoom.Room.Exits)
+					{
+						if (targetRoomExit.Value.Id == room.Id)
+						{
+							foundOpposite = true;
+
+							if (exitDir.GetOppositeDirection() != targetRoomExit.Key)
+							{
+								var k = 5;
+							}
+
+							break;
+						}
+					}
+					
+					if (!foundOpposite)
+					{
+						targetRoom.Connections[exitDir.GetOppositeDirection()] = room.Id;
+					}
+				}
+			}
+		}
 
 		private void OnRoomInvalid(object sender, EventArgs e) => InvalidatePositions();
 
-		internal void Add(MMBRoom room)
+		private void Add(MMBRoom room)
 		{
 			room.Invalid += OnRoomInvalid;
 
 			_roomsByIds[room.Id] = room;
-			_rooms.Add(room);
-			InvalidatePositions();
-		}
-
-		internal void Remove(int roomId)
-		{
-			var room = GetRoomById(roomId);
-			room.Invalid -= OnRoomInvalid;
-			_roomsByIds.Remove(roomId);
-			_rooms.Remove(room);
-
 			InvalidatePositions();
 		}
 
@@ -77,9 +116,15 @@ namespace MUDMapBuilder
 
 		public void ExpandGrid(Point pos, Point vec)
 		{
-			foreach (var room in _rooms)
+			foreach (var pair in _roomsByIds)
 			{
-				var roomPos = room.Position;
+				var room = pair.Value;
+				if (room.Position == null)
+				{
+					continue;
+				}
+
+				var roomPos = room.Position.Value;
 				if (vec.X < 0 && roomPos.X <= pos.X)
 				{
 					roomPos.X += vec.X;
@@ -181,11 +226,9 @@ namespace MUDMapBuilder
 			return isStraight;
 		}
 
-		private ConnectionBrokenType CheckConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir, out HashSet<int> obstacles)
+		private ConnectionBrokenType CheckConnectionBroken(Point sourcePos, Point targetPos, MMBDirection exitDir, out HashSet<int> obstacles)
 		{
 			obstacles = new HashSet<int>();
-			var sourcePos = sourceRoom.Position;
-			var targetPos = targetRoom.Position;
 
 			var delta = exitDir.GetDelta();
 			var desiredPos = new Point(sourcePos.X + delta.X, sourcePos.Y + delta.Y);
@@ -277,26 +320,31 @@ namespace MUDMapBuilder
 		{
 			var result = new BrokenConnectionsInfo();
 
-			foreach (var room in _rooms)
+			foreach (var ri in _roomsByIds)
 			{
-				var pos = room.Position;
-				foreach (var pair in room.Room.Exits)
+				var room = ri.Value;
+				if (room.Position == null)
+				{
+					continue;
+				}
+
+				var pos = room.Position.Value;
+				foreach (var pair in room.Connections)
 				{
 					var exitDir = pair.Key;
-					var exitRoom = pair.Value;
-					if (exitRoom.Id == room.Id)
+					if (pair.Value == room.Id)
 					{
 						continue;
 					}
 
-					var targetRoom = GetRoomById(exitRoom.Id);
-					if (targetRoom == null)
+					var targetRoom = GetRoomById(pair.Value);
+					if (targetRoom == null || targetRoom.Position == null)
 					{
 						continue;
 					}
 
 					HashSet<int> obstacles;
-					var brokenType = CheckConnectionBroken(room, targetRoom, exitDir, out obstacles);
+					var brokenType = CheckConnectionBroken(room.Position.Value, targetRoom.Position.Value, exitDir, out obstacles);
 					switch (brokenType)
 					{
 						case ConnectionBrokenType.Normal:
@@ -344,41 +392,48 @@ namespace MUDMapBuilder
 			var minSet = false;
 			var maxSet = false;
 
-			foreach (var room in _rooms)
+			foreach (var ri in _roomsByIds)
 			{
+				var room = ri.Value;
+				if (room.Position == null)
+				{
+					continue;
+				}
+
+				var pos = room.Position.Value;
 				if (!minSet)
 				{
-					min = room.Position;
+					min = pos;
 					minSet = true;
 				}
 				else
 				{
-					if (room.Position.X < min.X)
+					if (pos.X < min.X)
 					{
-						min.X = room.Position.X;
+						min.X = pos.X;
 					}
 
-					if (room.Position.Y < min.Y)
+					if (pos.Y < min.Y)
 					{
-						min.Y = room.Position.Y;
+						min.Y = pos.Y;
 					}
 				}
 
 				if (!maxSet)
 				{
-					max = room.Position;
+					max = pos;
 					maxSet = true;
 				}
 				else
 				{
-					if (room.Position.X > max.X)
+					if (pos.X > max.X)
 					{
-						max.X = room.Position.X;
+						max.X = pos.X;
 					}
 
-					if (room.Position.Y > max.Y)
+					if (pos.Y > max.Y)
 					{
-						max.Y = room.Position.Y;
+						max.Y = pos.Y;
 					}
 				}
 			}
@@ -398,9 +453,16 @@ namespace MUDMapBuilder
 			_roomsByPositions = new MMBRoom[_roomsRectangle.Width, _roomsRectangle.Height];
 
 			// Add rooms
-			foreach (var room in _rooms)
+			foreach (var ri in _roomsByIds)
 			{
-				var coord = new Point(room.Position.X - _roomsRectangle.X, room.Position.Y - _roomsRectangle.Y);
+				var room = ri.Value;
+				if (room.Position == null)
+				{
+					continue;
+				}
+
+				var pos = room.Position.Value;
+				var coord = new Point(pos.X - _roomsRectangle.X, pos.Y - _roomsRectangle.Y);
 				_roomsByPositions[coord.X, coord.Y] = room;
 			}
 
@@ -409,25 +471,30 @@ namespace MUDMapBuilder
 
 		public void FixPlacementOfSingleExitRooms()
 		{
-			foreach (var room in _rooms)
+			foreach (var ri in _roomsByIds)
 			{
-				var pos = room.Position;
-				foreach (var pair in room.Room.Exits)
+				var room = ri.Value;
+				if (room.Position == null)
+				{
+					continue;
+				}
+
+				var pos = room.Position.Value;
+				foreach (var pair in room.Connections)
 				{
 					var exitDir = pair.Key;
-					var exitRoom = pair.Value;
-					if (exitRoom.Id == room.Id)
+					if (pair.Value == room.Id)
 					{
 						continue;
 					}
 
-					var targetRoom = GetRoomById(exitRoom.Id);
-					if (targetRoom == null)
+					var targetRoom = GetRoomById(pair.Value);
+					if (targetRoom == null || targetRoom.Position == null)
 					{
 						continue;
 					}
 
-					if (exitRoom.Exits.Count > 1)
+					if (targetRoom.Connections.Count > 1)
 					{
 						continue;
 					}
@@ -457,27 +524,33 @@ namespace MUDMapBuilder
 		public PositionedRooms Clone()
 		{
 			var result = new PositionedRooms();
-			foreach (var r in _rooms)
+			foreach (var r in _roomsByIds)
 			{
-				result.Add(r.Clone());
+				result.Add(r.Value.Clone());
 			}
 
 			return result;
 		}
 
-		public IEnumerator<MMBRoom> GetEnumerator() => _rooms.GetEnumerator();
+		public IEnumerator<MMBRoom> GetEnumerator() => _roomsByIds.Values.GetEnumerator();
 
-		IEnumerator IEnumerable.GetEnumerator() => _rooms.GetEnumerator();
+		IEnumerator IEnumerable.GetEnumerator() => _roomsByIds.Values.GetEnumerator();
 
 		public override int GetHashCode()
 		{
 			var result = 0;
 
-			foreach (var room in _rooms)
+			foreach (var ri in _roomsByIds)
 			{
+				var room = ri.Value;
+				if (room.Position == null)
+				{
+					continue;
+				}
+
 				result ^= room.Id;
-				result ^= (room.Position.X << 8);
-				result ^= (room.Position.Y << 16);
+				result ^= (room.Position.Value.X << 8);
+				result ^= (room.Position.Value.Y << 16);
 			}
 
 			return result;

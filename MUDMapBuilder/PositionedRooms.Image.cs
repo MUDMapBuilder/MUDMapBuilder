@@ -190,6 +190,23 @@ namespace MUDMapBuilder
 									isStraight = false;
 								}
 
+								if (BrokenConnections.WithObstacles.Find(room.Id, targetRoom.Id, exitDir) != null)
+								{
+									paint.Color = ConnectionWithObstacles;
+								}
+								else if (BrokenConnections.NonStraight.Find(room.Id, targetRoom.Id, exitDir) != null)
+								{
+									paint.Color = NonStraightConnection;
+								}
+								else if (BrokenConnections.Long.Find(room.Id, targetRoom.Id, exitDir) != null)
+								{
+									paint.Color = LongConnection;
+								}
+								else
+								{
+									paint.Color = DefaultColor;
+								}
+
 								if (isStraight)
 								{
 									// Straight connection

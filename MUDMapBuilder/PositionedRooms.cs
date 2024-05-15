@@ -19,7 +19,9 @@ namespace MUDMapBuilder
 		private readonly Dictionary<int, MMBRoom> _roomsByIds = new Dictionary<int, MMBRoom>();
 		private Rectangle _roomsRectangle;
 		private MMBRoom[,] _roomsByPositions = null;
+		private MMBConnectionsList[,] _connectionsGrid = null;
 		private BrokenConnectionsInfo _brokenConnections;
+		private int _gridArea;
 
 		public int Count => _roomsByIds.Count;
 		public int PositionedRoomsCount => (from r in _roomsByIds.Values where r.Position != null select r).Count();
@@ -39,6 +41,15 @@ namespace MUDMapBuilder
 			{
 				UpdatePositions();
 				return _roomsRectangle;
+			}
+		}
+
+		public int GridArea
+		{
+			get
+			{
+				UpdatePositions();
+				return _gridArea;
 			}
 		}
 
@@ -106,6 +117,7 @@ namespace MUDMapBuilder
 		{
 			_roomsByPositions = null;
 			_brokenConnections = null;
+			_connectionsGrid = null;
 		}
 
 		public void ExpandGrid(Point pos, Point vec)
@@ -220,8 +232,11 @@ namespace MUDMapBuilder
 			return isStraight;
 		}
 
-		private ConnectionBrokenType CheckConnectionBroken(Point sourcePos, Point targetPos, MMBDirection exitDir, out HashSet<int> obstacles)
+		private ConnectionBrokenType CheckConnectionBroken(MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir, out HashSet<int> obstacles)
 		{
+			var sourcePos = sourceRoom.Position.Value;
+			var targetPos = targetRoom.Position.Value;
+
 			obstacles = new HashSet<int>();
 
 			var delta = exitDir.GetDelta();
@@ -292,12 +307,15 @@ namespace MUDMapBuilder
 							obstacles.Add(room.Room.Id);
 						}
 
-						/*					var asConnectionsCell = cell as MMBConnectionsCell;
-											if (asConnectionsCell != null && asConnectionsCell.Count > 1)
-											{
-												noObstacles = false;
-												break;
-											}*/
+						var gridPos = ToZeroBasedPosition(new Point(x, y));
+						MMBConnectionsList connections = _connectionsGrid[gridPos.X, gridPos.Y];
+						if (connections == null)
+						{
+							connections = new MMBConnectionsList();
+							_connectionsGrid[gridPos.X, gridPos.Y] = connections;
+						}
+
+						connections.Add(sourceRoom.Id, targetRoom.Id, exitDir);
 					}
 				}
 
@@ -338,7 +356,7 @@ namespace MUDMapBuilder
 					}
 
 					HashSet<int> obstacles;
-					var brokenType = CheckConnectionBroken(room.Position.Value, targetRoom.Position.Value, exitDir, out obstacles);
+					var brokenType = CheckConnectionBroken(room, targetRoom, exitDir, out obstacles);
 					switch (brokenType)
 					{
 						case ConnectionBrokenType.Normal:
@@ -374,6 +392,24 @@ namespace MUDMapBuilder
 			foreach (var vs in toDelete)
 			{
 				result.NonStraight.Remove(vs);
+			}
+
+			// Intersections
+			for(var x = 0; x < Width; ++x)
+			{
+				for(var y = 0; y < Height; ++y)
+				{
+					var connections = _connectionsGrid[x, y];
+					if (connections == null || connections.Count <= 1)
+					{
+						continue;
+					}
+
+					foreach(var c in connections)
+					{
+						result.Intersections.Add(c.SourceRoomId, c.TargetRoomId, c.Direction);
+					}
+				}
 			}
 
 			return result;
@@ -443,8 +479,9 @@ namespace MUDMapBuilder
 			}
 
 			_roomsRectangle = CalculateRectangle();
-
+			
 			_roomsByPositions = new MMBRoom[_roomsRectangle.Width, _roomsRectangle.Height];
+			_connectionsGrid = new MMBConnectionsList[_roomsRectangle.Width, _roomsRectangle.Height];
 
 			// Add rooms
 			foreach (var ri in _roomsByIds)
@@ -461,6 +498,30 @@ namespace MUDMapBuilder
 			}
 
 			_brokenConnections = CalculateBrokenConnections();
+
+			// Calculate grid area
+			_gridArea = 0;
+			for (var y = 0; y < Height; ++y)
+			{
+				var isData = false;
+				for (var x = 0; x < Width; ++x)
+				{
+					var room = GetRoomByZeroBasedPosition(x, y);
+					
+					if(!isData && room != null)
+					{
+						isData = true;
+					} else if(isData && room == null)
+					{
+						isData = false;
+					}
+
+					if (isData)
+					{
+						++_gridArea;
+					}
+				}
+			}
 		}
 
 		public void FixPlacementOfSingleExitRooms()

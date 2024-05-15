@@ -36,6 +36,7 @@ namespace MUDMapBuilder.Editor.UI
 
 			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
 			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _spinButtonStep.Maximum;
+			_buttonToCompact.Click += (s, e) => _spinButtonStep.Value = _mapViewer.Result.StartCompactStep;
 			_spinButtonStep.ValueChanged += (s, e) =>
 			{
 				if (_suspendStep)
@@ -83,8 +84,10 @@ namespace MUDMapBuilder.Editor.UI
 			{
 				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.PositionedRoomsCount}/{_mapViewer.Area.Rooms.Count}";
 				_labelGridSize.Text = $"Grid Size: {_mapViewer.Rooms.Width}x{_mapViewer.Rooms.Height}";
+				_labelStartCompactStep.Text = $"Start Compact Step: {_mapViewer.Result.StartCompactStep}";
 
 				var brokenConnections = _mapViewer.Rooms.BrokenConnections;
+				_labelIntersectedConnections.Text = $"Intersected Connections: {brokenConnections.Intersections.Count}";
 				_labelNonStraightConnections.Text = $"Non Straight Connections: {brokenConnections.NonStraight.Count}";
 				_labelConnectionsWithObstacles.Text = $"Connections With Obstacles: {brokenConnections.WithObstacles.Count}";
 				_labelLongConnections.Text = $"Long Connections: {brokenConnections.Long.Count}";
@@ -93,6 +96,8 @@ namespace MUDMapBuilder.Editor.UI
 			{
 				_labelRoomsCount.Text = "";
 				_labelGridSize.Text = "";
+				_labelStartCompactStep.Text = "";
+				_labelIntersectedConnections.Text = "";
 				_labelNonStraightConnections.Text = "";
 				_labelConnectionsWithObstacles.Text = "";
 				_labelLongConnections.Text = "";
@@ -106,6 +111,7 @@ namespace MUDMapBuilder.Editor.UI
 			_menuItemFileSave.Enabled = enabled;
 			_menuItemFileSaveAs.Enabled = enabled;
 			_buttonStart.Enabled = enabled;
+			_buttonToCompact.Enabled = enabled;
 			_buttonEnd.Enabled = enabled;
 			_spinButtonStep.Enabled = enabled;
 			_spinPushForceX.Enabled = enabled;

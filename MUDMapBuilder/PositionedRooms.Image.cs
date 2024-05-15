@@ -11,6 +11,7 @@ namespace MUDMapBuilder
 		private static readonly SKColor DefaultColor = SKColors.Black;
 		private static readonly SKColor ConnectionWithObstacles = SKColors.Red;
 		private static readonly SKColor NonStraightConnection = SKColors.Yellow;
+		private static readonly SKColor Intersection = SKColors.Magenta;
 		private static readonly SKColor LongConnection = SKColors.Green;
 
 		private const int RoomHeight = 32;
@@ -197,6 +198,10 @@ namespace MUDMapBuilder
 								else if (BrokenConnections.NonStraight.Find(room.Id, targetRoom.Id, exitDir) != null)
 								{
 									paint.Color = NonStraightConnection;
+								}
+								else if (BrokenConnections.Intersections.Find(room.Id, targetRoom.Id, exitDir) != null)
+								{
+									paint.Color = Intersection;
 								}
 								else if (BrokenConnections.Long.Find(room.Id, targetRoom.Id, exitDir) != null)
 								{

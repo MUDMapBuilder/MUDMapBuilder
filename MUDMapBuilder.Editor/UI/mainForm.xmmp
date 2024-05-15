@@ -1,5 +1,5 @@
 <Project>
-  <Project.ExportOptions Namespace="MUDMapBuilder.Editor.UI" Class="MainForm" OutputPath="D:\Projects\MUDMapBuilder.NET\MUDMapBuilder.Editor\UI" />
+  <Project.ExportOptions Namespace="MUDMapBuilder.Editor.UI" Class="MainForm" OutputPath="D:\Projects\MUDMapBuilder\MUDMapBuilder.Editor\UI" />
   <Panel>
     <VerticalStackPanel Spacing="8">
       <HorizontalMenu Id="_mainMenu">
@@ -19,6 +19,9 @@
           <Label Text="&lt;&lt;" />
         </Button>
         <SpinButton Maximum="1000" Minimum="1" Value="1" Integer="True" Width="50" Id="_spinButtonStep" />
+        <Button Id="_buttonToCompact">
+          <Label Text="To Compact" />
+        </Button>
         <Button Id="_buttonEnd">
           <Label Text="&gt;&gt;" />
         </Button>
@@ -38,10 +41,12 @@
       <Panel StackPanel.ProportionType="Fill">
         <ScrollViewer Id="_panelMap" />
         <VerticalStackPanel Spacing="8" Id="_panelConnectionIssues">
-          <Label Text="Rooms: 10" TextColor="#5756D5FF" Id="_labelRoomsCount" />
-          <Label Text="Grid Size: 10x10" TextColor="#5756D5FF" Id="_labelGridSize" />
+          <Label Text="Rooms: 10" TextColor="#0379FFFF" Id="_labelRoomsCount" />
+          <Label Text="Grid Size: 10x10" TextColor="#0379FFFF" Id="_labelGridSize" />
+          <Label Text="Start Compact Step: 100" TextColor="#0379FFFF" Id="_labelStartCompactStep" />
           <Label Text="Connections With Obstacles: 10" TextColor="#FE3930FF" Id="_labelConnectionsWithObstacles" />
           <Label Text="Non-Straight Connections: 10" TextColor="#FFCC01FF" Id="_labelNonStraightConnections" />
+          <Label Text="Intersected Connections: 10" TextColor="#5756D5FF" Id="_labelIntersectedConnections" />
           <Label Text="Long Connections: 10" TextColor="#4BD961FF" Id="_labelLongConnections" />
         </VerticalStackPanel>
       </Panel>

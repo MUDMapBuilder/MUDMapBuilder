@@ -333,20 +333,102 @@ namespace MUDMapBuilder
 			return remove == null;
 		}
 
-		private bool RemoveRooms(MMBRoom[] rooms)
+		private bool RemoveRooms(MMBRoom[] toRemove)
 		{
-			// Mark
+			// Firstly remove from the clone in order to determine how rooms will be spliited
+			var rooms = _rooms.Clone();
+			foreach(var r in toRemove)
+			{
+				var cloneRoom = rooms.GetRoomById(r.Id);
+				cloneRoom.Position = null;
+			}
+
+			// Check what parts the map was split on
+			var parts = new List<HashSet<int>>();
 			foreach (var room in rooms)
+			{
+				if (room.Position == null)
+				{
+					continue;
+				}
+
+				// Check if this room is already in one of parts
+				foreach(var p in parts)
+				{
+					if (p.Contains(room.Id))
+					{
+						goto finish;
+					}
+				}
+
+				// Create new part with this room and all its connections
+				var newPart = new HashSet<int>();
+				var toProcess = new List<MMBRoom>
+				{
+					room
+				};
+
+				while(toProcess.Count > 0)
+				{
+					var r = toProcess[0];
+					toProcess.RemoveAt(0);
+					newPart.Add(r.Id);
+
+					foreach(var exit in r.Connections)
+					{
+						if (newPart.Contains(exit.Value))
+						{
+							continue;
+						}
+
+						var targetRoom = rooms.GetRoomById(exit.Value);
+						if (targetRoom == null || targetRoom.Position == null)
+						{
+							continue;
+						}
+
+						toProcess.Add(targetRoom);
+					}
+				}
+
+				parts.Add(newPart);
+			finish:;
+			}
+
+			var roomsToRemove = new List<MMBRoom>();
+			roomsToRemove.AddRange(toRemove);
+
+			// Sort parts by size
+			var sortedParts = (from p in parts orderby p.Count select p).ToList();
+
+			// Add all parts except the last one with size below 10
+			for(var i = 0; i < sortedParts.Count - 1; ++i)
+			{
+				var p = sortedParts[i];
+				if (p.Count >= 10)
+				{
+					continue;
+				}
+
+				foreach(var id in p)
+				{
+					roomsToRemove.Add(_rooms.GetRoomById(id));
+				}
+			}
+
+			// Mark
+			foreach (var room in roomsToRemove)
 			{
 				room.MarkColor = SKColors.Red;
 			}
+
 			if (!AddRunStep())
 			{
 				return false;
 			}
 
 			// Remove
-			foreach (var room in rooms)
+			foreach (var room in roomsToRemove)
 			{
 
 				// Record the removal
@@ -372,11 +454,6 @@ namespace MUDMapBuilder
 
 		private StraightenRoomResult StraightenConnection(MMBRoom room1, MMBRoom room2, MMBDirection direction)
 		{
-			if (room1.Id == 2960 && room2.Id == 2970)
-			{
-				var k = 5;
-			}
-
 			// Try to move room2
 			var vc = _rooms.BrokenConnections;
 			var result1 = TryStraightenConnection(room1.Id, room2.Id, direction);

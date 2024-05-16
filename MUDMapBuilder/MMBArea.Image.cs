@@ -97,6 +97,7 @@ namespace MUDMapBuilder
 				{
 					SKCanvas canvas = surface.Canvas;
 
+					canvas.Clear(SKColors.White);
 					for (var x = 0; x < width; ++x)
 					{
 						for (var y = 0; y < height; ++y)

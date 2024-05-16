@@ -317,7 +317,7 @@ namespace MUDMapBuilder
 
 		private bool CompactRun(MMBDirection pushDirection)
 		{
-			Log($"Compacting map to the {pushDirection}. Processed {Area.PositionedRoomsCount}/{Area.Count} rooms. Step {_history.Count}. Grid Size: {Area.Width}/{Area.Height}");
+			Log($"Compacting map to the {pushDirection}. Processed {Area.PositionedRoomsCount}/{Area.Count} rooms. Step {_history.Count}. Grid Size: {Area.Width}x{Area.Height}");
 
 			// Firstly collect rooms
 			var roomsToPush = new List<MMBRoom>();
@@ -493,7 +493,7 @@ namespace MUDMapBuilder
 					var room = _toProcess[0];
 					_toProcess.RemoveAt(0);
 
-					Log($"Processed {Area.PositionedRoomsCount}/{Area.Count} rooms. Step {_history.Count}. Grid Size: {Area.Width}/{Area.Height}");
+					Log($"Processed {Area.PositionedRoomsCount}/{Area.Count} rooms. Step {_history.Count}. Grid Size: {Area.Width}x{Area.Height}");
 
 					foreach (var pair in room.Connections)
 					{

@@ -71,7 +71,7 @@ namespace MUDMapBuilder.Editor
 
 				if (_desktop.IsKeyDown(Keys.LeftControl) || _desktop.IsKeyDown(Keys.RightControl))
 				{
-					if (_desktop.IsKeyDown(Keys.I))
+					if (_desktop.IsKeyDown(Keys.O))
 					{
 						_mainForm.OnMenuFileImportSelected();
 					}

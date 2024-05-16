@@ -573,6 +573,7 @@ namespace MUDMapBuilder
 							}
 						}
 
+						vc = _area.BrokenConnections;
 						if (_options.FixNonStraight)
 						{
 							// Non-straight connections fix
@@ -612,6 +613,7 @@ namespace MUDMapBuilder
 							}
 						}
 
+						vc = _area.BrokenConnections;
 						if (_options.FixIntersected)
 						{
 							// Intersections

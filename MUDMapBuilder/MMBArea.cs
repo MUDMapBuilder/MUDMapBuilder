@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Text.Json.Nodes;
 
 namespace MUDMapBuilder
 {
-	public partial class PositionedRooms : IEnumerable<MMBRoom>
+	public partial class MMBArea : IEnumerable<MMBRoom>
 	{
 		private enum ConnectionBrokenType
 		{
@@ -22,10 +22,11 @@ namespace MUDMapBuilder
 		private MMBRoom[,] _roomsByPositions = null;
 		private MMBConnectionsList[,] _connectionsGrid = null;
 		private BrokenConnectionsInfo _brokenConnections;
-		private int _gridArea;
 
 		public int Count => _roomsByIds.Count;
 		public int PositionedRoomsCount => (from r in _roomsByIds.Values where r.Position != null select r).Count();
+
+		public string Name { get; set; }
 
 		public BrokenConnectionsInfo BrokenConnections
 		{
@@ -45,56 +46,13 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public int GridArea => _gridArea;
-
 		public int Width => RoomsRectangle.Width;
 		public int Height => RoomsRectangle.Height;
 
 		public int? SelectedRoomId { get; set; }
 
-		private PositionedRooms()
+		private MMBArea()
 		{
-		}
-
-		internal PositionedRooms(IMMBRoom[] sourceRooms)
-		{
-			// Create rooms
-			foreach (var r in sourceRooms)
-			{
-				Add(new MMBRoom(r));
-			}
-
-			// Set connections
-			foreach (var pair in _roomsByIds)
-			{
-				var room = pair.Value;
-				foreach (var exit in pair.Value.Room.Exits)
-				{
-					var targetRoom = GetRoomById(exit.Value.Id);
-					if (targetRoom == null)
-					{
-						continue;
-					}
-
-					var exitDir = exit.Key;
-					room.Connections[exitDir] = exit.Value.Id;
-
-					var foundOpposite = false;
-					foreach (var targetRoomExit in targetRoom.Room.Exits)
-					{
-						if (targetRoomExit.Value.Id == room.Id)
-						{
-							foundOpposite = true;
-							break;
-						}
-					}
-
-					if (!foundOpposite)
-					{
-						targetRoom.Connections[exitDir.GetOppositeDirection()] = room.Id;
-					}
-				}
-			}
 		}
 
 		private void OnRoomInvalid(object sender, EventArgs e) => InvalidatePositions();
@@ -298,7 +256,7 @@ namespace MUDMapBuilder
 						var room = GetRoomByPosition(pos);
 						if (room != null)
 						{
-							obstacles.Add(room.Room.Id);
+							obstacles.Add(room.Id);
 						}
 
 						var gridPos = ToZeroBasedPosition(new Point(x, y));
@@ -338,12 +296,12 @@ namespace MUDMapBuilder
 				foreach (var pair in room.Connections)
 				{
 					var exitDir = pair.Key;
-					if (pair.Value == room.Id)
+					if (pair.Value.RoomId == room.Id)
 					{
 						continue;
 					}
 
-					var targetRoom = GetRoomById(pair.Value);
+					var targetRoom = GetRoomById(pair.Value.RoomId);
 					if (targetRoom == null || targetRoom.Position == null)
 					{
 						continue;
@@ -497,40 +455,6 @@ namespace MUDMapBuilder
 			}
 
 			_brokenConnections = CalculateBrokenConnections();
-
-			// Calculate grid area
-			_gridArea = 0;
-			for (var y = 0; y < Height; ++y)
-			{
-				int startX, endX;
-				var found = false;
-				for (startX = 0; startX < Width; ++startX)
-				{
-					var room = GetRoomByZeroBasedPosition(startX, y);
-					if (room != null)
-					{
-						found = true;
-						break;
-					}
-				}
-
-				if (!found)
-				{
-					// Skip this line
-					continue;
-				}
-
-				for (endX = Width - 1; endX >= 0; --endX)
-				{
-					var room = GetRoomByZeroBasedPosition(endX, y);
-					if (room != null)
-					{
-						break;
-					}
-				}
-
-				_gridArea += (endX - startX + 1);
-			}
 		}
 
 		public HashSet<int>[] GroupPositionedRooms()
@@ -568,12 +492,12 @@ namespace MUDMapBuilder
 
 					foreach (var exit in r.Connections)
 					{
-						if (newPart.Contains(exit.Value))
+						if (newPart.Contains(exit.Value.RoomId))
 						{
 							continue;
 						}
 
-						var targetRoom = GetRoomById(exit.Value);
+						var targetRoom = GetRoomById(exit.Value.RoomId);
 						if (targetRoom == null || targetRoom.Position == null)
 						{
 							continue;
@@ -605,12 +529,12 @@ namespace MUDMapBuilder
 				foreach (var pair in room.Connections)
 				{
 					var exitDir = pair.Key;
-					if (pair.Value == room.Id)
+					if (pair.Value.RoomId == room.Id)
 					{
 						continue;
 					}
 
-					var targetRoom = GetRoomById(pair.Value);
+					var targetRoom = GetRoomById(pair.Value.RoomId);
 					if (targetRoom == null || targetRoom.Position == null)
 					{
 						continue;
@@ -621,7 +545,7 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					var connectionsToRoomCount = (from r in _roomsByIds where r.Value.Connections.Values.Contains(targetRoom.Id) select r).Count();
+					var connectionsToRoomCount = (from r in _roomsByIds where r.Value.FindConnection(targetRoom.Id) != null select r).Count();
 					if (connectionsToRoomCount > 1)
 					{
 						continue;
@@ -675,8 +599,8 @@ namespace MUDMapBuilder
 					var exitDir = pair.Key;
 					var forceVector = item.Item2;
 
-					var targetRoom = GetRoomById(pair.Value);
-					if (targetRoom == null || targetRoom.Position == null || movedRooms.ContainsKey(pair.Value))
+					var targetRoom = GetRoomById(pair.Value.RoomId);
+					if (targetRoom == null || targetRoom.Position == null || movedRooms.ContainsKey(pair.Value.RoomId))
 					{
 						continue;
 					}
@@ -890,8 +814,8 @@ namespace MUDMapBuilder
 				foreach (var pair in room.Connections)
 				{
 					var exitDir = pair.Key;
-					var targetRoom = GetRoomById(pair.Value);
-					if (targetRoom == null || targetRoom.Position == null || movedRooms.Contains(pair.Value))
+					var targetRoom = GetRoomById(pair.Value.RoomId);
+					if (targetRoom == null || targetRoom.Position == null || movedRooms.Contains(pair.Value.RoomId))
 					{
 						continue;
 					}
@@ -974,9 +898,9 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public PositionedRooms Clone()
+		public MMBArea Clone()
 		{
-			var result = new PositionedRooms();
+			var result = new MMBArea();
 			foreach (var r in _roomsByIds)
 			{
 				result.Add(r.Value.Clone());
@@ -989,7 +913,7 @@ namespace MUDMapBuilder
 
 		IEnumerator IEnumerable.GetEnumerator() => _roomsByIds.Values.GetEnumerator();
 
-		public static bool AreEqual(PositionedRooms a, PositionedRooms b)
+		public static bool AreEqual(MMBArea a, MMBArea b)
 		{
 			if (a.Width != b.Width || a.Height != b.Height)
 			{
@@ -1022,6 +946,83 @@ namespace MUDMapBuilder
 			}
 
 			return true;
+		}
+
+		public static MMBArea Parse(string data)
+		{
+			var rootObject = JsonNode.Parse(data);
+
+			var result = new MMBArea
+			{
+				Name = (string)rootObject["name"]
+			};
+
+			// First run: load all rooms and exits
+			var roomsObject = (JsonArray)rootObject["rooms"];
+			foreach (var roomObject in roomsObject)
+			{
+				var isExitToOtherArea = false;
+				if (roomObject["otherAreaExit"] != null)
+				{
+					isExitToOtherArea = (bool)roomObject["otherAreaExit"];
+				}
+
+				var room = new MMBRoom((int)roomObject["id"], (string)roomObject["name"], isExitToOtherArea);
+				if (result.GetRoomById(room.Id) != null)
+				{
+					throw new Exception($"Room with id {room.Id} already exists.");
+				}
+
+				var exitsObject = (JsonObject)roomObject["exits"];
+				if (exitsObject != null)
+				{
+					foreach (var pair in exitsObject)
+					{
+						var dir = Enum.Parse<MMBDirection>(pair.Key);
+						var targetRoomId = (int)pair.Value;
+						room.Connections[dir] = new MMBRoomConnection(dir, targetRoomId)
+						{
+							ConnectionType = MMBConnectionType.Forward
+						};
+					}
+				}
+
+				result.Add(room);
+			}
+
+			// Second run: set backward and twoway connections
+			foreach (var room in result)
+			{
+				foreach (var connection in room.Connections)
+				{
+					var dir = connection.Value.Direction;
+					var oppDir = dir.GetOppositeDirection();
+
+					var targetRoom = result.GetRoomById(connection.Value.RoomId);
+					var foundOpposite = false;
+					var oppositeConnection = targetRoom.FindConnection(room.Id);
+					if (oppositeConnection != null &&
+						oppDir == oppositeConnection.Direction)
+					{
+						foundOpposite = true;
+					}
+
+					if (foundOpposite)
+					{
+						connection.Value.ConnectionType = MMBConnectionType.TwoWay;
+					}
+					else if (!targetRoom.Connections.ContainsKey(oppDir))
+					{
+						// Establish opposite backwards connection
+						targetRoom.Connections[oppDir] = new MMBRoomConnection(oppDir, room.Id)
+						{
+							ConnectionType = MMBConnectionType.Backward
+						};
+					}
+				}
+			}
+
+			return result;
 		}
 	}
 }

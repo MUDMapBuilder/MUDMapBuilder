@@ -4,10 +4,10 @@ namespace MUDMapBuilder
 {
 	public class MMBImageRoomInfo
 	{
-		public IMMBRoom Room { get; private set; }
+		public MMBRoom Room { get; private set; }
 		public Rectangle Rectangle { get; private set; }
 
-		internal MMBImageRoomInfo(IMMBRoom room, Rectangle rectangle)
+		internal MMBImageRoomInfo(MMBRoom room, Rectangle rectangle)
 		{
 			Room = room;
 			Rectangle = rectangle;

@@ -47,19 +47,6 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public static bool IsConnectedTo(this IMMBRoom room1, IMMBRoom room2)
-		{
-			foreach (var pair in room1.Exits)
-			{
-				if (pair.Value.Id == room2.Id)
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
-
 		public static int CalculateArea(this Rectangle r) => r.Width * r.Height;
 	}
 }

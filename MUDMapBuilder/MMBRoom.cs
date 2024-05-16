@@ -2,9 +2,40 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace MUDMapBuilder
 {
+	public enum MMBDirection
+	{
+		North,
+		East,
+		South,
+		West,
+		Up,
+		Down,
+	}
+
+	public enum MMBConnectionType
+	{
+		Forward,
+		Backward,
+		TwoWay
+	}
+
+	public class MMBRoomConnection
+	{
+		public MMBDirection Direction { get; private set; }
+		public int RoomId { get; private set; }
+		public MMBConnectionType ConnectionType { get; internal set; }
+
+		public MMBRoomConnection(MMBDirection direction, int roomId)
+		{
+			Direction = direction;
+			RoomId = roomId;
+		}
+	}
+
 	public class MMBRoom
 	{
 		private Dictionary<MMBDirection, Point> _drawnConnections = new Dictionary<MMBDirection, Point>();
@@ -12,9 +43,9 @@ namespace MUDMapBuilder
 		private SKColor? _markColor;
 		private Point? _forceMark;
 
-		public int Id => Room.Id;
-
-		public IMMBRoom Room { get; }
+		public int Id { get; private set; }
+		public string Name { get; private set; }
+		public bool IsExitToOtherArea { get; private set; }
 
 		public Point? Position
 		{
@@ -30,6 +61,7 @@ namespace MUDMapBuilder
 				FireInvalid();
 			}
 		}
+
 		public SKColor? MarkColor
 		{
 			get => _markColor;
@@ -61,13 +93,20 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public Dictionary<MMBDirection, int> Connections { get; } = new Dictionary<MMBDirection, int>();
+		public Dictionary<MMBDirection, MMBRoomConnection> Connections { get; } = new Dictionary<MMBDirection, MMBRoomConnection>();
 
 		public event EventHandler Invalid;
 
-		public MMBRoom(IMMBRoom room)
+		internal MMBRoom(int id, string name, bool isExitToOtherArea)
 		{
-			Room = room;
+			Id = id;
+			Name = name;
+			IsExitToOtherArea = isExitToOtherArea;
+		}
+
+		public MMBRoomConnection FindConnection(int targetRoomId)
+		{
+			return (from pair in Connections where pair.Value.RoomId == targetRoomId select pair.Value).FirstOrDefault();
 		}
 
 		internal void ClearDrawnConnections() => _drawnConnections.Clear();
@@ -90,7 +129,7 @@ namespace MUDMapBuilder
 
 		public MMBRoom Clone()
 		{
-			var result = new MMBRoom(Room)
+			var result = new MMBRoom(Id, Name, IsExitToOtherArea)
 			{
 				Position = Position,
 				MarkColor = MarkColor,
@@ -105,7 +144,7 @@ namespace MUDMapBuilder
 			return result;
 		}
 
-		public override string ToString() => $"{Room}, {Position}";
+		public override string ToString() => $"{Name} (#{Id}), {Position}";
 
 		private void FireInvalid() => Invalid?.Invoke(this, EventArgs.Empty);
 	}

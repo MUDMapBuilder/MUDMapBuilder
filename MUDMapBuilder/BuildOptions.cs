@@ -2,13 +2,6 @@
 
 namespace MUDMapBuilder
 {
-	public enum AlgorithmUsage
-	{
-		DoNotUse,
-		Use,
-		LimitSteps
-	}
-
 	public class BuildOptions
 	{
 		public int MaxSteps { get; set; } = 1000;

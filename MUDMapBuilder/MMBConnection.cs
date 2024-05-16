@@ -2,7 +2,7 @@
 
 namespace MUDMapBuilder
 {
-	public class MMBConnection
+    public class MMBConnection
 	{
 		public int SourceRoomId { get; }
 		public int TargetRoomId { get; }

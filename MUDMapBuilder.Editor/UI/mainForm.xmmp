@@ -7,8 +7,6 @@
           <MenuItem Text="&amp;Open" ShortcutText="Ctrl+O" Id="_menuItemFileOpen" />
           <MenuItem Text="&amp;Save" ShortcutText="Ctrl+S" Id="_menuItemFileSave" />
           <MenuItem Text="S&amp;ave As..." Id="_menuItemFileSaveAs" />
-          <MenuSeparator />
-          <MenuItem Text="&amp;Import..." ShortcutText="Ctrl+I" Id="_menuItemImport" />
         </MenuItem>
         <MenuItem Text="&amp;Help">
           <MenuItem Text="&amp;About" Id="_menuHelpAbout" />

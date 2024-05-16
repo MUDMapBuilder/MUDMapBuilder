@@ -8,7 +8,7 @@ using System.Collections.Concurrent;
 
 namespace MUDMapBuilder.Editor
 {
-	public class ViewerGame : Game
+	public class EditorGame : Game
 	{
 		private readonly GraphicsDeviceManager _graphics;
 
@@ -17,7 +17,7 @@ namespace MUDMapBuilder.Editor
 		private readonly State _state;
 		private readonly ConcurrentQueue<Action> _uiActions = new ConcurrentQueue<Action>();
 
-		public static ViewerGame Instance { get; private set; }
+		public static EditorGame Instance { get; private set; }
 
 		public string FilePath
 		{
@@ -25,7 +25,7 @@ namespace MUDMapBuilder.Editor
 			set => Window.Title = value;
 		}
 
-		public ViewerGame()
+		public EditorGame()
 		{
 			Instance = this;
 

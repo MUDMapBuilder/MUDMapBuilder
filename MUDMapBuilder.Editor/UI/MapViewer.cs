@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MUDMapBuilder.Editor.Data;
 using Myra;
 using Myra.Graphics2D.Brushes;
 using Myra.Graphics2D.TextureAtlases;
@@ -27,7 +26,7 @@ namespace MUDMapBuilder.Editor.UI
 				if (value == _selectedRoomId) return;
 
 				_selectedRoomId = value;
-				Rooms.SelectedRoomId = value;
+				Area.SelectedRoomId = value;
 				SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
@@ -44,7 +43,7 @@ namespace MUDMapBuilder.Editor.UI
 				}
 
 				_result = value;
-				Step = Result.History.Length - 1;
+				Step = Result != null ? Result.History.Length - 1 : 0;
 			}
 		}
 
@@ -59,7 +58,7 @@ namespace MUDMapBuilder.Editor.UI
 			}
 		}
 
-		public PositionedRooms Rooms
+		public MMBArea Area
 		{
 			get
 			{
@@ -86,7 +85,7 @@ namespace MUDMapBuilder.Editor.UI
 
 			if (Result != null)
 			{
-				var rooms = Rooms;
+				var rooms = Area;
 				_imageResult = rooms.BuildPng();
 				using (var ms = new MemoryStream(_imageResult.PngData))
 				{
@@ -104,7 +103,7 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			base.OnTouchDown();
 
-			if (Rooms == null)
+			if (Area == null)
 			{
 				return;
 			}

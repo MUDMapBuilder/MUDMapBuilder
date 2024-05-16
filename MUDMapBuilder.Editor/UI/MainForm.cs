@@ -1,4 +1,3 @@
-using MUDMapBuilder.Editor.Data;
 using Myra.Graphics2D.UI;
 using Myra.Graphics2D.UI.File;
 using System;
@@ -7,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MUDMapBuilder.Editor.UI
 {
-	public partial class MainForm
+    public partial class MainForm
 	{
 		private readonly MapViewer _mapViewer;
 		private bool _suspendStep = false;
 
-		private Area Area { get; set; }
+		private MMBArea Area { get; set; }
 
 		public int Step
 		{
@@ -27,7 +26,7 @@ namespace MUDMapBuilder.Editor.UI
 			_mapViewer = new MapViewer();
 			_panelMap.Content = _mapViewer;
 
-			_menuItemImport.Selected += (s, e) => OnMenuFileImportSelected();
+			_menuItemFileOpen.Selected += (s, e) => OnMenuFileImportSelected();
 
 			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
 			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _spinButtonStep.Maximum;
@@ -54,12 +53,12 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void ClearRoomsMark()
 		{
-			if (_mapViewer.Rooms == null)
+			if (_mapViewer.Area == null)
 			{
 				return;
 			}
 
-			foreach (var room in _mapViewer.Rooms)
+			foreach (var room in _mapViewer.Area)
 			{
 				room.MarkColor = null;
 				room.ForceMark = null;
@@ -73,9 +72,9 @@ namespace MUDMapBuilder.Editor.UI
 				Filter = "*.json"
 			};
 
-			if (!string.IsNullOrEmpty(ViewerGame.Instance.FilePath))
+			if (!string.IsNullOrEmpty(EditorGame.Instance.FilePath))
 			{
-				dialog.Folder = Path.GetDirectoryName(ViewerGame.Instance.FilePath);
+				dialog.Folder = Path.GetDirectoryName(EditorGame.Instance.FilePath);
 			}
 
 			dialog.Closed += (s, a) =>
@@ -95,13 +94,13 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void UpdateNumbers()
 		{
-			if (_mapViewer.Rooms != null)
+			if (_mapViewer.Area != null)
 			{
-				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Rooms.PositionedRoomsCount}/{_mapViewer.Rooms.Count}";
-				_labelGridSize.Text = $"Grid Size: {_mapViewer.Rooms.Width}x{_mapViewer.Rooms.Height}";
+				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Area.PositionedRoomsCount}/{_mapViewer.Area.Count}";
+				_labelGridSize.Text = $"Grid Size: {_mapViewer.Area.Width}x{_mapViewer.Area.Height}";
 				_labelStartCompactStep.Text = $"Start Compact Step: {_mapViewer.Result.StartCompactStep}";
 
-				var brokenConnections = _mapViewer.Rooms.BrokenConnections;
+				var brokenConnections = _mapViewer.Area.BrokenConnections;
 				_labelIntersectedConnections.Text = $"Intersected Connections: {brokenConnections.Intersections.Count}";
 				_labelNonStraightConnections.Text = $"Non Straight Connections: {brokenConnections.NonStraight.Count}";
 				_labelConnectionsWithObstacles.Text = $"Connections With Obstacles: {brokenConnections.WithObstacles.Count}";
@@ -137,7 +136,7 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void QueueUIAction(Action action)
 		{
-			ViewerGame.Instance.QueueUIAction(() =>
+			EditorGame.Instance.QueueUIAction(() =>
 			{
 				try
 				{
@@ -171,8 +170,13 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void InternalRebuild(string newTitle = null)
 		{
+			QueueUIAction(() =>
+			{
+				_mapViewer.Result = null;
+			});
+
 			var options = CreateBuildOptions();
-			var result = MapBuilder.Build(Area.Rooms.ToArray(), options);
+			var result = MapBuilder.Build(Area, options);
 
 			QueueUIAction(() =>
 			{
@@ -191,7 +195,7 @@ namespace MUDMapBuilder.Editor.UI
 
 				if (newTitle != null)
 				{
-					ViewerGame.Instance.FilePath = newTitle;
+					EditorGame.Instance.FilePath = newTitle;
 				}
 				UpdateEnabled();
 			});
@@ -217,7 +221,7 @@ namespace MUDMapBuilder.Editor.UI
 				Task.Run(() =>
 				{
 					var data = File.ReadAllText(path);
-					Area = Area.Parse(data);
+					Area = MMBArea.Parse(data);
 
 					InternalRebuild(path);
 				});

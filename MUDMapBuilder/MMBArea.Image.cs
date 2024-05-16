@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace MUDMapBuilder
 {
-	partial class PositionedRooms
+	partial class MMBArea
 	{
 		private static readonly SKColor DefaultColor = SKColors.Black;
 		private static readonly SKColor SelectedColor = SKColors.Green;
@@ -70,7 +70,7 @@ namespace MUDMapBuilder
 
 						room.ClearDrawnConnections();
 
-						var sz = (int)(paint.MeasureText(room.Room.ToString()) + TextPadding * 2 + 0.5f);
+						var sz = (int)(paint.MeasureText(room.ToString()) + TextPadding * 2 + 0.5f);
 						if (sz > _cellsWidths[x])
 						{
 							_cellsWidths[x] = sz;
@@ -118,7 +118,7 @@ namespace MUDMapBuilder
 							{
 								paint.Color = room.MarkColor.Value;
 							}
-							else if (room.Room.IsExitToOtherArea)
+							else if (room.IsExitToOtherArea)
 							{
 								paint.Color = ExitToOtherAreaColor;
 							}
@@ -128,18 +128,24 @@ namespace MUDMapBuilder
 							}
 
 							canvas.DrawRect(rect.X, rect.Y, rect.Width, rect.Height, paint);
-							roomInfos.Add(new MMBImageRoomInfo(room.Room, rect));
+							roomInfos.Add(new MMBImageRoomInfo(room, rect));
 
 							// Draw connections
 							foreach (var pair in room.Connections)
 							{
-								var exitDir = pair.Key;
-								if (pair.Value == room.Id)
+								// Ignore backward connections
+								if (pair.Value.ConnectionType == MMBConnectionType.Backward)
 								{
 									continue;
 								}
 
-								var targetRoom = GetRoomById(pair.Value);
+								var exitDir = pair.Key;
+								if (pair.Value.RoomId == room.Id)
+								{
+									continue;
+								}
+
+								var targetRoom = GetRoomById(pair.Value.RoomId);
 								if (targetRoom == null || targetRoom.Position == null)
 								{
 									continue;
@@ -236,10 +242,7 @@ namespace MUDMapBuilder
 									}
 								}
 
-								var oppositeDir = exitDir.GetOppositeDirection();
-								var isTwoWay = targetRoom.Room.Exits.ContainsKey(oppositeDir) &&
-									targetRoom.Room.Exits[oppositeDir].Id == room.Id;
-								if (!isTwoWay)
+								if (pair.Value.ConnectionType == MMBConnectionType.Forward)
 								{
 									// Draw single-way arrow
 									var skPath = new SKPath();
@@ -275,9 +278,9 @@ namespace MUDMapBuilder
 								room.AddDrawnConnection(exitDir, targetPos);
 							}
 
-							paint.Color = room.Room.IsExitToOtherArea ? ExitToOtherAreaColor : DefaultColor;
+							paint.Color = room.IsExitToOtherArea ? ExitToOtherAreaColor : DefaultColor;
 							paint.StrokeWidth = 1;
-							canvas.DrawText(room.Room.ToString(), rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
+							canvas.DrawText(room.ToString(), rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
 
 							if (room.ForceMark != null)
 							{

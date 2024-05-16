@@ -4,7 +4,7 @@
 	{
 		static void Main(string[] args)
 		{
-			using (var game = new ViewerGame())
+			using (var game = new EditorGame())
 				game.Run();
 		}
 	}

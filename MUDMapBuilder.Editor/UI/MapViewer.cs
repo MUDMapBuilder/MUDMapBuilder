@@ -14,7 +14,7 @@ namespace MUDMapBuilder.Editor.UI
 	public class MapViewer : Image
 	{
 		private int? _selectedRoomId;
-		private Area _area;
+		private MapBuilderResult _result;
 		private MMBImageResult _imageResult;
 		private int _step;
 
@@ -32,7 +32,21 @@ namespace MUDMapBuilder.Editor.UI
 			}
 		}
 
-		public MapBuilderResult Result { get; private set; }
+		public MapBuilderResult Result
+		{
+			get => _result;
+
+			set
+			{
+				if (value == _result)
+				{
+					return;
+				}
+
+				_result = value;
+				Step = Result.History.Length - 1;
+			}
+		}
 
 		public int Step
 		{
@@ -59,22 +73,6 @@ namespace MUDMapBuilder.Editor.UI
 			}
 		}
 
-		public Area Area
-		{
-			get => _area;
-
-			set
-			{
-				if (value == _area)
-				{
-					return;
-				}
-
-				_area = value;
-				Rebuild(new BuildOptions());
-			}
-		}
-
 		public event EventHandler SelectedIndexChanged;
 
 		public MapViewer()
@@ -82,21 +80,7 @@ namespace MUDMapBuilder.Editor.UI
 			Background = new SolidBrush(Color.White);
 		}
 
-		public void Rebuild(BuildOptions options)
-		{
-			Result = null;
-			_imageResult = null;
-
-			if (Area != null)
-			{
-				Result = MapBuilder.Build(Area.Rooms.ToArray(), options);
-				Step = Result.History.Length - 1;
-			}
-
-			Redraw();
-		}
-
-		public void Redraw()
+		private void Redraw()
 		{
 			Renderable = null;
 

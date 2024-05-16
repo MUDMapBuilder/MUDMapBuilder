@@ -411,6 +411,11 @@ namespace MUDMapBuilder
 
 		private Rectangle CalculateRectangle()
 		{
+			if (PositionedRoomsCount == 0)
+			{
+				return new Rectangle(0, 0, 0, 0);
+			}
+
 			var min = new Point();
 			var max = new Point();
 			var minSet = false;

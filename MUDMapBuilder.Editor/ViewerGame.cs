@@ -4,6 +4,7 @@ using Myra;
 using MUDMapBuilder.Editor.UI;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Concurrent;
 
 namespace MUDMapBuilder.Editor
 {
@@ -14,6 +15,7 @@ namespace MUDMapBuilder.Editor
 		private Desktop _desktop;
 		private MainForm _mainForm;
 		private readonly State _state;
+		private readonly ConcurrentQueue<Action> _uiActions = new ConcurrentQueue<Action>();
 
 		public static ViewerGame Instance { get; private set; }
 
@@ -89,9 +91,21 @@ namespace MUDMapBuilder.Editor
 			}
 		}
 
+		public void QueueUIAction(Action action)
+		{
+			_uiActions.Enqueue(action);
+		}
+
 		protected override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
+
+			while (!_uiActions.IsEmpty)
+			{
+				Action action;
+				_uiActions.TryDequeue(out action);
+				action();
+			}
 		}
 
 		protected override void Draw(GameTime gameTime)

@@ -22,6 +22,9 @@ namespace MUDMapBuilder.Editor
 		public Point Size { get; set; }
 		public string EditedFile { get; set; }
 		public int Step { get; set; }
+		public bool FixObstacles { get; set; }
+		public bool FixNonStraight { get; set; }
+		public bool FixIntersection { get; set; }
 
 		public State()
 		{

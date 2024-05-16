@@ -8,14 +8,13 @@ namespace MUDMapBuilder
 		public bool FixObstacles { get; set; } = true;
 		public bool FixNonStraight { get; set; } = true;
 		public bool FixIntersected { get; set; } = true;
-		public Action<string> Log { get; set; }
 
-		public BuildOptions Clone()
+		public void CopyTo(BuildOptions other)
 		{
-			return new BuildOptions
-			{
-				MaxSteps = MaxSteps,
-			};
+			other.MaxSteps = MaxSteps;
+			other.FixObstacles = false;
+			other.FixNonStraight = false;
+			other.FixIntersected = false;
 		}
 	}
 }

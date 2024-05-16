@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace MUDMapBuilder
@@ -51,6 +52,7 @@ namespace MUDMapBuilder
 		public int Height => RoomsRectangle.Height;
 
 		public int? SelectedRoomId { get; set; }
+		public BuildOptions BuildOptions { get; private set; } = new BuildOptions();
 
 		private MMBArea()
 		{
@@ -902,6 +904,7 @@ namespace MUDMapBuilder
 		public MMBArea Clone()
 		{
 			var result = new MMBArea();
+			BuildOptions.CopyTo(result.BuildOptions);
 			foreach (var r in _roomsByIds)
 			{
 				result.Add(r.Value.Clone());
@@ -949,7 +952,56 @@ namespace MUDMapBuilder
 			return true;
 		}
 
+		public string ToJson()
+		{
+			var areaObject = new JsonObject
+			{
+				["name"] = Name
+			};
 
+			var optionsObject = new JsonObject
+			{
+				["maxSteps"] = BuildOptions.MaxSteps,
+				["fixObstacles"] = BuildOptions.FixObstacles,
+				["fixNonStraight"] = BuildOptions.FixNonStraight,
+				["fixIntersected"] = BuildOptions.FixIntersected
+			};
+			areaObject["buildOptions"] = optionsObject;
+
+			var roomsObject = new JsonArray();
+			foreach (var room in this)
+			{
+				var roomObject = new JsonObject
+				{
+					["id"] = room.Id,
+					["name"] = room.Name,
+				};
+
+				if (room.IsExitToOtherArea)
+				{
+					roomObject["otherAreaExit"] = true;
+				}
+
+				var exitsObject = new JsonObject();
+				foreach (var con in room.Connections.Values)
+				{
+					if (con.ConnectionType == MMBConnectionType.Backward)
+					{
+						continue;
+					}
+
+					exitsObject[con.Direction.ToString()] = con.RoomId;
+				}
+
+				roomObject["exits"] = exitsObject;
+				roomsObject.Add(roomObject);
+			}
+
+			areaObject["rooms"] = roomsObject;
+
+			var options = new JsonSerializerOptions { WriteIndented = true };
+			return areaObject.ToJsonString(options);
+		}
 
 		public static MMBArea Parse(string data)
 		{
@@ -959,6 +1011,15 @@ namespace MUDMapBuilder
 			{
 				Name = (string)rootObject["name"]
 			};
+
+			if (rootObject["buildOptions"] != null)
+			{
+				var optionsObject = (JsonObject)rootObject["buildOptions"];
+				result.BuildOptions.MaxSteps = (int)optionsObject["maxSteps"];
+				result.BuildOptions.FixObstacles = (bool)optionsObject["fixObstacles"];
+				result.BuildOptions.FixNonStraight = (bool)optionsObject["fixNonStraight"];
+				result.BuildOptions.FixIntersected = (bool)optionsObject["fixIntersected"];
+			}
 
 			// First run: load all rooms and exits
 			var roomsObject = (JsonArray)rootObject["rooms"];
@@ -993,7 +1054,7 @@ namespace MUDMapBuilder
 				result.Add(room);
 			}
 
-			// Second run: set backward and twoway connections
+			// Second run: set backward and two-way connections
 			foreach (var room in result)
 			{
 				foreach (var connection in room.Connections)

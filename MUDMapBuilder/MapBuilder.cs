@@ -39,25 +39,27 @@ namespace MUDMapBuilder
 		}
 
 		private readonly MMBArea _area;
-		private readonly BuildOptions _options;
 		private readonly List<MMBRoom> _toProcess = new List<MMBRoom>();
 		private readonly HashSet<int> _removedRooms = new HashSet<int>();
 		private readonly List<MMBArea> _history = new List<MMBArea>();
+		private readonly Action<string> _log;
 
-		private MapBuilder(MMBArea area, BuildOptions options)
+		private BuildOptions Options => _area.BuildOptions;
+
+		private MapBuilder(MMBArea area, Action<string> log)
 		{
 			_area = area;
-			_options = options ?? new BuildOptions();
+			_log = log;
 		}
 
 		private void Log(string message)
 		{
-			if (_options.Log == null)
+			if (_log == null)
 			{
 				return;
 			}
 
-			_options.Log(message);
+			_log(message);
 		}
 
 		private static Point CalculateDesiredPosition(Point sourcePos, Point targetPos, MMBDirection direction)
@@ -93,7 +95,7 @@ namespace MUDMapBuilder
 		private bool AddRunStep()
 		{
 			_history.Add(_area.Clone());
-			return _options.MaxSteps > _history.Count;
+			return Options.MaxSteps > _history.Count;
 		}
 
 		private bool PushRoom(MMBArea rooms, int firstRoomId, Point firstForceVector, bool measureRun, out int roomsRemoved)
@@ -483,9 +485,9 @@ namespace MUDMapBuilder
 			_toProcess.Add(firstRoom);
 
 			BrokenConnectionsInfo vc;
-			while (_toProcess.Count > 0 && _options.MaxSteps > _history.Count)
+			while (_toProcess.Count > 0 && Options.MaxSteps > _history.Count)
 			{
-				while (_toProcess.Count > 0 && _options.MaxSteps > _history.Count)
+				while (_toProcess.Count > 0 && Options.MaxSteps > _history.Count)
 				{
 					var room = _toProcess[0];
 					_toProcess.RemoveAt(0);
@@ -555,7 +557,7 @@ namespace MUDMapBuilder
 
 						// Connections fix run
 						vc = _area.BrokenConnections;
-						if (_options.FixObstacles)
+						if (Options.FixObstacles)
 						{
 							// Remove obstacles
 							while (vc.WithObstacles.Count > 0)
@@ -573,7 +575,7 @@ namespace MUDMapBuilder
 						}
 
 						vc = _area.BrokenConnections;
-						if (_options.FixNonStraight)
+						if (Options.FixNonStraight)
 						{
 							// Non-straight connections fix
 							while (vc.NonStraight.Count > 0)
@@ -613,7 +615,7 @@ namespace MUDMapBuilder
 						}
 
 						vc = _area.BrokenConnections;
-						if (_options.FixIntersected)
+						if (Options.FixIntersected)
 						{
 							// Intersections
 							while (vc.Intersections.Count > 0)
@@ -783,9 +785,9 @@ namespace MUDMapBuilder
 			return new MapBuilderResult(_history.ToArray(), startCompactStep);
 		}
 
-		public static MapBuilderResult Build(MMBArea area, BuildOptions options = null)
+		public static MapBuilderResult Build(MMBArea area, Action<string> log)
 		{
-			var mapBuilder = new MapBuilder(area, options);
+			var mapBuilder = new MapBuilder(area, log);
 			return mapBuilder.Process();
 		}
 	}

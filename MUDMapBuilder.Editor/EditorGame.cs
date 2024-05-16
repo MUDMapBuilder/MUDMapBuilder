@@ -19,12 +19,6 @@ namespace MUDMapBuilder.Editor
 
 		public static EditorGame Instance { get; private set; }
 
-		public string FilePath
-		{
-			get => Window.Title;
-			set => Window.Title = value;
-		}
-
 		public EditorGame()
 		{
 			Instance = this;
@@ -78,7 +72,7 @@ namespace MUDMapBuilder.Editor
 				{
 					if (_desktop.IsKeyDown(Keys.O))
 					{
-						_mainForm.OnMenuFileImportSelected();
+						_mainForm.OnMenuFileOpenSelected();
 					}
 				}
 			};
@@ -138,7 +132,7 @@ namespace MUDMapBuilder.Editor
 			{
 				Size = new Point(GraphicsDevice.PresentationParameters.BackBufferWidth,
 					GraphicsDevice.PresentationParameters.BackBufferHeight),
-				EditedFile = FilePath,
+				EditedFile = _mainForm.FilePath,
 				Step = _mainForm.Step,
 			};
 

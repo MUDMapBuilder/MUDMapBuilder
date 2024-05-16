@@ -8,8 +8,10 @@ namespace MUDMapBuilder.Editor.UI
 {
 	public partial class MainForm
 	{
+		private string _filePath;
+		private bool _isDirty;
 		private readonly MapViewer _mapViewer;
-		private bool _suspendStep = false;
+		private bool _suspendUi = false;
 
 		private MMBArea Area { get; set; }
 
@@ -19,6 +21,43 @@ namespace MUDMapBuilder.Editor.UI
 			set => _spinButtonStep.Value = value;
 		}
 
+		public string FilePath
+		{
+			get => _filePath;
+
+			set
+			{
+				if (value == _filePath)
+				{
+					return;
+				}
+
+				_filePath = value;
+
+				UpdateTitle();
+				UpdateEnabled();
+			}
+		}
+
+		public bool IsDirty
+		{
+			get
+			{
+				return _isDirty;
+			}
+
+			set
+			{
+				if (value == _isDirty)
+				{
+					return;
+				}
+
+				_isDirty = value;
+				UpdateTitle();
+			}
+		}
+
 		public MainForm()
 		{
 			BuildUI();
@@ -26,14 +65,16 @@ namespace MUDMapBuilder.Editor.UI
 			_mapViewer = new MapViewer();
 			_panelMap.Content = _mapViewer;
 
-			_menuItemFileOpen.Selected += (s, e) => OnMenuFileImportSelected();
+			_menuItemFileOpen.Selected += (s, e) => OnMenuFileOpenSelected();
+			_menuItemFileSave.Selected += (s, e) => Save(false);
+			_menuItemFileSaveAs.Selected += (s, e) => Save(true);
 
 			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
 			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _spinButtonStep.Maximum;
 			_buttonToCompact.Click += (s, e) => _spinButtonStep.Value = _mapViewer.Result.StartCompactStep;
 			_spinButtonStep.ValueChanged += (s, e) =>
 			{
-				if (_suspendStep)
+				if (_suspendUi)
 				{
 					return;
 				}
@@ -44,9 +85,9 @@ namespace MUDMapBuilder.Editor.UI
 
 			_mapViewer.SelectedIndexChanged += (s, e) => UpdateEnabled();
 
-			_checkFixObstacles.IsCheckedChanged += (s, e) => Rebuild();
-			_checkFixNonStraight.IsCheckedChanged += (s, e) => Rebuild();
-			_checkIntersected.IsCheckedChanged += (s, e) => Rebuild();
+			_checkFixObstacles.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
+			_checkFixNonStraight.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
+			_checkIntersected.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 
 			UpdateEnabled();
 		}
@@ -65,16 +106,55 @@ namespace MUDMapBuilder.Editor.UI
 			}
 		}
 
-		public void OnMenuFileImportSelected()
+		private void ProcessSave(string filePath)
+		{
+			var data = Area.ToJson();
+			File.WriteAllText(filePath, data);
+
+			FilePath = filePath;
+			IsDirty = false;
+		}
+
+		private void Save(bool setFileName)
+		{
+			if (string.IsNullOrEmpty(FilePath) || setFileName)
+			{
+				var dlg = new FileDialog(FileDialogMode.SaveFile)
+				{
+					Filter = "*.json"
+				};
+
+				if (!string.IsNullOrEmpty(FilePath))
+				{
+					dlg.FilePath = FilePath;
+				}
+
+				dlg.ShowModal(Desktop);
+
+				dlg.Closed += (s, a) =>
+				{
+					if (dlg.Result)
+					{
+						ProcessSave(dlg.FilePath);
+					}
+				};
+			}
+			else
+			{
+				ProcessSave(FilePath);
+			}
+		}
+
+		public void OnMenuFileOpenSelected()
 		{
 			FileDialog dialog = new FileDialog(FileDialogMode.OpenFile)
 			{
 				Filter = "*.json"
 			};
 
-			if (!string.IsNullOrEmpty(EditorGame.Instance.FilePath))
+			if (!string.IsNullOrEmpty(FilePath))
 			{
-				dialog.Folder = Path.GetDirectoryName(EditorGame.Instance.FilePath);
+				dialog.Folder = Path.GetDirectoryName(FilePath);
 			}
 
 			dialog.Closed += (s, a) =>
@@ -134,57 +214,50 @@ namespace MUDMapBuilder.Editor.UI
 			UpdateNumbers();
 		}
 
-		private BuildOptions CreateBuildOptions()
-		{
-			var result = new BuildOptions
-			{
-				Log = Utility.SetStatusMessage,
-				FixObstacles = _checkFixObstacles.IsChecked,
-				FixNonStraight = _checkFixNonStraight.IsChecked,
-				FixIntersected = _checkIntersected.IsChecked,
-			};
-
-			return result;
-		}
-
-		private void InternalRebuild(string newTitle = null)
+		private void InternalRebuild(string newFilePath = null)
 		{
 			Utility.QueueUIAction(() =>
 			{
 				_mapViewer.Result = null;
 			});
 
-			var options = CreateBuildOptions();
-			var result = MapBuilder.Build(Area, options);
+			var result = MapBuilder.Build(Area, Utility.SetStatusMessage);
 
 			Utility.QueueUIAction(() =>
 			{
 				_mapViewer.Result = result;
 				var maxSteps = _mapViewer.Result.History.Length;
 				_spinButtonStep.Maximum = maxSteps;
-				try
-				{
-					_suspendStep = true;
-					_spinButtonStep.Value = maxSteps;
-				}
-				finally
-				{
-					_suspendStep = false;
-				}
+				_spinButtonStep.Value = maxSteps;
 
-				if (newTitle != null)
+				if (newFilePath != null)
 				{
-					EditorGame.Instance.FilePath = newTitle;
+					FilePath = newFilePath;
 				}
 
 				UpdateEnabled();
 			});
 		}
 
+		private void SetDirtyAndRebuild()
+		{
+			if (_suspendUi)
+			{
+				return;
+			}
+
+			IsDirty = true;
+			Rebuild();
+		}
+
 		private void Rebuild()
 		{
 			try
 			{
+				Area.BuildOptions.FixObstacles = _checkFixObstacles.IsChecked;
+				Area.BuildOptions.FixNonStraight = _checkFixNonStraight.IsChecked;
+				Area.BuildOptions.FixIntersected = _checkIntersected.IsChecked;
+
 				Task.Run(() => InternalRebuild());
 			}
 			catch (Exception ex)
@@ -198,11 +271,24 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			try
 			{
-				Task.Run(() =>
-				{
-					var data = File.ReadAllText(path);
-					Area = MMBArea.Parse(data);
+				var data = File.ReadAllText(path);
+				Area = MMBArea.Parse(data);
 
+				try
+				{
+					_suspendUi = true;
+
+					var options = Area.BuildOptions;
+					_checkFixObstacles.IsChecked = options.FixObstacles;
+					_checkFixNonStraight.IsChecked = options.FixNonStraight;
+					_checkIntersected.IsChecked = options.FixIntersected;
+				}
+				finally
+				{
+					_suspendUi = false;
+				}
+
+				Task.Run(() => {
 					InternalRebuild(path);
 				});
 			}
@@ -211,6 +297,18 @@ namespace MUDMapBuilder.Editor.UI
 				var dialog = Dialog.CreateMessageBox("Error", ex.ToString());
 				dialog.ShowModal(Desktop);
 			}
+		}
+
+		private void UpdateTitle()
+		{
+			var title = string.IsNullOrEmpty(_filePath) ? "MUDMapBuilder.Editor" : _filePath;
+
+			if (_isDirty)
+			{
+				title += " *";
+			}
+
+			EditorGame.Instance.Window.Title = title;
 		}
 	}
 }

@@ -17,6 +17,6 @@ If the areas has complicated structure, then the work of utility might end with 
 
 `WARNING: The process wasn't completed. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected)`
 
-In that case, try setting 'fix...' options to 'false' at "buildOptions". In most cases, the 'fixIntersected' is the culprit.
+In that case, try setting 'fix...' options to 'false' at "buildOptions" node in the input json. In most cases, the 'fixIntersected' is the culprit.
 
 

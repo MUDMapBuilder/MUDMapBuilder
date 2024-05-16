@@ -9,6 +9,8 @@ namespace MUDMapBuilder
 	partial class PositionedRooms
 	{
 		private static readonly SKColor DefaultColor = SKColors.Black;
+		private static readonly SKColor SelectedColor = SKColors.Green;
+		private static readonly SKColor ExitToOtherAreaColor = SKColors.Blue;
 		private static readonly SKColor ConnectionWithObstacles = SKColors.Red;
 		private static readonly SKColor NonStraightConnection = SKColors.Yellow;
 		private static readonly SKColor Intersection = SKColors.Magenta;
@@ -113,6 +115,10 @@ namespace MUDMapBuilder
 							else if (room.MarkColor != null)
 							{
 								paint.Color = room.MarkColor.Value;
+							}
+							else if (room.Room.IsExitToOtherArea)
+							{
+								paint.Color = ExitToOtherAreaColor;
 							}
 							else
 							{
@@ -244,7 +250,7 @@ namespace MUDMapBuilder
 								room.AddDrawnConnection(exitDir, targetPos);
 							}
 
-							paint.Color = DefaultColor;
+							paint.Color = room.Room.IsExitToOtherArea ? ExitToOtherAreaColor : DefaultColor;
 							paint.StrokeWidth = 1;
 							canvas.DrawText(room.Room.ToString(), rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
 

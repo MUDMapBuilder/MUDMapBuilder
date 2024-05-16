@@ -172,76 +172,24 @@ namespace MUDMapBuilder
 			return new StraightenConnectionResult(delta, roomsRemoved, vc2);
 		}
 
-		private bool RemoveRooms(MMBRoom[] toRemove)
+		private int[] BuildRemoveList(int[] toRemove)
 		{
-			// Firstly remove from the clone in order to determine how rooms will be spliited
+			// Remove rooms from the clone in order to see how the map is split
 			var rooms = _rooms.Clone();
-			foreach (var r in toRemove)
+			foreach (var id in toRemove)
 			{
-				var cloneRoom = rooms.GetRoomById(r.Id);
-				cloneRoom.Position = null;
+				var room = rooms.GetRoomById(id);
+				room.Position = null;
 			}
 
 			// Check what parts the map was split on
-			var parts = new List<HashSet<int>>();
-			foreach (var room in rooms)
-			{
-				if (room.Position == null)
-				{
-					continue;
-				}
+			var sortedParts = rooms.GroupPositionedRooms();
 
-				// Check if this room is already in one of parts
-				foreach (var p in parts)
-				{
-					if (p.Contains(room.Id))
-					{
-						goto finish;
-					}
-				}
-
-				// Create new part with this room and all its connections
-				var newPart = new HashSet<int>();
-				var toProcess = new List<MMBRoom>
-				{
-					room
-				};
-
-				while (toProcess.Count > 0)
-				{
-					var r = toProcess[0];
-					toProcess.RemoveAt(0);
-					newPart.Add(r.Id);
-
-					foreach (var exit in r.Connections)
-					{
-						if (newPart.Contains(exit.Value))
-						{
-							continue;
-						}
-
-						var targetRoom = rooms.GetRoomById(exit.Value);
-						if (targetRoom == null || targetRoom.Position == null)
-						{
-							continue;
-						}
-
-						toProcess.Add(targetRoom);
-					}
-				}
-
-				parts.Add(newPart);
-			finish:;
-			}
-
-			var roomsToRemove = new List<MMBRoom>();
+			var roomsToRemove = new List<int>();
 			roomsToRemove.AddRange(toRemove);
 
-			// Sort parts by size
-			var sortedParts = (from p in parts orderby p.Count select p).ToList();
-
 			// Add all parts except the last one with size below 10
-			for (var i = 0; i < sortedParts.Count - 1; ++i)
+			for (var i = 0; i < sortedParts.Length - 1; ++i)
 			{
 				var p = sortedParts[i];
 				if (p.Count >= 10)
@@ -251,9 +199,17 @@ namespace MUDMapBuilder
 
 				foreach (var id in p)
 				{
-					roomsToRemove.Add(_rooms.GetRoomById(id));
+					roomsToRemove.Add(id);
 				}
 			}
+
+			return roomsToRemove.ToArray();
+		}
+
+		private bool RemoveRooms(MMBRoom[] toRemove)
+		{
+			var idsToRemove = BuildRemoveList((from r in toRemove select r.Id).ToArray());
+			var roomsToRemove = (from id in idsToRemove select _rooms.GetRoomById(id)).ToArray();
 
 			// Mark
 			foreach (var room in roomsToRemove)
@@ -442,9 +398,11 @@ namespace MUDMapBuilder
 
 						var vc2 = rooms.BrokenConnections;
 						if (vc2.WithObstacles.Count > vc.WithObstacles.Count ||
-							vc2.NonStraight.Count > vc.NonStraight.Count)
+							vc2.NonStraight.Count > vc.NonStraight.Count ||
+							vc2.Long.Count > vc.Long.Count)
 						{
 							// Such push would break some room connections
+							// Or introduce new long connections
 						}
 						else if (rooms.Width * rooms.Height > _rooms.Width * _rooms.Height)
 						{
@@ -617,6 +575,63 @@ namespace MUDMapBuilder
 						connectionFixed:;
 							vc = _rooms.BrokenConnections;
 
+							if (!connectionFixed)
+							{
+								break;
+							}
+						}
+
+						// Intersections
+						while (vc.Intersections.Count > 0)
+						{
+							// Run while at least one connection could be fixed
+							var connectionFixed = false;
+							for(var i = 0; i < vc.Intersections.Count; ++i)
+							{
+								var intersection = vc.Intersections[0];
+
+								// Try to delete first room
+								var rooms = _rooms.Clone();
+								var deleteList = BuildRemoveList(new int[] {intersection.SourceRoomId });
+								foreach(var id in deleteList)
+								{
+									rooms.GetRoomById(id).Position = null;
+								}
+
+								var vc2 = rooms.BrokenConnections;
+								if (vc2.Intersections.Count < vc.Intersections.Count)
+								{
+									if (!RemoveRooms((from id in deleteList select _rooms.GetRoomById(id)).ToArray()))
+									{
+										goto finish;
+									}
+
+									connectionFixed = true;
+									break;
+								}
+
+								// Try to delete the second room
+								rooms = _rooms.Clone();
+								deleteList = BuildRemoveList(new int[] { intersection.TargetRoomId });
+								foreach (var id in deleteList)
+								{
+									rooms.GetRoomById(id).Position = null;
+								}
+
+								vc2 = rooms.BrokenConnections;
+								if (vc2.Intersections.Count < vc.Intersections.Count)
+								{
+									if (!RemoveRooms((from id in deleteList select _rooms.GetRoomById(id)).ToArray()))
+									{
+										goto finish;
+									}
+
+									connectionFixed = true;
+									break;
+								}
+							}
+
+							vc = _rooms.BrokenConnections;
 							if (!connectionFixed)
 							{
 								break;

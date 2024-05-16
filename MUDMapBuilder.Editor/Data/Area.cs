@@ -29,6 +29,11 @@ namespace MUDMapBuilder.Editor.Data
 					Name = (string)roomObject["name"],
 				};
 
+				if (roomObject["otherAreaExit"] != null)
+				{
+					room.IsExitToOtherArea = (bool)roomObject["otherAreaExit"];
+				}
+					
 				if (roomsDict.ContainsKey(room.Id))
 				{
 					throw new Exception($"Room with id {room.Id} already exists.");
@@ -42,13 +47,16 @@ namespace MUDMapBuilder.Editor.Data
 			{
 				var room = roomsDict[(int)roomObject["id"]];
 				var exitsObject = (JsonObject)roomObject["exits"];
-				foreach(var pair in exitsObject)
+				if (exitsObject != null)
 				{
-					var dir = Enum.Parse<MMBDirection>(pair.Key);
-					var roomId = (int)pair.Value;
-					var targetRoom = roomsDict[roomId];
+					foreach (var pair in exitsObject)
+					{
+						var dir = Enum.Parse<MMBDirection>(pair.Key);
+						var roomId = (int)pair.Value;
+						var targetRoom = roomsDict[roomId];
 
-					room.InternalExits[dir] = targetRoom;
+						room.InternalExits[dir] = targetRoom;
+					}
 				}
 			}
 

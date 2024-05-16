@@ -528,6 +528,64 @@ namespace MUDMapBuilder
 			}
 		}
 
+		public HashSet<int>[] GroupPositionedRooms()
+		{
+			var parts = new List<HashSet<int>>();
+			foreach (var ri in _roomsByIds)
+			{
+				var room = ri.Value;
+				if (room.Position == null)
+				{
+					continue;
+				}
+
+				// Check if this room is already in one of parts
+				foreach (var p in parts)
+				{
+					if (p.Contains(room.Id))
+					{
+						goto finish;
+					}
+				}
+
+				// Create new part with this room and all its connections
+				var newPart = new HashSet<int>();
+				var toProcess = new List<MMBRoom>
+				{
+					room
+				};
+
+				while (toProcess.Count > 0)
+				{
+					var r = toProcess[0];
+					toProcess.RemoveAt(0);
+					newPart.Add(r.Id);
+
+					foreach (var exit in r.Connections)
+					{
+						if (newPart.Contains(exit.Value))
+						{
+							continue;
+						}
+
+						var targetRoom = GetRoomById(exit.Value);
+						if (targetRoom == null || targetRoom.Position == null)
+						{
+							continue;
+						}
+
+						toProcess.Add(targetRoom);
+					}
+				}
+
+				parts.Add(newPart);
+			finish:;
+			}
+
+			// Sort parts by size
+			return (from p in parts orderby p.Count select p).ToArray();
+		}
+
 		public void FixPlacementOfSingleExitRooms()
 		{
 			foreach (var ri in _roomsByIds)
@@ -558,6 +616,12 @@ namespace MUDMapBuilder
 						continue;
 					}
 
+					var connectionsToRoomCount = (from r in _roomsByIds where r.Value.Connections.Values.Contains(targetRoom.Id) select r).Count();
+					if (connectionsToRoomCount > 1)
+					{
+						continue;
+					}
+
 					var delta = exitDir.GetDelta();
 					var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
 					if (targetRoom.Position == desiredPos)
@@ -578,17 +642,6 @@ namespace MUDMapBuilder
 					targetRoom.Position = desiredPos;
 				}
 			}
-		}
-
-		public PositionedRooms Clone()
-		{
-			var result = new PositionedRooms();
-			foreach (var r in _roomsByIds)
-			{
-				result.Add(r.Value.Clone());
-			}
-
-			return result;
 		}
 
 		public MeasurePushRoomResult MeasurePushRoom(int firstRoomId, Point firstForceVector)
@@ -914,6 +967,17 @@ namespace MUDMapBuilder
 				room.MarkColor = null;
 				room.ForceMark = null;
 			}
+		}
+
+		public PositionedRooms Clone()
+		{
+			var result = new PositionedRooms();
+			foreach (var r in _roomsByIds)
+			{
+				result.Add(r.Value.Clone());
+			}
+
+			return result;
 		}
 
 		public IEnumerator<MMBRoom> GetEnumerator() => _roomsByIds.Values.GetEnumerator();

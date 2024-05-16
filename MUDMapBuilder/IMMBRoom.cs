@@ -16,6 +16,7 @@ namespace MUDMapBuilder
 	{
 		int Id { get; }
 		string Name { get; }
+		bool IsExitToOtherArea { get; }
 		public IReadOnlyDictionary<MMBDirection, IMMBRoom> Exits { get; }
 	}
 }

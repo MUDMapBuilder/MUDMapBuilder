@@ -74,6 +74,11 @@ namespace MUDMapBuilder.Editor
 					{
 						_mainForm.OnMenuFileOpenSelected();
 					}
+
+					if (_desktop.IsKeyDown(Keys.S))
+					{
+						_mainForm.Save(false);
+					}
 				}
 			};
 

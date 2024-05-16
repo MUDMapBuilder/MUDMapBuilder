@@ -31,8 +31,14 @@
         <CheckButton IsChecked="True" Id="_checkFixNonStraight">
           <Label Text="Fix NonStraight" />
         </CheckButton>
-        <CheckButton IsChecked="True" Id="_checkIntersected">
+        <CheckButton IsChecked="True" Id="_checkFixIntersected">
           <Label Text="Fix Intersected" />
+        </CheckButton>
+        <CheckButton Id="_checkAddDebugInfo">
+          <Label Text="Add Debug Info" />
+        </CheckButton>
+        <CheckButton IsChecked="True" Id="_checkColorizeConnectionIssues">
+          <Label Text="Colorize Connection Issues" />
         </CheckButton>
       </HorizontalStackPanel>
       <Label Text="Status" TextColor="#0379FFFF" Id="_labelStatus" />

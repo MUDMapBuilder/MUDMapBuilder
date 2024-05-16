@@ -6,7 +6,6 @@ using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
 using System;
 using System.IO;
-using System.Threading.Tasks;
 
 
 namespace MUDMapBuilder.Editor.UI
@@ -14,9 +13,9 @@ namespace MUDMapBuilder.Editor.UI
 	public class MapViewer : Image
 	{
 		private int? _selectedRoomId;
-		private MapBuilderResult _result;
+		private MMBArea _area;
+		private BuildOptions _options;
 		private MMBImageResult _imageResult;
-		private int _step;
 
 		public int? SelectedRoomId
 		{
@@ -27,49 +26,8 @@ namespace MUDMapBuilder.Editor.UI
 				if (value == _selectedRoomId) return;
 
 				_selectedRoomId = value;
-				Area.SelectedRoomId = value;
+				_area.SelectedRoomId = value;
 				SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
-			}
-		}
-
-		public MapBuilderResult Result
-		{
-			get => _result;
-
-			set
-			{
-				if (value == _result)
-				{
-					return;
-				}
-
-				_result = value;
-				Step = Result != null ? Result.History.Length - 1 : 0;
-			}
-		}
-
-		public int Step
-		{
-			get => _step;
-
-			set
-			{
-				_step = value;
-				Redraw();
-			}
-		}
-
-		public MMBArea Area
-		{
-			get
-			{
-				if (Result == null)
-				{
-					return null;
-				}
-
-				var step = Math.Min(Result.History.Length - 1, Step);
-				return Result.History[step];
 			}
 		}
 
@@ -80,17 +38,18 @@ namespace MUDMapBuilder.Editor.UI
 			Background = new SolidBrush(Color.White);
 		}
 
-		private void Redraw()
+		public void Redraw(MMBArea area, BuildOptions options)
 		{
 			Renderable = null;
 
-			if (Result == null)
+			_area = area;
+			_options = options;
+			if (_area == null)
 			{
 				return;
 			}
 
-			var rooms = Area;
-			_imageResult = rooms.BuildPng();
+			_imageResult = area.BuildPng(options);
 			Texture2D texture;
 			using (var ms = new MemoryStream(_imageResult.PngData))
 			{
@@ -104,7 +63,7 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			base.OnTouchDown();
 
-			if (Area == null)
+			if (_area == null)
 			{
 				return;
 			}
@@ -115,7 +74,7 @@ namespace MUDMapBuilder.Editor.UI
 				if (room.Rectangle.Contains(pos.X, pos.Y))
 				{
 					SelectedRoomId = room.Room.Id;
-					Redraw();
+					Redraw(_area, _options);
 					break;
 				}
 			}

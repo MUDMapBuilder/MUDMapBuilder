@@ -40,7 +40,7 @@ namespace MUDMapBuilder
 			return false;
 		}
 
-		public MMBImageResult BuildPng()
+		public MMBImageResult BuildPng(BuildOptions options)
 		{
 			var roomInfos = new List<MMBImageRoomInfo>();
 
@@ -70,7 +70,8 @@ namespace MUDMapBuilder
 
 						room.ClearDrawnConnections();
 
-						var sz = (int)(paint.MeasureText(room.ToString()) + TextPadding * 2 + 0.5f);
+						var text = options.AddDebugInfo ? room.ToString() : room.Name;
+						var sz = (int)(paint.MeasureText(text) + TextPadding * 2 + 0.5f);
 						if (sz > _cellsWidths[x])
 						{
 							_cellsWidths[x] = sz;
@@ -192,23 +193,29 @@ namespace MUDMapBuilder
 									isStraight = false;
 								}
 
-								if (BrokenConnections.WithObstacles.Find(room.Id, targetRoom.Id, exitDir) != null)
+								if (options.ColorizeConnectionIssues)
 								{
-									paint.Color = ConnectionWithObstacles;
-								}
-								else if (BrokenConnections.NonStraight.Find(room.Id, targetRoom.Id, exitDir) != null)
-								{
-									paint.Color = NonStraightConnection;
-								}
-								else if (BrokenConnections.Intersections.Find(room.Id, targetRoom.Id, exitDir) != null)
-								{
-									paint.Color = Intersection;
-								}
-								else if (BrokenConnections.Long.Find(room.Id, targetRoom.Id, exitDir) != null)
-								{
-									paint.Color = LongConnection;
-								}
-								else
+									if (BrokenConnections.WithObstacles.Find(room.Id, targetRoom.Id, exitDir) != null)
+									{
+										paint.Color = ConnectionWithObstacles;
+									}
+									else if (BrokenConnections.NonStraight.Find(room.Id, targetRoom.Id, exitDir) != null)
+									{
+										paint.Color = NonStraightConnection;
+									}
+									else if (BrokenConnections.Intersections.Find(room.Id, targetRoom.Id, exitDir) != null)
+									{
+										paint.Color = Intersection;
+									}
+									else if (BrokenConnections.Long.Find(room.Id, targetRoom.Id, exitDir) != null)
+									{
+										paint.Color = LongConnection;
+									}
+									else
+									{
+										paint.Color = DefaultColor;
+									}
+								} else
 								{
 									paint.Color = DefaultColor;
 								}
@@ -280,7 +287,8 @@ namespace MUDMapBuilder
 
 							paint.Color = room.IsExitToOtherArea ? ExitToOtherAreaColor : DefaultColor;
 							paint.StrokeWidth = 1;
-							canvas.DrawText(room.ToString(), rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
+							var text = options.AddDebugInfo ? room.ToString() : room.Name;
+							canvas.DrawText(text, rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
 
 							if (room.ForceMark != null)
 							{

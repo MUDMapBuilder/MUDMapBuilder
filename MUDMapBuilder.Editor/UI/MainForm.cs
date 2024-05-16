@@ -13,7 +13,24 @@ namespace MUDMapBuilder.Editor.UI
 		private readonly MapViewer _mapViewer;
 		private bool _suspendUi = false;
 
-		private MMBArea Area { get; set; }
+		private MMBProject Project { get; set; }
+		private MapBuilderResult Result { get; set; }
+
+		private MMBArea Area
+		{
+			get
+			{
+				if (Result == null)
+				{
+					return null;
+				}
+
+				var step = Math.Min(Step, Result.History.Length - 1);
+				return Result.History[step];
+			}
+		}
+
+		private BuildOptions Options => Project.BuildOptions;
 
 		public int Step
 		{
@@ -71,7 +88,7 @@ namespace MUDMapBuilder.Editor.UI
 
 			_buttonStart.Click += (s, e) => _spinButtonStep.Value = 1;
 			_buttonEnd.Click += (s, e) => _spinButtonStep.Value = _spinButtonStep.Maximum;
-			_buttonToCompact.Click += (s, e) => _spinButtonStep.Value = _mapViewer.Result.StartCompactStep;
+			_buttonToCompact.Click += (s, e) => _spinButtonStep.Value = Result.StartCompactStep;
 			_spinButtonStep.ValueChanged += (s, e) =>
 			{
 				if (_suspendUi)
@@ -79,7 +96,7 @@ namespace MUDMapBuilder.Editor.UI
 					return;
 				}
 
-				_mapViewer.Step = (int)_spinButtonStep.Value;
+				_mapViewer.Redraw(Area, Options);
 				UpdateNumbers();
 			};
 
@@ -87,35 +104,23 @@ namespace MUDMapBuilder.Editor.UI
 
 			_checkFixObstacles.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 			_checkFixNonStraight.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
-			_checkIntersected.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
+			_checkFixIntersected.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
+			_checkAddDebugInfo.IsCheckedChanged += (s, e) => SetDirtyAndRedraw();
+			_checkColorizeConnectionIssues.IsCheckedChanged += (s, e) => SetDirtyAndRedraw();
 
 			UpdateEnabled();
 		}
 
-		private void ClearRoomsMark()
-		{
-			if (_mapViewer.Area == null)
-			{
-				return;
-			}
-
-			foreach (var room in _mapViewer.Area)
-			{
-				room.MarkColor = null;
-				room.ForceMark = null;
-			}
-		}
-
 		private void ProcessSave(string filePath)
 		{
-			var data = Area.ToJson();
+			var data = Project.ToJson();
 			File.WriteAllText(filePath, data);
 
 			FilePath = filePath;
 			IsDirty = false;
 		}
 
-		private void Save(bool setFileName)
+		public void Save(bool setFileName)
 		{
 			if (string.IsNullOrEmpty(FilePath) || setFileName)
 			{
@@ -174,13 +179,14 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void UpdateNumbers()
 		{
-			if (_mapViewer.Area != null)
+			var area = Area;
+			if (area != null)
 			{
-				_labelRoomsCount.Text = $"Rooms Count: {_mapViewer.Area.PositionedRoomsCount}/{_mapViewer.Area.Count}";
-				_labelGridSize.Text = $"Grid Size: {_mapViewer.Area.Width}x{_mapViewer.Area.Height}";
-				_labelStartCompactStep.Text = $"Start Compact Step: {_mapViewer.Result.StartCompactStep}";
+				_labelRoomsCount.Text = $"Rooms Count: {area.PositionedRoomsCount}/{area.Count}";
+				_labelGridSize.Text = $"Grid Size: {area.Width}x{area.Height}";
+				_labelStartCompactStep.Text = $"Start Compact Step: {Result.StartCompactStep}";
 
-				var brokenConnections = _mapViewer.Area.BrokenConnections;
+				var brokenConnections = area.BrokenConnections;
 				_labelIntersectedConnections.Text = $"Intersected Connections: {brokenConnections.Intersections.Count}";
 				_labelNonStraightConnections.Text = $"Non Straight Connections: {brokenConnections.NonStraight.Count}";
 				_labelConnectionsWithObstacles.Text = $"Connections With Obstacles: {brokenConnections.WithObstacles.Count}";
@@ -200,9 +206,12 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void UpdateEnabled()
 		{
-			ClearRoomsMark();
-
 			var enabled = Area != null;
+
+			if (enabled)
+			{
+				Area.ClearMarks();
+			}
 
 			_menuItemFileSave.Enabled = enabled;
 			_menuItemFileSaveAs.Enabled = enabled;
@@ -218,15 +227,16 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			Utility.QueueUIAction(() =>
 			{
-				_mapViewer.Result = null;
+				_mapViewer.Redraw(null, null);
 			});
 
-			var result = MapBuilder.Build(Area, Utility.SetStatusMessage);
+			var result = MapBuilder.Build(Project, Utility.SetStatusMessage);
 
 			Utility.QueueUIAction(() =>
 			{
-				_mapViewer.Result = result;
-				var maxSteps = _mapViewer.Result.History.Length;
+				Result = result;
+				_mapViewer.Redraw(Area, Options);
+				var maxSteps = Result.History.Length;
 				_spinButtonStep.Maximum = maxSteps;
 				_spinButtonStep.Value = maxSteps;
 
@@ -237,6 +247,15 @@ namespace MUDMapBuilder.Editor.UI
 
 				UpdateEnabled();
 			});
+		}
+
+		private void SetBuildOptionsFromUI()
+		{
+			Project.BuildOptions.FixObstacles = _checkFixObstacles.IsChecked;
+			Project.BuildOptions.FixNonStraight = _checkFixNonStraight.IsChecked;
+			Project.BuildOptions.FixIntersected = _checkFixIntersected.IsChecked;
+			Project.BuildOptions.AddDebugInfo = _checkAddDebugInfo.IsChecked;
+			Project.BuildOptions.ColorizeConnectionIssues = _checkColorizeConnectionIssues.IsChecked;
 		}
 
 		private void SetDirtyAndRebuild()
@@ -250,14 +269,23 @@ namespace MUDMapBuilder.Editor.UI
 			Rebuild();
 		}
 
+		private void SetDirtyAndRedraw()
+		{
+			if (_suspendUi)
+			{
+				return;
+			}
+
+			IsDirty = true;
+			SetBuildOptionsFromUI();
+			_mapViewer.Redraw(Area, Options);
+		}
+
 		private void Rebuild()
 		{
 			try
 			{
-				Area.BuildOptions.FixObstacles = _checkFixObstacles.IsChecked;
-				Area.BuildOptions.FixNonStraight = _checkFixNonStraight.IsChecked;
-				Area.BuildOptions.FixIntersected = _checkIntersected.IsChecked;
-
+				SetBuildOptionsFromUI();
 				Task.Run(() => InternalRebuild());
 			}
 			catch (Exception ex)
@@ -272,23 +300,26 @@ namespace MUDMapBuilder.Editor.UI
 			try
 			{
 				var data = File.ReadAllText(path);
-				Area = MMBArea.Parse(data);
+				Project = MMBProject.Parse(data);
 
 				try
 				{
 					_suspendUi = true;
 
-					var options = Area.BuildOptions;
+					var options = Project.BuildOptions;
 					_checkFixObstacles.IsChecked = options.FixObstacles;
 					_checkFixNonStraight.IsChecked = options.FixNonStraight;
-					_checkIntersected.IsChecked = options.FixIntersected;
+					_checkFixIntersected.IsChecked = options.FixIntersected;
+					_checkAddDebugInfo.IsChecked = options.AddDebugInfo;
+					_checkColorizeConnectionIssues.IsChecked = options.ColorizeConnectionIssues;
 				}
 				finally
 				{
 					_suspendUi = false;
 				}
 
-				Task.Run(() => {
+				Task.Run(() =>
+				{
 					InternalRebuild(path);
 				});
 			}

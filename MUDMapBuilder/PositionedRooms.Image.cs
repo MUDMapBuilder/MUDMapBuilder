@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Numerics;
 
 namespace MUDMapBuilder
 {
@@ -18,6 +19,7 @@ namespace MUDMapBuilder
 
 		private const int RoomHeight = 32;
 		private const int TextPadding = 8;
+		private const int ArrowRadius = 8;
 		private static readonly Point RoomSpace = new Point(32, 32);
 		private int[] _cellsWidths;
 
@@ -110,7 +112,7 @@ namespace MUDMapBuilder
 
 							if (room.Id == SelectedRoomId)
 							{
-								paint.Color = SKColors.Green;
+								paint.Color = SelectedColor;
 							}
 							else if (room.MarkColor != null)
 							{
@@ -148,19 +150,6 @@ namespace MUDMapBuilder
 								{
 									// Connection is drawn already
 									continue;
-								}
-
-								var oppositeDir = exitDir.GetOppositeDirection();
-								var isTwoWay = targetRoom.Room.Exits.ContainsKey(oppositeDir) &&
-									targetRoom.Room.Exits[oppositeDir].Id == room.Id;
-
-								if (isTwoWay)
-								{
-									paint.Color = DefaultColor;
-								}
-								else
-								{
-									paint.Color = SKColors.Magenta;
 								}
 
 								var isStraight = true;
@@ -218,13 +207,13 @@ namespace MUDMapBuilder
 									paint.Color = DefaultColor;
 								}
 
+								var sourceScreen = GetConnectionPoint(rect, exitDir);
+								var targetRect = GetRoomRect(targetPos);
+								var targetScreen = GetConnectionPoint(targetRect, exitDir.GetOppositeDirection());
 								if (isStraight)
 								{
 									// Straight connection
 									// Source and target room are close to each other, hence draw the simple line
-									var targetRect = GetRoomRect(targetPos);
-									var sourceScreen = GetConnectionPoint(rect, exitDir);
-									var targetScreen = GetConnectionPoint(targetRect, exitDir.GetOppositeDirection());
 									canvas.DrawLine(sourceScreen.X, sourceScreen.Y, targetScreen.X, targetScreen.Y, paint);
 								}
 								else
@@ -245,6 +234,42 @@ namespace MUDMapBuilder
 
 										src = dest;
 									}
+								}
+
+								var oppositeDir = exitDir.GetOppositeDirection();
+								var isTwoWay = targetRoom.Room.Exits.ContainsKey(oppositeDir) &&
+									targetRoom.Room.Exits[oppositeDir].Id == room.Id;
+								if (!isTwoWay)
+								{
+									// Draw single-way arrow
+									var skPath = new SKPath();
+									skPath.FillType = SKPathFillType.EvenOdd;
+									skPath.MoveTo(0, 0);
+									skPath.LineTo(-ArrowRadius, ArrowRadius);
+									skPath.LineTo(-ArrowRadius, -ArrowRadius);
+									skPath.LineTo(0, 0);
+									skPath.Close();
+
+									// Determine angle between two vectors
+									var v1 = new Vector2(targetScreen.X - sourceScreen.X,
+										targetScreen.Y - sourceScreen.Y);
+									v1 = Vector2.Normalize(v1);
+									var v2 = new Vector2(1, 0);
+									var cosA = Vector2.Dot(v1, v2);
+									var sinA = v1.X * v2.Y - v2.X * v1.Y;
+									var angleInRads = (float)Math.Atan2(sinA, cosA);
+
+									var tr = SKMatrix.Concat(SKMatrix.CreateTranslation(targetScreen.X, targetScreen.Y),
+										SKMatrix.CreateRotation(-angleInRads));
+									skPath.Transform(tr);
+
+									var oldColor = paint.Color;
+									paint.Style = SKPaintStyle.Fill;
+									paint.Color = SKColors.White;
+									canvas.DrawPath(skPath, paint);
+									paint.Style = SKPaintStyle.Stroke;
+									paint.Color = oldColor;
+									canvas.DrawPath(skPath, paint);
 								}
 
 								room.AddDrawnConnection(exitDir, targetPos);

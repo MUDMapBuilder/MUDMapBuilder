@@ -680,19 +680,32 @@ namespace MUDMapBuilder
 					}
 				}
 
+				if (_toProcess.Count > 0 || _removedRooms.Count > 0)
+				{
+					continue;
+				}
+
 				// Finally deal with rooms that weren't reached
 				foreach (var sourceRoom in _sourceRooms)
 				{
-					if (_rooms.GetRoomById(sourceRoom.Id) != null ||
-						(from tp in _toProcess where tp.Room.Id == sourceRoom.Id select tp).FirstOrDefault() != null ||
-						_removedRooms.Contains(sourceRoom.Id))
+					var room = _rooms.GetRoomById(sourceRoom.Id);
+					if (room == null || room.Position != null)
 					{
-						// Room had been processed one way or other
 						continue;
 					}
 
 					// Unprocessed room
-					// Firstly check whether it connects to any existing room
+					// Ignore if it has no connections
+					if (room.Connections.Count == 0)
+					{
+						continue;
+					}
+
+					// Put it to the bottom left
+					room.Position = new Point(_rooms.RoomsRectangle.Left, _rooms.RoomsRectangle.Bottom + 1);
+					_toProcess.Add(room);
+
+					break;
 				}
 			}
 

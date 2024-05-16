@@ -7,6 +7,6 @@
     <RootNamespace>MUDMapBuilder</RootNamespace>
     <Description>.NET Library for Generating Map images for MUDs</Description>
     <VersionPrefix>0.1.0</VersionPrefix>
-    <MonoGameVersion>3.8.1.3031</MonoGameVersion>
+    <MonoGameVersion>3.8.1.303</MonoGameVersion>
   </PropertyGroup>
 </Project>

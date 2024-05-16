@@ -1,10 +1,18 @@
 {
   "name": "Galaxy",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": false,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
   "rooms": [
     {
       "id": 986,
-      "otherAreaExit": true,
       "name": "To High Tower",
+      "otherAreaExit": true,
       "exits": {
         "East": 704
       }
@@ -220,8 +228,8 @@
     },
     {
       "id": 2804,
-      "otherAreaExit": true,
       "name": "To Thalos",
+      "otherAreaExit": true,
       "exits": {}
     },
     {

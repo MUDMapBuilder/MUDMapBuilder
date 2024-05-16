@@ -1,10 +1,18 @@
 {
   "name": "High Tower",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": false,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
   "rooms": [
     {
       "id": 970,
-      "otherAreaExit": true,
       "name": "To Haon Dor",
+      "otherAreaExit": true,
       "exits": {
         "North": 980
       }
@@ -49,8 +57,8 @@
     },
     {
       "id": 387,
-      "otherAreaExit": true,
       "name": "To Dragon Tower",
+      "otherAreaExit": true,
       "exits": {
         "East": 984
       }
@@ -77,8 +85,8 @@
     },
     {
       "id": 704,
-      "otherAreaExit": true,
       "name": "To Galaxy",
+      "otherAreaExit": true,
       "exits": {
         "West": 986
       }
@@ -777,32 +785,32 @@
     },
     {
       "id": 480,
-      "otherAreaExit": true,
       "name": "To Drow City",
+      "otherAreaExit": true,
       "exits": {}
     },
     {
       "id": 609,
-      "otherAreaExit": true,
       "name": "To Dylan\u0027s Area",
+      "otherAreaExit": true,
       "exits": {}
     },
     {
       "id": 2650,
-      "otherAreaExit": true,
       "name": "To Sewers",
+      "otherAreaExit": true,
       "exits": {}
     },
     {
       "id": 2292,
-      "otherAreaExit": true,
       "name": "To Olympus",
+      "otherAreaExit": true,
       "exits": {}
     },
     {
       "id": 354,
-      "otherAreaExit": true,
       "name": "To Chapel",
+      "otherAreaExit": true,
       "exits": {}
     },
     {
@@ -1543,8 +1551,8 @@
     },
     {
       "id": 1455,
-      "otherAreaExit": true,
       "name": "To Midgaard",
+      "otherAreaExit": true,
       "exits": {}
     },
     {

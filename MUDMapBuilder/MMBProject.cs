@@ -150,12 +150,17 @@ namespace MUDMapBuilder
 			// Second run: set backward and two-way connections
 			foreach (var room in area)
 			{
-				foreach (var connection in room.Connections)
+				foreach (var connection in room.Connections.Values)
 				{
-					var dir = connection.Value.Direction;
+					if (connection.ConnectionType == MMBConnectionType.Backward)
+					{
+						continue;
+					}
+
+					var dir = connection.Direction;
 					var oppDir = dir.GetOppositeDirection();
 
-					var targetRoom = area.GetRoomById(connection.Value.RoomId);
+					var targetRoom = area.GetRoomById(connection.RoomId);
 					var foundOpposite = false;
 					var oppositeConnection = targetRoom.FindConnection(room.Id);
 					if (oppositeConnection != null &&
@@ -166,7 +171,7 @@ namespace MUDMapBuilder
 
 					if (foundOpposite)
 					{
-						connection.Value.ConnectionType = MMBConnectionType.TwoWay;
+						connection.ConnectionType = MMBConnectionType.TwoWay;
 					}
 					else if (!targetRoom.Connections.ContainsKey(oppDir))
 					{

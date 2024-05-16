@@ -1,10 +1,18 @@
 {
   "name": "Dylan\u0027s Area",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": false,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
   "rooms": [
     {
       "id": 2415,
-      "otherAreaExit": true,
       "name": "To Redferne\u0027s",
+      "otherAreaExit": true,
       "exits": {
         "South": 569
       }
@@ -343,8 +351,8 @@
     },
     {
       "id": 1455,
-      "otherAreaExit": true,
       "name": "To Midgaard",
+      "otherAreaExit": true,
       "exits": {}
     },
     {

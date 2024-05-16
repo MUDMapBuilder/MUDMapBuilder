@@ -6,6 +6,7 @@ using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 
 namespace MUDMapBuilder.Editor.UI
@@ -83,20 +84,20 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			Renderable = null;
 
-			if (Result != null)
+			if (Result == null)
 			{
-				var rooms = Area;
-				_imageResult = rooms.BuildPng();
-				using (var ms = new MemoryStream(_imageResult.PngData))
-				{
-					var texture = Texture2D.FromStream(MyraEnvironment.GraphicsDevice, ms);
-					Renderable = new TextureRegion(texture);
-				}
-				foreach (var room in rooms)
-				{
-					room.MarkColor = null;
-				}
+				return;
 			}
+
+			var rooms = Area;
+			_imageResult = rooms.BuildPng();
+			Texture2D texture;
+			using (var ms = new MemoryStream(_imageResult.PngData))
+			{
+				texture = Texture2D.FromStream(MyraEnvironment.GraphicsDevice, ms);
+			}
+
+			Renderable = new TextureRegion(texture);
 		}
 
 		public override void OnTouchDown()

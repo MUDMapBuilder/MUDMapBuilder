@@ -33,6 +33,7 @@ namespace MUDMapBuilder
 			get
 			{
 				UpdatePositions();
+
 				return _brokenConnections;
 			}
 		}
@@ -947,6 +948,8 @@ namespace MUDMapBuilder
 
 			return true;
 		}
+
+
 
 		public static MMBArea Parse(string data)
 		{

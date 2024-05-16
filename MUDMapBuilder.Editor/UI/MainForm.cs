@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MUDMapBuilder.Editor.UI
 {
-    public partial class MainForm
+	public partial class MainForm
 	{
 		private readonly MapViewer _mapViewer;
 		private bool _suspendStep = false;
@@ -134,32 +134,11 @@ namespace MUDMapBuilder.Editor.UI
 			UpdateNumbers();
 		}
 
-		private void QueueUIAction(Action action)
-		{
-			EditorGame.Instance.QueueUIAction(() =>
-			{
-				try
-				{
-					action();
-				}
-				catch (Exception ex)
-				{
-					var dialog = Dialog.CreateMessageBox("Error", ex.ToString());
-					dialog.ShowModal(Desktop);
-				}
-			});
-		}
-
-		private void Log(string message)
-		{
-			QueueUIAction(() => _labelStatus.Text = message);
-		}
-
 		private BuildOptions CreateBuildOptions()
 		{
 			var result = new BuildOptions
 			{
-				Log = Log,
+				Log = Utility.SetStatusMessage,
 				FixObstacles = _checkFixObstacles.IsChecked,
 				FixNonStraight = _checkFixNonStraight.IsChecked,
 				FixIntersected = _checkIntersected.IsChecked,
@@ -170,7 +149,7 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void InternalRebuild(string newTitle = null)
 		{
-			QueueUIAction(() =>
+			Utility.QueueUIAction(() =>
 			{
 				_mapViewer.Result = null;
 			});
@@ -178,7 +157,7 @@ namespace MUDMapBuilder.Editor.UI
 			var options = CreateBuildOptions();
 			var result = MapBuilder.Build(Area, options);
 
-			QueueUIAction(() =>
+			Utility.QueueUIAction(() =>
 			{
 				_mapViewer.Result = result;
 				var maxSteps = _mapViewer.Result.History.Length;
@@ -197,6 +176,7 @@ namespace MUDMapBuilder.Editor.UI
 				{
 					EditorGame.Instance.FilePath = newTitle;
 				}
+
 				UpdateEnabled();
 			});
 		}

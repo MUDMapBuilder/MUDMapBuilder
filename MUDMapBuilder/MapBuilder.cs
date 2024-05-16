@@ -553,9 +553,8 @@ namespace MUDMapBuilder
 
 						_area.FixPlacementOfSingleExitRooms();
 
-						vc = _area.BrokenConnections;
-
 						// Connections fix run
+						vc = _area.BrokenConnections;
 						if (_options.FixObstacles)
 						{
 							// Remove obstacles

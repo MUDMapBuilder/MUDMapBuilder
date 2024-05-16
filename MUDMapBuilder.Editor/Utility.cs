@@ -16,5 +16,9 @@ namespace MUDMapBuilder.Editor
 				return Path.GetDirectoryName(path);
 			}
 		}
+
+		public static void QueueUIAction(Action action) => EditorGame.Instance.QueueUIAction(action);
+
+		public static void SetStatusMessage(string message) => EditorGame.Instance.SetStatusMessage(message);
 	}
 }

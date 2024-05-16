@@ -52,6 +52,11 @@ namespace MUDMapBuilder.Editor
 			}
 		}
 
+		public void SetStatusMessage(string message)
+		{
+			QueueUIAction(() => _mainForm._labelStatus.Text = message);
+		}
+
 		protected override void LoadContent()
 		{
 			base.LoadContent();
@@ -104,7 +109,16 @@ namespace MUDMapBuilder.Editor
 			{
 				Action action;
 				_uiActions.TryDequeue(out action);
-				action();
+
+				try
+				{
+					action();
+				}
+				catch (Exception ex)
+				{
+					var dialog = Dialog.CreateMessageBox("Error", ex.ToString());
+					dialog.ShowModal(_desktop);
+				}
 			}
 		}
 

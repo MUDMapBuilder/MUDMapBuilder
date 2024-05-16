@@ -1,0 +1,409 @@
+{
+  "name": "Plains",
+  "rooms": [
+    {
+      "id": 1713,
+      "otherAreaExit": true,
+      "name": "To Moria",
+      "exits": {
+        "North": 2305
+      }
+    },
+    {
+      "id": 2305,
+      "name": "Path in the plains",
+      "exits": {
+        "North": 2320,
+        "East": 2306,
+        "South": 1713,
+        "West": 2321
+      }
+    },
+    {
+      "id": 2306,
+      "name": "Path in the plains",
+      "exits": {
+        "East": 2307,
+        "West": 2305
+      }
+    },
+    {
+      "id": 2307,
+      "name": "Path in the plains",
+      "exits": {
+        "North": 2308,
+        "West": 2306
+      }
+    },
+    {
+      "id": 2308,
+      "name": "Path in the plains",
+      "exits": {
+        "North": 2309,
+        "East": 2322,
+        "South": 2307,
+        "West": 2320
+      }
+    },
+    {
+      "id": 2309,
+      "name": "Path in the plains",
+      "exits": {
+        "North": 2310,
+        "South": 2308
+      }
+    },
+    {
+      "id": 2310,
+      "name": "Path in the plains",
+      "exits": {
+        "North": 2311,
+        "East": 2326,
+        "South": 2309,
+        "West": 2325
+      }
+    },
+    {
+      "id": 2311,
+      "name": "Path in the foothills",
+      "exits": {
+        "North": 2331,
+        "East": 2312,
+        "South": 2310
+      }
+    },
+    {
+      "id": 2312,
+      "name": "Path in the foothills",
+      "exits": {
+        "East": 2313,
+        "West": 2311
+      }
+    },
+    {
+      "id": 2313,
+      "name": "Path in the foothills",
+      "exits": {
+        "North": 2314,
+        "West": 2312
+      }
+    },
+    {
+      "id": 2314,
+      "name": "Path in the foothills",
+      "exits": {
+        "East": 2315,
+        "South": 2313,
+        "West": 2331
+      }
+    },
+    {
+      "id": 2315,
+      "name": "Path in the foothills",
+      "exits": {
+        "North": 2332,
+        "East": 2316,
+        "West": 2314
+      }
+    },
+    {
+      "id": 2316,
+      "name": "Path in the foothills",
+      "exits": {
+        "East": 2317,
+        "West": 2315
+      }
+    },
+    {
+      "id": 2317,
+      "name": "The path intersection",
+      "exits": {
+        "North": 2318,
+        "South": 2335,
+        "West": 2316
+      }
+    },
+    {
+      "id": 2318,
+      "name": "Road to Ofcol",
+      "exits": {
+        "North": 2319,
+        "South": 2317,
+        "West": 2332
+      }
+    },
+    {
+      "id": 2147,
+      "otherAreaExit": true,
+      "name": "To Ofcol",
+      "exits": {
+        "South": 2319
+      }
+    },
+    {
+      "id": 2319,
+      "name": "Outside Ofcol",
+      "exits": {
+        "North": 2147,
+        "South": 2318
+      }
+    },
+    {
+      "id": 2320,
+      "name": "Gallow hill",
+      "exits": {
+        "North": 2325,
+        "East": 2308,
+        "South": 2305,
+        "West": 2323
+      }
+    },
+    {
+      "id": 2321,
+      "name": "Grassy plains",
+      "exits": {
+        "North": 2323,
+        "East": 2305
+      }
+    },
+    {
+      "id": 2322,
+      "name": "Grassy plains",
+      "exits": {
+        "East": 2341,
+        "South": 2348,
+        "West": 2308
+      }
+    },
+    {
+      "id": 2323,
+      "name": "Grassy plains",
+      "exits": {
+        "North": 2324,
+        "East": 2320,
+        "South": 2321
+      }
+    },
+    {
+      "id": 2324,
+      "name": "Grassy plains",
+      "exits": {
+        "North": 2333,
+        "East": 2325,
+        "South": 2323
+      }
+    },
+    {
+      "id": 2325,
+      "name": "Grassy plains",
+      "exits": {
+        "North": 2327,
+        "East": 2310,
+        "South": 2320,
+        "West": 2324
+      }
+    },
+    {
+      "id": 2326,
+      "name": "Grassy plains",
+      "exits": {
+        "South": 2341,
+        "West": 2310
+      }
+    },
+    {
+      "id": 2327,
+      "name": "Grassy foothills",
+      "exits": {
+        "North": 2329,
+        "South": 2325,
+        "West": 2333
+      }
+    },
+    {
+      "id": 2982,
+      "otherAreaExit": true,
+      "name": "To Valley of the Elves",
+      "exits": {
+        "South": 2328
+      }
+    },
+    {
+      "id": 2328,
+      "name": "The steep foothills",
+      "exits": {
+        "North": 2982,
+        "East": 2329,
+        "South": 2333
+      }
+    },
+    {
+      "id": 2255,
+      "otherAreaExit": true,
+      "name": "To Olympus",
+      "exits": {
+        "South": 2329
+      }
+    },
+    {
+      "id": 2329,
+      "name": "The steep foothills",
+      "exits": {
+        "North": 2255,
+        "East": 2330,
+        "South": 2327,
+        "West": 2328
+      }
+    },
+    {
+      "id": 2330,
+      "name": "The steep foothills",
+      "exits": {
+        "East": 2331,
+        "West": 2329
+      }
+    },
+    {
+      "id": 2331,
+      "name": "The pool in the foothills",
+      "exits": {
+        "East": 2314,
+        "South": 2311,
+        "West": 2330
+      }
+    },
+    {
+      "id": 2332,
+      "name": "The foothills",
+      "exits": {
+        "East": 2318,
+        "South": 2315
+      }
+    },
+    {
+      "id": 2333,
+      "name": "In front of hut in foothills",
+      "exits": {
+        "North": 2328,
+        "East": 2327,
+        "South": 2324,
+        "West": 2334
+      }
+    },
+    {
+      "id": 2334,
+      "name": "Hermit\u0027s hut",
+      "exits": {
+        "East": 2333
+      }
+    },
+    {
+      "id": 2335,
+      "name": "The ancient path",
+      "exits": {
+        "North": 2317,
+        "South": 2336
+      }
+    },
+    {
+      "id": 2336,
+      "name": "The ancient path",
+      "exits": {
+        "North": 2335,
+        "South": 2337
+      }
+    },
+    {
+      "id": 2337,
+      "name": "The ancient path",
+      "exits": {
+        "North": 2336,
+        "South": 2338
+      }
+    },
+    {
+      "id": 2338,
+      "name": "The ancient path",
+      "exits": {
+        "North": 2337,
+        "East": 2339
+      }
+    },
+    {
+      "id": 2339,
+      "name": "The wooden bridge",
+      "exits": {
+        "East": 2340,
+        "West": 2338
+      }
+    },
+    {
+      "id": 2340,
+      "name": "The ancient path",
+      "exits": {
+        "East": 2342,
+        "West": 2339
+      }
+    },
+    {
+      "id": 2341,
+      "name": "Grassy plains",
+      "exits": {
+        "North": 2326,
+        "West": 2322
+      }
+    },
+    {
+      "id": 2342,
+      "name": "The Stones of G\u0027harne",
+      "exits": {
+        "West": 2340,
+        "Down": 2343
+      }
+    },
+    {
+      "id": 2343,
+      "name": "Dark smelly tunnels",
+      "exits": {
+        "South": 2344,
+        "West": 2345,
+        "Up": 2342
+      }
+    },
+    {
+      "id": 2344,
+      "name": "Dead end of tunnel",
+      "exits": {
+        "North": 2343
+      }
+    },
+    {
+      "id": 2345,
+      "name": "Dark smelly tunnels",
+      "exits": {
+        "East": 2343,
+        "West": 2346
+      }
+    },
+    {
+      "id": 2346,
+      "name": "Dark smelly tunnels",
+      "exits": {
+        "East": 2345,
+        "West": 2347
+      }
+    },
+    {
+      "id": 2347,
+      "name": "The Hall of G\u0027harne",
+      "exits": {
+        "East": 2346
+      }
+    },
+    {
+      "id": 2348,
+      "name": "Steep slope",
+      "exits": {}
+    }
+  ]
+}

@@ -1,0 +1,2123 @@
+{
+  "name": "New Thalos",
+  "rooms": [
+    {
+      "id": 1830,
+      "name": "The Entrance to the Dancing Daemon Inn",
+      "exits": {
+        "South": 1832,
+        "West": 1850,
+        "Up": 1831
+      }
+    },
+    {
+      "id": 1831,
+      "name": "The Reception Area",
+      "exits": {
+        "Down": 1830
+      }
+    },
+    {
+      "id": 1832,
+      "name": "The Dancing Daemon Inn",
+      "exits": {
+        "North": 1830
+      }
+    },
+    {
+      "id": 1833,
+      "name": "The Medina",
+      "exits": {
+        "North": 1834,
+        "South": 1840
+      }
+    },
+    {
+      "id": 1834,
+      "name": "The Medina",
+      "exits": {
+        "North": 1835,
+        "South": 1833
+      }
+    },
+    {
+      "id": 1835,
+      "name": "The Southern Market Square",
+      "exits": {
+        "North": 1836,
+        "East": 1837,
+        "South": 1834,
+        "West": 1838
+      }
+    },
+    {
+      "id": 1836,
+      "name": "The Center of Market Square",
+      "exits": {
+        "North": 1845,
+        "East": 1847,
+        "South": 1835,
+        "West": 1839
+      }
+    },
+    {
+      "id": 1837,
+      "name": "The Southeastern Market Square",
+      "exits": {
+        "North": 1847,
+        "East": 1959,
+        "South": 1966,
+        "West": 1835
+      }
+    },
+    {
+      "id": 1838,
+      "name": "The Southwestern Market Square",
+      "exits": {
+        "North": 1839,
+        "East": 1835,
+        "South": 1965,
+        "West": 1958
+      }
+    },
+    {
+      "id": 1839,
+      "name": "The Western Market Square",
+      "exits": {
+        "North": 1844,
+        "East": 1836,
+        "South": 1838,
+        "West": 1856
+      }
+    },
+    {
+      "id": 1840,
+      "name": "The Common Square",
+      "exits": {
+        "North": 1833,
+        "East": 1867,
+        "South": 1842,
+        "West": 1866
+      }
+    },
+    {
+      "id": 1841,
+      "name": "Outside the Southern Gate of New Thalos",
+      "exits": {
+        "North": 1843
+      }
+    },
+    {
+      "id": 1842,
+      "name": "The Southern Bridge",
+      "exits": {
+        "North": 1840,
+        "South": 1843,
+        "Down": 1915
+      }
+    },
+    {
+      "id": 1843,
+      "name": "Inside the South Gate of New Thalos",
+      "exits": {
+        "North": 1842,
+        "South": 1841
+      }
+    },
+    {
+      "id": 1844,
+      "name": "The Northwestern Market Square",
+      "exits": {
+        "North": 1944,
+        "East": 1845,
+        "South": 1839,
+        "West": 1951
+      }
+    },
+    {
+      "id": 1845,
+      "name": "The Northern Market Square",
+      "exits": {
+        "North": 1848,
+        "East": 1846,
+        "South": 1836,
+        "West": 1844
+      }
+    },
+    {
+      "id": 1846,
+      "name": "The Northeastern Market Square",
+      "exits": {
+        "North": 1945,
+        "East": 1952,
+        "South": 1847,
+        "West": 1845
+      }
+    },
+    {
+      "id": 1847,
+      "name": "The Eastern Market Square",
+      "exits": {
+        "North": 1846,
+        "East": 1857,
+        "South": 1837,
+        "West": 1836
+      }
+    },
+    {
+      "id": 1848,
+      "name": "Sultan\u0027s Walk",
+      "exits": {
+        "North": 1849,
+        "South": 1845
+      }
+    },
+    {
+      "id": 1849,
+      "name": "Sultan\u0027s Walk",
+      "exits": {
+        "North": 1850,
+        "South": 1848
+      }
+    },
+    {
+      "id": 1850,
+      "name": "Sultan\u0027s Walk",
+      "exits": {
+        "North": 1851,
+        "East": 1830,
+        "South": 1849,
+        "West": 1988
+      }
+    },
+    {
+      "id": 1851,
+      "name": "Sultan\u0027s Walk",
+      "exits": {
+        "North": 1852,
+        "South": 1850
+      }
+    },
+    {
+      "id": 1852,
+      "name": "Inside the Northern Gate of New Thalos",
+      "exits": {
+        "North": 1997,
+        "East": 1879,
+        "South": 1851,
+        "West": 1878
+      }
+    },
+    {
+      "id": 1853,
+      "name": "Inside the West Gate of New Thalos",
+      "exits": {
+        "East": 1854,
+        "South": 1956,
+        "West": 1999
+      }
+    },
+    {
+      "id": 1854,
+      "name": "West Main Street",
+      "exits": {
+        "North": 1950,
+        "East": 1855,
+        "South": 1957,
+        "West": 1853
+      }
+    },
+    {
+      "id": 1855,
+      "name": "West Main Street",
+      "exits": {
+        "North": 1901,
+        "East": 1856,
+        "South": 1902,
+        "West": 1854
+      }
+    },
+    {
+      "id": 1856,
+      "name": "West Main Street",
+      "exits": {
+        "East": 1839,
+        "West": 1855
+      }
+    },
+    {
+      "id": 1857,
+      "name": "East Main Street",
+      "exits": {
+        "East": 1858,
+        "West": 1847
+      }
+    },
+    {
+      "id": 1858,
+      "name": "East Main Street",
+      "exits": {
+        "North": 1894,
+        "East": 1859,
+        "South": 1895,
+        "West": 1857
+      }
+    },
+    {
+      "id": 1859,
+      "name": "East Main Street",
+      "exits": {
+        "North": 1953,
+        "East": 1860,
+        "South": 1960,
+        "West": 1858
+      }
+    },
+    {
+      "id": 1860,
+      "name": "East Main Street",
+      "exits": {
+        "North": 1954,
+        "East": 1861,
+        "West": 1859
+      }
+    },
+    {
+      "id": 1861,
+      "name": "Inside the Eastern Gate of New Thalos",
+      "exits": {
+        "North": 1955,
+        "East": 1998,
+        "West": 1860
+      }
+    },
+    {
+      "id": 1862,
+      "name": "Cassandra\u0027s Catch of the Day",
+      "exits": {
+        "South": 1871
+      }
+    },
+    {
+      "id": 1863,
+      "name": "West Ishtar Drive",
+      "exits": {
+        "North": 1970,
+        "East": 1864
+      }
+    },
+    {
+      "id": 1864,
+      "name": "West Ishtar Drive",
+      "exits": {
+        "North": 1971,
+        "East": 1865,
+        "West": 1863
+      }
+    },
+    {
+      "id": 1865,
+      "name": "West Ishtar Drive",
+      "exits": {
+        "North": 1972,
+        "East": 1866,
+        "South": 1873,
+        "West": 1864
+      }
+    },
+    {
+      "id": 1866,
+      "name": "West Ishtar Drive",
+      "exits": {
+        "East": 1840,
+        "West": 1865
+      }
+    },
+    {
+      "id": 1867,
+      "name": "East Ishtar Drive",
+      "exits": {
+        "North": 1974,
+        "East": 1869,
+        "West": 1840
+      }
+    },
+    {
+      "id": 1868,
+      "name": "East Ishtar Drive",
+      "exits": {
+        "East": 1870,
+        "West": 1869
+      }
+    },
+    {
+      "id": 1869,
+      "name": "East Ishtar Drive",
+      "exits": {
+        "North": 1975,
+        "East": 1868,
+        "West": 1867
+      }
+    },
+    {
+      "id": 1870,
+      "name": "East Ishtar Drive",
+      "exits": {
+        "North": 1898,
+        "East": 1871,
+        "West": 1868
+      }
+    },
+    {
+      "id": 1871,
+      "name": "East Ishtar Drive",
+      "exits": {
+        "North": 1862,
+        "East": 1872,
+        "West": 1870
+      }
+    },
+    {
+      "id": 1872,
+      "name": "East Ishtar Drive",
+      "exits": {
+        "North": 1977,
+        "West": 1871
+      }
+    },
+    {
+      "id": 1873,
+      "name": "Boat Ramp",
+      "exits": {
+        "North": 1865,
+        "South": 1916
+      }
+    },
+    {
+      "id": 1874,
+      "name": "West Casbah",
+      "exits": {
+        "East": 1875,
+        "South": 1983,
+        "Up": 1989
+      }
+    },
+    {
+      "id": 1875,
+      "name": "West Casbah",
+      "exits": {
+        "East": 1876,
+        "South": 1984,
+        "West": 1874
+      }
+    },
+    {
+      "id": 1876,
+      "name": "The Casbah",
+      "exits": {
+        "East": 1877,
+        "South": 1888,
+        "West": 1875
+      }
+    },
+    {
+      "id": 1877,
+      "name": "The Casbah",
+      "exits": {
+        "East": 1878,
+        "West": 1876
+      }
+    },
+    {
+      "id": 1878,
+      "name": "The Casbah",
+      "exits": {
+        "East": 1852,
+        "West": 1877
+      }
+    },
+    {
+      "id": 1879,
+      "name": "The Casbah",
+      "exits": {
+        "East": 1880,
+        "West": 1852
+      }
+    },
+    {
+      "id": 1880,
+      "name": "The Casbah",
+      "exits": {
+        "East": 1881,
+        "West": 1879
+      }
+    },
+    {
+      "id": 1881,
+      "name": "The Casbah",
+      "exits": {
+        "East": 1882,
+        "South": 1890,
+        "West": 1880
+      }
+    },
+    {
+      "id": 1882,
+      "name": "The Casbah",
+      "exits": {
+        "East": 1883,
+        "West": 1881
+      }
+    },
+    {
+      "id": 1883,
+      "name": "The Casbah",
+      "exits": {
+        "East": 1884,
+        "West": 1882
+      }
+    },
+    {
+      "id": 1884,
+      "name": "The Casbah",
+      "exits": {
+        "South": 1885,
+        "West": 1883,
+        "Up": 1992
+      }
+    },
+    {
+      "id": 1885,
+      "name": "Kali Row",
+      "exits": {
+        "North": 1884,
+        "South": 1886,
+        "West": 1981
+      }
+    },
+    {
+      "id": 1886,
+      "name": "Kali Row",
+      "exits": {
+        "North": 1885,
+        "West": 1982
+      }
+    },
+    {
+      "id": 1887,
+      "name": "Underground",
+      "exits": {
+        "North": 1908,
+        "South": 1910
+      }
+    },
+    {
+      "id": 1888,
+      "name": "Alley",
+      "exits": {
+        "North": 1876,
+        "South": 1889
+      }
+    },
+    {
+      "id": 1889,
+      "name": "Alley",
+      "exits": {
+        "North": 1888,
+        "Down": 1905
+      }
+    },
+    {
+      "id": 1890,
+      "name": "Guildsman\u0027s Row",
+      "exits": {
+        "North": 1881,
+        "East": 1986,
+        "South": 1891,
+        "West": 1985
+      }
+    },
+    {
+      "id": 1891,
+      "name": "Guildsman\u0027s Row",
+      "exits": {
+        "North": 1890,
+        "East": 1937,
+        "South": 1892,
+        "West": 1936
+      }
+    },
+    {
+      "id": 1892,
+      "name": "Guildsman\u0027s Row",
+      "exits": {
+        "North": 1891,
+        "East": 1941,
+        "South": 1893,
+        "West": 1994
+      }
+    },
+    {
+      "id": 1893,
+      "name": "Guildsman\u0027s Row",
+      "exits": {
+        "North": 1892,
+        "East": 1946,
+        "South": 1894
+      }
+    },
+    {
+      "id": 1894,
+      "name": "Guildsman\u0027s Row",
+      "exits": {
+        "North": 1893,
+        "South": 1858
+      }
+    },
+    {
+      "id": 1895,
+      "name": "Alley",
+      "exits": {
+        "North": 1858,
+        "South": 1896
+      }
+    },
+    {
+      "id": 1896,
+      "name": "Alley",
+      "exits": {
+        "North": 1895,
+        "East": 1897,
+        "West": 1967
+      }
+    },
+    {
+      "id": 1897,
+      "name": "Alley",
+      "exits": {
+        "East": 1968,
+        "South": 1898,
+        "West": 1896
+      }
+    },
+    {
+      "id": 1898,
+      "name": "Alley",
+      "exits": {
+        "North": 1897,
+        "South": 1870
+      }
+    },
+    {
+      "id": 1899,
+      "name": "Alley",
+      "exits": {
+        "East": 1900,
+        "South": 1901
+      }
+    },
+    {
+      "id": 1900,
+      "name": "Alley",
+      "exits": {
+        "West": 1899,
+        "Down": 1908
+      }
+    },
+    {
+      "id": 1901,
+      "name": "Alley",
+      "exits": {
+        "North": 1899,
+        "South": 1855
+      }
+    },
+    {
+      "id": 1902,
+      "name": "Alley",
+      "exits": {
+        "North": 1855,
+        "South": 1903
+      }
+    },
+    {
+      "id": 1903,
+      "name": "Alley",
+      "exits": {
+        "North": 1902,
+        "East": 1904
+      }
+    },
+    {
+      "id": 1904,
+      "name": "Alley",
+      "exits": {
+        "West": 1903,
+        "Down": 1911
+      }
+    },
+    {
+      "id": 1905,
+      "name": "Underground",
+      "exits": {
+        "South": 1906,
+        "Up": 1889
+      }
+    },
+    {
+      "id": 1906,
+      "name": "Underground",
+      "exits": {
+        "North": 1905,
+        "South": 1907
+      }
+    },
+    {
+      "id": 1907,
+      "name": "Underground",
+      "exits": {
+        "North": 1906,
+        "East": 1908,
+        "West": 1909
+      }
+    },
+    {
+      "id": 1908,
+      "name": "Underground",
+      "exits": {
+        "South": 1887,
+        "West": 1907,
+        "Up": 1900
+      }
+    },
+    {
+      "id": 1909,
+      "name": "Underground",
+      "exits": {
+        "East": 1907
+      }
+    },
+    {
+      "id": 1910,
+      "name": "Underground",
+      "exits": {
+        "North": 1887,
+        "South": 1911
+      }
+    },
+    {
+      "id": 1911,
+      "name": "Underground",
+      "exits": {
+        "North": 1910,
+        "East": 1912,
+        "Up": 1904
+      }
+    },
+    {
+      "id": 1912,
+      "name": "Underground",
+      "exits": {
+        "East": 1922,
+        "West": 1911
+      }
+    },
+    {
+      "id": 1913,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2043,
+        "West": 1914
+      }
+    },
+    {
+      "id": 1914,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 1913,
+        "West": 1915
+      }
+    },
+    {
+      "id": 1915,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 1914,
+        "West": 1916,
+        "Up": 1842
+      }
+    },
+    {
+      "id": 1916,
+      "name": "Ishtar River",
+      "exits": {
+        "North": 1873,
+        "East": 1915,
+        "West": 1917
+      }
+    },
+    {
+      "id": 1917,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 1916,
+        "West": 2042
+      }
+    },
+    {
+      "id": 1918,
+      "name": "Dark Passage",
+      "exits": {
+        "East": 1919
+      }
+    },
+    {
+      "id": 1919,
+      "name": "Dark Passage",
+      "exits": {
+        "East": 1920,
+        "West": 1918
+      }
+    },
+    {
+      "id": 1920,
+      "name": "Dark Passage",
+      "exits": {
+        "East": 1921,
+        "West": 1919
+      }
+    },
+    {
+      "id": 1921,
+      "name": "Dark Passage",
+      "exits": {
+        "West": 1920,
+        "Up": 2000
+      }
+    },
+    {
+      "id": 1922,
+      "name": "Underground",
+      "exits": {
+        "East": 1923,
+        "West": 1912
+      }
+    },
+    {
+      "id": 1923,
+      "name": "Underground",
+      "exits": {
+        "East": 1930,
+        "West": 1922
+      }
+    },
+    {
+      "id": 933,
+      "otherAreaExit": true,
+      "name": "To Haon Dor",
+      "exits": {}
+    },
+    {
+      "id": 1924,
+      "name": "Common Room of the Clan MacCleod",
+      "exits": {
+        "North": 1929,
+        "East": 1926,
+        "South": 933,
+        "West": 1927,
+        "Up": 1925,
+        "Down": 1928
+      }
+    },
+    {
+      "id": 1925,
+      "name": "Zippoii\u0027s Room",
+      "exits": {
+        "Down": 1924
+      }
+    },
+    {
+      "id": 1926,
+      "name": "Ice\u0027s Room",
+      "exits": {
+        "West": 1924
+      }
+    },
+    {
+      "id": 1927,
+      "name": "Naazgul\u0027s Room",
+      "exits": {
+        "North": 2037,
+        "East": 1924
+      }
+    },
+    {
+      "id": 1928,
+      "name": "Tank\u0027s Room",
+      "exits": {
+        "Up": 1924
+      }
+    },
+    {
+      "id": 1929,
+      "name": "Inside the Castle of Clan MacCleod",
+      "exits": {
+        "South": 1924
+      }
+    },
+    {
+      "id": 1930,
+      "name": "Underground",
+      "exits": {
+        "East": 1931,
+        "West": 1923
+      }
+    },
+    {
+      "id": 1931,
+      "name": "Underground",
+      "exits": {
+        "East": 1932,
+        "West": 1930
+      }
+    },
+    {
+      "id": 1932,
+      "name": "Underground",
+      "exits": {
+        "East": 1918,
+        "West": 1931
+      }
+    },
+    {
+      "id": 1933,
+      "name": "Cleric\u0027s Sanctum",
+      "exits": {
+        "East": 1909,
+        "Up": 1949
+      }
+    },
+    {
+      "id": 1934,
+      "name": "Chamber of the High Priest",
+      "exits": {
+        "South": 1938
+      }
+    },
+    {
+      "id": 1935,
+      "name": "By the Altar",
+      "exits": {
+        "South": 1939
+      }
+    },
+    {
+      "id": 1936,
+      "name": "The Weaver\u0027s Guild",
+      "exits": {
+        "East": 1891
+      }
+    },
+    {
+      "id": 1937,
+      "name": "The Craftsman\u0027s Guild",
+      "exits": {
+        "West": 1891
+      }
+    },
+    {
+      "id": 1938,
+      "name": "Inside the Temple",
+      "exits": {
+        "North": 1934,
+        "East": 1939,
+        "South": 1942
+      }
+    },
+    {
+      "id": 1939,
+      "name": "Inside the Temple",
+      "exits": {
+        "North": 1935,
+        "East": 1940,
+        "South": 1943,
+        "West": 1938
+      }
+    },
+    {
+      "id": 1940,
+      "name": "Donation Room",
+      "exits": {
+        "West": 1939
+      }
+    },
+    {
+      "id": 1941,
+      "name": "The Museum of the Greater Gods",
+      "exits": {
+        "South": 1946,
+        "West": 1892
+      }
+    },
+    {
+      "id": 1942,
+      "name": "Entrance to the Guild of Clerics",
+      "exits": {
+        "North": 1938,
+        "South": 1949
+      }
+    },
+    {
+      "id": 1943,
+      "name": "The Temple Gates",
+      "exits": {
+        "North": 1939,
+        "South": 1950,
+        "Down": 1950
+      }
+    },
+    {
+      "id": 1944,
+      "name": "Ahkeem\u0027s Stuff",
+      "exits": {
+        "South": 1844
+      }
+    },
+    {
+      "id": 1945,
+      "name": "Vera\u0027s Veggies",
+      "exits": {
+        "South": 1846
+      }
+    },
+    {
+      "id": 1946,
+      "name": "The Museum of the Greater Gods",
+      "exits": {
+        "North": 1941,
+        "West": 1893
+      }
+    },
+    {
+      "id": 1947,
+      "name": "Base of the Tower",
+      "exits": {
+        "East": 1948,
+        "South": 1954,
+        "Up": 1978
+      }
+    },
+    {
+      "id": 1948,
+      "name": "The Mage\u0027s Courtyard",
+      "exits": {
+        "South": 1955,
+        "West": 1947
+      }
+    },
+    {
+      "id": 1949,
+      "name": "Nectar of the Gods",
+      "exits": {
+        "North": 1942,
+        "Down": 1933
+      }
+    },
+    {
+      "id": 1950,
+      "name": "The Temple Square",
+      "exits": {
+        "North": 1943,
+        "South": 1854,
+        "Up": 1943
+      }
+    },
+    {
+      "id": 1951,
+      "name": "Nabil\u0027s Exotic Animals",
+      "exits": {
+        "East": 1844
+      }
+    },
+    {
+      "id": 1952,
+      "name": "The Butchary",
+      "exits": {
+        "West": 1846
+      }
+    },
+    {
+      "id": 1953,
+      "name": "The Witch\u0027s Brew",
+      "exits": {
+        "South": 1859
+      }
+    },
+    {
+      "id": 1954,
+      "name": "Braheem\u0027s Magic Shop",
+      "exits": {
+        "South": 1860
+      }
+    },
+    {
+      "id": 1955,
+      "name": "Entrance to the Mage\u0027s Tower",
+      "exits": {
+        "North": 1948,
+        "South": 1861
+      }
+    },
+    {
+      "id": 1956,
+      "name": "Entrance to the Guild of Warriors\u0027",
+      "exits": {
+        "North": 1853,
+        "South": 1963
+      }
+    },
+    {
+      "id": 1957,
+      "name": "The Repair Shop",
+      "exits": {
+        "North": 1854
+      }
+    },
+    {
+      "id": 1958,
+      "name": "The General Store",
+      "exits": {
+        "East": 1838
+      }
+    },
+    {
+      "id": 1959,
+      "name": "Abdul\u0027s Armor",
+      "exits": {
+        "West": 1837
+      }
+    },
+    {
+      "id": 1960,
+      "name": "The Mercenary\u0027s Guild",
+      "exits": {
+        "North": 1859,
+        "East": 1962
+      }
+    },
+    {
+      "id": 1961,
+      "name": "The Mercenary\u0027s Guild",
+      "exits": {}
+    },
+    {
+      "id": 1962,
+      "name": "Entrance to the Thieves\u0027 Guild",
+      "exits": {
+        "South": 1969,
+        "West": 1960
+      }
+    },
+    {
+      "id": 1963,
+      "name": "The Whet Stone",
+      "exits": {
+        "North": 1956,
+        "East": 1964
+      }
+    },
+    {
+      "id": 1964,
+      "name": "Tournament and Practice Yard",
+      "exits": {
+        "East": 1903,
+        "West": 1963
+      }
+    },
+    {
+      "id": 1965,
+      "name": "The Bread Stand",
+      "exits": {
+        "North": 1838
+      }
+    },
+    {
+      "id": 1966,
+      "name": "Igor\u0027s Implements of Destruction",
+      "exits": {
+        "North": 1837,
+        "Down": 2062
+      }
+    },
+    {
+      "id": 1967,
+      "name": "Ye Old Leather Shoppe",
+      "exits": {
+        "East": 1896
+      }
+    },
+    {
+      "id": 1968,
+      "name": "Smuggler\u0027s Inn",
+      "exits": {
+        "West": 1897
+      }
+    },
+    {
+      "id": 1969,
+      "name": "The Filthy Unicorn",
+      "exits": {
+        "North": 1962,
+        "Down": 1976
+      }
+    },
+    {
+      "id": 1970,
+      "name": "Warehouse",
+      "exits": {
+        "East": 1971,
+        "South": 1863
+      }
+    },
+    {
+      "id": 1971,
+      "name": "Warehouse",
+      "exits": {
+        "South": 1864,
+        "West": 1970
+      }
+    },
+    {
+      "id": 1972,
+      "name": "Shipwright",
+      "exits": {
+        "East": 1973,
+        "South": 1865
+      }
+    },
+    {
+      "id": 1973,
+      "name": "Drafting Room",
+      "exits": {
+        "West": 1972
+      }
+    },
+    {
+      "id": 1974,
+      "name": "The Forge",
+      "exits": {
+        "South": 1867
+      }
+    },
+    {
+      "id": 1975,
+      "name": "The Royal Stables",
+      "exits": {
+        "East": 1979,
+        "South": 1869
+      }
+    },
+    {
+      "id": 1976,
+      "name": "The Secret Yard",
+      "exits": {
+        "South": 1919,
+        "Up": 1969
+      }
+    },
+    {
+      "id": 1977,
+      "name": "The Dump",
+      "exits": {
+        "South": 1872
+      }
+    },
+    {
+      "id": 1978,
+      "name": "The Mage\u0027s Laboratory",
+      "exits": {
+        "Down": 1947
+      }
+    },
+    {
+      "id": 1979,
+      "name": "The Hay Loft",
+      "exits": {
+        "West": 1975
+      }
+    },
+    {
+      "id": 1980,
+      "name": "The Grand Entrance",
+      "exits": {
+        "North": 1990,
+        "East": 1988,
+        "South": 1987,
+        "West": 2035
+      }
+    },
+    {
+      "id": 1981,
+      "name": "The Library",
+      "exits": {
+        "East": 1885
+      }
+    },
+    {
+      "id": 1982,
+      "name": "The Dance Hall",
+      "exits": {
+        "East": 1886
+      }
+    },
+    {
+      "id": 1983,
+      "name": "Jail",
+      "exits": {
+        "North": 1874
+      }
+    },
+    {
+      "id": 1984,
+      "name": "City Hall",
+      "exits": {
+        "North": 1875
+      }
+    },
+    {
+      "id": 1985,
+      "name": "The Boyer/Fletcher\u0027s",
+      "exits": {
+        "East": 1890
+      }
+    },
+    {
+      "id": 1986,
+      "name": "The Mason\u0027s",
+      "exits": {
+        "West": 1890
+      }
+    },
+    {
+      "id": 1987,
+      "name": "Guard House",
+      "exits": {
+        "North": 1980
+      }
+    },
+    {
+      "id": 1988,
+      "name": "The Palace Gate",
+      "exits": {
+        "East": 1850,
+        "West": 1980
+      }
+    },
+    {
+      "id": 1989,
+      "name": "North-West Tower",
+      "exits": {
+        "Down": 1874
+      }
+    },
+    {
+      "id": 1990,
+      "name": "Guard House",
+      "exits": {
+        "South": 1980
+      }
+    },
+    {
+      "id": 1991,
+      "name": "Kitchen",
+      "exits": {
+        "North": 1993,
+        "West": 2001
+      }
+    },
+    {
+      "id": 1992,
+      "name": "North-East Tower",
+      "exits": {
+        "Down": 1884
+      }
+    },
+    {
+      "id": 1993,
+      "name": "Hall",
+      "exits": {
+        "South": 1991,
+        "West": 2002
+      }
+    },
+    {
+      "id": 1994,
+      "name": "The Tanner\u0027s Guild",
+      "exits": {
+        "East": 1892
+      }
+    },
+    {
+      "id": 1995,
+      "name": "Hall",
+      "exits": {
+        "North": 1996,
+        "West": 2004
+      }
+    },
+    {
+      "id": 1996,
+      "name": "Shrine of Allah",
+      "exits": {
+        "South": 1995
+      }
+    },
+    {
+      "id": 1997,
+      "name": "Outside the Northern Gate of New Thalos",
+      "exits": {
+        "North": 2068,
+        "South": 1852
+      }
+    },
+    {
+      "id": 1998,
+      "name": "Outside the Eastern Gate of New Thalos",
+      "exits": {
+        "East": 2077,
+        "South": 2000,
+        "West": 1861
+      }
+    },
+    {
+      "id": 1433,
+      "otherAreaExit": true,
+      "name": "To Miden\u0027nir",
+      "exits": {
+        "East": 1999
+      }
+    },
+    {
+      "id": 1999,
+      "name": "Outside the West Gate of New Thalos",
+      "exits": {
+        "East": 1853,
+        "West": 1433
+      }
+    },
+    {
+      "id": 2000,
+      "name": "Outside the wall",
+      "exits": {
+        "North": 1998
+      }
+    },
+    {
+      "id": 2001,
+      "name": "Grand Dining Hall",
+      "exits": {
+        "North": 2002,
+        "East": 1991
+      }
+    },
+    {
+      "id": 2002,
+      "name": "Hall",
+      "exits": {
+        "North": 2003,
+        "East": 1993,
+        "South": 2001,
+        "West": 2007
+      }
+    },
+    {
+      "id": 2003,
+      "name": "Hall",
+      "exits": {
+        "North": 2004,
+        "East": 2035,
+        "South": 2002,
+        "West": 2008
+      }
+    },
+    {
+      "id": 2004,
+      "name": "Hall",
+      "exits": {
+        "North": 2005,
+        "East": 1995,
+        "South": 2003,
+        "West": 2009
+      }
+    },
+    {
+      "id": 2005,
+      "name": "Entrance to the Dungeon",
+      "exits": {
+        "South": 2004,
+        "Down": 2021
+      }
+    },
+    {
+      "id": 2006,
+      "name": "Guest Room",
+      "exits": {
+        "North": 2007
+      }
+    },
+    {
+      "id": 2007,
+      "name": "Hall",
+      "exits": {
+        "East": 2002,
+        "South": 2006,
+        "West": 2012
+      }
+    },
+    {
+      "id": 2008,
+      "name": "Garden",
+      "exits": {
+        "East": 2003,
+        "West": 2013
+      }
+    },
+    {
+      "id": 2009,
+      "name": "Hall",
+      "exits": {
+        "North": 2010,
+        "East": 2004,
+        "West": 2014
+      }
+    },
+    {
+      "id": 2010,
+      "name": "Art Exhibit",
+      "exits": {
+        "South": 2009
+      }
+    },
+    {
+      "id": 2011,
+      "name": "Guest Room",
+      "exits": {
+        "North": 2012
+      }
+    },
+    {
+      "id": 2012,
+      "name": "Hall",
+      "exits": {
+        "East": 2007,
+        "South": 2011,
+        "West": 2017
+      }
+    },
+    {
+      "id": 2013,
+      "name": "Garden Gazebo",
+      "exits": {
+        "East": 2008
+      }
+    },
+    {
+      "id": 2014,
+      "name": "Hall",
+      "exits": {
+        "North": 2015,
+        "East": 2009,
+        "West": 2019
+      }
+    },
+    {
+      "id": 2015,
+      "name": "Guard Room",
+      "exits": {
+        "South": 2014
+      }
+    },
+    {
+      "id": 2016,
+      "name": "Guard Room",
+      "exits": {
+        "North": 2017
+      }
+    },
+    {
+      "id": 2017,
+      "name": "Harem",
+      "exits": {
+        "North": 2018,
+        "East": 2012,
+        "South": 2016
+      }
+    },
+    {
+      "id": 2018,
+      "name": "Small room",
+      "exits": {
+        "North": 2019,
+        "South": 2017
+      }
+    },
+    {
+      "id": 2019,
+      "name": "Throne Room",
+      "exits": {
+        "North": 2020,
+        "East": 2014,
+        "South": 2018
+      }
+    },
+    {
+      "id": 2020,
+      "name": "Treasure Room",
+      "exits": {
+        "East": 2015,
+        "South": 2019
+      }
+    },
+    {
+      "id": 2021,
+      "name": "Jailer\u0027s Room",
+      "exits": {
+        "East": 2022,
+        "Up": 2005
+      }
+    },
+    {
+      "id": 2022,
+      "name": "Tunnel in the Dungeon",
+      "exits": {
+        "North": 2027,
+        "East": 2023,
+        "South": 2031,
+        "West": 2021
+      }
+    },
+    {
+      "id": 2023,
+      "name": "Tunnel in the Dungeon",
+      "exits": {
+        "North": 2028,
+        "East": 2024,
+        "South": 2032,
+        "West": 2022
+      }
+    },
+    {
+      "id": 2024,
+      "name": "Tunnel in the Dungeon",
+      "exits": {
+        "North": 2029,
+        "East": 2025,
+        "South": 2033,
+        "West": 2023
+      }
+    },
+    {
+      "id": 2025,
+      "name": "Tunnel in the Dungeon",
+      "exits": {
+        "North": 2030,
+        "East": 2026,
+        "South": 2034,
+        "West": 2024
+      }
+    },
+    {
+      "id": 2026,
+      "name": "Secret Cell",
+      "exits": {
+        "West": 2025
+      }
+    },
+    {
+      "id": 2027,
+      "name": "Cell",
+      "exits": {
+        "South": 2022
+      }
+    },
+    {
+      "id": 2028,
+      "name": "Cell",
+      "exits": {
+        "South": 2023
+      }
+    },
+    {
+      "id": 2029,
+      "name": "Cell",
+      "exits": {
+        "South": 2024
+      }
+    },
+    {
+      "id": 2030,
+      "name": "Cell",
+      "exits": {
+        "South": 2025
+      }
+    },
+    {
+      "id": 2031,
+      "name": "Cell",
+      "exits": {
+        "North": 2022
+      }
+    },
+    {
+      "id": 2032,
+      "name": "Cell",
+      "exits": {
+        "North": 2023
+      }
+    },
+    {
+      "id": 2033,
+      "name": "Cell",
+      "exits": {
+        "North": 2024
+      }
+    },
+    {
+      "id": 2034,
+      "name": "Cell",
+      "exits": {
+        "North": 2025
+      }
+    },
+    {
+      "id": 2035,
+      "name": "Hall",
+      "exits": {
+        "East": 1980,
+        "West": 2003
+      }
+    },
+    {
+      "id": 2036,
+      "name": "Nabil\u0027s Back Room",
+      "exits": {}
+    },
+    {
+      "id": 2037,
+      "name": "Saska\u0027s Library",
+      "exits": {
+        "South": 1927
+      }
+    },
+    {
+      "id": 2038,
+      "name": "Headwaters of the River of Lost Souls",
+      "exits": {
+        "South": 2046
+      }
+    },
+    {
+      "id": 2039,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2040,
+        "West": 2051
+      }
+    },
+    {
+      "id": 2040,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2041,
+        "West": 2039
+      }
+    },
+    {
+      "id": 2041,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2056,
+        "West": 2040
+      }
+    },
+    {
+      "id": 2042,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 1917,
+        "West": 2061
+      }
+    },
+    {
+      "id": 2043,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2044,
+        "West": 1913
+      }
+    },
+    {
+      "id": 2044,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2045,
+        "West": 2043
+      }
+    },
+    {
+      "id": 2045,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2071,
+        "West": 2044
+      }
+    },
+    {
+      "id": 2046,
+      "name": "The River of Lost Souls",
+      "exits": {
+        "North": 2038,
+        "South": 2047
+      }
+    },
+    {
+      "id": 2047,
+      "name": "The River of Lost Souls",
+      "exits": {
+        "North": 2046,
+        "South": 2048
+      }
+    },
+    {
+      "id": 2048,
+      "name": "The River of Lost Souls",
+      "exits": {
+        "South": 2049
+      }
+    },
+    {
+      "id": 2049,
+      "name": "The River of Lost Souls",
+      "exits": {
+        "North": 2048,
+        "South": 2050
+      }
+    },
+    {
+      "id": 2050,
+      "name": "The River of Lost Souls",
+      "exits": {
+        "North": 2049,
+        "South": 2051
+      }
+    },
+    {
+      "id": 2051,
+      "name": "A Split in the River",
+      "exits": {
+        "North": 2050,
+        "East": 2039,
+        "South": 2052
+      }
+    },
+    {
+      "id": 2052,
+      "name": "The River of Lost Souls",
+      "exits": {
+        "North": 2051,
+        "South": 2053
+      }
+    },
+    {
+      "id": 2053,
+      "name": "The River of Lost Souls",
+      "exits": {
+        "North": 2052,
+        "South": 2054
+      }
+    },
+    {
+      "id": 2054,
+      "name": "The River of Lost Souls",
+      "exits": {
+        "North": 2053,
+        "South": 2055
+      }
+    },
+    {
+      "id": 2055,
+      "name": "The River of Lost Souls",
+      "exits": {
+        "North": 2054
+      }
+    },
+    {
+      "id": 2056,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2057,
+        "West": 2041
+      }
+    },
+    {
+      "id": 2057,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2058,
+        "West": 2056
+      }
+    },
+    {
+      "id": 2058,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2059,
+        "West": 2057
+      }
+    },
+    {
+      "id": 2059,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2060,
+        "West": 2058
+      }
+    },
+    {
+      "id": 2060,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2061,
+        "West": 2059
+      }
+    },
+    {
+      "id": 2061,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2042,
+        "West": 2060
+      }
+    },
+    {
+      "id": 2062,
+      "name": "Igor\u0027s Secret Chamber",
+      "exits": {
+        "Up": 1966
+      }
+    },
+    {
+      "id": 1556,
+      "otherAreaExit": true,
+      "name": "To Midgaard",
+      "exits": {
+        "West": 2063
+      }
+    },
+    {
+      "id": 2063,
+      "name": "On the Dark River",
+      "exits": {
+        "East": 1556,
+        "West": 2064
+      }
+    },
+    {
+      "id": 2064,
+      "name": "On the Dark River",
+      "exits": {
+        "East": 2063,
+        "West": 2065
+      }
+    },
+    {
+      "id": 956,
+      "otherAreaExit": true,
+      "name": "To Haon Dor",
+      "exits": {
+        "South": 2065
+      }
+    },
+    {
+      "id": 2065,
+      "name": "On the Dark River",
+      "exits": {
+        "North": 956,
+        "East": 2064,
+        "West": 2066
+      }
+    },
+    {
+      "id": 2066,
+      "name": "On the Dark River",
+      "exits": {
+        "East": 2065
+      }
+    },
+    {
+      "id": 2067,
+      "name": "Freefall",
+      "exits": {}
+    },
+    {
+      "id": 2068,
+      "name": "On the Plains",
+      "exits": {
+        "North": 2069,
+        "East": 2068,
+        "South": 1997,
+        "West": 2068
+      }
+    },
+    {
+      "id": 2069,
+      "name": "On the Plains",
+      "exits": {
+        "North": 2070,
+        "East": 2069,
+        "South": 2068,
+        "West": 2069
+      }
+    },
+    {
+      "id": 2070,
+      "name": "Edge of the forest",
+      "exits": {
+        "East": 2070,
+        "South": 2069,
+        "West": 2070
+      }
+    },
+    {
+      "id": 2071,
+      "name": "Ishtar River",
+      "exits": {
+        "East": 2072,
+        "West": 2045
+      }
+    },
+    {
+      "id": 2072,
+      "name": "The river delta",
+      "exits": {
+        "East": 2073,
+        "West": 2071
+      }
+    },
+    {
+      "id": 2073,
+      "name": "The Dragon Sea",
+      "exits": {
+        "North": 2074,
+        "West": 2072
+      }
+    },
+    {
+      "id": 2074,
+      "name": "The Dragon Sea",
+      "exits": {
+        "North": 2082,
+        "East": 2083,
+        "South": 2073
+      }
+    },
+    {
+      "id": 2075,
+      "name": "The Dragon Sea",
+      "exits": {
+        "East": 2084,
+        "South": 2082
+      }
+    },
+    {
+      "id": 2076,
+      "name": "The Dragon Sea",
+      "exits": {
+        "South": 2083,
+        "West": 2082,
+        "Down": 2085
+      }
+    },
+    {
+      "id": 2077,
+      "name": "On a road",
+      "exits": {
+        "East": 2078,
+        "West": 1998
+      }
+    },
+    {
+      "id": 2078,
+      "name": "On a road",
+      "exits": {
+        "East": 2079,
+        "West": 2077
+      }
+    },
+    {
+      "id": 2079,
+      "name": "On a road",
+      "exits": {
+        "East": 2080,
+        "West": 2078
+      }
+    },
+    {
+      "id": 2080,
+      "name": "On a road",
+      "exits": {
+        "East": 2081,
+        "West": 2079
+      }
+    },
+    {
+      "id": 2081,
+      "name": "Near the shore",
+      "exits": {
+        "East": 2082,
+        "West": 2080
+      }
+    },
+    {
+      "id": 2082,
+      "name": "On a dock",
+      "exits": {
+        "North": 2075,
+        "East": 2076,
+        "South": 2074,
+        "West": 2081
+      }
+    },
+    {
+      "id": 2083,
+      "name": "The Dragon Sea",
+      "exits": {
+        "North": 2076,
+        "West": 2074
+      }
+    },
+    {
+      "id": 2084,
+      "name": "The Dragon Sea",
+      "exits": {
+        "South": 2076,
+        "West": 2075
+      }
+    },
+    {
+      "id": 2085,
+      "name": "Under the dock",
+      "exits": {
+        "West": 2086,
+        "Up": 2076
+      }
+    },
+    {
+      "id": 2086,
+      "name": "Lair of the Ixitxachitl",
+      "exits": {
+        "East": 2085
+      }
+    }
+  ]
+}

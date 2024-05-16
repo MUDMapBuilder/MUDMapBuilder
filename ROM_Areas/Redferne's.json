@@ -1,0 +1,152 @@
+{
+  "name": "Redferne\u0027s",
+  "rooms": [
+    {
+      "id": 569,
+      "otherAreaExit": true,
+      "name": "To Dylan\u0027s Area",
+      "exits": {
+        "North": 2415
+      }
+    },
+    {
+      "id": 2415,
+      "name": "Outside Redferne\u0027s residence",
+      "exits": {
+        "North": 2416,
+        "South": 569,
+        "Down": 2431
+      }
+    },
+    {
+      "id": 2416,
+      "name": "The Southern end of the hall",
+      "exits": {
+        "North": 2419,
+        "East": 2425,
+        "South": 2415,
+        "West": 2417,
+        "Up": 2424
+      }
+    },
+    {
+      "id": 2417,
+      "name": "Redferne\u0027s Library",
+      "exits": {
+        "East": 2416
+      }
+    },
+    {
+      "id": 2418,
+      "name": "The Artifact room of Naris",
+      "exits": {}
+    },
+    {
+      "id": 2419,
+      "name": "The Northern end of the hall",
+      "exits": {
+        "North": 2421,
+        "East": 2428,
+        "South": 2416,
+        "West": 2420
+      }
+    },
+    {
+      "id": 2420,
+      "name": "The Sitting room of Naris",
+      "exits": {
+        "East": 2419
+      }
+    },
+    {
+      "id": 2421,
+      "name": "The Kitchen of Naris",
+      "exits": {
+        "North": 2422,
+        "East": 2423,
+        "South": 2419
+      }
+    },
+    {
+      "id": 2422,
+      "name": "The Larder",
+      "exits": {
+        "South": 2421
+      }
+    },
+    {
+      "id": 2423,
+      "name": "The Fridge",
+      "exits": {
+        "West": 2421
+      }
+    },
+    {
+      "id": 2424,
+      "name": "On the stairs",
+      "exits": {
+        "Up": 2426,
+        "Down": 2416
+      }
+    },
+    {
+      "id": 2425,
+      "name": "The Treasure room",
+      "exits": {
+        "West": 2416
+      }
+    },
+    {
+      "id": 2426,
+      "name": "Redferne\u0027s Bedroom",
+      "exits": {
+        "South": 2427,
+        "Down": 2424
+      }
+    },
+    {
+      "id": 2427,
+      "name": "The Balcony of Redferne\u0027s Residence",
+      "exits": {
+        "North": 2426
+      }
+    },
+    {
+      "id": 2428,
+      "name": "The Monster Pen",
+      "exits": {
+        "West": 2419
+      }
+    },
+    {
+      "id": 1527,
+      "otherAreaExit": true,
+      "name": "To Midgaard",
+      "exits": {
+        "Up": 2429
+      }
+    },
+    {
+      "id": 2429,
+      "name": "On the Huge Chain",
+      "exits": {
+        "Up": 2430,
+        "Down": 1527
+      }
+    },
+    {
+      "id": 2430,
+      "name": "On the Great Chain of Naris",
+      "exits": {
+        "Up": 2431
+      }
+    },
+    {
+      "id": 2431,
+      "name": "The Mighty Chain of Naris",
+      "exits": {
+        "Up": 2415
+      }
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "Ofcol",
+  "rooms": [
+    {
+      "id": 2319,
+      "otherAreaExit": true,
+      "name": "To Plains",
+      "exits": {
+        "North": 2147
+      }
+    },
+    {
+      "id": 2147,
+      "name": "Village street",
+      "exits": {
+        "North": 2148,
+        "South": 2319
+      }
+    },
+    {
+      "id": 2148,
+      "name": "Village street",
+      "exits": {
+        "North": 2149,
+        "East": 2150,
+        "South": 2147
+      }
+    },
+    {
+      "id": 2149,
+      "name": "Village square",
+      "exits": {
+        "North": 2153,
+        "South": 2148,
+        "West": 2152
+      }
+    },
+    {
+      "id": 2156,
+      "otherAreaExit": true,
+      "name": "To New Ofcol",
+      "exits": {
+        "West": 2150
+      }
+    },
+    {
+      "id": 2150,
+      "name": "The small alley",
+      "exits": {
+        "East": 2156,
+        "South": 2151,
+        "West": 2148
+      }
+    },
+    {
+      "id": 2151,
+      "name": "The future training room",
+      "exits": {
+        "North": 2150
+      }
+    },
+    {
+      "id": 2152,
+      "name": "Luxan\u0027s mixed shop",
+      "exits": {
+        "East": 2149
+      }
+    },
+    {
+      "id": 2153,
+      "name": "The Local Inn",
+      "exits": {
+        "South": 2149
+      }
+    },
+    {
+      "id": 2154,
+      "name": "Ravan\u0027s hideout",
+      "exits": {}
+    }
+  ]
+}

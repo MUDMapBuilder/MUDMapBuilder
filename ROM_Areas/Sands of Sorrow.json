@@ -1,0 +1,429 @@
+{
+  "name": "Sands of Sorrow",
+  "rooms": [
+    {
+      "id": 1561,
+      "otherAreaExit": true,
+      "name": "To Midgaard",
+      "exits": {
+        "East": 657
+      }
+    },
+    {
+      "id": 657,
+      "name": "A long tunnel",
+      "exits": {
+        "East": 658,
+        "West": 1561
+      }
+    },
+    {
+      "id": 658,
+      "name": "A long tunnel",
+      "exits": {
+        "North": 664,
+        "East": 659,
+        "West": 657
+      }
+    },
+    {
+      "id": 659,
+      "name": "A long tunnel",
+      "exits": {
+        "East": 660,
+        "South": 673,
+        "West": 658
+      }
+    },
+    {
+      "id": 660,
+      "name": "A long tunnel",
+      "exits": {
+        "East": 661,
+        "South": 674,
+        "West": 659
+      }
+    },
+    {
+      "id": 661,
+      "name": "An underground lake",
+      "exits": {
+        "North": 672,
+        "East": 662,
+        "South": 679,
+        "West": 660
+      }
+    },
+    {
+      "id": 662,
+      "name": "A long narrow tunnel",
+      "exits": {
+        "East": 663,
+        "West": 661
+      }
+    },
+    {
+      "id": 663,
+      "name": "A wide tunnel",
+      "exits": {
+        "East": 683,
+        "West": 662
+      }
+    },
+    {
+      "id": 664,
+      "name": "Cave-in",
+      "exits": {
+        "South": 658,
+        "Down": 665
+      }
+    },
+    {
+      "id": 665,
+      "name": "At the foot of the rubble",
+      "exits": {
+        "North": 666,
+        "East": 668,
+        "Up": 664
+      }
+    },
+    {
+      "id": 666,
+      "name": "Cave entrance",
+      "exits": {
+        "South": 665,
+        "Down": 667
+      }
+    },
+    {
+      "id": 667,
+      "name": "Giant cave",
+      "exits": {
+        "Up": 666
+      }
+    },
+    {
+      "id": 668,
+      "name": "Narrow bend",
+      "exits": {
+        "South": 669,
+        "West": 665
+      }
+    },
+    {
+      "id": 669,
+      "name": "Large cave",
+      "exits": {
+        "North": 668,
+        "East": 670
+      }
+    },
+    {
+      "id": 670,
+      "name": "Damp hallway",
+      "exits": {
+        "East": 671,
+        "West": 669
+      }
+    },
+    {
+      "id": 671,
+      "name": "Underground pool",
+      "exits": {
+        "South": 672,
+        "West": 670
+      }
+    },
+    {
+      "id": 672,
+      "name": "Damp hallway",
+      "exits": {
+        "North": 671,
+        "South": 661
+      }
+    },
+    {
+      "id": 673,
+      "name": "Narrow crawlway",
+      "exits": {
+        "North": 659,
+        "East": 674,
+        "South": 675
+      }
+    },
+    {
+      "id": 674,
+      "name": "Large cavern",
+      "exits": {
+        "North": 660,
+        "West": 673
+      }
+    },
+    {
+      "id": 675,
+      "name": "Fungus patch",
+      "exits": {
+        "North": 673,
+        "East": 676
+      }
+    },
+    {
+      "id": 676,
+      "name": "Fungus path",
+      "exits": {
+        "South": 677,
+        "West": 675
+      }
+    },
+    {
+      "id": 677,
+      "name": "Fungus temple",
+      "exits": {
+        "North": 676,
+        "East": 678
+      }
+    },
+    {
+      "id": 678,
+      "name": "Sloping passage",
+      "exits": {
+        "West": 677,
+        "Down": 679
+      }
+    },
+    {
+      "id": 679,
+      "name": "Sloping passage",
+      "exits": {
+        "North": 661,
+        "Up": 678
+      }
+    },
+    {
+      "id": 680,
+      "name": "The Sands of Sorrow",
+      "exits": {
+        "North": 686,
+        "East": 681,
+        "South": 683,
+        "West": 682
+      }
+    },
+    {
+      "id": 681,
+      "name": "The Sands of Sorrow",
+      "exits": {
+        "North": 689,
+        "East": 682,
+        "South": 684,
+        "West": 680
+      }
+    },
+    {
+      "id": 682,
+      "name": "The Sands of Sorrow",
+      "exits": {
+        "North": 688,
+        "East": 680,
+        "South": 685,
+        "West": 681
+      }
+    },
+    {
+      "id": 683,
+      "name": "The Sands of Sorrow",
+      "exits": {
+        "North": 680,
+        "East": 684,
+        "South": 686,
+        "West": 663
+      }
+    },
+    {
+      "id": 684,
+      "name": "The Sands of Sorrow",
+      "exits": {
+        "North": 681,
+        "East": 685,
+        "South": 687,
+        "West": 683
+      }
+    },
+    {
+      "id": 685,
+      "name": "The Sands of Sorrow",
+      "exits": {
+        "North": 682,
+        "East": 695,
+        "South": 688,
+        "West": 684
+      }
+    },
+    {
+      "id": 686,
+      "name": "The Sands of Sorrow",
+      "exits": {
+        "North": 683,
+        "East": 687,
+        "South": 680,
+        "West": 688
+      }
+    },
+    {
+      "id": 687,
+      "name": "The Sands of Sorrow",
+      "exits": {
+        "North": 684,
+        "East": 688,
+        "South": 696,
+        "West": 686
+      }
+    },
+    {
+      "id": 688,
+      "name": "The Sands of Sorrow",
+      "exits": {
+        "North": 685,
+        "East": 686,
+        "South": 682,
+        "West": 687
+      }
+    },
+    {
+      "id": 689,
+      "name": "A nomad camp",
+      "exits": {
+        "North": 691,
+        "East": 690,
+        "South": 681
+      }
+    },
+    {
+      "id": 2349,
+      "otherAreaExit": true,
+      "name": "To Pyramid",
+      "exits": {
+        "West": 690
+      }
+    },
+    {
+      "id": 690,
+      "name": "Inside a small tent",
+      "exits": {
+        "East": 2349,
+        "West": 689
+      }
+    },
+    {
+      "id": 691,
+      "name": "Beside the camels",
+      "exits": {
+        "North": 693,
+        "East": 692,
+        "South": 689
+      }
+    },
+    {
+      "id": 692,
+      "name": "The warrior\u0027s tent.",
+      "exits": {
+        "West": 691
+      }
+    },
+    {
+      "id": 693,
+      "name": "The main tent",
+      "exits": {
+        "East": 694,
+        "South": 691
+      }
+    },
+    {
+      "id": 694,
+      "name": "The main tent",
+      "exits": {
+        "West": 693
+      }
+    },
+    {
+      "id": 1375,
+      "otherAreaExit": true,
+      "name": "To Mega City One",
+      "exits": {
+        "North": 695
+      }
+    },
+    {
+      "id": 695,
+      "name": "Strange Glowing Sand",
+      "exits": {
+        "South": 1375,
+        "West": 685
+      }
+    },
+    {
+      "id": 696,
+      "name": "The wind-swept ledge",
+      "exits": {
+        "North": 687,
+        "West": 697
+      }
+    },
+    {
+      "id": 697,
+      "name": "The cave mouth",
+      "exits": {
+        "East": 696,
+        "West": 698
+      }
+    },
+    {
+      "id": 698,
+      "name": "The mysterious lair.",
+      "exits": {
+        "East": 697,
+        "West": 699
+      }
+    },
+    {
+      "id": 699,
+      "name": "A wide tunnel",
+      "exits": {
+        "East": 698,
+        "West": 700
+      }
+    },
+    {
+      "id": 700,
+      "name": "A narrower tunnel",
+      "exits": {
+        "East": 699,
+        "South": 701
+      }
+    },
+    {
+      "id": 701,
+      "name": "A narrow crack",
+      "exits": {
+        "North": 700,
+        "West": 702
+      }
+    },
+    {
+      "id": 702,
+      "name": "A small cavern.",
+      "exits": {
+        "North": 703,
+        "East": 701
+      }
+    },
+    {
+      "id": 703,
+      "name": "A small shaft",
+      "exits": {
+        "South": 702,
+        "Up": 665
+      }
+    }
+  ]
+}

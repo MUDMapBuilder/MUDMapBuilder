@@ -1,0 +1,475 @@
+{
+  "name": "Arachnos",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 966,
+      "name": "To Haon Dor",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 41
+      }
+    },
+    {
+      "id": 41,
+      "name": "On the spider web",
+      "exits": {
+        "North": 44,
+        "South": 966
+      }
+    },
+    {
+      "id": 967,
+      "name": "To Haon Dor",
+      "otherAreaExit": true,
+      "exits": {}
+    },
+    {
+      "id": 42,
+      "name": "On the spider web",
+      "exits": {
+        "North": 967
+      }
+    },
+    {
+      "id": 43,
+      "name": "On the spider web",
+      "exits": {
+        "East": 967
+      }
+    },
+    {
+      "id": 44,
+      "name": "On the spider web",
+      "exits": {
+        "North": 45,
+        "South": 41
+      }
+    },
+    {
+      "id": 45,
+      "name": "Webbed Entrance",
+      "exits": {
+        "North": 46,
+        "South": 44
+      }
+    },
+    {
+      "id": 46,
+      "name": "Webby Passage",
+      "exits": {
+        "North": 48,
+        "East": 49,
+        "South": 45,
+        "West": 47
+      }
+    },
+    {
+      "id": 47,
+      "name": "Wasp Hive",
+      "exits": {
+        "East": 46
+      }
+    },
+    {
+      "id": 48,
+      "name": "Webby Passage",
+      "exits": {
+        "South": 46
+      }
+    },
+    {
+      "id": 49,
+      "name": "Beneath the Busy Path",
+      "exits": {
+        "West": 46,
+        "Up": 50
+      }
+    },
+    {
+      "id": 50,
+      "name": "On the Busy Path",
+      "exits": {
+        "South": 51,
+        "Down": 49
+      }
+    },
+    {
+      "id": 51,
+      "name": "On the Busy Path",
+      "exits": {
+        "North": 50,
+        "East": 52
+      }
+    },
+    {
+      "id": 52,
+      "name": "On the Busy Path",
+      "exits": {
+        "East": 53,
+        "West": 51
+      }
+    },
+    {
+      "id": 53,
+      "name": "A Split in the Path",
+      "exits": {
+        "North": 54,
+        "South": 58,
+        "West": 52
+      }
+    },
+    {
+      "id": 54,
+      "name": "Fuzzy Tree Limb",
+      "exits": {
+        "South": 53,
+        "West": 55
+      }
+    },
+    {
+      "id": 55,
+      "name": "Tree Trunk",
+      "exits": {
+        "East": 54,
+        "South": 56
+      }
+    },
+    {
+      "id": 56,
+      "name": "Tree Lair Entrance",
+      "exits": {
+        "North": 55,
+        "West": 57
+      }
+    },
+    {
+      "id": 57,
+      "name": "Wolf Spider Lair",
+      "exits": {
+        "East": 56
+      }
+    },
+    {
+      "id": 58,
+      "name": "The Webless Path",
+      "exits": {
+        "North": 53,
+        "West": 59
+      }
+    },
+    {
+      "id": 59,
+      "name": "Above the Ravine",
+      "exits": {
+        "East": 58,
+        "South": 61,
+        "Down": 60
+      }
+    },
+    {
+      "id": 60,
+      "name": "The Rainbow Web",
+      "exits": {
+        "Up": 59
+      }
+    },
+    {
+      "id": 61,
+      "name": "The Web Forest",
+      "exits": {
+        "North": 59,
+        "Down": 62
+      }
+    },
+    {
+      "id": 62,
+      "name": "The Slave Pit",
+      "exits": {
+        "North": 63,
+        "Up": 61
+      }
+    },
+    {
+      "id": 63,
+      "name": "The Tether Path",
+      "exits": {
+        "East": 64,
+        "West": 62,
+        "South": 62
+      }
+    },
+    {
+      "id": 64,
+      "name": "A Road Crossing",
+      "exits": {
+        "West": 63,
+        "Up": 65
+      }
+    },
+    {
+      "id": 65,
+      "name": "A Leader Strand",
+      "exits": {
+        "North": 66,
+        "Down": 64
+      }
+    },
+    {
+      "id": 66,
+      "name": "The Entrance of the Ethereal Web",
+      "exits": {
+        "South": 65,
+        "Down": 68
+      }
+    },
+    {
+      "id": 67,
+      "name": "The Young Wormkin\u0027s Crib",
+      "exits": {
+        "South": 68
+      }
+    },
+    {
+      "id": 68,
+      "name": "The Base of the Web",
+      "exits": {
+        "North": 67,
+        "East": 69,
+        "South": 70,
+        "Up": 66
+      }
+    },
+    {
+      "id": 69,
+      "name": "Through the Trees",
+      "exits": {
+        "West": 68
+      }
+    },
+    {
+      "id": 70,
+      "name": "Above the Clouds",
+      "exits": {
+        "North": 68,
+        "South": 71,
+        "West": 72
+      }
+    },
+    {
+      "id": 71,
+      "name": "On A Cloud",
+      "exits": {
+        "North": 70
+      }
+    },
+    {
+      "id": 72,
+      "name": "A Link in the Ethereal Web",
+      "exits": {
+        "East": 70,
+        "West": 73
+      }
+    },
+    {
+      "id": 73,
+      "name": "The Tenuous Strand",
+      "exits": {
+        "East": 72,
+        "South": 74,
+        "West": 75
+      }
+    },
+    {
+      "id": 74,
+      "name": "The Elder Wormkin\u0027s Room",
+      "exits": {
+        "North": 73
+      }
+    },
+    {
+      "id": 75,
+      "name": "Another Tree Limb",
+      "exits": {
+        "East": 73,
+        "South": 76,
+        "West": 77
+      }
+    },
+    {
+      "id": 76,
+      "name": "The Bird Spider\u0027s Lair",
+      "exits": {
+        "North": 75
+      }
+    },
+    {
+      "id": 77,
+      "name": "A Link in the Ethereal Web",
+      "exits": {
+        "East": 75,
+        "South": 80,
+        "West": 78
+      }
+    },
+    {
+      "id": 78,
+      "name": "The Quiet Tree Top",
+      "exits": {
+        "East": 77,
+        "West": 79
+      }
+    },
+    {
+      "id": 79,
+      "name": "On The Web",
+      "exits": {
+        "East": 78,
+        "South": 81
+      }
+    },
+    {
+      "id": 80,
+      "name": "The Ki-Rin Chamber",
+      "exits": {
+        "North": 77
+      }
+    },
+    {
+      "id": 81,
+      "name": "A Link in the Ethereal Web",
+      "exits": {
+        "North": 79,
+        "West": 82,
+        "Up": 83
+      }
+    },
+    {
+      "id": 82,
+      "name": "Yevaud\u0027s Lair",
+      "exits": {
+        "East": 81
+      }
+    },
+    {
+      "id": 83,
+      "name": "A Link in the Ethereal Web",
+      "exits": {
+        "North": 89,
+        "South": 84,
+        "Up": 93,
+        "Down": 81
+      }
+    },
+    {
+      "id": 84,
+      "name": "Entrance to the Donjonkeep",
+      "exits": {
+        "East": 85,
+        "North": 83
+      }
+    },
+    {
+      "id": 85,
+      "name": "The Guardian\u0027s Room",
+      "exits": {
+        "East": 86,
+        "West": 84
+      }
+    },
+    {
+      "id": 86,
+      "name": "Realm of the Hopeless",
+      "exits": {
+        "East": 87,
+        "West": 85
+      }
+    },
+    {
+      "id": 87,
+      "name": "Realm of the Hopeless",
+      "exits": {
+        "East": 88,
+        "West": 86
+      }
+    },
+    {
+      "id": 88,
+      "name": "The Donjonkeep",
+      "exits": {
+        "East": 89,
+        "West": 87
+      }
+    },
+    {
+      "id": 89,
+      "name": "The Single Spider Line",
+      "exits": {
+        "East": 90,
+        "West": 88,
+        "South": 83
+      }
+    },
+    {
+      "id": 90,
+      "name": "The Single Spider Line",
+      "exits": {
+        "East": 91,
+        "West": 89
+      }
+    },
+    {
+      "id": 91,
+      "name": "The Hermit\u0027s Corner",
+      "exits": {
+        "East": 92,
+        "West": 90
+      }
+    },
+    {
+      "id": 92,
+      "name": "Mahatma\u0027s Inescapable Trap",
+      "exits": {
+        "West": 91
+      }
+    },
+    {
+      "id": 93,
+      "name": "The Entrance to the Arachnos\u0027 Lair",
+      "exits": {
+        "North": 94,
+        "Down": 83
+      }
+    },
+    {
+      "id": 94,
+      "name": "The Sticky Chamber",
+      "exits": {
+        "North": 95,
+        "South": 93
+      }
+    },
+    {
+      "id": 95,
+      "name": "The Great Door",
+      "exits": {
+        "North": 96,
+        "South": 94
+      }
+    },
+    {
+      "id": 96,
+      "name": "The Lair of Arachnos",
+      "exits": {
+        "South": 95
+      }
+    }
+  ]
+}

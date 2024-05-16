@@ -1,0 +1,644 @@
+{
+  "name": "Haon Dor",
+  "rooms": [
+    {
+      "id": 2668,
+      "otherAreaExit": true,
+      "name": "To Shire",
+      "exits": {
+        "South": 909
+      }
+    },
+    {
+      "id": 1502,
+      "otherAreaExit": true,
+      "name": "To Midgaard",
+      "exits": {
+        "West": 909
+      }
+    },
+    {
+      "id": 909,
+      "name": "The edge of the forest",
+      "exits": {
+        "North": 2668,
+        "East": 1502,
+        "West": 910
+      }
+    },
+    {
+      "id": 910,
+      "name": "A trail through the light forest",
+      "exits": {
+        "East": 909,
+        "West": 911
+      }
+    },
+    {
+      "id": 911,
+      "name": "A trail through the light forest",
+      "exits": {
+        "East": 910,
+        "South": 920,
+        "West": 912
+      }
+    },
+    {
+      "id": 912,
+      "name": "A trail through the dense forest",
+      "exits": {
+        "East": 911,
+        "West": 913
+      }
+    },
+    {
+      "id": 913,
+      "name": "A trail through the dense forest",
+      "exits": {
+        "East": 912,
+        "South": 914,
+        "West": 933
+      }
+    },
+    {
+      "id": 914,
+      "name": "A small path in the dense forest",
+      "exits": {
+        "North": 913,
+        "South": 915
+      }
+    },
+    {
+      "id": 915,
+      "name": "A small path in the dense forest",
+      "exits": {
+        "North": 914,
+        "East": 916
+      }
+    },
+    {
+      "id": 916,
+      "name": "An intersection in the dense forest",
+      "exits": {
+        "East": 917,
+        "South": 921,
+        "West": 915
+      }
+    },
+    {
+      "id": 917,
+      "name": "The forest clearing",
+      "exits": {
+        "North": 920,
+        "East": 918,
+        "West": 916
+      }
+    },
+    {
+      "id": 918,
+      "name": "Outside a small cabin in the forest",
+      "exits": {
+        "North": 919,
+        "South": 923,
+        "West": 917
+      }
+    },
+    {
+      "id": 919,
+      "name": "Inside the cabin",
+      "exits": {
+        "South": 918
+      }
+    },
+    {
+      "id": 920,
+      "name": "A small path through the light forest",
+      "exits": {
+        "North": 911,
+        "South": 917
+      }
+    },
+    {
+      "id": 921,
+      "name": "An intersection in the dense forest",
+      "exits": {
+        "North": 916,
+        "East": 922,
+        "South": 930
+      }
+    },
+    {
+      "id": 922,
+      "name": "A small path in the dense forest",
+      "exits": {
+        "East": 923,
+        "West": 921
+      }
+    },
+    {
+      "id": 923,
+      "name": "An intersection in the dense forest",
+      "exits": {
+        "North": 918,
+        "East": 924,
+        "West": 922
+      }
+    },
+    {
+      "id": 924,
+      "name": "A small path in the dense forest",
+      "exits": {
+        "South": 925,
+        "West": 923
+      }
+    },
+    {
+      "id": 925,
+      "name": "A small path in the dense forest",
+      "exits": {
+        "North": 924,
+        "South": 926
+      }
+    },
+    {
+      "id": 926,
+      "name": "A small path in the dense forest",
+      "exits": {
+        "North": 925,
+        "West": 927
+      }
+    },
+    {
+      "id": 927,
+      "name": "An intersection in the light forest",
+      "exits": {
+        "North": 932,
+        "East": 926,
+        "West": 928
+      }
+    },
+    {
+      "id": 928,
+      "name": "A small path in the dense forest",
+      "exits": {
+        "North": 929,
+        "East": 927
+      }
+    },
+    {
+      "id": 929,
+      "name": "A small path in the dense forest",
+      "exits": {
+        "South": 928,
+        "West": 930
+      }
+    },
+    {
+      "id": 930,
+      "name": "A small path in the dense forest",
+      "exits": {
+        "North": 921,
+        "East": 929,
+        "West": 931
+      }
+    },
+    {
+      "id": 931,
+      "name": "Inside the cave",
+      "exits": {
+        "East": 930
+      }
+    },
+    {
+      "id": 932,
+      "name": "On a small, grassy field",
+      "exits": {
+        "South": 927
+      }
+    },
+    {
+      "id": 933,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "East": 913,
+        "West": 934
+      }
+    },
+    {
+      "id": 934,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "East": 933,
+        "South": 937,
+        "West": 935
+      }
+    },
+    {
+      "id": 935,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "East": 934,
+        "West": 936
+      }
+    },
+    {
+      "id": 936,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "North": 974,
+        "East": 935,
+        "South": 941
+      }
+    },
+    {
+      "id": 937,
+      "name": "A small path in the deep, dark forest",
+      "exits": {
+        "North": 934,
+        "South": 938
+      }
+    },
+    {
+      "id": 938,
+      "name": "A small path in the deep, dark forest",
+      "exits": {
+        "North": 937,
+        "West": 939
+      }
+    },
+    {
+      "id": 939,
+      "name": "A junction in the deep, dark forest",
+      "exits": {
+        "East": 938,
+        "South": 950,
+        "West": 940
+      }
+    },
+    {
+      "id": 940,
+      "name": "A small path in the deep, dark forest",
+      "exits": {
+        "North": 941,
+        "East": 939
+      }
+    },
+    {
+      "id": 941,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "North": 936,
+        "South": 940,
+        "West": 942
+      }
+    },
+    {
+      "id": 942,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "East": 941,
+        "West": 943
+      }
+    },
+    {
+      "id": 943,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "North": 973,
+        "East": 942,
+        "South": 944
+      }
+    },
+    {
+      "id": 944,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "North": 943,
+        "South": 945
+      }
+    },
+    {
+      "id": 945,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "North": 944,
+        "East": 946,
+        "West": 960
+      }
+    },
+    {
+      "id": 946,
+      "name": "A small path in the deep, dark forest",
+      "exits": {
+        "South": 947,
+        "West": 945
+      }
+    },
+    {
+      "id": 947,
+      "name": "A junction in the deep, dark forest",
+      "exits": {
+        "North": 946,
+        "East": 948,
+        "West": 955
+      }
+    },
+    {
+      "id": 948,
+      "name": "A small path in the deep, dark forest",
+      "exits": {
+        "North": 949,
+        "West": 947
+      }
+    },
+    {
+      "id": 949,
+      "name": "A small path in the deep, dark forest",
+      "exits": {
+        "East": 950,
+        "South": 948
+      }
+    },
+    {
+      "id": 950,
+      "name": "A junction in the deep, dark forest",
+      "exits": {
+        "North": 939,
+        "East": 951,
+        "West": 949
+      }
+    },
+    {
+      "id": 951,
+      "name": "A small path in the deep, dark forest",
+      "exits": {
+        "South": 952,
+        "West": 950
+      }
+    },
+    {
+      "id": 952,
+      "name": "A small path in the deep, dark forest",
+      "exits": {
+        "North": 951,
+        "South": 953
+      }
+    },
+    {
+      "id": 953,
+      "name": "On the river bank in the deep, dark forest",
+      "exits": {
+        "North": 952,
+        "West": 954
+      }
+    },
+    {
+      "id": 954,
+      "name": "A dead end path on the river bank in the deep, dark forest",
+      "exits": {
+        "East": 953
+      }
+    },
+    {
+      "id": 955,
+      "name": "A small path in the deep, dark forest",
+      "exits": {
+        "East": 947,
+        "South": 956
+      }
+    },
+    {
+      "id": 2065,
+      "otherAreaExit": true,
+      "name": "To New Thalos",
+      "exits": {
+        "North": 956
+      }
+    },
+    {
+      "id": 956,
+      "name": "A junction on the river bank in the deep, dark forest",
+      "exits": {
+        "North": 955,
+        "East": 957,
+        "South": 2065,
+        "West": 958
+      }
+    },
+    {
+      "id": 2977,
+      "otherAreaExit": true,
+      "name": "To Troll Den",
+      "exits": {
+        "North": 957
+      }
+    },
+    {
+      "id": 957,
+      "name": "A dead end path in the deep, dark forest",
+      "exits": {
+        "South": 2977,
+        "West": 956
+      }
+    },
+    {
+      "id": 1357,
+      "otherAreaExit": true,
+      "name": "To Marsh",
+      "exits": {
+        "North": 958
+      }
+    },
+    {
+      "id": 958,
+      "name": "A small path on the river bank in the deep, dark forest",
+      "exits": {
+        "North": 959,
+        "East": 956,
+        "South": 1357
+      }
+    },
+    {
+      "id": 959,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "North": 960,
+        "South": 958,
+        "West": 961
+      }
+    },
+    {
+      "id": 960,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "East": 945,
+        "South": 959
+      }
+    },
+    {
+      "id": 961,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "East": 959,
+        "West": 962
+      }
+    },
+    {
+      "id": 962,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "East": 961,
+        "West": 968
+      }
+    },
+    {
+      "id": 963,
+      "name": "A narrow trail through the deep, dark forest",
+      "exits": {
+        "East": 973,
+        "West": 964,
+        "Up": 965
+      }
+    },
+    {
+      "id": 964,
+      "name": "The spider web",
+      "exits": {}
+    },
+    {
+      "id": 965,
+      "name": "Up in the tree",
+      "exits": {
+        "West": 966,
+        "Down": 963
+      }
+    },
+    {
+      "id": 41,
+      "otherAreaExit": true,
+      "name": "To Arachnos",
+      "exits": {
+        "South": 966
+      }
+    },
+    {
+      "id": 966,
+      "name": "On the spider web",
+      "exits": {
+        "North": 41,
+        "East": 965,
+        "West": 967
+      }
+    },
+    {
+      "id": 967,
+      "name": "The Den of the Queen Spider",
+      "exits": {
+        "East": 966
+      }
+    },
+    {
+      "id": 968,
+      "name": "A dusty trail in the deep, dark forest",
+      "exits": {
+        "North": 969,
+        "East": 962
+      }
+    },
+    {
+      "id": 969,
+      "name": "A dusty trail in the deep, dark forest",
+      "exits": {
+        "East": 971,
+        "South": 968,
+        "West": 970
+      }
+    },
+    {
+      "id": 980,
+      "otherAreaExit": true,
+      "name": "To High Tower",
+      "exits": {
+        "South": 970
+      }
+    },
+    {
+      "id": 970,
+      "name": "At the end of the trail through the deep, dark forest",
+      "exits": {
+        "North": 980,
+        "East": 969
+      }
+    },
+    {
+      "id": 971,
+      "name": "Outside a cave in the deep, dark forest",
+      "exits": {
+        "North": 972,
+        "West": 969
+      }
+    },
+    {
+      "id": 972,
+      "name": "The cave of the Green Dragon",
+      "exits": {
+        "South": 971
+      }
+    },
+    {
+      "id": 973,
+      "name": "A small path in the deep, dark forest",
+      "exits": {
+        "South": 943,
+        "West": 963
+      }
+    },
+    {
+      "id": 974,
+      "name": "The narrow trail.",
+      "exits": {
+        "North": 975,
+        "South": 936
+      }
+    },
+    {
+      "id": 975,
+      "name": "The narrow trail.",
+      "exits": {
+        "East": 976,
+        "South": 974
+      }
+    },
+    {
+      "id": 976,
+      "name": "The circle of trees.",
+      "exits": {
+        "East": 977,
+        "West": 975
+      }
+    },
+    {
+      "id": 977,
+      "name": "Inside the great tree.",
+      "exits": {
+        "West": 976,
+        "Down": 978
+      }
+    },
+    {
+      "id": 978,
+      "name": "The underground hallway.",
+      "exits": {
+        "South": 979,
+        "Up": 977
+      }
+    },
+    {
+      "id": 979,
+      "name": "The cultist temple.",
+      "exits": {
+        "North": 978
+      }
+    }
+  ]
+}

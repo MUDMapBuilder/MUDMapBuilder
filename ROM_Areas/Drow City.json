@@ -1,0 +1,426 @@
+{
+  "name": "Drow City",
+  "rooms": [
+    {
+      "id": 2824,
+      "otherAreaExit": true,
+      "name": "To Thalos",
+      "exits": {
+        "Down": 467
+      }
+    },
+    {
+      "id": 467,
+      "name": "City Entrance",
+      "exits": {
+        "West": 468,
+        "Up": 2824
+      }
+    },
+    {
+      "id": 468,
+      "name": "City street",
+      "exits": {
+        "North": 490,
+        "East": 467,
+        "South": 469,
+        "West": 489
+      }
+    },
+    {
+      "id": 469,
+      "name": "City street",
+      "exits": {
+        "North": 468,
+        "West": 470
+      }
+    },
+    {
+      "id": 470,
+      "name": "City street",
+      "exits": {
+        "East": 469,
+        "South": 471,
+        "West": 473
+      }
+    },
+    {
+      "id": 471,
+      "name": "3rd House",
+      "exits": {
+        "North": 470,
+        "South": 472
+      }
+    },
+    {
+      "id": 472,
+      "name": "Throne Room",
+      "exits": {
+        "North": 471
+      }
+    },
+    {
+      "id": 473,
+      "name": "City street",
+      "exits": {
+        "North": 485,
+        "East": 470,
+        "West": 474
+      }
+    },
+    {
+      "id": 474,
+      "name": "City street",
+      "exits": {
+        "North": 477,
+        "East": 473,
+        "South": 475
+      }
+    },
+    {
+      "id": 475,
+      "name": "2nd House",
+      "exits": {
+        "North": 474,
+        "West": 476
+      }
+    },
+    {
+      "id": 476,
+      "name": "Throne Room",
+      "exits": {
+        "East": 475
+      }
+    },
+    {
+      "id": 477,
+      "name": "Main Gate",
+      "exits": {
+        "North": 481,
+        "South": 474,
+        "West": 478
+      }
+    },
+    {
+      "id": 478,
+      "name": "1st House",
+      "exits": {
+        "East": 477,
+        "West": 479
+      }
+    },
+    {
+      "id": 479,
+      "name": "Throne Room",
+      "exits": {
+        "North": 480,
+        "East": 478
+      }
+    },
+    {
+      "id": 480,
+      "name": "Main Chamber",
+      "exits": {
+        "South": 479
+      }
+    },
+    {
+      "id": 481,
+      "name": "City street",
+      "exits": {
+        "North": 482,
+        "East": 484,
+        "South": 477
+      }
+    },
+    {
+      "id": 482,
+      "name": "City street",
+      "exits": {
+        "South": 481,
+        "West": 483
+      }
+    },
+    {
+      "id": 483,
+      "name": "Cleric Academy",
+      "exits": {
+        "East": 482
+      }
+    },
+    {
+      "id": 484,
+      "name": "City street",
+      "exits": {
+        "North": 486,
+        "East": 488,
+        "West": 481
+      }
+    },
+    {
+      "id": 485,
+      "name": "Warrior\u0027s Academy",
+      "exits": {
+        "South": 473
+      }
+    },
+    {
+      "id": 486,
+      "name": "Entrance to the Temple of Lloth",
+      "exits": {
+        "South": 484,
+        "Down": 493
+      }
+    },
+    {
+      "id": 487,
+      "name": "Mage\u0027s Academy",
+      "exits": {
+        "South": 488
+      }
+    },
+    {
+      "id": 488,
+      "name": "City street",
+      "exits": {
+        "North": 487,
+        "East": 490,
+        "South": 489,
+        "West": 484
+      }
+    },
+    {
+      "id": 489,
+      "name": "Slave Chamber",
+      "exits": {
+        "North": 488,
+        "East": 468
+      }
+    },
+    {
+      "id": 490,
+      "name": "City street",
+      "exits": {
+        "North": 491,
+        "South": 468,
+        "West": 488
+      }
+    },
+    {
+      "id": 491,
+      "name": "4th house",
+      "exits": {
+        "East": 492,
+        "South": 490
+      }
+    },
+    {
+      "id": 492,
+      "name": "Throne Room",
+      "exits": {
+        "West": 491
+      }
+    },
+    {
+      "id": 493,
+      "name": "Entrance Way",
+      "exits": {
+        "North": 494,
+        "Up": 486
+      }
+    },
+    {
+      "id": 494,
+      "name": "Hallway",
+      "exits": {
+        "North": 502,
+        "East": 495,
+        "South": 493,
+        "West": 498
+      }
+    },
+    {
+      "id": 495,
+      "name": "Long Hallway",
+      "exits": {
+        "East": 496,
+        "West": 494
+      }
+    },
+    {
+      "id": 496,
+      "name": "Long Hallway",
+      "exits": {
+        "North": 517,
+        "East": 497,
+        "West": 495
+      }
+    },
+    {
+      "id": 497,
+      "name": "Long Hallway",
+      "exits": {
+        "East": 501,
+        "West": 496
+      }
+    },
+    {
+      "id": 498,
+      "name": "Long Hallway",
+      "exits": {
+        "East": 494,
+        "West": 499
+      }
+    },
+    {
+      "id": 499,
+      "name": "Long Hallway",
+      "exits": {
+        "East": 498,
+        "South": 500,
+        "West": 501
+      }
+    },
+    {
+      "id": 500,
+      "name": "Warrior\u0027s Barracks",
+      "exits": {
+        "North": 499
+      }
+    },
+    {
+      "id": 501,
+      "name": "Long Hallway",
+      "exits": {
+        "East": 499,
+        "West": 497
+      }
+    },
+    {
+      "id": 502,
+      "name": "Grand Stairway",
+      "exits": {
+        "South": 494,
+        "Up": 503
+      }
+    },
+    {
+      "id": 503,
+      "name": "Grand Hallway",
+      "exits": {
+        "North": 505,
+        "East": 504,
+        "Down": 502
+      }
+    },
+    {
+      "id": 504,
+      "name": "Mage\u0027s Barracks",
+      "exits": {
+        "West": 503
+      }
+    },
+    {
+      "id": 505,
+      "name": "Grand Hallway",
+      "exits": {
+        "South": 503,
+        "West": 506,
+        "Down": 507
+      }
+    },
+    {
+      "id": 506,
+      "name": "Cleric\u0027s Barracks",
+      "exits": {
+        "East": 505
+      }
+    },
+    {
+      "id": 507,
+      "name": "Grand Stairway",
+      "exits": {
+        "North": 508,
+        "Up": 505
+      }
+    },
+    {
+      "id": 508,
+      "name": "Main Chamber",
+      "exits": {
+        "East": 509,
+        "South": 507,
+        "West": 511
+      }
+    },
+    {
+      "id": 509,
+      "name": "Eastern side of Chamber",
+      "exits": {
+        "North": 512,
+        "East": 513,
+        "South": 508
+      }
+    },
+    {
+      "id": 510,
+      "name": "Sacrificial Pit",
+      "exits": {}
+    },
+    {
+      "id": 511,
+      "name": "Western side of Chamber",
+      "exits": {
+        "North": 512,
+        "South": 508
+      }
+    },
+    {
+      "id": 512,
+      "name": "The Altar",
+      "exits": {
+        "North": 515,
+        "East": 509,
+        "West": 511,
+        "Down": 510
+      }
+    },
+    {
+      "id": 513,
+      "name": "Slave Cells",
+      "exits": {
+        "North": 514,
+        "West": 509
+      }
+    },
+    {
+      "id": 514,
+      "name": "Slave Pen",
+      "exits": {
+        "South": 513
+      }
+    },
+    {
+      "id": 515,
+      "name": "Dais",
+      "exits": {
+        "South": 512,
+        "West": 516
+      }
+    },
+    {
+      "id": 516,
+      "name": "The Treasury",
+      "exits": {
+        "East": 515
+      }
+    },
+    {
+      "id": 517,
+      "name": "Weaponsmaster\u0027s Chamber",
+      "exits": {
+        "South": 496
+      }
+    }
+  ]
+}

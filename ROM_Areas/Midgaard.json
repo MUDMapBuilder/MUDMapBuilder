@@ -1,0 +1,1383 @@
+{
+  "name": "Midgaard",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 2432,
+      "name": "To mud school",
+      "otherAreaExit": true,
+      "exits": {
+        "Down": 1455
+      }
+    },
+    {
+      "id": 1455,
+      "name": "The Temple Of Mota",
+      "exits": {
+        "North": 1504,
+        "South": 1459,
+        "Up": 2432
+      }
+    },
+    {
+      "id": 2513,
+      "name": "To Sewers",
+      "otherAreaExit": true,
+      "exits": {}
+    },
+    {
+      "id": 1456,
+      "name": "Cleric\u0027s Inner Sanctum",
+      "exits": {
+        "East": 1457,
+        "Down": 2513
+      }
+    },
+    {
+      "id": 1457,
+      "name": "Cleric\u0027s Bar",
+      "exits": {
+        "South": 1458,
+        "West": 1456
+      }
+    },
+    {
+      "id": 1458,
+      "name": "Entrance to Cleric\u0027s Guild",
+      "exits": {
+        "North": 1457,
+        "East": 1459
+      }
+    },
+    {
+      "id": 1459,
+      "name": "The Temple Square",
+      "exits": {
+        "North": 1455,
+        "East": 1460,
+        "South": 1468,
+        "West": 1458,
+        "Up": 1506
+      }
+    },
+    {
+      "id": 1460,
+      "name": "Entrance to the Grunting Boar Inn",
+      "exits": {
+        "East": 1461,
+        "West": 1459,
+        "Up": 1462
+      }
+    },
+    {
+      "id": 1461,
+      "name": "The Grunting Boar",
+      "exits": {
+        "West": 1460
+      }
+    },
+    {
+      "id": 1462,
+      "name": "The Bedroom Area",
+      "exits": {
+        "Down": 1460
+      }
+    },
+    {
+      "id": 1463,
+      "name": "The Bakery",
+      "exits": {
+        "South": 1467
+      }
+    },
+    {
+      "id": 1464,
+      "name": "The General Store",
+      "exits": {
+        "South": 1469
+      }
+    },
+    {
+      "id": 1465,
+      "name": "The Weapon Shop",
+      "exits": {
+        "South": 1470
+      }
+    },
+    {
+      "id": 1466,
+      "name": "Main Street",
+      "exits": {
+        "North": 1487,
+        "East": 1467,
+        "South": 1471,
+        "West": 1490
+      }
+    },
+    {
+      "id": 1467,
+      "name": "Main Street",
+      "exits": {
+        "North": 1463,
+        "East": 1468,
+        "South": 1474,
+        "West": 1466
+      }
+    },
+    {
+      "id": 1468,
+      "name": "Market Square",
+      "exits": {
+        "North": 1459,
+        "East": 1469,
+        "South": 1479,
+        "West": 1467
+      }
+    },
+    {
+      "id": 1469,
+      "name": "The Main Street",
+      "exits": {
+        "North": 1464,
+        "East": 1470,
+        "South": 1488,
+        "West": 1468
+      }
+    },
+    {
+      "id": 1470,
+      "name": "The Main Street",
+      "exits": {
+        "North": 1465,
+        "East": 1491,
+        "South": 1475,
+        "West": 1469
+      }
+    },
+    {
+      "id": 1471,
+      "name": "Entrance to Mage\u0027s Guild",
+      "exits": {
+        "North": 1466,
+        "South": 1472
+      }
+    },
+    {
+      "id": 1472,
+      "name": "Mage\u0027s Bar",
+      "exits": {
+        "North": 1471,
+        "East": 1473
+      }
+    },
+    {
+      "id": 2507,
+      "name": "To Sewers",
+      "otherAreaExit": true,
+      "exits": {}
+    },
+    {
+      "id": 1473,
+      "name": "Mage\u0027s Laboratory",
+      "exits": {
+        "West": 1472,
+        "Down": 2507
+      }
+    },
+    {
+      "id": 1474,
+      "name": "The Armoury",
+      "exits": {
+        "North": 1467
+      }
+    },
+    {
+      "id": 1475,
+      "name": "Entrance Hall to the Guild of Swordsmen",
+      "exits": {
+        "North": 1470,
+        "East": 1476
+      }
+    },
+    {
+      "id": 1476,
+      "name": "The Bar of Swordsmen",
+      "exits": {
+        "South": 1477,
+        "West": 1475
+      }
+    },
+    {
+      "id": 2530,
+      "name": "To Sewers",
+      "otherAreaExit": true,
+      "exits": {}
+    },
+    {
+      "id": 1477,
+      "name": "The Tournament and Practice Yard",
+      "exits": {
+        "North": 1476,
+        "Down": 2530
+      }
+    },
+    {
+      "id": 1478,
+      "name": "Eastern End of Poor Alley",
+      "exits": {
+        "North": 1553,
+        "East": 1479,
+        "South": 1498,
+        "West": 1494
+      }
+    },
+    {
+      "id": 1479,
+      "name": "The Common Square",
+      "exits": {
+        "North": 1468,
+        "East": 1480,
+        "South": 1484,
+        "West": 1478
+      }
+    },
+    {
+      "id": 1480,
+      "name": "The Dark Alley",
+      "exits": {
+        "North": 1592,
+        "East": 1495,
+        "South": 1481,
+        "West": 1479
+      }
+    },
+    {
+      "id": 1481,
+      "name": "Entrance Hall to the Guild of Thieves",
+      "exits": {
+        "North": 1480,
+        "East": 1482
+      }
+    },
+    {
+      "id": 1482,
+      "name": "The Thieves Bar",
+      "exits": {
+        "South": 1483,
+        "West": 1481
+      }
+    },
+    {
+      "id": 2525,
+      "name": "To Sewers",
+      "otherAreaExit": true,
+      "exits": {}
+    },
+    {
+      "id": 1483,
+      "name": "The Secret Yard",
+      "exits": {
+        "North": 1482,
+        "Down": 2525
+      }
+    },
+    {
+      "id": 2516,
+      "name": "To Sewers",
+      "otherAreaExit": true,
+      "exits": {
+        "Up": 1484
+      }
+    },
+    {
+      "id": 1484,
+      "name": "The Dump",
+      "exits": {
+        "North": 1479,
+        "South": 1566,
+        "Down": 2516
+      }
+    },
+    {
+      "id": 1485,
+      "name": "The Pet Shop",
+      "exits": {
+        "South": 1495
+      }
+    },
+    {
+      "id": 1486,
+      "name": "Pet Shop Store",
+      "exits": {}
+    },
+    {
+      "id": 1487,
+      "name": "The Magic Shop",
+      "exits": {
+        "South": 1466
+      }
+    },
+    {
+      "id": 1488,
+      "name": "The Jeweller\u0027s Shop",
+      "exits": {
+        "North": 1469
+      }
+    },
+    {
+      "id": 1489,
+      "name": "The Leather Shop",
+      "exits": {
+        "South": 1494
+      }
+    },
+    {
+      "id": 1490,
+      "name": "Inside the West Gate of Midgaard",
+      "exits": {
+        "North": 1569,
+        "East": 1466,
+        "South": 1492,
+        "West": 1502
+      }
+    },
+    {
+      "id": 1491,
+      "name": "Inside the East Gate of Midgaard",
+      "exits": {
+        "North": 1579,
+        "East": 1503,
+        "South": 1562,
+        "West": 1470
+      }
+    },
+    {
+      "id": 1492,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1490,
+        "South": 1493
+      }
+    },
+    {
+      "id": 1493,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1492,
+        "East": 1494,
+        "South": 1497
+      }
+    },
+    {
+      "id": 1494,
+      "name": "Poor Alley",
+      "exits": {
+        "North": 1489,
+        "East": 1478,
+        "South": 1555,
+        "West": 1493
+      }
+    },
+    {
+      "id": 1495,
+      "name": "Alley at Levee",
+      "exits": {
+        "North": 1485,
+        "East": 1496,
+        "South": 1499,
+        "West": 1480
+      }
+    },
+    {
+      "id": 1496,
+      "name": "Eastern end of Alley",
+      "exits": {
+        "North": 1505,
+        "East": 1563,
+        "South": 1500,
+        "West": 1495
+      }
+    },
+    {
+      "id": 1684,
+      "name": "To Mob Factory",
+      "otherAreaExit": true,
+      "exits": {
+        "West": 1497
+      }
+    },
+    {
+      "id": 1497,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1493,
+        "East": 1684,
+        "South": 1501
+      }
+    },
+    {
+      "id": 1498,
+      "name": "Grubby Inn",
+      "exits": {
+        "North": 1478
+      }
+    },
+    {
+      "id": 1499,
+      "name": "Levee",
+      "exits": {
+        "North": 1495,
+        "South": 1559
+      }
+    },
+    {
+      "id": 435,
+      "name": "To Machine Dreams",
+      "otherAreaExit": true,
+      "exits": {
+        "Down": 1500
+      }
+    },
+    {
+      "id": 1500,
+      "name": "Abandoned Warehouse",
+      "exits": {
+        "North": 1496,
+        "Up": 435
+      }
+    },
+    {
+      "id": 1501,
+      "name": "On the Bridge",
+      "exits": {
+        "North": 1497,
+        "South": 1507
+      }
+    },
+    {
+      "id": 1709,
+      "name": "To Moria",
+      "otherAreaExit": true,
+      "exits": {
+        "South": 1502
+      }
+    },
+    {
+      "id": 909,
+      "name": "To Haon Dor",
+      "otherAreaExit": true,
+      "exits": {
+        "East": 1502
+      }
+    },
+    {
+      "id": 1502,
+      "name": "Outside the West Gate of Midgaard",
+      "exits": {
+        "North": 1709,
+        "East": 1490,
+        "West": 909
+      }
+    },
+    {
+      "id": 1717,
+      "name": "To Moria",
+      "otherAreaExit": true,
+      "exits": {
+        "South": 1503
+      }
+    },
+    {
+      "id": 1406,
+      "name": "To Miden\u0027nir",
+      "otherAreaExit": true,
+      "exits": {
+        "West": 1503
+      }
+    },
+    {
+      "id": 1503,
+      "name": "Outside the East Gate of Midgaard",
+      "exits": {
+        "North": 1717,
+        "East": 1406,
+        "West": 1491
+      }
+    },
+    {
+      "id": 1248,
+      "name": "To Valhalla",
+      "otherAreaExit": true,
+      "exits": {
+        "Down": 1504
+      }
+    },
+    {
+      "id": 1504,
+      "name": "By the Temple Altar",
+      "exits": {
+        "South": 1455,
+        "Up": 1248
+      }
+    },
+    {
+      "id": 1505,
+      "name": "The Fountain of Youth Apothecary",
+      "exits": {
+        "South": 1496
+      }
+    },
+    {
+      "id": 17,
+      "name": "To In the Air",
+      "otherAreaExit": true,
+      "exits": {
+        "Down": 1506
+      }
+    },
+    {
+      "id": 1506,
+      "name": "In the air...",
+      "exits": {
+        "Up": 17,
+        "Down": 1459
+      }
+    },
+    {
+      "id": 1507,
+      "name": "Northwest end of Concourse",
+      "exits": {
+        "North": 1501,
+        "East": 1508,
+        "South": 1581
+      }
+    },
+    {
+      "id": 1508,
+      "name": "Promenade",
+      "exits": {
+        "East": 1509,
+        "South": 1538,
+        "West": 1507
+      }
+    },
+    {
+      "id": 1509,
+      "name": "Promenade",
+      "exits": {
+        "North": 1566,
+        "East": 1510,
+        "South": 1512,
+        "West": 1508
+      }
+    },
+    {
+      "id": 1510,
+      "name": "Austral Square",
+      "exits": {
+        "North": 1552,
+        "East": 1511,
+        "South": 1539,
+        "West": 1509
+      }
+    },
+    {
+      "id": 1511,
+      "name": "Northeast end of Concourse",
+      "exits": {
+        "North": 1565,
+        "South": 1583,
+        "West": 1510
+      }
+    },
+    {
+      "id": 1512,
+      "name": "Park Entrance",
+      "exits": {
+        "North": 1509,
+        "East": 1513,
+        "South": 1515
+      }
+    },
+    {
+      "id": 1513,
+      "name": "Park Cafe",
+      "exits": {
+        "West": 1512
+      }
+    },
+    {
+      "id": 1514,
+      "name": "Small path through the park",
+      "exits": {
+        "East": 1515,
+        "South": 1520
+      }
+    },
+    {
+      "id": 1515,
+      "name": "Small path in the park",
+      "exits": {
+        "North": 1512,
+        "East": 1516,
+        "West": 1514
+      }
+    },
+    {
+      "id": 1516,
+      "name": "Small path in the park",
+      "exits": {
+        "South": 1522,
+        "West": 1515
+      }
+    },
+    {
+      "id": 1517,
+      "name": "Cityguard Head Quarters",
+      "exits": {
+        "East": 1518,
+        "West": 1549
+      }
+    },
+    {
+      "id": 1518,
+      "name": "Park Road",
+      "exits": {
+        "North": 1538,
+        "East": 1519,
+        "South": 1525,
+        "West": 1517
+      }
+    },
+    {
+      "id": 1519,
+      "name": "Western Park Entrance",
+      "exits": {
+        "East": 1520,
+        "West": 1518
+      }
+    },
+    {
+      "id": 1520,
+      "name": "A path in the park",
+      "exits": {
+        "North": 1514,
+        "East": 1521,
+        "West": 1519
+      }
+    },
+    {
+      "id": 1521,
+      "name": "The Pond",
+      "exits": {
+        "East": 1522,
+        "West": 1520
+      }
+    },
+    {
+      "id": 1522,
+      "name": "A path in the park",
+      "exits": {
+        "North": 1516,
+        "East": 1523,
+        "West": 1521
+      }
+    },
+    {
+      "id": 1523,
+      "name": "Eastern Park Entrance",
+      "exits": {
+        "East": 1524,
+        "West": 1522
+      }
+    },
+    {
+      "id": 1524,
+      "name": "Emerald Avenue",
+      "exits": {
+        "North": 1539,
+        "East": 1544,
+        "South": 1526,
+        "West": 1523
+      }
+    },
+    {
+      "id": 1525,
+      "name": "Park Road",
+      "exits": {
+        "North": 1518,
+        "South": 1542
+      }
+    },
+    {
+      "id": 1163,
+      "name": "To Gangland",
+      "otherAreaExit": true,
+      "exits": {
+        "West": 1526
+      }
+    },
+    {
+      "id": 1526,
+      "name": "Emerald Avenue",
+      "exits": {
+        "North": 1524,
+        "East": 1163,
+        "West": 1540
+      }
+    },
+    {
+      "id": 2429,
+      "name": "To Redferne\u0027s",
+      "otherAreaExit": true,
+      "exits": {
+        "Down": 1527
+      }
+    },
+    {
+      "id": 1527,
+      "name": "Road Crossing",
+      "exits": {
+        "North": 1540,
+        "East": 1543,
+        "South": 1541,
+        "West": 1542,
+        "Up": 2429
+      }
+    },
+    {
+      "id": 1528,
+      "name": "Emerald Avenue",
+      "exits": {
+        "East": 1541,
+        "South": 1532
+      }
+    },
+    {
+      "id": 1529,
+      "name": "Park Road",
+      "exits": {
+        "North": 1543,
+        "East": 1530,
+        "South": 1533
+      }
+    },
+    {
+      "id": 1530,
+      "name": "Elm Street",
+      "exits": {
+        "East": 1531,
+        "West": 1529
+      }
+    },
+    {
+      "id": 854,
+      "name": "To Graveyard",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 1531
+      }
+    },
+    {
+      "id": 1531,
+      "name": "Elm Street",
+      "exits": {
+        "North": 1551,
+        "East": 1584,
+        "South": 854,
+        "West": 1530
+      }
+    },
+    {
+      "id": 1532,
+      "name": "Emerald Avenue",
+      "exits": {
+        "North": 1528,
+        "South": 1535
+      }
+    },
+    {
+      "id": 1533,
+      "name": "Park Road",
+      "exits": {
+        "North": 1529,
+        "South": 1536
+      }
+    },
+    {
+      "id": 1534,
+      "name": "On the Concourse",
+      "exits": {
+        "North": 1582,
+        "East": 1535
+      }
+    },
+    {
+      "id": 1535,
+      "name": "On the Concourse",
+      "exits": {
+        "North": 1532,
+        "East": 1567,
+        "West": 1534
+      }
+    },
+    {
+      "id": 1536,
+      "name": "On the Concourse",
+      "exits": {
+        "North": 1533,
+        "East": 1537,
+        "West": 1567
+      }
+    },
+    {
+      "id": 1537,
+      "name": "On the Concourse",
+      "exits": {
+        "North": 1584,
+        "West": 1536
+      }
+    },
+    {
+      "id": 1538,
+      "name": "Park Road",
+      "exits": {
+        "North": 1508,
+        "South": 1518
+      }
+    },
+    {
+      "id": 1539,
+      "name": "Emerald Avenue",
+      "exits": {
+        "North": 1510,
+        "East": 1546,
+        "South": 1524
+      }
+    },
+    {
+      "id": 1540,
+      "name": "Emerald Avenue",
+      "exits": {
+        "East": 1526,
+        "South": 1527
+      }
+    },
+    {
+      "id": 1541,
+      "name": "Emerald Avenue",
+      "exits": {
+        "North": 1527,
+        "West": 1528
+      }
+    },
+    {
+      "id": 1542,
+      "name": "Park Road",
+      "exits": {
+        "North": 1525,
+        "East": 1527
+      }
+    },
+    {
+      "id": 1543,
+      "name": "Park Road",
+      "exits": {
+        "South": 1529,
+        "West": 1527
+      }
+    },
+    {
+      "id": 1544,
+      "name": "The Waiting Room",
+      "exits": {
+        "East": 1545,
+        "West": 1524
+      }
+    },
+    {
+      "id": 1545,
+      "name": "The Mayor\u0027s Office",
+      "exits": {
+        "West": 1544
+      }
+    },
+    {
+      "id": 1546,
+      "name": "Penny Lane",
+      "exits": {
+        "East": 1547,
+        "West": 1539
+      }
+    },
+    {
+      "id": 1547,
+      "name": "Penny Lane",
+      "exits": {
+        "North": 1548,
+        "East": 1583,
+        "West": 1546
+      }
+    },
+    {
+      "id": 1548,
+      "name": "The end of Penny Lane",
+      "exits": {
+        "South": 1547
+      }
+    },
+    {
+      "id": 1549,
+      "name": "Captain\u0027s Office",
+      "exits": {
+        "East": 1517,
+        "South": 1550
+      }
+    },
+    {
+      "id": 1550,
+      "name": "The Jail",
+      "exits": {
+        "North": 1549
+      }
+    },
+    {
+      "id": 1222,
+      "name": "To Gangland",
+      "otherAreaExit": true,
+      "exits": {
+        "West": 1551
+      }
+    },
+    {
+      "id": 1551,
+      "name": "The end of Elm Street",
+      "exits": {
+        "East": 1222,
+        "South": 1531
+      }
+    },
+    {
+      "id": 1252,
+      "name": "To Valhalla",
+      "otherAreaExit": true,
+      "exits": {}
+    },
+    {
+      "id": 1552,
+      "name": "Kate\u0027s Diner",
+      "exits": {
+        "North": 1559,
+        "South": 1510,
+        "Up": 1252
+      }
+    },
+    {
+      "id": 1553,
+      "name": "Melancholy\u0027s Maps",
+      "exits": {
+        "North": 1554,
+        "South": 1478
+      }
+    },
+    {
+      "id": 1554,
+      "name": "Melancholy\u0027s Room",
+      "exits": {
+        "South": 1553,
+        "Up": 1252
+      }
+    },
+    {
+      "id": 1555,
+      "name": "Temple Of Stupid",
+      "exits": {
+        "North": 1494,
+        "Up": 1252
+      }
+    },
+    {
+      "id": 2063,
+      "name": "To New Thalos",
+      "otherAreaExit": true,
+      "exits": {
+        "East": 1556
+      }
+    },
+    {
+      "id": 1556,
+      "name": "Under the Bridge",
+      "exits": {
+        "East": 1557,
+        "West": 2063
+      }
+    },
+    {
+      "id": 1557,
+      "name": "On the River",
+      "exits": {
+        "East": 1558,
+        "West": 1556
+      }
+    },
+    {
+      "id": 1558,
+      "name": "On the River",
+      "exits": {
+        "East": 1559,
+        "West": 1557
+      }
+    },
+    {
+      "id": 1559,
+      "name": "On the River",
+      "exits": {
+        "North": 1499,
+        "East": 1560,
+        "South": 1552,
+        "West": 1558
+      }
+    },
+    {
+      "id": 1560,
+      "name": "On the River",
+      "exits": {
+        "East": 1561,
+        "West": 1559
+      }
+    },
+    {
+      "id": 657,
+      "name": "To Sands of Sorrow",
+      "otherAreaExit": true,
+      "exits": {
+        "West": 1561
+      }
+    },
+    {
+      "id": 1561,
+      "name": "On the River",
+      "exits": {
+        "East": 657,
+        "West": 1560
+      }
+    },
+    {
+      "id": 1562,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1491,
+        "South": 1563
+      }
+    },
+    {
+      "id": 1563,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1562,
+        "South": 1564,
+        "West": 1496
+      }
+    },
+    {
+      "id": 1564,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1563,
+        "South": 1565
+      }
+    },
+    {
+      "id": 1565,
+      "name": "On the Bridge",
+      "exits": {
+        "North": 1564,
+        "South": 1511
+      }
+    },
+    {
+      "id": 1566,
+      "name": "The South Bridge",
+      "exits": {
+        "North": 1484,
+        "South": 1509
+      }
+    },
+    {
+      "id": 1567,
+      "name": "Inside the South Gate of Midgaard",
+      "exits": {
+        "East": 1536,
+        "South": 1568,
+        "West": 1535
+      }
+    },
+    {
+      "id": 1407,
+      "name": "To Miden\u0027nir",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 1568
+      }
+    },
+    {
+      "id": 1568,
+      "name": "Outside the South Gate of Midgaard",
+      "exits": {
+        "North": 1567,
+        "South": 1407
+      }
+    },
+    {
+      "id": 1569,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1570,
+        "South": 1490
+      }
+    },
+    {
+      "id": 1570,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1571,
+        "East": 1585,
+        "South": 1569
+      }
+    },
+    {
+      "id": 1571,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1572,
+        "South": 1570
+      }
+    },
+    {
+      "id": 1572,
+      "name": "The Northwest Corner",
+      "exits": {
+        "East": 1573,
+        "South": 1571
+      }
+    },
+    {
+      "id": 1573,
+      "name": "Wall Road",
+      "exits": {
+        "East": 1574,
+        "West": 1572
+      }
+    },
+    {
+      "id": 1574,
+      "name": "Inside the North Gate of Midgaard",
+      "exits": {
+        "North": 1580,
+        "East": 1575,
+        "West": 1573
+      }
+    },
+    {
+      "id": 1575,
+      "name": "Wall Road",
+      "exits": {
+        "East": 1576,
+        "West": 1574
+      }
+    },
+    {
+      "id": 1576,
+      "name": "The Northeast Corner",
+      "exits": {
+        "South": 1577,
+        "West": 1575
+      }
+    },
+    {
+      "id": 1577,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1576,
+        "South": 1578
+      }
+    },
+    {
+      "id": 1578,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1577,
+        "South": 1579,
+        "West": 1590
+      }
+    },
+    {
+      "id": 1579,
+      "name": "Wall Road",
+      "exits": {
+        "North": 1578,
+        "South": 1491
+      }
+    },
+    {
+      "id": 1713,
+      "name": "To Moria",
+      "otherAreaExit": true,
+      "exits": {
+        "South": 1580
+      }
+    },
+    {
+      "id": 1580,
+      "name": "Outside the North Gate of Midgaard",
+      "exits": {
+        "North": 1713,
+        "South": 1574
+      }
+    },
+    {
+      "id": 1581,
+      "name": "On the Concourse",
+      "exits": {
+        "North": 1507,
+        "South": 1582
+      }
+    },
+    {
+      "id": 1582,
+      "name": "On the Concourse near the park",
+      "exits": {
+        "North": 1581,
+        "South": 1534
+      }
+    },
+    {
+      "id": 1583,
+      "name": "On the Concourse at Penny Lane",
+      "exits": {
+        "North": 1511,
+        "South": 1584,
+        "West": 1547
+      }
+    },
+    {
+      "id": 1584,
+      "name": "On the Concourse at Elm Street",
+      "exits": {
+        "North": 1583,
+        "South": 1537,
+        "West": 1531
+      }
+    },
+    {
+      "id": 1585,
+      "name": "Clan Road",
+      "exits": {
+        "East": 1586,
+        "West": 1570
+      }
+    },
+    {
+      "id": 1586,
+      "name": "Clan Road",
+      "exits": {
+        "East": 1587,
+        "South": 1591,
+        "West": 1585
+      }
+    },
+    {
+      "id": 1587,
+      "name": "Clan Road",
+      "exits": {
+        "East": 1588,
+        "West": 1586
+      }
+    },
+    {
+      "id": 1588,
+      "name": "Clan Road",
+      "exits": {
+        "East": 1589,
+        "West": 1587
+      }
+    },
+    {
+      "id": 1589,
+      "name": "Clan Road",
+      "exits": {
+        "East": 1590,
+        "South": 1594,
+        "West": 1588
+      }
+    },
+    {
+      "id": 1590,
+      "name": "Clan Road",
+      "exits": {
+        "East": 1578,
+        "West": 1589
+      }
+    },
+    {
+      "id": 1591,
+      "name": "A Money Changer\u0027s Room",
+      "exits": {
+        "North": 1586
+      }
+    },
+    {
+      "id": 1592,
+      "name": "Grebe\u0027s Tavern",
+      "exits": {
+        "South": 1480
+      }
+    },
+    {
+      "id": 1593,
+      "name": "Andy\u0027s Pub",
+      "exits": {
+        "East": 1594,
+        "South": 1595
+      }
+    },
+    {
+      "id": 1594,
+      "name": "A Room in the Pub",
+      "exits": {
+        "North": 1589,
+        "South": 1596,
+        "West": 1593,
+        "Up": 1597
+      }
+    },
+    {
+      "id": 1595,
+      "name": "The Bar",
+      "exits": {
+        "North": 1593
+      }
+    },
+    {
+      "id": 1596,
+      "name": "The Bar",
+      "exits": {
+        "North": 1594
+      }
+    },
+    {
+      "id": 1597,
+      "name": "The Inn",
+      "exits": {
+        "Down": 1594
+      }
+    }
+  ]
+}

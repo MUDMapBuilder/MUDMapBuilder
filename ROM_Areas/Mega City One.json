@@ -1,0 +1,242 @@
+{
+  "name": "Mega City One",
+  "rooms": [
+    {
+      "id": 695,
+      "otherAreaExit": true,
+      "name": "To Sands of Sorrow",
+      "exits": {
+        "South": 1375
+      }
+    },
+    {
+      "id": 1375,
+      "name": "Entrance to Mega-City One",
+      "exits": {
+        "North": 695,
+        "South": 1376
+      }
+    },
+    {
+      "id": 1376,
+      "name": "Mahmount Allesh Megway",
+      "exits": {
+        "North": 1375,
+        "South": 1377
+      }
+    },
+    {
+      "id": 1377,
+      "name": "Intersection of Junket Way and Megway",
+      "exits": {
+        "North": 1376,
+        "East": 1384,
+        "South": 1378,
+        "West": 1395
+      }
+    },
+    {
+      "id": 1378,
+      "name": "Mahmount Allesh Megway",
+      "exits": {
+        "North": 1377,
+        "South": 1379
+      }
+    },
+    {
+      "id": 1379,
+      "name": "Mahmount Allesh Megway",
+      "exits": {
+        "North": 1378,
+        "East": 1385,
+        "South": 1380,
+        "West": 1396
+      }
+    },
+    {
+      "id": 1380,
+      "name": "Central Plaza",
+      "exits": {
+        "North": 1379,
+        "East": 1386,
+        "South": 1381,
+        "West": 1397
+      }
+    },
+    {
+      "id": 1381,
+      "name": "Corner of Ed Hilldreth Memorial Parkway and Megway",
+      "exits": {
+        "North": 1380,
+        "East": 1387,
+        "South": 1382,
+        "West": 1398
+      }
+    },
+    {
+      "id": 1382,
+      "name": "Mahmount Allesh Megway",
+      "exits": {
+        "North": 1381,
+        "South": 1383
+      }
+    },
+    {
+      "id": 1383,
+      "name": "Mahmount Allesh Megway",
+      "exits": {
+        "North": 1382,
+        "East": 1388,
+        "South": 1394,
+        "West": 1399
+      }
+    },
+    {
+      "id": 1384,
+      "name": "Junket Way",
+      "exits": {
+        "East": 1389,
+        "West": 1377
+      }
+    },
+    {
+      "id": 1385,
+      "name": "Davies Alley",
+      "exits": {
+        "East": 1391,
+        "West": 1379
+      }
+    },
+    {
+      "id": 1386,
+      "name": "Max Jaffa Boulevard",
+      "exits": {
+        "East": 1392,
+        "West": 1380
+      }
+    },
+    {
+      "id": 1387,
+      "name": "Ed Hilldreth Memorial Parkway ",
+      "exits": {
+        "East": 1393,
+        "West": 1381
+      }
+    },
+    {
+      "id": 1388,
+      "name": "Construction site of the Harold Finkelbaum Block.",
+      "exits": {
+        "West": 1383
+      }
+    },
+    {
+      "id": 1389,
+      "name": "Corner of Junket Way and Threep Lane",
+      "exits": {
+        "South": 1390,
+        "West": 1384
+      }
+    },
+    {
+      "id": 1390,
+      "name": "Threep Lane",
+      "exits": {
+        "North": 1389,
+        "East": 1400,
+        "South": 1391
+      }
+    },
+    {
+      "id": 1391,
+      "name": "Threep Lane",
+      "exits": {
+        "North": 1390,
+        "South": 1392,
+        "West": 1385
+      }
+    },
+    {
+      "id": 1392,
+      "name": "Corner of Max Jaffa Blvd and Threep Way",
+      "exits": {
+        "North": 1391,
+        "South": 1393,
+        "West": 1386
+      }
+    },
+    {
+      "id": 1393,
+      "name": "Corner of Ed Hilldreth Mem. Prkwy and Threep Lane",
+      "exits": {
+        "North": 1392,
+        "West": 1387
+      }
+    },
+    {
+      "id": 1394,
+      "name": "Construction Site for the Brit-Cit One tunnel.",
+      "exits": {
+        "North": 1383
+      }
+    },
+    {
+      "id": 1395,
+      "name": "Pustule Palace Cafe",
+      "exits": {
+        "East": 1377
+      }
+    },
+    {
+      "id": 1396,
+      "name": "Rietzik\u0027s Shuggy Hall",
+      "exits": {
+        "East": 1379
+      }
+    },
+    {
+      "id": 1397,
+      "name": "Bazza\u0027s Home for the Terminally Sarky",
+      "exits": {
+        "East": 1380
+      }
+    },
+    {
+      "id": 1398,
+      "name": "Nu Phisog Parlour",
+      "exits": {
+        "East": 1381
+      }
+    },
+    {
+      "id": 1399,
+      "name": "Ziggi Piggi\u0027s Home for the Semi-Stiff",
+      "exits": {
+        "East": 1383
+      }
+    },
+    {
+      "id": 1400,
+      "name": "Throt \u0026 Gleep\u0027s Megger Store",
+      "exits": {
+        "North": 1401,
+        "West": 1390
+      }
+    },
+    {
+      "id": 1401,
+      "name": "Stockroom of Throt \u0026 Gleep\u0027s Megger Store",
+      "exits": {
+        "North": 1402,
+        "South": 1400
+      }
+    },
+    {
+      "id": 1402,
+      "name": "Throt \u0026 Gleep\u0027s Vault",
+      "exits": {
+        "South": 1401
+      }
+    }
+  ]
+}

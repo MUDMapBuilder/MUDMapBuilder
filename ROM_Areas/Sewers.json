@@ -1,0 +1,1461 @@
+{
+  "name": "Sewers",
+  "rooms": [
+    {
+      "id": 2491,
+      "name": "The muddy sewer",
+      "exits": {
+        "South": 2492
+      }
+    },
+    {
+      "id": 2492,
+      "name": "The muddy sewer junction",
+      "exits": {
+        "North": 2491,
+        "East": 2497,
+        "South": 2493
+      }
+    },
+    {
+      "id": 2493,
+      "name": "The mudhole",
+      "exits": {
+        "North": 2492,
+        "Down": 2553
+      }
+    },
+    {
+      "id": 2494,
+      "name": "The Dark Pit",
+      "exits": {
+        "East": 2499,
+        "Down": 2554
+      }
+    },
+    {
+      "id": 2495,
+      "name": "The muddy sewer",
+      "exits": {
+        "East": 2501,
+        "South": 2496
+      }
+    },
+    {
+      "id": 2496,
+      "name": "The muddy sewer",
+      "exits": {
+        "North": 2495,
+        "East": 2502
+      }
+    },
+    {
+      "id": 2497,
+      "name": "The muddy sewer bend",
+      "exits": {
+        "South": 2498,
+        "West": 2492
+      }
+    },
+    {
+      "id": 2498,
+      "name": "A muddy intersection",
+      "exits": {
+        "North": 2497,
+        "East": 2504,
+        "South": 2499
+      }
+    },
+    {
+      "id": 2499,
+      "name": "The Sewer Junction",
+      "exits": {
+        "North": 2498,
+        "East": 2507,
+        "South": 2500,
+        "West": 2494
+      }
+    },
+    {
+      "id": 2500,
+      "name": "A bend in sewer pipe",
+      "exits": {
+        "North": 2499,
+        "East": 2508
+      }
+    },
+    {
+      "id": 2501,
+      "name": "The muddy sewer pipe",
+      "exits": {
+        "East": 2511,
+        "South": 2509,
+        "West": 2495
+      }
+    },
+    {
+      "id": 2502,
+      "name": "The bend in the Muddy sewer",
+      "exits": {
+        "South": 2503,
+        "West": 2496
+      }
+    },
+    {
+      "id": 2503,
+      "name": "A MUDDY intersection",
+      "exits": {
+        "North": 2502,
+        "East": 2513,
+        "South": 2504
+      }
+    },
+    {
+      "id": 2504,
+      "name": "Muddy sewer",
+      "exits": {
+        "North": 2503,
+        "West": 2498
+      }
+    },
+    {
+      "id": 2505,
+      "name": "The old well",
+      "exits": {
+        "East": 2514,
+        "Down": 2557
+      }
+    },
+    {
+      "id": 2506,
+      "name": "The ordinary bend",
+      "exits": {
+        "East": 2509,
+        "South": 2507
+      }
+    },
+    {
+      "id": 2507,
+      "name": "The sewer junction",
+      "exits": {
+        "North": 2506,
+        "South": 2508,
+        "West": 2499
+      }
+    },
+    {
+      "id": 2508,
+      "name": "The ordinary junction",
+      "exits": {
+        "North": 2507,
+        "East": 2517,
+        "West": 2500
+      }
+    },
+    {
+      "id": 2509,
+      "name": "A quiet pipe junction",
+      "exits": {
+        "North": 2501,
+        "East": 2515,
+        "West": 2506
+      }
+    },
+    {
+      "id": 2510,
+      "name": "The odd room with smooth walls",
+      "exits": {
+        "Down": 2564
+      }
+    },
+    {
+      "id": 2511,
+      "name": "The sewer",
+      "exits": {
+        "East": 2521,
+        "South": 2512,
+        "West": 2501
+      }
+    },
+    {
+      "id": 2512,
+      "name": "Another intersection",
+      "exits": {
+        "North": 2511,
+        "East": 2522,
+        "South": 2513
+      }
+    },
+    {
+      "id": 2513,
+      "name": "A junction",
+      "exits": {
+        "North": 2512,
+        "South": 2514,
+        "West": 2503
+      }
+    },
+    {
+      "id": 2514,
+      "name": "The sewer junction",
+      "exits": {
+        "North": 2513,
+        "East": 2518,
+        "West": 2505
+      }
+    },
+    {
+      "id": 2515,
+      "name": "The Triple Junction",
+      "exits": {
+        "East": 2519,
+        "South": 2516,
+        "West": 2509
+      }
+    },
+    {
+      "id": 1484,
+      "otherAreaExit": true,
+      "name": "To Midgaard",
+      "exits": {
+        "Down": 2516
+      }
+    },
+    {
+      "id": 2516,
+      "name": "The Quadruple Junction Under the Dump",
+      "exits": {
+        "North": 2515,
+        "East": 2520,
+        "South": 2517,
+        "West": 2510,
+        "Up": 1484
+      }
+    },
+    {
+      "id": 2517,
+      "name": "A triple junction",
+      "exits": {
+        "North": 2516,
+        "East": 2526,
+        "West": 2508
+      }
+    },
+    {
+      "id": 2518,
+      "name": "A bend in the sewer pipe",
+      "exits": {
+        "South": 2519,
+        "West": 2514
+      }
+    },
+    {
+      "id": 2519,
+      "name": "The sewer pipe bend",
+      "exits": {
+        "North": 2518,
+        "West": 2515
+      }
+    },
+    {
+      "id": 2520,
+      "name": "The pit",
+      "exits": {
+        "West": 2516,
+        "Down": 2574
+      }
+    },
+    {
+      "id": 2521,
+      "name": "The round room",
+      "exits": {
+        "East": 2532
+      }
+    },
+    {
+      "id": 2522,
+      "name": "The three way junction",
+      "exits": {
+        "East": 2527,
+        "South": 2523,
+        "West": 2512
+      }
+    },
+    {
+      "id": 2523,
+      "name": "The Sewer Store Room",
+      "exits": {
+        "North": 2522
+      }
+    },
+    {
+      "id": 2524,
+      "name": "The Shaft",
+      "exits": {
+        "South": 2525,
+        "Down": 2575
+      }
+    },
+    {
+      "id": 2525,
+      "name": "The Sewer Entrance",
+      "exits": {
+        "North": 2524,
+        "South": 2526
+      }
+    },
+    {
+      "id": 2526,
+      "name": "The junction going three ways",
+      "exits": {
+        "North": 2525,
+        "East": 2531,
+        "West": 2517
+      }
+    },
+    {
+      "id": 2527,
+      "name": "The Sewer Room",
+      "exits": {
+        "South": 2528,
+        "West": 2522
+      }
+    },
+    {
+      "id": 2528,
+      "name": "The Sewer room",
+      "exits": {
+        "North": 2527,
+        "South": 2529
+      }
+    },
+    {
+      "id": 2529,
+      "name": "The Pool in the Sewer",
+      "exits": {
+        "North": 2528,
+        "East": 2535
+      }
+    },
+    {
+      "id": 2530,
+      "name": "The Sewers",
+      "exits": {
+        "South": 2531
+      }
+    },
+    {
+      "id": 2531,
+      "name": "The junction",
+      "exits": {
+        "North": 2530,
+        "East": 2541,
+        "West": 2526
+      }
+    },
+    {
+      "id": 2532,
+      "name": "The small room",
+      "exits": {
+        "East": 2536,
+        "South": 2533
+      }
+    },
+    {
+      "id": 2533,
+      "name": "The Sewer pipe",
+      "exits": {
+        "North": 2532,
+        "South": 2534
+      }
+    },
+    {
+      "id": 2534,
+      "name": "The Grand Sewer",
+      "exits": {
+        "North": 2533,
+        "East": 2537,
+        "South": 2535
+      }
+    },
+    {
+      "id": 2535,
+      "name": "The South end of the Grand Pipe",
+      "exits": {
+        "North": 2534,
+        "West": 2529
+      }
+    },
+    {
+      "id": 2536,
+      "name": "The Edge of The Water Sewer",
+      "exits": {
+        "East": 2542,
+        "West": 2532
+      }
+    },
+    {
+      "id": 2537,
+      "name": "The Dark hallway",
+      "exits": {
+        "South": 2538,
+        "West": 2534
+      }
+    },
+    {
+      "id": 2538,
+      "name": "The dark passageway",
+      "exits": {
+        "North": 2537,
+        "South": 2539
+      }
+    },
+    {
+      "id": 2539,
+      "name": "The dark passageway",
+      "exits": {
+        "North": 2538,
+        "South": 2540
+      }
+    },
+    {
+      "id": 2540,
+      "name": "The dark passageway",
+      "exits": {
+        "North": 2539,
+        "South": 2541
+      }
+    },
+    {
+      "id": 2541,
+      "name": "The dark passageway",
+      "exits": {
+        "North": 2540,
+        "East": 2549,
+        "West": 2531
+      }
+    },
+    {
+      "id": 2542,
+      "name": "The Watery Sewer Bend",
+      "exits": {
+        "South": 2543,
+        "West": 2536
+      }
+    },
+    {
+      "id": 2543,
+      "name": "The Watery sewer",
+      "exits": {
+        "North": 2542,
+        "South": 2544
+      }
+    },
+    {
+      "id": 2544,
+      "name": "The Watery sewer",
+      "exits": {
+        "North": 2543,
+        "South": 2545
+      }
+    },
+    {
+      "id": 2545,
+      "name": "The Watery Sewer Junction",
+      "exits": {
+        "North": 2544,
+        "East": 2550,
+        "South": 2546
+      }
+    },
+    {
+      "id": 2546,
+      "name": "The Watery sewer",
+      "exits": {
+        "North": 2545,
+        "South": 2547
+      }
+    },
+    {
+      "id": 2547,
+      "name": "The Watery sewer junction",
+      "exits": {
+        "North": 2546,
+        "East": 2551,
+        "South": 2548
+      }
+    },
+    {
+      "id": 2548,
+      "name": "The Watery sewer",
+      "exits": {
+        "North": 2547,
+        "South": 2549
+      }
+    },
+    {
+      "id": 2549,
+      "name": "The Watery sewer bend",
+      "exits": {
+        "North": 2548,
+        "West": 2541
+      }
+    },
+    {
+      "id": 2550,
+      "name": "A ledge by the dark pool",
+      "exits": {
+        "South": 2551,
+        "West": 2545
+      }
+    },
+    {
+      "id": 2551,
+      "name": "A ledge by the dark pool",
+      "exits": {
+        "North": 2550,
+        "West": 2547,
+        "Down": 2552
+      }
+    },
+    {
+      "id": 2552,
+      "name": "The fissure under the ledge",
+      "exits": {
+        "Up": 2551,
+        "Down": 2579
+      }
+    },
+    {
+      "id": 2553,
+      "name": "Under the mudhole",
+      "exits": {
+        "East": 2555
+      }
+    },
+    {
+      "id": 2554,
+      "name": "Under the Dark Pit",
+      "exits": {
+        "East": 2556,
+        "Up": 2494,
+        "Down": 2622
+      }
+    },
+    {
+      "id": 2555,
+      "name": "A muddy bend in the sewer system",
+      "exits": {
+        "South": 2556,
+        "West": 2553
+      }
+    },
+    {
+      "id": 2556,
+      "name": "A junction in the sewer pipes",
+      "exits": {
+        "North": 2555,
+        "East": 2564,
+        "West": 2554
+      }
+    },
+    {
+      "id": 2557,
+      "name": "Down the old well",
+      "exits": {
+        "Up": 2505
+      }
+    },
+    {
+      "id": 2558,
+      "name": "The northwestern corner of the ledge",
+      "exits": {
+        "East": 2565,
+        "South": 2559
+      }
+    },
+    {
+      "id": 2559,
+      "name": "The narrow ledge",
+      "exits": {
+        "North": 2558,
+        "East": 2578,
+        "South": 2560
+      }
+    },
+    {
+      "id": 2560,
+      "name": "The narrow ledge",
+      "exits": {
+        "North": 2559,
+        "East": 2578,
+        "South": 2561
+      }
+    },
+    {
+      "id": 2561,
+      "name": "The narrow ledge",
+      "exits": {
+        "North": 2560,
+        "East": 2578,
+        "South": 2562
+      }
+    },
+    {
+      "id": 2562,
+      "name": "The narrow ledge",
+      "exits": {
+        "North": 2561,
+        "East": 2578,
+        "South": 2563
+      }
+    },
+    {
+      "id": 2563,
+      "name": "The southwestern corner of the ledge",
+      "exits": {
+        "North": 2562,
+        "East": 2567,
+        "South": 2564,
+        "Down": 2612
+      }
+    },
+    {
+      "id": 2564,
+      "name": "An odd intersection",
+      "exits": {
+        "North": 2563,
+        "East": 2574,
+        "West": 2556
+      }
+    },
+    {
+      "id": 2565,
+      "name": "The narrow ledge going east to west",
+      "exits": {
+        "East": 2568,
+        "South": 2578,
+        "West": 2558
+      }
+    },
+    {
+      "id": 2566,
+      "name": "Mid-air",
+      "exits": {}
+    },
+    {
+      "id": 2567,
+      "name": "The Broad ledge",
+      "exits": {
+        "North": 2566,
+        "East": 2573,
+        "South": 2576,
+        "West": 2563
+      }
+    },
+    {
+      "id": 2568,
+      "name": "The northeastern corner of the ledge",
+      "exits": {
+        "South": 2569,
+        "West": 2565,
+        "Down": 2613
+      }
+    },
+    {
+      "id": 2569,
+      "name": "The narrow eastern ledge",
+      "exits": {
+        "South": 2570,
+        "West": 2566
+      }
+    },
+    {
+      "id": 2570,
+      "name": "The narrow eastern ledge",
+      "exits": {
+        "South": 2571,
+        "West": 2566
+      }
+    },
+    {
+      "id": 2571,
+      "name": "The narrow eastern ledge",
+      "exits": {
+        "South": 2572,
+        "West": 2566
+      }
+    },
+    {
+      "id": 2572,
+      "name": "The narrow eastern ledge",
+      "exits": {
+        "East": 2575,
+        "South": 2573,
+        "West": 2566
+      }
+    },
+    {
+      "id": 2573,
+      "name": "The southeastern corner of the ledge",
+      "exits": {
+        "North": 2572,
+        "West": 2567
+      }
+    },
+    {
+      "id": 2574,
+      "name": "Under the pit",
+      "exits": {
+        "West": 2564
+      }
+    },
+    {
+      "id": 2575,
+      "name": "Under The Shaft",
+      "exits": {
+        "West": 2572,
+        "Up": 2524
+      }
+    },
+    {
+      "id": 2576,
+      "name": "The sewer line.",
+      "exits": {
+        "North": 2567,
+        "Down": 2601
+      }
+    },
+    {
+      "id": 2577,
+      "name": "The sewer pipe.",
+      "exits": {}
+    },
+    {
+      "id": 2578,
+      "name": "Mid-air",
+      "exits": {}
+    },
+    {
+      "id": 2579,
+      "name": "The Edge of the Water",
+      "exits": {
+        "Up": 2552
+      }
+    },
+    {
+      "id": 2580,
+      "name": "The Treasury",
+      "exits": {
+        "East": 2581
+      }
+    },
+    {
+      "id": 2581,
+      "name": "The inner Lair",
+      "exits": {
+        "South": 2582,
+        "West": 2580
+      }
+    },
+    {
+      "id": 2582,
+      "name": "The Lair",
+      "exits": {
+        "North": 2581,
+        "East": 2585,
+        "South": 2583
+      }
+    },
+    {
+      "id": 2583,
+      "name": "The Lair",
+      "exits": {
+        "North": 2582,
+        "East": 2586,
+        "South": 2584
+      }
+    },
+    {
+      "id": 2584,
+      "name": "The Lair",
+      "exits": {
+        "North": 2583,
+        "East": 2587,
+        "South": 2588
+      }
+    },
+    {
+      "id": 2585,
+      "name": "The Lair",
+      "exits": {
+        "South": 2586,
+        "West": 2582
+      }
+    },
+    {
+      "id": 2586,
+      "name": "The lair.",
+      "exits": {
+        "North": 2585,
+        "South": 2587,
+        "West": 2583
+      }
+    },
+    {
+      "id": 2587,
+      "name": "The lair.",
+      "exits": {
+        "North": 2586,
+        "West": 2584
+      }
+    },
+    {
+      "id": 2588,
+      "name": "The lair entrance.",
+      "exits": {
+        "North": 2584,
+        "East": 2589
+      }
+    },
+    {
+      "id": 2589,
+      "name": "The crawlway.",
+      "exits": {
+        "East": 2590,
+        "West": 2588
+      }
+    },
+    {
+      "id": 2590,
+      "name": "The four-way junction.",
+      "exits": {
+        "North": 2591,
+        "East": 2592,
+        "South": 2595,
+        "West": 2589
+      }
+    },
+    {
+      "id": 2591,
+      "name": "The small cave.",
+      "exits": {
+        "South": 2590
+      }
+    },
+    {
+      "id": 2592,
+      "name": "The sewer drain.",
+      "exits": {
+        "North": 2593,
+        "West": 2590
+      }
+    },
+    {
+      "id": 2593,
+      "name": "The sewer drain.",
+      "exits": {
+        "East": 2594,
+        "South": 2592
+      }
+    },
+    {
+      "id": 2594,
+      "name": "The drain end.",
+      "exits": {
+        "West": 2593
+      }
+    },
+    {
+      "id": 2595,
+      "name": "The half-wet drain.",
+      "exits": {
+        "North": 2590,
+        "South": 2596
+      }
+    },
+    {
+      "id": 2596,
+      "name": "Under water in the sewer.",
+      "exits": {
+        "North": 2595,
+        "South": 2597
+      }
+    },
+    {
+      "id": 2597,
+      "name": "The half-dry drain.",
+      "exits": {
+        "North": 2596,
+        "East": 2598,
+        "West": 2599
+      }
+    },
+    {
+      "id": 2598,
+      "name": "The very small room.",
+      "exits": {
+        "West": 2597
+      }
+    },
+    {
+      "id": 2599,
+      "name": "A dry sewer drain.",
+      "exits": {
+        "East": 2597,
+        "South": 2600
+      }
+    },
+    {
+      "id": 2600,
+      "name": "A boring drain.",
+      "exits": {
+        "North": 2599,
+        "East": 2601
+      }
+    },
+    {
+      "id": 2601,
+      "name": "The sewer drain.",
+      "exits": {
+        "East": 2602,
+        "West": 2600,
+        "Up": 2576
+      }
+    },
+    {
+      "id": 2602,
+      "name": "The sewer drain.",
+      "exits": {
+        "East": 2603,
+        "West": 2601
+      }
+    },
+    {
+      "id": 2603,
+      "name": "The sewer bend.",
+      "exits": {
+        "North": 2604,
+        "West": 2602
+      }
+    },
+    {
+      "id": 2604,
+      "name": "The sewer junction",
+      "exits": {
+        "North": 2605,
+        "South": 2603,
+        "West": 2606
+      }
+    },
+    {
+      "id": 2605,
+      "name": "The sewer",
+      "exits": {
+        "South": 2604
+      }
+    },
+    {
+      "id": 2606,
+      "name": "The strange sewer",
+      "exits": {
+        "East": 2604,
+        "West": 2607
+      }
+    },
+    {
+      "id": 2607,
+      "name": "The damp sewer",
+      "exits": {
+        "East": 2606,
+        "West": 2608
+      }
+    },
+    {
+      "id": 2608,
+      "name": "The strange sewer",
+      "exits": {
+        "East": 2607,
+        "West": 2609
+      }
+    },
+    {
+      "id": 2609,
+      "name": "The sewer",
+      "exits": {
+        "North": 2610,
+        "East": 2608
+      }
+    },
+    {
+      "id": 2610,
+      "name": "The sewer drain",
+      "exits": {
+        "East": 2611,
+        "South": 2609
+      }
+    },
+    {
+      "id": 2611,
+      "name": "The rat\u0027s lair",
+      "exits": {
+        "West": 2610
+      }
+    },
+    {
+      "id": 2612,
+      "name": "The Wall of the Abyss",
+      "exits": {
+        "Up": 2563,
+        "Down": 2621
+      }
+    },
+    {
+      "id": 2613,
+      "name": "The entrance.",
+      "exits": {
+        "North": 2614,
+        "Up": 2568
+      }
+    },
+    {
+      "id": 2614,
+      "name": "The corridor.",
+      "exits": {
+        "East": 2615,
+        "South": 2613
+      }
+    },
+    {
+      "id": 2615,
+      "name": "The Realm of lost souls",
+      "exits": {
+        "North": 2616,
+        "West": 2614
+      }
+    },
+    {
+      "id": 2616,
+      "name": "The T-crossing",
+      "exits": {
+        "East": 2619,
+        "South": 2615,
+        "West": 2617
+      }
+    },
+    {
+      "id": 2617,
+      "name": "The firedeath",
+      "exits": {}
+    },
+    {
+      "id": 2618,
+      "name": "The tortureroom.",
+      "exits": {
+        "South": 2619
+      }
+    },
+    {
+      "id": 2619,
+      "name": "The hells yard",
+      "exits": {
+        "North": 2618,
+        "West": 2616
+      }
+    },
+    {
+      "id": 2620,
+      "name": "The Entrance to the Realm of silence",
+      "exits": {}
+    },
+    {
+      "id": 2621,
+      "name": "On the walls of the Abyss",
+      "exits": {
+        "Up": 2612
+      }
+    },
+    {
+      "id": 2622,
+      "name": "Cave entrance",
+      "exits": {
+        "North": 2623,
+        "Up": 2554
+      }
+    },
+    {
+      "id": 2623,
+      "name": "Cave tunnel",
+      "exits": {
+        "North": 2624,
+        "South": 2622
+      }
+    },
+    {
+      "id": 2624,
+      "name": "Cave room",
+      "exits": {
+        "East": 2625,
+        "South": 2623,
+        "West": 2643
+      }
+    },
+    {
+      "id": 2625,
+      "name": "Cave T-cross",
+      "exits": {
+        "East": 2626,
+        "South": 2630,
+        "West": 2624
+      }
+    },
+    {
+      "id": 2626,
+      "name": "Cave turning-point",
+      "exits": {
+        "South": 2627,
+        "West": 2625
+      }
+    },
+    {
+      "id": 2627,
+      "name": "The secret room",
+      "exits": {
+        "North": 2626,
+        "South": 2628
+      }
+    },
+    {
+      "id": 2628,
+      "name": "The mudhole",
+      "exits": {
+        "North": 2627,
+        "West": 2629
+      }
+    },
+    {
+      "id": 2629,
+      "name": "Tunnel",
+      "exits": {
+        "North": 2630,
+        "East": 2628,
+        "South": 2631
+      }
+    },
+    {
+      "id": 2630,
+      "name": "The long tunnel",
+      "exits": {
+        "North": 2625,
+        "South": 2629
+      }
+    },
+    {
+      "id": 2631,
+      "name": "The hot room",
+      "exits": {
+        "North": 2629,
+        "West": 2632
+      }
+    },
+    {
+      "id": 2632,
+      "name": "The small room",
+      "exits": {
+        "East": 2631,
+        "West": 2633
+      }
+    },
+    {
+      "id": 2633,
+      "name": "The stalagmite cave",
+      "exits": {
+        "North": 2636,
+        "East": 2632,
+        "South": 2634
+      }
+    },
+    {
+      "id": 2634,
+      "name": "The stalagmite tunnel",
+      "exits": {
+        "North": 2633,
+        "West": 2635
+      }
+    },
+    {
+      "id": 2635,
+      "name": "The spongy room",
+      "exits": {
+        "East": 2634,
+        "West": 2667
+      }
+    },
+    {
+      "id": 2636,
+      "name": "The stalagmite T-cross",
+      "exits": {
+        "North": 2639,
+        "East": 2637,
+        "South": 2633
+      }
+    },
+    {
+      "id": 2637,
+      "name": "The blind end room",
+      "exits": {
+        "North": 2638,
+        "West": 2636
+      }
+    },
+    {
+      "id": 2638,
+      "name": "The treasure room",
+      "exits": {
+        "South": 2637
+      }
+    },
+    {
+      "id": 2639,
+      "name": "The square lair",
+      "exits": {
+        "North": 2640,
+        "South": 2636,
+        "West": 2642
+      }
+    },
+    {
+      "id": 2640,
+      "name": "The square lair",
+      "exits": {
+        "East": 2643,
+        "South": 2639,
+        "West": 2641
+      }
+    },
+    {
+      "id": 2641,
+      "name": "The square lair",
+      "exits": {
+        "North": 2644,
+        "East": 2640,
+        "South": 2642
+      }
+    },
+    {
+      "id": 2642,
+      "name": "The lair end",
+      "exits": {
+        "North": 2641,
+        "East": 2639
+      }
+    },
+    {
+      "id": 2643,
+      "name": "East tunnel",
+      "exits": {
+        "East": 2624,
+        "West": 2640
+      }
+    },
+    {
+      "id": 2644,
+      "name": "North tunnel",
+      "exits": {
+        "North": 2645,
+        "South": 2641,
+        "West": 2658
+      }
+    },
+    {
+      "id": 2645,
+      "name": "The L-shaped room.",
+      "exits": {
+        "East": 2646,
+        "South": 2644
+      }
+    },
+    {
+      "id": 2646,
+      "name": "The Circular hall.",
+      "exits": {
+        "East": 2647,
+        "West": 2645
+      }
+    },
+    {
+      "id": 2647,
+      "name": "Dusty tunnel",
+      "exits": {
+        "East": 2648,
+        "West": 2646
+      }
+    },
+    {
+      "id": 2648,
+      "name": "The crossing",
+      "exits": {
+        "North": 2653,
+        "East": 2652,
+        "South": 2649,
+        "West": 2647
+      }
+    },
+    {
+      "id": 2649,
+      "name": "The L-shaped room",
+      "exits": {
+        "North": 2648,
+        "East": 2650
+      }
+    },
+    {
+      "id": 2650,
+      "name": "Dragons lair",
+      "exits": {
+        "North": 2651,
+        "West": 2649
+      }
+    },
+    {
+      "id": 2651,
+      "name": "The burned room",
+      "exits": {
+        "South": 2650,
+        "West": 2652
+      }
+    },
+    {
+      "id": 2652,
+      "name": "The wind tunnel",
+      "exits": {
+        "East": 2651,
+        "West": 2648
+      }
+    },
+    {
+      "id": 2653,
+      "name": "The glittering room",
+      "exits": {
+        "East": 2654,
+        "South": 2648,
+        "West": 2655
+      }
+    },
+    {
+      "id": 2654,
+      "name": "The secret passageroom",
+      "exits": {
+        "West": 2653
+      }
+    },
+    {
+      "id": 2655,
+      "name": "End of long tunnel",
+      "exits": {
+        "East": 2653,
+        "West": 2656
+      }
+    },
+    {
+      "id": 2656,
+      "name": "Stair-room",
+      "exits": {
+        "South": 2657
+      }
+    },
+    {
+      "id": 2657,
+      "name": "Dark tunnel",
+      "exits": {
+        "North": 2656,
+        "South": 2658
+      }
+    },
+    {
+      "id": 2658,
+      "name": "Entrance to lair",
+      "exits": {
+        "North": 2657,
+        "East": 2644,
+        "South": 2659
+      }
+    },
+    {
+      "id": 2659,
+      "name": "North-eastern part of Basilisks cave",
+      "exits": {
+        "North": 2658,
+        "South": 2660,
+        "West": 2661
+      }
+    },
+    {
+      "id": 2660,
+      "name": "South-eastern part of basilisks cave",
+      "exits": {
+        "North": 2659,
+        "West": 2662
+      }
+    },
+    {
+      "id": 2661,
+      "name": "North-western part of basilisks cave",
+      "exits": {
+        "East": 2659,
+        "South": 2662
+      }
+    },
+    {
+      "id": 2662,
+      "name": "South-western part of basilisks cave",
+      "exits": {
+        "North": 2661,
+        "East": 2660,
+        "South": 2663
+      }
+    },
+    {
+      "id": 2663,
+      "name": "The small cave",
+      "exits": {
+        "North": 2662,
+        "South": 2664
+      }
+    },
+    {
+      "id": 2664,
+      "name": "The northern end of the pool",
+      "exits": {
+        "North": 2663,
+        "East": 2665,
+        "South": 2666
+      }
+    },
+    {
+      "id": 2665,
+      "name": "The pool",
+      "exits": {
+        "South": 2667,
+        "West": 2664
+      }
+    },
+    {
+      "id": 2666,
+      "name": "The south end of the pool",
+      "exits": {
+        "North": 2664,
+        "East": 2667
+      }
+    },
+    {
+      "id": 2667,
+      "name": "The pool",
+      "exits": {
+        "North": 2665,
+        "East": 2635,
+        "West": 2666
+      }
+    }
+  ]
+}

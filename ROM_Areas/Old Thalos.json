@@ -1,0 +1,738 @@
+{
+  "name": "Old Thalos",
+  "rooms": [
+    {
+      "id": 1598,
+      "name": "The Grand Gate of Thalos",
+      "exits": {
+        "East": 1653,
+        "West": 1599
+      }
+    },
+    {
+      "id": 1599,
+      "name": "Main Street",
+      "exits": {
+        "North": 1637,
+        "East": 1598,
+        "South": 1652,
+        "West": 1600
+      }
+    },
+    {
+      "id": 1600,
+      "name": "Main Street",
+      "exits": {
+        "North": 1634,
+        "East": 1599,
+        "South": 1630,
+        "West": 1601
+      }
+    },
+    {
+      "id": 1601,
+      "name": "A Garden Path",
+      "exits": {
+        "North": 1602,
+        "East": 1600,
+        "South": 1604,
+        "West": 1647
+      }
+    },
+    {
+      "id": 1602,
+      "name": "A Garden Path",
+      "exits": {
+        "North": 1609,
+        "South": 1601,
+        "West": 1603
+      }
+    },
+    {
+      "id": 1603,
+      "name": "A garden path",
+      "exits": {
+        "East": 1602,
+        "South": 1647
+      }
+    },
+    {
+      "id": 1604,
+      "name": "A Garden Path",
+      "exits": {
+        "North": 1601,
+        "South": 1610
+      }
+    },
+    {
+      "id": 1605,
+      "name": "The market place",
+      "exits": {
+        "North": 1623,
+        "South": 1618,
+        "West": 1606
+      }
+    },
+    {
+      "id": 1606,
+      "name": "The market place",
+      "exits": {
+        "North": 1620,
+        "East": 1605,
+        "South": 1615
+      }
+    },
+    {
+      "id": 1607,
+      "name": "A Side Street",
+      "exits": {
+        "East": 1641,
+        "South": 1608,
+        "West": 1626
+      }
+    },
+    {
+      "id": 1608,
+      "name": "A Side Street",
+      "exits": {
+        "North": 1607,
+        "East": 1642,
+        "South": 1609,
+        "West": 1624
+      }
+    },
+    {
+      "id": 1609,
+      "name": "A Side Street",
+      "exits": {
+        "North": 1608,
+        "East": 1635,
+        "South": 1602,
+        "West": 1625
+      }
+    },
+    {
+      "id": 1610,
+      "name": "A side street",
+      "exits": {
+        "North": 1604,
+        "East": 1630,
+        "South": 1611,
+        "West": 1619
+      }
+    },
+    {
+      "id": 1611,
+      "name": "A side street",
+      "exits": {
+        "North": 1610,
+        "East": 1628,
+        "South": 1612,
+        "West": 1617
+      }
+    },
+    {
+      "id": 1612,
+      "name": "A side street",
+      "exits": {
+        "North": 1611,
+        "East": 1648,
+        "South": 1627,
+        "West": 1616
+      }
+    },
+    {
+      "id": 1613,
+      "name": "Under another grand watchtower",
+      "exits": {
+        "North": 1614,
+        "East": 1616,
+        "Up": 1645
+      }
+    },
+    {
+      "id": 1614,
+      "name": "A back alley",
+      "exits": {
+        "North": 1615,
+        "South": 1613
+      }
+    },
+    {
+      "id": 1615,
+      "name": "The meat stand",
+      "exits": {
+        "North": 1606,
+        "East": 1618,
+        "South": 1614
+      }
+    },
+    {
+      "id": 1616,
+      "name": "A back alley",
+      "exits": {
+        "East": 1612,
+        "West": 1613
+      }
+    },
+    {
+      "id": 1617,
+      "name": "The guild house",
+      "exits": {
+        "East": 1611
+      }
+    },
+    {
+      "id": 1618,
+      "name": "The produce stand",
+      "exits": {
+        "North": 1605,
+        "West": 1615
+      }
+    },
+    {
+      "id": 1619,
+      "name": "The smithy",
+      "exits": {
+        "East": 1610
+      }
+    },
+    {
+      "id": 1620,
+      "name": "The tapestry stand",
+      "exits": {
+        "North": 1621,
+        "East": 1623,
+        "South": 1606
+      }
+    },
+    {
+      "id": 1621,
+      "name": "A back alley",
+      "exits": {
+        "North": 1622,
+        "South": 1620
+      }
+    },
+    {
+      "id": 1622,
+      "name": "Under the watchtower",
+      "exits": {
+        "East": 1626,
+        "South": 1621,
+        "Up": 1644
+      }
+    },
+    {
+      "id": 1623,
+      "name": "The jewelery stand",
+      "exits": {
+        "South": 1605,
+        "West": 1620
+      }
+    },
+    {
+      "id": 1624,
+      "name": "A simple clay dwelling",
+      "exits": {
+        "East": 1608
+      }
+    },
+    {
+      "id": 1625,
+      "name": "A stone dwelling",
+      "exits": {
+        "East": 1609
+      }
+    },
+    {
+      "id": 1626,
+      "name": "A back alley",
+      "exits": {
+        "East": 1607,
+        "West": 1622
+      }
+    },
+    {
+      "id": 1627,
+      "name": "A busy shop",
+      "exits": {
+        "North": 1612
+      }
+    },
+    {
+      "id": 1628,
+      "name": "The Tavern of the Sun",
+      "exits": {
+        "West": 1611
+      }
+    },
+    {
+      "id": 1629,
+      "name": "South wing of the city hall",
+      "exits": {
+        "North": 1630,
+        "East": 1632
+      }
+    },
+    {
+      "id": 1630,
+      "name": "The city hall",
+      "exits": {
+        "North": 1600,
+        "East": 1631,
+        "South": 1629,
+        "West": 1610
+      }
+    },
+    {
+      "id": 1631,
+      "name": "East wing of the city hall",
+      "exits": {
+        "South": 1632,
+        "West": 1630
+      }
+    },
+    {
+      "id": 1632,
+      "name": "The private gardens and courtyard of Thalos",
+      "exits": {
+        "North": 1631,
+        "West": 1629
+      }
+    },
+    {
+      "id": 1633,
+      "name": "A small guard house",
+      "exits": {
+        "East": 1652
+      }
+    },
+    {
+      "id": 1634,
+      "name": "An impressive house",
+      "exits": {
+        "South": 1600
+      }
+    },
+    {
+      "id": 1635,
+      "name": "A Public Library",
+      "exits": {
+        "East": 1636,
+        "West": 1609,
+        "Up": 1643
+      }
+    },
+    {
+      "id": 1636,
+      "name": "The Library Addition",
+      "exits": {
+        "West": 1635
+      }
+    },
+    {
+      "id": 1637,
+      "name": "A back alley",
+      "exits": {
+        "North": 1638,
+        "South": 1599
+      }
+    },
+    {
+      "id": 1638,
+      "name": "A back alley",
+      "exits": {
+        "North": 1639,
+        "South": 1637
+      }
+    },
+    {
+      "id": 1639,
+      "name": "Under a watchtower",
+      "exits": {
+        "South": 1638,
+        "West": 1641,
+        "Up": 1646
+      }
+    },
+    {
+      "id": 1640,
+      "name": "A bath house",
+      "exits": {
+        "North": 1641,
+        "West": 1642
+      }
+    },
+    {
+      "id": 1641,
+      "name": "A back alley",
+      "exits": {
+        "East": 1639,
+        "South": 1640,
+        "West": 1607
+      }
+    },
+    {
+      "id": 1642,
+      "name": "A Resting Room",
+      "exits": {
+        "East": 1640,
+        "West": 1608
+      }
+    },
+    {
+      "id": 1643,
+      "name": "On the second floor of the library",
+      "exits": {
+        "Down": 1635
+      }
+    },
+    {
+      "id": 1644,
+      "name": "The north-west watchtower",
+      "exits": {
+        "Down": 1622
+      }
+    },
+    {
+      "id": 1645,
+      "name": "The south-west watchtower",
+      "exits": {
+        "Down": 1613
+      }
+    },
+    {
+      "id": 1646,
+      "name": "The north-east watchtower",
+      "exits": {
+        "Down": 1639
+      }
+    },
+    {
+      "id": 1647,
+      "name": "The Temple of Thalos",
+      "exits": {
+        "North": 1603,
+        "East": 1601
+      }
+    },
+    {
+      "id": 1648,
+      "name": "A back alley",
+      "exits": {
+        "East": 1649,
+        "West": 1612
+      }
+    },
+    {
+      "id": 1649,
+      "name": "Under a watchtower",
+      "exits": {
+        "North": 1650,
+        "West": 1648,
+        "Up": 1651
+      }
+    },
+    {
+      "id": 1650,
+      "name": "A back alley",
+      "exits": {
+        "North": 1652,
+        "South": 1649
+      }
+    },
+    {
+      "id": 1651,
+      "name": "The south-east watchtower",
+      "exits": {
+        "Down": 1649
+      }
+    },
+    {
+      "id": 1652,
+      "name": "A back alley",
+      "exits": {
+        "North": 1599,
+        "South": 1650,
+        "West": 1633
+      }
+    },
+    {
+      "id": 1653,
+      "name": "A trail at the end of the dwarf forest",
+      "exits": {
+        "East": 1654,
+        "West": 1598
+      }
+    },
+    {
+      "id": 1654,
+      "name": "A trail at the end of the dwarf forest",
+      "exits": {
+        "East": 1655,
+        "West": 1653
+      }
+    },
+    {
+      "id": 1655,
+      "name": "The dwarf forest",
+      "exits": {
+        "North": 1656,
+        "West": 1654
+      }
+    },
+    {
+      "id": 1656,
+      "name": "The dwarf forest",
+      "exits": {
+        "North": 1657,
+        "South": 1655
+      }
+    },
+    {
+      "id": 1657,
+      "name": "The dwarf forest",
+      "exits": {
+        "North": 1658,
+        "South": 1656
+      }
+    },
+    {
+      "id": 1658,
+      "name": "The dwarf forest",
+      "exits": {
+        "North": 1659,
+        "South": 1657
+      }
+    },
+    {
+      "id": 1659,
+      "name": "The Cross Roads",
+      "exits": {
+        "North": 1660,
+        "East": 1666,
+        "South": 1658,
+        "West": 1661
+      }
+    },
+    {
+      "id": 1660,
+      "name": "The Lane",
+      "exits": {
+        "North": 1662,
+        "South": 1659
+      }
+    },
+    {
+      "id": 1661,
+      "name": "City Entrance",
+      "exits": {
+        "East": 1659,
+        "West": 1682
+      }
+    },
+    {
+      "id": 1662,
+      "name": "The Plains",
+      "exits": {
+        "South": 1660
+      }
+    },
+    {
+      "id": 1663,
+      "name": "The holy grove",
+      "exits": {
+        "East": 1664,
+        "South": 1666
+      }
+    },
+    {
+      "id": 1664,
+      "name": "The holy grove",
+      "exits": {
+        "East": 1665,
+        "South": 1667,
+        "West": 1663
+      }
+    },
+    {
+      "id": 1665,
+      "name": "A clearing in the woods",
+      "exits": {
+        "North": 1672,
+        "South": 1668,
+        "West": 1664
+      }
+    },
+    {
+      "id": 1666,
+      "name": "The holy grove",
+      "exits": {
+        "North": 1663,
+        "East": 1667,
+        "South": 1669,
+        "West": 1659
+      }
+    },
+    {
+      "id": 1667,
+      "name": "The sacred glade",
+      "exits": {
+        "North": 1664,
+        "East": 1668,
+        "South": 1670,
+        "West": 1666
+      }
+    },
+    {
+      "id": 1668,
+      "name": "The holy grove",
+      "exits": {
+        "North": 1665,
+        "South": 1671,
+        "West": 1667
+      }
+    },
+    {
+      "id": 1669,
+      "name": "The holy grove",
+      "exits": {
+        "North": 1666,
+        "East": 1670
+      }
+    },
+    {
+      "id": 1670,
+      "name": "The sunny field",
+      "exits": {
+        "North": 1667,
+        "West": 1669
+      }
+    },
+    {
+      "id": 1671,
+      "name": "The croquet lawn",
+      "exits": {
+        "North": 1668
+      }
+    },
+    {
+      "id": 1672,
+      "name": "The Void",
+      "exits": {
+        "East": 1675,
+        "South": 1665,
+        "West": 1675,
+        "Up": 1673,
+        "Down": 1673
+      }
+    },
+    {
+      "id": 1673,
+      "name": "The Void",
+      "exits": {
+        "North": 1674,
+        "East": 1673,
+        "South": 1674,
+        "West": 1673,
+        "Up": 1672,
+        "Down": 1672
+      }
+    },
+    {
+      "id": 1674,
+      "name": "The Void",
+      "exits": {
+        "North": 1673,
+        "East": 1674,
+        "South": 1673,
+        "West": 1674,
+        "Up": 1675,
+        "Down": 1675
+      }
+    },
+    {
+      "id": 889,
+      "otherAreaExit": true,
+      "name": "To Holy Grove",
+      "exits": {
+        "North": 1675
+      }
+    },
+    {
+      "id": 1675,
+      "name": "The Void",
+      "exits": {
+        "East": 1672,
+        "South": 889,
+        "West": 1672,
+        "Up": 1674,
+        "Down": 1674
+      }
+    },
+    {
+      "id": 1676,
+      "name": "The Temple Of Midgaard",
+      "exits": {
+        "North": 1683,
+        "South": 1677
+      }
+    },
+    {
+      "id": 1677,
+      "name": "The Temple Square",
+      "exits": {
+        "North": 1676,
+        "South": 1678
+      }
+    },
+    {
+      "id": 1678,
+      "name": "Market Square",
+      "exits": {
+        "North": 1677,
+        "East": 1679
+      }
+    },
+    {
+      "id": 1679,
+      "name": "The Main Street",
+      "exits": {
+        "East": 1680,
+        "West": 1678
+      }
+    },
+    {
+      "id": 1680,
+      "name": "The Main Street",
+      "exits": {
+        "East": 1681,
+        "West": 1679
+      }
+    },
+    {
+      "id": 1681,
+      "name": "Inside the East Gate of Midgaard",
+      "exits": {
+        "East": 1682,
+        "West": 1680
+      }
+    },
+    {
+      "id": 1682,
+      "name": "Outside the East Gate of Midgaard",
+      "exits": {
+        "East": 1661,
+        "West": 1681
+      }
+    },
+    {
+      "id": 1683,
+      "name": "By the Temple Altar",
+      "exits": {
+        "South": 1676
+      }
+    }
+  ]
+}

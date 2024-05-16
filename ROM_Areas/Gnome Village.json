@@ -1,0 +1,728 @@
+{
+  "name": "Gnome Village",
+  "rooms": [
+    {
+      "id": 1427,
+      "otherAreaExit": true,
+      "name": "To Miden\u0027nir",
+      "exits": {
+        "South": 765
+      }
+    },
+    {
+      "id": 765,
+      "name": "Entrance to Gnome Village",
+      "exits": {
+        "North": 1427,
+        "East": 766
+      }
+    },
+    {
+      "id": 766,
+      "name": "A Dusty Path",
+      "exits": {
+        "North": 773,
+        "East": 767,
+        "West": 765
+      }
+    },
+    {
+      "id": 767,
+      "name": "A Road in the Village",
+      "exits": {
+        "North": 769,
+        "East": 768,
+        "South": 771,
+        "West": 766
+      }
+    },
+    {
+      "id": 768,
+      "name": "A Dusty Path",
+      "exits": {
+        "North": 776,
+        "East": 822,
+        "South": 777,
+        "West": 767
+      }
+    },
+    {
+      "id": 769,
+      "name": "A Road in the Village",
+      "exits": {
+        "North": 770,
+        "East": 775,
+        "South": 767,
+        "West": 774
+      }
+    },
+    {
+      "id": 770,
+      "name": "A Road in the Village",
+      "exits": {
+        "North": 789,
+        "South": 769
+      }
+    },
+    {
+      "id": 771,
+      "name": "A Road in the Village",
+      "exits": {
+        "North": 767,
+        "South": 772,
+        "West": 778
+      }
+    },
+    {
+      "id": 772,
+      "name": "A Road in the Village",
+      "exits": {
+        "North": 771,
+        "East": 780,
+        "South": 781,
+        "West": 779
+      }
+    },
+    {
+      "id": 773,
+      "name": "A Small Gnome House",
+      "exits": {
+        "South": 766
+      }
+    },
+    {
+      "id": 774,
+      "name": "A Small Gnome House",
+      "exits": {
+        "East": 769
+      }
+    },
+    {
+      "id": 775,
+      "name": "A Small Gnome House",
+      "exits": {
+        "West": 769
+      }
+    },
+    {
+      "id": 776,
+      "name": "A Small Gnome House",
+      "exits": {
+        "South": 768
+      }
+    },
+    {
+      "id": 777,
+      "name": "A Small Gnome House",
+      "exits": {
+        "North": 768
+      }
+    },
+    {
+      "id": 778,
+      "name": "A Gnome Shop",
+      "exits": {
+        "East": 771
+      }
+    },
+    {
+      "id": 779,
+      "name": "A Gnome Shop",
+      "exits": {
+        "East": 772
+      }
+    },
+    {
+      "id": 780,
+      "name": "A Gnome Shop",
+      "exits": {
+        "West": 772
+      }
+    },
+    {
+      "id": 781,
+      "name": "Path by a Stream",
+      "exits": {
+        "North": 772,
+        "South": 784,
+        "West": 782
+      }
+    },
+    {
+      "id": 782,
+      "name": "Path by a Stream",
+      "exits": {
+        "East": 781,
+        "South": 785,
+        "West": 783
+      }
+    },
+    {
+      "id": 783,
+      "name": "A Small Hut",
+      "exits": {
+        "East": 782
+      }
+    },
+    {
+      "id": 784,
+      "name": "On the Stream",
+      "exits": {
+        "North": 781,
+        "South": 786,
+        "West": 785
+      }
+    },
+    {
+      "id": 785,
+      "name": "On the Stream",
+      "exits": {
+        "North": 782,
+        "East": 784
+      }
+    },
+    {
+      "id": 786,
+      "name": "The Field of Mice\u0027s Dreams",
+      "exits": {
+        "North": 784,
+        "East": 787
+      }
+    },
+    {
+      "id": 787,
+      "name": "The Dark Cave",
+      "exits": {
+        "North": 788,
+        "West": 786
+      }
+    },
+    {
+      "id": 788,
+      "name": "Darker Cave",
+      "exits": {
+        "South": 787
+      }
+    },
+    {
+      "id": 789,
+      "name": "A Dusty Path",
+      "exits": {
+        "North": 821,
+        "South": 770,
+        "West": 790
+      }
+    },
+    {
+      "id": 790,
+      "name": "The Iron Gateway",
+      "exits": {
+        "East": 789,
+        "West": 791
+      }
+    },
+    {
+      "id": 791,
+      "name": "A Long Hallway",
+      "exits": {
+        "North": 793,
+        "East": 790,
+        "South": 795,
+        "West": 792
+      }
+    },
+    {
+      "id": 792,
+      "name": "A Long Hallway",
+      "exits": {
+        "East": 791,
+        "South": 797,
+        "West": 798
+      }
+    },
+    {
+      "id": 793,
+      "name": "The Barracks",
+      "exits": {
+        "East": 794,
+        "South": 791
+      }
+    },
+    {
+      "id": 794,
+      "name": "A Small Storage Room",
+      "exits": {
+        "West": 793
+      }
+    },
+    {
+      "id": 795,
+      "name": "A Small Storage Room",
+      "exits": {
+        "North": 791,
+        "East": 796
+      }
+    },
+    {
+      "id": 796,
+      "name": "A Small Storage Room",
+      "exits": {
+        "West": 795
+      }
+    },
+    {
+      "id": 797,
+      "name": "The Mess Hall",
+      "exits": {
+        "North": 792
+      }
+    },
+    {
+      "id": 798,
+      "name": "A Small Room",
+      "exits": {
+        "East": 792,
+        "Down": 799
+      }
+    },
+    {
+      "id": 799,
+      "name": "A Small Unused Room",
+      "exits": {
+        "East": 800,
+        "Up": 798
+      }
+    },
+    {
+      "id": 800,
+      "name": "Dark Hallway",
+      "exits": {
+        "East": 801,
+        "South": 802,
+        "West": 799
+      }
+    },
+    {
+      "id": 801,
+      "name": "Torture Chamber",
+      "exits": {
+        "West": 800
+      }
+    },
+    {
+      "id": 802,
+      "name": "Dark Hallway",
+      "exits": {
+        "North": 800,
+        "East": 805,
+        "South": 803,
+        "West": 804
+      }
+    },
+    {
+      "id": 803,
+      "name": "Dark Hallway",
+      "exits": {
+        "North": 802,
+        "East": 807,
+        "South": 806,
+        "West": 808
+      }
+    },
+    {
+      "id": 804,
+      "name": "Prison Cell",
+      "exits": {
+        "East": 802
+      }
+    },
+    {
+      "id": 805,
+      "name": "Prison Cell",
+      "exits": {
+        "West": 802
+      }
+    },
+    {
+      "id": 806,
+      "name": "Prison Cell",
+      "exits": {
+        "North": 803
+      }
+    },
+    {
+      "id": 807,
+      "name": "Prison Cell",
+      "exits": {
+        "West": 803
+      }
+    },
+    {
+      "id": 808,
+      "name": "End of the Dark Hallway",
+      "exits": {
+        "East": 803,
+        "West": 809
+      }
+    },
+    {
+      "id": 809,
+      "name": "A Ladder",
+      "exits": {
+        "East": 808,
+        "Down": 810
+      }
+    },
+    {
+      "id": 810,
+      "name": "Lair",
+      "exits": {
+        "South": 811,
+        "Up": 809
+      }
+    },
+    {
+      "id": 811,
+      "name": "A Damp Hallway",
+      "exits": {
+        "North": 810,
+        "East": 812,
+        "West": 814
+      }
+    },
+    {
+      "id": 812,
+      "name": "A Damp Hallway",
+      "exits": {
+        "South": 813,
+        "West": 811
+      }
+    },
+    {
+      "id": 813,
+      "name": "A Damp Hallway",
+      "exits": {
+        "North": 812,
+        "South": 818
+      }
+    },
+    {
+      "id": 814,
+      "name": "A Damp Hallway",
+      "exits": {
+        "East": 811,
+        "South": 815
+      }
+    },
+    {
+      "id": 815,
+      "name": "A Damp Hallway",
+      "exits": {
+        "North": 814,
+        "South": 816
+      }
+    },
+    {
+      "id": 816,
+      "name": "A Damp Hallway",
+      "exits": {
+        "North": 815,
+        "East": 817
+      }
+    },
+    {
+      "id": 817,
+      "name": "A Damp Hallway",
+      "exits": {
+        "North": 819,
+        "East": 818,
+        "West": 816
+      }
+    },
+    {
+      "id": 818,
+      "name": "A Damp Hallway",
+      "exits": {
+        "North": 813,
+        "West": 817
+      }
+    },
+    {
+      "id": 819,
+      "name": "The End of the Hallway",
+      "exits": {
+        "East": 820,
+        "South": 817
+      }
+    },
+    {
+      "id": 820,
+      "name": "The Altar",
+      "exits": {
+        "West": 819
+      }
+    },
+    {
+      "id": 821,
+      "name": "The Chief\u0027s House",
+      "exits": {
+        "South": 789
+      }
+    },
+    {
+      "id": 822,
+      "name": "The Unused Path",
+      "exits": {
+        "East": 823,
+        "West": 768
+      }
+    },
+    {
+      "id": 823,
+      "name": "The Overgrown Path",
+      "exits": {
+        "East": 824,
+        "West": 822
+      }
+    },
+    {
+      "id": 824,
+      "name": "The Clearing",
+      "exits": {
+        "North": 825,
+        "West": 823
+      }
+    },
+    {
+      "id": 825,
+      "name": "Entrance to the Mine Shaft",
+      "exits": {
+        "East": 826,
+        "South": 824
+      }
+    },
+    {
+      "id": 826,
+      "name": "Mine Shaft",
+      "exits": {
+        "North": 845,
+        "East": 827,
+        "South": 837,
+        "West": 825
+      }
+    },
+    {
+      "id": 827,
+      "name": "Mine Shaft",
+      "exits": {
+        "North": 846,
+        "East": 828,
+        "South": 836,
+        "West": 826
+      }
+    },
+    {
+      "id": 828,
+      "name": "Mine Shaft",
+      "exits": {
+        "East": 829,
+        "South": 835,
+        "West": 827
+      }
+    },
+    {
+      "id": 829,
+      "name": "Walkway",
+      "exits": {
+        "South": 830,
+        "West": 828
+      }
+    },
+    {
+      "id": 830,
+      "name": "Walkway",
+      "exits": {
+        "North": 829,
+        "South": 831
+      }
+    },
+    {
+      "id": 831,
+      "name": "The Grand Hall",
+      "exits": {
+        "North": 830,
+        "South": 832
+      }
+    },
+    {
+      "id": 832,
+      "name": "The Throne Room",
+      "exits": {
+        "North": 831
+      }
+    },
+    {
+      "id": 833,
+      "name": "The Treasury",
+      "exits": {
+        "North": 834
+      }
+    },
+    {
+      "id": 834,
+      "name": "Guarded Room",
+      "exits": {
+        "North": 835,
+        "South": 833
+      }
+    },
+    {
+      "id": 835,
+      "name": "Guarded Room",
+      "exits": {
+        "North": 828,
+        "South": 834
+      }
+    },
+    {
+      "id": 836,
+      "name": "Hobgoblin Armory",
+      "exits": {
+        "North": 827
+      }
+    },
+    {
+      "id": 837,
+      "name": "Mine Shaft",
+      "exits": {
+        "North": 826,
+        "South": 838
+      }
+    },
+    {
+      "id": 838,
+      "name": "Entrance to a Dungeon",
+      "exits": {
+        "North": 837,
+        "East": 840,
+        "South": 839,
+        "West": 844
+      }
+    },
+    {
+      "id": 839,
+      "name": "A Dungeon",
+      "exits": {
+        "North": 838,
+        "East": 841,
+        "South": 842,
+        "West": 843
+      }
+    },
+    {
+      "id": 840,
+      "name": "A Jail Cell",
+      "exits": {
+        "West": 838
+      }
+    },
+    {
+      "id": 841,
+      "name": "The Jail Cell",
+      "exits": {
+        "West": 839
+      }
+    },
+    {
+      "id": 842,
+      "name": "The Jail Cell",
+      "exits": {
+        "North": 839
+      }
+    },
+    {
+      "id": 843,
+      "name": "The Jail Cell",
+      "exits": {
+        "East": 839
+      }
+    },
+    {
+      "id": 844,
+      "name": "The Jail Cell",
+      "exits": {
+        "East": 838
+      }
+    },
+    {
+      "id": 845,
+      "name": "Small Mine Shaft",
+      "exits": {
+        "North": 851,
+        "South": 826
+      }
+    },
+    {
+      "id": 846,
+      "name": "Hobgoblin Barracks",
+      "exits": {
+        "North": 847,
+        "East": 848,
+        "South": 827
+      }
+    },
+    {
+      "id": 847,
+      "name": "Hobgoblin Barracks",
+      "exits": {
+        "South": 846
+      }
+    },
+    {
+      "id": 848,
+      "name": "Mess Hall",
+      "exits": {
+        "North": 849,
+        "East": 850,
+        "West": 846
+      }
+    },
+    {
+      "id": 849,
+      "name": "A Store Room",
+      "exits": {
+        "South": 848
+      }
+    },
+    {
+      "id": 850,
+      "name": "The Kitchen",
+      "exits": {
+        "West": 848
+      }
+    },
+    {
+      "id": 851,
+      "name": "A Small Mine Shaft",
+      "exits": {
+        "North": 852,
+        "South": 845,
+        "Down": 853
+      }
+    },
+    {
+      "id": 852,
+      "name": "Hermit\u0027s Lair",
+      "exits": {
+        "South": 851
+      }
+    },
+    {
+      "id": 853,
+      "name": "A Hole",
+      "exits": {
+        "Up": 851
+      }
+    }
+  ]
+}

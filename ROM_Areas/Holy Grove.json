@@ -1,0 +1,215 @@
+{
+  "name": "Holy Grove",
+  "rooms": [
+    {
+      "id": 887,
+      "name": "The holy grove",
+      "exits": {
+        "East": 888,
+        "South": 890
+      }
+    },
+    {
+      "id": 888,
+      "name": "The holy grove",
+      "exits": {
+        "East": 889,
+        "South": 891,
+        "West": 887
+      }
+    },
+    {
+      "id": 1675,
+      "otherAreaExit": true,
+      "name": "To Old Thalos",
+      "exits": {
+        "South": 889
+      }
+    },
+    {
+      "id": 889,
+      "name": "A clearing in the woods",
+      "exits": {
+        "North": 1675,
+        "South": 892,
+        "West": 888
+      }
+    },
+    {
+      "id": 890,
+      "name": "The holy grove",
+      "exits": {
+        "North": 887,
+        "East": 891,
+        "South": 893,
+        "West": 907
+      }
+    },
+    {
+      "id": 2087,
+      "otherAreaExit": true,
+      "name": "To Nirvana",
+      "exits": {
+        "Down": 891
+      }
+    },
+    {
+      "id": 891,
+      "name": "The sacred glade",
+      "exits": {
+        "North": 888,
+        "East": 892,
+        "South": 894,
+        "West": 890,
+        "Up": 2087
+      }
+    },
+    {
+      "id": 892,
+      "name": "The holy grove",
+      "exits": {
+        "North": 889,
+        "South": 895,
+        "West": 891
+      }
+    },
+    {
+      "id": 893,
+      "name": "The holy grove",
+      "exits": {
+        "North": 890,
+        "East": 894
+      }
+    },
+    {
+      "id": 894,
+      "name": "The sunny field",
+      "exits": {
+        "North": 891,
+        "East": 905,
+        "West": 893
+      }
+    },
+    {
+      "id": 895,
+      "name": "The croquet lawn",
+      "exits": {
+        "North": 892,
+        "South": 896
+      }
+    },
+    {
+      "id": 896,
+      "name": "The foyer",
+      "exits": {
+        "North": 895,
+        "South": 897
+      }
+    },
+    {
+      "id": 897,
+      "name": "The hallway",
+      "exits": {
+        "North": 896,
+        "East": 898,
+        "South": 899
+      }
+    },
+    {
+      "id": 898,
+      "name": "The blue room",
+      "exits": {
+        "West": 897
+      }
+    },
+    {
+      "id": 899,
+      "name": "The hallway",
+      "exits": {
+        "North": 897,
+        "East": 900,
+        "South": 901,
+        "West": 902
+      }
+    },
+    {
+      "id": 900,
+      "name": "The red room",
+      "exits": {
+        "West": 899
+      }
+    },
+    {
+      "id": 901,
+      "name": "The kitchen",
+      "exits": {
+        "North": 899,
+        "West": 904
+      }
+    },
+    {
+      "id": 902,
+      "name": "The ballroom",
+      "exits": {
+        "East": 899,
+        "South": 904,
+        "West": 903
+      }
+    },
+    {
+      "id": 903,
+      "name": "The greenhouse",
+      "exits": {
+        "East": 902,
+        "South": 905
+      }
+    },
+    {
+      "id": 904,
+      "name": "The dining hall",
+      "exits": {
+        "North": 902,
+        "East": 901,
+        "West": 905
+      }
+    },
+    {
+      "id": 905,
+      "name": "The terrace",
+      "exits": {
+        "North": 903,
+        "East": 904,
+        "West": 894
+      }
+    },
+    {
+      "id": 1427,
+      "otherAreaExit": true,
+      "name": "To Miden\u0027nir",
+      "exits": {
+        "North": 906
+      }
+    },
+    {
+      "id": 906,
+      "name": "At the edge of the grove",
+      "exits": {
+        "North": 907,
+        "South": 1427
+      }
+    },
+    {
+      "id": 907,
+      "name": "Inside the grove",
+      "exits": {
+        "East": 890,
+        "South": 906
+      }
+    },
+    {
+      "id": 908,
+      "name": "The fog",
+      "exits": {}
+    }
+  ]
+}

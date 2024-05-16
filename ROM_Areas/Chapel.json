@@ -1,0 +1,568 @@
+{
+  "name": "Chapel",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": false,
+    "fixNonStraight": true,
+    "fixIntersected": true
+  },
+  "rooms": [
+    {
+      "id": 858,
+      "name": "To Graveyard",
+      "otherAreaExit": true,
+      "exits": {
+        "South": 301
+      }
+    },
+    {
+      "id": 301,
+      "name": "Inside the Chapel",
+      "exits": {
+        "North": 858,
+        "Down": 315
+      }
+    },
+    {
+      "id": 302,
+      "name": "Stairwell into Darkness",
+      "exits": {
+        "West": 343,
+        "Down": 344
+      }
+    },
+    {
+      "id": 303,
+      "name": "The Acolyte\u0027s Bedroom",
+      "exits": {}
+    },
+    {
+      "id": 304,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "East": 309,
+        "South": 305
+      }
+    },
+    {
+      "id": 305,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "North": 304
+      }
+    },
+    {
+      "id": 306,
+      "name": "The Grand Hall of Kings",
+      "exits": {
+        "East": 311,
+        "South": 307
+      }
+    },
+    {
+      "id": 307,
+      "name": "The Shrine of Shohan",
+      "exits": {
+        "North": 306,
+        "South": 308
+      }
+    },
+    {
+      "id": 308,
+      "name": "The Tomb of Shohan",
+      "exits": {
+        "North": 307,
+        "East": 313
+      }
+    },
+    {
+      "id": 309,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "East": 314,
+        "South": 310,
+        "West": 304
+      }
+    },
+    {
+      "id": 310,
+      "name": "Entrance to the Lower Chambers",
+      "exits": {
+        "North": 309,
+        "Up": 312
+      }
+    },
+    {
+      "id": 311,
+      "name": "The Grand Hall of Kings",
+      "exits": {
+        "East": 316,
+        "West": 306
+      }
+    },
+    {
+      "id": 312,
+      "name": "The Shrine of Cristis",
+      "exits": {
+        "South": 313,
+        "Down": 310
+      }
+    },
+    {
+      "id": 313,
+      "name": "The Tomb of Cristis",
+      "exits": {
+        "North": 312,
+        "West": 308
+      }
+    },
+    {
+      "id": 314,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "East": 319,
+        "West": 309
+      }
+    },
+    {
+      "id": 315,
+      "name": "Entrance Chamber to the Grand Hall of Kings",
+      "exits": {
+        "South": 316,
+        "Up": 301
+      }
+    },
+    {
+      "id": 316,
+      "name": "The Grand Hall of Kings",
+      "exits": {
+        "North": 315,
+        "East": 321,
+        "South": 317,
+        "West": 311
+      }
+    },
+    {
+      "id": 317,
+      "name": "The Shrine of Crotus",
+      "exits": {
+        "North": 316,
+        "South": 318
+      }
+    },
+    {
+      "id": 318,
+      "name": "The Tomb of Crotus",
+      "exits": {
+        "North": 317,
+        "East": 323
+      }
+    },
+    {
+      "id": 319,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "South": 320,
+        "West": 314
+      }
+    },
+    {
+      "id": 320,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "North": 319,
+        "East": 324
+      }
+    },
+    {
+      "id": 321,
+      "name": "The Grand Hall of Kings",
+      "exits": {
+        "East": 326,
+        "South": 322,
+        "West": 316
+      }
+    },
+    {
+      "id": 322,
+      "name": "The Shrine of Mitnar",
+      "exits": {
+        "North": 321,
+        "East": 327,
+        "South": 323
+      }
+    },
+    {
+      "id": 323,
+      "name": "The Tomb of Mitnar",
+      "exits": {
+        "North": 322,
+        "West": 318
+      }
+    },
+    {
+      "id": 324,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "East": 329,
+        "South": 325,
+        "West": 320
+      }
+    },
+    {
+      "id": 325,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "North": 324,
+        "East": 330
+      }
+    },
+    {
+      "id": 326,
+      "name": "The Grand Hall of Kings",
+      "exits": {
+        "East": 331,
+        "West": 321
+      }
+    },
+    {
+      "id": 327,
+      "name": "The Shrine of Frath",
+      "exits": {
+        "East": 332,
+        "West": 322
+      }
+    },
+    {
+      "id": 328,
+      "name": "The Tomb of Frath",
+      "exits": {
+        "Down": 333
+      }
+    },
+    {
+      "id": 329,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "East": 334,
+        "South": 330,
+        "West": 324
+      }
+    },
+    {
+      "id": 330,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "North": 329,
+        "East": 335,
+        "West": 325
+      }
+    },
+    {
+      "id": 331,
+      "name": "The Grand Hall of Kings",
+      "exits": {
+        "North": 303,
+        "West": 326
+      }
+    },
+    {
+      "id": 332,
+      "name": "The Shrine of Jubal",
+      "exits": {
+        "South": 333,
+        "West": 327
+      }
+    },
+    {
+      "id": 333,
+      "name": "The Tomb of Jubal",
+      "exits": {
+        "North": 332,
+        "Up": 328
+      }
+    },
+    {
+      "id": 334,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "East": 339,
+        "South": 335,
+        "West": 329
+      }
+    },
+    {
+      "id": 335,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "North": 334,
+        "East": 340,
+        "West": 330
+      }
+    },
+    {
+      "id": 336,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "East": 341,
+        "South": 337
+      }
+    },
+    {
+      "id": 337,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "North": 336,
+        "South": 338
+      }
+    },
+    {
+      "id": 338,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "North": 337,
+        "East": 343
+      }
+    },
+    {
+      "id": 339,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "South": 340,
+        "West": 334
+      }
+    },
+    {
+      "id": 340,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "North": 339,
+        "South": 341,
+        "West": 335
+      }
+    },
+    {
+      "id": 341,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "North": 340,
+        "South": 342,
+        "West": 336
+      }
+    },
+    {
+      "id": 342,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "North": 341
+      }
+    },
+    {
+      "id": 343,
+      "name": "The Lower Chambers and Tombs of the Undead",
+      "exits": {
+        "East": 302,
+        "West": 338
+      }
+    },
+    {
+      "id": 344,
+      "name": "Entrance to the Forbidden Catacombs",
+      "exits": {
+        "North": 345,
+        "East": 346,
+        "South": 347,
+        "West": 348,
+        "Up": 302
+      }
+    },
+    {
+      "id": 345,
+      "name": "The Catacombs",
+      "exits": {
+        "East": 349,
+        "South": 344
+      }
+    },
+    {
+      "id": 346,
+      "name": "The Catacombs",
+      "exits": {
+        "North": 355,
+        "West": 344
+      }
+    },
+    {
+      "id": 347,
+      "name": "The Catacombs",
+      "exits": {
+        "North": 344
+      }
+    },
+    {
+      "id": 348,
+      "name": "The Catacombs",
+      "exits": {
+        "East": 344
+      }
+    },
+    {
+      "id": 349,
+      "name": "The Catacombs",
+      "exits": {
+        "South": 350,
+        "West": 345
+      }
+    },
+    {
+      "id": 350,
+      "name": "The Catacombs",
+      "exits": {
+        "North": 349,
+        "East": 351
+      }
+    },
+    {
+      "id": 351,
+      "name": "The Catacombs",
+      "exits": {
+        "South": 352,
+        "West": 350
+      }
+    },
+    {
+      "id": 352,
+      "name": "The Catacombs",
+      "exits": {
+        "North": 351,
+        "South": 366,
+        "West": 353
+      }
+    },
+    {
+      "id": 353,
+      "name": "The Catacombs",
+      "exits": {
+        "East": 352,
+        "West": 354
+      }
+    },
+    {
+      "id": 354,
+      "name": "Den of the Vampire",
+      "exits": {
+        "East": 353,
+        "Down": 367
+      }
+    },
+    {
+      "id": 355,
+      "name": "The Catacombs",
+      "exits": {
+        "East": 356,
+        "South": 346
+      }
+    },
+    {
+      "id": 356,
+      "name": "The Catacombs",
+      "exits": {
+        "South": 357,
+        "West": 355
+      }
+    },
+    {
+      "id": 357,
+      "name": "The Catacombs",
+      "exits": {
+        "North": 356,
+        "East": 358
+      }
+    },
+    {
+      "id": 358,
+      "name": "The Catacombs",
+      "exits": {
+        "East": 364,
+        "South": 359,
+        "West": 357
+      }
+    },
+    {
+      "id": 359,
+      "name": "The Gilded Hallway",
+      "exits": {
+        "North": 358,
+        "South": 360
+      }
+    },
+    {
+      "id": 360,
+      "name": "The Gilded Hallway",
+      "exits": {
+        "North": 359,
+        "South": 361
+      }
+    },
+    {
+      "id": 361,
+      "name": "The Gilded Hallway",
+      "exits": {
+        "North": 360,
+        "South": 362
+      }
+    },
+    {
+      "id": 362,
+      "name": "The Gilded Hallway",
+      "exits": {
+        "North": 361,
+        "South": 363
+      }
+    },
+    {
+      "id": 363,
+      "name": "The Gilded Hallway",
+      "exits": {
+        "North": 362
+      }
+    },
+    {
+      "id": 364,
+      "name": "A Secret Passageway",
+      "exits": {
+        "South": 365,
+        "West": 358
+      }
+    },
+    {
+      "id": 365,
+      "name": "A Secret Passageway",
+      "exits": {
+        "North": 364
+      }
+    },
+    {
+      "id": 2836,
+      "name": "To Hell",
+      "otherAreaExit": true,
+      "exits": {
+        "South": 366
+      }
+    },
+    {
+      "id": 366,
+      "name": "The Short Way to Hell ...",
+      "exits": {
+        "North": 2836
+      }
+    },
+    {
+      "id": 367,
+      "name": "Inside the coffin",
+      "exits": {
+        "Up": 354
+      }
+    }
+  ]
+}

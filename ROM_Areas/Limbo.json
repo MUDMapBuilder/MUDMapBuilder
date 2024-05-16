@@ -1,0 +1,23 @@
+{
+  "name": "Limbo",
+  "rooms": [
+    {
+      "id": 1255,
+      "name": "The Void",
+      "exits": {}
+    },
+    {
+      "id": 1455,
+      "otherAreaExit": true,
+      "name": "To Midgaard",
+      "exits": {}
+    },
+    {
+      "id": 1256,
+      "name": "Limbo",
+      "exits": {
+        "Up": 1455
+      }
+    }
+  ]
+}

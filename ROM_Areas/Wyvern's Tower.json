@@ -1,0 +1,498 @@
+{
+  "name": "Wyvern\u0027s Tower",
+  "rooms": [
+    {
+      "id": 3066,
+      "name": "Rough East-West Path",
+      "exits": {
+        "East": 3067,
+        "West": 3110
+      }
+    },
+    {
+      "id": 3067,
+      "name": "Rough Path Between the Hills",
+      "exits": {
+        "East": 3068,
+        "West": 3066
+      }
+    },
+    {
+      "id": 3068,
+      "name": "Path through an Open Area",
+      "exits": {
+        "East": 3069,
+        "West": 3067
+      }
+    },
+    {
+      "id": 3069,
+      "name": "West Side of Moat",
+      "exits": {
+        "North": 3070,
+        "East": 3076,
+        "West": 3068
+      }
+    },
+    {
+      "id": 3070,
+      "name": "Path North of Moat",
+      "exits": {
+        "North": 3071,
+        "South": 3069
+      }
+    },
+    {
+      "id": 3071,
+      "name": "Cluster of Buildings",
+      "exits": {
+        "North": 3074,
+        "East": 3072,
+        "South": 3070,
+        "West": 3073
+      }
+    },
+    {
+      "id": 3072,
+      "name": "House of Pancakes",
+      "exits": {}
+    },
+    {
+      "id": 3073,
+      "name": "Old Store Room",
+      "exits": {
+        "East": 3071
+      }
+    },
+    {
+      "id": 3074,
+      "name": "Empty Room",
+      "exits": {
+        "South": 3071,
+        "Down": 3075
+      }
+    },
+    {
+      "id": 3075,
+      "name": "Minotaur\u0027s Room",
+      "exits": {
+        "Up": 3074
+      }
+    },
+    {
+      "id": 3076,
+      "name": "Western Moat",
+      "exits": {
+        "North": 3077,
+        "East": 3079,
+        "South": 3078,
+        "West": 3069
+      }
+    },
+    {
+      "id": 3077,
+      "name": "Northern Moat",
+      "exits": {
+        "South": 3076
+      }
+    },
+    {
+      "id": 3078,
+      "name": "Southern Moat",
+      "exits": {
+        "North": 3076
+      }
+    },
+    {
+      "id": 3079,
+      "name": "Tower Foyer",
+      "exits": {
+        "East": 3080,
+        "West": 3076
+      }
+    },
+    {
+      "id": 3080,
+      "name": "The Grand Lobby",
+      "exits": {
+        "East": 3081,
+        "West": 3079
+      }
+    },
+    {
+      "id": 3081,
+      "name": "Base of the Western Tower",
+      "exits": {
+        "North": 3083,
+        "East": 3082,
+        "South": 3084,
+        "West": 3080
+      }
+    },
+    {
+      "id": 3082,
+      "name": "The Musty Corridor",
+      "exits": {
+        "North": 3085,
+        "East": 3087,
+        "South": 3086,
+        "West": 3081
+      }
+    },
+    {
+      "id": 3083,
+      "name": "Kitchen",
+      "exits": {
+        "South": 3081
+      }
+    },
+    {
+      "id": 3084,
+      "name": "Conservatory",
+      "exits": {
+        "North": 3081
+      }
+    },
+    {
+      "id": 3085,
+      "name": "The Dining Hall",
+      "exits": {
+        "South": 3082
+      }
+    },
+    {
+      "id": 3086,
+      "name": "Art Gallery",
+      "exits": {
+        "North": 3082
+      }
+    },
+    {
+      "id": 3087,
+      "name": "Base of the Eastern Tower",
+      "exits": {
+        "North": 3088,
+        "South": 3089,
+        "West": 3082,
+        "Up": 3091
+      }
+    },
+    {
+      "id": 3088,
+      "name": "The Common Room",
+      "exits": {
+        "South": 3087,
+        "Down": 3090
+      }
+    },
+    {
+      "id": 3089,
+      "name": "Servant\u0027s Quarters",
+      "exits": {
+        "North": 3087
+      }
+    },
+    {
+      "id": 3090,
+      "name": "A Large Murky Cellar",
+      "exits": {
+        "Up": 3088
+      }
+    },
+    {
+      "id": 3091,
+      "name": "On the First Staircase",
+      "exits": {
+        "Up": 3092,
+        "Down": 3087
+      }
+    },
+    {
+      "id": 3092,
+      "name": "Second Level of the Eastern Tower",
+      "exits": {
+        "West": 3093,
+        "Down": 3091
+      }
+    },
+    {
+      "id": 3093,
+      "name": "The Elegant Hall",
+      "exits": {
+        "North": 3094,
+        "East": 3092,
+        "South": 3095,
+        "West": 3096
+      }
+    },
+    {
+      "id": 3094,
+      "name": "The Shaman\u0027s Room",
+      "exits": {
+        "South": 3093
+      }
+    },
+    {
+      "id": 3095,
+      "name": "The Library",
+      "exits": {
+        "North": 3093
+      }
+    },
+    {
+      "id": 3096,
+      "name": "Second Level of the Western Tower",
+      "exits": {
+        "East": 3093,
+        "West": 3097,
+        "Up": 3098
+      }
+    },
+    {
+      "id": 3097,
+      "name": "On the Balcony",
+      "exits": {
+        "East": 3096
+      }
+    },
+    {
+      "id": 3098,
+      "name": "The Spiral Stairs",
+      "exits": {
+        "Up": 3099,
+        "Down": 3096
+      }
+    },
+    {
+      "id": 3099,
+      "name": "Third Level of Western Tower",
+      "exits": {
+        "East": 3100,
+        "Down": 3098
+      }
+    },
+    {
+      "id": 3100,
+      "name": "It\u0027s too dark to see anything!",
+      "exits": {
+        "North": 3101,
+        "East": 3103,
+        "South": 3102,
+        "West": 3099
+      }
+    },
+    {
+      "id": 3101,
+      "name": "The Armory",
+      "exits": {
+        "South": 3100
+      }
+    },
+    {
+      "id": 3102,
+      "name": "The Officer\u0027s Quarters",
+      "exits": {
+        "North": 3100
+      }
+    },
+    {
+      "id": 3103,
+      "name": "Third Level of Eastern Tower",
+      "exits": {
+        "West": 3100,
+        "Up": 3104
+      }
+    },
+    {
+      "id": 3104,
+      "name": "Turret of the Eastern Tower",
+      "exits": {
+        "West": 3105,
+        "Down": 3103
+      }
+    },
+    {
+      "id": 3105,
+      "name": "On the Catwalk",
+      "exits": {
+        "East": 3104,
+        "West": 3106
+      }
+    },
+    {
+      "id": 3106,
+      "name": "Turret of the Western Tower",
+      "exits": {
+        "East": 3105,
+        "West": 3107
+      }
+    },
+    {
+      "id": 3107,
+      "name": "On the Other Side",
+      "exits": {
+        "East": 3106,
+        "West": 3108
+      }
+    },
+    {
+      "id": 3108,
+      "name": "The Chamber",
+      "exits": {
+        "East": 3107
+      }
+    },
+    {
+      "id": 2821,
+      "otherAreaExit": true,
+      "name": "To Thalos",
+      "exits": {
+        "East": 3109
+      }
+    },
+    {
+      "id": 3109,
+      "name": "Main Eastern Road",
+      "exits": {
+        "East": 3110,
+        "West": 2821
+      }
+    },
+    {
+      "id": 3110,
+      "name": "Crossroads to the Wilderness",
+      "exits": {
+        "North": 3112,
+        "East": 3066,
+        "South": 3111,
+        "West": 3109
+      }
+    },
+    {
+      "id": 3111,
+      "name": "Trading Post",
+      "exits": {
+        "North": 3110
+      }
+    },
+    {
+      "id": 3112,
+      "name": "Trail north of crossroads",
+      "exits": {
+        "North": 3113,
+        "South": 3110
+      }
+    },
+    {
+      "id": 3113,
+      "name": "Trail south of forest",
+      "exits": {
+        "North": 3114,
+        "South": 3112
+      }
+    },
+    {
+      "id": 3114,
+      "name": "Entrance to the forest",
+      "exits": {
+        "North": 3115,
+        "South": 3113
+      }
+    },
+    {
+      "id": 3115,
+      "name": "Trail in Dark Oak Forest",
+      "exits": {
+        "North": 3116,
+        "South": 3114
+      }
+    },
+    {
+      "id": 3116,
+      "name": "Junction in Dark Forest",
+      "exits": {
+        "East": 3126,
+        "South": 3115,
+        "West": 3117
+      }
+    },
+    {
+      "id": 3117,
+      "name": "Path to Centaur Village",
+      "exits": {
+        "East": 3116,
+        "West": 3118
+      }
+    },
+    {
+      "id": 3118,
+      "name": "The East side of the Centaur Clearing",
+      "exits": {
+        "North": 3120,
+        "East": 3117,
+        "South": 3121,
+        "West": 3119
+      }
+    },
+    {
+      "id": 3119,
+      "name": "West side of the Centaur Clearing",
+      "exits": {
+        "North": 3122,
+        "East": 3118,
+        "South": 3123,
+        "West": 3124
+      }
+    },
+    {
+      "id": 3120,
+      "name": "A Centaur\u0027s Hut",
+      "exits": {
+        "South": 3118
+      }
+    },
+    {
+      "id": 3121,
+      "name": "A Centaur\u0027s Hut",
+      "exits": {
+        "North": 3118
+      }
+    },
+    {
+      "id": 3122,
+      "name": "A Centaur\u0027s Hut",
+      "exits": {
+        "South": 3119
+      }
+    },
+    {
+      "id": 3123,
+      "name": "A Centaur\u0027s Hut",
+      "exits": {
+        "North": 3119
+      }
+    },
+    {
+      "id": 3124,
+      "name": "Entrance to a Large Hut",
+      "exits": {
+        "East": 3119,
+        "West": 3125
+      }
+    },
+    {
+      "id": 3125,
+      "name": "Back of a Large Hut",
+      "exits": {
+        "East": 3124
+      }
+    },
+    {
+      "id": 3126,
+      "name": "Eastern Path in Dark Forest",
+      "exits": {
+        "West": 3116
+      }
+    }
+  ]
+}

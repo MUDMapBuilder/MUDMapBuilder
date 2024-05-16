@@ -1,0 +1,740 @@
+{
+  "name": "Dylan\u0027s Area",
+  "rooms": [
+    {
+      "id": 2415,
+      "otherAreaExit": true,
+      "name": "To Redferne\u0027s",
+      "exits": {
+        "South": 569
+      }
+    },
+    {
+      "id": 569,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "North": 2415,
+        "Up": 570
+      }
+    },
+    {
+      "id": 570,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "East": 571,
+        "Down": 569
+      }
+    },
+    {
+      "id": 571,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "North": 596,
+        "South": 572,
+        "West": 570
+      }
+    },
+    {
+      "id": 572,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "North": 571,
+        "East": 573
+      }
+    },
+    {
+      "id": 573,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "East": 574,
+        "West": 572
+      }
+    },
+    {
+      "id": 574,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "North": 575,
+        "West": 573
+      }
+    },
+    {
+      "id": 575,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "East": 576,
+        "South": 574,
+        "Down": 594
+      }
+    },
+    {
+      "id": 576,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "East": 577,
+        "West": 575
+      }
+    },
+    {
+      "id": 577,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "West": 576,
+        "Down": 578
+      }
+    },
+    {
+      "id": 578,
+      "name": "An ominous storm cloud.",
+      "exits": {
+        "East": 579,
+        "West": 593,
+        "Up": 577
+      }
+    },
+    {
+      "id": 579,
+      "name": "High and perilous cliff",
+      "exits": {
+        "South": 580,
+        "West": 578
+      }
+    },
+    {
+      "id": 580,
+      "name": "Narrow rocky trail.",
+      "exits": {
+        "North": 579,
+        "Down": 581
+      }
+    },
+    {
+      "id": 581,
+      "name": "Small valley.",
+      "exits": {
+        "South": 582,
+        "Up": 580
+      }
+    },
+    {
+      "id": 582,
+      "name": "Small valley.",
+      "exits": {
+        "North": 581,
+        "Down": 583
+      }
+    },
+    {
+      "id": 583,
+      "name": "Deep, slippery crevice.",
+      "exits": {
+        "South": 585,
+        "West": 584,
+        "Up": 582
+      }
+    },
+    {
+      "id": 584,
+      "name": "Incredibly slippery crevice.",
+      "exits": {
+        "East": 583,
+        "Down": 656
+      }
+    },
+    {
+      "id": 585,
+      "name": "Steep mountainside.",
+      "exits": {
+        "North": 583,
+        "Up": 586
+      }
+    },
+    {
+      "id": 586,
+      "name": "Steep mountainside.",
+      "exits": {
+        "East": 587,
+        "Down": 585
+      }
+    },
+    {
+      "id": 587,
+      "name": "Treacherous Cliff.",
+      "exits": {
+        "West": 586,
+        "Up": 588
+      }
+    },
+    {
+      "id": 588,
+      "name": "Cliff Face.",
+      "exits": {
+        "East": 589,
+        "Up": 590,
+        "Down": 587
+      }
+    },
+    {
+      "id": 589,
+      "name": "Dank, dark, smelly hole.",
+      "exits": {
+        "West": 588
+      }
+    },
+    {
+      "id": 590,
+      "name": "Large, sturdy ledge.",
+      "exits": {
+        "North": 592,
+        "West": 591,
+        "Down": 588
+      }
+    },
+    {
+      "id": 591,
+      "name": "Absolutely disgusting lair.",
+      "exits": {
+        "East": 590
+      }
+    },
+    {
+      "id": 592,
+      "name": "Absolutely disgusting lair.",
+      "exits": {
+        "South": 590
+      }
+    },
+    {
+      "id": 593,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "East": 578,
+        "Up": 594
+      }
+    },
+    {
+      "id": 594,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "North": 599,
+        "West": 595,
+        "Up": 575,
+        "Down": 593
+      }
+    },
+    {
+      "id": 595,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "North": 598,
+        "East": 594,
+        "Up": 596
+      }
+    },
+    {
+      "id": 596,
+      "name": "A fluffy white cloud.",
+      "exits": {
+        "South": 571,
+        "Down": 595
+      }
+    },
+    {
+      "id": 597,
+      "name": "Sleepy little cloud.",
+      "exits": {
+        "North": 600,
+        "East": 598
+      }
+    },
+    {
+      "id": 598,
+      "name": "Grumpy little cloud.",
+      "exits": {
+        "East": 599,
+        "South": 595,
+        "West": 597
+      }
+    },
+    {
+      "id": 599,
+      "name": "Happy little cloud.",
+      "exits": {
+        "North": 604,
+        "South": 594,
+        "West": 598
+      }
+    },
+    {
+      "id": 600,
+      "name": "Bashful little cloud.",
+      "exits": {
+        "North": 601,
+        "South": 597,
+        "West": 610
+      }
+    },
+    {
+      "id": 601,
+      "name": "Sneezing little cloud.",
+      "exits": {
+        "North": 613,
+        "East": 602,
+        "South": 600,
+        "West": 611
+      }
+    },
+    {
+      "id": 602,
+      "name": "Dopey little cloud.",
+      "exits": {
+        "East": 603,
+        "West": 601
+      }
+    },
+    {
+      "id": 603,
+      "name": "Doc-like little cloud.",
+      "exits": {
+        "South": 604,
+        "West": 602
+      }
+    },
+    {
+      "id": 604,
+      "name": "Snowy, white cloud.",
+      "exits": {
+        "North": 603,
+        "South": 599,
+        "West": 605
+      }
+    },
+    {
+      "id": 605,
+      "name": "Cold, damp cloud.",
+      "exits": {
+        "East": 604,
+        "Up": 606
+      }
+    },
+    {
+      "id": 606,
+      "name": "Mysterious rock outcropping.",
+      "exits": {
+        "North": 607,
+        "Down": 605
+      }
+    },
+    {
+      "id": 607,
+      "name": "Foyer.",
+      "exits": {
+        "East": 608,
+        "South": 606
+      }
+    },
+    {
+      "id": 608,
+      "name": "Tower.",
+      "exits": {
+        "West": 607,
+        "Up": 609
+      }
+    },
+    {
+      "id": 1455,
+      "otherAreaExit": true,
+      "name": "To Midgaard",
+      "exits": {}
+    },
+    {
+      "id": 609,
+      "name": "Witches Tower",
+      "exits": {
+        "East": 1455,
+        "Down": 608
+      }
+    },
+    {
+      "id": 610,
+      "name": "Suspicious little raincloud.",
+      "exits": {
+        "North": 611,
+        "East": 600
+      }
+    },
+    {
+      "id": 611,
+      "name": "Cirrus maximus cloud.",
+      "exits": {
+        "East": 601,
+        "South": 610
+      }
+    },
+    {
+      "id": 612,
+      "name": "Raging hurricane.",
+      "exits": {
+        "North": 616,
+        "Down": 614
+      }
+    },
+    {
+      "id": 613,
+      "name": "Raging hurricane.",
+      "exits": {
+        "South": 601,
+        "West": 618,
+        "Down": 616
+      }
+    },
+    {
+      "id": 614,
+      "name": "Raging hurricane.",
+      "exits": {
+        "North": 615,
+        "East": 612
+      }
+    },
+    {
+      "id": 615,
+      "name": "Raging hurricane.",
+      "exits": {
+        "East": 616,
+        "South": 614
+      }
+    },
+    {
+      "id": 616,
+      "name": "Raging hurricane.",
+      "exits": {
+        "South": 612,
+        "West": 615,
+        "Up": 613
+      }
+    },
+    {
+      "id": 617,
+      "name": "Raging hurricane.",
+      "exits": {
+        "North": 620,
+        "East": 618,
+        "Down": 625
+      }
+    },
+    {
+      "id": 618,
+      "name": "Raging hurricane.",
+      "exits": {
+        "North": 619,
+        "East": 613,
+        "West": 617
+      }
+    },
+    {
+      "id": 619,
+      "name": "Raging hurricane.",
+      "exits": {
+        "South": 618,
+        "West": 620
+      }
+    },
+    {
+      "id": 620,
+      "name": "Raging hurricane.",
+      "exits": {
+        "East": 619,
+        "South": 617
+      }
+    },
+    {
+      "id": 621,
+      "name": "Calm cloud.",
+      "exits": {
+        "West": 622,
+        "Up": 620
+      }
+    },
+    {
+      "id": 622,
+      "name": "Mountainside.",
+      "exits": {
+        "East": 621,
+        "West": 623
+      }
+    },
+    {
+      "id": 623,
+      "name": "Mountainside.",
+      "exits": {
+        "East": 622,
+        "Up": 624
+      }
+    },
+    {
+      "id": 624,
+      "name": "Roc\u0027s Nest.",
+      "exits": {
+        "Down": 623
+      }
+    },
+    {
+      "id": 625,
+      "name": "Cumulative nimbus cloud.",
+      "exits": {
+        "South": 627,
+        "West": 626,
+        "Up": 617
+      }
+    },
+    {
+      "id": 626,
+      "name": "Dark hidden cloud.",
+      "exits": {
+        "East": 625
+      }
+    },
+    {
+      "id": 627,
+      "name": "Yet another cloud",
+      "exits": {
+        "North": 625,
+        "Up": 628
+      }
+    },
+    {
+      "id": 628,
+      "name": "Front gate",
+      "exits": {
+        "South": 629,
+        "Down": 627
+      }
+    },
+    {
+      "id": 629,
+      "name": "Lawn",
+      "exits": {
+        "North": 628,
+        "South": 631,
+        "West": 630
+      }
+    },
+    {
+      "id": 630,
+      "name": "Croquet game",
+      "exits": {
+        "East": 629,
+        "South": 632
+      }
+    },
+    {
+      "id": 631,
+      "name": "Huge, gorgeous fountain.",
+      "exits": {
+        "North": 629,
+        "West": 632
+      }
+    },
+    {
+      "id": 632,
+      "name": "Patio.",
+      "exits": {
+        "North": 630,
+        "East": 631,
+        "Up": 633
+      }
+    },
+    {
+      "id": 633,
+      "name": "Long stairway.",
+      "exits": {
+        "Up": 634,
+        "Down": 632
+      }
+    },
+    {
+      "id": 634,
+      "name": "Front door",
+      "exits": {
+        "East": 641,
+        "South": 645,
+        "West": 635,
+        "Down": 633
+      }
+    },
+    {
+      "id": 635,
+      "name": "Lawn northwest of house.",
+      "exits": {
+        "East": 634,
+        "South": 636
+      }
+    },
+    {
+      "id": 636,
+      "name": "Lawn west of house.",
+      "exits": {
+        "North": 635,
+        "South": 637
+      }
+    },
+    {
+      "id": 637,
+      "name": "Lawn southwest of house.",
+      "exits": {
+        "North": 636,
+        "East": 638,
+        "Down": 642
+      }
+    },
+    {
+      "id": 638,
+      "name": "Lawn south of house.",
+      "exits": {
+        "East": 639,
+        "West": 637
+      }
+    },
+    {
+      "id": 639,
+      "name": "Lawn southeast of house.",
+      "exits": {
+        "North": 640,
+        "West": 638
+      }
+    },
+    {
+      "id": 640,
+      "name": "Lawn east of house.",
+      "exits": {
+        "North": 641,
+        "South": 639
+      }
+    },
+    {
+      "id": 641,
+      "name": "Lawn northeast of house.",
+      "exits": {
+        "South": 640,
+        "West": 634
+      }
+    },
+    {
+      "id": 642,
+      "name": "Dirty, dusty tunnel.",
+      "exits": {
+        "East": 643,
+        "Up": 637
+      }
+    },
+    {
+      "id": 643,
+      "name": "Basement.",
+      "exits": {
+        "North": 644,
+        "West": 642
+      }
+    },
+    {
+      "id": 644,
+      "name": "Bottom of the stairs.",
+      "exits": {
+        "South": 643,
+        "Up": 645
+      }
+    },
+    {
+      "id": 645,
+      "name": "Foyer.",
+      "exits": {
+        "North": 634,
+        "East": 651,
+        "West": 646,
+        "Down": 644
+      }
+    },
+    {
+      "id": 646,
+      "name": "Elegant hallway.",
+      "exits": {
+        "East": 645,
+        "South": 647,
+        "West": 648
+      }
+    },
+    {
+      "id": 647,
+      "name": "Library",
+      "exits": {
+        "North": 646
+      }
+    },
+    {
+      "id": 648,
+      "name": "Arboretum.",
+      "exits": {
+        "East": 646,
+        "South": 649
+      }
+    },
+    {
+      "id": 649,
+      "name": "Western tower.",
+      "exits": {
+        "North": 648,
+        "Up": 650
+      }
+    },
+    {
+      "id": 650,
+      "name": "Western tower.",
+      "exits": {
+        "Down": 649
+      }
+    },
+    {
+      "id": 651,
+      "name": "Elegant hallway.",
+      "exits": {
+        "East": 653,
+        "South": 652,
+        "West": 645
+      }
+    },
+    {
+      "id": 652,
+      "name": "Conservatory",
+      "exits": {
+        "North": 651
+      }
+    },
+    {
+      "id": 653,
+      "name": "Office",
+      "exits": {
+        "South": 654,
+        "West": 651
+      }
+    },
+    {
+      "id": 654,
+      "name": "Eastern tower.",
+      "exits": {
+        "North": 653,
+        "Up": 655
+      }
+    },
+    {
+      "id": 655,
+      "name": "Eastern tower.",
+      "exits": {
+        "Down": 654
+      }
+    },
+    {
+      "id": 656,
+      "name": "Mid-Air.",
+      "exits": {}
+    }
+  ]
+}

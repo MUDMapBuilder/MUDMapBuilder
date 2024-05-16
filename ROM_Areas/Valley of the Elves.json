@@ -1,5 +1,11 @@
 {
   "name": "Valley of the Elves",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": false
+  },
   "rooms": [
     {
       "id": 2328,

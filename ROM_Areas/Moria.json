@@ -1,10 +1,18 @@
 {
   "name": "Moria",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": false,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
   "rooms": [
     {
       "id": 1502,
-      "otherAreaExit": true,
       "name": "To Midgaard",
+      "otherAreaExit": true,
       "exits": {
         "North": 1709
       }
@@ -43,16 +51,16 @@
     },
     {
       "id": 2305,
-      "otherAreaExit": true,
       "name": "To Plains",
+      "otherAreaExit": true,
       "exits": {
         "South": 1713
       }
     },
     {
       "id": 1580,
-      "otherAreaExit": true,
       "name": "To Midgaard",
+      "otherAreaExit": true,
       "exits": {
         "North": 1713
       }
@@ -93,8 +101,8 @@
     },
     {
       "id": 1503,
-      "otherAreaExit": true,
       "name": "To Midgaard",
+      "otherAreaExit": true,
       "exits": {
         "North": 1717
       }
@@ -109,16 +117,16 @@
     },
     {
       "id": 568,
-      "otherAreaExit": true,
       "name": "To Dwarven Kingdom",
+      "otherAreaExit": true,
       "exits": {
         "West": 1718
       }
     },
     {
       "id": 1403,
-      "otherAreaExit": true,
       "name": "To Miden\u0027nir",
+      "otherAreaExit": true,
       "exits": {
         "North": 1718
       }
@@ -396,8 +404,8 @@
     },
     {
       "id": 2566,
-      "otherAreaExit": true,
       "name": "To Sewers",
+      "otherAreaExit": true,
       "exits": {}
     },
     {

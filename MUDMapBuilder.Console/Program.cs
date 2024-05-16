@@ -20,6 +20,11 @@ namespace MUDMapBuilder
 
 			var pngData = buildResult.Last.BuildPng(options).PngData;
 			File.WriteAllBytes(outputPath, pngData);
+
+			if (buildResult.History.Length >= project.BuildOptions.MaxSteps)
+			{
+				Log($"WARNING: The process wasn't completed. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected)");
+			}
 		}
 
 		static void Main(string[] args)

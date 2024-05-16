@@ -1,5 +1,13 @@
 {
   "name": "In the Air",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": false,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
   "rooms": [
     {
       "id": 1,
@@ -166,8 +174,8 @@
     },
     {
       "id": 1506,
-      "otherAreaExit": true,
       "name": "To Midgaard",
+      "otherAreaExit": true,
       "exits": {
         "Up": 17
       }
@@ -368,8 +376,8 @@
     },
     {
       "id": 97,
-      "otherAreaExit": true,
       "name": "To Astral Plane",
+      "otherAreaExit": true,
       "exits": {
         "Down": 36
       }

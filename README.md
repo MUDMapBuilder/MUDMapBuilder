@@ -17,7 +17,7 @@ The input json contains the area data and looks like this: https://github.com/rd
 
 The binary release contains stock ROM maps in that format.
 
-If the areas has complicated structure, then the work of utility might end with following message:
+If an area has complicated structure, then the work of utility might end with following message:
 
 `WARNING: The process wasn't completed. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected)`
 

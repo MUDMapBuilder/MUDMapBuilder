@@ -1,6 +1,9 @@
 # About
 MUDMapBuilder is utility to generate map images for MUDs(Multi-User Dungeons) areas.
-If you would like to see samples of its work, then download [ROM_Maps.zip](https://github.com/rds1983/MUDMapBuilder/releases/download/0.1.0/ROM_Maps.zip)
+
+It is intended to be used by MUD owners, who want to add the cartography section to their sites and generate many maps quickly.
+
+If you would like to see samples of MUDMapBuilder work, then download [ROM_Maps.zip](https://github.com/rds1983/MUDMapBuilder/releases/download/0.1.0/ROM_Maps.zip)
 It contains png map images for the stock ROM areas.
 
 # Installation
@@ -18,5 +21,3 @@ If the areas has complicated structure, then the work of utility might end with 
 `WARNING: The process wasn't completed. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected)`
 
 In that case, try setting 'fix...' options to 'false' at "buildOptions" node in the input json. In most cases, the 'fixIntersected' is the culprit.
-
-

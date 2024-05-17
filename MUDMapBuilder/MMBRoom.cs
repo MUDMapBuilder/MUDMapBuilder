@@ -44,8 +44,8 @@ namespace MUDMapBuilder
 		private Point? _forceMark;
 
 		public int Id { get; private set; }
-		public string Name { get; private set; }
-		public bool IsExitToOtherArea { get; private set; }
+		public string Name { get; set; }
+		public bool IsExitToOtherArea { get; set; }
 
 		public Point? Position
 		{
@@ -97,7 +97,7 @@ namespace MUDMapBuilder
 
 		public event EventHandler Invalid;
 
-		internal MMBRoom(int id, string name, bool isExitToOtherArea)
+		public MMBRoom(int id, string name, bool isExitToOtherArea)
 		{
 			Id = id;
 			Name = name;

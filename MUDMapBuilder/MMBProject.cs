@@ -9,7 +9,7 @@ namespace MUDMapBuilder
 		public MMBArea Area { get; private set; }
 		public BuildOptions BuildOptions { get; private set; }
 
-		internal MMBProject(MMBArea area, BuildOptions buildOptions)
+		public MMBProject(MMBArea area, BuildOptions buildOptions)
 		{
 			Area = area;
 			BuildOptions = buildOptions;
@@ -28,6 +28,7 @@ namespace MUDMapBuilder
 				["fixObstacles"] = BuildOptions.FixObstacles,
 				["fixNonStraight"] = BuildOptions.FixNonStraight,
 				["fixIntersected"] = BuildOptions.FixIntersected,
+				["compactMap"] = BuildOptions.CompactMap,
 				["addDebugInfo"] = BuildOptions.AddDebugInfo,
 				["colorizeConnectionIssues"] = BuildOptions.ColorizeConnectionIssues
 			};
@@ -103,6 +104,11 @@ namespace MUDMapBuilder
 					options.FixIntersected = (bool)optionsObject["fixIntersected"];
 				}
 
+				if (optionsObject["compactMap"] != null)
+				{
+					options.CompactMap = (bool)optionsObject["compactMap"];
+				}
+
 				if (optionsObject["addDebugInfo"] != null)
 				{
 					options.AddDebugInfo = (bool)optionsObject["addDebugInfo"];
@@ -152,7 +158,7 @@ namespace MUDMapBuilder
 			{
 				foreach (var connection in room.Connections.Values)
 				{
-					if (connection.ConnectionType == MMBConnectionType.Backward)
+					if (connection.RoomId == room.Id || connection.ConnectionType == MMBConnectionType.Backward)
 					{
 						continue;
 					}
@@ -161,6 +167,11 @@ namespace MUDMapBuilder
 					var oppDir = dir.GetOppositeDirection();
 
 					var targetRoom = area.GetRoomById(connection.RoomId);
+					if (targetRoom == null)
+					{
+						continue;
+					}
+
 					var foundOpposite = false;
 					var oppositeConnection = targetRoom.FindConnection(room.Id);
 					if (oppositeConnection != null &&

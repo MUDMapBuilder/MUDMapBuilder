@@ -105,6 +105,7 @@ namespace MUDMapBuilder.Editor.UI
 			_checkFixObstacles.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 			_checkFixNonStraight.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 			_checkFixIntersected.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
+			_checkCompactMap.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 			_checkAddDebugInfo.IsCheckedChanged += (s, e) => SetDirtyAndRedraw();
 			_checkColorizeConnectionIssues.IsCheckedChanged += (s, e) => SetDirtyAndRedraw();
 
@@ -254,6 +255,7 @@ namespace MUDMapBuilder.Editor.UI
 			Project.BuildOptions.FixObstacles = _checkFixObstacles.IsChecked;
 			Project.BuildOptions.FixNonStraight = _checkFixNonStraight.IsChecked;
 			Project.BuildOptions.FixIntersected = _checkFixIntersected.IsChecked;
+			Project.BuildOptions.CompactMap = _checkCompactMap.IsChecked;
 			Project.BuildOptions.AddDebugInfo = _checkAddDebugInfo.IsChecked;
 			Project.BuildOptions.ColorizeConnectionIssues = _checkColorizeConnectionIssues.IsChecked;
 		}
@@ -310,6 +312,7 @@ namespace MUDMapBuilder.Editor.UI
 					_checkFixObstacles.IsChecked = options.FixObstacles;
 					_checkFixNonStraight.IsChecked = options.FixNonStraight;
 					_checkFixIntersected.IsChecked = options.FixIntersected;
+					_checkCompactMap.IsChecked = options.CompactMap;
 					_checkAddDebugInfo.IsChecked = options.AddDebugInfo;
 					_checkColorizeConnectionIssues.IsChecked = options.ColorizeConnectionIssues;
 				}

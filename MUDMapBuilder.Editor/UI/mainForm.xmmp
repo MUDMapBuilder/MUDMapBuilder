@@ -34,6 +34,9 @@
         <CheckButton IsChecked="True" Id="_checkFixIntersected">
           <Label Text="Fix Intersected" />
         </CheckButton>
+        <CheckButton IsChecked="True" Id="_checkCompactMap">
+          <Label Text="Compact Map" />
+        </CheckButton>
         <CheckButton Id="_checkAddDebugInfo">
           <Label Text="Add Debug Info" />
         </CheckButton>

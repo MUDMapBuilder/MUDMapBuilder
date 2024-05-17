@@ -23,6 +23,8 @@ namespace MUDMapBuilder
 		private BrokenConnectionsInfo _brokenConnections;
 
 		public int Count => _roomsByIds.Count;
+		public MMBRoom[] Rooms => _roomsByIds.Values.ToArray();
+
 		public int PositionedRoomsCount => (from r in _roomsByIds.Values where r.Position != null select r).Count();
 
 		public string Name { get; set; }
@@ -51,13 +53,13 @@ namespace MUDMapBuilder
 
 		public int? SelectedRoomId { get; set; }
 
-		internal MMBArea()
+		public MMBArea()
 		{
 		}
 
 		private void OnRoomInvalid(object sender, EventArgs e) => InvalidatePositions();
 
-		internal void Add(MMBRoom room)
+		public void Add(MMBRoom room)
 		{
 			room.Invalid += OnRoomInvalid;
 

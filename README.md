@@ -4,6 +4,7 @@ MUDMapBuilder is utility to generate map images for MUDs(Multi-User Dungeons) ar
 It is intended to be used by MUD owners, who want to add the cartography section to their sites and generate many maps quickly.
 
 If you would like to see samples of MUDMapBuilder work, then download [ROM_Maps.zip](https://github.com/rds1983/MUDMapBuilder/releases/download/0.1.0/ROM_Maps.zip)
+
 It contains png map images for the stock ROM areas.
 
 # Installation

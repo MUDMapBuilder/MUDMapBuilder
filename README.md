@@ -17,7 +17,7 @@ The utility is used like this: `mmb Midgaard.json Midgaard.png`
 
 The input json contains the area data and looks like this: https://github.com/rds1983/MUDMapBuilder/blob/master/ROM_Areas/Midgaard.json
 
-The binary release(see Installation) contains stock ROM maps in that format.
+The binary release(see [Installation](https://github.com/rds1983/MUDMapBuilder/blob/master/README.md#installation)) contains stock ROM maps in that format.
 
 If an area has complicated structure, then the work of utility might end with following message:
 

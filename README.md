@@ -1,5 +1,5 @@
 # About
-![Midgaard](https://github.com/rds1983/MUDMapBuilder/assets/1057289/0f195935-f89d-4247-b0b2-cab81af409cb)
+![image](https://github.com/rds1983/MUDMapBuilder/assets/1057289/3f233fc8-510b-4125-a0c5-7e89d372b62e)
 
 MUDMapBuilder is utility to generate map images for MUDs(Multi-User Dungeons) areas.
 

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUDMapBuilder", "MUDMapBuil
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUDMapBuilder.Editor", "MUDMapBuilder.Editor\MUDMapBuilder.Editor.csproj", "{C4A82623-1E64-4C27-BE22-49FB27A4596A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUDMapBuilder.Console", "MUDMapBuilder.Console\MUDMapBuilder.Console.csproj", "{B8503F49-CBB6-456A-8CDE-D96C6FCB1639}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUDMapBuilder.Console", "MUDMapBuilder.Console\MUDMapBuilder.Console.csproj", "{B8503F49-CBB6-456A-8CDE-D96C6FCB1639}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUDMapBuilder.BatchConverter", "MUDMapBuilder.BatchConverter\MUDMapBuilder.BatchConverter.csproj", "{6384351C-AA08-4D86-845E-461F06F49E42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{B8503F49-CBB6-456A-8CDE-D96C6FCB1639}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8503F49-CBB6-456A-8CDE-D96C6FCB1639}.Release|x64.ActiveCfg = Release|Any CPU
 		{B8503F49-CBB6-456A-8CDE-D96C6FCB1639}.Release|x64.Build.0 = Release|Any CPU
+		{6384351C-AA08-4D86-845E-461F06F49E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6384351C-AA08-4D86-845E-461F06F49E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6384351C-AA08-4D86-845E-461F06F49E42}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6384351C-AA08-4D86-845E-461F06F49E42}.Debug|x64.Build.0 = Debug|Any CPU
+		{6384351C-AA08-4D86-845E-461F06F49E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6384351C-AA08-4D86-845E-461F06F49E42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6384351C-AA08-4D86-845E-461F06F49E42}.Release|x64.ActiveCfg = Release|Any CPU
+		{6384351C-AA08-4D86-845E-461F06F49E42}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

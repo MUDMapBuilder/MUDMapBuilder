@@ -309,6 +309,10 @@ namespace MUDMapBuilder.Editor.UI
 					_suspendUi = true;
 
 					var options = Project.BuildOptions;
+					options.FixObstacles = false;
+					options.FixNonStraight = false;
+					options.FixIntersected = false;
+					options.CompactMap = false;
 					_checkFixObstacles.IsChecked = options.FixObstacles;
 					_checkFixNonStraight.IsChecked = options.FixNonStraight;
 					_checkFixIntersected.IsChecked = options.FixIntersected;

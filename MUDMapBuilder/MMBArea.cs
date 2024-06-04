@@ -542,7 +542,8 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					if (targetRoom.Connections.Count > 1)
+					var connectionsFromRoomCount = (from c in targetRoom.Connections where c.Value != null && _roomsByIds.ContainsKey(c.Value.RoomId) select c).Count();
+					if (connectionsFromRoomCount > 1)
 					{
 						continue;
 					}

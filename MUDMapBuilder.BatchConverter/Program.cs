@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System;
+using System.Linq;
 
 namespace MUDMapBuilder.BatchConverter
 {
@@ -29,12 +30,13 @@ namespace MUDMapBuilder.BatchConverter
 
 				Console.WriteLine($"Processing file {areaFileName}...");
 				var project = MMBProject.Parse(File.ReadAllText(areaFile));
-				if (project.Area.Rooms.Length == 0)
+				var buildResult = MapBuilder.Build(project, Log);
+				if (buildResult == null)
 				{
+					Log($"Warning: no rooms to process. Skipping.");
 					continue;
 				}
 
-				var buildResult = MapBuilder.Build(project, Log);
 				if (buildResult.History.Length >= project.BuildOptions.MaxSteps)
 				{
 					throw new Exception($"WARNING: The process wasn't completed for {areaFileName}. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected).");

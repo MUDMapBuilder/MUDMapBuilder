@@ -67,6 +67,14 @@ namespace MUDMapBuilder
 			InvalidatePositions();
 		}
 
+		public void DeleteRoom(MMBRoom room)
+		{
+			room.Invalid -= OnRoomInvalid;
+
+			_roomsByIds.Remove(room.Id);
+			InvalidatePositions();
+		}
+
 		public void InvalidatePositions()
 		{
 			_roomsByPositions = null;
@@ -548,7 +556,7 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					var connectionsToRoomCount = (from r in _roomsByIds where r.Value.FindConnection(targetRoom.Id) != null select r).Count();
+					var connectionsToRoomCount = (from r in _roomsByIds where r.Value.Id != targetRoom.Id && r.Value.FindConnection(targetRoom.Id) != null select r).Count();
 					if (connectionsToRoomCount > 1)
 					{
 						continue;

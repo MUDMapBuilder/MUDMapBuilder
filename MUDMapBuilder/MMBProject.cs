@@ -197,5 +197,10 @@ namespace MUDMapBuilder
 
 			return new MMBProject(area, options);
 		}
+
+		public MMBProject Clone()
+		{
+			return new MMBProject(Area.Clone(), BuildOptions);
+		}
 	}
 }

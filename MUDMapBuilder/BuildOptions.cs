@@ -3,6 +3,7 @@
 	public class BuildOptions
 	{
 		public int MaxSteps { get; set; } = 1000;
+		public bool RemoveSolitaryRooms { get; set; } = false;
 		public bool FixObstacles { get; set; } = true;
 		public bool FixNonStraight { get; set; } = true;
 		public bool FixIntersected { get; set; } = true;

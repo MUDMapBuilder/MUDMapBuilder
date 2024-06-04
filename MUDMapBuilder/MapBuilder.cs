@@ -475,6 +475,35 @@ namespace MUDMapBuilder
 
 			Area.ClearMarks();
 
+			// Remove single exit rooms
+			if (Options.RemoveSolitaryRooms)
+			{
+				var toDelete = new List<MMBRoom>();
+				foreach (var room in Area.Rooms)
+				{
+					var connectionsFromRoomCount = (from c in room.Connections where c.Value != null && c.Value.ConnectionType == MMBConnectionType.Forward && Area.GetRoomById(c.Value.RoomId) != null select c).Count();
+					var connectionsToRoomCount = (from r in Area.Rooms where r.Id != room.Id && 
+												  r.FindConnection(room.Id) != null &&
+												  r.FindConnection(room.Id).ConnectionType != MMBConnectionType.Backward select r).Count();
+
+					if (connectionsFromRoomCount <= 1 && connectionsToRoomCount == 0)
+					{
+						// Delete
+						toDelete.Add(room);
+					}
+				}
+
+				foreach(var room in toDelete)
+				{
+					Log($"Removed solitary room {room}");
+					Area.DeleteRoom(room);
+				}
+			}
+
+			if (Area.Count == 0)
+			{
+				return null;
+			}
 
 			MMBRoom firstRoom = null;
 			foreach (var room in Area)
@@ -791,7 +820,7 @@ namespace MUDMapBuilder
 
 		public static MapBuilderResult Build(MMBProject project, Action<string> log)
 		{
-			var mapBuilder = new MapBuilder(project, log);
+			var mapBuilder = new MapBuilder(project.Clone(), log);
 			return mapBuilder.Process();
 		}
 	}

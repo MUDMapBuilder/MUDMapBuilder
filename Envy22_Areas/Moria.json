@@ -1,0 +1,1070 @@
+{
+  "name": "Moria",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 2474,
+      "name": "West trail around Midgaard",
+      "exits": {
+        "North": 2475,
+        "South": 2294
+      }
+    },
+    {
+      "id": 2475,
+      "name": "West trail around Midgaard",
+      "exits": {
+        "North": 2476,
+        "South": 2474
+      }
+    },
+    {
+      "id": 2476,
+      "name": "Northwest corner of dusty trail.",
+      "exits": {
+        "East": 2477,
+        "South": 2475
+      }
+    },
+    {
+      "id": 2477,
+      "name": "Dusty trail along north wall.",
+      "exits": {
+        "East": 2478,
+        "West": 2476
+      }
+    },
+    {
+      "id": 2478,
+      "name": "The long dusty trail following the north wall.",
+      "exits": {
+        "North": 3031,
+        "East": 2479,
+        "West": 2477
+      }
+    },
+    {
+      "id": 2479,
+      "name": "Dusty trail along north wall.",
+      "exits": {
+        "East": 2480,
+        "West": 2478
+      }
+    },
+    {
+      "id": 2480,
+      "name": "Northeast corner of dusty trail.",
+      "exits": {
+        "South": 2481,
+        "West": 2479
+      }
+    },
+    {
+      "id": 2481,
+      "name": "East trail around Midgaard",
+      "exits": {
+        "North": 2480,
+        "South": 2482
+      }
+    },
+    {
+      "id": 2482,
+      "name": "East trail around Midgaard",
+      "exits": {
+        "North": 2481,
+        "South": 2295
+      }
+    },
+    {
+      "id": 2483,
+      "name": "The hills",
+      "exits": {
+        "North": 2484,
+        "East": 2051,
+        "South": 2201
+      }
+    },
+    {
+      "id": 2484,
+      "name": "The hills",
+      "exits": {
+        "North": 2485,
+        "South": 2483
+      }
+    },
+    {
+      "id": 2485,
+      "name": "End of the path",
+      "exits": {
+        "North": 2486,
+        "South": 2484
+      }
+    },
+    {
+      "id": 2486,
+      "name": "The cave",
+      "exits": {
+        "North": 2487,
+        "South": 2485
+      }
+    },
+    {
+      "id": 2487,
+      "name": "The tunnel",
+      "exits": {
+        "North": 2490,
+        "South": 2486
+      }
+    },
+    {
+      "id": 2488,
+      "name": "The tunnel",
+      "exits": {
+        "North": 2492,
+        "East": 2489
+      }
+    },
+    {
+      "id": 2489,
+      "name": "The tunnel",
+      "exits": {
+        "East": 2490,
+        "West": 2488
+      }
+    },
+    {
+      "id": 2490,
+      "name": "The tunnel",
+      "exits": {
+        "North": 2494,
+        "East": 2491,
+        "South": 2487,
+        "West": 2489
+      }
+    },
+    {
+      "id": 2491,
+      "name": "The tunnel",
+      "exits": {
+        "North": 2495,
+        "West": 2490
+      }
+    },
+    {
+      "id": 2492,
+      "name": "The large cave",
+      "exits": {
+        "East": 2493,
+        "South": 2488,
+        "West": 2499
+      }
+    },
+    {
+      "id": 2493,
+      "name": "The large cave",
+      "exits": {
+        "West": 2492
+      }
+    },
+    {
+      "id": 2494,
+      "name": "The cave",
+      "exits": {
+        "North": 2501,
+        "South": 2490
+      }
+    },
+    {
+      "id": 2495,
+      "name": "The tunnel",
+      "exits": {
+        "North": 2502,
+        "South": 2491
+      }
+    },
+    {
+      "id": 2496,
+      "name": "The hole",
+      "exits": {
+        "North": 2503,
+        "Down": 2535
+      }
+    },
+    {
+      "id": 2497,
+      "name": "The hole",
+      "exits": {
+        "East": 2498,
+        "Down": 2561
+      }
+    },
+    {
+      "id": 2498,
+      "name": "The damp tunnel",
+      "exits": {
+        "North": 2499,
+        "East": 2500,
+        "West": 2497
+      }
+    },
+    {
+      "id": 2499,
+      "name": "The large cave",
+      "exits": {
+        "East": 2492,
+        "South": 2498
+      }
+    },
+    {
+      "id": 2500,
+      "name": "The damp tunnel",
+      "exits": {
+        "West": 2498,
+        "South": 2530
+      }
+    },
+    {
+      "id": 2501,
+      "name": "The cave",
+      "exits": {
+        "East": 2502,
+        "South": 2494
+      }
+    },
+    {
+      "id": 2502,
+      "name": "The many tunnels",
+      "exits": {
+        "North": 2504,
+        "East": 2503,
+        "South": 2495,
+        "West": 2501
+      }
+    },
+    {
+      "id": 2503,
+      "name": "The tunnel",
+      "exits": {
+        "North": 2505,
+        "South": 2496,
+        "West": 2502
+      }
+    },
+    {
+      "id": 2504,
+      "name": "The smelly tunnel",
+      "exits": {
+        "North": 2506,
+        "South": 2502
+      }
+    },
+    {
+      "id": 2505,
+      "name": "The cave",
+      "exits": {
+        "North": 2507,
+        "South": 2503
+      }
+    },
+    {
+      "id": 2506,
+      "name": "The light cave",
+      "exits": {
+        "South": 2504
+      }
+    },
+    {
+      "id": 2507,
+      "name": "The valley",
+      "exits": {
+        "South": 2505,
+        "North": 2508
+      }
+    },
+    {
+      "id": 2508,
+      "name": "The foothills",
+      "exits": {
+        "North": 2509,
+        "South": 2507
+      }
+    },
+    {
+      "id": 2509,
+      "name": "The intersection in the foothills",
+      "exits": {
+        "North": 2510,
+        "East": 2513,
+        "South": 2508
+      }
+    },
+    {
+      "id": 2510,
+      "name": "The grassy area of the foothills",
+      "exits": {
+        "North": 2511,
+        "West": 2518,
+        "South": 2509
+      }
+    },
+    {
+      "id": 2511,
+      "name": "The foothills end",
+      "exits": {
+        "Down": 2512,
+        "South": 2510
+      }
+    },
+    {
+      "id": 2512,
+      "name": "The path to the valley",
+      "exits": {
+        "Up": 2511,
+        "Down": 1511
+      }
+    },
+    {
+      "id": 2513,
+      "name": "The foothills path",
+      "exits": {
+        "West": 2509,
+        "East": 2514
+      }
+    },
+    {
+      "id": 2514,
+      "name": "Base of the mountain",
+      "exits": {
+        "East": 2515,
+        "West": 2513
+      }
+    },
+    {
+      "id": 2515,
+      "name": "A trail up the mountain",
+      "exits": {
+        "East": 2516,
+        "West": 2514
+      }
+    },
+    {
+      "id": 2516,
+      "name": "The mountain top.",
+      "exits": {
+        "North": 2517,
+        "East": 3356,
+        "West": 2515
+      }
+    },
+    {
+      "id": 2517,
+      "name": "The lion\u0027s den",
+      "exits": {
+        "South": 2516
+      }
+    },
+    {
+      "id": 2518,
+      "name": "The level foothills",
+      "exits": {
+        "East": 2510,
+        "West": 2519
+      }
+    },
+    {
+      "id": 2519,
+      "name": "The cave entrance",
+      "exits": {
+        "East": 2518,
+        "West": 2520
+      }
+    },
+    {
+      "id": 2520,
+      "name": "The hill giant cave",
+      "exits": {
+        "East": 2519
+      }
+    },
+    {
+      "id": 2521,
+      "name": "The tunnel",
+      "exits": {
+        "East": 2522,
+        "South": 2524
+      }
+    },
+    {
+      "id": 2522,
+      "name": "The tunnel",
+      "exits": {
+        "East": 2523,
+        "West": 2521
+      }
+    },
+    {
+      "id": 2523,
+      "name": "The tunnel",
+      "exits": {
+        "South": 2546,
+        "West": 2522
+      }
+    },
+    {
+      "id": 2524,
+      "name": "The tunnel",
+      "exits": {
+        "North": 2521,
+        "East": 2525
+      }
+    },
+    {
+      "id": 2525,
+      "name": "The light cave",
+      "exits": {
+        "East": 2526,
+        "South": 2527,
+        "West": 2524
+      }
+    },
+    {
+      "id": 2526,
+      "name": "The maze",
+      "exits": {
+        "West": 2525
+      }
+    },
+    {
+      "id": 2527,
+      "name": "The light cave",
+      "exits": {
+        "North": 2525,
+        "South": 2532
+      }
+    },
+    {
+      "id": 2528,
+      "name": "The maze",
+      "exits": {
+        "East": 2529,
+        "South": 2533
+      }
+    },
+    {
+      "id": 2529,
+      "name": "The maze",
+      "exits": {
+        "South": 2534,
+        "West": 2528
+      }
+    },
+    {
+      "id": 2530,
+      "name": "The tunnel",
+      "exits": {
+        "North": 2500,
+        "East": 2531
+      }
+    },
+    {
+      "id": 2531,
+      "name": "The tunnel",
+      "exits": {
+        "East": 2532,
+        "West": 2530
+      }
+    },
+    {
+      "id": 2532,
+      "name": "The light cave",
+      "exits": {
+        "North": 2527,
+        "West": 2531
+      }
+    },
+    {
+      "id": 2533,
+      "name": "The maze",
+      "exits": {
+        "North": 2528,
+        "East": 2536
+      }
+    },
+    {
+      "id": 2534,
+      "name": "The maze",
+      "exits": {
+        "North": 2529,
+        "East": 2535
+      }
+    },
+    {
+      "id": 2535,
+      "name": "The tunnel",
+      "exits": {
+        "West": 2534,
+        "Up": 2496
+      }
+    },
+    {
+      "id": 2536,
+      "name": "The maze",
+      "exits": {
+        "West": 2533,
+        "East": 2537
+      }
+    },
+    {
+      "id": 2537,
+      "name": "The maze",
+      "exits": {
+        "East": 2538,
+        "South": 2540,
+        "West": 2536
+      }
+    },
+    {
+      "id": 2538,
+      "name": "The maze",
+      "exits": {
+        "West": 2537
+      }
+    },
+    {
+      "id": 2539,
+      "name": "The large cave",
+      "exits": {
+        "East": 2540,
+        "South": 2541
+      }
+    },
+    {
+      "id": 2540,
+      "name": "The large cave",
+      "exits": {
+        "North": 2537,
+        "South": 2542,
+        "West": 2539
+      }
+    },
+    {
+      "id": 2541,
+      "name": "The large cave",
+      "exits": {
+        "North": 2539,
+        "East": 2542
+      }
+    },
+    {
+      "id": 2542,
+      "name": "The large cave",
+      "exits": {
+        "North": 2540,
+        "East": 2543,
+        "West": 2541
+      }
+    },
+    {
+      "id": 2543,
+      "name": "The tunnel",
+      "exits": {
+        "East": 2544,
+        "South": 2545,
+        "West": 2542
+      }
+    },
+    {
+      "id": 2544,
+      "name": "End of tunnel",
+      "exits": {
+        "West": 2543
+      }
+    },
+    {
+      "id": 2545,
+      "name": "The hole",
+      "exits": {
+        "North": 2543,
+        "Down": 2593
+      }
+    },
+    {
+      "id": 2546,
+      "name": "The tunnel",
+      "exits": {
+        "North": 2523,
+        "West": 2547
+      }
+    },
+    {
+      "id": 2547,
+      "name": "The long tunnel",
+      "exits": {
+        "East": 2546,
+        "West": 2548
+      }
+    },
+    {
+      "id": 2548,
+      "name": "The long tunnel",
+      "exits": {
+        "East": 2547,
+        "West": 2549
+      }
+    },
+    {
+      "id": 2549,
+      "name": "The long tunnel",
+      "exits": {
+        "East": 2548,
+        "South": 2552,
+        "West": 2550
+      }
+    },
+    {
+      "id": 2550,
+      "name": "The long tunnel",
+      "exits": {
+        "East": 2549,
+        "West": 2574
+      }
+    },
+    {
+      "id": 2551,
+      "name": "The golden cave",
+      "exits": {
+        "South": 2554,
+        "West": 2552
+      }
+    },
+    {
+      "id": 2552,
+      "name": "The golden cave",
+      "exits": {
+        "North": 2549,
+        "East": 2551,
+        "South": 2555
+      }
+    },
+    {
+      "id": 2553,
+      "name": "The passage",
+      "exits": {
+        "South": 2559,
+        "West": 2554
+      }
+    },
+    {
+      "id": 2554,
+      "name": "The golden cave",
+      "exits": {
+        "North": 2551,
+        "East": 2553,
+        "West": 2555
+      }
+    },
+    {
+      "id": 2555,
+      "name": "The golden cave",
+      "exits": {
+        "North": 2552,
+        "East": 2554,
+        "South": 2560
+      }
+    },
+    {
+      "id": 2556,
+      "name": "The tunnel",
+      "exits": {
+        "West": 2557
+      }
+    },
+    {
+      "id": 2557,
+      "name": "The tunnel",
+      "exits": {
+        "East": 2556,
+        "West": 2558
+      }
+    },
+    {
+      "id": 2558,
+      "name": "The tunnel",
+      "exits": {
+        "East": 2557,
+        "West": 2559
+      }
+    },
+    {
+      "id": 2559,
+      "name": "The passage",
+      "exits": {
+        "North": 2553,
+        "East": 2558,
+        "South": 2562
+      }
+    },
+    {
+      "id": 2560,
+      "name": "The golden cave",
+      "exits": {
+        "North": 2555,
+        "West": 2561
+      }
+    },
+    {
+      "id": 2561,
+      "name": "The dark passage.",
+      "exits": {
+        "East": 2560,
+        "Up": 2497
+      }
+    },
+    {
+      "id": 2562,
+      "name": "The passage",
+      "exits": {
+        "North": 2559,
+        "South": 2566
+      }
+    },
+    {
+      "id": 2563,
+      "name": "The secret chamber",
+      "exits": {
+        "South": 2568
+      }
+    },
+    {
+      "id": 2564,
+      "name": "The cave",
+      "exits": {
+        "South": 2569,
+        "West": 2565
+      }
+    },
+    {
+      "id": 2565,
+      "name": "The cave",
+      "exits": {
+        "East": 2564,
+        "South": 2570,
+        "West": 2567
+      }
+    },
+    {
+      "id": 2566,
+      "name": "The passage",
+      "exits": {
+        "North": 2562,
+        "South": 2571
+      }
+    },
+    {
+      "id": 2567,
+      "name": "The secret tunnel",
+      "exits": {
+        "East": 2565,
+        "West": 2568
+      }
+    },
+    {
+      "id": 2568,
+      "name": "The secret chamber",
+      "exits": {
+        "North": 2563,
+        "East": 2567
+      }
+    },
+    {
+      "id": 2569,
+      "name": "The cave",
+      "exits": {
+        "North": 2564,
+        "West": 2570
+      }
+    },
+    {
+      "id": 2570,
+      "name": "The cave",
+      "exits": {
+        "North": 2565,
+        "East": 2569,
+        "West": 2571
+      }
+    },
+    {
+      "id": 2571,
+      "name": "The passage",
+      "exits": {
+        "North": 2566,
+        "East": 2570
+      }
+    },
+    {
+      "id": 2572,
+      "name": "The dark hole",
+      "exits": {
+        "South": 2573
+      }
+    },
+    {
+      "id": 2573,
+      "name": "The small passage",
+      "exits": {
+        "North": 2572,
+        "South": 2578,
+        "West": 2577
+      }
+    },
+    {
+      "id": 2574,
+      "name": "The tunnel",
+      "exits": {
+        "East": 2550,
+        "South": 2575
+      }
+    },
+    {
+      "id": 2575,
+      "name": "The large tunnel",
+      "exits": {
+        "North": 2574,
+        "East": 2576,
+        "South": 2579
+      }
+    },
+    {
+      "id": 2576,
+      "name": "The large tunnel",
+      "exits": {
+        "East": 2577,
+        "West": 2575
+      }
+    },
+    {
+      "id": 2577,
+      "name": "The large tunnel",
+      "exits": {
+        "East": 2573,
+        "West": 2576
+      }
+    },
+    {
+      "id": 2578,
+      "name": "The long tunnel",
+      "exits": {
+        "North": 2573,
+        "South": 2582
+      }
+    },
+    {
+      "id": 2579,
+      "name": "The wet tunnel",
+      "exits": {
+        "North": 2575,
+        "South": 2583,
+        "East": 2580
+      }
+    },
+    {
+      "id": 2580,
+      "name": "The small maze",
+      "exits": {
+        "East": 2581,
+        "South": 2584,
+        "West": 2579
+      }
+    },
+    {
+      "id": 2581,
+      "name": "The small maze",
+      "exits": {
+        "South": 2585,
+        "West": 2580
+      }
+    },
+    {
+      "id": 2582,
+      "name": "In the tunnel at the inscription",
+      "exits": {
+        "North": 2578,
+        "South": 2586
+      }
+    },
+    {
+      "id": 2583,
+      "name": "The wet tunnel",
+      "exits": {
+        "North": 2579,
+        "South": 2587
+      }
+    },
+    {
+      "id": 2584,
+      "name": "The small maze",
+      "exits": {
+        "North": 2580,
+        "East": 2585,
+        "South": 2588
+      }
+    },
+    {
+      "id": 2585,
+      "name": "The small maze",
+      "exits": {
+        "North": 2581,
+        "East": 2586,
+        "West": 2584
+      }
+    },
+    {
+      "id": 2586,
+      "name": "The entrance to the small maze",
+      "exits": {
+        "North": 2582,
+        "South": 2590,
+        "West": 2585
+      }
+    },
+    {
+      "id": 2587,
+      "name": "In the water",
+      "exits": {
+        "North": 2583,
+        "South": 2591
+      }
+    },
+    {
+      "id": 2588,
+      "name": "The wet maze",
+      "exits": {
+        "North": 2584,
+        "East": 2589,
+        "South": 2592
+      }
+    },
+    {
+      "id": 2589,
+      "name": "The wet maze",
+      "exits": {
+        "East": 2590,
+        "South": 2593,
+        "West": 2588
+      }
+    },
+    {
+      "id": 2590,
+      "name": "A Tunnel",
+      "exits": {
+        "North": 2586,
+        "West": 2589
+      }
+    },
+    {
+      "id": 2591,
+      "name": "In the water",
+      "exits": {
+        "North": 2587,
+        "East": 2592
+      }
+    },
+    {
+      "id": 2592,
+      "name": "In the water",
+      "exits": {
+        "North": 2588,
+        "East": 2594,
+        "West": 2591
+      }
+    },
+    {
+      "id": 2593,
+      "name": "End of maze",
+      "exits": {
+        "North": 2589,
+        "Up": 2545
+      }
+    },
+    {
+      "id": 2594,
+      "name": "At the sand bar",
+      "exits": {
+        "West": 2592
+      }
+    },
+    {
+      "id": 2294,
+      "name": "To Midgaard",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2474,
+        "East": 2282,
+        "West": 1407
+      }
+    },
+    {
+      "id": 3031,
+      "name": "To Plains of the North",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 3046,
+        "East": 3032,
+        "South": 2478,
+        "West": 3047
+      }
+    },
+    {
+      "id": 2295,
+      "name": "To Midgaard",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2482,
+        "East": 2204,
+        "West": 2283
+      }
+    },
+    {
+      "id": 2051,
+      "name": "To Kingdom of Juargan",
+      "otherAreaExit": true,
+      "exits": {
+        "East": 2050,
+        "West": 2483,
+        "South": 1116
+      }
+    },
+    {
+      "id": 2201,
+      "name": "To Miden\u0027nir",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2483,
+        "South": 2202
+      }
+    },
+    {
+      "id": 1511,
+      "name": "To The HighLands",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 1512,
+        "Up": 2512
+      }
+    },
+    {
+      "id": 3356,
+      "name": "To Sewer",
+      "otherAreaExit": true,
+      "exits": {}
+    }
+  ]
+}

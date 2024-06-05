@@ -1,0 +1,845 @@
+{
+  "name": "New Ofcol",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 2881,
+      "name": "Granny\u0027s Still Room",
+      "exits": {
+        "East": 2897
+      }
+    },
+    {
+      "id": 2882,
+      "name": "The Big Intersection",
+      "exits": {
+        "North": 2906,
+        "East": 2947,
+        "South": 2883,
+        "West": 2876
+      }
+    },
+    {
+      "id": 2883,
+      "name": "Impy Way",
+      "exits": {
+        "North": 2882,
+        "East": 2885,
+        "South": 2886,
+        "West": 2884
+      }
+    },
+    {
+      "id": 2884,
+      "name": "The Blacksmith",
+      "exits": {
+        "East": 2883
+      }
+    },
+    {
+      "id": 2885,
+      "name": "The Leather Shop",
+      "exits": {
+        "West": 2883
+      }
+    },
+    {
+      "id": 2886,
+      "name": "Impy Way",
+      "exits": {
+        "North": 2883,
+        "East": 2888,
+        "South": 2889,
+        "West": 2887
+      }
+    },
+    {
+      "id": 2887,
+      "name": "The Pawn Shop.",
+      "exits": {
+        "East": 2886
+      }
+    },
+    {
+      "id": 2888,
+      "name": "The Meat Store",
+      "exits": {
+        "West": 2886
+      }
+    },
+    {
+      "id": 2889,
+      "name": "Impy Way",
+      "exits": {
+        "North": 2886,
+        "East": 2891,
+        "South": 2892,
+        "West": 2890
+      }
+    },
+    {
+      "id": 2890,
+      "name": "Nyles\u0027 House of Ale",
+      "exits": {
+        "East": 2889
+      }
+    },
+    {
+      "id": 2891,
+      "name": "Farmer\u0027s Market",
+      "exits": {
+        "West": 2889
+      }
+    },
+    {
+      "id": 2892,
+      "name": "The End of Impy Way",
+      "exits": {
+        "North": 2889,
+        "East": 2949,
+        "West": 2893
+      }
+    },
+    {
+      "id": 2893,
+      "name": "Fields",
+      "exits": {
+        "North": 2897,
+        "East": 2892,
+        "South": 2894,
+        "West": 2896
+      }
+    },
+    {
+      "id": 2894,
+      "name": "Fields",
+      "exits": {
+        "North": 2893,
+        "West": 2895
+      }
+    },
+    {
+      "id": 2895,
+      "name": "Fields",
+      "exits": {
+        "North": 2896,
+        "East": 2894
+      }
+    },
+    {
+      "id": 2896,
+      "name": "Fields",
+      "exits": {
+        "East": 2893,
+        "South": 2895
+      }
+    },
+    {
+      "id": 2897,
+      "name": "The Shed",
+      "exits": {
+        "South": 2893,
+        "West": 2881
+      }
+    },
+    {
+      "id": 2898,
+      "name": "Slaughterhouse",
+      "exits": {
+        "West": 2949
+      }
+    },
+    {
+      "id": 2899,
+      "name": "Dirt Road",
+      "exits": {
+        "North": 2949,
+        "East": 2901,
+        "South": 2900,
+        "West": 2902
+      }
+    },
+    {
+      "id": 2900,
+      "name": "Chicken Coop",
+      "exits": {
+        "North": 2899
+      }
+    },
+    {
+      "id": 2901,
+      "name": "Barn",
+      "exits": {
+        "West": 2899
+      }
+    },
+    {
+      "id": 2902,
+      "name": "Dirt Road",
+      "exits": {
+        "North": 2903,
+        "East": 2899,
+        "South": 2904,
+        "West": 2905
+      }
+    },
+    {
+      "id": 2903,
+      "name": "Grass Field",
+      "exits": {
+        "South": 2902
+      }
+    },
+    {
+      "id": 2904,
+      "name": "Grass Field",
+      "exits": {
+        "North": 2902
+      }
+    },
+    {
+      "id": 2905,
+      "name": "Pig Sty",
+      "exits": {
+        "East": 2902
+      }
+    },
+    {
+      "id": 2906,
+      "name": "Impy Way",
+      "exits": {
+        "North": 2913,
+        "East": 2907,
+        "South": 2882,
+        "West": 2910
+      }
+    },
+    {
+      "id": 2907,
+      "name": "Big House",
+      "exits": {
+        "East": 2909,
+        "West": 2906,
+        "Up": 2908
+      }
+    },
+    {
+      "id": 2908,
+      "name": "Bedroom",
+      "exits": {
+        "Down": 2907
+      }
+    },
+    {
+      "id": 2909,
+      "name": "Kitchen",
+      "exits": {
+        "West": 2907
+      }
+    },
+    {
+      "id": 2910,
+      "name": "Big House",
+      "exits": {
+        "West": 2912,
+        "East": 2906,
+        "Up": 2911
+      }
+    },
+    {
+      "id": 2911,
+      "name": "Bedroom",
+      "exits": {
+        "Down": 2910
+      }
+    },
+    {
+      "id": 2912,
+      "name": "Kitchen",
+      "exits": {
+        "East": 2910
+      }
+    },
+    {
+      "id": 2913,
+      "name": "Impy Way",
+      "exits": {
+        "North": 2918,
+        "East": 2914,
+        "South": 2906,
+        "West": 2916
+      }
+    },
+    {
+      "id": 2914,
+      "name": "House",
+      "exits": {
+        "South": 2915,
+        "West": 2913
+      }
+    },
+    {
+      "id": 2915,
+      "name": "Bedroom",
+      "exits": {
+        "North": 2914
+      }
+    },
+    {
+      "id": 2916,
+      "name": "House",
+      "exits": {
+        "South": 2917,
+        "East": 2913
+      }
+    },
+    {
+      "id": 2917,
+      "name": "Bedroom",
+      "exits": {
+        "North": 2916
+      }
+    },
+    {
+      "id": 2918,
+      "name": "Impy Way",
+      "exits": {
+        "North": 2923,
+        "East": 2919,
+        "South": 2913,
+        "West": 2921
+      }
+    },
+    {
+      "id": 2919,
+      "name": "House",
+      "exits": {
+        "South": 2920,
+        "West": 2918
+      }
+    },
+    {
+      "id": 2920,
+      "name": "Bedroom",
+      "exits": {
+        "North": 2919
+      }
+    },
+    {
+      "id": 2921,
+      "name": "House",
+      "exits": {
+        "South": 2922,
+        "East": 2918
+      }
+    },
+    {
+      "id": 2922,
+      "name": "Bedroom",
+      "exits": {
+        "North": 2921
+      }
+    },
+    {
+      "id": 2923,
+      "name": "The Big Intersection",
+      "exits": {
+        "North": 2924,
+        "East": 2927,
+        "South": 2918,
+        "West": 2930
+      }
+    },
+    {
+      "id": 2924,
+      "name": "Big House",
+      "exits": {
+        "North": 2926,
+        "South": 2923,
+        "Up": 2925
+      }
+    },
+    {
+      "id": 2925,
+      "name": "Bedroom",
+      "exits": {
+        "Down": 2924
+      }
+    },
+    {
+      "id": 2926,
+      "name": "Kitchen",
+      "exits": {
+        "South": 2924
+      }
+    },
+    {
+      "id": 2927,
+      "name": "Swiftest Way",
+      "exits": {
+        "North": 2933,
+        "East": 2928,
+        "South": 2934,
+        "West": 2923
+      }
+    },
+    {
+      "id": 2928,
+      "name": "Swiftest Way",
+      "exits": {
+        "North": 2935,
+        "East": 2929,
+        "South": 2936,
+        "West": 2927
+      }
+    },
+    {
+      "id": 2929,
+      "name": "End of Swiftest Way",
+      "exits": {
+        "North": 2937,
+        "East": 2938,
+        "South": 2939,
+        "West": 2928
+      }
+    },
+    {
+      "id": 2930,
+      "name": "Swiftest Way",
+      "exits": {
+        "North": 2940,
+        "East": 2923,
+        "South": 2941,
+        "West": 2931
+      }
+    },
+    {
+      "id": 2931,
+      "name": "Swiftest Way",
+      "exits": {
+        "North": 2942,
+        "East": 2930,
+        "South": 2943,
+        "West": 2932
+      }
+    },
+    {
+      "id": 2932,
+      "name": "The end of Swiftest Way",
+      "exits": {
+        "North": 2944,
+        "East": 2931,
+        "South": 2945,
+        "West": 2946
+      }
+    },
+    {
+      "id": 2933,
+      "name": "Small House",
+      "exits": {
+        "South": 2927
+      }
+    },
+    {
+      "id": 2934,
+      "name": "Small House",
+      "exits": {
+        "North": 2927
+      }
+    },
+    {
+      "id": 2935,
+      "name": "Small House",
+      "exits": {
+        "South": 2928
+      }
+    },
+    {
+      "id": 2936,
+      "name": "Small House",
+      "exits": {
+        "North": 2928
+      }
+    },
+    {
+      "id": 2937,
+      "name": "Small House",
+      "exits": {
+        "South": 2929
+      }
+    },
+    {
+      "id": 2938,
+      "name": "Small House",
+      "exits": {
+        "West": 2929
+      }
+    },
+    {
+      "id": 2939,
+      "name": "Small House",
+      "exits": {
+        "North": 2929
+      }
+    },
+    {
+      "id": 2940,
+      "name": "Small House",
+      "exits": {
+        "South": 2930
+      }
+    },
+    {
+      "id": 2941,
+      "name": "Small House",
+      "exits": {
+        "North": 2930
+      }
+    },
+    {
+      "id": 2942,
+      "name": "Small House",
+      "exits": {
+        "South": 2931
+      }
+    },
+    {
+      "id": 2943,
+      "name": "Small House",
+      "exits": {
+        "North": 2931
+      }
+    },
+    {
+      "id": 2944,
+      "name": "Small House",
+      "exits": {
+        "South": 2932
+      }
+    },
+    {
+      "id": 2945,
+      "name": "Small House",
+      "exits": {
+        "North": 2932
+      }
+    },
+    {
+      "id": 2946,
+      "name": "Small House",
+      "exits": {
+        "East": 2932
+      }
+    },
+    {
+      "id": 2947,
+      "name": "Raff Way",
+      "exits": {
+        "East": 2948,
+        "West": 2882
+      }
+    },
+    {
+      "id": 2948,
+      "name": "Raff Way",
+      "exits": {
+        "East": 2980,
+        "West": 2947
+      }
+    },
+    {
+      "id": 2949,
+      "name": "Dirt Road",
+      "exits": {
+        "East": 2898,
+        "South": 2899,
+        "West": 2892
+      }
+    },
+    {
+      "id": 2950,
+      "name": "The Temple of Ofcol",
+      "exits": {
+        "North": 2951,
+        "East": 2953,
+        "South": 2954,
+        "West": 2952
+      }
+    },
+    {
+      "id": 2951,
+      "name": "The Anteroom to the Temple of Ofcol",
+      "exits": {
+        "North": 2956,
+        "South": 2950,
+        "Up": 2967
+      }
+    },
+    {
+      "id": 2952,
+      "name": "The Anteroom to the Temple of Ofcol",
+      "exits": {
+        "East": 2950,
+        "West": 2960,
+        "Up": 2968
+      }
+    },
+    {
+      "id": 2953,
+      "name": "The Anteroom to the Temple of Ofcol",
+      "exits": {
+        "East": 2961,
+        "West": 2950,
+        "Up": 2970
+      }
+    },
+    {
+      "id": 2954,
+      "name": "The Anteroom to the Temple of Ofcol",
+      "exits": {
+        "North": 2950,
+        "South": 2965,
+        "Up": 2971
+      }
+    },
+    {
+      "id": 2955,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "East": 2956,
+        "South": 2958
+      }
+    },
+    {
+      "id": 2956,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "East": 2957,
+        "South": 2951,
+        "West": 2955
+      }
+    },
+    {
+      "id": 2957,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "South": 2959,
+        "West": 2956
+      }
+    },
+    {
+      "id": 2958,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "North": 2955,
+        "South": 2960
+      }
+    },
+    {
+      "id": 2959,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "North": 2957,
+        "South": 2961
+      }
+    },
+    {
+      "id": 2960,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "North": 2958,
+        "East": 2952,
+        "South": 2962,
+        "West": 2979
+      }
+    },
+    {
+      "id": 2961,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "North": 2959,
+        "South": 2963,
+        "West": 2953
+      }
+    },
+    {
+      "id": 2962,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "North": 2960,
+        "South": 2964
+      }
+    },
+    {
+      "id": 2963,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "North": 2961,
+        "South": 2966
+      }
+    },
+    {
+      "id": 2964,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "North": 2962,
+        "East": 2965
+      }
+    },
+    {
+      "id": 2965,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "North": 2954,
+        "East": 2966,
+        "West": 2964
+      }
+    },
+    {
+      "id": 2966,
+      "name": "A Hallway of the Golden Citadel",
+      "exits": {
+        "North": 2963,
+        "West": 2965
+      }
+    },
+    {
+      "id": 2967,
+      "name": "An Upper Chamber of the Golden Citadel",
+      "exits": {
+        "South": 2969,
+        "Up": 2972,
+        "Down": 2951
+      }
+    },
+    {
+      "id": 2968,
+      "name": "An Upper Chamber of the Golden Citadel",
+      "exits": {
+        "East": 2969,
+        "Up": 2973,
+        "Down": 2952
+      }
+    },
+    {
+      "id": 2969,
+      "name": "The Hall of the DragonLords",
+      "exits": {
+        "North": 2967,
+        "East": 2970,
+        "South": 2971,
+        "West": 2968
+      }
+    },
+    {
+      "id": 2970,
+      "name": "An Upper Chamber of the Golden Citadel",
+      "exits": {
+        "West": 2969,
+        "Up": 2975,
+        "Down": 2953
+      }
+    },
+    {
+      "id": 2971,
+      "name": "An Upper Chamber of the Golden Citadel",
+      "exits": {
+        "North": 2969,
+        "Up": 2976,
+        "Down": 2954
+      }
+    },
+    {
+      "id": 2972,
+      "name": "A Top Chamber of the Golden Citadel",
+      "exits": {
+        "South": 2974,
+        "Down": 2967
+      }
+    },
+    {
+      "id": 2973,
+      "name": "A Top Chamber of the Golden Citadel",
+      "exits": {
+        "East": 2974,
+        "Down": 2968
+      }
+    },
+    {
+      "id": 2974,
+      "name": "The Dragon Chamber",
+      "exits": {
+        "North": 2972,
+        "East": 2975,
+        "South": 2976,
+        "West": 2973,
+        "Up": 2977
+      }
+    },
+    {
+      "id": 2975,
+      "name": "A Top Chamber of the Golden Citadel",
+      "exits": {
+        "West": 2974,
+        "Down": 2970
+      }
+    },
+    {
+      "id": 2976,
+      "name": "A Top Chamber of the Golden Citadel",
+      "exits": {
+        "North": 2974,
+        "Down": 2971
+      }
+    },
+    {
+      "id": 2977,
+      "name": "Above the Dragon Chamber",
+      "exits": {
+        "Up": 2978,
+        "Down": 2974
+      }
+    },
+    {
+      "id": 2978,
+      "name": "In the Shaft from the Dragon Chamber",
+      "exits": {
+        "Down": 2977
+      }
+    },
+    {
+      "id": 2979,
+      "name": "Inside the Entrance to the Golden Citadel",
+      "exits": {
+        "East": 2960,
+        "West": 2980
+      }
+    },
+    {
+      "id": 2980,
+      "name": "Outside the Entrance to the Golden Citadel",
+      "exits": {
+        "East": 2979,
+        "West": 2948
+      }
+    },
+    {
+      "id": 2876,
+      "name": "To Ofcol",
+      "otherAreaExit": true,
+      "exits": {
+        "East": 2882,
+        "South": 2877,
+        "West": 2874
+      }
+    }
+  ]
+}

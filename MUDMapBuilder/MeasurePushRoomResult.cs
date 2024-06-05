@@ -12,6 +12,8 @@ namespace MUDMapBuilder
 			Room = room;
 			Delta = delta;
 		}
+
+		public override string ToString() => $"{Room}, {Delta}";
 	}
 
 	public class MeasurePushRoomResult

@@ -1,0 +1,450 @@
+{
+  "name": "The River",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 2826,
+      "name": "On the River",
+      "exits": {
+        "East": 2357,
+        "West": 2827
+      }
+    },
+    {
+      "id": 2827,
+      "name": "On the River",
+      "exits": {
+        "East": 2826,
+        "West": 2828
+      }
+    },
+    {
+      "id": 2828,
+      "name": "On the River",
+      "exits": {
+        "East": 2827,
+        "West": 2829
+      }
+    },
+    {
+      "id": 2829,
+      "name": "The Wide River",
+      "exits": {
+        "East": 2828,
+        "West": 2830
+      }
+    },
+    {
+      "id": 2830,
+      "name": "A Split in the River",
+      "exits": {
+        "East": 2829,
+        "West": 2831,
+        "South": 2832
+      }
+    },
+    {
+      "id": 2831,
+      "name": "On the River",
+      "exits": {
+        "East": 2830,
+        "West": 2834
+      }
+    },
+    {
+      "id": 2832,
+      "name": "The Southeast Split in the River",
+      "exits": {
+        "North": 2830,
+        "West": 2833
+      }
+    },
+    {
+      "id": 2833,
+      "name": "The Little River",
+      "exits": {
+        "East": 2832,
+        "North": 2867,
+        "West": 2835
+      }
+    },
+    {
+      "id": 2834,
+      "name": "On the Big River",
+      "exits": {
+        "East": 2831,
+        "South": 2835,
+        "West": 2836
+      }
+    },
+    {
+      "id": 2835,
+      "name": "The Southwest Split in the River",
+      "exits": {
+        "North": 2834,
+        "East": 2833
+      }
+    },
+    {
+      "id": 2836,
+      "name": "The Wide River",
+      "exits": {
+        "East": 2834,
+        "West": 2837
+      }
+    },
+    {
+      "id": 2837,
+      "name": "The Mouth of the River",
+      "exits": {
+        "East": 2836,
+        "West": 2838
+      }
+    },
+    {
+      "id": 2838,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2839,
+        "East": 2837,
+        "South": 2840,
+        "West": 2841
+      }
+    },
+    {
+      "id": 2839,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2842,
+        "South": 2838,
+        "West": 2846
+      }
+    },
+    {
+      "id": 2840,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2838,
+        "South": 2847,
+        "West": 2849
+      }
+    },
+    {
+      "id": 2841,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2846,
+        "East": 2838,
+        "South": 2849,
+        "West": 2854
+      }
+    },
+    {
+      "id": 2842,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2843,
+        "South": 2839,
+        "West": 2845
+      }
+    },
+    {
+      "id": 2843,
+      "name": "In a Frozen Ocean",
+      "exits": {
+        "South": 2842,
+        "West": 2844
+      }
+    },
+    {
+      "id": 2844,
+      "name": "In a Frozen Ocean",
+      "exits": {
+        "East": 2843,
+        "South": 2845
+      }
+    },
+    {
+      "id": 2845,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2844,
+        "East": 2842,
+        "South": 2846,
+        "West": 2859
+      }
+    },
+    {
+      "id": 2846,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2845,
+        "East": 2839,
+        "South": 2841,
+        "West": 2858
+      }
+    },
+    {
+      "id": 2847,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2840,
+        "West": 2848,
+        "South": 1478
+      }
+    },
+    {
+      "id": 2848,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2849,
+        "East": 2847,
+        "West": 2850
+      }
+    },
+    {
+      "id": 2849,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2841,
+        "East": 2840,
+        "South": 2848,
+        "West": 2851
+      }
+    },
+    {
+      "id": 2850,
+      "name": "The Angry Sea",
+      "exits": {
+        "North": 2851,
+        "East": 2848,
+        "South": 2852,
+        "West": 2853
+      }
+    },
+    {
+      "id": 2851,
+      "name": "A Ferocious Sea",
+      "exits": {
+        "North": 2854,
+        "East": 2849,
+        "South": 2850,
+        "West": 2855
+      }
+    },
+    {
+      "id": 2852,
+      "name": "A Tropical Sea",
+      "exits": {
+        "North": 2850,
+        "West": 2856
+      }
+    },
+    {
+      "id": 2853,
+      "name": "A Tropical Sea",
+      "exits": {
+        "North": 2855,
+        "East": 2850,
+        "South": 2856,
+        "West": 2857
+      }
+    },
+    {
+      "id": 2854,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2858,
+        "East": 2841,
+        "South": 2851
+      }
+    },
+    {
+      "id": 2855,
+      "name": "A Tropical Sea",
+      "exits": {
+        "East": 2851,
+        "South": 2853,
+        "West": 2860
+      }
+    },
+    {
+      "id": 2856,
+      "name": "A Tropical Sea",
+      "exits": {
+        "North": 2853,
+        "East": 2852,
+        "South": 2861,
+        "West": 2862
+      }
+    },
+    {
+      "id": 2857,
+      "name": "A Tropical Sea",
+      "exits": {
+        "North": 2860,
+        "East": 2853,
+        "South": 2862,
+        "West": 2863
+      }
+    },
+    {
+      "id": 2858,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2859,
+        "East": 2846,
+        "South": 2854
+      }
+    },
+    {
+      "id": 2859,
+      "name": "The Big Blue Ocean",
+      "exits": {
+        "North": 2870,
+        "East": 2845,
+        "South": 2858
+      }
+    },
+    {
+      "id": 2860,
+      "name": "A Tropical Sea",
+      "exits": {
+        "North": 2864,
+        "East": 2855,
+        "South": 2857
+      }
+    },
+    {
+      "id": 2861,
+      "name": "A Tropical Sea",
+      "exits": {
+        "North": 2856,
+        "West": 2865
+      }
+    },
+    {
+      "id": 2862,
+      "name": "A Tropical Sea",
+      "exits": {
+        "North": 2857,
+        "East": 2856,
+        "South": 2865,
+        "West": 2866
+      }
+    },
+    {
+      "id": 2863,
+      "name": "A Tropical Sea",
+      "exits": {
+        "East": 2857,
+        "South": 2866
+      }
+    },
+    {
+      "id": 2864,
+      "name": "The Dock",
+      "exits": {
+        "South": 2860
+      }
+    },
+    {
+      "id": 2865,
+      "name": "A Tropical Sea",
+      "exits": {
+        "North": 2862,
+        "East": 2861
+      }
+    },
+    {
+      "id": 2866,
+      "name": "A Tropical Sea",
+      "exits": {
+        "North": 2863,
+        "East": 2862
+      }
+    },
+    {
+      "id": 2867,
+      "name": "A Small Path",
+      "exits": {
+        "North": 2868,
+        "South": 2833
+      }
+    },
+    {
+      "id": 2868,
+      "name": "Beside the Cottage",
+      "exits": {
+        "South": 2867,
+        "West": 2869
+      }
+    },
+    {
+      "id": 2869,
+      "name": "Inside the Cottage",
+      "exits": {
+        "East": 2868
+      }
+    },
+    {
+      "id": 2870,
+      "name": "A Beach",
+      "exits": {
+        "North": 2871,
+        "South": 2859
+      }
+    },
+    {
+      "id": 2871,
+      "name": "Along the Beach",
+      "exits": {
+        "North": 2872,
+        "South": 2870
+      }
+    },
+    {
+      "id": 2872,
+      "name": "Foot of the Mountain",
+      "exits": {
+        "North": 3458,
+        "South": 2871
+      }
+    },
+    {
+      "id": 2357,
+      "name": "To Midgaard",
+      "otherAreaExit": true,
+      "exits": {
+        "East": 2358,
+        "West": 2826
+      }
+    },
+    {
+      "id": 1478,
+      "name": "To Little Haven",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2847,
+        "West": 1479
+      }
+    },
+    {
+      "id": 3458,
+      "name": "To Shaolin Temple",
+      "otherAreaExit": true,
+      "exits": {
+        "South": 2872,
+        "Up": 3459
+      }
+    }
+  ]
+}

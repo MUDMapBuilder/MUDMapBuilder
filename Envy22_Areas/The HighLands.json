@@ -1,0 +1,1666 @@
+{
+  "name": "The HighLands",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 1511,
+      "name": "Entrance to a Valley in the Highlands.",
+      "exits": {
+        "North": 1512,
+        "Up": 2512
+      }
+    },
+    {
+      "id": 1512,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1520,
+        "East": 1513,
+        "South": 1511,
+        "West": 1517
+      }
+    },
+    {
+      "id": 1513,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1521,
+        "East": 1514,
+        "South": 1527,
+        "West": 1512
+      }
+    },
+    {
+      "id": 1514,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1522,
+        "South": 1526,
+        "West": 1513
+      }
+    },
+    {
+      "id": 1515,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1523,
+        "East": 1516,
+        "South": 1529
+      }
+    },
+    {
+      "id": 1516,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1518,
+        "East": 1517,
+        "South": 1524,
+        "West": 1515
+      }
+    },
+    {
+      "id": 1517,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1519,
+        "East": 1512,
+        "South": 1525,
+        "West": 1516
+      }
+    },
+    {
+      "id": 1518,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1524,
+        "East": 1519,
+        "South": 1516,
+        "West": 1523
+      }
+    },
+    {
+      "id": 1519,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1525,
+        "East": 1520,
+        "South": 1517,
+        "West": 1518
+      }
+    },
+    {
+      "id": 1520,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1526,
+        "East": 1521,
+        "South": 1512,
+        "West": 1519
+      }
+    },
+    {
+      "id": 1521,
+      "name": "The Bog.",
+      "exits": {
+        "South": 1513,
+        "West": 1520
+      }
+    },
+    {
+      "id": 1522,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1528,
+        "East": 1523,
+        "South": 1514,
+        "West": 1521
+      }
+    },
+    {
+      "id": 1523,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1529,
+        "East": 1518,
+        "South": 1515,
+        "West": 1522
+      }
+    },
+    {
+      "id": 1524,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1516,
+        "East": 1525,
+        "South": 1518,
+        "West": 1529
+      }
+    },
+    {
+      "id": 1525,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1517,
+        "East": 1526,
+        "South": 1519,
+        "West": 1524
+      }
+    },
+    {
+      "id": 1526,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1514,
+        "East": 1527,
+        "South": 1520,
+        "West": 1525
+      }
+    },
+    {
+      "id": 1527,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1513,
+        "East": 1528,
+        "South": 1521,
+        "West": 1526
+      }
+    },
+    {
+      "id": 1528,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1530,
+        "East": 1529,
+        "South": 1522,
+        "West": 1527
+      }
+    },
+    {
+      "id": 1529,
+      "name": "The Bog.",
+      "exits": {
+        "North": 1515,
+        "East": 1524,
+        "South": 1523,
+        "West": 1528
+      }
+    },
+    {
+      "id": 1530,
+      "name": "A path.",
+      "exits": {
+        "North": 1531,
+        "South": 1528
+      }
+    },
+    {
+      "id": 1531,
+      "name": "A path.",
+      "exits": {
+        "North": 1532,
+        "South": 1530
+      }
+    },
+    {
+      "id": 1532,
+      "name": "A path.",
+      "exits": {
+        "North": 1533,
+        "South": 1531
+      }
+    },
+    {
+      "id": 1533,
+      "name": "The Crossroads.",
+      "exits": {
+        "North": 1548,
+        "East": 1534,
+        "South": 1532,
+        "West": 1542
+      }
+    },
+    {
+      "id": 1534,
+      "name": "Path to the southeastern Beacon Tower.",
+      "exits": {
+        "East": 1535,
+        "West": 1533
+      }
+    },
+    {
+      "id": 1535,
+      "name": "A path uphill.",
+      "exits": {
+        "East": 1536,
+        "West": 1534
+      }
+    },
+    {
+      "id": 1536,
+      "name": "A path uphill.",
+      "exits": {
+        "East": 1537,
+        "West": 1535
+      }
+    },
+    {
+      "id": 1537,
+      "name": "A path uphill.",
+      "exits": {
+        "East": 1538,
+        "West": 1536
+      }
+    },
+    {
+      "id": 1538,
+      "name": "A path uphill.",
+      "exits": {
+        "East": 1539,
+        "West": 1537
+      }
+    },
+    {
+      "id": 1539,
+      "name": "A path uphill.",
+      "exits": {
+        "East": 1540,
+        "West": 1538
+      }
+    },
+    {
+      "id": 1540,
+      "name": "A path uphill.",
+      "exits": {
+        "South": 1541,
+        "West": 1539
+      }
+    },
+    {
+      "id": 1541,
+      "name": "A path uphill.",
+      "exits": {
+        "North": 1540,
+        "South": 1603
+      }
+    },
+    {
+      "id": 1542,
+      "name": "The path to the southwestern Beacon Tower.",
+      "exits": {
+        "East": 1533,
+        "West": 1543
+      }
+    },
+    {
+      "id": 1543,
+      "name": "A path uphill.",
+      "exits": {
+        "East": 1542,
+        "West": 1544
+      }
+    },
+    {
+      "id": 1544,
+      "name": "A path uphill.",
+      "exits": {
+        "East": 1543,
+        "West": 1545
+      }
+    },
+    {
+      "id": 1545,
+      "name": "A path uphill.",
+      "exits": {
+        "East": 1544,
+        "West": 1546
+      }
+    },
+    {
+      "id": 1546,
+      "name": "A path uphill.",
+      "exits": {
+        "East": 1545,
+        "West": 1547
+      }
+    },
+    {
+      "id": 1547,
+      "name": "A path uphill.",
+      "exits": {
+        "North": 1604,
+        "East": 1546
+      }
+    },
+    {
+      "id": 1548,
+      "name": "A muddy path.",
+      "exits": {
+        "North": 1549,
+        "South": 1533
+      }
+    },
+    {
+      "id": 1549,
+      "name": "A muddy path",
+      "exits": {
+        "North": 1550,
+        "South": 1548
+      }
+    },
+    {
+      "id": 1550,
+      "name": "Crossroads at the Lake.",
+      "exits": {
+        "North": 1584,
+        "East": 1551,
+        "South": 1549,
+        "West": 1583
+      }
+    },
+    {
+      "id": 1551,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1552,
+        "West": 1550
+      }
+    },
+    {
+      "id": 1552,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1553,
+        "West": 1551
+      }
+    },
+    {
+      "id": 1553,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1554,
+        "South": 1552
+      }
+    },
+    {
+      "id": 1554,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1555,
+        "West": 1553
+      }
+    },
+    {
+      "id": 1555,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1556,
+        "South": 1554
+      }
+    },
+    {
+      "id": 1556,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1557,
+        "West": 1555
+      }
+    },
+    {
+      "id": 1557,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1558,
+        "South": 1556
+      }
+    },
+    {
+      "id": 1558,
+      "name": "Path along lake.",
+      "exits": {
+        "West": 1559,
+        "South": 1557
+      }
+    },
+    {
+      "id": 1559,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1558,
+        "West": 1560
+      }
+    },
+    {
+      "id": 1560,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1561,
+        "East": 1559
+      }
+    },
+    {
+      "id": 1561,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1562,
+        "South": 1560
+      }
+    },
+    {
+      "id": 1562,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1563,
+        "South": 1561
+      }
+    },
+    {
+      "id": 1563,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1596,
+        "South": 1562,
+        "West": 1564
+      }
+    },
+    {
+      "id": 1564,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1565,
+        "East": 1563
+      }
+    },
+    {
+      "id": 1565,
+      "name": "Path along lake.",
+      "exits": {
+        "South": 1564,
+        "West": 1566
+      }
+    },
+    {
+      "id": 1566,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1565,
+        "West": 1567
+      }
+    },
+    {
+      "id": 1567,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1566,
+        "West": 1568
+      }
+    },
+    {
+      "id": 1568,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1567,
+        "West": 1569
+      }
+    },
+    {
+      "id": 1569,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1568,
+        "South": 1570
+      }
+    },
+    {
+      "id": 1570,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1569,
+        "West": 1571
+      }
+    },
+    {
+      "id": 1571,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1570,
+        "South": 1572
+      }
+    },
+    {
+      "id": 1572,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1571,
+        "South": 1573,
+        "West": 1589
+      }
+    },
+    {
+      "id": 1573,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1572,
+        "South": 1574
+      }
+    },
+    {
+      "id": 1574,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1573,
+        "West": 1575
+      }
+    },
+    {
+      "id": 1575,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1574,
+        "South": 1576
+      }
+    },
+    {
+      "id": 1576,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1575,
+        "South": 1577
+      }
+    },
+    {
+      "id": 1577,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1576,
+        "South": 1578
+      }
+    },
+    {
+      "id": 1578,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1577,
+        "East": 1579
+      }
+    },
+    {
+      "id": 1579,
+      "name": "Path along lake.",
+      "exits": {
+        "South": 1580,
+        "West": 1578
+      }
+    },
+    {
+      "id": 1580,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1579,
+        "East": 1581
+      }
+    },
+    {
+      "id": 1581,
+      "name": "Path along lake.",
+      "exits": {
+        "South": 1582,
+        "West": 1580
+      }
+    },
+    {
+      "id": 1582,
+      "name": "Path along lake.",
+      "exits": {
+        "North": 1581,
+        "East": 1583
+      }
+    },
+    {
+      "id": 1583,
+      "name": "Path along lake.",
+      "exits": {
+        "East": 1550,
+        "West": 1582
+      }
+    },
+    {
+      "id": 1584,
+      "name": "Near the shore.",
+      "exits": {
+        "North": 1585,
+        "South": 1550
+      }
+    },
+    {
+      "id": 1585,
+      "name": "On the Lake.",
+      "exits": {
+        "North": 1586,
+        "South": 1584
+      }
+    },
+    {
+      "id": 1586,
+      "name": "Near the Isle.",
+      "exits": {
+        "North": 1587,
+        "South": 1585
+      }
+    },
+    {
+      "id": 1587,
+      "name": "On Nessy\u0027s Isle.",
+      "exits": {
+        "North": 1588,
+        "South": 1586
+      }
+    },
+    {
+      "id": 1588,
+      "name": "On Nessy\u0027s Isle.",
+      "exits": {
+        "South": 1587,
+        "Down": 1607
+      }
+    },
+    {
+      "id": 1589,
+      "name": "A path into the hills.",
+      "exits": {
+        "East": 1572,
+        "West": 1590
+      }
+    },
+    {
+      "id": 1590,
+      "name": "A path.",
+      "exits": {
+        "East": 1589,
+        "West": 1591
+      }
+    },
+    {
+      "id": 1591,
+      "name": "At a cliff.",
+      "exits": {
+        "East": 1590,
+        "West": 1592
+      }
+    },
+    {
+      "id": 1592,
+      "name": "On top of the cliff.",
+      "exits": {
+        "East": 1591,
+        "West": 1593
+      }
+    },
+    {
+      "id": 1593,
+      "name": "In a hilltop.",
+      "exits": {
+        "East": 1592,
+        "West": 1594
+      }
+    },
+    {
+      "id": 1594,
+      "name": "Near the tower.",
+      "exits": {
+        "North": 1595,
+        "East": 1593
+      }
+    },
+    {
+      "id": 1595,
+      "name": "In front of the tower.",
+      "exits": {
+        "North": 1605,
+        "South": 1594
+      }
+    },
+    {
+      "id": 1596,
+      "name": "A path along a cliff.",
+      "exits": {
+        "East": 1597,
+        "West": 1563
+      }
+    },
+    {
+      "id": 1597,
+      "name": "A path along a cliff.",
+      "exits": {
+        "East": 1598,
+        "West": 1596
+      }
+    },
+    {
+      "id": 1598,
+      "name": "A steep climb.",
+      "exits": {
+        "North": 1599,
+        "West": 1597
+      }
+    },
+    {
+      "id": 1599,
+      "name": "On the hill.",
+      "exits": {
+        "North": 1600,
+        "South": 1598
+      }
+    },
+    {
+      "id": 1600,
+      "name": "Down hill.",
+      "exits": {
+        "North": 1601,
+        "South": 1599
+      }
+    },
+    {
+      "id": 1601,
+      "name": "On another path up hill.",
+      "exits": {
+        "North": 1602,
+        "South": 1600
+      }
+    },
+    {
+      "id": 1602,
+      "name": "On a hill.",
+      "exits": {
+        "East": 1606,
+        "South": 1601
+      }
+    },
+    {
+      "id": 1603,
+      "name": "In the southeastern tower.",
+      "exits": {
+        "North": 1541,
+        "Up": 1617,
+        "Down": 1616
+      }
+    },
+    {
+      "id": 1604,
+      "name": "In the southwestern tower.",
+      "exits": {
+        "South": 1547,
+        "Up": 1621,
+        "Down": 1620
+      }
+    },
+    {
+      "id": 1605,
+      "name": "In the northwestern tower.",
+      "exits": {
+        "South": 1595,
+        "Up": 1627,
+        "Down": 1626
+      }
+    },
+    {
+      "id": 1606,
+      "name": "In the northeastern tower.",
+      "exits": {
+        "West": 1602,
+        "Up": 1631,
+        "Down": 1630
+      }
+    },
+    {
+      "id": 1607,
+      "name": "In Nessy\u0027s cave.",
+      "exits": {
+        "South": 1608,
+        "Up": 1588
+      }
+    },
+    {
+      "id": 1608,
+      "name": "In Nessy\u0027s cave.",
+      "exits": {
+        "South": 1609,
+        "West": 1613
+      }
+    },
+    {
+      "id": 1609,
+      "name": "In Nessy\u0027s cave.",
+      "exits": {
+        "North": 1608,
+        "South": 1610
+      }
+    },
+    {
+      "id": 1610,
+      "name": "In Nessy\u0027s cave.",
+      "exits": {
+        "North": 1609,
+        "South": 1611
+      }
+    },
+    {
+      "id": 1611,
+      "name": "Near Nessy\u0027s cave.",
+      "exits": {
+        "North": 1610,
+        "West": 1612
+      }
+    },
+    {
+      "id": 1612,
+      "name": "In Nessy\u0027s nest.",
+      "exits": {
+        "East": 1611
+      }
+    },
+    {
+      "id": 1613,
+      "name": "In Nessy cave.",
+      "exits": {
+        "East": 1608,
+        "West": 1614
+      }
+    },
+    {
+      "id": 1614,
+      "name": "In Nessy\u0027s cave.",
+      "exits": {
+        "East": 1613,
+        "South": 1615
+      }
+    },
+    {
+      "id": 1615,
+      "name": "The cave of Nessy\u0027s kid.",
+      "exits": {
+        "North": 1614
+      }
+    },
+    {
+      "id": 1616,
+      "name": "In the Cellar.",
+      "exits": {
+        "Up": 1603
+      }
+    },
+    {
+      "id": 1617,
+      "name": "On the first floor.",
+      "exits": {
+        "Up": 1618,
+        "Down": 1603
+      }
+    },
+    {
+      "id": 1618,
+      "name": "On the second floor.",
+      "exits": {
+        "Up": 1619,
+        "Down": 1617
+      }
+    },
+    {
+      "id": 1619,
+      "name": "On the top of the tower.",
+      "exits": {
+        "Down": 1618
+      }
+    },
+    {
+      "id": 1620,
+      "name": "In the cellar.",
+      "exits": {
+        "North": 1624,
+        "Up": 1604
+      }
+    },
+    {
+      "id": 1621,
+      "name": "On the first floor.",
+      "exits": {
+        "Up": 1622,
+        "Down": 1604
+      }
+    },
+    {
+      "id": 1622,
+      "name": "On the secondfloor.",
+      "exits": {
+        "Up": 1623,
+        "Down": 1621
+      }
+    },
+    {
+      "id": 1623,
+      "name": "On the top of the tower.",
+      "exits": {
+        "Down": 1622
+      }
+    },
+    {
+      "id": 1624,
+      "name": "In a secret walkway.",
+      "exits": {
+        "North": 1637,
+        "South": 1620
+      }
+    },
+    {
+      "id": 1625,
+      "name": "A dead end.",
+      "exits": {
+        "North": 1626,
+        "South": 1651
+      }
+    },
+    {
+      "id": 1626,
+      "name": "In the cellar.",
+      "exits": {
+        "East": 1636,
+        "South": 1625,
+        "Up": 1605
+      }
+    },
+    {
+      "id": 1627,
+      "name": "On the first floor.",
+      "exits": {
+        "Up": 1628,
+        "Down": 1605
+      }
+    },
+    {
+      "id": 1628,
+      "name": "On the second floor.",
+      "exits": {
+        "Up": 1629,
+        "Down": 1627
+      }
+    },
+    {
+      "id": 1629,
+      "name": "On the top of the tower.",
+      "exits": {
+        "Down": 1628
+      }
+    },
+    {
+      "id": 1630,
+      "name": "In the cellar.",
+      "exits": {
+        "North": 1635,
+        "West": 1634,
+        "Up": 1606
+      }
+    },
+    {
+      "id": 1631,
+      "name": "On the first floor.",
+      "exits": {
+        "Up": 1632,
+        "Down": 1606
+      }
+    },
+    {
+      "id": 1632,
+      "name": "On the second floor.",
+      "exits": {
+        "Up": 1633,
+        "Down": 1631
+      }
+    },
+    {
+      "id": 1633,
+      "name": "On the top of a tower.",
+      "exits": {
+        "Down": 1632
+      }
+    },
+    {
+      "id": 1634,
+      "name": "A dead end",
+      "exits": {
+        "East": 1630,
+        "West": 1667
+      }
+    },
+    {
+      "id": 1635,
+      "name": "Another gangway.",
+      "exits": {
+        "North": 1668,
+        "South": 1630
+      }
+    },
+    {
+      "id": 1636,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1652,
+        "West": 1626
+      }
+    },
+    {
+      "id": 1637,
+      "name": "In a secret gangway.",
+      "exits": {
+        "South": 1624,
+        "West": 1638
+      }
+    },
+    {
+      "id": 1638,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1639,
+        "East": 1637
+      }
+    },
+    {
+      "id": 1639,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1640,
+        "South": 1638
+      }
+    },
+    {
+      "id": 1640,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1641,
+        "South": 1639
+      }
+    },
+    {
+      "id": 1641,
+      "name": "In a secret gangway.",
+      "exits": {
+        "South": 1640,
+        "West": 1642
+      }
+    },
+    {
+      "id": 1642,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1641,
+        "West": 1643
+      }
+    },
+    {
+      "id": 1643,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1642,
+        "South": 1644
+      }
+    },
+    {
+      "id": 1644,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1643,
+        "West": 1645
+      }
+    },
+    {
+      "id": 1645,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1646,
+        "East": 1644
+      }
+    },
+    {
+      "id": 1646,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1647,
+        "South": 1645
+      }
+    },
+    {
+      "id": 1647,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1648,
+        "South": 1646
+      }
+    },
+    {
+      "id": 1648,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1649,
+        "South": 1647
+      }
+    },
+    {
+      "id": 1649,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1650,
+        "South": 1648
+      }
+    },
+    {
+      "id": 1650,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1651,
+        "South": 1649
+      }
+    },
+    {
+      "id": 1651,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1625,
+        "South": 1650
+      }
+    },
+    {
+      "id": 1652,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1653,
+        "West": 1636
+      }
+    },
+    {
+      "id": 1653,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1654,
+        "West": 1652
+      }
+    },
+    {
+      "id": 1654,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1655,
+        "West": 1653
+      }
+    },
+    {
+      "id": 1655,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1656,
+        "West": 1654
+      }
+    },
+    {
+      "id": 1656,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1657,
+        "West": 1655
+      }
+    },
+    {
+      "id": 1657,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1658,
+        "South": 1656
+      }
+    },
+    {
+      "id": 1658,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1659,
+        "West": 1657
+      }
+    },
+    {
+      "id": 1659,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1660,
+        "West": 1658
+      }
+    },
+    {
+      "id": 1660,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1661,
+        "West": 1659
+      }
+    },
+    {
+      "id": 1661,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1662,
+        "West": 1660
+      }
+    },
+    {
+      "id": 1662,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1663,
+        "West": 1661
+      }
+    },
+    {
+      "id": 1663,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1664,
+        "West": 1662
+      }
+    },
+    {
+      "id": 1664,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1665,
+        "West": 1663
+      }
+    },
+    {
+      "id": 1665,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1666,
+        "West": 1664
+      }
+    },
+    {
+      "id": 1666,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1667,
+        "South": 1665
+      }
+    },
+    {
+      "id": 1667,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1634,
+        "South": 1666
+      }
+    },
+    {
+      "id": 1668,
+      "name": "In a secret gangway.",
+      "exits": {
+        "North": 1669,
+        "South": 1635
+      }
+    },
+    {
+      "id": 1669,
+      "name": "In a secret gangway.",
+      "exits": {
+        "South": 1668,
+        "West": 1670
+      }
+    },
+    {
+      "id": 1670,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1669,
+        "West": 1671
+      }
+    },
+    {
+      "id": 1671,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1670,
+        "West": 1672
+      }
+    },
+    {
+      "id": 1672,
+      "name": "In a secret gangway.",
+      "exits": {
+        "East": 1671,
+        "West": 1673
+      }
+    },
+    {
+      "id": 1673,
+      "name": "At the porch.",
+      "exits": {
+        "East": 1672,
+        "West": 1674
+      }
+    },
+    {
+      "id": 1674,
+      "name": "In a sleeping room.",
+      "exits": {
+        "West": 1675
+      }
+    },
+    {
+      "id": 1675,
+      "name": "In a hallway.",
+      "exits": {
+        "North": 1676,
+        "East": 1674
+      }
+    },
+    {
+      "id": 1676,
+      "name": "In the hallway.",
+      "exits": {
+        "North": 1677,
+        "South": 1675
+      }
+    },
+    {
+      "id": 1677,
+      "name": "In the hallway.",
+      "exits": {
+        "North": 1678,
+        "South": 1676,
+        "West": 1679
+      }
+    },
+    {
+      "id": 1678,
+      "name": "The guard barracks.",
+      "exits": {
+        "South": 1677
+      }
+    },
+    {
+      "id": 1679,
+      "name": "In a hallway.",
+      "exits": {
+        "East": 1677,
+        "West": 1680
+      }
+    },
+    {
+      "id": 1680,
+      "name": "In a hallway.",
+      "exits": {
+        "North": 1681,
+        "East": 1679,
+        "West": 1682
+      }
+    },
+    {
+      "id": 1681,
+      "name": "A guard barracks.",
+      "exits": {
+        "South": 1680
+      }
+    },
+    {
+      "id": 1682,
+      "name": "At a flight of stairs.",
+      "exits": {
+        "East": 1680,
+        "Up": 1683
+      }
+    },
+    {
+      "id": 1683,
+      "name": "At a flight of stairs.",
+      "exits": {
+        "South": 1687,
+        "Down": 1682
+      }
+    },
+    {
+      "id": 1684,
+      "name": "In the northwestern corner of the foyer.",
+      "exits": {
+        "East": 1687,
+        "South": 1685
+      }
+    },
+    {
+      "id": 1685,
+      "name": "In the west of the foyer.",
+      "exits": {
+        "North": 1684,
+        "East": 1688,
+        "South": 1686
+      }
+    },
+    {
+      "id": 1686,
+      "name": "In the southwestern corner of the foyer.",
+      "exits": {
+        "North": 1685,
+        "East": 1689
+      }
+    },
+    {
+      "id": 1687,
+      "name": "In the north of the foyer.  To the north, you see stairs.",
+      "exits": {
+        "North": 1683,
+        "East": 1691,
+        "South": 1688,
+        "West": 1684
+      }
+    },
+    {
+      "id": 1688,
+      "name": "In the Center of the foyer.",
+      "exits": {
+        "North": 1687,
+        "East": 1692,
+        "South": 1689,
+        "West": 1685
+      }
+    },
+    {
+      "id": 1689,
+      "name": "In the south of the foyer.  To the south, you see some stairs.",
+      "exits": {
+        "North": 1688,
+        "East": 1693,
+        "South": 1690,
+        "West": 1686
+      }
+    },
+    {
+      "id": 1690,
+      "name": "A flight of stairs.",
+      "exits": {
+        "North": 1689,
+        "Up": 1694
+      }
+    },
+    {
+      "id": 1691,
+      "name": "In the northeastern corner of the foyer.",
+      "exits": {
+        "South": 1692,
+        "West": 1687
+      }
+    },
+    {
+      "id": 1692,
+      "name": "In the east of the foyer.",
+      "exits": {
+        "North": 1691,
+        "South": 1693,
+        "West": 1688
+      }
+    },
+    {
+      "id": 1693,
+      "name": "In the southeastern corner of the foyer.",
+      "exits": {
+        "North": 1692,
+        "West": 1689
+      }
+    },
+    {
+      "id": 1694,
+      "name": "At a flight of stairs.",
+      "exits": {
+        "South": 1695,
+        "Down": 1690
+      }
+    },
+    {
+      "id": 1695,
+      "name": "A hallway on the first floor.",
+      "exits": {
+        "North": 1694,
+        "South": 1697
+      }
+    },
+    {
+      "id": 1696,
+      "name": "In an unused room.",
+      "exits": {
+        "East": 1697
+      }
+    },
+    {
+      "id": 1697,
+      "name": "In a hallway.",
+      "exits": {
+        "North": 1695,
+        "East": 1698,
+        "South": 1699,
+        "West": 1696
+      }
+    },
+    {
+      "id": 1698,
+      "name": "In the Lord\u0027s bedroom.",
+      "exits": {
+        "West": 1697
+      }
+    },
+    {
+      "id": 1699,
+      "name": "In a hallway.",
+      "exits": {
+        "North": 1697,
+        "South": 1701
+      }
+    },
+    {
+      "id": 1700,
+      "name": "A bedroom.",
+      "exits": {
+        "East": 1701
+      }
+    },
+    {
+      "id": 1701,
+      "name": "In a hallway.",
+      "exits": {
+        "North": 1699,
+        "East": 1702,
+        "South": 1703,
+        "West": 1700
+      }
+    },
+    {
+      "id": 1702,
+      "name": "The Lady\u0027s bedroom.",
+      "exits": {
+        "West": 1701
+      }
+    },
+    {
+      "id": 1703,
+      "name": "In a hallway.",
+      "exits": {
+        "North": 1701,
+        "South": 1704
+      }
+    },
+    {
+      "id": 1704,
+      "name": "A bend in the hallway.",
+      "exits": {
+        "North": 1703,
+        "East": 1705
+      }
+    },
+    {
+      "id": 1705,
+      "name": "In a hallway.",
+      "exits": {
+        "East": 1706,
+        "West": 1704
+      }
+    },
+    {
+      "id": 1706,
+      "name": "At a flight of stairs.",
+      "exits": {
+        "West": 1705,
+        "Up": 1707
+      }
+    },
+    {
+      "id": 1707,
+      "name": "At a flight of stairs.",
+      "exits": {
+        "South": 1708,
+        "Down": 1706
+      }
+    },
+    {
+      "id": 1708,
+      "name": "In the Ante-Room.",
+      "exits": {
+        "North": 1707,
+        "South": 1709
+      }
+    },
+    {
+      "id": 1709,
+      "name": "A room in between the throne and the ante-room.",
+      "exits": {
+        "North": 1708,
+        "South": 1710
+      }
+    },
+    {
+      "id": 1710,
+      "name": "The throne room.",
+      "exits": {
+        "North": 1709
+      }
+    },
+    {
+      "id": 2512,
+      "name": "To Moria",
+      "otherAreaExit": true,
+      "exits": {
+        "Up": 2511,
+        "Down": 1511
+      }
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "name": "Ofcol",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 2873,
+      "name": "Village street",
+      "exits": {
+        "North": 2874,
+        "South": 3045
+      }
+    },
+    {
+      "id": 2874,
+      "name": "Village street",
+      "exits": {
+        "North": 2875,
+        "East": 2876,
+        "South": 2873
+      }
+    },
+    {
+      "id": 2875,
+      "name": "Village square",
+      "exits": {
+        "North": 2879,
+        "East": 2595,
+        "South": 2874,
+        "West": 2878
+      }
+    },
+    {
+      "id": 2876,
+      "name": "The small alley",
+      "exits": {
+        "East": 2882,
+        "South": 2877,
+        "West": 2874
+      }
+    },
+    {
+      "id": 2877,
+      "name": "The future training room",
+      "exits": {
+        "North": 2876
+      }
+    },
+    {
+      "id": 2878,
+      "name": "Luxan\u0027s mixed shop",
+      "exits": {
+        "East": 2875
+      }
+    },
+    {
+      "id": 2879,
+      "name": "The Local Inn",
+      "exits": {
+        "South": 2875
+      }
+    },
+    {
+      "id": 2880,
+      "name": "Ravan\u0027s hideout",
+      "exits": {}
+    },
+    {
+      "id": 3045,
+      "name": "To Plains of the North",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2873,
+        "South": 3044
+      }
+    },
+    {
+      "id": 2595,
+      "name": "To Murky Land",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2596,
+        "West": 2875
+      }
+    },
+    {
+      "id": 2882,
+      "name": "To New Ofcol",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2906,
+        "East": 2947,
+        "South": 2883,
+        "West": 2876
+      }
+    }
+  ]
+}

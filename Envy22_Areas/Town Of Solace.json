@@ -1,0 +1,970 @@
+{
+  "name": "Town Of Solace",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 3582,
+      "name": "Gateway to Solace",
+      "exits": {
+        "North": 3583,
+        "East": 3597,
+        "South": 516,
+        "West": 3598
+      }
+    },
+    {
+      "id": 3583,
+      "name": "Main Road",
+      "exits": {
+        "North": 3584,
+        "East": 3638,
+        "South": 3582,
+        "West": 3627
+      }
+    },
+    {
+      "id": 3584,
+      "name": "Main Road",
+      "exits": {
+        "North": 3585,
+        "South": 3583,
+        "West": 3626
+      }
+    },
+    {
+      "id": 3585,
+      "name": "Main Road",
+      "exits": {
+        "North": 3586,
+        "South": 3584
+      }
+    },
+    {
+      "id": 3586,
+      "name": "Intersection at Main Road.",
+      "exits": {
+        "North": 3609,
+        "East": 3587,
+        "South": 3585,
+        "West": 3608
+      }
+    },
+    {
+      "id": 3587,
+      "name": "East Gullen Way",
+      "exits": {
+        "East": 3588,
+        "South": 3632,
+        "West": 3586
+      }
+    },
+    {
+      "id": 3588,
+      "name": "East Gullen Way",
+      "exits": {
+        "East": 3589,
+        "South": 3633,
+        "West": 3587
+      }
+    },
+    {
+      "id": 3589,
+      "name": "East Gullen Way",
+      "exits": {
+        "East": 3590,
+        "West": 3588
+      }
+    },
+    {
+      "id": 3590,
+      "name": "Corner of East Gullen and Ketra Road.",
+      "exits": {
+        "South": 3591,
+        "West": 3589
+      }
+    },
+    {
+      "id": 3591,
+      "name": "Ketra Road.",
+      "exits": {
+        "North": 3590,
+        "South": 3592
+      }
+    },
+    {
+      "id": 3592,
+      "name": "Ketra Road.",
+      "exits": {
+        "North": 3591,
+        "South": 3593,
+        "West": 3635
+      }
+    },
+    {
+      "id": 3593,
+      "name": "Ketra Road.",
+      "exits": {
+        "North": 3592,
+        "South": 3594,
+        "West": 3636
+      }
+    },
+    {
+      "id": 3594,
+      "name": "Southeast Guardpost and Watchtower.",
+      "exits": {
+        "North": 3593,
+        "West": 3595,
+        "Up": 3641
+      }
+    },
+    {
+      "id": 3595,
+      "name": "Small Alleyway.",
+      "exits": {
+        "East": 3594,
+        "West": 3596
+      }
+    },
+    {
+      "id": 3596,
+      "name": "Small Alleyway.",
+      "exits": {
+        "North": 3637,
+        "East": 3595,
+        "West": 3597
+      }
+    },
+    {
+      "id": 3597,
+      "name": "Small Alleyway.",
+      "exits": {
+        "East": 3596,
+        "West": 3582
+      }
+    },
+    {
+      "id": 3598,
+      "name": "Small Alleyway.",
+      "exits": {
+        "East": 3582,
+        "West": 3599
+      }
+    },
+    {
+      "id": 3599,
+      "name": "Small Alleyway.",
+      "exits": {
+        "North": 3628,
+        "East": 3598,
+        "West": 3600
+      }
+    },
+    {
+      "id": 3600,
+      "name": "Small Alleyway.",
+      "exits": {
+        "East": 3599,
+        "West": 3601
+      }
+    },
+    {
+      "id": 3601,
+      "name": "Southwest Guardpost and Watchtower.",
+      "exits": {
+        "North": 3602,
+        "East": 3600,
+        "Up": 3642
+      }
+    },
+    {
+      "id": 3602,
+      "name": "Harvest Road.",
+      "exits": {
+        "North": 3603,
+        "East": 3629,
+        "South": 3601
+      }
+    },
+    {
+      "id": 3603,
+      "name": "Harvest Road.",
+      "exits": {
+        "North": 3604,
+        "East": 3630,
+        "South": 3602
+      }
+    },
+    {
+      "id": 3604,
+      "name": "Harvest Road.",
+      "exits": {
+        "North": 3605,
+        "South": 3603
+      }
+    },
+    {
+      "id": 3605,
+      "name": "Corner of West Gullen Way and Harvest Road.",
+      "exits": {
+        "East": 3606,
+        "South": 3604
+      }
+    },
+    {
+      "id": 3606,
+      "name": "West Gullen Way",
+      "exits": {
+        "East": 3607,
+        "South": 3623,
+        "West": 3605
+      }
+    },
+    {
+      "id": 3607,
+      "name": "West Gullen Way",
+      "exits": {
+        "East": 3608,
+        "South": 3624,
+        "West": 3606
+      }
+    },
+    {
+      "id": 3608,
+      "name": "West Gullen Way",
+      "exits": {
+        "East": 3586,
+        "South": 3625,
+        "West": 3607
+      }
+    },
+    {
+      "id": 3609,
+      "name": "Main Road",
+      "exits": {
+        "North": 3610,
+        "South": 3586
+      }
+    },
+    {
+      "id": 3610,
+      "name": "End of the Main Road",
+      "exits": {
+        "North": 3653,
+        "East": 3643,
+        "South": 3609,
+        "West": 3611
+      }
+    },
+    {
+      "id": 3611,
+      "name": "Marketplace.",
+      "exits": {
+        "North": 3622,
+        "East": 3610,
+        "South": 3618,
+        "West": 3612
+      }
+    },
+    {
+      "id": 3612,
+      "name": "Marketplace.",
+      "exits": {
+        "North": 3621,
+        "East": 3611,
+        "South": 3617,
+        "West": 3613
+      }
+    },
+    {
+      "id": 3613,
+      "name": "Marketplace.",
+      "exits": {
+        "North": 3620,
+        "East": 3612,
+        "South": 3616,
+        "West": 3614
+      }
+    },
+    {
+      "id": 3614,
+      "name": "Marketplace.",
+      "exits": {
+        "East": 3613,
+        "North": 3619,
+        "South": 3615
+      }
+    },
+    {
+      "id": 3615,
+      "name": "Jhen\u0027s Vegetable Cart.",
+      "exits": {
+        "North": 3614
+      }
+    },
+    {
+      "id": 3616,
+      "name": "Krista\u0027s Fruit Stand.",
+      "exits": {
+        "North": 3613
+      }
+    },
+    {
+      "id": 3617,
+      "name": "Janni\u0027s Souvenirs.",
+      "exits": {
+        "North": 3612
+      }
+    },
+    {
+      "id": 3618,
+      "name": "Nisi\u0027s Frozen Food",
+      "exits": {
+        "North": 3611
+      }
+    },
+    {
+      "id": 3619,
+      "name": "Molin\u0027s Mulburry Extracts.",
+      "exits": {
+        "South": 3614
+      }
+    },
+    {
+      "id": 3620,
+      "name": "Rashan\u0027s Rutabagas",
+      "exits": {
+        "South": 3613
+      }
+    },
+    {
+      "id": 3621,
+      "name": "Lexie\u0027s Scuba Shop",
+      "exits": {
+        "South": 3612
+      }
+    },
+    {
+      "id": 3622,
+      "name": "Croben\u0027s Containers.",
+      "exits": {
+        "South": 3611
+      }
+    },
+    {
+      "id": 3623,
+      "name": "Matt\u0027s Brewery.",
+      "exits": {
+        "North": 3606
+      }
+    },
+    {
+      "id": 3624,
+      "name": "a House.",
+      "exits": {
+        "North": 3607
+      }
+    },
+    {
+      "id": 3625,
+      "name": "a House.",
+      "exits": {
+        "North": 3608
+      }
+    },
+    {
+      "id": 3626,
+      "name": "Cookie\u0027s Cookie Cookery.",
+      "exits": {
+        "East": 3584,
+        "West": 3631
+      }
+    },
+    {
+      "id": 3627,
+      "name": "a House.",
+      "exits": {
+        "East": 3583
+      }
+    },
+    {
+      "id": 3628,
+      "name": "Old Gambling Parlor.",
+      "exits": {
+        "South": 3599
+      }
+    },
+    {
+      "id": 3629,
+      "name": "The McBakery",
+      "exits": {
+        "West": 3602
+      }
+    },
+    {
+      "id": 3630,
+      "name": "a House.",
+      "exits": {
+        "West": 3603
+      }
+    },
+    {
+      "id": 3631,
+      "name": "Cookie\u0027s Relaxing Room.",
+      "exits": {
+        "East": 3626
+      }
+    },
+    {
+      "id": 3632,
+      "name": "a House.",
+      "exits": {
+        "North": 3587
+      }
+    },
+    {
+      "id": 3633,
+      "name": "The Marilyn\u0027s Bird Factory.",
+      "exits": {
+        "North": 3588
+      }
+    },
+    {
+      "id": 3634,
+      "name": "Pet Storage",
+      "exits": {}
+    },
+    {
+      "id": 3635,
+      "name": "Storage Building",
+      "exits": {
+        "East": 3592
+      }
+    },
+    {
+      "id": 3636,
+      "name": "Jander\u0027s",
+      "exits": {
+        "East": 3593,
+        "West": 3637
+      }
+    },
+    {
+      "id": 3637,
+      "name": "Jander\u0027s Poolhall",
+      "exits": {
+        "North": 3640,
+        "East": 3636,
+        "South": 3596,
+        "West": 3638
+      }
+    },
+    {
+      "id": 3638,
+      "name": "Jander\u0027s Restaurant",
+      "exits": {
+        "East": 3637,
+        "West": 3583
+      }
+    },
+    {
+      "id": 3639,
+      "name": "Death\u0027s Chambers",
+      "exits": {}
+    },
+    {
+      "id": 3640,
+      "name": "Jander\u0027s Office",
+      "exits": {
+        "South": 3637
+      }
+    },
+    {
+      "id": 3641,
+      "name": "Inside Southeast Watchtower.",
+      "exits": {
+        "Down": 3594
+      }
+    },
+    {
+      "id": 3642,
+      "name": "Inside Southwest Watchtower.",
+      "exits": {
+        "Down": 3601
+      }
+    },
+    {
+      "id": 3643,
+      "name": "Dusty road.",
+      "exits": {
+        "East": 3644,
+        "West": 3610
+      }
+    },
+    {
+      "id": 3644,
+      "name": "Townguard Administration Building.",
+      "exits": {
+        "East": 3645,
+        "West": 3643
+      }
+    },
+    {
+      "id": 3645,
+      "name": "Entrance Hall.",
+      "exits": {
+        "East": 3651,
+        "South": 3646,
+        "West": 3644
+      }
+    },
+    {
+      "id": 3646,
+      "name": "Marble Corridor.",
+      "exits": {
+        "North": 3645,
+        "East": 3649,
+        "West": 3647
+      }
+    },
+    {
+      "id": 3647,
+      "name": "Town Clerk.",
+      "exits": {
+        "East": 3646,
+        "West": 3648
+      }
+    },
+    {
+      "id": 3648,
+      "name": "Deposits Room.",
+      "exits": {
+        "East": 3647
+      }
+    },
+    {
+      "id": 3649,
+      "name": "Marble Corridor.",
+      "exits": {
+        "North": 3651,
+        "East": 3650,
+        "West": 3646
+      }
+    },
+    {
+      "id": 3650,
+      "name": "Water Fountain.",
+      "exits": {
+        "West": 3649
+      }
+    },
+    {
+      "id": 3651,
+      "name": "Hallway Intersection.",
+      "exits": {
+        "North": 3657,
+        "East": 3652,
+        "South": 3649,
+        "West": 3645
+      }
+    },
+    {
+      "id": 3652,
+      "name": "End of Long Hall",
+      "exits": {
+        "North": 3658,
+        "West": 3651
+      }
+    },
+    {
+      "id": 3653,
+      "name": "Cobblestone Path",
+      "exits": {
+        "North": 3663,
+        "South": 3610
+      }
+    },
+    {
+      "id": 3654,
+      "name": "Sergeant\u0027s Reception Room",
+      "exits": {
+        "North": 3664,
+        "East": 3655
+      }
+    },
+    {
+      "id": 3655,
+      "name": "Administration Hallway",
+      "exits": {
+        "North": 3665,
+        "East": 3656,
+        "West": 3654
+      }
+    },
+    {
+      "id": 3656,
+      "name": "Administration Hallway",
+      "exits": {
+        "North": 3666,
+        "East": 3657,
+        "West": 3655
+      }
+    },
+    {
+      "id": 3657,
+      "name": "Administration Hallway",
+      "exits": {
+        "North": 3667,
+        "South": 3651,
+        "West": 3656
+      }
+    },
+    {
+      "id": 3658,
+      "name": "Long Hallway",
+      "exits": {
+        "North": 3668,
+        "South": 3652
+      }
+    },
+    {
+      "id": 3659,
+      "name": "West end of Common Room",
+      "exits": {
+        "East": 3660
+      }
+    },
+    {
+      "id": 3660,
+      "name": "East end of Common Room",
+      "exits": {
+        "North": 3670,
+        "West": 3659
+      }
+    },
+    {
+      "id": 3661,
+      "name": "West end of Bar.",
+      "exits": {
+        "East": 3662
+      }
+    },
+    {
+      "id": 3662,
+      "name": "Inn of the Last Home.",
+      "exits": {
+        "North": 3672,
+        "East": 3663,
+        "West": 3661,
+        "Up": 3671
+      }
+    },
+    {
+      "id": 3663,
+      "name": "Outside the Inn of the Last Home.",
+      "exits": {
+        "North": 3673,
+        "South": 3653,
+        "West": 3662
+      }
+    },
+    {
+      "id": 3664,
+      "name": "Sergeant\u0027s Office",
+      "exits": {
+        "South": 3654
+      }
+    },
+    {
+      "id": 3665,
+      "name": "Administration Hallway",
+      "exits": {
+        "North": 3675,
+        "South": 3655
+      }
+    },
+    {
+      "id": 3666,
+      "name": "Guards Room.",
+      "exits": {
+        "South": 3656
+      }
+    },
+    {
+      "id": 3667,
+      "name": "Administration Hallway",
+      "exits": {
+        "North": 3677,
+        "South": 3657
+      }
+    },
+    {
+      "id": 3668,
+      "name": "Long Hallway",
+      "exits": {
+        "North": 3678,
+        "South": 3658
+      }
+    },
+    {
+      "id": 3669,
+      "name": "Hallway",
+      "exits": {
+        "North": 3679,
+        "East": 3670
+      }
+    },
+    {
+      "id": 3670,
+      "name": "Outside Common Room",
+      "exits": {
+        "East": 3671,
+        "South": 3660,
+        "West": 3669
+      }
+    },
+    {
+      "id": 3671,
+      "name": "Second Floor of the Inn.",
+      "exits": {
+        "West": 3670,
+        "Down": 3662
+      }
+    },
+    {
+      "id": 3672,
+      "name": "North End of Bar.",
+      "exits": {
+        "South": 3662
+      }
+    },
+    {
+      "id": 3673,
+      "name": "Captain\u0027s Office.",
+      "exits": {
+        "North": 3683,
+        "South": 3663
+      }
+    },
+    {
+      "id": 3674,
+      "name": "Administration Hallway",
+      "exits": {
+        "North": 3684,
+        "East": 3675
+      }
+    },
+    {
+      "id": 3675,
+      "name": "Administration Hallway",
+      "exits": {
+        "East": 3676,
+        "South": 3665,
+        "West": 3674
+      }
+    },
+    {
+      "id": 3676,
+      "name": "Lieutenant\u0027s Reception Area.",
+      "exits": {
+        "North": 3686,
+        "West": 3675
+      }
+    },
+    {
+      "id": 3677,
+      "name": "Administration Hallway",
+      "exits": {
+        "North": 3687,
+        "South": 3667
+      }
+    },
+    {
+      "id": 3678,
+      "name": "Long Hallway",
+      "exits": {
+        "North": 3688,
+        "South": 3668
+      }
+    },
+    {
+      "id": 3679,
+      "name": "Hallway",
+      "exits": {
+        "North": 3689,
+        "South": 3669
+      }
+    },
+    {
+      "id": 3680,
+      "name": "Private Room",
+      "exits": {
+        "North": 3690
+      }
+    },
+    {
+      "id": 3681,
+      "name": "Private Room",
+      "exits": {
+        "North": 3691
+      }
+    },
+    {
+      "id": 3682,
+      "name": "Private Room",
+      "exits": {
+        "North": 3692
+      }
+    },
+    {
+      "id": 3683,
+      "name": "Captain\u0027s Meeting room.",
+      "exits": {
+        "North": 3693,
+        "South": 3673
+      }
+    },
+    {
+      "id": 3684,
+      "name": "Administration Hallway",
+      "exits": {
+        "North": 3694,
+        "South": 3674
+      }
+    },
+    {
+      "id": 3685,
+      "name": "Guards Room.",
+      "exits": {
+        "North": 3695
+      }
+    },
+    {
+      "id": 3686,
+      "name": "Lieutenant\u0027s Office.",
+      "exits": {
+        "South": 3676
+      }
+    },
+    {
+      "id": 3687,
+      "name": "Administration Hallway",
+      "exits": {
+        "North": 3697,
+        "South": 3677
+      }
+    },
+    {
+      "id": 3688,
+      "name": "Long Hallway",
+      "exits": {
+        "North": 3698,
+        "South": 3678
+      }
+    },
+    {
+      "id": 3689,
+      "name": "Reading Room.",
+      "exits": {
+        "East": 3690,
+        "South": 3679
+      }
+    },
+    {
+      "id": 3690,
+      "name": "Hallway",
+      "exits": {
+        "East": 3691,
+        "South": 3680,
+        "West": 3689
+      }
+    },
+    {
+      "id": 3691,
+      "name": "Hallway",
+      "exits": {
+        "East": 3692,
+        "South": 3681,
+        "West": 3690
+      }
+    },
+    {
+      "id": 3692,
+      "name": "Hallway",
+      "exits": {
+        "South": 3682,
+        "West": 3691
+      }
+    },
+    {
+      "id": 3693,
+      "name": "Captain\u0027s Waiting Room.",
+      "exits": {
+        "East": 3694,
+        "South": 3683
+      }
+    },
+    {
+      "id": 3694,
+      "name": "Administration Hallway",
+      "exits": {
+        "East": 3695,
+        "South": 3684,
+        "West": 3693
+      }
+    },
+    {
+      "id": 3695,
+      "name": "Administration Hallway",
+      "exits": {
+        "East": 3696,
+        "South": 3685,
+        "West": 3694
+      }
+    },
+    {
+      "id": 3696,
+      "name": "Administration Hallway",
+      "exits": {
+        "East": 3697,
+        "West": 3695
+      }
+    },
+    {
+      "id": 3697,
+      "name": "Administration Hallway",
+      "exits": {
+        "East": 3698,
+        "South": 3687,
+        "West": 3696
+      }
+    },
+    {
+      "id": 3698,
+      "name": "End of Long Hall",
+      "exits": {
+        "South": 3688,
+        "West": 3697
+      }
+    },
+    {
+      "id": 516,
+      "name": "To Crystalmir Lake",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 3582,
+        "East": 515,
+        "South": 535,
+        "West": 517
+      }
+    }
+  ]
+}

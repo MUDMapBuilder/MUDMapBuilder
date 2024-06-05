@@ -1,0 +1,243 @@
+{
+  "name": "Mob Factory",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 2449,
+      "name": "Entrance to the Mob Factory",
+      "exits": {
+        "North": 2450,
+        "East": 2456,
+        "South": 2452,
+        "West": 2288
+      }
+    },
+    {
+      "id": 2450,
+      "name": "Mob Factory Storage Area",
+      "exits": {
+        "North": 2451,
+        "East": 2455,
+        "South": 2449
+      }
+    },
+    {
+      "id": 2451,
+      "name": "Mob Factory Storage Area",
+      "exits": {
+        "East": 2454,
+        "South": 2450
+      }
+    },
+    {
+      "id": 2452,
+      "name": "Foreman\u0027s Office",
+      "exits": {
+        "North": 2449,
+        "South": 2453
+      }
+    },
+    {
+      "id": 2453,
+      "name": "Foreman\u0027s Bathroom",
+      "exits": {
+        "North": 2452
+      }
+    },
+    {
+      "id": 2454,
+      "name": "Mob Factory Storage Area",
+      "exits": {
+        "East": 2459,
+        "South": 2455,
+        "West": 2451
+      }
+    },
+    {
+      "id": 2455,
+      "name": "Mob Factory Storage Area",
+      "exits": {
+        "North": 2454,
+        "East": 2460,
+        "South": 2456,
+        "West": 2450
+      }
+    },
+    {
+      "id": 2456,
+      "name": "Entrance Hallway to Mob Factory",
+      "exits": {
+        "North": 2455,
+        "East": 2461,
+        "South": 2457,
+        "West": 2449
+      }
+    },
+    {
+      "id": 2457,
+      "name": "Mob Factory Cafeteria",
+      "exits": {
+        "North": 2456,
+        "South": 2458
+      }
+    },
+    {
+      "id": 2458,
+      "name": "Mob Factory Cafeteria",
+      "exits": {
+        "North": 2457
+      }
+    },
+    {
+      "id": 2459,
+      "name": "Mob Factory Inspection Room",
+      "exits": {
+        "East": 2464,
+        "South": 2460,
+        "West": 2454
+      }
+    },
+    {
+      "id": 2460,
+      "name": "Mob Factory Inspection Room",
+      "exits": {
+        "North": 2459,
+        "East": 2465,
+        "South": 2461,
+        "West": 2455
+      }
+    },
+    {
+      "id": 2461,
+      "name": "Entrance Hallway to Mob Factory",
+      "exits": {
+        "North": 2460,
+        "East": 2466,
+        "South": 2462,
+        "West": 2456
+      }
+    },
+    {
+      "id": 2462,
+      "name": "Mob Factory Reject Room",
+      "exits": {
+        "North": 2461,
+        "South": 2463
+      }
+    },
+    {
+      "id": 2463,
+      "name": "Mob Factory Reject Room",
+      "exits": {
+        "North": 2462
+      }
+    },
+    {
+      "id": 2464,
+      "name": "Primary Assembly Line",
+      "exits": {
+        "East": 2469,
+        "South": 2465,
+        "West": 2459
+      }
+    },
+    {
+      "id": 2465,
+      "name": "Primary Assembly Line",
+      "exits": {
+        "North": 2464,
+        "East": 2470,
+        "South": 2466,
+        "West": 2460
+      }
+    },
+    {
+      "id": 2466,
+      "name": "Primary Assembly Line",
+      "exits": {
+        "North": 2465,
+        "East": 2471,
+        "South": 2467,
+        "West": 2461
+      }
+    },
+    {
+      "id": 2467,
+      "name": "Primary Assembly Line",
+      "exits": {
+        "North": 2466,
+        "East": 2472,
+        "South": 2468
+      }
+    },
+    {
+      "id": 2468,
+      "name": "Primary Assembly Line",
+      "exits": {
+        "North": 2467,
+        "East": 2473
+      }
+    },
+    {
+      "id": 2469,
+      "name": "Secondary Assembly Line",
+      "exits": {
+        "South": 2470,
+        "West": 2464
+      }
+    },
+    {
+      "id": 2470,
+      "name": "Secondary Assembly Line",
+      "exits": {
+        "North": 2469,
+        "South": 2471,
+        "West": 2465
+      }
+    },
+    {
+      "id": 2471,
+      "name": "Secondary Assembly Line",
+      "exits": {
+        "North": 2470,
+        "South": 2472,
+        "West": 2466
+      }
+    },
+    {
+      "id": 2472,
+      "name": "Secondary Assembly Line",
+      "exits": {
+        "North": 2471,
+        "South": 2473,
+        "West": 2467
+      }
+    },
+    {
+      "id": 2473,
+      "name": "Secondary Assembly Line",
+      "exits": {
+        "North": 2472,
+        "West": 2468
+      }
+    },
+    {
+      "id": 2288,
+      "name": "To Midgaard",
+      "otherAreaExit": true,
+      "exits": {
+        "East": 2449,
+        "South": 2292,
+        "West": 2287
+      }
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "name": "God Rooms",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 1330,
+      "name": "The Chat Room",
+      "exits": {}
+    },
+    {
+      "id": 1331,
+      "name": "The HotTub",
+      "exits": {}
+    },
+    {
+      "id": 1332,
+      "name": "A Small Clearing",
+      "exits": {}
+    },
+    {
+      "id": 1333,
+      "name": "Ben\u0027s Room",
+      "exits": {}
+    },
+    {
+      "id": 1334,
+      "name": "Mephisto\u0027s Pad",
+      "exits": {
+        "Up": 1335
+      }
+    },
+    {
+      "id": 1335,
+      "name": "The Bathroom",
+      "exits": {
+        "Down": 1334
+      }
+    },
+    {
+      "id": 1336,
+      "name": "The Porch",
+      "exits": {
+        "South": 1337,
+        "Up": 1339
+      }
+    },
+    {
+      "id": 1337,
+      "name": "The Living Room",
+      "exits": {
+        "North": 1336,
+        "West": 1338
+      }
+    },
+    {
+      "id": 1338,
+      "name": "The Kitchen",
+      "exits": {
+        "East": 1337
+      }
+    },
+    {
+      "id": 1339,
+      "name": "Picard\u0027s Hideaway",
+      "exits": {
+        "Down": 1336
+      }
+    },
+    {
+      "id": 1340,
+      "name": "Katrina\u0027s Playpen",
+      "exits": {
+        "West": 1341
+      }
+    },
+    {
+      "id": 1341,
+      "name": "An Alcove",
+      "exits": {
+        "East": 1340,
+        "Up": 2247
+      }
+    },
+    {
+      "id": 1342,
+      "name": "The Abyss",
+      "exits": {}
+    },
+    {
+      "id": 1343,
+      "name": "The Burning Shrine",
+      "exits": {}
+    },
+    {
+      "id": 1344,
+      "name": "Smoof\u0027s bedroom",
+      "exits": {
+        "East": 1346,
+        "North": 1345
+      }
+    },
+    {
+      "id": 1345,
+      "name": "Smoof\u0027s bathroom",
+      "exits": {
+        "South": 1344
+      }
+    },
+    {
+      "id": 1346,
+      "name": "James\u0027 bedroom",
+      "exits": {
+        "West": 1344
+      }
+    },
+    {
+      "id": 1347,
+      "name": "Horizon",
+      "exits": {
+        "Down": 1348
+      }
+    },
+    {
+      "id": 1348,
+      "name": "The Hideout",
+      "exits": {
+        "Up": 1347
+      }
+    },
+    {
+      "id": 1349,
+      "name": "Alexander\u0027s private enclave",
+      "exits": {
+        "South": 1350,
+        "West": 1351
+      }
+    },
+    {
+      "id": 1350,
+      "name": "Alexander\u0027s sleeping chamber",
+      "exits": {
+        "North": 1349
+      }
+    },
+    {
+      "id": 1351,
+      "name": "Alexander\u0027s laboratory",
+      "exits": {
+        "East": 1349
+      }
+    },
+    {
+      "id": 1352,
+      "name": "Wyrmclaw\u0027s Council of War Room",
+      "exits": {
+        "South": 1330
+      }
+    },
+    {
+      "id": 1353,
+      "name": "Zelda\u0027s Zany Zoo",
+      "exits": {}
+    },
+    {
+      "id": 2247,
+      "name": "To Midgaard",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2296,
+        "South": 2251,
+        "Up": 3222
+      }
+    }
+  ]
+}

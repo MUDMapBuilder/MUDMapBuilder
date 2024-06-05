@@ -1,0 +1,826 @@
+{
+  "name": "The Castle Naytil",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 2667,
+      "name": "Baladurs Throne Room",
+      "exits": {
+        "South": 2668
+      }
+    },
+    {
+      "id": 2668,
+      "name": "The Great Hall, north end",
+      "exits": {
+        "North": 2667,
+        "East": 2671,
+        "South": 2669,
+        "West": 2677
+      }
+    },
+    {
+      "id": 2669,
+      "name": "The Great Entrance Hall, Center",
+      "exits": {
+        "North": 2668,
+        "South": 2670
+      }
+    },
+    {
+      "id": 2670,
+      "name": "Beginning of the Great Entrance Hall",
+      "exits": {
+        "North": 2669,
+        "South": 2728,
+        "West": 2718
+      }
+    },
+    {
+      "id": 2671,
+      "name": "the Great Banquet Hall, North End",
+      "exits": {
+        "West": 2668,
+        "South": 2672
+      }
+    },
+    {
+      "id": 2672,
+      "name": "The Great Banquet Hall, South End",
+      "exits": {
+        "North": 2671,
+        "East": 2673
+      }
+    },
+    {
+      "id": 2673,
+      "name": "a huge kitchen.",
+      "exits": {
+        "West": 2672,
+        "North": 2674,
+        "East": 2675,
+        "South": 2676
+      }
+    },
+    {
+      "id": 2674,
+      "name": "A water cistern",
+      "exits": {
+        "South": 2673
+      }
+    },
+    {
+      "id": 2675,
+      "name": "a cold room",
+      "exits": {
+        "West": 2673
+      }
+    },
+    {
+      "id": 2676,
+      "name": "the Pantry of Naytil",
+      "exits": {
+        "North": 2673
+      }
+    },
+    {
+      "id": 2677,
+      "name": "a grandois sweeping marble staircase",
+      "exits": {
+        "East": 2668,
+        "Up": 2678
+      }
+    },
+    {
+      "id": 2678,
+      "name": "a grandois sweeping marble staircase",
+      "exits": {
+        "Down": 2677,
+        "Up": 2679
+      }
+    },
+    {
+      "id": 2679,
+      "name": "The upstairs hallway",
+      "exits": {
+        "Down": 2678,
+        "East": 2680,
+        "West": 2684
+      }
+    },
+    {
+      "id": 2680,
+      "name": "An oak paneled hallway.",
+      "exits": {
+        "North": 2700,
+        "South": 2699,
+        "West": 2679,
+        "East": 2681
+      }
+    },
+    {
+      "id": 2681,
+      "name": "An oak paneled hallway.",
+      "exits": {
+        "North": 2701,
+        "East": 2682,
+        "South": 2703,
+        "West": 2680
+      }
+    },
+    {
+      "id": 2682,
+      "name": "An oak paneled hallway.",
+      "exits": {
+        "North": 2704,
+        "East": 2683,
+        "South": 2705,
+        "West": 2681
+      }
+    },
+    {
+      "id": 2683,
+      "name": "The end of the oak paneled hallway.",
+      "exits": {
+        "North": 2706,
+        "South": 2707,
+        "West": 2682
+      }
+    },
+    {
+      "id": 2684,
+      "name": "An oak paneled hallway.",
+      "exits": {
+        "North": 2696,
+        "East": 2679,
+        "South": 2698,
+        "West": 2685
+      }
+    },
+    {
+      "id": 2685,
+      "name": "An oak paneled hallway.",
+      "exits": {
+        "North": 2693,
+        "East": 2684,
+        "South": 2695,
+        "West": 2686
+      }
+    },
+    {
+      "id": 2686,
+      "name": "An oak paneled hallway.",
+      "exits": {
+        "North": 2691,
+        "East": 2685,
+        "South": 2690,
+        "West": 2687
+      }
+    },
+    {
+      "id": 2687,
+      "name": "The west end of an oak paneled hallway.",
+      "exits": {
+        "North": 2688,
+        "East": 2686,
+        "South": 2689
+      }
+    },
+    {
+      "id": 2688,
+      "name": "Sebrina\u0027s bedroom.",
+      "exits": {
+        "South": 2687
+      }
+    },
+    {
+      "id": 2689,
+      "name": "Sebrinas Playroom.",
+      "exits": {
+        "North": 2687
+      }
+    },
+    {
+      "id": 2690,
+      "name": "The black leather lined room.",
+      "exits": {
+        "North": 2686
+      }
+    },
+    {
+      "id": 2691,
+      "name": "the lavanderia.",
+      "exits": {
+        "North": 2692,
+        "South": 2686
+      }
+    },
+    {
+      "id": 2692,
+      "name": "The shower room.",
+      "exits": {
+        "South": 2691
+      }
+    },
+    {
+      "id": 2693,
+      "name": "The bottom of a slim long stairwell",
+      "exits": {
+        "South": 2685,
+        "Up": 2694
+      }
+    },
+    {
+      "id": 2694,
+      "name": "The top of a long slim staircase.",
+      "exits": {
+        "North": 2712,
+        "Down": 2693
+      }
+    },
+    {
+      "id": 2695,
+      "name": "The classroom.",
+      "exits": {
+        "North": 2685
+      }
+    },
+    {
+      "id": 2696,
+      "name": "a small kitchen.",
+      "exits": {
+        "East": 2697,
+        "South": 2684
+      }
+    },
+    {
+      "id": 2697,
+      "name": "a small pantry.",
+      "exits": {
+        "West": 2696
+      }
+    },
+    {
+      "id": 2698,
+      "name": "The weapons armory.",
+      "exits": {
+        "North": 2684
+      }
+    },
+    {
+      "id": 2699,
+      "name": "The armory.",
+      "exits": {
+        "North": 2680
+      }
+    },
+    {
+      "id": 2700,
+      "name": "The private dining hall.",
+      "exits": {
+        "South": 2680
+      }
+    },
+    {
+      "id": 2701,
+      "name": "The bottom of the stairwell.",
+      "exits": {
+        "South": 2681,
+        "Up": 2702
+      }
+    },
+    {
+      "id": 2702,
+      "name": "The top of the stairwell.",
+      "exits": {
+        "North": 2708,
+        "Down": 2701
+      }
+    },
+    {
+      "id": 2703,
+      "name": "The teachers quarters.",
+      "exits": {
+        "North": 2681
+      }
+    },
+    {
+      "id": 2704,
+      "name": "The wizards sleeping quarters.",
+      "exits": {
+        "South": 2682
+      }
+    },
+    {
+      "id": 2705,
+      "name": "The quarters of the Salderon.",
+      "exits": {
+        "North": 2682
+      }
+    },
+    {
+      "id": 2706,
+      "name": "The King and Queen\u0027s bedroom",
+      "exits": {
+        "South": 2683
+      }
+    },
+    {
+      "id": 2707,
+      "name": "The exercise room.",
+      "exits": {
+        "North": 2683
+      }
+    },
+    {
+      "id": 2708,
+      "name": "The pentagram",
+      "exits": {
+        "North": 2709,
+        "East": 2710,
+        "South": 2702
+      }
+    },
+    {
+      "id": 2709,
+      "name": "The messy workbench",
+      "exits": {
+        "East": 2711,
+        "South": 2708
+      }
+    },
+    {
+      "id": 2710,
+      "name": "The golem creation area",
+      "exits": {
+        "North": 2711,
+        "West": 2708
+      }
+    },
+    {
+      "id": 2711,
+      "name": "The potion creation laboratory",
+      "exits": {
+        "South": 2710,
+        "West": 2709
+      }
+    },
+    {
+      "id": 2712,
+      "name": "the meadow",
+      "exits": {
+        "North": 2713,
+        "East": 2714,
+        "South": 2694
+      }
+    },
+    {
+      "id": 2713,
+      "name": "A light meadow",
+      "exits": {
+        "East": 2715,
+        "South": 2712
+      }
+    },
+    {
+      "id": 2714,
+      "name": "The Great Falls",
+      "exits": {
+        "North": 2715,
+        "West": 2712
+      }
+    },
+    {
+      "id": 2715,
+      "name": "Deep inside a heavy forest",
+      "exits": {
+        "South": 2714,
+        "West": 2713,
+        "Up": 2716
+      }
+    },
+    {
+      "id": 2716,
+      "name": "Up a tree",
+      "exits": {
+        "Up": 2717,
+        "Down": 2715
+      }
+    },
+    {
+      "id": 2717,
+      "name": "The treehouse",
+      "exits": {
+        "Down": 2716
+      }
+    },
+    {
+      "id": 2718,
+      "name": "The servants hallway",
+      "exits": {
+        "North": 2722,
+        "East": 2670,
+        "South": 2721,
+        "West": 2719
+      }
+    },
+    {
+      "id": 2719,
+      "name": "The center of the Servants hallway",
+      "exits": {
+        "North": 2724,
+        "East": 2718,
+        "South": 2723,
+        "West": 2720
+      }
+    },
+    {
+      "id": 2720,
+      "name": "The end of the Servants Hallway",
+      "exits": {
+        "North": 2726,
+        "East": 2719,
+        "South": 2725,
+        "West": 2727
+      }
+    },
+    {
+      "id": 2721,
+      "name": "The butlers room",
+      "exits": {
+        "North": 2718
+      }
+    },
+    {
+      "id": 2722,
+      "name": "The maids chambers",
+      "exits": {
+        "South": 2718
+      }
+    },
+    {
+      "id": 2723,
+      "name": "The servants bathroom",
+      "exits": {
+        "North": 2719
+      }
+    },
+    {
+      "id": 2724,
+      "name": "The cooks quarters",
+      "exits": {
+        "South": 2719
+      }
+    },
+    {
+      "id": 2725,
+      "name": "The servants showers",
+      "exits": {
+        "North": 2720
+      }
+    },
+    {
+      "id": 2726,
+      "name": "The castle linen closet",
+      "exits": {
+        "South": 2720
+      }
+    },
+    {
+      "id": 2727,
+      "name": "The laundry room",
+      "exits": {
+        "East": 2720
+      }
+    },
+    {
+      "id": 2728,
+      "name": "The courtyard gate",
+      "exits": {
+        "North": 2670,
+        "East": 2733,
+        "South": 2729,
+        "West": 2730
+      }
+    },
+    {
+      "id": 2729,
+      "name": "The Entrance Courtyard",
+      "exits": {
+        "North": 2728,
+        "East": 2732,
+        "South": 2746,
+        "West": 2731
+      }
+    },
+    {
+      "id": 2730,
+      "name": "In the courtyard",
+      "exits": {
+        "East": 2728,
+        "South": 2731,
+        "West": 2735
+      }
+    },
+    {
+      "id": 2731,
+      "name": "Inside the courtyard",
+      "exits": {
+        "North": 2730,
+        "East": 2729,
+        "West": 2734
+      }
+    },
+    {
+      "id": 2732,
+      "name": "Inside the courtyard",
+      "exits": {
+        "North": 2733,
+        "East": 2737,
+        "West": 2729
+      }
+    },
+    {
+      "id": 2733,
+      "name": "Against the keep wall",
+      "exits": {
+        "East": 2736,
+        "South": 2732,
+        "West": 2728
+      }
+    },
+    {
+      "id": 2734,
+      "name": "The Rich Bounty",
+      "exits": {
+        "East": 2731
+      }
+    },
+    {
+      "id": 2735,
+      "name": "Western Alley",
+      "exits": {
+        "East": 2730,
+        "West": 2738
+      }
+    },
+    {
+      "id": 2736,
+      "name": "Eastern Alley",
+      "exits": {
+        "East": 2741,
+        "West": 2733
+      }
+    },
+    {
+      "id": 2737,
+      "name": "The Adamantium Piece",
+      "exits": {
+        "West": 2732
+      }
+    },
+    {
+      "id": 2738,
+      "name": "A bend in the western alley.",
+      "exits": {
+        "North": 2744,
+        "East": 2735,
+        "South": 2740,
+        "West": 2739
+      }
+    },
+    {
+      "id": 2739,
+      "name": "The Double Irons",
+      "exits": {
+        "East": 2738
+      }
+    },
+    {
+      "id": 2740,
+      "name": "The Golden Shield",
+      "exits": {
+        "North": 2738
+      }
+    },
+    {
+      "id": 2741,
+      "name": "Eastern corner of Naytil",
+      "exits": {
+        "North": 2743,
+        "South": 2742,
+        "West": 2736
+      }
+    },
+    {
+      "id": 2742,
+      "name": "the kennels",
+      "exits": {
+        "North": 2741
+      }
+    },
+    {
+      "id": 2743,
+      "name": "The stables",
+      "exits": {
+        "South": 2741
+      }
+    },
+    {
+      "id": 2744,
+      "name": "The practice grounds",
+      "exits": {
+        "North": 2745,
+        "South": 2738
+      }
+    },
+    {
+      "id": 2745,
+      "name": "The barracks",
+      "exits": {
+        "South": 2744,
+        "Down": 2747
+      }
+    },
+    {
+      "id": 2746,
+      "name": "Owinpell Ave, in front of Naytil",
+      "exits": {
+        "North": 2729,
+        "Up": 2251
+      }
+    },
+    {
+      "id": 2747,
+      "name": "holding cell corridor",
+      "exits": {
+        "North": 2755,
+        "East": 2748,
+        "West": 2749,
+        "Up": 2745
+      }
+    },
+    {
+      "id": 2748,
+      "name": "The east end of the prison corridor",
+      "exits": {
+        "North": 2751,
+        "East": 2750,
+        "South": 2752,
+        "West": 2747
+      }
+    },
+    {
+      "id": 2749,
+      "name": "The west end of the prison corridor",
+      "exits": {
+        "East": 2747,
+        "North": 2753,
+        "South": 2754
+      }
+    },
+    {
+      "id": 2750,
+      "name": "Blue Cell",
+      "exits": {
+        "West": 2748
+      }
+    },
+    {
+      "id": 2751,
+      "name": "Yellow cell",
+      "exits": {
+        "South": 2748
+      }
+    },
+    {
+      "id": 2752,
+      "name": "Orange cell",
+      "exits": {
+        "North": 2748
+      }
+    },
+    {
+      "id": 2753,
+      "name": "Red cell",
+      "exits": {
+        "South": 2749
+      }
+    },
+    {
+      "id": 2754,
+      "name": "Green cell",
+      "exits": {
+        "North": 2749
+      }
+    },
+    {
+      "id": 2755,
+      "name": "The rank passage",
+      "exits": {
+        "North": 2756,
+        "South": 2747
+      }
+    },
+    {
+      "id": 2756,
+      "name": "The rank passage",
+      "exits": {
+        "North": 2757,
+        "South": 2755
+      }
+    },
+    {
+      "id": 2757,
+      "name": "The filthy corner",
+      "exits": {
+        "East": 2758,
+        "South": 2756
+      }
+    },
+    {
+      "id": 2758,
+      "name": "an even ranker passage",
+      "exits": {
+        "East": 2759,
+        "West": 2757
+      }
+    },
+    {
+      "id": 2759,
+      "name": "South turn in a rank passage",
+      "exits": {
+        "South": 2760,
+        "West": 2758
+      }
+    },
+    {
+      "id": 2760,
+      "name": "The horrid interchange",
+      "exits": {
+        "North": 2759,
+        "East": 2762,
+        "West": 2761,
+        "Up": 2763
+      }
+    },
+    {
+      "id": 2761,
+      "name": "The trolls den",
+      "exits": {
+        "East": 2760
+      }
+    },
+    {
+      "id": 2762,
+      "name": "Hallway of mushrooms",
+      "exits": {
+        "West": 2760
+      }
+    },
+    {
+      "id": 2763,
+      "name": "In the shaft",
+      "exits": {
+        "Up": 2764,
+        "Down": 2760
+      }
+    },
+    {
+      "id": 2764,
+      "name": "the mossy tunnel",
+      "exits": {
+        "East": 2765,
+        "Down": 2763
+      }
+    },
+    {
+      "id": 2765,
+      "name": "mossy tunnel mouth",
+      "exits": {
+        "South": 2715,
+        "West": 2764
+      }
+    },
+    {
+      "id": 2251,
+      "name": "To Midgaard",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2247,
+        "East": 2252,
+        "South": 2260,
+        "West": 2250,
+        "Up": 2297
+      }
+    }
+  ]
+}

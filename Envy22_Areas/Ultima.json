@@ -1,0 +1,1563 @@
+{
+  "name": "Ultima",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 3808,
+      "name": "Entrance to Ultima",
+      "exits": {
+        "South": 3809,
+        "Down": 3046
+      }
+    },
+    {
+      "id": 3809,
+      "name": "New Magincia Road",
+      "exits": {
+        "North": 3808,
+        "South": 3810
+      }
+    },
+    {
+      "id": 3810,
+      "name": "New Magincia Road",
+      "exits": {
+        "North": 3809,
+        "South": 3811
+      }
+    },
+    {
+      "id": 3811,
+      "name": "The New Magincia Moongate",
+      "exits": {
+        "North": 3810,
+        "East": 3821,
+        "South": 3812,
+        "West": 3816,
+        "Up": 3824
+      }
+    },
+    {
+      "id": 3812,
+      "name": "New Magincia Road",
+      "exits": {
+        "North": 3811,
+        "East": 3822,
+        "South": 3813
+      }
+    },
+    {
+      "id": 3813,
+      "name": "New Magincia Road",
+      "exits": {
+        "North": 3812,
+        "West": 3818
+      }
+    },
+    {
+      "id": 3814,
+      "name": "Stables",
+      "exits": {
+        "South": 3815
+      }
+    },
+    {
+      "id": 3815,
+      "name": "Barn",
+      "exits": {
+        "North": 3814,
+        "South": 3816
+      }
+    },
+    {
+      "id": 3816,
+      "name": "Humility Lane",
+      "exits": {
+        "North": 3815,
+        "East": 3811
+      }
+    },
+    {
+      "id": 3817,
+      "name": "Condemned House",
+      "exits": {
+        "South": 3818
+      }
+    },
+    {
+      "id": 3818,
+      "name": "Condemned House",
+      "exits": {
+        "North": 3817,
+        "East": 3813
+      }
+    },
+    {
+      "id": 3819,
+      "name": "Attic",
+      "exits": {
+        "Down": 3820
+      }
+    },
+    {
+      "id": 3820,
+      "name": "House",
+      "exits": {
+        "South": 3821,
+        "Up": 3819
+      }
+    },
+    {
+      "id": 3821,
+      "name": "Humility Lane",
+      "exits": {
+        "North": 3820,
+        "West": 3811
+      }
+    },
+    {
+      "id": 3822,
+      "name": "Entrance to the Office",
+      "exits": {
+        "South": 3823,
+        "West": 3812
+      }
+    },
+    {
+      "id": 3823,
+      "name": "Katrina\u0027s Office",
+      "exits": {
+        "North": 3822
+      }
+    },
+    {
+      "id": 3824,
+      "name": "Library",
+      "exits": {
+        "East": 3825,
+        "West": 3844
+      }
+    },
+    {
+      "id": 3825,
+      "name": "Library",
+      "exits": {
+        "East": 3826,
+        "West": 3824
+      }
+    },
+    {
+      "id": 3826,
+      "name": "Library",
+      "exits": {
+        "East": 3827,
+        "West": 3825
+      }
+    },
+    {
+      "id": 3827,
+      "name": "Library",
+      "exits": {
+        "South": 3828,
+        "West": 3826
+      }
+    },
+    {
+      "id": 3828,
+      "name": "Library",
+      "exits": {
+        "North": 3827,
+        "West": 3829
+      }
+    },
+    {
+      "id": 3829,
+      "name": "Library Office",
+      "exits": {
+        "East": 3828,
+        "West": 3830
+      }
+    },
+    {
+      "id": 3830,
+      "name": "Library",
+      "exits": {
+        "East": 3829,
+        "West": 3831
+      }
+    },
+    {
+      "id": 3831,
+      "name": "Library",
+      "exits": {
+        "South": 3832,
+        "East": 3830
+      }
+    },
+    {
+      "id": 3832,
+      "name": "Library",
+      "exits": {
+        "North": 3831,
+        "East": 3833
+      }
+    },
+    {
+      "id": 3833,
+      "name": "Library",
+      "exits": {
+        "East": 3834,
+        "West": 3832
+      }
+    },
+    {
+      "id": 3834,
+      "name": "Library",
+      "exits": {
+        "East": 3835,
+        "West": 3833
+      }
+    },
+    {
+      "id": 3835,
+      "name": "Library",
+      "exits": {
+        "South": 3837,
+        "West": 3834
+      }
+    },
+    {
+      "id": 3836,
+      "name": "The Library Moongate",
+      "exits": {
+        "North": 3840,
+        "Up": 3845
+      }
+    },
+    {
+      "id": 3837,
+      "name": "Library",
+      "exits": {
+        "North": 3835,
+        "West": 3838
+      }
+    },
+    {
+      "id": 3838,
+      "name": "Library",
+      "exits": {
+        "East": 3837,
+        "West": 3839
+      }
+    },
+    {
+      "id": 3839,
+      "name": "Library",
+      "exits": {
+        "East": 3838,
+        "West": 3840
+      }
+    },
+    {
+      "id": 3840,
+      "name": "Library",
+      "exits": {
+        "East": 3839,
+        "South": 3836,
+        "West": 3841
+      }
+    },
+    {
+      "id": 3841,
+      "name": "Library",
+      "exits": {
+        "North": 3842,
+        "East": 3840
+      }
+    },
+    {
+      "id": 3842,
+      "name": "Library",
+      "exits": {
+        "North": 3843,
+        "South": 3841
+      }
+    },
+    {
+      "id": 3843,
+      "name": "Web",
+      "exits": {
+        "North": 3844,
+        "South": 3842
+      }
+    },
+    {
+      "id": 3844,
+      "name": "Library",
+      "exits": {
+        "East": 3824,
+        "South": 3843
+      }
+    },
+    {
+      "id": 3845,
+      "name": "The Center of the Tavern",
+      "exits": {
+        "North": 3847,
+        "East": 3850,
+        "South": 3852,
+        "West": 3849
+      }
+    },
+    {
+      "id": 3846,
+      "name": "The Northwest Corner of the Tavern",
+      "exits": {
+        "East": 3847,
+        "South": 3849
+      }
+    },
+    {
+      "id": 3847,
+      "name": "The North Wall of the Tavern",
+      "exits": {
+        "East": 3848,
+        "South": 3845,
+        "West": 3846
+      }
+    },
+    {
+      "id": 3848,
+      "name": "The Northeast Corner of the Tavern",
+      "exits": {
+        "South": 3850,
+        "West": 3847
+      }
+    },
+    {
+      "id": 3849,
+      "name": "The West Wall of the Tavern",
+      "exits": {
+        "North": 3846,
+        "East": 3845,
+        "South": 3851
+      }
+    },
+    {
+      "id": 3850,
+      "name": "The East Wall of the Tavern",
+      "exits": {
+        "North": 3848,
+        "South": 3853,
+        "West": 3845
+      }
+    },
+    {
+      "id": 3851,
+      "name": "The Southwest Corner of the Tavern",
+      "exits": {
+        "North": 3849,
+        "East": 3852,
+        "Down": 3854
+      }
+    },
+    {
+      "id": 3852,
+      "name": "The South Wall of the Tavern",
+      "exits": {
+        "North": 3845,
+        "East": 3853,
+        "West": 3851
+      }
+    },
+    {
+      "id": 3853,
+      "name": "The Southeast Corner of the Tavern",
+      "exits": {
+        "North": 3850,
+        "West": 3852
+      }
+    },
+    {
+      "id": 3854,
+      "name": "Cellar",
+      "exits": {
+        "East": 3855,
+        "South": 3857,
+        "Up": 3851
+      }
+    },
+    {
+      "id": 3855,
+      "name": "Cellar",
+      "exits": {
+        "East": 3856,
+        "South": 3858,
+        "West": 3854
+      }
+    },
+    {
+      "id": 3856,
+      "name": "Cellar",
+      "exits": {
+        "South": 3859,
+        "West": 3855
+      }
+    },
+    {
+      "id": 3857,
+      "name": "Cellar",
+      "exits": {
+        "North": 3854,
+        "East": 3858,
+        "South": 3860
+      }
+    },
+    {
+      "id": 3858,
+      "name": "The Britain Moongate",
+      "exits": {
+        "North": 3855,
+        "East": 3859,
+        "South": 3861,
+        "West": 3857,
+        "Up": 3864
+      }
+    },
+    {
+      "id": 3859,
+      "name": "Cellar",
+      "exits": {
+        "North": 3856,
+        "South": 3862,
+        "West": 3858
+      }
+    },
+    {
+      "id": 3860,
+      "name": "Cellar",
+      "exits": {
+        "North": 3857,
+        "East": 3861
+      }
+    },
+    {
+      "id": 3861,
+      "name": "Cellar",
+      "exits": {
+        "North": 3858,
+        "East": 3862,
+        "West": 3860
+      }
+    },
+    {
+      "id": 3862,
+      "name": "Cellar",
+      "exits": {
+        "North": 3859,
+        "West": 3861
+      }
+    },
+    {
+      "id": 3863,
+      "name": "The Yew Entrance",
+      "exits": {
+        "North": 3878,
+        "South": 3864
+      }
+    },
+    {
+      "id": 3864,
+      "name": "In Front of the Courthouse",
+      "exits": {
+        "North": 3863,
+        "East": 3865,
+        "South": 3871,
+        "West": 3870
+      }
+    },
+    {
+      "id": 3865,
+      "name": "Justice Row",
+      "exits": {
+        "East": 3866,
+        "West": 3864
+      }
+    },
+    {
+      "id": 3866,
+      "name": "Under the Stone Arch",
+      "exits": {
+        "East": 3867,
+        "West": 3865
+      }
+    },
+    {
+      "id": 3867,
+      "name": "Bonfire",
+      "exits": {
+        "West": 3866
+      }
+    },
+    {
+      "id": 3868,
+      "name": "Pub",
+      "exits": {
+        "East": 3869
+      }
+    },
+    {
+      "id": 3869,
+      "name": "Justice Row",
+      "exits": {
+        "East": 3870,
+        "West": 3868
+      }
+    },
+    {
+      "id": 3870,
+      "name": "Justice Row",
+      "exits": {
+        "East": 3864,
+        "West": 3869
+      }
+    },
+    {
+      "id": 3871,
+      "name": "The Audience Room",
+      "exits": {
+        "North": 3864,
+        "South": 3872
+      }
+    },
+    {
+      "id": 3872,
+      "name": "The Bench",
+      "exits": {
+        "North": 3871,
+        "East": 3873,
+        "West": 3874
+      }
+    },
+    {
+      "id": 3873,
+      "name": "Prison",
+      "exits": {
+        "North": 3876,
+        "West": 3872
+      }
+    },
+    {
+      "id": 3874,
+      "name": "Prison",
+      "exits": {
+        "North": 3875,
+        "East": 3872
+      }
+    },
+    {
+      "id": 3875,
+      "name": "Prison Cell",
+      "exits": {
+        "South": 3874
+      }
+    },
+    {
+      "id": 3876,
+      "name": "Prison Cell",
+      "exits": {
+        "South": 3873
+      }
+    },
+    {
+      "id": 3877,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3886,
+        "East": 3878,
+        "South": 3887,
+        "West": 3881
+      }
+    },
+    {
+      "id": 3878,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3885,
+        "East": 3879,
+        "South": 3863,
+        "West": 3877
+      }
+    },
+    {
+      "id": 3879,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3884,
+        "East": 3880,
+        "South": 3889,
+        "West": 3878
+      }
+    },
+    {
+      "id": 3880,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3883,
+        "East": 3881,
+        "South": 3890,
+        "West": 3879
+      }
+    },
+    {
+      "id": 3881,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3882,
+        "East": 3877,
+        "South": 3891,
+        "West": 3880
+      }
+    },
+    {
+      "id": 3882,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3891,
+        "East": 3886,
+        "South": 3881,
+        "West": 3883
+      }
+    },
+    {
+      "id": 3883,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3890,
+        "East": 3882,
+        "South": 3880,
+        "West": 3884
+      }
+    },
+    {
+      "id": 3884,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3889,
+        "East": 3883,
+        "South": 3879,
+        "West": 3885
+      }
+    },
+    {
+      "id": 3885,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3888,
+        "East": 3884,
+        "South": 3878,
+        "West": 3886
+      }
+    },
+    {
+      "id": 3886,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3887,
+        "East": 3885,
+        "South": 3877,
+        "West": 3882
+      }
+    },
+    {
+      "id": 3887,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3877,
+        "East": 3888,
+        "South": 3886,
+        "West": 3891
+      }
+    },
+    {
+      "id": 3888,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3892,
+        "East": 3889,
+        "South": 3885,
+        "West": 3887
+      }
+    },
+    {
+      "id": 3889,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3879,
+        "East": 3890,
+        "South": 3884,
+        "West": 3888
+      }
+    },
+    {
+      "id": 3890,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3880,
+        "East": 3891,
+        "South": 3883,
+        "West": 3889
+      }
+    },
+    {
+      "id": 3891,
+      "name": "Yew Forest",
+      "exits": {
+        "North": 3881,
+        "East": 3887,
+        "South": 3882,
+        "West": 3890
+      }
+    },
+    {
+      "id": 3892,
+      "name": "The Yew Moongate",
+      "exits": {
+        "South": 3888,
+        "Up": 3893
+      }
+    },
+    {
+      "id": 3893,
+      "name": "Dungeon Entrance",
+      "exits": {
+        "Up": 3895,
+        "Down": 3892
+      }
+    },
+    {
+      "id": 3894,
+      "name": "The Dungeon",
+      "exits": {
+        "North": 3898
+      }
+    },
+    {
+      "id": 3895,
+      "name": "The Dungeon",
+      "exits": {
+        "North": 3899,
+        "Down": 3893
+      }
+    },
+    {
+      "id": 3896,
+      "name": "The Dungeon",
+      "exits": {
+        "North": 3900,
+        "East": 3897
+      }
+    },
+    {
+      "id": 3897,
+      "name": "The Dungeon",
+      "exits": {
+        "West": 3896
+      }
+    },
+    {
+      "id": 3898,
+      "name": "The Dungeon",
+      "exits": {
+        "North": 3902,
+        "East": 3899,
+        "South": 3894
+      }
+    },
+    {
+      "id": 3899,
+      "name": "The Dungeon",
+      "exits": {
+        "North": 3903,
+        "East": 3900,
+        "South": 3895,
+        "West": 3898
+      }
+    },
+    {
+      "id": 3900,
+      "name": "The Dungeon",
+      "exits": {
+        "East": 3901,
+        "South": 3896,
+        "West": 3899
+      }
+    },
+    {
+      "id": 3901,
+      "name": "The Dungeon",
+      "exits": {
+        "North": 3905,
+        "West": 3900
+      }
+    },
+    {
+      "id": 3902,
+      "name": "The Dungeon",
+      "exits": {
+        "North": 3906,
+        "South": 3898
+      }
+    },
+    {
+      "id": 3903,
+      "name": "The Dungeon",
+      "exits": {
+        "North": 3907,
+        "East": 3904,
+        "South": 3899
+      }
+    },
+    {
+      "id": 3904,
+      "name": "The Dungeon",
+      "exits": {
+        "North": 3908,
+        "West": 3903
+      }
+    },
+    {
+      "id": 3905,
+      "name": "The Dungeon",
+      "exits": {
+        "South": 3901
+      }
+    },
+    {
+      "id": 3906,
+      "name": "The Dungeon",
+      "exits": {
+        "South": 3902
+      }
+    },
+    {
+      "id": 3907,
+      "name": "The Dungeon",
+      "exits": {
+        "South": 3903
+      }
+    },
+    {
+      "id": 3908,
+      "name": "The Dungeon",
+      "exits": {
+        "East": 3909,
+        "South": 3904
+      }
+    },
+    {
+      "id": 3909,
+      "name": "The Dungeon Moongate",
+      "exits": {
+        "West": 3908,
+        "Up": 3910
+      }
+    },
+    {
+      "id": 3910,
+      "name": "Minoc",
+      "exits": {
+        "North": 3923,
+        "South": 3912
+      }
+    },
+    {
+      "id": 3911,
+      "name": "The Armourer",
+      "exits": {
+        "East": 3912
+      }
+    },
+    {
+      "id": 3912,
+      "name": "Minoc\u0027s Fountain",
+      "exits": {
+        "North": 3910,
+        "East": 3913,
+        "South": 3916,
+        "West": 3911
+      }
+    },
+    {
+      "id": 3913,
+      "name": "The Weaponsmith",
+      "exits": {
+        "West": 3912
+      }
+    },
+    {
+      "id": 3914,
+      "name": "The Boatseller",
+      "exits": {
+        "East": 3915
+      }
+    },
+    {
+      "id": 3915,
+      "name": "Sacrifice Street",
+      "exits": {
+        "East": 3916,
+        "South": 3919,
+        "West": 3914
+      }
+    },
+    {
+      "id": 3916,
+      "name": "Sacrifice Street",
+      "exits": {
+        "North": 3912,
+        "East": 3917,
+        "West": 3915
+      }
+    },
+    {
+      "id": 3917,
+      "name": "Sacrifice Street",
+      "exits": {
+        "East": 3918,
+        "South": 3920,
+        "West": 3916
+      }
+    },
+    {
+      "id": 3918,
+      "name": "Forge",
+      "exits": {
+        "West": 3917
+      }
+    },
+    {
+      "id": 3919,
+      "name": "Residence",
+      "exits": {
+        "North": 3915
+      }
+    },
+    {
+      "id": 3920,
+      "name": "Residence",
+      "exits": {
+        "North": 3917
+      }
+    },
+    {
+      "id": 3921,
+      "name": "The Beach",
+      "exits": {
+        "West": 3992,
+        "East": 3922
+      }
+    },
+    {
+      "id": 3922,
+      "name": "The Beach",
+      "exits": {
+        "East": 3923,
+        "West": 3921
+      }
+    },
+    {
+      "id": 3923,
+      "name": "The Beach",
+      "exits": {
+        "East": 3924,
+        "South": 3910,
+        "West": 3922
+      }
+    },
+    {
+      "id": 3924,
+      "name": "The Beach",
+      "exits": {
+        "East": 3925,
+        "West": 3923
+      }
+    },
+    {
+      "id": 3925,
+      "name": "The Beach",
+      "exits": {
+        "West": 3924
+      }
+    },
+    {
+      "id": 3926,
+      "name": "The Whirlpool",
+      "exits": {
+        "North": 3929,
+        "East": 3927,
+        "South": 3992,
+        "West": 3928
+      }
+    },
+    {
+      "id": 3927,
+      "name": "The Whirlpool",
+      "exits": {
+        "North": 3930,
+        "East": 3928,
+        "South": 3933,
+        "West": 3926
+      }
+    },
+    {
+      "id": 3928,
+      "name": "The Whirlpool",
+      "exits": {
+        "North": 3931,
+        "East": 3926,
+        "South": 3934,
+        "West": 3927
+      }
+    },
+    {
+      "id": 3929,
+      "name": "The Whirlpool",
+      "exits": {
+        "North": 3932,
+        "East": 3930,
+        "South": 3926,
+        "West": 3931
+      }
+    },
+    {
+      "id": 3930,
+      "name": "The Whirlpool",
+      "exits": {
+        "North": 3933,
+        "East": 3931,
+        "South": 3927,
+        "West": 3929
+      }
+    },
+    {
+      "id": 3931,
+      "name": "The Whirlpool",
+      "exits": {
+        "North": 3934,
+        "East": 3929,
+        "South": 3928,
+        "West": 3930
+      }
+    },
+    {
+      "id": 3932,
+      "name": "The Whirlpool",
+      "exits": {
+        "North": 3935,
+        "East": 3933,
+        "South": 3929,
+        "West": 3934
+      }
+    },
+    {
+      "id": 3933,
+      "name": "The Whirlpool",
+      "exits": {
+        "North": 3927,
+        "East": 3934,
+        "South": 3930,
+        "West": 3932
+      }
+    },
+    {
+      "id": 3934,
+      "name": "The Whirlpool",
+      "exits": {
+        "North": 3928,
+        "East": 3932,
+        "South": 3931,
+        "West": 3933
+      }
+    },
+    {
+      "id": 3935,
+      "name": "The Minoc Moongate",
+      "exits": {
+        "South": 3932,
+        "Up": 3936
+      }
+    },
+    {
+      "id": 3936,
+      "name": "A Campfire",
+      "exits": {
+        "North": 3946,
+        "East": 3937,
+        "South": 3940
+      }
+    },
+    {
+      "id": 3937,
+      "name": "Between the Tents",
+      "exits": {
+        "East": 3938,
+        "West": 3936
+      }
+    },
+    {
+      "id": 3938,
+      "name": "In front of the Grand Tent",
+      "exits": {
+        "East": 3939,
+        "South": 3942,
+        "West": 3937
+      }
+    },
+    {
+      "id": 3939,
+      "name": "A Small Tent",
+      "exits": {
+        "West": 3938
+      }
+    },
+    {
+      "id": 3940,
+      "name": "A Small Tent",
+      "exits": {
+        "North": 3936
+      }
+    },
+    {
+      "id": 3941,
+      "name": "The Treasure Tent",
+      "exits": {
+        "East": 3942
+      }
+    },
+    {
+      "id": 3942,
+      "name": "The Grand Tent",
+      "exits": {
+        "North": 3938,
+        "East": 3943,
+        "South": 3944,
+        "West": 3941
+      }
+    },
+    {
+      "id": 3943,
+      "name": "The Map Tent",
+      "exits": {
+        "West": 3942
+      }
+    },
+    {
+      "id": 3944,
+      "name": "Dupre\u0027s Tent",
+      "exits": {
+        "North": 3942
+      }
+    },
+    {
+      "id": 3945,
+      "name": "A Small Tent",
+      "exits": {
+        "East": 3946
+      }
+    },
+    {
+      "id": 3946,
+      "name": "Desert Entrance",
+      "exits": {
+        "North": 3949,
+        "East": 3947,
+        "West": 3945
+      }
+    },
+    {
+      "id": 3947,
+      "name": "A Small Tent",
+      "exits": {
+        "West": 3946
+      }
+    },
+    {
+      "id": 3948,
+      "name": "The Desert",
+      "exits": {
+        "North": 3952,
+        "East": 3949
+      }
+    },
+    {
+      "id": 3949,
+      "name": "The Desert",
+      "exits": {
+        "East": 3950,
+        "South": 3946,
+        "West": 3948
+      }
+    },
+    {
+      "id": 3950,
+      "name": "The Desert",
+      "exits": {
+        "North": 3954,
+        "East": 3951,
+        "West": 3949
+      }
+    },
+    {
+      "id": 3951,
+      "name": "The Desert Moongate",
+      "exits": {
+        "West": 3950,
+        "Up": 3957
+      }
+    },
+    {
+      "id": 3952,
+      "name": "The Desert Moongate",
+      "exits": {
+        "South": 3948,
+        "Up": 2052
+      }
+    },
+    {
+      "id": 3953,
+      "name": "The Desert",
+      "exits": {
+        "North": 3956,
+        "East": 3954
+      }
+    },
+    {
+      "id": 3954,
+      "name": "The Desert",
+      "exits": {
+        "East": 3955,
+        "South": 3950,
+        "West": 3953
+      }
+    },
+    {
+      "id": 3955,
+      "name": "The Desert Moongate",
+      "exits": {
+        "West": 3954,
+        "Up": 2052
+      }
+    },
+    {
+      "id": 3956,
+      "name": "The Dragon Cave",
+      "exits": {
+        "South": 3953
+      }
+    },
+    {
+      "id": 3957,
+      "name": "The Shrine of Spirituality",
+      "exits": {
+        "North": 3962,
+        "South": 3965,
+        "Up": 3970
+      }
+    },
+    {
+      "id": 3958,
+      "name": "The Place of Ultimate Evil",
+      "exits": {
+        "East": 3959,
+        "South": 3961
+      }
+    },
+    {
+      "id": 3959,
+      "name": "The Place of Ultimate Evil",
+      "exits": {
+        "East": 3960,
+        "South": 3962,
+        "West": 3958
+      }
+    },
+    {
+      "id": 3960,
+      "name": "The Place of Ultimate Evil",
+      "exits": {
+        "South": 3963,
+        "West": 3959
+      }
+    },
+    {
+      "id": 3961,
+      "name": "The Place of Ultimate Evil",
+      "exits": {
+        "North": 3958,
+        "East": 3962
+      }
+    },
+    {
+      "id": 3962,
+      "name": "The Place of Ultimate Evil",
+      "exits": {
+        "North": 3959,
+        "East": 3963,
+        "South": 3957,
+        "West": 3961
+      }
+    },
+    {
+      "id": 3963,
+      "name": "The Place of Ultimate Evil",
+      "exits": {
+        "North": 3960,
+        "West": 3962
+      }
+    },
+    {
+      "id": 3964,
+      "name": "The Graveyard",
+      "exits": {
+        "East": 3965,
+        "South": 3967
+      }
+    },
+    {
+      "id": 3965,
+      "name": "The Graveyard",
+      "exits": {
+        "North": 3957,
+        "East": 3966,
+        "South": 3968,
+        "West": 3964
+      }
+    },
+    {
+      "id": 3966,
+      "name": "The Graveyard",
+      "exits": {
+        "South": 3969,
+        "West": 3965
+      }
+    },
+    {
+      "id": 3967,
+      "name": "The Graveyard",
+      "exits": {
+        "North": 3964,
+        "East": 3968
+      }
+    },
+    {
+      "id": 3968,
+      "name": "The Graveyard",
+      "exits": {
+        "North": 3965,
+        "East": 3969,
+        "West": 3967
+      }
+    },
+    {
+      "id": 3969,
+      "name": "The Graveyard",
+      "exits": {
+        "North": 3966,
+        "West": 3968
+      }
+    },
+    {
+      "id": 3970,
+      "name": "Lord British\u0027s Castle Entrance",
+      "exits": {
+        "North": 3971
+      }
+    },
+    {
+      "id": 3971,
+      "name": "Castle Fountain",
+      "exits": {
+        "North": 3973,
+        "South": 3970
+      }
+    },
+    {
+      "id": 3972,
+      "name": "A staircase",
+      "exits": {
+        "East": 3973,
+        "Up": 3977
+      }
+    },
+    {
+      "id": 3973,
+      "name": "Hallways",
+      "exits": {
+        "North": 3975,
+        "East": 3974,
+        "South": 3971,
+        "West": 3972
+      }
+    },
+    {
+      "id": 3974,
+      "name": "Hallway",
+      "exits": {
+        "North": 3976,
+        "West": 3973
+      }
+    },
+    {
+      "id": 3975,
+      "name": "The Throne Room",
+      "exits": {
+        "South": 3973
+      }
+    },
+    {
+      "id": 3976,
+      "name": "Batlin\u0027s Room",
+      "exits": {
+        "South": 3974
+      }
+    },
+    {
+      "id": 3977,
+      "name": "The Altar of Honesty",
+      "exits": {
+        "North": 3978
+      }
+    },
+    {
+      "id": 3978,
+      "name": "The Altar of Compassion",
+      "exits": {
+        "North": 3979
+      }
+    },
+    {
+      "id": 3979,
+      "name": "The Altar of Valor",
+      "exits": {
+        "North": 3980
+      }
+    },
+    {
+      "id": 3980,
+      "name": "The Altar of Justice",
+      "exits": {
+        "North": 3981
+      }
+    },
+    {
+      "id": 3981,
+      "name": "The Altar of Sacrifice",
+      "exits": {
+        "North": 3982
+      }
+    },
+    {
+      "id": 3982,
+      "name": "The Altar of Honour",
+      "exits": {
+        "North": 3983
+      }
+    },
+    {
+      "id": 3983,
+      "name": "The Altar of Spirituality",
+      "exits": {
+        "North": 3984
+      }
+    },
+    {
+      "id": 3984,
+      "name": "The Altar of Humility",
+      "exits": {
+        "North": 3985
+      }
+    },
+    {
+      "id": 3985,
+      "name": "The Enlightenment",
+      "exits": {
+        "Up": 3986
+      }
+    },
+    {
+      "id": 3986,
+      "name": "In the Warp",
+      "exits": {
+        "Up": 3987
+      }
+    },
+    {
+      "id": 3987,
+      "name": "In the Warp",
+      "exits": {
+        "Up": 3988
+      }
+    },
+    {
+      "id": 3988,
+      "name": "In the Warp",
+      "exits": {
+        "Up": 3989
+      }
+    },
+    {
+      "id": 3989,
+      "name": "The Enlightenment",
+      "exits": {
+        "Up": 3990
+      }
+    },
+    {
+      "id": 3990,
+      "name": "In the Warp",
+      "exits": {
+        "Up": 3991
+      }
+    },
+    {
+      "id": 3991,
+      "name": "In the Warp",
+      "exits": {}
+    },
+    {
+      "id": 3992,
+      "name": "The Lagoon",
+      "exits": {
+        "North": 3926,
+        "East": 3921
+      }
+    },
+    {
+      "id": 3046,
+      "name": "To Plains of the North",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 3051,
+        "East": 3034,
+        "South": 3031,
+        "West": 3049,
+        "Up": 3808
+      }
+    },
+    {
+      "id": 2052,
+      "name": "To Limbo",
+      "otherAreaExit": true,
+      "exits": {}
+    }
+  ]
+}

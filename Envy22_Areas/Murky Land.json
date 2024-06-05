@@ -1,0 +1,626 @@
+{
+  "name": "Murky Land",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": false,
+    "fixNonStraight": true,
+    "fixIntersected": false,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 2595,
+      "name": "Entrance to Murky Land",
+      "exits": {
+        "North": 2596,
+        "West": 2875
+      }
+    },
+    {
+      "id": 2596,
+      "name": "At the Cashier\u0027s Booth",
+      "exits": {
+        "North": 2597,
+        "South": 2595
+      }
+    },
+    {
+      "id": 2597,
+      "name": "Inside the Entrance to Murky Land",
+      "exits": {
+        "North": 2598,
+        "East": 2617,
+        "South": 2596
+      }
+    },
+    {
+      "id": 2598,
+      "name": "A Room in Murky Land",
+      "exits": {
+        "North": 2604,
+        "East": 2599,
+        "South": 2597,
+        "West": 2602
+      }
+    },
+    {
+      "id": 2599,
+      "name": "Restroom Hallway",
+      "exits": {
+        "North": 2600,
+        "South": 2601,
+        "West": 2598
+      }
+    },
+    {
+      "id": 2600,
+      "name": "Little Boys Room",
+      "exits": {
+        "South": 2599
+      }
+    },
+    {
+      "id": 2601,
+      "name": "Little Girls Room",
+      "exits": {
+        "North": 2599
+      }
+    },
+    {
+      "id": 2602,
+      "name": "Cafeteria",
+      "exits": {
+        "North": 2603,
+        "East": 2598
+      }
+    },
+    {
+      "id": 2603,
+      "name": "Kitchen",
+      "exits": {
+        "South": 2602
+      }
+    },
+    {
+      "id": 2604,
+      "name": "Along a Brick Path in Murky Land",
+      "exits": {
+        "North": 2613,
+        "East": 2609,
+        "South": 2598,
+        "West": 2605
+      }
+    },
+    {
+      "id": 2605,
+      "name": "Along a Path in Murky Land",
+      "exits": {
+        "North": 2606,
+        "East": 2604,
+        "South": 2607,
+        "West": 2608
+      }
+    },
+    {
+      "id": 2606,
+      "name": "Hatchling\u0027s and Iccy\u0027s Playpen",
+      "exits": {
+        "South": 2605
+      }
+    },
+    {
+      "id": 2607,
+      "name": "Fraggie\u0027s Dark Hovel",
+      "exits": {
+        "North": 2605
+      }
+    },
+    {
+      "id": 2608,
+      "name": "KahnO\u0027s Hall of Mirrors",
+      "exits": {
+        "East": 2605
+      }
+    },
+    {
+      "id": 2609,
+      "name": "Along a Path in Murky Land",
+      "exits": {
+        "North": 2610,
+        "East": 2612,
+        "South": 2611,
+        "West": 2604
+      }
+    },
+    {
+      "id": 2610,
+      "name": "A Small Hell",
+      "exits": {
+        "South": 2609
+      }
+    },
+    {
+      "id": 2611,
+      "name": "Blinky\u0027s Kitchenette",
+      "exits": {
+        "North": 2609
+      }
+    },
+    {
+      "id": 2612,
+      "name": "Atom\u0027s Little Galaxy",
+      "exits": {
+        "West": 2609
+      }
+    },
+    {
+      "id": 2613,
+      "name": "Along a Path in Murky Land",
+      "exits": {
+        "North": 2614,
+        "East": 2616,
+        "South": 2604,
+        "West": 2615
+      }
+    },
+    {
+      "id": 2614,
+      "name": "A Monk\u0027s Temple/Crackhouse",
+      "exits": {
+        "South": 2613
+      }
+    },
+    {
+      "id": 2615,
+      "name": "A Junkyard",
+      "exits": {
+        "East": 2613
+      }
+    },
+    {
+      "id": 2616,
+      "name": "An Ash Heap",
+      "exits": {
+        "West": 2613
+      }
+    },
+    {
+      "id": 2617,
+      "name": "Behind the Hidden Door",
+      "exits": {
+        "West": 2597,
+        "Down": 2618
+      }
+    },
+    {
+      "id": 2618,
+      "name": "Beneath Murky Land",
+      "exits": {
+        "North": 2619,
+        "Up": 2617
+      }
+    },
+    {
+      "id": 2619,
+      "name": "Inside a Tavern",
+      "exits": {
+        "North": 2631,
+        "East": 2632,
+        "South": 2618,
+        "West": 2620
+      }
+    },
+    {
+      "id": 2620,
+      "name": "The Shady Rooms Counter",
+      "exits": {
+        "East": 2619,
+        "West": 2621
+      }
+    },
+    {
+      "id": 2621,
+      "name": "A Hallway",
+      "exits": {
+        "North": 2622,
+        "East": 2620,
+        "South": 2623,
+        "West": 2624
+      }
+    },
+    {
+      "id": 2622,
+      "name": "Room A",
+      "exits": {
+        "South": 2621
+      }
+    },
+    {
+      "id": 2623,
+      "name": "Room B",
+      "exits": {
+        "North": 2621
+      }
+    },
+    {
+      "id": 2624,
+      "name": "A Hallway",
+      "exits": {
+        "North": 2625,
+        "East": 2621,
+        "South": 2626,
+        "West": 2627
+      }
+    },
+    {
+      "id": 2625,
+      "name": "Room C",
+      "exits": {
+        "South": 2624
+      }
+    },
+    {
+      "id": 2626,
+      "name": "Room D",
+      "exits": {
+        "North": 2624
+      }
+    },
+    {
+      "id": 2627,
+      "name": "At the End of the Hallway",
+      "exits": {
+        "North": 2628,
+        "East": 2624,
+        "South": 2629,
+        "West": 2630
+      }
+    },
+    {
+      "id": 2628,
+      "name": "Room E",
+      "exits": {
+        "South": 2627
+      }
+    },
+    {
+      "id": 2629,
+      "name": "Room F",
+      "exits": {
+        "North": 2627
+      }
+    },
+    {
+      "id": 2630,
+      "name": "Room G",
+      "exits": {
+        "East": 2627
+      }
+    },
+    {
+      "id": 2631,
+      "name": "The Bar",
+      "exits": {
+        "South": 2619
+      }
+    },
+    {
+      "id": 2632,
+      "name": "Hallway",
+      "exits": {
+        "North": 2633,
+        "East": 2635,
+        "South": 2634,
+        "West": 2619
+      }
+    },
+    {
+      "id": 2633,
+      "name": "An Office",
+      "exits": {
+        "South": 2632
+      }
+    },
+    {
+      "id": 2634,
+      "name": "A Holding Room",
+      "exits": {
+        "North": 2632
+      }
+    },
+    {
+      "id": 2635,
+      "name": "A Hallway",
+      "exits": {
+        "North": 2636,
+        "East": 2638,
+        "South": 2637,
+        "West": 2632
+      }
+    },
+    {
+      "id": 2636,
+      "name": "An Office",
+      "exits": {
+        "South": 2635
+      }
+    },
+    {
+      "id": 2637,
+      "name": "An Office",
+      "exits": {
+        "North": 2635
+      }
+    },
+    {
+      "id": 2638,
+      "name": "The End of the Hallway",
+      "exits": {
+        "North": 2640,
+        "South": 2639,
+        "West": 2635
+      }
+    },
+    {
+      "id": 2639,
+      "name": "A Holding Room",
+      "exits": {
+        "North": 2638
+      }
+    },
+    {
+      "id": 2640,
+      "name": "An Empty Hallway",
+      "exits": {
+        "North": 2641,
+        "South": 2638
+      }
+    },
+    {
+      "id": 2641,
+      "name": "Hallway",
+      "exits": {
+        "North": 2642,
+        "South": 2643
+      }
+    },
+    {
+      "id": 2642,
+      "name": "At the End of a Hallway",
+      "exits": {
+        "South": 2641
+      }
+    },
+    {
+      "id": 2643,
+      "name": "An Empty Hallway",
+      "exits": {
+        "North": 2644,
+        "South": 2638
+      }
+    },
+    {
+      "id": 2644,
+      "name": "Hallway",
+      "exits": {
+        "North": 2645,
+        "South": 2640
+      }
+    },
+    {
+      "id": 2645,
+      "name": "At the End of a Hallway",
+      "exits": {
+        "North": 2646,
+        "South": 2644
+      }
+    },
+    {
+      "id": 2646,
+      "name": "A Dark Room",
+      "exits": {
+        "South": 2645,
+        "Down": 2647
+      }
+    },
+    {
+      "id": 2647,
+      "name": "Lower Chambers",
+      "exits": {
+        "North": 2663,
+        "East": 2651,
+        "South": 2648,
+        "West": 2656,
+        "Up": 2646
+      }
+    },
+    {
+      "id": 2648,
+      "name": "A Dark Hallway",
+      "exits": {
+        "North": 2647,
+        "South": 2649
+      }
+    },
+    {
+      "id": 2649,
+      "name": "A Dark Hallway",
+      "exits": {
+        "North": 2648,
+        "South": 2650
+      }
+    },
+    {
+      "id": 2650,
+      "name": "Shadow Dragon\u0027s Lair",
+      "exits": {
+        "North": 2649
+      }
+    },
+    {
+      "id": 2651,
+      "name": "A Dark Hallway",
+      "exits": {
+        "North": 2654,
+        "East": 2652,
+        "South": 2655,
+        "West": 2647
+      }
+    },
+    {
+      "id": 2652,
+      "name": "A Dark Hallway",
+      "exits": {
+        "East": 2653,
+        "West": 2651
+      }
+    },
+    {
+      "id": 2653,
+      "name": "The Altar of the Shadow Demon",
+      "exits": {
+        "North": 2661,
+        "East": 2661,
+        "South": 2661,
+        "West": 2652,
+        "Up": 2661,
+        "Down": 2661
+      }
+    },
+    {
+      "id": 2654,
+      "name": "A Library",
+      "exits": {
+        "South": 2651
+      }
+    },
+    {
+      "id": 2655,
+      "name": "A Laboratory",
+      "exits": {
+        "North": 2651
+      }
+    },
+    {
+      "id": 2656,
+      "name": "A Dark Hallway",
+      "exits": {
+        "North": 2659,
+        "East": 2647,
+        "South": 2660,
+        "West": 2657
+      }
+    },
+    {
+      "id": 2657,
+      "name": "A Dark Hallway",
+      "exits": {
+        "East": 2656,
+        "West": 2658
+      }
+    },
+    {
+      "id": 2658,
+      "name": "The Altar of the Shadow Demon",
+      "exits": {
+        "North": 2662,
+        "East": 2657,
+        "South": 2662,
+        "West": 2662,
+        "Up": 2662,
+        "Down": 2662
+      }
+    },
+    {
+      "id": 2659,
+      "name": "A Scribing Room",
+      "exits": {
+        "South": 2656
+      }
+    },
+    {
+      "id": 2660,
+      "name": "A Weapon Room",
+      "exits": {
+        "North": 2656
+      }
+    },
+    {
+      "id": 2661,
+      "name": "A Nether Room",
+      "exits": {
+        "North": 2662,
+        "East": 2666,
+        "South": 2662,
+        "West": 2653,
+        "Up": 2653,
+        "Down": 2666
+      }
+    },
+    {
+      "id": 2662,
+      "name": "A Nether Room",
+      "exits": {
+        "North": 2661,
+        "East": 2658,
+        "South": 2661,
+        "West": 2666,
+        "Up": 2666,
+        "Down": 2658
+      }
+    },
+    {
+      "id": 2663,
+      "name": "A Dark Hallway",
+      "exits": {
+        "North": 2664,
+        "South": 2647
+      }
+    },
+    {
+      "id": 2664,
+      "name": "A Dark Hallway",
+      "exits": {
+        "North": 2665,
+        "South": 2663
+      }
+    },
+    {
+      "id": 2665,
+      "name": "The Altar of the Shadow Lord",
+      "exits": {
+        "North": 2666,
+        "East": 2666,
+        "South": 2664,
+        "West": 2666,
+        "Up": 2666,
+        "Down": 2666
+      }
+    },
+    {
+      "id": 2666,
+      "name": "A Nether Room",
+      "exits": {
+        "North": 2665,
+        "East": 2662,
+        "South": 2665,
+        "West": 2661,
+        "Up": 2661,
+        "Down": 2662
+      }
+    },
+    {
+      "id": 2875,
+      "name": "To Ofcol",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2879,
+        "East": 2595,
+        "South": 2874,
+        "West": 2878
+      }
+    }
+  ]
+}

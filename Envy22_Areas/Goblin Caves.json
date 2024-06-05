@@ -1,0 +1,282 @@
+{
+  "name": "Goblin Caves",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 1298,
+      "name": "Base of the Mountain",
+      "exits": {
+        "South": 3776,
+        "Up": 1299
+      }
+    },
+    {
+      "id": 1299,
+      "name": "On the Mountain Path",
+      "exits": {
+        "Up": 1300,
+        "Down": 1298
+      }
+    },
+    {
+      "id": 1300,
+      "name": "On the Mountain Path",
+      "exits": {
+        "Up": 1301,
+        "Down": 1299
+      }
+    },
+    {
+      "id": 1301,
+      "name": "On the Mountain Path",
+      "exits": {
+        "Up": 1302,
+        "Down": 1300
+      }
+    },
+    {
+      "id": 1302,
+      "name": "Path to the Caves",
+      "exits": {
+        "North": 1303,
+        "Down": 1301
+      }
+    },
+    {
+      "id": 1303,
+      "name": "Atop the mountain and before the caves",
+      "exits": {
+        "East": 1304,
+        "South": 1302
+      }
+    },
+    {
+      "id": 1304,
+      "name": "At the entrance",
+      "exits": {
+        "West": 1303,
+        "Down": 1305
+      }
+    },
+    {
+      "id": 1305,
+      "name": "Within the Entrance",
+      "exits": {
+        "North": 1306,
+        "Up": 1304
+      }
+    },
+    {
+      "id": 1306,
+      "name": "Hallway",
+      "exits": {
+        "North": 1310,
+        "East": 1307,
+        "South": 1305
+      }
+    },
+    {
+      "id": 1307,
+      "name": "Hallway",
+      "exits": {
+        "South": 1308,
+        "West": 1306
+      }
+    },
+    {
+      "id": 1308,
+      "name": "End of the Hallway",
+      "exits": {
+        "North": 1307,
+        "East": 1309
+      }
+    },
+    {
+      "id": 1309,
+      "name": "Armory",
+      "exits": {
+        "West": 1308
+      }
+    },
+    {
+      "id": 1310,
+      "name": "Intersection",
+      "exits": {
+        "North": 1315,
+        "South": 1306,
+        "West": 1311
+      }
+    },
+    {
+      "id": 1311,
+      "name": "Hallway",
+      "exits": {
+        "East": 1310,
+        "West": 1312
+      }
+    },
+    {
+      "id": 1312,
+      "name": "End of the Hallway",
+      "exits": {
+        "North": 1313,
+        "East": 1311,
+        "West": 1314
+      }
+    },
+    {
+      "id": 1313,
+      "name": "Guard Room",
+      "exits": {
+        "South": 1312
+      }
+    },
+    {
+      "id": 1314,
+      "name": "Dark Cell",
+      "exits": {
+        "East": 1312
+      }
+    },
+    {
+      "id": 1315,
+      "name": "Hallway",
+      "exits": {
+        "East": 1316,
+        "South": 1310
+      }
+    },
+    {
+      "id": 1316,
+      "name": "Alcove",
+      "exits": {
+        "East": 1317,
+        "West": 1315
+      }
+    },
+    {
+      "id": 1317,
+      "name": "Stairway",
+      "exits": {
+        "West": 1316,
+        "Down": 1318
+      }
+    },
+    {
+      "id": 1318,
+      "name": "Lower caves",
+      "exits": {
+        "South": 1319,
+        "Up": 1317
+      }
+    },
+    {
+      "id": 1319,
+      "name": "Eroded Hallway",
+      "exits": {
+        "North": 1318,
+        "East": 1324,
+        "South": 1320
+      }
+    },
+    {
+      "id": 1320,
+      "name": "Cavern Entrance",
+      "exits": {
+        "North": 1319,
+        "South": 1321
+      }
+    },
+    {
+      "id": 1321,
+      "name": "Dark Tunnel",
+      "exits": {
+        "North": 1320,
+        "East": 1322
+      }
+    },
+    {
+      "id": 1322,
+      "name": "Cavern Opening",
+      "exits": {
+        "East": 1323,
+        "West": 1321
+      }
+    },
+    {
+      "id": 1323,
+      "name": "Great Waterfall",
+      "exits": {
+        "North": 1326,
+        "West": 1322,
+        "Down": 1327
+      }
+    },
+    {
+      "id": 1324,
+      "name": "Underground River",
+      "exits": {
+        "South": 1325,
+        "West": 1319
+      }
+    },
+    {
+      "id": 1325,
+      "name": "Underground Pool",
+      "exits": {
+        "North": 1324,
+        "East": 1326
+      }
+    },
+    {
+      "id": 1326,
+      "name": "Underground River",
+      "exits": {
+        "South": 1323,
+        "West": 1325
+      }
+    },
+    {
+      "id": 1327,
+      "name": "Below Waterfall",
+      "exits": {
+        "South": 1328,
+        "Up": 1323
+      }
+    },
+    {
+      "id": 1328,
+      "name": "Large Cave",
+      "exits": {
+        "North": 1327,
+        "East": 1329
+      }
+    },
+    {
+      "id": 1329,
+      "name": "Storage Cave",
+      "exits": {
+        "South": 1298,
+        "West": 1328
+      }
+    },
+    {
+      "id": 3776,
+      "name": "To Thalos",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 1298,
+        "East": 3775,
+        "West": 3777
+      }
+    }
+  ]
+}

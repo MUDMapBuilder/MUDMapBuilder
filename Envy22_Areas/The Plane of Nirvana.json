@@ -1,0 +1,511 @@
+{
+  "name": "The Plane of Nirvana",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 2766,
+      "name": "In the Plane of Nirvana",
+      "exits": {
+        "East": 2767,
+        "Down": 146,
+        "West": 2768
+      }
+    },
+    {
+      "id": 2767,
+      "name": "The Plane of Nirvana",
+      "exits": {
+        "East": 2769,
+        "West": 2766
+      }
+    },
+    {
+      "id": 2768,
+      "name": "The Plane of Nirvana",
+      "exits": {
+        "East": 2766,
+        "West": 2770
+      }
+    },
+    {
+      "id": 2769,
+      "name": "A Change in Direction",
+      "exits": {
+        "North": 2771,
+        "West": 2767
+      }
+    },
+    {
+      "id": 2770,
+      "name": "A Change in Direction",
+      "exits": {
+        "North": 2772,
+        "East": 2768
+      }
+    },
+    {
+      "id": 2771,
+      "name": "A North-South direction of the plane",
+      "exits": {
+        "North": 2778,
+        "South": 2769
+      }
+    },
+    {
+      "id": 2772,
+      "name": "A North-South stretch of the plane",
+      "exits": {
+        "North": 2779,
+        "South": 2770
+      }
+    },
+    {
+      "id": 2773,
+      "name": "In the Tower of Nirvana",
+      "exits": {
+        "East": 2776,
+        "West": 2779
+      }
+    },
+    {
+      "id": 2774,
+      "name": "A hallway in the Tower of Nirvana",
+      "exits": {
+        "East": 2778,
+        "West": 2775
+      }
+    },
+    {
+      "id": 2775,
+      "name": "An east-west hallway in the Tower of Nirvana",
+      "exits": {
+        "East": 2774,
+        "West": 2777
+      }
+    },
+    {
+      "id": 2776,
+      "name": "An east-west passage in the Tower of Nirvana",
+      "exits": {
+        "East": 2777,
+        "West": 2773
+      }
+    },
+    {
+      "id": 2777,
+      "name": "An intersection in the Tower of Nirvana",
+      "exits": {
+        "North": 2789,
+        "East": 2775,
+        "West": 2776
+      }
+    },
+    {
+      "id": 2778,
+      "name": "At the door to the Tower of Nirvana",
+      "exits": {
+        "North": 2780,
+        "South": 2771,
+        "West": 2774
+      }
+    },
+    {
+      "id": 2779,
+      "name": "At the door to the Tower of Nirvana",
+      "exits": {
+        "North": 2781,
+        "East": 2773,
+        "South": 2772
+      }
+    },
+    {
+      "id": 2780,
+      "name": "A north-south area of the Plane of Nirvana",
+      "exits": {
+        "North": 2793,
+        "South": 2778
+      }
+    },
+    {
+      "id": 2781,
+      "name": "A north-south area on the Plane of Nirvana",
+      "exits": {
+        "North": 2794,
+        "South": 2779
+      }
+    },
+    {
+      "id": 2782,
+      "name": "Dead End",
+      "exits": {
+        "West": 2784
+      }
+    },
+    {
+      "id": 2783,
+      "name": "Dead End",
+      "exits": {
+        "East": 2785
+      }
+    },
+    {
+      "id": 2784,
+      "name": "A Tertain\u0027s lair",
+      "exits": {
+        "East": 2782,
+        "West": 2786
+      }
+    },
+    {
+      "id": 2785,
+      "name": "A Tertian\u0027s lair",
+      "exits": {
+        "East": 2786,
+        "West": 2783
+      }
+    },
+    {
+      "id": 2786,
+      "name": "The Lair of Primus",
+      "exits": {
+        "North": 2790,
+        "East": 2784,
+        "South": 2787,
+        "West": 2785
+      }
+    },
+    {
+      "id": 2787,
+      "name": "A Tertian\u0027s lair",
+      "exits": {
+        "North": 2786,
+        "South": 2788
+      }
+    },
+    {
+      "id": 2788,
+      "name": "The office of a Quinton",
+      "exits": {
+        "North": 2787,
+        "East": 2812,
+        "South": 2789,
+        "West": 2819
+      }
+    },
+    {
+      "id": 2789,
+      "name": "A wide north-south passageway",
+      "exits": {
+        "North": 2788,
+        "South": 2777
+      }
+    },
+    {
+      "id": 2790,
+      "name": "A Tertian\u0027s lair",
+      "exits": {
+        "North": 2791,
+        "South": 2786
+      }
+    },
+    {
+      "id": 2791,
+      "name": "A north south tunnel",
+      "exits": {
+        "North": 2792,
+        "South": 2790
+      }
+    },
+    {
+      "id": 2792,
+      "name": "An intersection of passages",
+      "exits": {
+        "North": 2797,
+        "East": 2798,
+        "South": 2791,
+        "West": 2805
+      }
+    },
+    {
+      "id": 2793,
+      "name": "A change of direction",
+      "exits": {
+        "South": 2780,
+        "West": 2796
+      }
+    },
+    {
+      "id": 2794,
+      "name": "A change of direction",
+      "exits": {
+        "East": 2795,
+        "South": 2781
+      }
+    },
+    {
+      "id": 2795,
+      "name": "An east-west route on the Plane of Nirvana",
+      "exits": {
+        "East": 2797,
+        "West": 2794
+      }
+    },
+    {
+      "id": 2796,
+      "name": "An east-west route on The Plane of Nirvana",
+      "exits": {
+        "East": 2793,
+        "South": 2797
+      }
+    },
+    {
+      "id": 2797,
+      "name": "At a door into the Tower of Nirvana",
+      "exits": {
+        "East": 2796,
+        "South": 2792,
+        "West": 2795
+      }
+    },
+    {
+      "id": 2798,
+      "name": "A Junction in the passage",
+      "exits": {
+        "North": 2799,
+        "East": 2801,
+        "South": 2800,
+        "West": 2792
+      }
+    },
+    {
+      "id": 2799,
+      "name": "The office of the Octon",
+      "exits": {
+        "South": 2798
+      }
+    },
+    {
+      "id": 2800,
+      "name": "A small room",
+      "exits": {
+        "North": 2798
+      }
+    },
+    {
+      "id": 2801,
+      "name": "A passageway",
+      "exits": {
+        "North": 2802,
+        "East": 2804,
+        "South": 2803,
+        "West": 2798
+      }
+    },
+    {
+      "id": 2802,
+      "name": "Lair of a Hexton",
+      "exits": {
+        "South": 2801
+      }
+    },
+    {
+      "id": 2803,
+      "name": "Office of a Hexton",
+      "exits": {
+        "North": 2801
+      }
+    },
+    {
+      "id": 2804,
+      "name": "Office of a Secundus",
+      "exits": {
+        "West": 2801
+      }
+    },
+    {
+      "id": 2805,
+      "name": "A Junction in the hallway",
+      "exits": {
+        "North": 2806,
+        "East": 2792,
+        "South": 2807,
+        "West": 2808
+      }
+    },
+    {
+      "id": 2806,
+      "name": "Office of an Octon",
+      "exits": {
+        "South": 2805
+      }
+    },
+    {
+      "id": 2807,
+      "name": "Office of a Septon",
+      "exits": {
+        "North": 2805
+      }
+    },
+    {
+      "id": 2808,
+      "name": "An east-west passage",
+      "exits": {
+        "North": 2809,
+        "East": 2805,
+        "South": 2810,
+        "West": 2811
+      }
+    },
+    {
+      "id": 2809,
+      "name": "The Barracks",
+      "exits": {
+        "South": 2808
+      }
+    },
+    {
+      "id": 2810,
+      "name": "The Commander\u0027s Post",
+      "exits": {
+        "North": 2808
+      }
+    },
+    {
+      "id": 2811,
+      "name": "The chamber of the second Secundus",
+      "exits": {
+        "East": 2808
+      }
+    },
+    {
+      "id": 2812,
+      "name": "A Passageway",
+      "exits": {
+        "North": 2813,
+        "East": 2815,
+        "South": 2814,
+        "West": 2788
+      }
+    },
+    {
+      "id": 2813,
+      "name": "Chamber of the Octon",
+      "exits": {
+        "South": 2812
+      }
+    },
+    {
+      "id": 2814,
+      "name": "Chamber of the Nonaton",
+      "exits": {
+        "North": 2812
+      }
+    },
+    {
+      "id": 2815,
+      "name": "End of the passageway",
+      "exits": {
+        "North": 2816,
+        "East": 2818,
+        "South": 2817,
+        "West": 2812
+      }
+    },
+    {
+      "id": 2816,
+      "name": "Chamber of a Hexton",
+      "exits": {
+        "South": 2815
+      }
+    },
+    {
+      "id": 2817,
+      "name": "Chamber of a Hexton",
+      "exits": {
+        "North": 2815
+      }
+    },
+    {
+      "id": 2818,
+      "name": "Chamber of the Secudus",
+      "exits": {
+        "West": 2815
+      }
+    },
+    {
+      "id": 2819,
+      "name": "A passageway",
+      "exits": {
+        "North": 2820,
+        "East": 2788,
+        "South": 2821,
+        "West": 2825
+      }
+    },
+    {
+      "id": 2820,
+      "name": "A small chamber",
+      "exits": {
+        "South": 2819
+      }
+    },
+    {
+      "id": 2821,
+      "name": "A cramped room",
+      "exits": {
+        "North": 2819
+      }
+    },
+    {
+      "id": 2822,
+      "name": "A large room",
+      "exits": {
+        "South": 2825
+      }
+    },
+    {
+      "id": 2823,
+      "name": "A room",
+      "exits": {
+        "North": 2825
+      }
+    },
+    {
+      "id": 2824,
+      "name": "Chamber of The First Secundus",
+      "exits": {
+        "East": 2825
+      }
+    },
+    {
+      "id": 2825,
+      "name": "Junction in the hallway",
+      "exits": {
+        "North": 2822,
+        "East": 2819,
+        "South": 2823,
+        "West": 2824
+      }
+    },
+    {
+      "id": 146,
+      "name": "To The Astral Plane",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 145,
+        "East": 142,
+        "South": 129,
+        "West": 126,
+        "Up": 2766
+      }
+    }
+  ]
+}

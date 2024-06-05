@@ -1,0 +1,279 @@
+{
+  "name": "Land of the Fire Newts",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 1116,
+      "name": "Obsidian hills",
+      "exits": {
+        "North": 2051,
+        "South": 1117
+      }
+    },
+    {
+      "id": 1117,
+      "name": "Obsidian hills",
+      "exits": {
+        "South": 1118,
+        "North": 1116
+      }
+    },
+    {
+      "id": 1118,
+      "name": "Obsidian hills",
+      "exits": {
+        "East": 1119,
+        "North": 1117
+      }
+    },
+    {
+      "id": 1119,
+      "name": "Mountain side",
+      "exits": {
+        "South": 1120,
+        "West": 1118
+      }
+    },
+    {
+      "id": 1120,
+      "name": "Mountain side",
+      "exits": {
+        "South": 1121,
+        "North": 1119
+      }
+    },
+    {
+      "id": 1121,
+      "name": "Mountain top",
+      "exits": {
+        "South": 1122,
+        "North": 1120
+      }
+    },
+    {
+      "id": 1122,
+      "name": "Entrance to the mountain",
+      "exits": {
+        "Down": 1126,
+        "North": 1121,
+        "East": 1123,
+        "South": 1125,
+        "West": 1124
+      }
+    },
+    {
+      "id": 1123,
+      "name": "Mountain top",
+      "exits": {
+        "West": 1122
+      }
+    },
+    {
+      "id": 1124,
+      "name": "Mountain top",
+      "exits": {
+        "East": 1122
+      }
+    },
+    {
+      "id": 1125,
+      "name": "Mountain top",
+      "exits": {
+        "North": 1122
+      }
+    },
+    {
+      "id": 1126,
+      "name": "Inside the mountain",
+      "exits": {
+        "Down": 1129,
+        "Up": 1122,
+        "East": 1127,
+        "West": 1128
+      }
+    },
+    {
+      "id": 1127,
+      "name": "Guard room",
+      "exits": {
+        "West": 1126
+      }
+    },
+    {
+      "id": 1128,
+      "name": "Guard room",
+      "exits": {
+        "East": 1126
+      }
+    },
+    {
+      "id": 1129,
+      "name": "Inside the mountain",
+      "exits": {
+        "Down": 1132,
+        "Up": 1126,
+        "North": 1130,
+        "South": 1131
+      }
+    },
+    {
+      "id": 1130,
+      "name": "Store room",
+      "exits": {
+        "South": 1129
+      }
+    },
+    {
+      "id": 1131,
+      "name": "Workers\u0027 quarters",
+      "exits": {
+        "North": 1129
+      }
+    },
+    {
+      "id": 1132,
+      "name": "Bottom of the mountain",
+      "exits": {
+        "North": 1133,
+        "Up": 1129
+      }
+    },
+    {
+      "id": 1133,
+      "name": "The tunnel",
+      "exits": {
+        "North": 1134,
+        "South": 1132
+      }
+    },
+    {
+      "id": 1134,
+      "name": "Bend in the tunnel",
+      "exits": {
+        "East": 1135,
+        "South": 1133
+      }
+    },
+    {
+      "id": 1135,
+      "name": "The tunnel",
+      "exits": {
+        "North": 1137,
+        "West": 1134,
+        "East": 1136
+      }
+    },
+    {
+      "id": 1136,
+      "name": "Fire Newt House",
+      "exits": {
+        "West": 1135
+      }
+    },
+    {
+      "id": 1137,
+      "name": "The tunnel",
+      "exits": {
+        "West": 1138,
+        "South": 1135,
+        "North": 1139
+      }
+    },
+    {
+      "id": 1138,
+      "name": "Fire Newt House",
+      "exits": {
+        "East": 1137
+      }
+    },
+    {
+      "id": 1139,
+      "name": "The tunnel",
+      "exits": {
+        "West": 1140,
+        "South": 1137,
+        "East": 1143
+      }
+    },
+    {
+      "id": 1140,
+      "name": "Entrance to the town hall",
+      "exits": {
+        "West": 1141,
+        "East": 1139
+      }
+    },
+    {
+      "id": 1141,
+      "name": "The Waiting Room",
+      "exits": {
+        "West": 1142,
+        "East": 1140
+      }
+    },
+    {
+      "id": 1142,
+      "name": "The Leader\u0027s Office",
+      "exits": {
+        "East": 1141
+      }
+    },
+    {
+      "id": 1143,
+      "name": "Outside the temple",
+      "exits": {
+        "East": 1144,
+        "West": 1139
+      }
+    },
+    {
+      "id": 1144,
+      "name": "Entrance to the temple",
+      "exits": {
+        "East": 1145,
+        "West": 1143
+      }
+    },
+    {
+      "id": 1145,
+      "name": "Inside the Temple",
+      "exits": {
+        "West": 1144,
+        "Down": 1146
+      }
+    },
+    {
+      "id": 1146,
+      "name": "The room before the doors",
+      "exits": {
+        "East": 1147,
+        "Up": 1145
+      }
+    },
+    {
+      "id": 1147,
+      "name": "The Egg Room",
+      "exits": {
+        "West": 1146
+      }
+    },
+    {
+      "id": 2051,
+      "name": "To Kingdom of Juargan",
+      "otherAreaExit": true,
+      "exits": {
+        "East": 2050,
+        "West": 2483,
+        "South": 1116
+      }
+    }
+  ]
+}

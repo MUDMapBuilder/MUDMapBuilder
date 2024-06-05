@@ -525,6 +525,24 @@ namespace MUDMapBuilder
 			return (from p in parts orderby p.Count select p).ToArray();
 		}
 
+		public bool IsSingleExitRoom(MMBRoom room, out MMBRoomConnection connection)
+		{
+			connection = null;
+			if (room.Connections == null)
+			{
+				return false;
+			}
+
+			var realConnections = (from c in room.Connections where GetRoomById(c.Value.RoomId) != null select c.Value).ToArray();
+			if (realConnections.Length != 1)
+			{
+				return false;
+			}
+
+			connection = realConnections[0];
+			return connection.ConnectionType == MMBConnectionType.TwoWay;
+		}
+
 		public void FixPlacementOfSingleExitRooms()
 		{
 			foreach (var ri in _roomsByIds)
@@ -550,14 +568,8 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					var connectionsFromRoomCount = (from c in targetRoom.Connections where c.Value != null && _roomsByIds.ContainsKey(c.Value.RoomId) select c).Count();
-					if (connectionsFromRoomCount > 1)
-					{
-						continue;
-					}
-
-					var connectionsToRoomCount = (from r in _roomsByIds where r.Value.Id != targetRoom.Id && r.Value.FindConnection(targetRoom.Id) != null select r).Count();
-					if (connectionsToRoomCount > 1)
+					MMBRoomConnection conn;
+					if (!IsSingleExitRoom(targetRoom, out conn))
 					{
 						continue;
 					}
@@ -698,12 +710,19 @@ namespace MUDMapBuilder
 			// Determine deleted rooms
 			var movedRoomsList = new List<MeasurePushRoomMovement>();
 			var deletedRooms = new List<MMBRoom>();
+
 			foreach (var pair in movedRooms)
 			{
 				var room = GetRoomById(pair.Key);
 				var delta = pair.Value;
 
 				movedRoomsList.Add(new MeasurePushRoomMovement(room, delta));
+			}
+
+			foreach (var pair in movedRooms)
+			{
+				var room = GetRoomById(pair.Key);
+				var delta = pair.Value;
 
 				var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
 

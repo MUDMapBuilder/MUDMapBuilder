@@ -1,0 +1,882 @@
+{
+  "name": "The Keep of Mahn-Tor",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": false,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 2055,
+      "name": "The dark woods",
+      "exits": {
+        "North": 3778,
+        "South": 2056
+      }
+    },
+    {
+      "id": 2056,
+      "name": "The dark woods",
+      "exits": {
+        "North": 2055,
+        "South": 2057
+      }
+    },
+    {
+      "id": 2057,
+      "name": "The small intersection in the forest",
+      "exits": {
+        "North": 2056,
+        "East": 2059,
+        "South": 2058
+      }
+    },
+    {
+      "id": 2058,
+      "name": "The edge of the forest and hills",
+      "exits": {
+        "North": 2057,
+        "West": 2064
+      }
+    },
+    {
+      "id": 2059,
+      "name": "In the dense forest",
+      "exits": {
+        "South": 2060,
+        "West": 2057
+      }
+    },
+    {
+      "id": 2060,
+      "name": "The dark forest path",
+      "exits": {
+        "North": 2059,
+        "East": 2082,
+        "South": 2061
+      }
+    },
+    {
+      "id": 2061,
+      "name": "A turn in the path",
+      "exits": {
+        "North": 2060,
+        "West": 2062
+      }
+    },
+    {
+      "id": 2062,
+      "name": "The bloody intersection",
+      "exits": {
+        "East": 2061,
+        "South": 2065,
+        "West": 2063
+      }
+    },
+    {
+      "id": 2063,
+      "name": "The rocky path",
+      "exits": {
+        "North": 2064,
+        "East": 2062
+      }
+    },
+    {
+      "id": 2064,
+      "name": "The rocky path",
+      "exits": {
+        "East": 2058,
+        "South": 2063
+      }
+    },
+    {
+      "id": 2065,
+      "name": "Up the rocky hillside",
+      "exits": {
+        "North": 2062,
+        "East": 2067,
+        "South": 2069,
+        "West": 2066
+      }
+    },
+    {
+      "id": 2066,
+      "name": "The sparse foothills",
+      "exits": {
+        "East": 2065,
+        "South": 2068
+      }
+    },
+    {
+      "id": 2067,
+      "name": "Standing on level ground",
+      "exits": {
+        "South": 2070,
+        "West": 2065
+      }
+    },
+    {
+      "id": 2068,
+      "name": "In the foothills",
+      "exits": {
+        "North": 2066,
+        "East": 2069,
+        "South": 2072
+      }
+    },
+    {
+      "id": 2069,
+      "name": "Before the huge tree",
+      "exits": {
+        "North": 2065,
+        "East": 2070,
+        "South": 2073,
+        "West": 2068
+      }
+    },
+    {
+      "id": 2070,
+      "name": "Before the dark cave",
+      "exits": {
+        "North": 2067,
+        "East": 2071,
+        "South": 2074,
+        "West": 2069
+      }
+    },
+    {
+      "id": 2071,
+      "name": "Inside the horrid cave",
+      "exits": {
+        "West": 2070
+      }
+    },
+    {
+      "id": 2072,
+      "name": "The hills overlooking the shore",
+      "exits": {
+        "North": 2068,
+        "East": 2073,
+        "Down": 2075
+      }
+    },
+    {
+      "id": 2073,
+      "name": "The hills overlooking the shoreline",
+      "exits": {
+        "North": 2069,
+        "East": 2074,
+        "West": 2072,
+        "Down": 2076
+      }
+    },
+    {
+      "id": 2074,
+      "name": "The hills above the shoreline",
+      "exits": {
+        "North": 2070,
+        "West": 2073,
+        "Down": 2077
+      }
+    },
+    {
+      "id": 2075,
+      "name": "The rocky shore",
+      "exits": {
+        "East": 2076,
+        "South": 2078,
+        "Up": 2072
+      }
+    },
+    {
+      "id": 2076,
+      "name": "The rocky shoreline",
+      "exits": {
+        "East": 2077,
+        "South": 2079,
+        "West": 2075,
+        "Up": 2073
+      }
+    },
+    {
+      "id": 2077,
+      "name": "The rocky shore",
+      "exits": {
+        "South": 2080,
+        "West": 2076,
+        "Up": 2074
+      }
+    },
+    {
+      "id": 2078,
+      "name": "The edge of the sea",
+      "exits": {
+        "North": 2075,
+        "East": 2079
+      }
+    },
+    {
+      "id": 2079,
+      "name": "The Blood Sea Portal",
+      "exits": {
+        "North": 2076,
+        "East": 2080,
+        "South": 2081,
+        "West": 2078
+      }
+    },
+    {
+      "id": 2080,
+      "name": "The edge of the sea",
+      "exits": {
+        "North": 2077,
+        "West": 2079
+      }
+    },
+    {
+      "id": 2081,
+      "name": "Floating in blue light",
+      "exits": {
+        "North": 2079,
+        "South": 2108
+      }
+    },
+    {
+      "id": 2082,
+      "name": "The swampy path",
+      "exits": {
+        "East": 2083,
+        "West": 2060
+      }
+    },
+    {
+      "id": 2083,
+      "name": "The swampy path",
+      "exits": {
+        "East": 2084,
+        "West": 2082
+      }
+    },
+    {
+      "id": 2084,
+      "name": "The swampy path",
+      "exits": {
+        "East": 2085,
+        "West": 2083
+      }
+    },
+    {
+      "id": 2085,
+      "name": "The turn in the swampy path",
+      "exits": {
+        "South": 2086,
+        "West": 2084
+      }
+    },
+    {
+      "id": 2086,
+      "name": "The swampy path",
+      "exits": {
+        "North": 2085,
+        "East": 2090
+      }
+    },
+    {
+      "id": 2087,
+      "name": "Lost in the Mist",
+      "exits": {
+        "North": 2092,
+        "East": 2089,
+        "South": 2090,
+        "West": 2089
+      }
+    },
+    {
+      "id": 2088,
+      "name": "Lost in the Mist",
+      "exits": {
+        "North": 2088,
+        "East": 2091,
+        "South": 2088,
+        "West": 2090
+      }
+    },
+    {
+      "id": 2089,
+      "name": "Lost in the Mist",
+      "exits": {
+        "North": 2093,
+        "East": 2087,
+        "South": 2091,
+        "West": 2087
+      }
+    },
+    {
+      "id": 2090,
+      "name": "Lost in the Mist",
+      "exits": {
+        "North": 2087,
+        "East": 2088,
+        "South": 2092,
+        "West": 2086
+      }
+    },
+    {
+      "id": 2091,
+      "name": "Lost in the Mist",
+      "exits": {
+        "North": 2089,
+        "East": 2094,
+        "South": 2093,
+        "West": 2088
+      }
+    },
+    {
+      "id": 2092,
+      "name": "Lost in the Mist",
+      "exits": {
+        "North": 2090,
+        "East": 2093,
+        "South": 2087,
+        "West": 2093
+      }
+    },
+    {
+      "id": 2093,
+      "name": "Lost in the Mist",
+      "exits": {
+        "North": 2091,
+        "East": 2092,
+        "South": 2089,
+        "West": 2092
+      }
+    },
+    {
+      "id": 2094,
+      "name": "The solid path",
+      "exits": {
+        "North": 2095,
+        "West": 2091
+      }
+    },
+    {
+      "id": 2095,
+      "name": "A forested path",
+      "exits": {
+        "North": 2096,
+        "South": 2094
+      }
+    },
+    {
+      "id": 2096,
+      "name": "The gate before the Ogre Village",
+      "exits": {
+        "North": 2098,
+        "South": 2095
+      }
+    },
+    {
+      "id": 2097,
+      "name": "Among the crude huts",
+      "exits": {
+        "North": 2100,
+        "East": 2098
+      }
+    },
+    {
+      "id": 2098,
+      "name": "Inside the gates",
+      "exits": {
+        "North": 2101,
+        "East": 2099,
+        "South": 2096,
+        "West": 2097
+      }
+    },
+    {
+      "id": 2099,
+      "name": "Among the crude huts",
+      "exits": {
+        "North": 2102,
+        "West": 2098
+      }
+    },
+    {
+      "id": 2100,
+      "name": "The gathering place",
+      "exits": {
+        "East": 2101,
+        "South": 2097
+      }
+    },
+    {
+      "id": 2101,
+      "name": "The firepit before the lodge",
+      "exits": {
+        "North": 2103,
+        "East": 2102,
+        "South": 2098,
+        "West": 2100
+      }
+    },
+    {
+      "id": 2102,
+      "name": "The village dump",
+      "exits": {
+        "South": 2099,
+        "West": 2101
+      }
+    },
+    {
+      "id": 2103,
+      "name": "The entryway to the lodge",
+      "exits": {
+        "North": 2104,
+        "South": 2101
+      }
+    },
+    {
+      "id": 2104,
+      "name": "The throne room",
+      "exits": {
+        "North": 2105,
+        "South": 2103
+      }
+    },
+    {
+      "id": 2105,
+      "name": "The chieftain\u0027s room",
+      "exits": {
+        "South": 2104
+      }
+    },
+    {
+      "id": 2106,
+      "name": "The frigid wastelands",
+      "exits": {
+        "North": 2108,
+        "East": 2107,
+        "South": 2110,
+        "West": 2109
+      }
+    },
+    {
+      "id": 2107,
+      "name": "The frigid wastelands",
+      "exits": {
+        "North": 2112,
+        "East": 2109,
+        "South": 2113,
+        "West": 2106
+      }
+    },
+    {
+      "id": 2108,
+      "name": "The Glacier Temple",
+      "exits": {
+        "North": 2081,
+        "South": 2106
+      }
+    },
+    {
+      "id": 2109,
+      "name": "The frigid wastelands",
+      "exits": {
+        "North": 2114,
+        "East": 2106,
+        "South": 2111,
+        "West": 2107
+      }
+    },
+    {
+      "id": 2110,
+      "name": "The frigid wastelands",
+      "exits": {
+        "North": 2106,
+        "East": 2111,
+        "South": 2112,
+        "West": 2111
+      }
+    },
+    {
+      "id": 2111,
+      "name": "The frigid wastelands",
+      "exits": {
+        "North": 2109,
+        "East": 2110,
+        "South": 2114,
+        "West": 2110
+      }
+    },
+    {
+      "id": 2112,
+      "name": "The frigid wastelands",
+      "exits": {
+        "North": 2110,
+        "East": 2113,
+        "South": 2107,
+        "West": 2114
+      }
+    },
+    {
+      "id": 2113,
+      "name": "The frigid wastelands",
+      "exits": {
+        "North": 2107,
+        "East": 2114,
+        "South": 2115,
+        "West": 2112
+      }
+    },
+    {
+      "id": 2114,
+      "name": "The frigid wastelands",
+      "exits": {
+        "North": 2111,
+        "East": 2112,
+        "South": 2109,
+        "West": 2113
+      }
+    },
+    {
+      "id": 2115,
+      "name": "The edge of the frigid wastes",
+      "exits": {
+        "North": 2113,
+        "Up": 2116
+      }
+    },
+    {
+      "id": 2116,
+      "name": "On the cliffside",
+      "exits": {
+        "Up": 2117,
+        "Down": 2115
+      }
+    },
+    {
+      "id": 2117,
+      "name": "Before the gates of Mahn-Tor",
+      "exits": {
+        "South": 2119,
+        "Down": 2116
+      }
+    },
+    {
+      "id": 2118,
+      "name": "The city streets of Mahn-Tor",
+      "exits": {
+        "East": 2119,
+        "South": 2121
+      }
+    },
+    {
+      "id": 2119,
+      "name": "Inside the gates of Mahn-Tor",
+      "exits": {
+        "North": 2117,
+        "East": 2120,
+        "South": 2122,
+        "West": 2118
+      }
+    },
+    {
+      "id": 2120,
+      "name": "The city streets of Mahn-Tor",
+      "exits": {
+        "South": 2123,
+        "West": 2119
+      }
+    },
+    {
+      "id": 2121,
+      "name": "The city streets of Mahn-Tor",
+      "exits": {
+        "North": 2118,
+        "East": 2122,
+        "South": 2124
+      }
+    },
+    {
+      "id": 2122,
+      "name": "The Square of Mahn-Tor",
+      "exits": {
+        "North": 2119,
+        "East": 2123,
+        "South": 2125,
+        "West": 2121
+      }
+    },
+    {
+      "id": 2123,
+      "name": "The streets of Mahn-Tor",
+      "exits": {
+        "North": 2120,
+        "East": 2130,
+        "South": 2126,
+        "West": 2122
+      }
+    },
+    {
+      "id": 2124,
+      "name": "The Inn of the Broken Horn",
+      "exits": {
+        "North": 2121
+      }
+    },
+    {
+      "id": 2125,
+      "name": "The Mahn-Tor Equipment Shop",
+      "exits": {
+        "North": 2122
+      }
+    },
+    {
+      "id": 2126,
+      "name": "The Mahn-Tor General Store",
+      "exits": {
+        "North": 2123
+      }
+    },
+    {
+      "id": 2127,
+      "name": "Gorak\u0027s Training Room",
+      "exits": {
+        "East": 2143
+      }
+    },
+    {
+      "id": 2128,
+      "name": "Darkoth\u0027s Dark Study",
+      "exits": {
+        "East": 2144
+      }
+    },
+    {
+      "id": 2129,
+      "name": "Tyrgoth\u0027s Inner Sanctum",
+      "exits": {
+        "East": 2147
+      }
+    },
+    {
+      "id": 2130,
+      "name": "The road to the Keep of Mahn-Tor",
+      "exits": {
+        "East": 2132,
+        "West": 2123
+      }
+    },
+    {
+      "id": 2131,
+      "name": "A small guard house",
+      "exits": {
+        "South": 2132
+      }
+    },
+    {
+      "id": 2132,
+      "name": "Before the Keep of Mahn-Tor",
+      "exits": {
+        "North": 2131,
+        "East": 2134,
+        "South": 2133,
+        "West": 2130
+      }
+    },
+    {
+      "id": 2133,
+      "name": "A small guard house",
+      "exits": {
+        "North": 2132
+      }
+    },
+    {
+      "id": 2134,
+      "name": "The entryway to the Keep of Mahn-Tor",
+      "exits": {
+        "East": 2135,
+        "West": 2132
+      }
+    },
+    {
+      "id": 2135,
+      "name": "The Hall",
+      "exits": {
+        "East": 2136,
+        "West": 2134
+      }
+    },
+    {
+      "id": 2136,
+      "name": "The Grand Hall",
+      "exits": {
+        "East": 2138,
+        "South": 2137,
+        "West": 2135
+      }
+    },
+    {
+      "id": 2137,
+      "name": "The Great Hall",
+      "exits": {
+        "North": 2136,
+        "East": 2139,
+        "South": 2142
+      }
+    },
+    {
+      "id": 2138,
+      "name": "Standing before the throne",
+      "exits": {
+        "East": 2140,
+        "South": 2139,
+        "West": 2136
+      }
+    },
+    {
+      "id": 2139,
+      "name": "The Great Hall",
+      "exits": {
+        "North": 2138,
+        "West": 2137
+      }
+    },
+    {
+      "id": 2140,
+      "name": "The secret hallway",
+      "exits": {
+        "East": 2141,
+        "West": 2138
+      }
+    },
+    {
+      "id": 2141,
+      "name": "Entry to the Royal Chambers",
+      "exits": {
+        "East": 2150,
+        "South": 2148,
+        "West": 2140
+      }
+    },
+    {
+      "id": 2142,
+      "name": "The Guard Post",
+      "exits": {
+        "North": 2137,
+        "South": 2143
+      }
+    },
+    {
+      "id": 2143,
+      "name": "The guarded hall",
+      "exits": {
+        "North": 2142,
+        "East": 2145,
+        "South": 2144,
+        "West": 2127
+      }
+    },
+    {
+      "id": 2144,
+      "name": "The guarded hall",
+      "exits": {
+        "North": 2143,
+        "East": 2146,
+        "South": 2147,
+        "West": 2128
+      }
+    },
+    {
+      "id": 2145,
+      "name": "Sumaron\u0027s Sanctum",
+      "exits": {
+        "West": 2143
+      }
+    },
+    {
+      "id": 2146,
+      "name": "Amyrok\u0027s Arcane Study",
+      "exits": {
+        "West": 2144
+      }
+    },
+    {
+      "id": 2147,
+      "name": "The guarded hall",
+      "exits": {
+        "North": 2144,
+        "East": 2149,
+        "South": 2152,
+        "West": 2129
+      }
+    },
+    {
+      "id": 2148,
+      "name": "The Harem Room",
+      "exits": {
+        "North": 2141,
+        "East": 2151
+      }
+    },
+    {
+      "id": 2149,
+      "name": "Nasturn\u0027s Humble Abode",
+      "exits": {
+        "West": 2147
+      }
+    },
+    {
+      "id": 2150,
+      "name": "The main living room",
+      "exits": {
+        "South": 2151,
+        "West": 2141
+      }
+    },
+    {
+      "id": 2151,
+      "name": "The Master Bedroom",
+      "exits": {
+        "North": 2150,
+        "West": 2148
+      }
+    },
+    {
+      "id": 2152,
+      "name": "The end of the guarded hall",
+      "exits": {
+        "North": 2147,
+        "East": 2153,
+        "West": 2154
+      }
+    },
+    {
+      "id": 2153,
+      "name": "Dorgar\u0027s Dismal Domicile",
+      "exits": {
+        "West": 2152
+      }
+    },
+    {
+      "id": 2154,
+      "name": "Belrak\u0027s Green Room",
+      "exits": {
+        "East": 2152
+      }
+    },
+    {
+      "id": 3778,
+      "name": "To Thalos",
+      "otherAreaExit": true,
+      "exits": {
+        "South": 2055,
+        "West": 3771
+      }
+    }
+  ]
+}

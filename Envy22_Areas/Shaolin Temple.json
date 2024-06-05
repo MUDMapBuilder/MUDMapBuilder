@@ -1,0 +1,316 @@
+{
+  "name": "Shaolin Temple",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 3458,
+      "name": "Mountain Stairs",
+      "exits": {
+        "South": 2872,
+        "Up": 3459
+      }
+    },
+    {
+      "id": 3459,
+      "name": "Path to the Shaolin Temple",
+      "exits": {
+        "Up": 3463,
+        "West": 3460,
+        "Down": 3458
+      }
+    },
+    {
+      "id": 3460,
+      "name": "A side mountain path",
+      "exits": {
+        "North": 3461,
+        "East": 3459
+      }
+    },
+    {
+      "id": 3461,
+      "name": "Mountain shrine",
+      "exits": {
+        "West": 3462,
+        "South": 3460
+      }
+    },
+    {
+      "id": 3462,
+      "name": "A dark cave",
+      "exits": {
+        "East": 3461
+      }
+    },
+    {
+      "id": 3463,
+      "name": "Entrance to Shaolin Temple",
+      "exits": {
+        "North": 3464,
+        "Down": 3459
+      }
+    },
+    {
+      "id": 3464,
+      "name": "The Main Court",
+      "exits": {
+        "North": 3476,
+        "East": 3470,
+        "West": 3465,
+        "South": 3463
+      }
+    },
+    {
+      "id": 3465,
+      "name": "A Side Court",
+      "exits": {
+        "East": 3464,
+        "West": 3466,
+        "North": 3468,
+        "South": 3469
+      }
+    },
+    {
+      "id": 3466,
+      "name": "The Dining Hall",
+      "exits": {
+        "South": 3467,
+        "East": 3465
+      }
+    },
+    {
+      "id": 3467,
+      "name": "The Kitchen",
+      "exits": {
+        "North": 3466
+      }
+    },
+    {
+      "id": 3468,
+      "name": "The Monks\u0027 Bunk",
+      "exits": {
+        "South": 3465
+      }
+    },
+    {
+      "id": 3469,
+      "name": "The Disciples\u0027 Bunk",
+      "exits": {
+        "North": 3465
+      }
+    },
+    {
+      "id": 3470,
+      "name": "A Side Court",
+      "exits": {
+        "East": 3471,
+        "West": 3464,
+        "North": 3475,
+        "South": 3474
+      }
+    },
+    {
+      "id": 3471,
+      "name": "The Chamber of Wooden Men",
+      "exits": {
+        "South": 3472
+      }
+    },
+    {
+      "id": 3472,
+      "name": "The Luohan Chamber",
+      "exits": {
+        "Down": 3473
+      }
+    },
+    {
+      "id": 3473,
+      "name": "A Secret Tunnel",
+      "exits": {
+        "South": 3458
+      }
+    },
+    {
+      "id": 3474,
+      "name": "A Training Arena",
+      "exits": {
+        "North": 3470
+      }
+    },
+    {
+      "id": 3475,
+      "name": "A Training Arena",
+      "exits": {
+        "South": 3470
+      }
+    },
+    {
+      "id": 3476,
+      "name": "The Grand Hall",
+      "exits": {
+        "South": 3464,
+        "West": 3477,
+        "East": 3483,
+        "Down": 3493
+      }
+    },
+    {
+      "id": 3477,
+      "name": "A Side Hall",
+      "exits": {
+        "Up": 3480,
+        "North": 3481,
+        "South": 3478,
+        "West": 3479,
+        "East": 3476
+      }
+    },
+    {
+      "id": 3478,
+      "name": "A Master\u0027s Chamber",
+      "exits": {
+        "North": 3477
+      }
+    },
+    {
+      "id": 3479,
+      "name": "A Master\u0027s Chamber",
+      "exits": {
+        "East": 3477
+      }
+    },
+    {
+      "id": 3480,
+      "name": "The Abbot\u0027s Chamber",
+      "exits": {
+        "Down": 3477
+      }
+    },
+    {
+      "id": 3481,
+      "name": "The Library",
+      "exits": {
+        "South": 3477,
+        "East": 3482
+      }
+    },
+    {
+      "id": 3482,
+      "name": "A Secret Chamber",
+      "exits": {
+        "West": 3481
+      }
+    },
+    {
+      "id": 3483,
+      "name": "A Side Hall",
+      "exits": {
+        "Up": 3487,
+        "North": 3486,
+        "South": 3484,
+        "East": 3485,
+        "West": 3476,
+        "Down": 3488
+      }
+    },
+    {
+      "id": 3484,
+      "name": "A Guest Room",
+      "exits": {
+        "North": 3483
+      }
+    },
+    {
+      "id": 3485,
+      "name": "A Guest Room",
+      "exits": {
+        "West": 3483
+      }
+    },
+    {
+      "id": 3486,
+      "name": "A Guest Room",
+      "exits": {
+        "South": 3483
+      }
+    },
+    {
+      "id": 3487,
+      "name": "A Guest Room",
+      "exits": {
+        "Down": 3483
+      }
+    },
+    {
+      "id": 3488,
+      "name": "The Dungeons",
+      "exits": {
+        "Up": 3483,
+        "North": 3492,
+        "South": 3491,
+        "East": 3490,
+        "West": 3489
+      }
+    },
+    {
+      "id": 3489,
+      "name": "A prison cell",
+      "exits": {
+        "East": 3488
+      }
+    },
+    {
+      "id": 3490,
+      "name": "An empty prison",
+      "exits": {
+        "West": 3488
+      }
+    },
+    {
+      "id": 3491,
+      "name": "Cell of Wuhua",
+      "exits": {
+        "North": 3488
+      }
+    },
+    {
+      "id": 3492,
+      "name": "A female prison cell",
+      "exits": {
+        "South": 3488
+      }
+    },
+    {
+      "id": 3493,
+      "name": "A Mysterious Room",
+      "exits": {
+        "Down": 3473,
+        "East": 3494
+      }
+    },
+    {
+      "id": 3494,
+      "name": "A Workshop",
+      "exits": {
+        "West": 3493
+      }
+    },
+    {
+      "id": 2872,
+      "name": "To The River",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 3458,
+        "South": 2871
+      }
+    }
+  ]
+}

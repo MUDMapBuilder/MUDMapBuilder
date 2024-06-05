@@ -1,0 +1,422 @@
+{
+  "name": "The Circus",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": false,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 465,
+      "name": "The Path to the Circus",
+      "exits": {
+        "North": 1965,
+        "South": 466
+      }
+    },
+    {
+      "id": 466,
+      "name": "The Entrance to the Circus",
+      "exits": {
+        "South": 467,
+        "North": 465
+      }
+    },
+    {
+      "id": 467,
+      "name": "The Path to the Big Top",
+      "exits": {
+        "North": 466,
+        "South": 470,
+        "West": 468,
+        "East": 469
+      }
+    },
+    {
+      "id": 468,
+      "name": "The Game Booths",
+      "exits": {
+        "East": 467
+      }
+    },
+    {
+      "id": 469,
+      "name": "The Game Booths",
+      "exits": {
+        "West": 467
+      }
+    },
+    {
+      "id": 470,
+      "name": "The Path to the Big Top",
+      "exits": {
+        "North": 467,
+        "South": 478,
+        "West": 471,
+        "East": 472
+      }
+    },
+    {
+      "id": 471,
+      "name": "The Cotton Candy Vendor",
+      "exits": {
+        "East": 470
+      }
+    },
+    {
+      "id": 472,
+      "name": "The Entrance to the Freak Shows",
+      "exits": {
+        "West": 470,
+        "East": 473,
+        "South": 477
+      }
+    },
+    {
+      "id": 473,
+      "name": "The Tent of the Bearded Lady",
+      "exits": {
+        "West": 472,
+        "East": 474,
+        "South": 476
+      }
+    },
+    {
+      "id": 474,
+      "name": "The Tent of the Illusionist",
+      "exits": {
+        "West": 473,
+        "South": 475
+      }
+    },
+    {
+      "id": 475,
+      "name": "The Midget\u0027s Tent",
+      "exits": {
+        "North": 474,
+        "West": 476
+      }
+    },
+    {
+      "id": 476,
+      "name": "The Sword Swallower\u0027s Tent",
+      "exits": {
+        "North": 473,
+        "East": 475,
+        "West": 477
+      }
+    },
+    {
+      "id": 477,
+      "name": "The Strongman\u0027s Tent",
+      "exits": {
+        "North": 472,
+        "East": 476
+      }
+    },
+    {
+      "id": 478,
+      "name": "The Path to the Big Top",
+      "exits": {
+        "North": 470,
+        "South": 479
+      }
+    },
+    {
+      "id": 479,
+      "name": "The Entrance to the Big Top.",
+      "exits": {
+        "North": 478,
+        "South": 480
+      }
+    },
+    {
+      "id": 480,
+      "name": "Entryway between the Grand Stands",
+      "exits": {
+        "North": 479,
+        "South": 483,
+        "East": 481,
+        "West": 485
+      }
+    },
+    {
+      "id": 481,
+      "name": "Under the Grand Stands",
+      "exits": {
+        "West": 480,
+        "Up": 482
+      }
+    },
+    {
+      "id": 482,
+      "name": "In the Grand Stands",
+      "exits": {
+        "Down": 481,
+        "West": 483
+      }
+    },
+    {
+      "id": 483,
+      "name": "First Look at the Big Top",
+      "exits": {
+        "East": 482,
+        "North": 480,
+        "South": 486,
+        "West": 484
+      }
+    },
+    {
+      "id": 484,
+      "name": "In the Grand Stands",
+      "exits": {
+        "Down": 485,
+        "East": 483
+      }
+    },
+    {
+      "id": 485,
+      "name": "Under the Grand Stands",
+      "exits": {
+        "Up": 484,
+        "East": 480
+      }
+    },
+    {
+      "id": 486,
+      "name": "The 2nd Ring - You\u0027d better read the description of this room. ",
+      "exits": {
+        "Down": 508,
+        "North": 483,
+        "East": 487,
+        "West": 488,
+        "Up": 491
+      }
+    },
+    {
+      "id": 487,
+      "name": "The 3rd Ring",
+      "exits": {
+        "West": 486
+      }
+    },
+    {
+      "id": 488,
+      "name": "The 1st Ring",
+      "exits": {
+        "East": 486,
+        "Down": 513
+      }
+    },
+    {
+      "id": 489,
+      "name": "On the High Wire",
+      "exits": {
+        "Down": 488,
+        "East": 490,
+        "West": 492
+      }
+    },
+    {
+      "id": 490,
+      "name": "On the High Wire",
+      "exits": {
+        "East": 491,
+        "West": 489
+      }
+    },
+    {
+      "id": 491,
+      "name": "On the Platform Way, Way Up in the Air",
+      "exits": {
+        "Down": 486,
+        "West": 490
+      }
+    },
+    {
+      "id": 492,
+      "name": "The End of the Highwire",
+      "exits": {
+        "East": 489,
+        "Down": 493
+      }
+    },
+    {
+      "id": 493,
+      "name": "Behind the Big Top",
+      "exits": {
+        "Up": 492,
+        "West": 509,
+        "South": 494,
+        "East": 498
+      }
+    },
+    {
+      "id": 494,
+      "name": "The Animal Pens",
+      "exits": {
+        "North": 493,
+        "East": 497,
+        "South": 496,
+        "West": 495
+      }
+    },
+    {
+      "id": 495,
+      "name": "The Elephant Pen",
+      "exits": {
+        "East": 494
+      }
+    },
+    {
+      "id": 496,
+      "name": "The Bear Pen",
+      "exits": {
+        "North": 494
+      }
+    },
+    {
+      "id": 497,
+      "name": "The Horse Corral",
+      "exits": {
+        "West": 494
+      }
+    },
+    {
+      "id": 498,
+      "name": "The Row of Trailers",
+      "exits": {
+        "North": 499,
+        "East": 502,
+        "South": 500,
+        "West": 493
+      }
+    },
+    {
+      "id": 499,
+      "name": "The Strongman\u0027s Trailer",
+      "exits": {
+        "South": 498
+      }
+    },
+    {
+      "id": 500,
+      "name": "The Bearded Lady\u0027s Trailer",
+      "exits": {
+        "North": 498
+      }
+    },
+    {
+      "id": 501,
+      "name": "The Sword Swallower\u0027s Trailer",
+      "exits": {
+        "South": 502
+      }
+    },
+    {
+      "id": 502,
+      "name": "The Row of Trailers",
+      "exits": {
+        "North": 501,
+        "East": 504,
+        "South": 503,
+        "West": 498
+      }
+    },
+    {
+      "id": 503,
+      "name": "The Midget\u0027s Tiny Trailer",
+      "exits": {
+        "North": 502
+      }
+    },
+    {
+      "id": 504,
+      "name": "The Row of Trailers",
+      "exits": {
+        "East": 512,
+        "North": 505,
+        "South": 506,
+        "West": 502
+      }
+    },
+    {
+      "id": 505,
+      "name": "The Illusionist\u0027s Trailer",
+      "exits": {
+        "South": 504
+      }
+    },
+    {
+      "id": 506,
+      "name": "The Circus Owner\u0027s Trailer",
+      "exits": {
+        "North": 504,
+        "South": 507
+      }
+    },
+    {
+      "id": 507,
+      "name": "The Secret Room",
+      "exits": {
+        "North": 506
+      }
+    },
+    {
+      "id": 508,
+      "name": "The Clown\u0027s Room below the 2nd Ring",
+      "exits": {
+        "Up": 486
+      }
+    },
+    {
+      "id": 509,
+      "name": "Behind the Big Top",
+      "exits": {
+        "East": 493,
+        "West": 510
+      }
+    },
+    {
+      "id": 510,
+      "name": "Behind the Big Top",
+      "exits": {
+        "East": 509,
+        "West": 511
+      }
+    },
+    {
+      "id": 511,
+      "name": "Behind the Big Top",
+      "exits": {
+        "East": 510
+      }
+    },
+    {
+      "id": 512,
+      "name": "The Tightrope Walkers Trailer",
+      "exits": {
+        "West": 504
+      }
+    },
+    {
+      "id": 513,
+      "name": "Binky\u0027s Kitchen",
+      "exits": {}
+    },
+    {
+      "id": 1965,
+      "name": "To Dangerous Neighborhood",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 1964,
+        "East": 1894,
+        "South": 465
+      }
+    }
+  ]
+}

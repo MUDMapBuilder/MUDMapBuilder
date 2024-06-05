@@ -1,0 +1,296 @@
+{
+  "name": "Little Haven",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 1478,
+      "name": "The Big, Blue Ocean",
+      "exits": {
+        "North": 2847,
+        "West": 1479
+      }
+    },
+    {
+      "id": 1479,
+      "name": "The Big, Blue Ocean",
+      "exits": {
+        "South": 1480
+      }
+    },
+    {
+      "id": 1480,
+      "name": "The Big, Blue Ocean",
+      "exits": {
+        "South": 1481
+      }
+    },
+    {
+      "id": 1481,
+      "name": "The Icy Waters",
+      "exits": {
+        "South": 1482
+      }
+    },
+    {
+      "id": 1482,
+      "name": "The Hardpack",
+      "exits": {
+        "North": 1481,
+        "South": 1483
+      }
+    },
+    {
+      "id": 1483,
+      "name": "The Snow-filled Land",
+      "exits": {
+        "North": 1482,
+        "East": 1508,
+        "South": 1509,
+        "West": 1508
+      }
+    },
+    {
+      "id": 1484,
+      "name": "The Gnome Outpost",
+      "exits": {
+        "North": 1510,
+        "Down": 1485
+      }
+    },
+    {
+      "id": 1485,
+      "name": "The Tight Passage",
+      "exits": {
+        "Up": 1484,
+        "Down": 1486
+      }
+    },
+    {
+      "id": 1486,
+      "name": "The Even Tighter Passage",
+      "exits": {
+        "Up": 1485,
+        "Down": 1487
+      }
+    },
+    {
+      "id": 1487,
+      "name": "The Center Chamber",
+      "exits": {
+        "East": 1488,
+        "West": 1490
+      }
+    },
+    {
+      "id": 1488,
+      "name": "A Passageway",
+      "exits": {
+        "East": 1489,
+        "West": 1487
+      }
+    },
+    {
+      "id": 1489,
+      "name": "The Cold Passageway",
+      "exits": {
+        "North": 1498,
+        "West": 1488
+      }
+    },
+    {
+      "id": 1490,
+      "name": "The Warm Passageway",
+      "exits": {
+        "East": 1487,
+        "West": 1493
+      }
+    },
+    {
+      "id": 1491,
+      "name": "The Little Temple",
+      "exits": {
+        "North": 1494,
+        "South": 1492
+      }
+    },
+    {
+      "id": 1492,
+      "name": "The Vestibule",
+      "exits": {
+        "North": 1491,
+        "South": 1495
+      }
+    },
+    {
+      "id": 1493,
+      "name": "The Chanting Room",
+      "exits": {
+        "North": 1495,
+        "East": 1490
+      }
+    },
+    {
+      "id": 1494,
+      "name": "The Furnace",
+      "exits": {
+        "North": 1504,
+        "South": 1491
+      }
+    },
+    {
+      "id": 1495,
+      "name": "The Arboretum",
+      "exits": {
+        "North": 1492,
+        "East": 1497,
+        "South": 1493
+      }
+    },
+    {
+      "id": 1496,
+      "name": "The Snow Queen\u0027s Chamber",
+      "exits": {}
+    },
+    {
+      "id": 1497,
+      "name": "The Master Herbal\u0027s Room",
+      "exits": {
+        "West": 1495,
+        "Down": 1492
+      }
+    },
+    {
+      "id": 1498,
+      "name": "The Guard\u0027s Dining Hall",
+      "exits": {
+        "North": 1500,
+        "East": 1499,
+        "South": 1489
+      }
+    },
+    {
+      "id": 1499,
+      "name": "The Vat Room",
+      "exits": {
+        "West": 1498
+      }
+    },
+    {
+      "id": 1500,
+      "name": "The Frost Giant Guard Quarters",
+      "exits": {
+        "North": 1503,
+        "South": 1498
+      }
+    },
+    {
+      "id": 1501,
+      "name": "The White Dragon\u0027s Lair",
+      "exits": {
+        "South": 1503,
+        "North": 1502
+      }
+    },
+    {
+      "id": 1502,
+      "name": "The Blue Dragon\u0027s Lair",
+      "exits": {
+        "Down": 1499
+      }
+    },
+    {
+      "id": 1503,
+      "name": "The connecting tunnel",
+      "exits": {
+        "North": 1501,
+        "South": 1500
+      }
+    },
+    {
+      "id": 1504,
+      "name": "The Great Door",
+      "exits": {
+        "North": 1505,
+        "South": 1494
+      }
+    },
+    {
+      "id": 1505,
+      "name": "The Snow Queen\u0027s Entry Hall",
+      "exits": {
+        "North": 1506,
+        "East": 1506,
+        "South": 1504,
+        "West": 1506
+      }
+    },
+    {
+      "id": 1506,
+      "name": "Another Mirrored Room",
+      "exits": {
+        "North": 1507,
+        "East": 1505,
+        "South": 1505,
+        "West": 1505
+      }
+    },
+    {
+      "id": 1507,
+      "name": "Another Mirrored Room",
+      "exits": {
+        "North": 1496,
+        "East": 1507,
+        "South": 1506,
+        "West": 1507
+      }
+    },
+    {
+      "id": 1508,
+      "name": "The Snow-filled Land",
+      "exits": {
+        "North": 1509,
+        "East": 1483,
+        "South": 1510,
+        "West": 1483
+      }
+    },
+    {
+      "id": 1509,
+      "name": "The Snow-filled Land",
+      "exits": {
+        "North": 1483,
+        "East": 1510,
+        "South": 1508,
+        "West": 1510
+      }
+    },
+    {
+      "id": 1510,
+      "name": "The Snow-filled Land",
+      "exits": {
+        "North": 1508,
+        "East": 1509,
+        "South": 1484,
+        "West": 1509
+      }
+    },
+    {
+      "id": 2847,
+      "name": "To The River",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2840,
+        "West": 2848,
+        "South": 1478
+      }
+    }
+  ]
+}

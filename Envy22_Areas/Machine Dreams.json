@@ -1,0 +1,411 @@
+{
+  "name": "Machine Dreams",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": false,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 844,
+      "name": "The Void",
+      "exits": {
+        "North": 850,
+        "East": 845,
+        "South": 847,
+        "West": 846,
+        "Up": 853,
+        "Down": 862
+      }
+    },
+    {
+      "id": 845,
+      "name": "The Void",
+      "exits": {
+        "North": 851,
+        "East": 846,
+        "South": 848,
+        "West": 844,
+        "Up": 854,
+        "Down": 863
+      }
+    },
+    {
+      "id": 846,
+      "name": "The Void",
+      "exits": {
+        "North": 852,
+        "East": 844,
+        "South": 849,
+        "West": 845,
+        "Up": 855,
+        "Down": 864
+      }
+    },
+    {
+      "id": 847,
+      "name": "The Void",
+      "exits": {
+        "North": 844,
+        "East": 848,
+        "South": 850,
+        "West": 849,
+        "Up": 856,
+        "Down": 865
+      }
+    },
+    {
+      "id": 848,
+      "name": "The Void",
+      "exits": {
+        "North": 845,
+        "East": 849,
+        "South": 851,
+        "West": 847,
+        "Up": 857,
+        "Down": 2292
+      }
+    },
+    {
+      "id": 849,
+      "name": "The Void",
+      "exits": {
+        "North": 846,
+        "East": 847,
+        "South": 852,
+        "West": 848,
+        "Up": 858,
+        "Down": 867
+      }
+    },
+    {
+      "id": 850,
+      "name": "The Void",
+      "exits": {
+        "North": 847,
+        "East": 851,
+        "South": 844,
+        "West": 852,
+        "Up": 859,
+        "Down": 868
+      }
+    },
+    {
+      "id": 851,
+      "name": "The Void",
+      "exits": {
+        "North": 848,
+        "East": 852,
+        "South": 845,
+        "West": 850,
+        "Up": 860,
+        "Down": 869
+      }
+    },
+    {
+      "id": 852,
+      "name": "The Void",
+      "exits": {
+        "North": 849,
+        "East": 850,
+        "South": 846,
+        "West": 851,
+        "Up": 861,
+        "Down": 870
+      }
+    },
+    {
+      "id": 853,
+      "name": "The Void",
+      "exits": {
+        "North": 859,
+        "East": 854,
+        "South": 856,
+        "West": 855,
+        "Up": 862,
+        "Down": 844
+      }
+    },
+    {
+      "id": 854,
+      "name": "The Void",
+      "exits": {
+        "North": 871,
+        "East": 855,
+        "South": 857,
+        "West": 853,
+        "Up": 863,
+        "Down": 845
+      }
+    },
+    {
+      "id": 855,
+      "name": "The Void",
+      "exits": {
+        "North": 861,
+        "East": 853,
+        "South": 858,
+        "West": 854,
+        "Up": 864,
+        "Down": 846
+      }
+    },
+    {
+      "id": 856,
+      "name": "The Void",
+      "exits": {
+        "North": 853,
+        "East": 857,
+        "South": 859,
+        "West": 875,
+        "Up": 865,
+        "Down": 847
+      }
+    },
+    {
+      "id": 857,
+      "name": "The Void",
+      "exits": {
+        "North": 854,
+        "East": 858,
+        "South": 860,
+        "West": 856,
+        "Up": 866,
+        "Down": 848
+      }
+    },
+    {
+      "id": 858,
+      "name": "The Void",
+      "exits": {
+        "North": 855,
+        "East": 873,
+        "South": 861,
+        "West": 857,
+        "Up": 867,
+        "Down": 849
+      }
+    },
+    {
+      "id": 859,
+      "name": "The Void",
+      "exits": {
+        "North": 856,
+        "East": 860,
+        "South": 853,
+        "West": 861,
+        "Up": 868,
+        "Down": 850
+      }
+    },
+    {
+      "id": 860,
+      "name": "The Void",
+      "exits": {
+        "North": 857,
+        "East": 861,
+        "South": 874,
+        "West": 859,
+        "Up": 869,
+        "Down": 851
+      }
+    },
+    {
+      "id": 861,
+      "name": "The Void",
+      "exits": {
+        "North": 858,
+        "East": 859,
+        "South": 855,
+        "West": 860,
+        "Up": 870,
+        "Down": 852
+      }
+    },
+    {
+      "id": 862,
+      "name": "The Void",
+      "exits": {
+        "North": 868,
+        "East": 863,
+        "South": 865,
+        "West": 864,
+        "Up": 844,
+        "Down": 853
+      }
+    },
+    {
+      "id": 863,
+      "name": "The Void",
+      "exits": {
+        "North": 869,
+        "East": 864,
+        "South": 866,
+        "West": 862,
+        "Up": 845,
+        "Down": 854
+      }
+    },
+    {
+      "id": 864,
+      "name": "The Void",
+      "exits": {
+        "North": 870,
+        "East": 862,
+        "South": 867,
+        "West": 863,
+        "Up": 846,
+        "Down": 855
+      }
+    },
+    {
+      "id": 865,
+      "name": "The Void",
+      "exits": {
+        "North": 862,
+        "East": 866,
+        "South": 868,
+        "West": 867,
+        "Up": 847,
+        "Down": 856
+      }
+    },
+    {
+      "id": 866,
+      "name": "The Void",
+      "exits": {
+        "North": 863,
+        "East": 867,
+        "South": 869,
+        "West": 865,
+        "Up": 877,
+        "Down": 857
+      }
+    },
+    {
+      "id": 867,
+      "name": "The Void",
+      "exits": {
+        "North": 864,
+        "East": 865,
+        "South": 870,
+        "West": 866,
+        "Up": 849,
+        "Down": 858
+      }
+    },
+    {
+      "id": 868,
+      "name": "The Void",
+      "exits": {
+        "North": 865,
+        "East": 869,
+        "South": 862,
+        "West": 870,
+        "Up": 850,
+        "Down": 859
+      }
+    },
+    {
+      "id": 869,
+      "name": "The Void",
+      "exits": {
+        "North": 866,
+        "East": 870,
+        "South": 863,
+        "West": 868,
+        "Up": 851,
+        "Down": 860
+      }
+    },
+    {
+      "id": 870,
+      "name": "The Void",
+      "exits": {
+        "North": 867,
+        "East": 868,
+        "South": 864,
+        "West": 869,
+        "Up": 852,
+        "Down": 861
+      }
+    },
+    {
+      "id": 871,
+      "name": "Road to Newfane",
+      "exits": {
+        "North": 872,
+        "South": 854
+      }
+    },
+    {
+      "id": 872,
+      "name": "Newfane Village Square",
+      "exits": {
+        "South": 871
+      }
+    },
+    {
+      "id": 873,
+      "name": "A Large Dance Hall",
+      "exits": {
+        "West": 858
+      }
+    },
+    {
+      "id": 874,
+      "name": "A Small Hall",
+      "exits": {
+        "North": 860
+      }
+    },
+    {
+      "id": 875,
+      "name": "Road by a Pond",
+      "exits": {
+        "East": 856,
+        "West": 876
+      }
+    },
+    {
+      "id": 876,
+      "name": "An Old Wooden Church",
+      "exits": {
+        "East": 875
+      }
+    },
+    {
+      "id": 877,
+      "name": "Mountain Road",
+      "exits": {
+        "Up": 878,
+        "Down": 866
+      }
+    },
+    {
+      "id": 878,
+      "name": "Yule Tree Farm",
+      "exits": {
+        "Down": 877
+      }
+    },
+    {
+      "id": 879,
+      "name": "The Void",
+      "exits": {}
+    },
+    {
+      "id": 2292,
+      "name": "To Midgaard",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2288,
+        "Up": 848
+      }
+    }
+  ]
+}

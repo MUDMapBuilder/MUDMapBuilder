@@ -1,0 +1,398 @@
+{
+  "name": "Dragon Cult",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 593,
+      "name": "The Reception Area",
+      "exits": {
+        "North": 594,
+        "South": 2270
+      }
+    },
+    {
+      "id": 594,
+      "name": "A dimly lit corridor",
+      "exits": {
+        "North": 595,
+        "South": 593
+      }
+    },
+    {
+      "id": 595,
+      "name": "Dragon Hall",
+      "exits": {
+        "North": 596,
+        "South": 594
+      }
+    },
+    {
+      "id": 596,
+      "name": "Tourist Office",
+      "exits": {
+        "East": 623,
+        "South": 595,
+        "West": 614,
+        "Down": 597
+      }
+    },
+    {
+      "id": 597,
+      "name": "A five way intersection",
+      "exits": {
+        "North": 599,
+        "East": 600,
+        "South": 598,
+        "West": 602,
+        "Up": 596
+      }
+    },
+    {
+      "id": 598,
+      "name": "A Shrine",
+      "exits": {
+        "North": 597
+      }
+    },
+    {
+      "id": 599,
+      "name": "The Tapestry Room",
+      "exits": {
+        "East": 629,
+        "South": 597
+      }
+    },
+    {
+      "id": 600,
+      "name": "A VERY ordinary hallway",
+      "exits": {
+        "North": 635,
+        "East": 601,
+        "West": 597
+      }
+    },
+    {
+      "id": 601,
+      "name": "The Bathroom",
+      "exits": {
+        "West": 600
+      }
+    },
+    {
+      "id": 602,
+      "name": "A hallway",
+      "exits": {
+        "East": 597,
+        "West": 603
+      }
+    },
+    {
+      "id": 603,
+      "name": "Bend in the hallway",
+      "exits": {
+        "North": 604,
+        "East": 602
+      }
+    },
+    {
+      "id": 604,
+      "name": "A place of worship",
+      "exits": {
+        "North": 637,
+        "South": 603,
+        "Down": 605
+      }
+    },
+    {
+      "id": 605,
+      "name": "Dark Room",
+      "exits": {
+        "South": 606,
+        "Up": 604
+      }
+    },
+    {
+      "id": 606,
+      "name": "The Inner Circle",
+      "exits": {
+        "North": 605,
+        "East": 607,
+        "West": 608
+      }
+    },
+    {
+      "id": 607,
+      "name": "Priests Quarters",
+      "exits": {
+        "West": 606,
+        "Down": 630
+      }
+    },
+    {
+      "id": 608,
+      "name": "A foreboding corridor",
+      "exits": {
+        "North": 609,
+        "East": 606,
+        "West": 610
+      }
+    },
+    {
+      "id": 609,
+      "name": "The Cell",
+      "exits": {
+        "South": 608
+      }
+    },
+    {
+      "id": 610,
+      "name": "An even MORE foreboding corridor",
+      "exits": {
+        "East": 608,
+        "West": 611
+      }
+    },
+    {
+      "id": 611,
+      "name": "The Chamber of the High Priestess",
+      "exits": {
+        "North": 612,
+        "East": 610
+      }
+    },
+    {
+      "id": 612,
+      "name": "A foul smelling hallway",
+      "exits": {
+        "North": 613,
+        "South": 611
+      }
+    },
+    {
+      "id": 613,
+      "name": "Chamber of the Wyrmling",
+      "exits": {
+        "South": 612
+      }
+    },
+    {
+      "id": 614,
+      "name": "The Waiting Room",
+      "exits": {
+        "North": 615,
+        "East": 596,
+        "West": 616
+      }
+    },
+    {
+      "id": 615,
+      "name": "Entranceway to the Main Office",
+      "exits": {
+        "North": 617,
+        "East": 621,
+        "South": 614,
+        "West": 622
+      }
+    },
+    {
+      "id": 616,
+      "name": "A strange room",
+      "exits": {
+        "Down": 609
+      }
+    },
+    {
+      "id": 617,
+      "name": "A hallway in the office",
+      "exits": {
+        "North": 636,
+        "South": 615,
+        "West": 618
+      }
+    },
+    {
+      "id": 618,
+      "name": "Gale\u0027s Office",
+      "exits": {
+        "East": 617
+      }
+    },
+    {
+      "id": 619,
+      "name": "Fred\u0027s Office",
+      "exits": {
+        "South": 621
+      }
+    },
+    {
+      "id": 620,
+      "name": "The break room",
+      "exits": {
+        "South": 625
+      }
+    },
+    {
+      "id": 621,
+      "name": "The middle of the office",
+      "exits": {
+        "North": 619,
+        "East": 625,
+        "West": 615
+      }
+    },
+    {
+      "id": 622,
+      "name": "A sales booth",
+      "exits": {
+        "East": 615
+      }
+    },
+    {
+      "id": 623,
+      "name": "A back hallway",
+      "exits": {
+        "North": 624,
+        "West": 596
+      }
+    },
+    {
+      "id": 624,
+      "name": "End of the hallway",
+      "exits": {
+        "North": 628,
+        "South": 623,
+        "West": 625
+      }
+    },
+    {
+      "id": 625,
+      "name": "The copy room",
+      "exits": {
+        "North": 620,
+        "East": 624,
+        "West": 621
+      }
+    },
+    {
+      "id": 626,
+      "name": "The dungeon",
+      "exits": {
+        "West": 627
+      }
+    },
+    {
+      "id": 627,
+      "name": "The torture chamber",
+      "exits": {
+        "North": 629,
+        "East": 626
+      }
+    },
+    {
+      "id": 628,
+      "name": "sliding",
+      "exits": {
+        "Down": 626
+      }
+    },
+    {
+      "id": 629,
+      "name": "A secret passageway",
+      "exits": {
+        "South": 627,
+        "West": 599
+      }
+    },
+    {
+      "id": 630,
+      "name": "A Downward Tunnel",
+      "exits": {
+        "Up": 607,
+        "Down": 631
+      }
+    },
+    {
+      "id": 631,
+      "name": "Deeper into the pit",
+      "exits": {
+        "Up": 630,
+        "Down": 632
+      }
+    },
+    {
+      "id": 632,
+      "name": "Before the Jaws of Dark Death",
+      "exits": {
+        "East": 633,
+        "Up": 631,
+        "Down": 634
+      }
+    },
+    {
+      "id": 633,
+      "name": "A hidden alcove",
+      "exits": {
+        "West": 632
+      }
+    },
+    {
+      "id": 634,
+      "name": "The bottom of the pit",
+      "exits": {
+        "Up": 632
+      }
+    },
+    {
+      "id": 635,
+      "name": "Candy Store",
+      "exits": {
+        "South": 600
+      }
+    },
+    {
+      "id": 636,
+      "name": "Top of the staircase",
+      "exits": {
+        "South": 617,
+        "Down": 637
+      }
+    },
+    {
+      "id": 637,
+      "name": "Bottom of the staircase",
+      "exits": {
+        "South": 604,
+        "Up": 636
+      }
+    },
+    {
+      "id": 638,
+      "name": "Morpheus\u0027s Study",
+      "exits": {}
+    },
+    {
+      "id": 639,
+      "name": "Sandman\u0027s Study",
+      "exits": {}
+    },
+    {
+      "id": 2270,
+      "name": "To Midgaard",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 593,
+        "East": 2271,
+        "South": 2290,
+        "West": 2286
+      }
+    }
+  ]
+}

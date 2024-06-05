@@ -1,0 +1,215 @@
+{
+  "name": "Yggdrasil",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 3779,
+      "name": "The Entrance to Yggdrasil",
+      "exits": {
+        "North": 543,
+        "Up": 3780,
+        "Down": 3786
+      }
+    },
+    {
+      "id": 3780,
+      "name": "The Trunk of Yggdrasil",
+      "exits": {
+        "Up": 3781,
+        "Down": 3779
+      }
+    },
+    {
+      "id": 3781,
+      "name": "The Lower Trunk of Yggrasil",
+      "exits": {
+        "North": 3782,
+        "East": 3785,
+        "South": 3790,
+        "West": 3784,
+        "Up": 3796,
+        "Down": 3780
+      }
+    },
+    {
+      "id": 3782,
+      "name": "A Lower Branch of Yggdrasil",
+      "exits": {
+        "South": 3781
+      }
+    },
+    {
+      "id": 3783,
+      "name": "The Crest of Yggdrasil",
+      "exits": {
+        "Down": 3797
+      }
+    },
+    {
+      "id": 3784,
+      "name": "A Lower Branch of Yggdrasil",
+      "exits": {
+        "East": 3781
+      }
+    },
+    {
+      "id": 3785,
+      "name": "A Lower Branch of Yggdrasil",
+      "exits": {
+        "West": 3781
+      }
+    },
+    {
+      "id": 3786,
+      "name": "The Roots of Yggdrasil",
+      "exits": {
+        "North": 3802,
+        "East": 3788,
+        "South": 3787,
+        "West": 3789,
+        "Up": 3779,
+        "Down": 3791
+      }
+    },
+    {
+      "id": 3787,
+      "name": "The Roots of Yggdrasil",
+      "exits": {
+        "North": 3786
+      }
+    },
+    {
+      "id": 3788,
+      "name": "The Roots of Yggdrasil",
+      "exits": {
+        "West": 3786
+      }
+    },
+    {
+      "id": 3789,
+      "name": "The Roots of Yggdrasil",
+      "exits": {
+        "East": 3786
+      }
+    },
+    {
+      "id": 3790,
+      "name": "A Lower Branch of Yggdrasil",
+      "exits": {
+        "North": 3781
+      }
+    },
+    {
+      "id": 3791,
+      "name": "The Deepest Roots of Yggdrasil",
+      "exits": {
+        "Up": 3786
+      }
+    },
+    {
+      "id": 3792,
+      "name": "A Middle Branch of Yggdrasil",
+      "exits": {
+        "East": 3796
+      }
+    },
+    {
+      "id": 3793,
+      "name": "A Middle Branch of Yggdrasil",
+      "exits": {
+        "South": 3796
+      }
+    },
+    {
+      "id": 3794,
+      "name": "A Middle Branch of Yggdrasil",
+      "exits": {
+        "West": 3796
+      }
+    },
+    {
+      "id": 3795,
+      "name": "A Middle Branch of Yggdrasil",
+      "exits": {
+        "North": 3796
+      }
+    },
+    {
+      "id": 3796,
+      "name": "The Middle Trunk of Yggrasil",
+      "exits": {
+        "North": 3793,
+        "East": 3794,
+        "South": 3795,
+        "West": 3792,
+        "Up": 3797,
+        "Down": 3781
+      }
+    },
+    {
+      "id": 3797,
+      "name": "The Upper Trunk of Yggrasil",
+      "exits": {
+        "North": 3800,
+        "East": 3801,
+        "South": 3798,
+        "West": 3799,
+        "Up": 3783,
+        "Down": 3796
+      }
+    },
+    {
+      "id": 3798,
+      "name": "An Upper Branch of Yggdrasil",
+      "exits": {
+        "North": 3797
+      }
+    },
+    {
+      "id": 3799,
+      "name": "An Upper Branch of Yggdrasil",
+      "exits": {
+        "East": 3797
+      }
+    },
+    {
+      "id": 3800,
+      "name": "An Upper Branch of Yggdrasil",
+      "exits": {
+        "South": 3797
+      }
+    },
+    {
+      "id": 3801,
+      "name": "An Upper Branch of Yggdrasil",
+      "exits": {
+        "West": 3797
+      }
+    },
+    {
+      "id": 3802,
+      "name": "The Roots of Yggdrasil",
+      "exits": {
+        "South": 3786
+      }
+    },
+    {
+      "id": 543,
+      "name": "To Crystalmir Lake",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 542,
+        "South": 3779,
+        "West": 536
+      }
+    }
+  ]
+}

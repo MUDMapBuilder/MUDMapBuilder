@@ -1,0 +1,166 @@
+{
+  "name": "Redferne\u0027s Residence",
+  "buildOptions": {
+    "maxSteps": 1000,
+    "fixObstacles": true,
+    "fixNonStraight": true,
+    "fixIntersected": true,
+    "compactMap": true,
+    "addDebugInfo": false,
+    "colorizeConnectionIssues": true
+  },
+  "rooms": [
+    {
+      "id": 3205,
+      "name": "Outside Redferne\u0027s residence",
+      "exits": {
+        "North": 3206,
+        "South": 981,
+        "Down": 3221
+      }
+    },
+    {
+      "id": 3206,
+      "name": "The Southern end of the hall",
+      "exits": {
+        "North": 3209,
+        "East": 3215,
+        "South": 3205,
+        "West": 3207,
+        "Up": 3214
+      }
+    },
+    {
+      "id": 3207,
+      "name": "Redferne\u0027s Library",
+      "exits": {
+        "East": 3206
+      }
+    },
+    {
+      "id": 3208,
+      "name": "The Artifact room of Naris",
+      "exits": {}
+    },
+    {
+      "id": 3209,
+      "name": "The Northern end of the hall",
+      "exits": {
+        "North": 3211,
+        "East": 3218,
+        "South": 3206,
+        "West": 3210
+      }
+    },
+    {
+      "id": 3210,
+      "name": "The Sitting room of Naris",
+      "exits": {
+        "East": 3209
+      }
+    },
+    {
+      "id": 3211,
+      "name": "The Kitchen of Naris",
+      "exits": {
+        "North": 3212,
+        "East": 3213,
+        "South": 3209
+      }
+    },
+    {
+      "id": 3212,
+      "name": "The Larder",
+      "exits": {
+        "South": 3211
+      }
+    },
+    {
+      "id": 3213,
+      "name": "The Fridge",
+      "exits": {
+        "West": 3211
+      }
+    },
+    {
+      "id": 3214,
+      "name": "On the stairs",
+      "exits": {
+        "Up": 3216,
+        "Down": 3206
+      }
+    },
+    {
+      "id": 3215,
+      "name": "The Treasure room",
+      "exits": {
+        "West": 3206
+      }
+    },
+    {
+      "id": 3216,
+      "name": "Redferne\u0027s Bedroom",
+      "exits": {
+        "South": 3217,
+        "Down": 3214
+      }
+    },
+    {
+      "id": 3217,
+      "name": "The Balcony of Redferne\u0027s Residence",
+      "exits": {
+        "North": 3216
+      }
+    },
+    {
+      "id": 3218,
+      "name": "The Monster Pen",
+      "exits": {
+        "West": 3209
+      }
+    },
+    {
+      "id": 3219,
+      "name": "On the Huge Chain",
+      "exits": {
+        "Up": 3220,
+        "Down": 2324
+      }
+    },
+    {
+      "id": 3220,
+      "name": "On the Great Chain of Naris",
+      "exits": {
+        "Up": 3221
+      }
+    },
+    {
+      "id": 3221,
+      "name": "The Mighty Chain of Naris",
+      "exits": {
+        "Up": 3205
+      }
+    },
+    {
+      "id": 981,
+      "name": "To Dylan\u0027s Area",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 3205,
+        "Up": 982
+      }
+    },
+    {
+      "id": 2324,
+      "name": "To Midgaard",
+      "otherAreaExit": true,
+      "exits": {
+        "North": 2337,
+        "East": 2340,
+        "South": 2338,
+        "West": 2339,
+        "Up": 3219
+      }
+    }
+  ]
+}

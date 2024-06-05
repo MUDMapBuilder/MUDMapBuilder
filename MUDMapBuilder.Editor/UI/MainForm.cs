@@ -102,7 +102,7 @@ namespace MUDMapBuilder.Editor.UI
 
 			_mapViewer.SelectedIndexChanged += (s, e) => UpdateEnabled();
 
-			_checkRemoveSolitaryRooms.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
+			_checkKeepSolitaryRooms.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 			_checkFixObstacles.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 			_checkFixNonStraight.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 			_checkFixIntersected.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
@@ -253,7 +253,7 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void SetBuildOptionsFromUI()
 		{
-			Project.BuildOptions.RemoveSolitaryRooms = _checkRemoveSolitaryRooms.IsChecked;
+			Project.BuildOptions.KeepSolitaryRooms = _checkKeepSolitaryRooms.IsChecked;
 			Project.BuildOptions.FixObstacles = _checkFixObstacles.IsChecked;
 			Project.BuildOptions.FixNonStraight = _checkFixNonStraight.IsChecked;
 			Project.BuildOptions.FixIntersected = _checkFixIntersected.IsChecked;
@@ -311,12 +311,7 @@ namespace MUDMapBuilder.Editor.UI
 					_suspendUi = true;
 
 					var options = Project.BuildOptions;
-					options.RemoveSolitaryRooms = false;
-					options.FixObstacles = false;
-					options.FixNonStraight = false;
-					options.FixIntersected = false;
-					options.CompactMap = false;
-					_checkRemoveSolitaryRooms.IsChecked = options.RemoveSolitaryRooms;
+					_checkKeepSolitaryRooms.IsChecked = options.KeepSolitaryRooms;
 					_checkFixObstacles.IsChecked = options.FixObstacles;
 					_checkFixNonStraight.IsChecked = options.FixNonStraight;
 					_checkFixIntersected.IsChecked = options.FixIntersected;

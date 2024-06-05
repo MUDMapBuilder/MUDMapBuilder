@@ -4,7 +4,7 @@
     "maxSteps": 1000,
     "fixObstacles": true,
     "fixNonStraight": true,
-    "fixIntersected": true,
+    "fixIntersected": false,
     "compactMap": true,
     "addDebugInfo": false,
     "colorizeConnectionIssues": true

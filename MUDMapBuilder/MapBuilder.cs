@@ -604,7 +604,7 @@ namespace MUDMapBuilder
 			fixes = false;
 			if (!Options.FixIntersected)
 			{
-				return false;
+				return true;
 			}
 
 			var vc = Area.BrokenConnections;
@@ -683,7 +683,6 @@ namespace MUDMapBuilder
 		private bool FixRun(MMBRoom newRoom)
 		{
 			// Connections fix run
-
 			while (true)
 			{
 				bool obstaclesFixes;

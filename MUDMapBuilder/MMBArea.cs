@@ -297,21 +297,42 @@ namespace MUDMapBuilder
 							}
 
 							var obstacleRoom = GetRoomById(o);
-
-							// Determine connections to the source and target rooms
-							var conn = (from c in obstacleRoom.Connections where keepRooms.Contains(c.Value.RoomId) select c.Value).ToArray();
-							foreach (var c in conn)
+							foreach (var kr in keepRooms)
 							{
-								if ((exitDir.IsHorizontal() && c.Direction.IsHorizontal()) ||
-									(exitDir.IsVertical() && c.Direction.IsVertical()))
+								var keepRoom = GetRoomById(kr);
+
+								var conn = keepRoom.FindConnection(o);
+								if (conn == null)
+								{
+									continue;
+								}
+
+								if ((exitDir.IsHorizontal() && conn.Direction.IsHorizontal()) ||
+									(exitDir.IsVertical() && conn.Direction.IsVertical()))
 								{
 									// Do not delete obstacle rooms that has same direction connections
 									roomsAdded = true;
 									keepRooms.Add(o);
-									break;
+									goto finish;
+								}
+
+								conn = (from c in obstacleRoom.Connections where keepRooms.Contains(c.Value.RoomId) select c.Value).FirstOrDefault();
+								if (conn == null)
+								{
+									continue;
+								}
+
+								if ((exitDir.IsHorizontal() && conn.Direction.IsHorizontal()) ||
+									(exitDir.IsVertical() && conn.Direction.IsVertical()))
+								{
+									// Do not delete obstacle rooms that has same direction connections
+									roomsAdded = true;
+									keepRooms.Add(o);
+									goto finish;
 								}
 							}
 						}
+					finish:;
 
 						if (!roomsAdded)
 						{
@@ -492,7 +513,6 @@ namespace MUDMapBuilder
 			_roomsRectangle = CalculateRectangle();
 
 			_roomsByPositions = new MMBRoom[_roomsRectangle.Width, _roomsRectangle.Height];
-			_connectionsGrid = new MMBConnectionsList[_roomsRectangle.Width, _roomsRectangle.Height];
 
 			// Add rooms
 			foreach (var ri in _roomsByIds)
@@ -508,7 +528,93 @@ namespace MUDMapBuilder
 				_roomsByPositions[coord.X, coord.Y] = room;
 			}
 
+			_connectionsGrid = new MMBConnectionsList[_roomsRectangle.Width, _roomsRectangle.Height];
 			_brokenConnections = CalculateBrokenConnections();
+		}
+
+		public void DeleteEmptyColsRows()
+		{
+			UpdatePositions();
+
+			// Remove empty columns
+			for (var x = 0; x < _roomsRectangle.Width; ++x)
+			{
+				var isEmpty = true;
+				for (var y = 0; y < _roomsRectangle.Height; ++y)
+				{
+					if (_roomsByPositions[x, y] != null)
+					{
+						isEmpty = false;
+						break;
+					}
+				}
+
+				if (isEmpty)
+				{
+					// Do the shift
+					for (var x2 = x + 1; x2 < _roomsRectangle.Width; ++x2)
+					{
+						for (var y = 0; y < _roomsRectangle.Height; ++y)
+						{
+							var room = _roomsByPositions[x2, y];
+							if (room == null)
+							{
+								continue;
+							}
+
+							_roomsByPositions[x2, y] = null;
+							_roomsByPositions[x2 - 1, y] = room;
+							var pos = room.Position.Value;
+
+							// Set field directly to prevent the rebuilding of the grid
+							room._position = new Point(pos.X - 1, pos.Y);
+						}
+					}
+
+					--_roomsRectangle.Width;
+				}
+			}
+
+			// Remove empty rows
+			for (var y = 0; y < _roomsRectangle.Height; ++y)
+			{
+				var isEmpty = true;
+				for (var x = 0; x < _roomsRectangle.Width; ++x)
+				{
+					if (_roomsByPositions[x, y] != null)
+					{
+						isEmpty = false;
+						break;
+					}
+				}
+
+				if (isEmpty)
+				{
+					// Do the shift
+					for (var y2 = y + 1; y2 < _roomsRectangle.Height; ++y2)
+					{
+						for (var x = 0; x < _roomsRectangle.Width; ++x)
+						{
+							var room = _roomsByPositions[x, y2];
+							if (room == null)
+							{
+								continue;
+							}
+
+							_roomsByPositions[x, y2] = null;
+							_roomsByPositions[x, y2 - 1] = room;
+							var pos = room.Position.Value;
+
+							// Set field directly to prevent the rebuilding of the grid
+							room._position = new Point(pos.X, pos.Y - 1);
+						}
+					}
+
+					--_roomsRectangle.Height;
+				}
+			}
+
+			InvalidatePositions();
 		}
 
 		public HashSet<int>[] GroupPositionedRooms()
@@ -985,6 +1091,12 @@ namespace MUDMapBuilder
 			{
 				return false;
 			}
+
+			a = a.Clone();
+			a.DeleteEmptyColsRows();
+
+			b = b.Clone();
+			b.DeleteEmptyColsRows();
 
 			for (var x = 0; x < a.Width; ++x)
 			{

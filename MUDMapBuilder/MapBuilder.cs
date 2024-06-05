@@ -111,7 +111,10 @@ namespace MUDMapBuilder
 			{
 				if (measure.DeletedRooms.Length > 0)
 				{
-					return RemoveRooms(measure.DeletedRooms);
+					if (!RemoveRooms(measure.DeletedRooms, false))
+					{
+						return false;
+					}
 				}
 
 				// Mark for movement
@@ -218,10 +221,18 @@ namespace MUDMapBuilder
 			return roomsToRemove.ToArray();
 		}
 
-		private bool RemoveRooms(MMBRoom[] toRemove)
+		private bool RemoveRooms(MMBRoom[] toRemove, bool addAjancent = true)
 		{
-			var idsToRemove = BuildRemoveList((from r in toRemove select r.Id).ToArray());
-			var roomsToRemove = (from id in idsToRemove select Area.GetRoomById(id)).ToArray();
+			MMBRoom[] roomsToRemove;
+
+			if (addAjancent)
+			{
+				var idsToRemove = BuildRemoveList((from r in toRemove select r.Id).ToArray());
+				roomsToRemove = (from id in idsToRemove select Area.GetRoomById(id)).ToArray();
+			} else
+			{
+				roomsToRemove = toRemove;
+			}
 
 			// Mark
 			foreach (var room in roomsToRemove)
@@ -249,8 +260,9 @@ namespace MUDMapBuilder
 
 		private bool ExistsInHistory(MMBArea area)
 		{
-			foreach (var h in _history)
+			for(var i = 0; i < _history.Count; ++i)
 			{
+				var h = _history[i];
 				if (MMBArea.AreEqual(area, h))
 				{
 					return true;
@@ -454,11 +466,11 @@ namespace MUDMapBuilder
 							// Such push would break some room connections
 							// Or introduce new long connections
 						}
-						else if (rooms.Width * rooms.Height >= Area.Width * Area.Height)
+						else if (rooms.Width * rooms.Height > Area.Width * Area.Height)
 						{
 							// Such push would make the grid bigger
 						}
-						else if (MMBArea.AreEqual(rooms, Area) || ExistsInHistory(rooms))
+						else if (MMBArea.AreEqual(rooms, Area))
 						{
 							// Such push wouldn't change anything
 						}
@@ -886,13 +898,22 @@ namespace MUDMapBuilder
 					var sourceRoom = Area.GetRoomById(roomId);
 					foreach (var pair in sourceRoom.Connections)
 					{
-						var connectedRoom = Area.GetRoomById(pair.Value.RoomId);
-						if (connectedRoom == null || connectedRoom.Position == null || _toProcess.Contains(connectedRoom))
+						foreach(var room in Area.Rooms)
 						{
-							continue;
-						}
+							if (room.Id == roomId || room.Position == null)
+							{
+								continue;
+							}
 
-						_toProcess.Add(connectedRoom);
+							var conn = room.FindConnection(roomId);
+							if (conn == null || _toProcess.Contains(room))
+							{
+								continue;
+							}
+
+							_toProcess.Add(room);
+							break;
+						}
 					}
 				}
 
@@ -953,6 +974,7 @@ namespace MUDMapBuilder
 					}
 
 					continueCompactRun = !MMBArea.AreEqual(roomsClone, Area);
+					break;
 				}
 			}
 

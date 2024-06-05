@@ -34,12 +34,14 @@ namespace MUDMapBuilder
 			Direction = direction;
 			RoomId = roomId;
 		}
+
+		public override string ToString() => $"{RoomId}, {ConnectionType}";
 	}
 
 	public class MMBRoom
 	{
 		private Dictionary<MMBDirection, Point> _drawnConnections = new Dictionary<MMBDirection, Point>();
-		private Point? _position;
+		internal Point? _position;
 		private SKColor? _markColor;
 		private Point? _forceMark;
 

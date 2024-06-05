@@ -454,11 +454,11 @@ namespace MUDMapBuilder
 							// Such push would break some room connections
 							// Or introduce new long connections
 						}
-						else if (rooms.Width * rooms.Height > Area.Width * Area.Height)
+						else if (rooms.Width * rooms.Height >= Area.Width * Area.Height)
 						{
 							// Such push would make the grid bigger
 						}
-						else if (MMBArea.AreEqual(rooms, Area)/* || ExistsInHistory(rooms)*/)
+						else if (MMBArea.AreEqual(rooms, Area) || ExistsInHistory(rooms))
 						{
 							// Such push wouldn't change anything
 						}

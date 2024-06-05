@@ -225,7 +225,7 @@ namespace MUDMapBuilder.Editor.UI
 			UpdateNumbers();
 		}
 
-		private void InternalRebuild(string newFilePath = null)
+		private void InternalRebuild(string newFilePath = null, bool clearDirty = false)
 		{
 			Utility.QueueUIAction(() =>
 			{
@@ -245,6 +245,10 @@ namespace MUDMapBuilder.Editor.UI
 				if (newFilePath != null)
 				{
 					FilePath = newFilePath;
+					if (clearDirty)
+					{
+						IsDirty = false;
+					}
 				}
 
 				UpdateEnabled();
@@ -326,7 +330,7 @@ namespace MUDMapBuilder.Editor.UI
 
 				Task.Run(() =>
 				{
-					InternalRebuild(path);
+					InternalRebuild(path, true);
 				});
 			}
 			catch (Exception ex)

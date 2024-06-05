@@ -25,6 +25,7 @@ namespace MUDMapBuilder
 			var optionsObject = new JsonObject
 			{
 				["maxSteps"] = BuildOptions.MaxSteps,
+				["keepSolitaryRooms"] = BuildOptions.KeepSolitaryRooms,
 				["fixObstacles"] = BuildOptions.FixObstacles,
 				["fixNonStraight"] = BuildOptions.FixNonStraight,
 				["fixIntersected"] = BuildOptions.FixIntersected,
@@ -87,6 +88,11 @@ namespace MUDMapBuilder
 				if (optionsObject["maxSteps"] != null)
 				{
 					options.MaxSteps = (int)optionsObject["maxSteps"];
+				}
+
+				if (optionsObject["keepSolitaryRooms"] != null)
+				{
+					options.KeepSolitaryRooms = (bool)optionsObject["keepSolitaryRooms"];
 				}
 
 				if (optionsObject["fixObstacles"] != null)

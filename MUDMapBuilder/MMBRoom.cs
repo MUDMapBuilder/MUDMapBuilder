@@ -148,4 +148,5 @@ namespace MUDMapBuilder
 
 		private void FireInvalid() => Invalid?.Invoke(this, EventArgs.Empty);
 	}
+
 }

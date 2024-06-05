@@ -16,7 +16,7 @@
         <Button Id="_buttonStart">
           <Label Text="&lt;&lt;" />
         </Button>
-        <SpinButton Maximum="1000" Minimum="1" Value="1" Integer="True" Width="50" Id="_spinButtonStep" />
+        <SpinButton Maximum="10000" Minimum="1" Value="1" Integer="True" Width="80" Id="_spinButtonStep" />
         <Button Id="_buttonToCompact">
           <Label Text="To Compact" />
         </Button>

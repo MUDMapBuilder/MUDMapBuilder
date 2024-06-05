@@ -28,6 +28,9 @@ namespace MUDMapBuilder
 			throw new Exception($"Unknown direction {direction}");
 		}
 
+		public static bool IsHorizontal(this MMBDirection direction) => direction == MMBDirection.East || direction == MMBDirection.West;
+		public static bool IsVertical(this MMBDirection direction) => direction == MMBDirection.North || direction == MMBDirection.South;
+
 		public static MMBDirection GetOppositeDirection(this MMBDirection direction)
 		{
 			switch (direction)

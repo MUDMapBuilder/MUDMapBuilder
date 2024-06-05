@@ -2,7 +2,7 @@
   "name": "The Great Pyramid",
   "buildOptions": {
     "maxSteps": 1000,
-    "fixObstacles": false,
+    "fixObstacles": true,
     "fixNonStraight": true,
     "fixIntersected": true,
     "compactMap": true,

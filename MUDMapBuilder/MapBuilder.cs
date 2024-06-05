@@ -276,10 +276,10 @@ namespace MUDMapBuilder
 				return StraightenRoomResult.Fail;
 			}
 
-			var existInHistory1 = ExistsInHistory(result1.NewArea);
-			var existInHistory2 = ExistsInHistory(result2.NewArea);
+			var existInHistory2 = ExistsInHistory(result1.NewArea);
+			var existInHistory1 = ExistsInHistory(result2.NewArea);
 
-			if (existInHistory1 && existInHistory2)
+			if (existInHistory2 && existInHistory1)
 			{
 				return StraightenRoomResult.Fail;
 			}
@@ -290,11 +290,11 @@ namespace MUDMapBuilder
 			// First criteria - doesnt exist in history
 			if (existInHistory1)
 			{
-				moveSecond = false;
-			}
-			else if (existInHistory2)
-			{
 				moveSecond = true;
+			} else
+			if (existInHistory2)
+			{
+				moveSecond = false;
 			}
 
 			if (moveSecond == null)
@@ -458,7 +458,7 @@ namespace MUDMapBuilder
 						{
 							// Such push would make the grid bigger
 						}
-						else if (MMBArea.AreEqual(rooms, Area) || ExistsInHistory(rooms))
+						else if (MMBArea.AreEqual(rooms, Area)/* || ExistsInHistory(rooms)*/)
 						{
 							// Such push wouldn't change anything
 						}
@@ -497,6 +497,220 @@ namespace MUDMapBuilder
 			}
 
 			Area.FixPlacementOfSingleExitRooms();
+
+			return true;
+		}
+
+		private bool ObstacleFixRun(out bool fixes)
+		{
+			fixes = false;
+
+			if (!Options.FixObstacles)
+			{
+				return true;
+			}
+
+			var vc = Area.BrokenConnections;
+			while (vc.WithObstacles.Count > 0)
+			{
+				// Run while at least one connection could be fixed
+				var connectionFixed = false;
+				for (var i = 0; i < vc.WithObstacles.Count; ++i)
+				{
+					var wo = vc.WithObstacles[0];
+
+					var roomsToDelete = new List<MMBRoom>();
+					foreach (var o in wo.Obstacles)
+					{
+						roomsToDelete.Add(Area.GetRoomById(o));
+					}
+
+					if (roomsToDelete.Count == 0)
+					{
+						continue;
+					}
+
+					if (!RemoveRooms(roomsToDelete.ToArray()))
+					{
+						return false;
+					}
+
+					fixes = true;
+					connectionFixed = true;
+					break;
+				}
+
+				if (!connectionFixed)
+				{
+					break;
+				}
+
+				vc = Area.BrokenConnections;
+			}
+
+			return true;
+		}
+
+		private bool NonStraightFixRun(MMBRoom newRoom, out bool fixes)
+		{
+			fixes = false;
+			if (!Options.FixNonStraight)
+			{
+				return true;
+			}
+
+			var vc = Area.BrokenConnections;
+			while (vc.NonStraight.Count > 0)
+			{
+				// Run while at least one connection could be fixed
+				var connectionFixed = false;
+				for (var i = 0; i < vc.NonStraight.Count; ++i)
+				{
+					var ns = vc.NonStraight[i];
+
+					// Try to straighten it
+					var room1 = Area.GetRoomById(ns.SourceRoomId);
+					var room2 = Area.GetRoomById(ns.TargetRoomId);
+					var srr = StraightenConnection(room1, room2, ns.Direction);
+
+					switch (srr)
+					{
+						case StraightenRoomResult.Success:
+							fixes = true;
+							connectionFixed = true;
+							goto connectionFixed;
+
+						case StraightenRoomResult.Fail:
+							break;
+
+						case StraightenRoomResult.OutOfSteps:
+							return false;
+					}
+				}
+			connectionFixed:;
+				vc = Area.BrokenConnections;
+
+				if (!connectionFixed)
+				{
+					break;
+				}
+			}
+
+			return true;
+		}
+
+		private bool IntersectionsFixRun(MMBRoom newRoom, out bool fixes)
+		{
+			fixes = false;
+			if (!Options.FixIntersected)
+			{
+				return false;
+			}
+
+			var vc = Area.BrokenConnections;
+			while (vc.Intersections.Count > 0)
+			{
+				// Run while at least one connection could be fixed
+				var connectionFixed = false;
+				for (var i = 0; i < vc.Intersections.Count; ++i)
+				{
+					var intersection = vc.Intersections[0];
+					if (newRoom.Id != intersection.SourceRoomId)
+					{
+						// Try to delete first room
+						var rooms = Area.Clone();
+						var deleteList = BuildRemoveList(new int[] { intersection.SourceRoomId });
+						foreach (var id in deleteList)
+						{
+							rooms.GetRoomById(id).Position = null;
+						}
+
+						if (!ExistsInHistory(rooms))
+						{
+							var vc2 = rooms.BrokenConnections;
+							if (vc2.Intersections.Count < vc.Intersections.Count)
+							{
+								if (!RemoveRooms((from id in deleteList select Area.GetRoomById(id)).ToArray()))
+								{
+									return false;
+								}
+
+								fixes = true;
+								connectionFixed = true;
+								break;
+							}
+						}
+					}
+
+					// Try to delete the second room
+					if (newRoom.Id != intersection.TargetRoomId)
+					{
+						var rooms = Area.Clone();
+						var deleteList = BuildRemoveList(new int[] { intersection.TargetRoomId });
+						foreach (var id in deleteList)
+						{
+							rooms.GetRoomById(id).Position = null;
+						}
+
+						if (!ExistsInHistory(rooms))
+						{
+							var vc2 = rooms.BrokenConnections;
+							if (vc2.Intersections.Count < vc.Intersections.Count)
+							{
+								if (!RemoveRooms((from id in deleteList select Area.GetRoomById(id)).ToArray()))
+								{
+									return false;
+								}
+
+								fixes = true;
+								connectionFixed = true;
+								break;
+							}
+						}
+					}
+				}
+
+				vc = Area.BrokenConnections;
+				if (!connectionFixed)
+				{
+					break;
+				}
+			}
+
+			return true;
+		}
+
+		private bool FixRun(MMBRoom newRoom)
+		{
+			// Connections fix run
+
+			while (true)
+			{
+				bool obstaclesFixes;
+				if (!ObstacleFixRun(out obstaclesFixes))
+				{
+					return false;
+				}
+
+				bool nonStraightFixes;
+				if (!NonStraightFixRun(newRoom, out nonStraightFixes))
+				{
+					return false;
+				}
+
+				bool intersectionFixes;
+				if (!IntersectionsFixRun(newRoom, out intersectionFixes))
+				{
+					return false;
+				}
+
+				if (!obstaclesFixes && !nonStraightFixes && !intersectionFixes)
+				{
+					// Run while at least one fix is possible
+					break;
+				}
+			}
+
 
 			return true;
 		}
@@ -636,135 +850,9 @@ namespace MUDMapBuilder
 						Area.FixPlacementOfSingleExitRooms();
 
 						// Connections fix run
-						vc = Area.BrokenConnections;
-						if (Options.FixObstacles)
+						if (!FixRun(newRoom))
 						{
-							// Remove obstacles
-							while (vc.WithObstacles.Count > 0)
-							{
-								var wo = vc.WithObstacles[0];
-
-								var roomsToDelete = (from o in wo.Obstacles select Area.GetRoomById(o)).ToArray();
-								if (!RemoveRooms(roomsToDelete))
-								{
-									goto finish;
-								}
-
-								vc = Area.BrokenConnections;
-							}
-						}
-
-						vc = Area.BrokenConnections;
-						if (Options.FixNonStraight)
-						{
-							// Non-straight connections fix
-							while (vc.NonStraight.Count > 0)
-							{
-								// Run while at least one connection could be fixed
-								var connectionFixed = false;
-								for (var i = 0; i < vc.NonStraight.Count; ++i)
-								{
-									var ns = vc.NonStraight[i];
-
-									// Try to straighten it
-									var room1 = Area.GetRoomById(ns.SourceRoomId);
-									var room2 = Area.GetRoomById(ns.TargetRoomId);
-									var srr = StraightenConnection(room1, room2, ns.Direction);
-
-									switch (srr)
-									{
-										case StraightenRoomResult.Success:
-											connectionFixed = true;
-											goto connectionFixed;
-
-										case StraightenRoomResult.Fail:
-											break;
-
-										case StraightenRoomResult.OutOfSteps:
-											goto finish;
-									}
-								}
-							connectionFixed:;
-								vc = Area.BrokenConnections;
-
-								if (!connectionFixed)
-								{
-									break;
-								}
-							}
-						}
-
-						vc = Area.BrokenConnections;
-						if (Options.FixIntersected)
-						{
-							// Intersections
-							while (vc.Intersections.Count > 0)
-							{
-								// Run while at least one connection could be fixed
-								var connectionFixed = false;
-								for (var i = 0; i < vc.Intersections.Count; ++i)
-								{
-									var intersection = vc.Intersections[0];
-
-									if (newRoom.Id != intersection.SourceRoomId)
-									{
-										// Try to delete first room
-										var rooms = Area.Clone();
-										var deleteList = BuildRemoveList(new int[] { intersection.SourceRoomId });
-										foreach (var id in deleteList)
-										{
-											rooms.GetRoomById(id).Position = null;
-										}
-
-										if (!ExistsInHistory(rooms))
-										{
-											var vc2 = rooms.BrokenConnections;
-											if (vc2.Intersections.Count < vc.Intersections.Count)
-											{
-												if (!RemoveRooms((from id in deleteList select Area.GetRoomById(id)).ToArray()))
-												{
-													goto finish;
-												}
-
-												connectionFixed = true;
-												break;
-											}
-										}
-									}
-
-									// Try to delete the second room
-									if (newRoom.Id != intersection.TargetRoomId)
-									{
-										var rooms = Area.Clone();
-										var deleteList = BuildRemoveList(new int[] { intersection.TargetRoomId });
-										foreach (var id in deleteList)
-										{
-											rooms.GetRoomById(id).Position = null;
-										}
-
-										if (!ExistsInHistory(rooms))
-										{
-											var vc2 = rooms.BrokenConnections;
-											if (vc2.Intersections.Count < vc.Intersections.Count)
-											{
-												if (!RemoveRooms((from id in deleteList select Area.GetRoomById(id)).ToArray()))
-												{
-													goto finish;
-												}
-
-												connectionFixed = true;
-												break;
-											}
-										}
-									}
-								}
-
-								vc = Area.BrokenConnections;
-								if (!connectionFixed)
-								{
-									break;
-								}
-							}
+							break;
 						}
 
 						if (room.Position == null)

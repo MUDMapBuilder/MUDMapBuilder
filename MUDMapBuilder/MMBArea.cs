@@ -283,7 +283,51 @@ namespace MUDMapBuilder
 
 				if (obstacles.Count > 0)
 				{
-					return ConnectionBrokenType.HasObstacles;
+					// Remove obstacles that couldn't be fixed
+					// Determine which rooms should be kept
+					var keepRooms = new HashSet<int> { sourceRoom.Id, targetRoom.Id };
+					while (true)
+					{
+						var roomsAdded = false;
+						foreach (var o in obstacles)
+						{
+							if (keepRooms.Contains(o))
+							{
+								continue;
+							}
+
+							var obstacleRoom = GetRoomById(o);
+
+							// Determine connections to the source and target rooms
+							var conn = (from c in obstacleRoom.Connections where keepRooms.Contains(c.Value.RoomId) select c.Value).ToArray();
+							foreach (var c in conn)
+							{
+								if ((exitDir.IsHorizontal() && c.Direction.IsHorizontal()) ||
+									(exitDir.IsVertical() && c.Direction.IsVertical()))
+								{
+									// Do not delete obstacle rooms that has same direction connections
+									roomsAdded = true;
+									keepRooms.Add(o);
+									break;
+								}
+							}
+						}
+
+						if (!roomsAdded)
+						{
+							break;
+						}
+					}
+
+					foreach(var k in keepRooms)
+					{
+						obstacles.Remove(k);
+					}
+
+					if (obstacles.Count > 0)
+					{
+						return ConnectionBrokenType.HasObstacles;
+					}
 				}
 			}
 
@@ -717,22 +761,14 @@ namespace MUDMapBuilder
 				var delta = pair.Value;
 
 				movedRoomsList.Add(new MeasurePushRoomMovement(room, delta));
-			}
-
-			foreach (var pair in movedRooms)
-			{
-				var room = GetRoomById(pair.Key);
-				var delta = pair.Value;
-
 				var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
-
 				var existingRoom = GetRoomByPosition(newPos);
 				if (existingRoom != null && !movedRooms.ContainsKey(existingRoom.Id))
 				{
 					deletedRooms.Add(existingRoom);
 				}
 			}
-
+			
 			return new MeasurePushRoomResult(movedRoomsList.ToArray(), deletedRooms.ToArray());
 		}
 

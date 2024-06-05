@@ -3,8 +3,8 @@
   "buildOptions": {
     "maxSteps": 1000,
     "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": false,
+    "fixNonStraight": false,
+    "fixIntersected": true,
     "compactMap": true,
     "addDebugInfo": false,
     "colorizeConnectionIssues": true

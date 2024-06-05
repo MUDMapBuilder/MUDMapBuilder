@@ -725,7 +725,7 @@ namespace MUDMapBuilder
 			Area.ClearMarks();
 
 			// Remove single exit rooms
-			if (Options.RemoveSolitaryRooms)
+			if (!Options.KeepSolitaryRooms)
 			{
 				var toDelete = new List<MMBRoom>();
 				foreach (var room in Area.Rooms)

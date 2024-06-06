@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -7,6 +8,10 @@ namespace MUDMapBuilder.Import.Diku
 {
 	internal static class Utility
 	{
+		private static readonly Dictionary<OldResistanceFlags, ResistanceFlags> _resistanceFlagsMapper = new Dictionary<OldResistanceFlags, ResistanceFlags>();
+		private static readonly Dictionary<OldAffectedByFlags, AffectedByFlags> _affectedByFlagsMapper = new Dictionary<OldAffectedByFlags, AffectedByFlags>();
+
+
 		public static string ExecutingAssemblyDirectory
 		{
 			get
@@ -15,6 +20,31 @@ namespace MUDMapBuilder.Import.Diku
 				UriBuilder uri = new UriBuilder(codeBase);
 				string path = Uri.UnescapeDataString(uri.Path);
 				return Path.GetDirectoryName(path);
+			}
+		}
+
+		static Utility()
+		{
+			PopulateMapper(_affectedByFlagsMapper);
+			PopulateMapper(_resistanceFlagsMapper);
+		}
+
+		private static void PopulateMapper<T2, T>(Dictionary<T2, T> mapper) where T : struct, Enum where T2 : struct, Enum
+		{
+			foreach (T2 flag in Enum.GetValues(typeof(T2)))
+			{
+				if ((int)(object)flag == 0)
+				{
+					continue;
+				}
+
+				var name = flag.ToString();
+
+				T newFlag;
+				if (Enum.TryParse(name, true, out newFlag))
+				{
+					mapper[flag] = newFlag;
+				}
 			}
 		}
 
@@ -28,7 +58,7 @@ namespace MUDMapBuilder.Import.Diku
 			// Calculate the line and line pos
 			stream.Seek(0, SeekOrigin.Begin);
 
-			while(stream.Position < lastPos)
+			while (stream.Position < lastPos)
 			{
 				var b = stream.ReadByte();
 
@@ -87,7 +117,7 @@ namespace MUDMapBuilder.Import.Diku
 			var sb = new StringBuilder();
 
 			var endOfLine = false;
-			while(!stream.EndOfStream())
+			while (!stream.EndOfStream())
 			{
 				var c = stream.ReadLetter();
 
@@ -97,11 +127,13 @@ namespace MUDMapBuilder.Import.Diku
 					if (!isNewLine)
 					{
 						sb.Append(c);
-					} else
+					}
+					else
 					{
 						endOfLine = true;
 					}
-				} else if (!isNewLine)
+				}
+				else if (!isNewLine)
 				{
 					stream.GoBackIfNotEOF();
 					break;
@@ -124,68 +156,69 @@ namespace MUDMapBuilder.Import.Diku
 			return stream.ReadLine().Trim();
 		}
 
-		public static int ReadFlag(this Stream stream)
+		public static void SkipWhitespace(this Stream stream)
 		{
-			int result = 0;
-			var negative = false;
-			var c = stream.ReadSpacedLetter();
+			while(!stream.EndOfStream())
+			{
+				var c = (char)stream.ReadByte();
+				if (!char.IsWhiteSpace(c))
+				{
+					stream.GoBackIfNotEOF();
+					break;
+				}
+			}
+		}
 
-			if (c == '-')
+		public static int ReadFlag(this Stream stream, int asciiAddition = 0)
+		{
+			stream.SkipWhitespace();
+
+			var sb = new StringBuilder();
+			while(!stream.EndOfStream())
+			{
+				var c = (char)stream.ReadByte();
+				if (char.IsWhiteSpace(c))
+				{
+					break;
+				}
+
+				sb.Append(c);
+			}
+
+			var str = sb.ToString();
+			if (string.IsNullOrEmpty(str))
+			{
+				return 0;
+			}
+
+			var negative = false;
+			if (str.StartsWith("-"))
 			{
 				negative = true;
-				c = stream.ReadLetter();
+				str = str.Substring(0);
 			}
 
-			if (!char.IsDigit(c))
+			int result = 0;
+			if (int.TryParse(str, out result))
+			{ 
+			} else
 			{
-				while (!stream.EndOfStream())
+				// ASCII flags
+				for(var i = 0; i < str.Length; ++i)
 				{
-					int bitsum = 0;
-					if ('A' <= c && c <= 'Z')
+					var c = str[i];
+					if ('a' <= c && c <= 'z')
 					{
-						bitsum = 1;
-						for (int i = c; i > 'A'; i--)
-						{
-							bitsum *= 2;
-						}
-					}
-					else if ('a' <= c && c <= 'z')
+						result |= 1 << (c - 'a' + asciiAddition);
+					} else if ('A' <= c && c <= 'Z')
 					{
-						bitsum = 67108864;
-						for (int i = c; i > 'a'; i--)
-						{
-							bitsum *= 2;
-						}
-					}
-					else
+						result |= 1 << (26 + c - 'a' + asciiAddition);
+					} else
 					{
-						break;
+						stream.RaiseError($"Could not parse ascii flag {str}");
 					}
-
-					result += bitsum;
-					c = stream.ReadLetter();
 				}
 			}
-			else
-			{
-				var sb = new StringBuilder();
-
-				while (!stream.EndOfStream() && char.IsDigit(c))
-				{
-					sb.Append(c);
-					c = stream.ReadLetter();
-				}
-
-				result = int.Parse(sb.ToString());
-			}
-
-			if (c == '|')
-			{
-				result += stream.ReadFlag();
-			}
-
-			// Last symbol beint to the new data
-			stream.GoBackIfNotEOF();
 
 			return negative ? -result : result;
 		}
@@ -198,7 +231,8 @@ namespace MUDMapBuilder.Import.Diku
 			if (c == '+')
 			{
 				c = stream.ReadLetter();
-			} else if (c == '-')
+			}
+			else if (c == '-')
 			{
 				negative = true;
 				c = stream.ReadLetter();
@@ -304,7 +338,7 @@ namespace MUDMapBuilder.Import.Diku
 				c = stream.ReadLetter();
 			}
 
-			while(!stream.EndOfStream())
+			while (!stream.EndOfStream())
 			{
 				if ((startsWithQuote && (c == '"' || c == '\'')) ||
 					(!startsWithQuote && char.IsWhiteSpace(c)))
@@ -333,7 +367,7 @@ namespace MUDMapBuilder.Import.Diku
 			{
 				return (T)Enum.Parse(typeof(T), value, true);
 			}
-			catch(Exception)
+			catch (Exception)
 			{
 				stream.RaiseError($"Enum parse error: enum type={typeof(T).Name}, value={value}");
 			}
@@ -395,5 +429,41 @@ namespace MUDMapBuilder.Import.Diku
 
 			return true;
 		}
+
+		private static HashSet<T> ConvertFlags<T, T2>(Dictionary<T2, T> mapper, T2 flags) where T2 : struct, Enum
+		{
+			var result = new HashSet<T>();
+
+			if ((int)(object)flags == 0)
+			{
+				// None
+				return new HashSet<T>();
+			}
+
+			foreach (T2 flag in Enum.GetValues(typeof(T2)))
+			{
+				if ((int)(object)flag == 0)
+				{
+					continue;
+				}
+
+				if (flags.HasFlag(flag))
+				{
+					T newFlag;
+					if (!mapper.TryGetValue(flag, out newFlag))
+					{
+						throw new Exception($"Unable to find the corresponding flag for {flag}");
+					}
+
+					result.Add(newFlag);
+				}
+			}
+
+			return result;
+		}
+
+		public static HashSet<ResistanceFlags> ToNewFlags(this OldResistanceFlags flags) => ConvertFlags(_resistanceFlagsMapper, flags);
+		public static HashSet<AffectedByFlags> ToNewFlags(this OldAffectedByFlags flags) => ConvertFlags(_affectedByFlagsMapper, flags);
+
 	}
 }

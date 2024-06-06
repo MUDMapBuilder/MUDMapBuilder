@@ -37,7 +37,7 @@ namespace MUDMapBuilder
 			{
 				if (_rooms != null)
 				{
-					foreach(var room in _rooms)
+					foreach (var room in _rooms)
 					{
 						room.RoomInvalid -= OnRoomInvalid;
 					}
@@ -58,6 +58,8 @@ namespace MUDMapBuilder
 				InvalidatePositions();
 			}
 		}
+
+		public MMBObject[] Objects { get; set; }
 
 		public int Count => _roomsByIds.Count;
 
@@ -146,10 +148,10 @@ namespace MUDMapBuilder
 		public void RemoveNonExistantConnections()
 		{
 			// Remove exits that lead to nowhere
-			foreach(var room in _rooms)
+			foreach (var room in _rooms)
 			{
 				var toDelete = new List<MMBDirection>();
-				foreach(var pair in room.Connections)
+				foreach (var pair in room.Connections)
 				{
 					if (!_roomsByIds.ContainsKey(pair.Value.RoomId))
 					{
@@ -157,7 +159,7 @@ namespace MUDMapBuilder
 					}
 				}
 
-				foreach(var td in toDelete)
+				foreach (var td in toDelete)
 				{
 					room.Connections.Remove(td);
 				}

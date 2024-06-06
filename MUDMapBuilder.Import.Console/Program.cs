@@ -64,11 +64,12 @@ namespace MUDMapBuilder.Import
 							areas.Add(area);
 
 						}*/
+			var settings = new ImporterSettings(folder, SourceType.Circle);
 
 			var files = Directory.EnumerateFiles(folder, "*.wld", SearchOption.AllDirectories);
 			foreach (var path in files)
 			{
-				var area = Importer.ProcessFile(path);
+				var area = Importer.ProcessFile(settings, path);
 				areas.Add(area);
 			}
 
@@ -117,12 +118,12 @@ namespace MUDMapBuilder.Import
 			}
 
 			var outputFolder = $"data/{mudName}/maps/json/";
-			if (Directory.Exists(outputFolder))
+/*			if (Directory.Exists(outputFolder))
 			{
 				Directory.Delete(outputFolder, true);
 			}
 
-			Directory.CreateDirectory(outputFolder);
+			Directory.CreateDirectory(outputFolder);*/
 
 			// Save all areas
 			foreach (var area in areas)
@@ -136,15 +137,26 @@ namespace MUDMapBuilder.Import
 				Console.WriteLine($"Saving {fileName}...");
 
 				var project = new MMBProject(area, new BuildOptions());
+				var outputPath = Path.Combine(outputFolder, fileName);
+				if (File.Exists(outputPath))
+				{
+					Console.Write($"File '{fileName}' exists already. Trying to copy the build options...");
 
-				/*				// Copy build options
-								var oldData = File.ReadAllText(Path.Combine(@"D:\Temp\MUDMapBuilder.0.1.0\circle_Areas", fileName));
-								var oldProject = MMBProject.Parse(oldData);
-
-								oldProject.BuildOptions.CopyTo(project.BuildOptions);*/
+					// Copy build options
+					try
+					{
+						var oldData = File.ReadAllText(outputPath);
+						var oldProject = MMBProject.Parse(oldData);
+						oldProject.BuildOptions.CopyTo(project.BuildOptions);
+					}
+					catch (Exception)
+					{
+						Console.WriteLine("Failed to load the existing json");
+					}
+				}
 
 				var data = project.ToJson();
-				File.WriteAllText(Path.Combine(outputFolder, fileName), data);
+				File.WriteAllText(outputPath, data);
 			}
 
 			// Generate area table
@@ -154,15 +166,64 @@ namespace MUDMapBuilder.Import
 			sb.AppendLine("layout: page");
 			sb.AppendLine("---");
 			sb.AppendLine();
-			sb.AppendLine("Name|Credits|Minimum Level|Maximum Level");
+			sb.AppendLine("Name|Credits|Minimum Level|Maximum Level|Source JSON");
 
 			var orderedAreas = (from a in areas orderby AreaNumericValue(a) select a).ToList();
 			foreach (var area in orderedAreas)
 			{
-				sb.AppendLine($"[{area.Name}](/data/{mudName}/maps/png/{area.Name}.png)|{area.Credits}|{area.MinimumLevel}|{area.MaximumLevel}");
+				sb.AppendLine($"[{area.Name}](/data/{mudName}/maps/png/{area.Name}.png)|{area.Credits}|{area.MinimumLevel}|{area.MaximumLevel}|[json](/data/{mudName}/maps/json/{area.Name}.json)");
 			}
 
 			File.WriteAllText($"{mudName}_Maps.markdown", sb.ToString());
+
+			// Group equipment by wear type
+			var eq = new Dictionary<WearFlags, List<MMBObject>>();
+			foreach (var area in orderedAreas)
+			{
+				foreach (var obj in area.Objects)
+				{
+					if (obj.ItemType != ItemType.Weapon && obj.ItemType != ItemType.Armor)
+					{
+						continue;
+					}
+
+					obj.AreaName = area.Name;
+					var flag = obj.WearFlags;
+					flag &= ~WearFlags.Take;
+					List<MMBObject> list;
+					if (!eq.TryGetValue(flag, out list))
+					{
+						list = new List<MMBObject>();
+						eq[flag] = list;
+					}
+
+					list.Add(obj);
+				}
+			}
+
+			// Generate eqlist table
+			sb.Clear();
+			sb.AppendLine("---");
+			sb.AppendLine("layout: page");
+			sb.AppendLine("---");
+			sb.AppendLine();
+
+			foreach (var pair in eq)
+			{
+				sb.AppendLine($"### {pair.Key}");
+				sb.AppendLine();
+				sb.AppendLine("Name|Area|Level|Value|Extra|Effects");
+
+				var orderedEq = (from obj in pair.Value orderby obj.Level descending select obj).ToList();
+				foreach (var obj in orderedEq)
+				{
+					sb.AppendLine($"{obj.Name}|{obj.AreaName}|{obj.Level}|{obj.BuildStringValue()}|{obj.ExtraFlags}|{obj.BuildEffectsValue()}");
+				}
+
+				sb.AppendLine();
+			}
+
+			File.WriteAllText($"{mudName}_Eq.markdown", sb.ToString());
 		}
 
 		static void Main(string[] args)

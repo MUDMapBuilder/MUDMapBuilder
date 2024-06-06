@@ -297,6 +297,23 @@ namespace MUDMapBuilder
 							}
 
 							var obstacleRoom = GetRoomById(o);
+							var skip = false;
+							foreach (var pair in obstacleRoom.Connections)
+							{
+								var connDir = pair.Value.Direction;
+								if ((exitDir.IsHorizontal() && !connDir.IsHorizontal()) ||
+									(exitDir.IsVertical() && !connDir.IsVertical()))
+								{
+									skip = true;
+									break;
+								}
+							}
+
+							if (skip)
+							{
+								continue;
+							}
+
 							foreach (var kr in keepRooms)
 							{
 								var keepRoom = GetRoomById(kr);

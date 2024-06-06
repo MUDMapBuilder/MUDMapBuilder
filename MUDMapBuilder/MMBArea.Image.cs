@@ -148,7 +148,7 @@ namespace MUDMapBuilder
 								}
 
 								var targetRoom = GetRoomById(pair.Value.RoomId);
-								if (targetRoom == null || targetRoom.Position == null)
+								if (targetRoom.Position == null)
 								{
 									continue;
 								}

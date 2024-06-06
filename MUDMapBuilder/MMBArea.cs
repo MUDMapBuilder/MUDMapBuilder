@@ -140,6 +140,27 @@ namespace MUDMapBuilder
 			_connectionsGrid = null;
 		}
 
+		public void RemoveNonExistantConnections()
+		{
+			// Remove exits that lead to nowhere
+			foreach(var room in _rooms)
+			{
+				var toDelete = new List<MMBDirection>();
+				foreach(var pair in room.Connections)
+				{
+					if (!_roomsByIds.ContainsKey(pair.Value.RoomId))
+					{
+						toDelete.Add(pair.Key);
+					}
+				}
+
+				foreach(var td in toDelete)
+				{
+					room.Connections.Remove(td);
+				}
+			}
+		}
+
 		public void ExpandGrid(Point pos, Point vec)
 		{
 			foreach (var pair in _roomsByIds)
@@ -180,7 +201,7 @@ namespace MUDMapBuilder
 			MMBRoom result;
 			if (!_roomsByIds.TryGetValue(id, out result))
 			{
-				return null;
+				throw new Exception($"Could not find room with id {id}.");
 			}
 
 			return result;
@@ -358,7 +379,6 @@ namespace MUDMapBuilder
 							foreach (var kr in keepRooms)
 							{
 								var keepRoom = GetRoomById(kr);
-
 								var conn = keepRoom.FindConnection(o);
 								if (conn == null)
 								{
@@ -435,7 +455,7 @@ namespace MUDMapBuilder
 					}
 
 					var targetRoom = GetRoomById(pair.Value.RoomId);
-					if (targetRoom == null || targetRoom.Position == null)
+					if (targetRoom.Position == null)
 					{
 						continue;
 					}
@@ -711,7 +731,7 @@ namespace MUDMapBuilder
 						}
 
 						var targetRoom = GetRoomById(exit.Value.RoomId);
-						if (targetRoom == null || targetRoom.Position == null)
+						if (targetRoom.Position == null)
 						{
 							continue;
 						}
@@ -728,7 +748,7 @@ namespace MUDMapBuilder
 			return (from p in parts orderby p.Count select p).ToArray();
 		}
 
-		public bool IsSingleExitRoom(MMBRoom room, out MMBRoomConnection connection)
+		public static bool IsSingleExitRoom(MMBRoom room, out MMBRoomConnection connection)
 		{
 			connection = null;
 			if (room.Connections == null)
@@ -736,7 +756,7 @@ namespace MUDMapBuilder
 				return false;
 			}
 
-			var realConnections = (from c in room.Connections where GetRoomById(c.Value.RoomId) != null select c.Value).ToArray();
+			var realConnections = (from c in room.Connections select c.Value).ToArray();
 			if (realConnections.Length != 1)
 			{
 				return false;
@@ -766,7 +786,7 @@ namespace MUDMapBuilder
 					}
 
 					var targetRoom = GetRoomById(pair.Value.RoomId);
-					if (targetRoom == null || targetRoom.Position == null)
+					if (targetRoom.Position == null)
 					{
 						continue;
 					}
@@ -826,7 +846,7 @@ namespace MUDMapBuilder
 					var forceVector = item.Item2;
 
 					var targetRoom = GetRoomById(pair.Value.RoomId);
-					if (targetRoom == null || targetRoom.Position == null || movedRooms.ContainsKey(pair.Value.RoomId))
+					if (targetRoom.Position == null || movedRooms.ContainsKey(pair.Value.RoomId))
 					{
 						continue;
 					}
@@ -1033,7 +1053,7 @@ namespace MUDMapBuilder
 				{
 					var exitDir = pair.Key;
 					var targetRoom = GetRoomById(pair.Value.RoomId);
-					if (targetRoom == null || targetRoom.Position == null || toProcess.WasProcessed(pair.Value.RoomId))
+					if (targetRoom.Position == null || toProcess.WasProcessed(pair.Value.RoomId))
 					{
 						continue;
 					}

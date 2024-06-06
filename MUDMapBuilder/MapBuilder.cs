@@ -771,7 +771,7 @@ namespace MUDMapBuilder
 				var toDelete = new List<MMBRoom>();
 				foreach (var room in Area.Rooms)
 				{
-					var connectionsFromRoomCount = (from c in room.Connections where c.Value != null && c.Value.ConnectionType == MMBConnectionType.Forward && Area.GetRoomById(c.Value.RoomId) != null select c).Count();
+					var connectionsFromRoomCount = (from c in room.Connections where c.Value.ConnectionType == MMBConnectionType.Forward select c).Count();
 					var connectionsToRoomCount = (from r in Area.Rooms
 												  where r.Id != room.Id &&
 												  r.FindConnection(room.Id) != null &&
@@ -825,7 +825,7 @@ namespace MUDMapBuilder
 						}
 
 						var newRoom = Area.GetRoomById(pair.Value.RoomId);
-						if (newRoom == null || newRoom.Position != null || _roomsQueue.WasAdded(pair.Value.RoomId))
+						if (newRoom.Position != null || _roomsQueue.WasAdded(pair.Value.RoomId))
 						{
 							continue;
 						}
@@ -843,7 +843,7 @@ namespace MUDMapBuilder
 						if (existingRoom != null)
 						{
 							MMBRoomConnection conn;
-							if (Area.IsSingleExitRoom(existingRoom, out conn) && (conn.Direction == MMBDirection.Up || conn.Direction == MMBDirection.Down))
+							if (MMBArea.IsSingleExitRoom(existingRoom, out conn) && (conn.Direction == MMBDirection.Up || conn.Direction == MMBDirection.Down))
 							{
 								// Delete such rooms instead of expanding the grid
 								if (!RemoveRooms(new[] { existingRoom }))

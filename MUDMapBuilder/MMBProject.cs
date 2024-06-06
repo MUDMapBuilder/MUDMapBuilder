@@ -74,6 +74,8 @@ namespace MUDMapBuilder
 				}
 			}
 
+			area.RemoveNonExistantConnections();
+
 			// Set connections types
 			foreach (var room in area.Rooms)
 			{

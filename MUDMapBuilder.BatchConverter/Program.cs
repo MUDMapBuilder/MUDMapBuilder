@@ -1,52 +1,72 @@
 ﻿using System.IO;
 using System;
-using System.Linq;
+using System.Collections.Concurrent;
+using System.Threading.Tasks;
 
 namespace MUDMapBuilder.BatchConverter
 {
 	internal class Program
 	{
+		private static string _outputFolder;
+		private static ConcurrentDictionary<string, string> _errors = new ConcurrentDictionary<string, string>();
+
 		private static void Log(string message) => Console.WriteLine(message);
+
+		static void ProcessFile(string areaFile)
+		{
+			var areaFileName = Path.GetFileName(areaFile);
+			var imageFile = Path.ChangeExtension(Path.Combine(_outputFolder, areaFileName), "png");
+			if (File.Exists(imageFile))
+			{
+				Log($"Map for '{areaFileName}' exits already.");
+				return;
+			}
+
+			Log($"Processing file {areaFileName}...");
+			var project = MMBProject.Parse(File.ReadAllText(areaFile));
+			var buildResult = MapBuilder.Build(project, Log);
+			if (buildResult == null)
+			{
+				_errors[areaFile] = "Mo rooms to process.";
+				return;
+			}
+
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				_errors[areaFile] = $"{buildResult.ResultType}. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected) for this file.";
+				return;
+			}
+
+			var options = project.BuildOptions;
+			options.ColorizeConnectionIssues = false;
+
+			var pngData = buildResult.Last.BuildPng(options).PngData;
+			File.WriteAllBytes(imageFile, pngData);
+		}
 
 		static void Process(string folder)
 		{
 			var areaFiles = Directory.EnumerateFiles(folder, "*.json");
 
-			var outputFolder = Path.Combine(folder, "png");
-			if (!Directory.Exists(outputFolder))
+			_outputFolder = Path.Combine(folder, "png");
+			if (!Directory.Exists(_outputFolder))
 			{
-				Directory.CreateDirectory(outputFolder);
+				Directory.CreateDirectory(_outputFolder);
 			}
 
-			foreach (var areaFile in areaFiles)
+			Parallel.ForEach(areaFiles, areaFile => ProcessFile(areaFile));
+
+			foreach(var pair in _errors)
 			{
-				var areaFileName = Path.GetFileName(areaFile);
-				var imageFile = Path.ChangeExtension(Path.Combine(outputFolder, areaFileName), "png");
-				if (File.Exists(imageFile))
-				{
-					Console.WriteLine($"Map for '{areaFileName}' exits already.");
-					continue;
-				}
+				Log($"Error in {pair.Key}: {pair.Value}");
+			}
 
-				Console.WriteLine($"Processing file {areaFileName}...");
-				var project = MMBProject.Parse(File.ReadAllText(areaFile));
-				var buildResult = MapBuilder.Build(project, Log);
-				if (buildResult == null)
-				{
-					Log($"Warning: no rooms to process. Skipping.");
-					continue;
-				}
-
-				if (buildResult.ResultType != ResultType.Success)
-				{
-					throw new Exception($"WARNING: The process wasn't completed for {areaFileName}. Result Type: {buildResult.ResultType}. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected).");
-				}
-
-				var options = project.BuildOptions;
-				options.ColorizeConnectionIssues = false;
-
-				var pngData = buildResult.Last.BuildPng(options).PngData;
-				File.WriteAllBytes(imageFile, pngData);
+			if (_errors.Count > 0)
+			{
+				Log($"Total errors count: {_errors.Count}");
+			} else
+			{
+				Log("Success");
 			}
 		}
 
@@ -56,7 +76,7 @@ namespace MUDMapBuilder.BatchConverter
 			{
 				if (args.Length == 0)
 				{
-					Console.WriteLine("Usage: mmb-bc <inputFolder>");
+					Log("Usage: mmb-bc <inputFolder>");
 					return;
 				}
 
@@ -64,7 +84,7 @@ namespace MUDMapBuilder.BatchConverter
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.ToString());
+				Log(ex.ToString());
 			}
 		}
 	}

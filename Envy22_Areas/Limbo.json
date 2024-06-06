@@ -1,29 +1,39 @@
 {
-  "name": "Limbo",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Limbo",
+    "Rooms": [
+      {
+        "Id": 2052,
+        "Name": "The Void",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 2053,
+        "Name": "Limbo",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 2054,
+        "Name": "Frag\u0027s Hovel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 2052,
-      "name": "The Void",
-      "exits": {}
-    },
-    {
-      "id": 2053,
-      "name": "Limbo",
-      "exits": {}
-    },
-    {
-      "id": 2054,
-      "name": "Frag\u0027s Hovel",
-      "exits": {}
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

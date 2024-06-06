@@ -1,171 +1,212 @@
 {
-  "name": "Old Marsh",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Old Marsh",
+    "Rooms": [
+      {
+        "Id": 2155,
+        "Name": "Muddy Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1456,
+          "South": 2156
+        }
+      },
+      {
+        "Id": 2156,
+        "Name": "Swamp\u0027s Edge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2155,
+          "East": 2157,
+          "South": 2158
+        }
+      },
+      {
+        "Id": 2157,
+        "Name": "Marshy Forest",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2159,
+          "West": 2156
+        }
+      },
+      {
+        "Id": 2158,
+        "Name": "On a hill.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2156,
+          "East": 2163,
+          "South": 2164
+        }
+      },
+      {
+        "Id": 2159,
+        "Name": "An Oozing Bog",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2160,
+          "West": 2157
+        }
+      },
+      {
+        "Id": 2160,
+        "Name": "An Oozing Bog",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 2159
+        }
+      },
+      {
+        "Id": 2161,
+        "Name": "Swamp Thing\u0027s Lair",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 2162
+        }
+      },
+      {
+        "Id": 2162,
+        "Name": "Pool of Quick Sand",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2161,
+          "South": 2168,
+          "West": 2163
+        }
+      },
+      {
+        "Id": 2163,
+        "Name": "A Dark Pool.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2162,
+          "South": 2165,
+          "West": 2158
+        }
+      },
+      {
+        "Id": 2164,
+        "Name": "Gloomy Path Through the Marsh.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2158,
+          "South": 2166
+        }
+      },
+      {
+        "Id": 2165,
+        "Name": "Cloud of Darkness.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2163,
+          "South": 2167
+        }
+      },
+      {
+        "Id": 2166,
+        "Name": "Near Vegetation from Hell.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2164,
+          "East": 2167
+        }
+      },
+      {
+        "Id": 2167,
+        "Name": "By the Monolith.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2165,
+          "East": 2168,
+          "West": 2166
+        }
+      },
+      {
+        "Id": 2168,
+        "Name": "Murky Bog.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2162,
+          "East": 2169,
+          "West": 2167
+        }
+      },
+      {
+        "Id": 2169,
+        "Name": "Northern Lake Side.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2170,
+          "West": 2168
+        }
+      },
+      {
+        "Id": 2170,
+        "Name": "Southern Lake Side.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2169,
+          "West": 2171
+        }
+      },
+      {
+        "Id": 2171,
+        "Name": "Beach",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2170,
+          "West": 2172
+        }
+      },
+      {
+        "Id": 2172,
+        "Name": "Before the Great Gates.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2171
+        }
+      },
+      {
+        "Id": 1456,
+        "Name": "To Haon Dor",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 1457,
+          "East": 1454,
+          "South": 2155
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 2155,
-      "name": "Muddy Path",
-      "exits": {
-        "North": 1456,
-        "South": 2156
-      }
-    },
-    {
-      "id": 2156,
-      "name": "Swamp\u0027s Edge",
-      "exits": {
-        "North": 2155,
-        "East": 2157,
-        "South": 2158
-      }
-    },
-    {
-      "id": 2157,
-      "name": "Marshy Forest",
-      "exits": {
-        "East": 2159,
-        "West": 2156
-      }
-    },
-    {
-      "id": 2158,
-      "name": "On a hill.",
-      "exits": {
-        "North": 2156,
-        "East": 2163,
-        "South": 2164
-      }
-    },
-    {
-      "id": 2159,
-      "name": "An Oozing Bog",
-      "exits": {
-        "East": 2160,
-        "West": 2157
-      }
-    },
-    {
-      "id": 2160,
-      "name": "An Oozing Bog",
-      "exits": {
-        "West": 2159
-      }
-    },
-    {
-      "id": 2161,
-      "name": "Swamp Thing\u0027s Lair",
-      "exits": {
-        "West": 2162
-      }
-    },
-    {
-      "id": 2162,
-      "name": "Pool of Quick Sand",
-      "exits": {
-        "East": 2161,
-        "South": 2168,
-        "West": 2163
-      }
-    },
-    {
-      "id": 2163,
-      "name": "A Dark Pool.",
-      "exits": {
-        "East": 2162,
-        "South": 2165,
-        "West": 2158
-      }
-    },
-    {
-      "id": 2164,
-      "name": "Gloomy Path Through the Marsh.",
-      "exits": {
-        "North": 2158,
-        "South": 2166
-      }
-    },
-    {
-      "id": 2165,
-      "name": "Cloud of Darkness.",
-      "exits": {
-        "North": 2163,
-        "South": 2167
-      }
-    },
-    {
-      "id": 2166,
-      "name": "Near Vegetation from Hell.",
-      "exits": {
-        "North": 2164,
-        "East": 2167
-      }
-    },
-    {
-      "id": 2167,
-      "name": "By the Monolith.",
-      "exits": {
-        "North": 2165,
-        "East": 2168,
-        "West": 2166
-      }
-    },
-    {
-      "id": 2168,
-      "name": "Murky Bog.",
-      "exits": {
-        "North": 2162,
-        "East": 2169,
-        "West": 2167
-      }
-    },
-    {
-      "id": 2169,
-      "name": "Northern Lake Side.",
-      "exits": {
-        "South": 2170,
-        "West": 2168
-      }
-    },
-    {
-      "id": 2170,
-      "name": "Southern Lake Side.",
-      "exits": {
-        "North": 2169,
-        "West": 2171
-      }
-    },
-    {
-      "id": 2171,
-      "name": "Beach",
-      "exits": {
-        "East": 2170,
-        "West": 2172
-      }
-    },
-    {
-      "id": 2172,
-      "name": "Before the Great Gates.",
-      "exits": {
-        "East": 2171
-      }
-    },
-    {
-      "id": 1456,
-      "name": "To Haon Dor",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 1457,
-        "East": 1454,
-        "South": 2155
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

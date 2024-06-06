@@ -4,6 +4,7 @@
 	{
 		public int MaxSteps { get; set; } = 1000;
 		public bool KeepSolitaryRooms { get; set; } = true;
+		public bool KeepRoomsWithSingleOutsideExit { get; set; } = true;
 		public bool FixObstacles { get; set; } = true;
 		public bool FixNonStraight { get; set; } = true;
 		public bool FixIntersected { get; set; } = true;

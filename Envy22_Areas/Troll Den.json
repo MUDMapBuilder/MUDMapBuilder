@@ -1,62 +1,77 @@
 {
-  "name": "Troll Den",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Troll Den",
+    "Rooms": [
+      {
+        "Id": 3803,
+        "Name": "Wastedump",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3805,
+          "North": 1455
+        }
+      },
+      {
+        "Id": 3804,
+        "Name": "Troll\u0027s Larder",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3805
+        }
+      },
+      {
+        "Id": 3805,
+        "Name": "Troll\u0027s Living Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3803,
+          "East": 3806,
+          "South": 3807,
+          "West": 3804
+        }
+      },
+      {
+        "Id": 3806,
+        "Name": "The Playpen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3805
+        }
+      },
+      {
+        "Id": 3807,
+        "Name": "Troll\u0027s Bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3805
+        }
+      },
+      {
+        "Id": 1455,
+        "Name": "To Haon Dor",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "West": 1454,
+          "South": 3803
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 3803,
-      "name": "Wastedump",
-      "exits": {
-        "South": 3805,
-        "North": 1455
-      }
-    },
-    {
-      "id": 3804,
-      "name": "Troll\u0027s Larder",
-      "exits": {
-        "East": 3805
-      }
-    },
-    {
-      "id": 3805,
-      "name": "Troll\u0027s Living Room",
-      "exits": {
-        "North": 3803,
-        "East": 3806,
-        "South": 3807,
-        "West": 3804
-      }
-    },
-    {
-      "id": 3806,
-      "name": "The Playpen",
-      "exits": {
-        "West": 3805
-      }
-    },
-    {
-      "id": 3807,
-      "name": "Troll\u0027s Bedroom",
-      "exits": {
-        "North": 3805
-      }
-    },
-    {
-      "id": 1455,
-      "name": "To Haon Dor",
-      "otherAreaExit": true,
-      "exits": {
-        "West": 1454,
-        "South": 3803
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

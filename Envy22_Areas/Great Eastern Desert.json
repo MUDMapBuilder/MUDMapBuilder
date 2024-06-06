@@ -1,442 +1,543 @@
 {
-  "name": "Great Eastern Desert",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": false,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Great Eastern Desert",
+    "Rooms": [
+      {
+        "Id": 1069,
+        "Name": "A long tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1070,
+          "West": 2362
+        }
+      },
+      {
+        "Id": 1070,
+        "Name": "A long tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1076,
+          "East": 1071,
+          "West": 1069
+        }
+      },
+      {
+        "Id": 1071,
+        "Name": "A long tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1072,
+          "South": 1085,
+          "West": 1070
+        }
+      },
+      {
+        "Id": 1072,
+        "Name": "A long tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1073,
+          "South": 1086,
+          "West": 1071
+        }
+      },
+      {
+        "Id": 1073,
+        "Name": "An underground lake",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1084,
+          "East": 1074,
+          "South": 1091,
+          "West": 1072
+        }
+      },
+      {
+        "Id": 1074,
+        "Name": "A long narrow tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1075,
+          "West": 1073
+        }
+      },
+      {
+        "Id": 1075,
+        "Name": "A wide tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1095,
+          "West": 1074
+        }
+      },
+      {
+        "Id": 1076,
+        "Name": "Cave-in",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1070,
+          "Down": 1077
+        }
+      },
+      {
+        "Id": 1077,
+        "Name": "At the foot of the rubble",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1078,
+          "East": 1080,
+          "Up": 1076
+        }
+      },
+      {
+        "Id": 1078,
+        "Name": "Cave entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1077,
+          "Down": 1079
+        }
+      },
+      {
+        "Id": 1079,
+        "Name": "Giant cave",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1078
+        }
+      },
+      {
+        "Id": 1080,
+        "Name": "Narrow bend",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1081,
+          "West": 1077
+        }
+      },
+      {
+        "Id": 1081,
+        "Name": "Large cave",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1080,
+          "East": 1082
+        }
+      },
+      {
+        "Id": 1082,
+        "Name": "Damp hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1083,
+          "West": 1081
+        }
+      },
+      {
+        "Id": 1083,
+        "Name": "Underground pool",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1084,
+          "West": 1082
+        }
+      },
+      {
+        "Id": 1084,
+        "Name": "Damp hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1083,
+          "South": 1073
+        }
+      },
+      {
+        "Id": 1085,
+        "Name": "Narrow crawlway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1071,
+          "East": 1086,
+          "South": 1087
+        }
+      },
+      {
+        "Id": 1086,
+        "Name": "Large cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1072,
+          "West": 1085
+        }
+      },
+      {
+        "Id": 1087,
+        "Name": "Fungus patch",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1085,
+          "East": 1088
+        }
+      },
+      {
+        "Id": 1088,
+        "Name": "Fungus path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1089,
+          "West": 1087
+        }
+      },
+      {
+        "Id": 1089,
+        "Name": "Fungus temple",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1088,
+          "East": 1090
+        }
+      },
+      {
+        "Id": 1090,
+        "Name": "Sloping passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1089,
+          "Down": 1091
+        }
+      },
+      {
+        "Id": 1091,
+        "Name": "Sloping passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1073,
+          "Up": 1090
+        }
+      },
+      {
+        "Id": 1092,
+        "Name": "The Great Eastern Desert",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1098,
+          "East": 1093,
+          "South": 1095,
+          "West": 1094
+        }
+      },
+      {
+        "Id": 1093,
+        "Name": "The Great Eastern Desert",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1101,
+          "East": 1094,
+          "South": 1096,
+          "West": 1092
+        }
+      },
+      {
+        "Id": 1094,
+        "Name": "The Great Eastern Desert",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1100,
+          "East": 1092,
+          "South": 1097,
+          "West": 1093
+        }
+      },
+      {
+        "Id": 1095,
+        "Name": "The Great Eastern Desert",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1092,
+          "East": 1096,
+          "South": 1098,
+          "West": 1075
+        }
+      },
+      {
+        "Id": 1096,
+        "Name": "The Great Eastern Desert",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1093,
+          "East": 1097,
+          "South": 1099,
+          "West": 1095
+        }
+      },
+      {
+        "Id": 1097,
+        "Name": "The Great Eastern Desert",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1094,
+          "East": 1107,
+          "South": 1100,
+          "West": 1096
+        }
+      },
+      {
+        "Id": 1098,
+        "Name": "The Great Eastern Desert",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1095,
+          "East": 1099,
+          "South": 1092,
+          "West": 1100
+        }
+      },
+      {
+        "Id": 1099,
+        "Name": "The Great Eastern Desert",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1096,
+          "East": 1100,
+          "South": 1108,
+          "West": 1098
+        }
+      },
+      {
+        "Id": 1100,
+        "Name": "The Great Eastern Desert",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1097,
+          "East": 1098,
+          "South": 1094,
+          "West": 1099
+        }
+      },
+      {
+        "Id": 1101,
+        "Name": "A nomad camp",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1103,
+          "East": 3102,
+          "South": 1093,
+          "West": 1102
+        }
+      },
+      {
+        "Id": 1102,
+        "Name": "Inside a small tent",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1101
+        }
+      },
+      {
+        "Id": 1103,
+        "Name": "Beside the camels",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1105,
+          "East": 1104,
+          "South": 1101
+        }
+      },
+      {
+        "Id": 1104,
+        "Name": "The warrior\u0027s tent.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1103
+        }
+      },
+      {
+        "Id": 1105,
+        "Name": "The main tent",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1106,
+          "South": 1103
+        }
+      },
+      {
+        "Id": 1106,
+        "Name": "The main tent",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1105
+        }
+      },
+      {
+        "Id": 1107,
+        "Name": "Upon a small hill.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2173
+        }
+      },
+      {
+        "Id": 1108,
+        "Name": "The wind-swept ledge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1099,
+          "West": 1109
+        }
+      },
+      {
+        "Id": 1109,
+        "Name": "The cave mouth",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1108,
+          "West": 1110
+        }
+      },
+      {
+        "Id": 1110,
+        "Name": "The mysterious lair.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1109,
+          "West": 1111
+        }
+      },
+      {
+        "Id": 1111,
+        "Name": "A wide tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1110,
+          "West": 1112
+        }
+      },
+      {
+        "Id": 1112,
+        "Name": "A narrower tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1111,
+          "South": 1113
+        }
+      },
+      {
+        "Id": 1113,
+        "Name": "A narrow crack",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1112,
+          "West": 1114
+        }
+      },
+      {
+        "Id": 1114,
+        "Name": "A small cavern.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1115,
+          "East": 1113
+        }
+      },
+      {
+        "Id": 1115,
+        "Name": "A small shaft",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1114,
+          "Up": 1077
+        }
+      },
+      {
+        "Id": 2362,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "East": 1069,
+          "West": 2361
+        }
+      },
+      {
+        "Id": 3102,
+        "Name": "To The Great Pyramid",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 3102,
+          "East": 3103,
+          "South": 3102,
+          "West": 1101
+        }
+      },
+      {
+        "Id": 2173,
+        "Name": "To Mega-City One",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 1107,
+          "South": 2174
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 1069,
-      "name": "A long tunnel",
-      "exits": {
-        "East": 1070,
-        "West": 2362
-      }
-    },
-    {
-      "id": 1070,
-      "name": "A long tunnel",
-      "exits": {
-        "North": 1076,
-        "East": 1071,
-        "West": 1069
-      }
-    },
-    {
-      "id": 1071,
-      "name": "A long tunnel",
-      "exits": {
-        "East": 1072,
-        "South": 1085,
-        "West": 1070
-      }
-    },
-    {
-      "id": 1072,
-      "name": "A long tunnel",
-      "exits": {
-        "East": 1073,
-        "South": 1086,
-        "West": 1071
-      }
-    },
-    {
-      "id": 1073,
-      "name": "An underground lake",
-      "exits": {
-        "North": 1084,
-        "East": 1074,
-        "South": 1091,
-        "West": 1072
-      }
-    },
-    {
-      "id": 1074,
-      "name": "A long narrow tunnel",
-      "exits": {
-        "East": 1075,
-        "West": 1073
-      }
-    },
-    {
-      "id": 1075,
-      "name": "A wide tunnel",
-      "exits": {
-        "East": 1095,
-        "West": 1074
-      }
-    },
-    {
-      "id": 1076,
-      "name": "Cave-in",
-      "exits": {
-        "South": 1070,
-        "Down": 1077
-      }
-    },
-    {
-      "id": 1077,
-      "name": "At the foot of the rubble",
-      "exits": {
-        "North": 1078,
-        "East": 1080,
-        "Up": 1076
-      }
-    },
-    {
-      "id": 1078,
-      "name": "Cave entrance",
-      "exits": {
-        "South": 1077,
-        "Down": 1079
-      }
-    },
-    {
-      "id": 1079,
-      "name": "Giant cave",
-      "exits": {
-        "Up": 1078
-      }
-    },
-    {
-      "id": 1080,
-      "name": "Narrow bend",
-      "exits": {
-        "South": 1081,
-        "West": 1077
-      }
-    },
-    {
-      "id": 1081,
-      "name": "Large cave",
-      "exits": {
-        "North": 1080,
-        "East": 1082
-      }
-    },
-    {
-      "id": 1082,
-      "name": "Damp hallway",
-      "exits": {
-        "East": 1083,
-        "West": 1081
-      }
-    },
-    {
-      "id": 1083,
-      "name": "Underground pool",
-      "exits": {
-        "South": 1084,
-        "West": 1082
-      }
-    },
-    {
-      "id": 1084,
-      "name": "Damp hallway",
-      "exits": {
-        "North": 1083,
-        "South": 1073
-      }
-    },
-    {
-      "id": 1085,
-      "name": "Narrow crawlway",
-      "exits": {
-        "North": 1071,
-        "East": 1086,
-        "South": 1087
-      }
-    },
-    {
-      "id": 1086,
-      "name": "Large cavern",
-      "exits": {
-        "North": 1072,
-        "West": 1085
-      }
-    },
-    {
-      "id": 1087,
-      "name": "Fungus patch",
-      "exits": {
-        "North": 1085,
-        "East": 1088
-      }
-    },
-    {
-      "id": 1088,
-      "name": "Fungus path",
-      "exits": {
-        "South": 1089,
-        "West": 1087
-      }
-    },
-    {
-      "id": 1089,
-      "name": "Fungus temple",
-      "exits": {
-        "North": 1088,
-        "East": 1090
-      }
-    },
-    {
-      "id": 1090,
-      "name": "Sloping passage",
-      "exits": {
-        "West": 1089,
-        "Down": 1091
-      }
-    },
-    {
-      "id": 1091,
-      "name": "Sloping passage",
-      "exits": {
-        "North": 1073,
-        "Up": 1090
-      }
-    },
-    {
-      "id": 1092,
-      "name": "The Great Eastern Desert",
-      "exits": {
-        "North": 1098,
-        "East": 1093,
-        "South": 1095,
-        "West": 1094
-      }
-    },
-    {
-      "id": 1093,
-      "name": "The Great Eastern Desert",
-      "exits": {
-        "North": 1101,
-        "East": 1094,
-        "South": 1096,
-        "West": 1092
-      }
-    },
-    {
-      "id": 1094,
-      "name": "The Great Eastern Desert",
-      "exits": {
-        "North": 1100,
-        "East": 1092,
-        "South": 1097,
-        "West": 1093
-      }
-    },
-    {
-      "id": 1095,
-      "name": "The Great Eastern Desert",
-      "exits": {
-        "North": 1092,
-        "East": 1096,
-        "South": 1098,
-        "West": 1075
-      }
-    },
-    {
-      "id": 1096,
-      "name": "The Great Eastern Desert",
-      "exits": {
-        "North": 1093,
-        "East": 1097,
-        "South": 1099,
-        "West": 1095
-      }
-    },
-    {
-      "id": 1097,
-      "name": "The Great Eastern Desert",
-      "exits": {
-        "North": 1094,
-        "East": 1107,
-        "South": 1100,
-        "West": 1096
-      }
-    },
-    {
-      "id": 1098,
-      "name": "The Great Eastern Desert",
-      "exits": {
-        "North": 1095,
-        "East": 1099,
-        "South": 1092,
-        "West": 1100
-      }
-    },
-    {
-      "id": 1099,
-      "name": "The Great Eastern Desert",
-      "exits": {
-        "North": 1096,
-        "East": 1100,
-        "South": 1108,
-        "West": 1098
-      }
-    },
-    {
-      "id": 1100,
-      "name": "The Great Eastern Desert",
-      "exits": {
-        "North": 1097,
-        "East": 1098,
-        "South": 1094,
-        "West": 1099
-      }
-    },
-    {
-      "id": 1101,
-      "name": "A nomad camp",
-      "exits": {
-        "North": 1103,
-        "East": 3102,
-        "South": 1093,
-        "West": 1102
-      }
-    },
-    {
-      "id": 1102,
-      "name": "Inside a small tent",
-      "exits": {
-        "East": 1101
-      }
-    },
-    {
-      "id": 1103,
-      "name": "Beside the camels",
-      "exits": {
-        "North": 1105,
-        "East": 1104,
-        "South": 1101
-      }
-    },
-    {
-      "id": 1104,
-      "name": "The warrior\u0027s tent.",
-      "exits": {
-        "West": 1103
-      }
-    },
-    {
-      "id": 1105,
-      "name": "The main tent",
-      "exits": {
-        "East": 1106,
-        "South": 1103
-      }
-    },
-    {
-      "id": 1106,
-      "name": "The main tent",
-      "exits": {
-        "West": 1105
-      }
-    },
-    {
-      "id": 1107,
-      "name": "Upon a small hill.",
-      "exits": {
-        "South": 2173
-      }
-    },
-    {
-      "id": 1108,
-      "name": "The wind-swept ledge",
-      "exits": {
-        "North": 1099,
-        "West": 1109
-      }
-    },
-    {
-      "id": 1109,
-      "name": "The cave mouth",
-      "exits": {
-        "East": 1108,
-        "West": 1110
-      }
-    },
-    {
-      "id": 1110,
-      "name": "The mysterious lair.",
-      "exits": {
-        "East": 1109,
-        "West": 1111
-      }
-    },
-    {
-      "id": 1111,
-      "name": "A wide tunnel",
-      "exits": {
-        "East": 1110,
-        "West": 1112
-      }
-    },
-    {
-      "id": 1112,
-      "name": "A narrower tunnel",
-      "exits": {
-        "East": 1111,
-        "South": 1113
-      }
-    },
-    {
-      "id": 1113,
-      "name": "A narrow crack",
-      "exits": {
-        "North": 1112,
-        "West": 1114
-      }
-    },
-    {
-      "id": 1114,
-      "name": "A small cavern.",
-      "exits": {
-        "North": 1115,
-        "East": 1113
-      }
-    },
-    {
-      "id": 1115,
-      "name": "A small shaft",
-      "exits": {
-        "South": 1114,
-        "Up": 1077
-      }
-    },
-    {
-      "id": 2362,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "East": 1069,
-        "West": 2361
-      }
-    },
-    {
-      "id": 3102,
-      "name": "To The Great Pyramid",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 3102,
-        "East": 3103,
-        "South": 3102,
-        "West": 1101
-      }
-    },
-    {
-      "id": 2173,
-      "name": "To Mega-City One",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 1107,
-        "South": 2174
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

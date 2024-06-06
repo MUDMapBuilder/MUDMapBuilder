@@ -1,748 +1,921 @@
 {
-  "name": "Valley of the Elves",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Valley of the Elves",
+    "Rooms": [
+      {
+        "Id": 3993,
+        "Name": "A Path from the Plains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3994,
+          "South": 3054
+        }
+      },
+      {
+        "Id": 3994,
+        "Name": "Along the Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3997,
+          "East": 3996,
+          "South": 3993,
+          "West": 3995
+        }
+      },
+      {
+        "Id": 3995,
+        "Name": "A Small Trail",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4060,
+          "East": 3994
+        }
+      },
+      {
+        "Id": 3996,
+        "Name": "A Small Trail",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4042,
+          "West": 3994
+        }
+      },
+      {
+        "Id": 3997,
+        "Name": "The Overlook",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3994,
+          "Down": 3998
+        }
+      },
+      {
+        "Id": 3998,
+        "Name": "The Entrance to the Valley of the Elves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4003,
+          "East": 4000,
+          "West": 3999,
+          "Up": 3997
+        }
+      },
+      {
+        "Id": 3999,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4002,
+          "East": 3998
+        }
+      },
+      {
+        "Id": 4000,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4004,
+          "West": 3998
+        }
+      },
+      {
+        "Id": 4001,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4006,
+          "East": 4002
+        }
+      },
+      {
+        "Id": 4002,
+        "Name": "The Valley of the Elves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4007,
+          "East": 4003,
+          "South": 3999,
+          "West": 4001
+        }
+      },
+      {
+        "Id": 4003,
+        "Name": "The Valley of the Elves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4008,
+          "East": 4004,
+          "South": 3998,
+          "West": 4002
+        }
+      },
+      {
+        "Id": 4004,
+        "Name": "The Valley of the Elves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4009,
+          "East": 4005,
+          "South": 4000,
+          "West": 4003
+        }
+      },
+      {
+        "Id": 4005,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4010,
+          "West": 4004
+        }
+      },
+      {
+        "Id": 4006,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4011,
+          "East": 4007,
+          "South": 4001,
+          "Up": 4056
+        }
+      },
+      {
+        "Id": 4007,
+        "Name": "The Valley of the Elves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4012,
+          "East": 4008,
+          "South": 4002,
+          "West": 4006
+        }
+      },
+      {
+        "Id": 4008,
+        "Name": "The Valley of the Elves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4013,
+          "East": 4009,
+          "South": 4003,
+          "West": 4007
+        }
+      },
+      {
+        "Id": 4009,
+        "Name": "The Valley of the Elves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4014,
+          "East": 4010,
+          "South": 4004,
+          "West": 4008
+        }
+      },
+      {
+        "Id": 4010,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4015,
+          "South": 4005,
+          "West": 4009,
+          "Up": 4046
+        }
+      },
+      {
+        "Id": 4011,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4012,
+          "South": 4006
+        }
+      },
+      {
+        "Id": 4012,
+        "Name": "The Valley of the Elves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4016,
+          "East": 4013,
+          "South": 4007,
+          "West": 4011
+        }
+      },
+      {
+        "Id": 4013,
+        "Name": "The Valley of the Elves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4017,
+          "East": 4014,
+          "South": 4008,
+          "West": 4012
+        }
+      },
+      {
+        "Id": 4014,
+        "Name": "The Valley of the Elves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4018,
+          "East": 4015,
+          "South": 4009,
+          "West": 4013
+        }
+      },
+      {
+        "Id": 4015,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4010,
+          "West": 4014
+        }
+      },
+      {
+        "Id": 4016,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4017,
+          "South": 4012
+        }
+      },
+      {
+        "Id": 4017,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4019,
+          "East": 4018,
+          "South": 4013,
+          "West": 4016
+        }
+      },
+      {
+        "Id": 4018,
+        "Name": "The Edge of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4014,
+          "West": 4017
+        }
+      },
+      {
+        "Id": 4019,
+        "Name": "A Trail Leading from the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4020,
+          "South": 4017,
+          "Up": 4051
+        }
+      },
+      {
+        "Id": 4020,
+        "Name": "Along the Trail",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4021,
+          "South": 4019,
+          "West": 4061
+        }
+      },
+      {
+        "Id": 4021,
+        "Name": "A Bend in the Trail",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4022,
+          "West": 4020
+        }
+      },
+      {
+        "Id": 4022,
+        "Name": "A Smaller Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4027,
+          "East": 4024,
+          "South": 4021,
+          "West": 4023
+        }
+      },
+      {
+        "Id": 4023,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4025,
+          "East": 4022
+        }
+      },
+      {
+        "Id": 4024,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4026,
+          "West": 4022
+        }
+      },
+      {
+        "Id": 4025,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4030,
+          "South": 4023
+        }
+      },
+      {
+        "Id": 4026,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4029,
+          "West": 4024
+        }
+      },
+      {
+        "Id": 4027,
+        "Name": "The Elf Home",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4031,
+          "East": 4028,
+          "South": 4022
+        }
+      },
+      {
+        "Id": 4028,
+        "Name": "The Kitchen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4032,
+          "West": 4027
+        }
+      },
+      {
+        "Id": 4029,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4033,
+          "South": 4026
+        }
+      },
+      {
+        "Id": 4030,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4034,
+          "South": 4025
+        }
+      },
+      {
+        "Id": 4031,
+        "Name": "The Living Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4032,
+          "South": 4027
+        }
+      },
+      {
+        "Id": 4032,
+        "Name": "The Storage Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4028,
+          "West": 4031,
+          "Up": 4041
+        }
+      },
+      {
+        "Id": 4033,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4037,
+          "South": 4029
+        }
+      },
+      {
+        "Id": 4034,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4035,
+          "South": 4030
+        }
+      },
+      {
+        "Id": 4035,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4036,
+          "West": 4034
+        }
+      },
+      {
+        "Id": 4036,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4037,
+          "West": 4035
+        }
+      },
+      {
+        "Id": 4037,
+        "Name": "A Trail in the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4033,
+          "West": 4036
+        }
+      },
+      {
+        "Id": 4038,
+        "Name": "The Elders\u0027 Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4040,
+          "East": 4039
+        }
+      },
+      {
+        "Id": 4039,
+        "Name": "The Storage Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4041,
+          "West": 4038
+        }
+      },
+      {
+        "Id": 4040,
+        "Name": "The Sleeping Quarters",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4041,
+          "South": 4038
+        }
+      },
+      {
+        "Id": 4041,
+        "Name": "Study",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4039,
+          "West": 4040,
+          "Down": 4032
+        }
+      },
+      {
+        "Id": 4042,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4043,
+          "South": 3996,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4043,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4044,
+          "West": 4042,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4044,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4045,
+          "South": 4043,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4045,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4046,
+          "West": 4044,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4046,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4047,
+          "South": 4045,
+          "Down": 4010
+        }
+      },
+      {
+        "Id": 4047,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4046,
+          "West": 4048,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4048,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4049,
+          "East": 4047,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4049,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4048,
+          "West": 4050,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4050,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4049,
+          "West": 4051,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4051,
+        "Name": "On the Rope Bridge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4050,
+          "West": 4052,
+          "Down": 4019
+        }
+      },
+      {
+        "Id": 4052,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4051,
+          "West": 4053,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4053,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4052,
+          "South": 4054,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4054,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4053,
+          "West": 4055,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4055,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4054,
+          "South": 4056,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4056,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4055,
+          "South": 4057,
+          "Down": 4006
+        }
+      },
+      {
+        "Id": 4057,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4056,
+          "East": 4058,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4058,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4059,
+          "West": 4057,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4059,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4058,
+          "East": 4060,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4060,
+        "Name": "Along a Windy Trail on the Rim of the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3995,
+          "West": 4059,
+          "Down": 4076
+        }
+      },
+      {
+        "Id": 4061,
+        "Name": "A Bend in the Trail",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4062,
+          "East": 4020
+        }
+      },
+      {
+        "Id": 4062,
+        "Name": "A Bend in the Trail",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4061,
+          "West": 4063
+        }
+      },
+      {
+        "Id": 4063,
+        "Name": "The Small Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4064,
+          "East": 4062,
+          "South": 4065,
+          "West": 4071
+        }
+      },
+      {
+        "Id": 4064,
+        "Name": "The Small Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4063,
+          "West": 4066
+        }
+      },
+      {
+        "Id": 4065,
+        "Name": "The Small Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4063,
+          "West": 4070
+        }
+      },
+      {
+        "Id": 4066,
+        "Name": "The Small Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4064,
+          "West": 4067
+        }
+      },
+      {
+        "Id": 4067,
+        "Name": "The Small Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4066,
+          "South": 4068
+        }
+      },
+      {
+        "Id": 4068,
+        "Name": "The Small Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4067,
+          "South": 4069
+        }
+      },
+      {
+        "Id": 4069,
+        "Name": "The Small Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4068,
+          "East": 4070
+        }
+      },
+      {
+        "Id": 4070,
+        "Name": "The Small Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4065,
+          "West": 4069
+        }
+      },
+      {
+        "Id": 4071,
+        "Name": "Inside the Small Shack",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4063,
+          "Down": 4072
+        }
+      },
+      {
+        "Id": 4072,
+        "Name": "Beneath the Small Shack",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 4073,
+          "Up": 4071
+        }
+      },
+      {
+        "Id": 4073,
+        "Name": "The Den of the Pyrohydra",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4072,
+          "East": 4075,
+          "West": 4074
+        }
+      },
+      {
+        "Id": 4074,
+        "Name": "The Workroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 4073
+        }
+      },
+      {
+        "Id": 4075,
+        "Name": "The Storage Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 4073
+        }
+      },
+      {
+        "Id": 4076,
+        "Name": "WAY Far Down into the Valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 3054,
+        "Name": "To Plains of the North",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 3993,
+          "East": 3055,
+          "South": 3059
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 3993,
-      "name": "A Path from the Plains",
-      "exits": {
-        "North": 3994,
-        "South": 3054
-      }
-    },
-    {
-      "id": 3994,
-      "name": "Along the Path",
-      "exits": {
-        "North": 3997,
-        "East": 3996,
-        "South": 3993,
-        "West": 3995
-      }
-    },
-    {
-      "id": 3995,
-      "name": "A Small Trail",
-      "exits": {
-        "North": 4060,
-        "East": 3994
-      }
-    },
-    {
-      "id": 3996,
-      "name": "A Small Trail",
-      "exits": {
-        "North": 4042,
-        "West": 3994
-      }
-    },
-    {
-      "id": 3997,
-      "name": "The Overlook",
-      "exits": {
-        "South": 3994,
-        "Down": 3998
-      }
-    },
-    {
-      "id": 3998,
-      "name": "The Entrance to the Valley of the Elves",
-      "exits": {
-        "North": 4003,
-        "East": 4000,
-        "West": 3999,
-        "Up": 3997
-      }
-    },
-    {
-      "id": 3999,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "North": 4002,
-        "East": 3998
-      }
-    },
-    {
-      "id": 4000,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "North": 4004,
-        "West": 3998
-      }
-    },
-    {
-      "id": 4001,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "North": 4006,
-        "East": 4002
-      }
-    },
-    {
-      "id": 4002,
-      "name": "The Valley of the Elves",
-      "exits": {
-        "North": 4007,
-        "East": 4003,
-        "South": 3999,
-        "West": 4001
-      }
-    },
-    {
-      "id": 4003,
-      "name": "The Valley of the Elves",
-      "exits": {
-        "North": 4008,
-        "East": 4004,
-        "South": 3998,
-        "West": 4002
-      }
-    },
-    {
-      "id": 4004,
-      "name": "The Valley of the Elves",
-      "exits": {
-        "North": 4009,
-        "East": 4005,
-        "South": 4000,
-        "West": 4003
-      }
-    },
-    {
-      "id": 4005,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "North": 4010,
-        "West": 4004
-      }
-    },
-    {
-      "id": 4006,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "North": 4011,
-        "East": 4007,
-        "South": 4001,
-        "Up": 4056
-      }
-    },
-    {
-      "id": 4007,
-      "name": "The Valley of the Elves",
-      "exits": {
-        "North": 4012,
-        "East": 4008,
-        "South": 4002,
-        "West": 4006
-      }
-    },
-    {
-      "id": 4008,
-      "name": "The Valley of the Elves",
-      "exits": {
-        "North": 4013,
-        "East": 4009,
-        "South": 4003,
-        "West": 4007
-      }
-    },
-    {
-      "id": 4009,
-      "name": "The Valley of the Elves",
-      "exits": {
-        "North": 4014,
-        "East": 4010,
-        "South": 4004,
-        "West": 4008
-      }
-    },
-    {
-      "id": 4010,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "North": 4015,
-        "South": 4005,
-        "West": 4009,
-        "Up": 4046
-      }
-    },
-    {
-      "id": 4011,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "East": 4012,
-        "South": 4006
-      }
-    },
-    {
-      "id": 4012,
-      "name": "The Valley of the Elves",
-      "exits": {
-        "North": 4016,
-        "East": 4013,
-        "South": 4007,
-        "West": 4011
-      }
-    },
-    {
-      "id": 4013,
-      "name": "The Valley of the Elves",
-      "exits": {
-        "North": 4017,
-        "East": 4014,
-        "South": 4008,
-        "West": 4012
-      }
-    },
-    {
-      "id": 4014,
-      "name": "The Valley of the Elves",
-      "exits": {
-        "North": 4018,
-        "East": 4015,
-        "South": 4009,
-        "West": 4013
-      }
-    },
-    {
-      "id": 4015,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "South": 4010,
-        "West": 4014
-      }
-    },
-    {
-      "id": 4016,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "East": 4017,
-        "South": 4012
-      }
-    },
-    {
-      "id": 4017,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "North": 4019,
-        "East": 4018,
-        "South": 4013,
-        "West": 4016
-      }
-    },
-    {
-      "id": 4018,
-      "name": "The Edge of the Valley",
-      "exits": {
-        "South": 4014,
-        "West": 4017
-      }
-    },
-    {
-      "id": 4019,
-      "name": "A Trail Leading from the Valley",
-      "exits": {
-        "North": 4020,
-        "South": 4017,
-        "Up": 4051
-      }
-    },
-    {
-      "id": 4020,
-      "name": "Along the Trail",
-      "exits": {
-        "East": 4021,
-        "South": 4019,
-        "West": 4061
-      }
-    },
-    {
-      "id": 4021,
-      "name": "A Bend in the Trail",
-      "exits": {
-        "North": 4022,
-        "West": 4020
-      }
-    },
-    {
-      "id": 4022,
-      "name": "A Smaller Valley",
-      "exits": {
-        "North": 4027,
-        "East": 4024,
-        "South": 4021,
-        "West": 4023
-      }
-    },
-    {
-      "id": 4023,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "North": 4025,
-        "East": 4022
-      }
-    },
-    {
-      "id": 4024,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "East": 4026,
-        "West": 4022
-      }
-    },
-    {
-      "id": 4025,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "North": 4030,
-        "South": 4023
-      }
-    },
-    {
-      "id": 4026,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "North": 4029,
-        "West": 4024
-      }
-    },
-    {
-      "id": 4027,
-      "name": "The Elf Home",
-      "exits": {
-        "North": 4031,
-        "East": 4028,
-        "South": 4022
-      }
-    },
-    {
-      "id": 4028,
-      "name": "The Kitchen",
-      "exits": {
-        "North": 4032,
-        "West": 4027
-      }
-    },
-    {
-      "id": 4029,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "North": 4033,
-        "South": 4026
-      }
-    },
-    {
-      "id": 4030,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "North": 4034,
-        "South": 4025
-      }
-    },
-    {
-      "id": 4031,
-      "name": "The Living Room",
-      "exits": {
-        "East": 4032,
-        "South": 4027
-      }
-    },
-    {
-      "id": 4032,
-      "name": "The Storage Room",
-      "exits": {
-        "South": 4028,
-        "West": 4031,
-        "Up": 4041
-      }
-    },
-    {
-      "id": 4033,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "North": 4037,
-        "South": 4029
-      }
-    },
-    {
-      "id": 4034,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "East": 4035,
-        "South": 4030
-      }
-    },
-    {
-      "id": 4035,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "East": 4036,
-        "West": 4034
-      }
-    },
-    {
-      "id": 4036,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "East": 4037,
-        "West": 4035
-      }
-    },
-    {
-      "id": 4037,
-      "name": "A Trail in the Valley",
-      "exits": {
-        "South": 4033,
-        "West": 4036
-      }
-    },
-    {
-      "id": 4038,
-      "name": "The Elders\u0027 Room",
-      "exits": {
-        "North": 4040,
-        "East": 4039
-      }
-    },
-    {
-      "id": 4039,
-      "name": "The Storage Room",
-      "exits": {
-        "North": 4041,
-        "West": 4038
-      }
-    },
-    {
-      "id": 4040,
-      "name": "The Sleeping Quarters",
-      "exits": {
-        "East": 4041,
-        "South": 4038
-      }
-    },
-    {
-      "id": 4041,
-      "name": "Study",
-      "exits": {
-        "South": 4039,
-        "West": 4040,
-        "Down": 4032
-      }
-    },
-    {
-      "id": 4042,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "East": 4043,
-        "South": 3996,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4043,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "North": 4044,
-        "West": 4042,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4044,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "East": 4045,
-        "South": 4043,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4045,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "North": 4046,
-        "West": 4044,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4046,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "North": 4047,
-        "South": 4045,
-        "Down": 4010
-      }
-    },
-    {
-      "id": 4047,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "South": 4046,
-        "West": 4048,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4048,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "North": 4049,
-        "East": 4047,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4049,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "South": 4048,
-        "West": 4050,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4050,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "East": 4049,
-        "West": 4051,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4051,
-      "name": "On the Rope Bridge",
-      "exits": {
-        "East": 4050,
-        "West": 4052,
-        "Down": 4019
-      }
-    },
-    {
-      "id": 4052,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "East": 4051,
-        "West": 4053,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4053,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "East": 4052,
-        "South": 4054,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4054,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "North": 4053,
-        "West": 4055,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4055,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "East": 4054,
-        "South": 4056,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4056,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "North": 4055,
-        "South": 4057,
-        "Down": 4006
-      }
-    },
-    {
-      "id": 4057,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "North": 4056,
-        "East": 4058,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4058,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "South": 4059,
-        "West": 4057,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4059,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "North": 4058,
-        "East": 4060,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4060,
-      "name": "Along a Windy Trail on the Rim of the Valley",
-      "exits": {
-        "South": 3995,
-        "West": 4059,
-        "Down": 4076
-      }
-    },
-    {
-      "id": 4061,
-      "name": "A Bend in the Trail",
-      "exits": {
-        "North": 4062,
-        "East": 4020
-      }
-    },
-    {
-      "id": 4062,
-      "name": "A Bend in the Trail",
-      "exits": {
-        "South": 4061,
-        "West": 4063
-      }
-    },
-    {
-      "id": 4063,
-      "name": "The Small Valley",
-      "exits": {
-        "North": 4064,
-        "East": 4062,
-        "South": 4065,
-        "West": 4071
-      }
-    },
-    {
-      "id": 4064,
-      "name": "The Small Valley",
-      "exits": {
-        "South": 4063,
-        "West": 4066
-      }
-    },
-    {
-      "id": 4065,
-      "name": "The Small Valley",
-      "exits": {
-        "North": 4063,
-        "West": 4070
-      }
-    },
-    {
-      "id": 4066,
-      "name": "The Small Valley",
-      "exits": {
-        "East": 4064,
-        "West": 4067
-      }
-    },
-    {
-      "id": 4067,
-      "name": "The Small Valley",
-      "exits": {
-        "East": 4066,
-        "South": 4068
-      }
-    },
-    {
-      "id": 4068,
-      "name": "The Small Valley",
-      "exits": {
-        "North": 4067,
-        "South": 4069
-      }
-    },
-    {
-      "id": 4069,
-      "name": "The Small Valley",
-      "exits": {
-        "North": 4068,
-        "East": 4070
-      }
-    },
-    {
-      "id": 4070,
-      "name": "The Small Valley",
-      "exits": {
-        "East": 4065,
-        "West": 4069
-      }
-    },
-    {
-      "id": 4071,
-      "name": "Inside the Small Shack",
-      "exits": {
-        "East": 4063,
-        "Down": 4072
-      }
-    },
-    {
-      "id": 4072,
-      "name": "Beneath the Small Shack",
-      "exits": {
-        "South": 4073,
-        "Up": 4071
-      }
-    },
-    {
-      "id": 4073,
-      "name": "The Den of the Pyrohydra",
-      "exits": {
-        "North": 4072,
-        "East": 4075,
-        "West": 4074
-      }
-    },
-    {
-      "id": 4074,
-      "name": "The Workroom",
-      "exits": {
-        "East": 4073
-      }
-    },
-    {
-      "id": 4075,
-      "name": "The Storage Room",
-      "exits": {
-        "West": 4073
-      }
-    },
-    {
-      "id": 4076,
-      "name": "WAY Far Down into the Valley",
-      "exits": {}
-    },
-    {
-      "id": 3054,
-      "name": "To Plains of the North",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 3993,
-        "East": 3055,
-        "South": 3059
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

@@ -1,735 +1,914 @@
 {
-  "name": "Kingdom of Juargan",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Kingdom of Juargan",
+    "Rooms": [
+      {
+        "Id": 1966,
+        "Name": "The Spiral Stair",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1967,
+          "Up": 2038
+        }
+      },
+      {
+        "Id": 1967,
+        "Name": "Mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1966,
+          "West": 1968
+        }
+      },
+      {
+        "Id": 1968,
+        "Name": "Mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1969,
+          "East": 1967
+        }
+      },
+      {
+        "Id": 1969,
+        "Name": "Mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1968,
+          "West": 1970
+        }
+      },
+      {
+        "Id": 1970,
+        "Name": "Mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1969,
+          "South": 1971,
+          "West": 1972
+        }
+      },
+      {
+        "Id": 1971,
+        "Name": "Unfinished Mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1970
+        }
+      },
+      {
+        "Id": 1972,
+        "Name": "Mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1970,
+          "West": 1973
+        }
+      },
+      {
+        "Id": 1973,
+        "Name": "Turn in the Mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1972,
+          "South": 1974
+        }
+      },
+      {
+        "Id": 1974,
+        "Name": "Mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1973,
+          "South": 1975,
+          "West": 2002
+        }
+      },
+      {
+        "Id": 1975,
+        "Name": "Dwarven mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1974,
+          "East": 1990,
+          "South": 1976
+        }
+      },
+      {
+        "Id": 1976,
+        "Name": "Dwarven mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1975,
+          "East": 1978,
+          "South": 1977
+        }
+      },
+      {
+        "Id": 1977,
+        "Name": "Dwarven mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1976
+        }
+      },
+      {
+        "Id": 1978,
+        "Name": "Dwarven mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1979,
+          "West": 1976
+        }
+      },
+      {
+        "Id": 1979,
+        "Name": "Dwarven mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1978,
+          "South": 1980
+        }
+      },
+      {
+        "Id": 1980,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1979,
+          "East": 1985,
+          "West": 1981
+        }
+      },
+      {
+        "Id": 1981,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1980,
+          "South": 1982
+        }
+      },
+      {
+        "Id": 1982,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1981,
+          "East": 1983
+        }
+      },
+      {
+        "Id": 1983,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1984,
+          "West": 1982
+        }
+      },
+      {
+        "Id": 1984,
+        "Name": "End of the mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1983
+        }
+      },
+      {
+        "Id": 1985,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1987,
+          "South": 1986,
+          "West": 1980
+        }
+      },
+      {
+        "Id": 1986,
+        "Name": "Unfinished shaft",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1985
+        }
+      },
+      {
+        "Id": 1987,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1988,
+          "West": 1985
+        }
+      },
+      {
+        "Id": 1988,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1987,
+          "South": 1989
+        }
+      },
+      {
+        "Id": 1989,
+        "Name": "Unfinished mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1988
+        }
+      },
+      {
+        "Id": 1990,
+        "Name": "Dwarven mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1991,
+          "West": 1975
+        }
+      },
+      {
+        "Id": 1991,
+        "Name": "Dwarven mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1992,
+          "West": 1990
+        }
+      },
+      {
+        "Id": 1992,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1991,
+          "South": 1993
+        }
+      },
+      {
+        "Id": 1993,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1992,
+          "East": 1994
+        }
+      },
+      {
+        "Id": 1994,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1995,
+          "West": 1993
+        }
+      },
+      {
+        "Id": 1995,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1998,
+          "South": 1996,
+          "West": 1994
+        }
+      },
+      {
+        "Id": 1996,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1995,
+          "South": 1997
+        }
+      },
+      {
+        "Id": 1997,
+        "Name": "Dwarven mines",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1996
+        }
+      },
+      {
+        "Id": 1998,
+        "Name": "Duergar Outcamp",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1999,
+          "South": 1995,
+          "West": 2001
+        }
+      },
+      {
+        "Id": 1999,
+        "Name": "Duergar Barracks",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1998
+        }
+      },
+      {
+        "Id": 2000,
+        "Name": "Small cave",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2001
+        }
+      },
+      {
+        "Id": 2001,
+        "Name": "By a small fire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1998,
+          "North": 2000
+        }
+      },
+      {
+        "Id": 2002,
+        "Name": "Carved Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2003,
+          "East": 1974
+        }
+      },
+      {
+        "Id": 2003,
+        "Name": "Carved Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2002,
+          "West": 2004
+        }
+      },
+      {
+        "Id": 2004,
+        "Name": "Carved Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2003,
+          "South": 2005
+        }
+      },
+      {
+        "Id": 2005,
+        "Name": "Stone Gates",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2004,
+          "South": 2006
+        }
+      },
+      {
+        "Id": 2006,
+        "Name": "Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2005,
+          "South": 2007,
+          "West": 2016
+        }
+      },
+      {
+        "Id": 2007,
+        "Name": "Rock Garden",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2006,
+          "East": 2008,
+          "West": 2014
+        }
+      },
+      {
+        "Id": 2008,
+        "Name": "Rock Garden",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2009,
+          "West": 2007
+        }
+      },
+      {
+        "Id": 2009,
+        "Name": "Rock Garden",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2008,
+          "South": 2010
+        }
+      },
+      {
+        "Id": 2010,
+        "Name": "Rock Garden",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2009,
+          "West": 2011
+        }
+      },
+      {
+        "Id": 2011,
+        "Name": "Rock Garden",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2015,
+          "East": 2010,
+          "West": 2012
+        }
+      },
+      {
+        "Id": 2012,
+        "Name": "Rock Garden",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2013,
+          "East": 2011
+        }
+      },
+      {
+        "Id": 2013,
+        "Name": "Rock Garden",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2014,
+          "South": 2012
+        }
+      },
+      {
+        "Id": 2014,
+        "Name": "Rock Garden",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2007,
+          "South": 2013
+        }
+      },
+      {
+        "Id": 2015,
+        "Name": "Temple of Juargan",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2011
+        }
+      },
+      {
+        "Id": 2016,
+        "Name": "Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2006,
+          "West": 2017
+        }
+      },
+      {
+        "Id": 2017,
+        "Name": "Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2016,
+          "South": 2019,
+          "West": 2018
+        }
+      },
+      {
+        "Id": 2018,
+        "Name": "Blacksmith\u0027s Home",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2017
+        }
+      },
+      {
+        "Id": 2019,
+        "Name": "Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2017,
+          "South": 2025,
+          "West": 2020
+        }
+      },
+      {
+        "Id": 2020,
+        "Name": "Path in the Rock",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2019,
+          "West": 2021
+        }
+      },
+      {
+        "Id": 2021,
+        "Name": "Path in the Rock",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2020,
+          "South": 2022
+        }
+      },
+      {
+        "Id": 2022,
+        "Name": "Path in the Rock",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2021,
+          "East": 2037,
+          "South": 2023
+        }
+      },
+      {
+        "Id": 2023,
+        "Name": "Path in the Rock",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2022,
+          "East": 2024
+        }
+      },
+      {
+        "Id": 2024,
+        "Name": "Path in the Rock",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2026,
+          "South": 2027,
+          "West": 2023
+        }
+      },
+      {
+        "Id": 2025,
+        "Name": "Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2019,
+          "South": 2026
+        }
+      },
+      {
+        "Id": 2026,
+        "Name": "Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2025,
+          "South": 2028,
+          "West": 2024
+        }
+      },
+      {
+        "Id": 2027,
+        "Name": "Pasty\u0027s Dwelling",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2024
+        }
+      },
+      {
+        "Id": 2028,
+        "Name": "Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2026,
+          "East": 2029,
+          "South": 2030
+        }
+      },
+      {
+        "Id": 2029,
+        "Name": "Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2032,
+          "South": 2031,
+          "West": 2028
+        }
+      },
+      {
+        "Id": 2030,
+        "Name": "Leatherbies Home",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2028
+        }
+      },
+      {
+        "Id": 2031,
+        "Name": "The Stone Jewel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2029
+        }
+      },
+      {
+        "Id": 2032,
+        "Name": "Guard Barrack",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 2029,
+          "South": 2033
+        }
+      },
+      {
+        "Id": 2033,
+        "Name": "Alcove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2032,
+          "West": 2034
+        }
+      },
+      {
+        "Id": 2034,
+        "Name": "Entrance to Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2035,
+          "East": 2033
+        }
+      },
+      {
+        "Id": 2035,
+        "Name": "Ancients Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2034,
+          "West": 2036
+        }
+      },
+      {
+        "Id": 2036,
+        "Name": "Ancients Vault",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2035
+        }
+      },
+      {
+        "Id": 2037,
+        "Name": "Siven\u0027s Stone",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 2022
+        }
+      },
+      {
+        "Id": 2038,
+        "Name": "The small cave",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2039,
+          "Down": 1966
+        }
+      },
+      {
+        "Id": 2039,
+        "Name": "Beneath the waterfall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2038,
+          "West": 2040
+        }
+      },
+      {
+        "Id": 2040,
+        "Name": "By the beautiful waterfall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3777,
+          "East": 2039,
+          "South": 2041
+        }
+      },
+      {
+        "Id": 2041,
+        "Name": "A valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2040,
+          "West": 2042
+        }
+      },
+      {
+        "Id": 2042,
+        "Name": "A valley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2041,
+          "Up": 2043
+        }
+      },
+      {
+        "Id": 2043,
+        "Name": "At the end of the hills",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 2042,
+          "West": 2044
+        }
+      },
+      {
+        "Id": 2044,
+        "Name": "A trail along the hills",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2043,
+          "West": 2045
+        }
+      },
+      {
+        "Id": 2045,
+        "Name": "A trail along the hills",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2044,
+          "Down": 2046
+        }
+      },
+      {
+        "Id": 2046,
+        "Name": "Up the hill",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 2045,
+          "Down": 2047
+        }
+      },
+      {
+        "Id": 2047,
+        "Name": "Up the hill",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 2046,
+          "Down": 2048
+        }
+      },
+      {
+        "Id": 2048,
+        "Name": "Up the hill",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 2047,
+          "Down": 2049
+        }
+      },
+      {
+        "Id": 2049,
+        "Name": "Up the hill",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 2048,
+          "Down": 2050
+        }
+      },
+      {
+        "Id": 2050,
+        "Name": "The hills",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 2051,
+          "Up": 2049
+        }
+      },
+      {
+        "Id": 2051,
+        "Name": "The hills",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2050,
+          "West": 2483,
+          "South": 1116
+        }
+      },
+      {
+        "Id": 3777,
+        "Name": "To Thalos",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "East": 3776,
+          "South": 2040
+        }
+      },
+      {
+        "Id": 2483,
+        "Name": "To Moria",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2484,
+          "East": 2051,
+          "South": 2201
+        }
+      },
+      {
+        "Id": 1116,
+        "Name": "To Land of the Fire Newts",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2051,
+          "South": 1117
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 1966,
-      "name": "The Spiral Stair",
-      "exits": {
-        "West": 1967,
-        "Up": 2038
-      }
-    },
-    {
-      "id": 1967,
-      "name": "Mines",
-      "exits": {
-        "East": 1966,
-        "West": 1968
-      }
-    },
-    {
-      "id": 1968,
-      "name": "Mines",
-      "exits": {
-        "North": 1969,
-        "East": 1967
-      }
-    },
-    {
-      "id": 1969,
-      "name": "Mines",
-      "exits": {
-        "South": 1968,
-        "West": 1970
-      }
-    },
-    {
-      "id": 1970,
-      "name": "Mines",
-      "exits": {
-        "East": 1969,
-        "South": 1971,
-        "West": 1972
-      }
-    },
-    {
-      "id": 1971,
-      "name": "Unfinished Mine",
-      "exits": {
-        "North": 1970
-      }
-    },
-    {
-      "id": 1972,
-      "name": "Mines",
-      "exits": {
-        "East": 1970,
-        "West": 1973
-      }
-    },
-    {
-      "id": 1973,
-      "name": "Turn in the Mine",
-      "exits": {
-        "East": 1972,
-        "South": 1974
-      }
-    },
-    {
-      "id": 1974,
-      "name": "Mines",
-      "exits": {
-        "North": 1973,
-        "South": 1975,
-        "West": 2002
-      }
-    },
-    {
-      "id": 1975,
-      "name": "Dwarven mine",
-      "exits": {
-        "North": 1974,
-        "East": 1990,
-        "South": 1976
-      }
-    },
-    {
-      "id": 1976,
-      "name": "Dwarven mine",
-      "exits": {
-        "North": 1975,
-        "East": 1978,
-        "South": 1977
-      }
-    },
-    {
-      "id": 1977,
-      "name": "Dwarven mine",
-      "exits": {
-        "North": 1976
-      }
-    },
-    {
-      "id": 1978,
-      "name": "Dwarven mine",
-      "exits": {
-        "South": 1979,
-        "West": 1976
-      }
-    },
-    {
-      "id": 1979,
-      "name": "Dwarven mine",
-      "exits": {
-        "North": 1978,
-        "South": 1980
-      }
-    },
-    {
-      "id": 1980,
-      "name": "Dwarven mines",
-      "exits": {
-        "North": 1979,
-        "East": 1985,
-        "West": 1981
-      }
-    },
-    {
-      "id": 1981,
-      "name": "Dwarven mines",
-      "exits": {
-        "East": 1980,
-        "South": 1982
-      }
-    },
-    {
-      "id": 1982,
-      "name": "Dwarven mines",
-      "exits": {
-        "North": 1981,
-        "East": 1983
-      }
-    },
-    {
-      "id": 1983,
-      "name": "Dwarven mines",
-      "exits": {
-        "South": 1984,
-        "West": 1982
-      }
-    },
-    {
-      "id": 1984,
-      "name": "End of the mine",
-      "exits": {
-        "North": 1983
-      }
-    },
-    {
-      "id": 1985,
-      "name": "Dwarven mines",
-      "exits": {
-        "East": 1987,
-        "South": 1986,
-        "West": 1980
-      }
-    },
-    {
-      "id": 1986,
-      "name": "Unfinished shaft",
-      "exits": {
-        "North": 1985
-      }
-    },
-    {
-      "id": 1987,
-      "name": "Dwarven mines",
-      "exits": {
-        "South": 1988,
-        "West": 1985
-      }
-    },
-    {
-      "id": 1988,
-      "name": "Dwarven mines",
-      "exits": {
-        "North": 1987,
-        "South": 1989
-      }
-    },
-    {
-      "id": 1989,
-      "name": "Unfinished mine",
-      "exits": {
-        "North": 1988
-      }
-    },
-    {
-      "id": 1990,
-      "name": "Dwarven mine",
-      "exits": {
-        "East": 1991,
-        "West": 1975
-      }
-    },
-    {
-      "id": 1991,
-      "name": "Dwarven mine",
-      "exits": {
-        "South": 1992,
-        "West": 1990
-      }
-    },
-    {
-      "id": 1992,
-      "name": "Dwarven mines",
-      "exits": {
-        "North": 1991,
-        "South": 1993
-      }
-    },
-    {
-      "id": 1993,
-      "name": "Dwarven mines",
-      "exits": {
-        "North": 1992,
-        "East": 1994
-      }
-    },
-    {
-      "id": 1994,
-      "name": "Dwarven mines",
-      "exits": {
-        "East": 1995,
-        "West": 1993
-      }
-    },
-    {
-      "id": 1995,
-      "name": "Dwarven mines",
-      "exits": {
-        "North": 1998,
-        "South": 1996,
-        "West": 1994
-      }
-    },
-    {
-      "id": 1996,
-      "name": "Dwarven mines",
-      "exits": {
-        "North": 1995,
-        "South": 1997
-      }
-    },
-    {
-      "id": 1997,
-      "name": "Dwarven mines",
-      "exits": {
-        "North": 1996
-      }
-    },
-    {
-      "id": 1998,
-      "name": "Duergar Outcamp",
-      "exits": {
-        "North": 1999,
-        "South": 1995,
-        "West": 2001
-      }
-    },
-    {
-      "id": 1999,
-      "name": "Duergar Barracks",
-      "exits": {
-        "South": 1998
-      }
-    },
-    {
-      "id": 2000,
-      "name": "Small cave",
-      "exits": {
-        "South": 2001
-      }
-    },
-    {
-      "id": 2001,
-      "name": "By a small fire",
-      "exits": {
-        "East": 1998,
-        "North": 2000
-      }
-    },
-    {
-      "id": 2002,
-      "name": "Carved Tunnel",
-      "exits": {
-        "North": 2003,
-        "East": 1974
-      }
-    },
-    {
-      "id": 2003,
-      "name": "Carved Tunnel",
-      "exits": {
-        "South": 2002,
-        "West": 2004
-      }
-    },
-    {
-      "id": 2004,
-      "name": "Carved Tunnel",
-      "exits": {
-        "East": 2003,
-        "South": 2005
-      }
-    },
-    {
-      "id": 2005,
-      "name": "Stone Gates",
-      "exits": {
-        "North": 2004,
-        "South": 2006
-      }
-    },
-    {
-      "id": 2006,
-      "name": "Walkway",
-      "exits": {
-        "North": 2005,
-        "South": 2007,
-        "West": 2016
-      }
-    },
-    {
-      "id": 2007,
-      "name": "Rock Garden",
-      "exits": {
-        "North": 2006,
-        "East": 2008,
-        "West": 2014
-      }
-    },
-    {
-      "id": 2008,
-      "name": "Rock Garden",
-      "exits": {
-        "South": 2009,
-        "West": 2007
-      }
-    },
-    {
-      "id": 2009,
-      "name": "Rock Garden",
-      "exits": {
-        "North": 2008,
-        "South": 2010
-      }
-    },
-    {
-      "id": 2010,
-      "name": "Rock Garden",
-      "exits": {
-        "North": 2009,
-        "West": 2011
-      }
-    },
-    {
-      "id": 2011,
-      "name": "Rock Garden",
-      "exits": {
-        "North": 2015,
-        "East": 2010,
-        "West": 2012
-      }
-    },
-    {
-      "id": 2012,
-      "name": "Rock Garden",
-      "exits": {
-        "North": 2013,
-        "East": 2011
-      }
-    },
-    {
-      "id": 2013,
-      "name": "Rock Garden",
-      "exits": {
-        "North": 2014,
-        "South": 2012
-      }
-    },
-    {
-      "id": 2014,
-      "name": "Rock Garden",
-      "exits": {
-        "East": 2007,
-        "South": 2013
-      }
-    },
-    {
-      "id": 2015,
-      "name": "Temple of Juargan",
-      "exits": {
-        "South": 2011
-      }
-    },
-    {
-      "id": 2016,
-      "name": "Walkway",
-      "exits": {
-        "East": 2006,
-        "West": 2017
-      }
-    },
-    {
-      "id": 2017,
-      "name": "Walkway",
-      "exits": {
-        "East": 2016,
-        "South": 2019,
-        "West": 2018
-      }
-    },
-    {
-      "id": 2018,
-      "name": "Blacksmith\u0027s Home",
-      "exits": {
-        "East": 2017
-      }
-    },
-    {
-      "id": 2019,
-      "name": "Walkway",
-      "exits": {
-        "North": 2017,
-        "South": 2025,
-        "West": 2020
-      }
-    },
-    {
-      "id": 2020,
-      "name": "Path in the Rock",
-      "exits": {
-        "East": 2019,
-        "West": 2021
-      }
-    },
-    {
-      "id": 2021,
-      "name": "Path in the Rock",
-      "exits": {
-        "East": 2020,
-        "South": 2022
-      }
-    },
-    {
-      "id": 2022,
-      "name": "Path in the Rock",
-      "exits": {
-        "North": 2021,
-        "East": 2037,
-        "South": 2023
-      }
-    },
-    {
-      "id": 2023,
-      "name": "Path in the Rock",
-      "exits": {
-        "North": 2022,
-        "East": 2024
-      }
-    },
-    {
-      "id": 2024,
-      "name": "Path in the Rock",
-      "exits": {
-        "East": 2026,
-        "South": 2027,
-        "West": 2023
-      }
-    },
-    {
-      "id": 2025,
-      "name": "Walkway",
-      "exits": {
-        "North": 2019,
-        "South": 2026
-      }
-    },
-    {
-      "id": 2026,
-      "name": "Walkway",
-      "exits": {
-        "North": 2025,
-        "South": 2028,
-        "West": 2024
-      }
-    },
-    {
-      "id": 2027,
-      "name": "Pasty\u0027s Dwelling",
-      "exits": {
-        "North": 2024
-      }
-    },
-    {
-      "id": 2028,
-      "name": "Walkway",
-      "exits": {
-        "North": 2026,
-        "East": 2029,
-        "South": 2030
-      }
-    },
-    {
-      "id": 2029,
-      "name": "Walkway",
-      "exits": {
-        "East": 2032,
-        "South": 2031,
-        "West": 2028
-      }
-    },
-    {
-      "id": 2030,
-      "name": "Leatherbies Home",
-      "exits": {
-        "North": 2028
-      }
-    },
-    {
-      "id": 2031,
-      "name": "The Stone Jewel",
-      "exits": {
-        "North": 2029
-      }
-    },
-    {
-      "id": 2032,
-      "name": "Guard Barrack",
-      "exits": {
-        "West": 2029,
-        "South": 2033
-      }
-    },
-    {
-      "id": 2033,
-      "name": "Alcove",
-      "exits": {
-        "North": 2032,
-        "West": 2034
-      }
-    },
-    {
-      "id": 2034,
-      "name": "Entrance to Tomb",
-      "exits": {
-        "North": 2035,
-        "East": 2033
-      }
-    },
-    {
-      "id": 2035,
-      "name": "Ancients Tomb",
-      "exits": {
-        "South": 2034,
-        "West": 2036
-      }
-    },
-    {
-      "id": 2036,
-      "name": "Ancients Vault",
-      "exits": {
-        "East": 2035
-      }
-    },
-    {
-      "id": 2037,
-      "name": "Siven\u0027s Stone",
-      "exits": {
-        "West": 2022
-      }
-    },
-    {
-      "id": 2038,
-      "name": "The small cave",
-      "exits": {
-        "North": 2039,
-        "Down": 1966
-      }
-    },
-    {
-      "id": 2039,
-      "name": "Beneath the waterfall",
-      "exits": {
-        "South": 2038,
-        "West": 2040
-      }
-    },
-    {
-      "id": 2040,
-      "name": "By the beautiful waterfall",
-      "exits": {
-        "North": 3777,
-        "East": 2039,
-        "South": 2041
-      }
-    },
-    {
-      "id": 2041,
-      "name": "A valley",
-      "exits": {
-        "North": 2040,
-        "West": 2042
-      }
-    },
-    {
-      "id": 2042,
-      "name": "A valley",
-      "exits": {
-        "East": 2041,
-        "Up": 2043
-      }
-    },
-    {
-      "id": 2043,
-      "name": "At the end of the hills",
-      "exits": {
-        "Down": 2042,
-        "West": 2044
-      }
-    },
-    {
-      "id": 2044,
-      "name": "A trail along the hills",
-      "exits": {
-        "East": 2043,
-        "West": 2045
-      }
-    },
-    {
-      "id": 2045,
-      "name": "A trail along the hills",
-      "exits": {
-        "East": 2044,
-        "Down": 2046
-      }
-    },
-    {
-      "id": 2046,
-      "name": "Up the hill",
-      "exits": {
-        "Up": 2045,
-        "Down": 2047
-      }
-    },
-    {
-      "id": 2047,
-      "name": "Up the hill",
-      "exits": {
-        "Up": 2046,
-        "Down": 2048
-      }
-    },
-    {
-      "id": 2048,
-      "name": "Up the hill",
-      "exits": {
-        "Up": 2047,
-        "Down": 2049
-      }
-    },
-    {
-      "id": 2049,
-      "name": "Up the hill",
-      "exits": {
-        "Up": 2048,
-        "Down": 2050
-      }
-    },
-    {
-      "id": 2050,
-      "name": "The hills",
-      "exits": {
-        "West": 2051,
-        "Up": 2049
-      }
-    },
-    {
-      "id": 2051,
-      "name": "The hills",
-      "exits": {
-        "East": 2050,
-        "West": 2483,
-        "South": 1116
-      }
-    },
-    {
-      "id": 3777,
-      "name": "To Thalos",
-      "otherAreaExit": true,
-      "exits": {
-        "East": 3776,
-        "South": 2040
-      }
-    },
-    {
-      "id": 2483,
-      "name": "To Moria",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2484,
-        "East": 2051,
-        "South": 2201
-      }
-    },
-    {
-      "id": 1116,
-      "name": "To Land of the Fire Newts",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2051,
-        "South": 1117
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

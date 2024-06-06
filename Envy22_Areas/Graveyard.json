@@ -1,302 +1,374 @@
 {
-  "name": "Graveyard",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Graveyard",
+    "Rooms": [
+      {
+        "Id": 1354,
+        "Name": "A Gravel Road on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2333,
+          "East": 1385,
+          "South": 1355,
+          "West": 1359
+        }
+      },
+      {
+        "Id": 1355,
+        "Name": "A Gravel Road on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1354,
+          "South": 1356
+        }
+      },
+      {
+        "Id": 1356,
+        "Name": "A Gravel Road on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1355,
+          "South": 1357
+        }
+      },
+      {
+        "Id": 1357,
+        "Name": "A Gravel Road on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1356,
+          "South": 1358
+        }
+      },
+      {
+        "Id": 1358,
+        "Name": "In front of the Chapel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1357,
+          "East": 1373,
+          "South": 398,
+          "West": 1371
+        }
+      },
+      {
+        "Id": 1359,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1354,
+          "South": 1361,
+          "Down": 1360
+        }
+      },
+      {
+        "Id": 1360,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1359
+        }
+      },
+      {
+        "Id": 1361,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1359,
+          "West": 1363,
+          "Down": 1362
+        }
+      },
+      {
+        "Id": 1362,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1361
+        }
+      },
+      {
+        "Id": 1363,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1361,
+          "South": 1365,
+          "Down": 1364
+        }
+      },
+      {
+        "Id": 1364,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1363
+        }
+      },
+      {
+        "Id": 1365,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1363,
+          "East": 1367,
+          "West": 1366
+        }
+      },
+      {
+        "Id": 1366,
+        "Name": "In a shed on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1365
+        }
+      },
+      {
+        "Id": 1367,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1369,
+          "West": 1365,
+          "Down": 1368
+        }
+      },
+      {
+        "Id": 1368,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1367
+        }
+      },
+      {
+        "Id": 1369,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1367,
+          "South": 1371,
+          "Down": 1370
+        }
+      },
+      {
+        "Id": 1370,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1369
+        }
+      },
+      {
+        "Id": 1371,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1369,
+          "East": 1358,
+          "Down": 1372
+        }
+      },
+      {
+        "Id": 1372,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1371
+        }
+      },
+      {
+        "Id": 1373,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1375,
+          "West": 1358,
+          "Down": 1374
+        }
+      },
+      {
+        "Id": 1374,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1373
+        }
+      },
+      {
+        "Id": 1375,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1377,
+          "South": 1373,
+          "Down": 1376
+        }
+      },
+      {
+        "Id": 1376,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1375
+        }
+      },
+      {
+        "Id": 1377,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1379,
+          "South": 1375,
+          "Down": 1378
+        }
+      },
+      {
+        "Id": 1378,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1377
+        }
+      },
+      {
+        "Id": 1379,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1381,
+          "West": 1377,
+          "Down": 1380
+        }
+      },
+      {
+        "Id": 1380,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1379
+        }
+      },
+      {
+        "Id": 1381,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1379,
+          "West": 1383,
+          "Down": 1382
+        }
+      },
+      {
+        "Id": 1382,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1381
+        }
+      },
+      {
+        "Id": 1383,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1385,
+          "East": 1381,
+          "Down": 1384
+        }
+      },
+      {
+        "Id": 1384,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1383
+        }
+      },
+      {
+        "Id": 1385,
+        "Name": "A Gravel Path on the Graveyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1383,
+          "West": 1354,
+          "Down": 1386
+        }
+      },
+      {
+        "Id": 1386,
+        "Name": "In a dusty Tomb",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1385
+        }
+      },
+      {
+        "Id": 2333,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2330,
+          "East": 2334,
+          "South": 1354,
+          "West": 2332
+        }
+      },
+      {
+        "Id": 398,
+        "Name": "To Chapel Catacombs",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 1358,
+          "Down": 412
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 1354,
-      "name": "A Gravel Road on the Graveyard",
-      "exits": {
-        "North": 2333,
-        "East": 1385,
-        "South": 1355,
-        "West": 1359
-      }
-    },
-    {
-      "id": 1355,
-      "name": "A Gravel Road on the Graveyard",
-      "exits": {
-        "North": 1354,
-        "South": 1356
-      }
-    },
-    {
-      "id": 1356,
-      "name": "A Gravel Road on the Graveyard",
-      "exits": {
-        "North": 1355,
-        "South": 1357
-      }
-    },
-    {
-      "id": 1357,
-      "name": "A Gravel Road on the Graveyard",
-      "exits": {
-        "North": 1356,
-        "South": 1358
-      }
-    },
-    {
-      "id": 1358,
-      "name": "In front of the Chapel",
-      "exits": {
-        "North": 1357,
-        "East": 1373,
-        "South": 398,
-        "West": 1371
-      }
-    },
-    {
-      "id": 1359,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "East": 1354,
-        "South": 1361,
-        "Down": 1360
-      }
-    },
-    {
-      "id": 1360,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1359
-      }
-    },
-    {
-      "id": 1361,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "North": 1359,
-        "West": 1363,
-        "Down": 1362
-      }
-    },
-    {
-      "id": 1362,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1361
-      }
-    },
-    {
-      "id": 1363,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "East": 1361,
-        "South": 1365,
-        "Down": 1364
-      }
-    },
-    {
-      "id": 1364,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1363
-      }
-    },
-    {
-      "id": 1365,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "North": 1363,
-        "East": 1367,
-        "West": 1366
-      }
-    },
-    {
-      "id": 1366,
-      "name": "In a shed on the Graveyard",
-      "exits": {
-        "East": 1365
-      }
-    },
-    {
-      "id": 1367,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "South": 1369,
-        "West": 1365,
-        "Down": 1368
-      }
-    },
-    {
-      "id": 1368,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1367
-      }
-    },
-    {
-      "id": 1369,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "North": 1367,
-        "South": 1371,
-        "Down": 1370
-      }
-    },
-    {
-      "id": 1370,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1369
-      }
-    },
-    {
-      "id": 1371,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "North": 1369,
-        "East": 1358,
-        "Down": 1372
-      }
-    },
-    {
-      "id": 1372,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1371
-      }
-    },
-    {
-      "id": 1373,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "North": 1375,
-        "West": 1358,
-        "Down": 1374
-      }
-    },
-    {
-      "id": 1374,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1373
-      }
-    },
-    {
-      "id": 1375,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "North": 1377,
-        "South": 1373,
-        "Down": 1376
-      }
-    },
-    {
-      "id": 1376,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1375
-      }
-    },
-    {
-      "id": 1377,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "East": 1379,
-        "South": 1375,
-        "Down": 1378
-      }
-    },
-    {
-      "id": 1378,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1377
-      }
-    },
-    {
-      "id": 1379,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "North": 1381,
-        "West": 1377,
-        "Down": 1380
-      }
-    },
-    {
-      "id": 1380,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1379
-      }
-    },
-    {
-      "id": 1381,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "South": 1379,
-        "West": 1383,
-        "Down": 1382
-      }
-    },
-    {
-      "id": 1382,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1381
-      }
-    },
-    {
-      "id": 1383,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "North": 1385,
-        "East": 1381,
-        "Down": 1384
-      }
-    },
-    {
-      "id": 1384,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1383
-      }
-    },
-    {
-      "id": 1385,
-      "name": "A Gravel Path on the Graveyard",
-      "exits": {
-        "South": 1383,
-        "West": 1354,
-        "Down": 1386
-      }
-    },
-    {
-      "id": 1386,
-      "name": "In a dusty Tomb",
-      "exits": {
-        "Up": 1385
-      }
-    },
-    {
-      "id": 2333,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2330,
-        "East": 2334,
-        "South": 1354,
-        "West": 2332
-      }
-    },
-    {
-      "id": 398,
-      "name": "To Chapel Catacombs",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 1358,
-        "Down": 412
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

@@ -1,1593 +1,1972 @@
 {
-  "name": "High Tower of Sorcery",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "High Tower of Sorcery",
+    "Rooms": [
+      {
+        "Id": 1711,
+        "Name": "Entrance to the Shadow Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1468,
+          "North": 1719
+        }
+      },
+      {
+        "Id": 1712,
+        "Name": "The Shadow Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1718,
+          "East": 1713,
+          "South": 1715,
+          "West": 1714
+        }
+      },
+      {
+        "Id": 1713,
+        "Name": "The Shadow Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1721,
+          "East": 1714,
+          "South": 1716,
+          "West": 1712
+        }
+      },
+      {
+        "Id": 1714,
+        "Name": "The Shadow Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1720,
+          "East": 1712,
+          "South": 1717,
+          "West": 1713
+        }
+      },
+      {
+        "Id": 1715,
+        "Name": "The Shadow Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1712,
+          "East": 1716,
+          "South": 1718,
+          "West": 800
+        }
+      },
+      {
+        "Id": 1716,
+        "Name": "The Shadow Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1713,
+          "East": 1717,
+          "South": 1719,
+          "West": 1715
+        }
+      },
+      {
+        "Id": 1717,
+        "Name": "The Shadow Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1714,
+          "East": 1148,
+          "South": 1720,
+          "West": 1716
+        }
+      },
+      {
+        "Id": 1718,
+        "Name": "The Shadow Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1715,
+          "East": 1719,
+          "South": 1712,
+          "West": 1720
+        }
+      },
+      {
+        "Id": 1719,
+        "Name": "The Shadow Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1716,
+          "East": 1720,
+          "South": 1711,
+          "West": 1718
+        }
+      },
+      {
+        "Id": 1720,
+        "Name": "The Shadow Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1717,
+          "East": 1718,
+          "South": 1714,
+          "West": 1719
+        }
+      },
+      {
+        "Id": 1721,
+        "Name": "A small clearing",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1722,
+          "South": 1713
+        }
+      },
+      {
+        "Id": 1722,
+        "Name": "Entrance to the High Tower",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1723
+        }
+      },
+      {
+        "Id": 1723,
+        "Name": "Inside the High Tower of Sorcerery",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1724,
+          "East": 1725,
+          "South": 1722,
+          "West": 1726
+        }
+      },
+      {
+        "Id": 1724,
+        "Name": "Common Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1727,
+          "East": 1728,
+          "South": 1723,
+          "West": 1729
+        }
+      },
+      {
+        "Id": 1725,
+        "Name": "The Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1740,
+          "West": 1723
+        }
+      },
+      {
+        "Id": 1726,
+        "Name": "Dining Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1723,
+          "West": 1730
+        }
+      },
+      {
+        "Id": 1727,
+        "Name": "Dark Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1724,
+          "Down": 1731
+        }
+      },
+      {
+        "Id": 1728,
+        "Name": "Mages Tavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1724
+        }
+      },
+      {
+        "Id": 1729,
+        "Name": "The Magic Shop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1724
+        }
+      },
+      {
+        "Id": 1730,
+        "Name": "the kitchen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1726
+        }
+      },
+      {
+        "Id": 1731,
+        "Name": "Below the trapdoor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1727,
+          "Down": 1732
+        }
+      },
+      {
+        "Id": 1732,
+        "Name": "A damp intersection",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1733,
+          "East": 1734,
+          "South": 1735,
+          "West": 1736,
+          "Up": 1731
+        }
+      },
+      {
+        "Id": 1733,
+        "Name": "A dark passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1737,
+          "South": 1732
+        }
+      },
+      {
+        "Id": 1734,
+        "Name": "A dark passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1738,
+          "West": 1732
+        }
+      },
+      {
+        "Id": 1735,
+        "Name": "The stagnant pool",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1732,
+          "Down": 1739
+        }
+      },
+      {
+        "Id": 1736,
+        "Name": "A dark passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1732
+        }
+      },
+      {
+        "Id": 1737,
+        "Name": "A dark cell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1733
+        }
+      },
+      {
+        "Id": 1738,
+        "Name": "The Jailor\u0027s office",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1734
+        }
+      },
+      {
+        "Id": 1739,
+        "Name": "Below the stagnant pool",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 1740,
+        "Name": "The hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1741,
+          "West": 1725,
+          "North": 1742,
+          "South": 1743
+        }
+      },
+      {
+        "Id": 1741,
+        "Name": "A bend in the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1744,
+          "East": 1746,
+          "South": 1745,
+          "West": 1740
+        }
+      },
+      {
+        "Id": 1742,
+        "Name": "A store room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1740
+        }
+      },
+      {
+        "Id": 1743,
+        "Name": "A broom closet",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1740
+        }
+      },
+      {
+        "Id": 1744,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1747,
+          "North": 1748,
+          "South": 1741
+        }
+      },
+      {
+        "Id": 1745,
+        "Name": "Guardians chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1741
+        }
+      },
+      {
+        "Id": 1746,
+        "Name": "A guest bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1741
+        }
+      },
+      {
+        "Id": 1747,
+        "Name": "A guest bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1744
+        }
+      },
+      {
+        "Id": 1748,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1749,
+          "South": 1744,
+          "Up": 1750
+        }
+      },
+      {
+        "Id": 1749,
+        "Name": "The burnt room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1748
+        }
+      },
+      {
+        "Id": 1750,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1752,
+          "East": 1751,
+          "West": 1753,
+          "Down": 1748
+        }
+      },
+      {
+        "Id": 1751,
+        "Name": "A culdesac",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1750
+        }
+      },
+      {
+        "Id": 1752,
+        "Name": "The Apprentice\u0027s Barracks",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1750,
+          "West": 1754
+        }
+      },
+      {
+        "Id": 1753,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1754,
+          "East": 1750,
+          "West": 1755
+        }
+      },
+      {
+        "Id": 1754,
+        "Name": "The Apprentice\u0027s barracks",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1752,
+          "South": 1753
+        }
+      },
+      {
+        "Id": 1755,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1756,
+          "East": 1753,
+          "West": 1757
+        }
+      },
+      {
+        "Id": 1756,
+        "Name": "The apprentice\u0027s workshop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1755
+        }
+      },
+      {
+        "Id": 1757,
+        "Name": "A bend in the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1755,
+          "South": 1758
+        }
+      },
+      {
+        "Id": 1758,
+        "Name": "The hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1757,
+          "South": 1760,
+          "West": 1759
+        }
+      },
+      {
+        "Id": 1759,
+        "Name": "A classroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1758
+        }
+      },
+      {
+        "Id": 1760,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1758,
+          "South": 1761,
+          "West": 1762
+        }
+      },
+      {
+        "Id": 1761,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1760,
+          "South": 1763,
+          "West": 1764
+        }
+      },
+      {
+        "Id": 1762,
+        "Name": "An empty classroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1760
+        }
+      },
+      {
+        "Id": 1763,
+        "Name": "A bend in the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1761,
+          "East": 1765
+        }
+      },
+      {
+        "Id": 1764,
+        "Name": "An empty classroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1761
+        }
+      },
+      {
+        "Id": 1765,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1766,
+          "South": 1767,
+          "West": 1763
+        }
+      },
+      {
+        "Id": 1766,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1768,
+          "South": 1769,
+          "West": 1765
+        }
+      },
+      {
+        "Id": 1767,
+        "Name": "The Amphitheater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1765
+        }
+      },
+      {
+        "Id": 1768,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1770,
+          "South": 1771,
+          "West": 1766
+        }
+      },
+      {
+        "Id": 1769,
+        "Name": "The training room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1766
+        }
+      },
+      {
+        "Id": 1770,
+        "Name": "A bend in the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1772,
+          "West": 1768
+        }
+      },
+      {
+        "Id": 1771,
+        "Name": "A dueling room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1768
+        }
+      },
+      {
+        "Id": 1772,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1773,
+          "East": 1774,
+          "South": 1770
+        }
+      },
+      {
+        "Id": 1773,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1776,
+          "East": 1775,
+          "South": 1772
+        }
+      },
+      {
+        "Id": 1774,
+        "Name": "The spellmaster\u0027s lounge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1772
+        }
+      },
+      {
+        "Id": 1775,
+        "Name": "A bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1773
+        }
+      },
+      {
+        "Id": 1776,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1778,
+          "East": 1777,
+          "South": 1773
+        }
+      },
+      {
+        "Id": 1777,
+        "Name": "The study",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1776
+        }
+      },
+      {
+        "Id": 1778,
+        "Name": "Below the stairs",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1776,
+          "Up": 1779
+        }
+      },
+      {
+        "Id": 1779,
+        "Name": "Atop the stairway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1780,
+          "Down": 1778
+        }
+      },
+      {
+        "Id": 1780,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1781,
+          "East": 1779,
+          "West": 1782
+        }
+      },
+      {
+        "Id": 1781,
+        "Name": "A small office",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1780,
+          "West": 1783
+        }
+      },
+      {
+        "Id": 1782,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1780,
+          "West": 1784
+        }
+      },
+      {
+        "Id": 1783,
+        "Name": "The master scribe\u0027s workshop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1781
+        }
+      },
+      {
+        "Id": 1784,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1785,
+          "East": 1782,
+          "West": 1786
+        }
+      },
+      {
+        "Id": 1785,
+        "Name": "A store room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1784
+        }
+      },
+      {
+        "Id": 1786,
+        "Name": "A bend in the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1784,
+          "South": 1787
+        }
+      },
+      {
+        "Id": 1787,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1786,
+          "South": 1788,
+          "West": 1789
+        }
+      },
+      {
+        "Id": 1788,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1787,
+          "South": 1790,
+          "West": 1791
+        }
+      },
+      {
+        "Id": 1789,
+        "Name": "A store room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1787,
+          "South": 1791
+        }
+      },
+      {
+        "Id": 1790,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1788,
+          "South": 1793
+        }
+      },
+      {
+        "Id": 1791,
+        "Name": "A very hot room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1789,
+          "East": 1788,
+          "South": 1792,
+          "Up": 1822
+        }
+      },
+      {
+        "Id": 1792,
+        "Name": "The master Enchanter\u0027s chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1791
+        }
+      },
+      {
+        "Id": 1793,
+        "Name": "A bend in the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1790,
+          "East": 1794
+        }
+      },
+      {
+        "Id": 1794,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1795,
+          "South": 1796,
+          "West": 1793
+        }
+      },
+      {
+        "Id": 1795,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1797,
+          "West": 1794
+        }
+      },
+      {
+        "Id": 1796,
+        "Name": "A laboratory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1794,
+          "East": 1798
+        }
+      },
+      {
+        "Id": 1797,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1799,
+          "South": 1800,
+          "West": 1795
+        }
+      },
+      {
+        "Id": 1798,
+        "Name": "The Mad Alchemist\u0027s workroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1796
+        }
+      },
+      {
+        "Id": 1799,
+        "Name": "A bend in the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1801,
+          "West": 1797
+        }
+      },
+      {
+        "Id": 1800,
+        "Name": "The pentagram chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1797,
+          "South": 1802
+        }
+      },
+      {
+        "Id": 1801,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1803,
+          "East": 1804,
+          "South": 1799
+        }
+      },
+      {
+        "Id": 1802,
+        "Name": "Inside the Energy Field",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 893,
+          "South": 1021,
+          "West": 3440,
+          "Up": 3018,
+          "Down": 451
+        }
+      },
+      {
+        "Id": 1803,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1806,
+          "East": 1805,
+          "South": 1801
+        }
+      },
+      {
+        "Id": 1804,
+        "Name": "An empty room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1801
+        }
+      },
+      {
+        "Id": 1805,
+        "Name": "The charm master\u0027s chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1807,
+          "West": 1803
+        }
+      },
+      {
+        "Id": 1806,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1808,
+          "South": 1803
+        }
+      },
+      {
+        "Id": 1807,
+        "Name": "The animal pens",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1805
+        }
+      },
+      {
+        "Id": 1808,
+        "Name": "The end of the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1806,
+          "Up": 1809
+        }
+      },
+      {
+        "Id": 1809,
+        "Name": "Atop the stairway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1810,
+          "Down": 1808
+        }
+      },
+      {
+        "Id": 1810,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1811,
+          "East": 1809,
+          "West": 1814
+        }
+      },
+      {
+        "Id": 1811,
+        "Name": "A store room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1810,
+          "West": 1812
+        }
+      },
+      {
+        "Id": 1812,
+        "Name": "The master spellbinder\u0027s chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1811,
+          "West": 1813
+        }
+      },
+      {
+        "Id": 1813,
+        "Name": "The spellbinder\u0027s cache",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1812,
+          "South": 1815
+        }
+      },
+      {
+        "Id": 1814,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1810,
+          "West": 1815
+        }
+      },
+      {
+        "Id": 1815,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1813,
+          "East": 1814,
+          "West": 1816
+        }
+      },
+      {
+        "Id": 1816,
+        "Name": "A bend in the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1815,
+          "South": 1817
+        }
+      },
+      {
+        "Id": 1817,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1816,
+          "South": 1818
+        }
+      },
+      {
+        "Id": 1818,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1817,
+          "South": 1823,
+          "West": 1819
+        }
+      },
+      {
+        "Id": 1819,
+        "Name": "The golem master\u0027s workshop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1820,
+          "East": 1818,
+          "South": 1821,
+          "Down": 1822
+        }
+      },
+      {
+        "Id": 1820,
+        "Name": "A store room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1819
+        }
+      },
+      {
+        "Id": 1821,
+        "Name": "The golem chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1819
+        }
+      },
+      {
+        "Id": 1822,
+        "Name": "It is very dark here...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1819,
+          "Down": 1791
+        }
+      },
+      {
+        "Id": 1823,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1818,
+          "South": 1824
+        }
+      },
+      {
+        "Id": 1824,
+        "Name": "A bend in the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1823,
+          "East": 1825
+        }
+      },
+      {
+        "Id": 1825,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1826,
+          "West": 1824
+        }
+      },
+      {
+        "Id": 1826,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1829,
+          "South": 1827,
+          "West": 1825
+        }
+      },
+      {
+        "Id": 1827,
+        "Name": "The master of illusion\u0027s chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1826,
+          "West": 1828
+        }
+      },
+      {
+        "Id": 1828,
+        "Name": "A bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1827
+        }
+      },
+      {
+        "Id": 1829,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1831,
+          "South": 1830,
+          "West": 1826
+        }
+      },
+      {
+        "Id": 1830,
+        "Name": "The meditation chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1829
+        }
+      },
+      {
+        "Id": 1831,
+        "Name": "A bend in the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1832,
+          "West": 1829
+        }
+      },
+      {
+        "Id": 1832,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1836,
+          "East": 1833,
+          "South": 1831
+        }
+      },
+      {
+        "Id": 1833,
+        "Name": "A dark room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1834,
+          "West": 1832
+        }
+      },
+      {
+        "Id": 1834,
+        "Name": "A dark room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1835,
+          "South": 1833
+        }
+      },
+      {
+        "Id": 1835,
+        "Name": "The Necromancer\u0027s Lair",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1834
+        }
+      },
+      {
+        "Id": 1836,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1837,
+          "South": 1832
+        }
+      },
+      {
+        "Id": 1837,
+        "Name": "A hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1838,
+          "South": 1836
+        }
+      },
+      {
+        "Id": 1838,
+        "Name": "The end of the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1837,
+          "Up": 1839
+        }
+      },
+      {
+        "Id": 1839,
+        "Name": "A corridor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1840,
+          "Down": 1838
+        }
+      },
+      {
+        "Id": 1840,
+        "Name": "A corridor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1839,
+          "West": 1841
+        }
+      },
+      {
+        "Id": 1841,
+        "Name": "A bend in the corridor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1840,
+          "South": 1842
+        }
+      },
+      {
+        "Id": 1842,
+        "Name": "A corridor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1841,
+          "South": 1843
+        }
+      },
+      {
+        "Id": 1843,
+        "Name": "An intersection",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1842,
+          "East": 1844,
+          "South": 1856,
+          "West": 1846
+        }
+      },
+      {
+        "Id": 1844,
+        "Name": "A corridor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1845,
+          "West": 1843
+        }
+      },
+      {
+        "Id": 1845,
+        "Name": "The scrying chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1844
+        }
+      },
+      {
+        "Id": 1846,
+        "Name": "A corridor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1843,
+          "West": 1847
+        }
+      },
+      {
+        "Id": 1847,
+        "Name": "The entrance to the library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1849,
+          "East": 1846,
+          "South": 1850,
+          "West": 1848
+        }
+      },
+      {
+        "Id": 1848,
+        "Name": "In the library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1851,
+          "East": 1847,
+          "South": 1852,
+          "West": 1853
+        }
+      },
+      {
+        "Id": 1849,
+        "Name": "In the library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1850,
+          "East": 1852,
+          "South": 1847,
+          "West": 1851
+        }
+      },
+      {
+        "Id": 1850,
+        "Name": "In the library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1847,
+          "East": 1851,
+          "South": 1849,
+          "West": 1852
+        }
+      },
+      {
+        "Id": 1851,
+        "Name": "In the library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1852,
+          "East": 1849,
+          "South": 1848,
+          "West": 1850
+        }
+      },
+      {
+        "Id": 1852,
+        "Name": "In the library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1848,
+          "East": 1850,
+          "South": 1851,
+          "West": 1849
+        }
+      },
+      {
+        "Id": 1853,
+        "Name": "In the library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1848,
+          "West": 1854
+        }
+      },
+      {
+        "Id": 1854,
+        "Name": "Between the shelves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1855,
+          "East": 1853
+        }
+      },
+      {
+        "Id": 1855,
+        "Name": "The reading room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1854
+        }
+      },
+      {
+        "Id": 1856,
+        "Name": "A corridor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1843,
+          "South": 1857
+        }
+      },
+      {
+        "Id": 1857,
+        "Name": "The end of the corridor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1856,
+          "South": 1858
+        }
+      },
+      {
+        "Id": 1858,
+        "Name": "The arched entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1857,
+          "Up": 1859
+        }
+      },
+      {
+        "Id": 1859,
+        "Name": "The landing",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 1858,
+          "Up": 1860
+        }
+      },
+      {
+        "Id": 1860,
+        "Name": "An intersection",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1882,
+          "East": 1868,
+          "South": 1861,
+          "West": 1875,
+          "Down": 1859
+        }
+      },
+      {
+        "Id": 1861,
+        "Name": "A grey tiled hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1860,
+          "South": 1862
+        }
+      },
+      {
+        "Id": 1862,
+        "Name": "A grey tiled hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1861,
+          "South": 1863
+        }
+      },
+      {
+        "Id": 1863,
+        "Name": "The antechamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1862,
+          "South": 1864
+        }
+      },
+      {
+        "Id": 1864,
+        "Name": "The main chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1863,
+          "East": 1866,
+          "South": 1867,
+          "West": 1865
+        }
+      },
+      {
+        "Id": 1865,
+        "Name": "The study",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1864
+        }
+      },
+      {
+        "Id": 1866,
+        "Name": "A closet",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1864
+        }
+      },
+      {
+        "Id": 1867,
+        "Name": "A bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1864
+        }
+      },
+      {
+        "Id": 1868,
+        "Name": "A dark hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1860,
+          "East": 1869
+        }
+      },
+      {
+        "Id": 1869,
+        "Name": "A dark hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1870,
+          "West": 1868
+        }
+      },
+      {
+        "Id": 1870,
+        "Name": "The end of the hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1871,
+          "West": 1869
+        }
+      },
+      {
+        "Id": 1871,
+        "Name": "The chamber of darkness",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1872,
+          "South": 1873,
+          "East": 1874,
+          "West": 1870
+        }
+      },
+      {
+        "Id": 1872,
+        "Name": "It is very dark here...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1871
+        }
+      },
+      {
+        "Id": 1873,
+        "Name": "Torture chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1871
+        }
+      },
+      {
+        "Id": 1874,
+        "Name": "The inner chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1871
+        }
+      },
+      {
+        "Id": 1875,
+        "Name": "A bright hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1860,
+          "West": 1876
+        }
+      },
+      {
+        "Id": 1876,
+        "Name": "A bright hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1875,
+          "West": 1877
+        }
+      },
+      {
+        "Id": 1877,
+        "Name": "An antechamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1876,
+          "West": 1878
+        }
+      },
+      {
+        "Id": 1878,
+        "Name": "The chamber of the white light",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1879,
+          "South": 1880,
+          "East": 1877,
+          "West": 1881
+        }
+      },
+      {
+        "Id": 1879,
+        "Name": "The meditation chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1878
+        }
+      },
+      {
+        "Id": 1880,
+        "Name": "A study",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1878
+        }
+      },
+      {
+        "Id": 1881,
+        "Name": "A closet",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1878
+        }
+      },
+      {
+        "Id": 1882,
+        "Name": "A wide hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1883,
+          "South": 1860
+        }
+      },
+      {
+        "Id": 1883,
+        "Name": "A wide hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1884,
+          "South": 1882
+        }
+      },
+      {
+        "Id": 1884,
+        "Name": "A wide hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1885,
+          "South": 1883
+        }
+      },
+      {
+        "Id": 1885,
+        "Name": "The entranceway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1886,
+          "South": 1884
+        }
+      },
+      {
+        "Id": 1886,
+        "Name": "The audience chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1889,
+          "East": 1887,
+          "South": 1885,
+          "West": 1888
+        }
+      },
+      {
+        "Id": 1887,
+        "Name": "A dressing room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1886
+        }
+      },
+      {
+        "Id": 1888,
+        "Name": "The library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1886
+        }
+      },
+      {
+        "Id": 1889,
+        "Name": "The altar",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1890,
+          "South": 1886,
+          "West": 1891
+        }
+      },
+      {
+        "Id": 1890,
+        "Name": "The treasury",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1889
+        }
+      },
+      {
+        "Id": 1891,
+        "Name": "A passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1892
+        }
+      },
+      {
+        "Id": 1892,
+        "Name": "In the light",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 2247
+        }
+      },
+      {
+        "Id": 1893,
+        "Name": "Skylar\u0027s Hideout",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 1468,
+        "Name": "To Haon Dor",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 1711,
+          "East": 1467
+        }
+      },
+      {
+        "Id": 800,
+        "Name": "To Dragon Tower",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 801,
+          "East": 1715
+        }
+      },
+      {
+        "Id": 1148,
+        "Name": "To Galaxy",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "Down": 1149,
+          "West": 1717
+        }
+      },
+      {
+        "Id": 893,
+        "Name": "To Drow City",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "South": 892
+        }
+      },
+      {
+        "Id": 1021,
+        "Name": "To Dylan\u0027s Area",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "East": 2247,
+          "Down": 1020
+        }
+      },
+      {
+        "Id": 3440,
+        "Name": "To Sewer",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 3441,
+          "West": 3439
+        }
+      },
+      {
+        "Id": 3018,
+        "Name": "To Olympus",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "East": 3017,
+          "North": 3030
+        }
+      },
+      {
+        "Id": 451,
+        "Name": "To Chapel Catacombs",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "East": 450,
+          "Down": 464
+        }
+      },
+      {
+        "Id": 2247,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2296,
+          "South": 2251,
+          "Up": 3222
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 1711,
-      "name": "Entrance to the Shadow Grove",
-      "exits": {
-        "South": 1468,
-        "North": 1719
-      }
-    },
-    {
-      "id": 1712,
-      "name": "The Shadow Grove",
-      "exits": {
-        "North": 1718,
-        "East": 1713,
-        "South": 1715,
-        "West": 1714
-      }
-    },
-    {
-      "id": 1713,
-      "name": "The Shadow Grove",
-      "exits": {
-        "North": 1721,
-        "East": 1714,
-        "South": 1716,
-        "West": 1712
-      }
-    },
-    {
-      "id": 1714,
-      "name": "The Shadow Grove",
-      "exits": {
-        "North": 1720,
-        "East": 1712,
-        "South": 1717,
-        "West": 1713
-      }
-    },
-    {
-      "id": 1715,
-      "name": "The Shadow Grove",
-      "exits": {
-        "North": 1712,
-        "East": 1716,
-        "South": 1718,
-        "West": 800
-      }
-    },
-    {
-      "id": 1716,
-      "name": "The Shadow Grove",
-      "exits": {
-        "North": 1713,
-        "East": 1717,
-        "South": 1719,
-        "West": 1715
-      }
-    },
-    {
-      "id": 1717,
-      "name": "The Shadow Grove",
-      "exits": {
-        "North": 1714,
-        "East": 1148,
-        "South": 1720,
-        "West": 1716
-      }
-    },
-    {
-      "id": 1718,
-      "name": "The Shadow Grove",
-      "exits": {
-        "North": 1715,
-        "East": 1719,
-        "South": 1712,
-        "West": 1720
-      }
-    },
-    {
-      "id": 1719,
-      "name": "The Shadow Grove",
-      "exits": {
-        "North": 1716,
-        "East": 1720,
-        "South": 1711,
-        "West": 1718
-      }
-    },
-    {
-      "id": 1720,
-      "name": "The Shadow Grove",
-      "exits": {
-        "North": 1717,
-        "East": 1718,
-        "South": 1714,
-        "West": 1719
-      }
-    },
-    {
-      "id": 1721,
-      "name": "A small clearing",
-      "exits": {
-        "North": 1722,
-        "South": 1713
-      }
-    },
-    {
-      "id": 1722,
-      "name": "Entrance to the High Tower",
-      "exits": {
-        "North": 1723
-      }
-    },
-    {
-      "id": 1723,
-      "name": "Inside the High Tower of Sorcerery",
-      "exits": {
-        "North": 1724,
-        "East": 1725,
-        "South": 1722,
-        "West": 1726
-      }
-    },
-    {
-      "id": 1724,
-      "name": "Common Room",
-      "exits": {
-        "North": 1727,
-        "East": 1728,
-        "South": 1723,
-        "West": 1729
-      }
-    },
-    {
-      "id": 1725,
-      "name": "The Hallway",
-      "exits": {
-        "East": 1740,
-        "West": 1723
-      }
-    },
-    {
-      "id": 1726,
-      "name": "Dining Room",
-      "exits": {
-        "East": 1723,
-        "West": 1730
-      }
-    },
-    {
-      "id": 1727,
-      "name": "Dark Hallway",
-      "exits": {
-        "South": 1724,
-        "Down": 1731
-      }
-    },
-    {
-      "id": 1728,
-      "name": "Mages Tavern",
-      "exits": {
-        "West": 1724
-      }
-    },
-    {
-      "id": 1729,
-      "name": "The Magic Shop",
-      "exits": {
-        "East": 1724
-      }
-    },
-    {
-      "id": 1730,
-      "name": "the kitchen",
-      "exits": {
-        "East": 1726
-      }
-    },
-    {
-      "id": 1731,
-      "name": "Below the trapdoor",
-      "exits": {
-        "Up": 1727,
-        "Down": 1732
-      }
-    },
-    {
-      "id": 1732,
-      "name": "A damp intersection",
-      "exits": {
-        "North": 1733,
-        "East": 1734,
-        "South": 1735,
-        "West": 1736,
-        "Up": 1731
-      }
-    },
-    {
-      "id": 1733,
-      "name": "A dark passage",
-      "exits": {
-        "North": 1737,
-        "South": 1732
-      }
-    },
-    {
-      "id": 1734,
-      "name": "A dark passage",
-      "exits": {
-        "East": 1738,
-        "West": 1732
-      }
-    },
-    {
-      "id": 1735,
-      "name": "The stagnant pool",
-      "exits": {
-        "North": 1732,
-        "Down": 1739
-      }
-    },
-    {
-      "id": 1736,
-      "name": "A dark passage",
-      "exits": {
-        "East": 1732
-      }
-    },
-    {
-      "id": 1737,
-      "name": "A dark cell",
-      "exits": {
-        "South": 1733
-      }
-    },
-    {
-      "id": 1738,
-      "name": "The Jailor\u0027s office",
-      "exits": {
-        "West": 1734
-      }
-    },
-    {
-      "id": 1739,
-      "name": "Below the stagnant pool",
-      "exits": {}
-    },
-    {
-      "id": 1740,
-      "name": "The hallway",
-      "exits": {
-        "East": 1741,
-        "West": 1725,
-        "North": 1742,
-        "South": 1743
-      }
-    },
-    {
-      "id": 1741,
-      "name": "A bend in the hallway",
-      "exits": {
-        "North": 1744,
-        "East": 1746,
-        "South": 1745,
-        "West": 1740
-      }
-    },
-    {
-      "id": 1742,
-      "name": "A store room",
-      "exits": {
-        "South": 1740
-      }
-    },
-    {
-      "id": 1743,
-      "name": "A broom closet",
-      "exits": {
-        "North": 1740
-      }
-    },
-    {
-      "id": 1744,
-      "name": "A hallway",
-      "exits": {
-        "East": 1747,
-        "North": 1748,
-        "South": 1741
-      }
-    },
-    {
-      "id": 1745,
-      "name": "Guardians chamber",
-      "exits": {
-        "North": 1741
-      }
-    },
-    {
-      "id": 1746,
-      "name": "A guest bedroom",
-      "exits": {
-        "West": 1741
-      }
-    },
-    {
-      "id": 1747,
-      "name": "A guest bedroom",
-      "exits": {
-        "West": 1744
-      }
-    },
-    {
-      "id": 1748,
-      "name": "A hallway",
-      "exits": {
-        "East": 1749,
-        "South": 1744,
-        "Up": 1750
-      }
-    },
-    {
-      "id": 1749,
-      "name": "The burnt room",
-      "exits": {
-        "West": 1748
-      }
-    },
-    {
-      "id": 1750,
-      "name": "A hallway",
-      "exits": {
-        "North": 1752,
-        "East": 1751,
-        "West": 1753,
-        "Down": 1748
-      }
-    },
-    {
-      "id": 1751,
-      "name": "A culdesac",
-      "exits": {
-        "West": 1750
-      }
-    },
-    {
-      "id": 1752,
-      "name": "The Apprentice\u0027s Barracks",
-      "exits": {
-        "South": 1750,
-        "West": 1754
-      }
-    },
-    {
-      "id": 1753,
-      "name": "A hallway",
-      "exits": {
-        "North": 1754,
-        "East": 1750,
-        "West": 1755
-      }
-    },
-    {
-      "id": 1754,
-      "name": "The Apprentice\u0027s barracks",
-      "exits": {
-        "East": 1752,
-        "South": 1753
-      }
-    },
-    {
-      "id": 1755,
-      "name": "A hallway",
-      "exits": {
-        "North": 1756,
-        "East": 1753,
-        "West": 1757
-      }
-    },
-    {
-      "id": 1756,
-      "name": "The apprentice\u0027s workshop",
-      "exits": {
-        "South": 1755
-      }
-    },
-    {
-      "id": 1757,
-      "name": "A bend in the hallway",
-      "exits": {
-        "East": 1755,
-        "South": 1758
-      }
-    },
-    {
-      "id": 1758,
-      "name": "The hallway",
-      "exits": {
-        "North": 1757,
-        "South": 1760,
-        "West": 1759
-      }
-    },
-    {
-      "id": 1759,
-      "name": "A classroom",
-      "exits": {
-        "East": 1758
-      }
-    },
-    {
-      "id": 1760,
-      "name": "A hallway",
-      "exits": {
-        "North": 1758,
-        "South": 1761,
-        "West": 1762
-      }
-    },
-    {
-      "id": 1761,
-      "name": "A hallway",
-      "exits": {
-        "North": 1760,
-        "South": 1763,
-        "West": 1764
-      }
-    },
-    {
-      "id": 1762,
-      "name": "An empty classroom",
-      "exits": {
-        "East": 1760
-      }
-    },
-    {
-      "id": 1763,
-      "name": "A bend in the hallway",
-      "exits": {
-        "North": 1761,
-        "East": 1765
-      }
-    },
-    {
-      "id": 1764,
-      "name": "An empty classroom",
-      "exits": {
-        "East": 1761
-      }
-    },
-    {
-      "id": 1765,
-      "name": "A hallway",
-      "exits": {
-        "East": 1766,
-        "South": 1767,
-        "West": 1763
-      }
-    },
-    {
-      "id": 1766,
-      "name": "A hallway",
-      "exits": {
-        "East": 1768,
-        "South": 1769,
-        "West": 1765
-      }
-    },
-    {
-      "id": 1767,
-      "name": "The Amphitheater",
-      "exits": {
-        "North": 1765
-      }
-    },
-    {
-      "id": 1768,
-      "name": "A hallway",
-      "exits": {
-        "East": 1770,
-        "South": 1771,
-        "West": 1766
-      }
-    },
-    {
-      "id": 1769,
-      "name": "The training room",
-      "exits": {
-        "North": 1766
-      }
-    },
-    {
-      "id": 1770,
-      "name": "A bend in the hallway",
-      "exits": {
-        "North": 1772,
-        "West": 1768
-      }
-    },
-    {
-      "id": 1771,
-      "name": "A dueling room",
-      "exits": {
-        "North": 1768
-      }
-    },
-    {
-      "id": 1772,
-      "name": "A hallway",
-      "exits": {
-        "North": 1773,
-        "East": 1774,
-        "South": 1770
-      }
-    },
-    {
-      "id": 1773,
-      "name": "A hallway",
-      "exits": {
-        "North": 1776,
-        "East": 1775,
-        "South": 1772
-      }
-    },
-    {
-      "id": 1774,
-      "name": "The spellmaster\u0027s lounge",
-      "exits": {
-        "West": 1772
-      }
-    },
-    {
-      "id": 1775,
-      "name": "A bedroom",
-      "exits": {
-        "West": 1773
-      }
-    },
-    {
-      "id": 1776,
-      "name": "A hallway",
-      "exits": {
-        "North": 1778,
-        "East": 1777,
-        "South": 1773
-      }
-    },
-    {
-      "id": 1777,
-      "name": "The study",
-      "exits": {
-        "West": 1776
-      }
-    },
-    {
-      "id": 1778,
-      "name": "Below the stairs",
-      "exits": {
-        "South": 1776,
-        "Up": 1779
-      }
-    },
-    {
-      "id": 1779,
-      "name": "Atop the stairway",
-      "exits": {
-        "West": 1780,
-        "Down": 1778
-      }
-    },
-    {
-      "id": 1780,
-      "name": "A hallway",
-      "exits": {
-        "North": 1781,
-        "East": 1779,
-        "West": 1782
-      }
-    },
-    {
-      "id": 1781,
-      "name": "A small office",
-      "exits": {
-        "South": 1780,
-        "West": 1783
-      }
-    },
-    {
-      "id": 1782,
-      "name": "A hallway",
-      "exits": {
-        "East": 1780,
-        "West": 1784
-      }
-    },
-    {
-      "id": 1783,
-      "name": "The master scribe\u0027s workshop",
-      "exits": {
-        "East": 1781
-      }
-    },
-    {
-      "id": 1784,
-      "name": "A hallway",
-      "exits": {
-        "North": 1785,
-        "East": 1782,
-        "West": 1786
-      }
-    },
-    {
-      "id": 1785,
-      "name": "A store room",
-      "exits": {
-        "South": 1784
-      }
-    },
-    {
-      "id": 1786,
-      "name": "A bend in the hallway",
-      "exits": {
-        "East": 1784,
-        "South": 1787
-      }
-    },
-    {
-      "id": 1787,
-      "name": "A hallway",
-      "exits": {
-        "North": 1786,
-        "South": 1788,
-        "West": 1789
-      }
-    },
-    {
-      "id": 1788,
-      "name": "A hallway",
-      "exits": {
-        "North": 1787,
-        "South": 1790,
-        "West": 1791
-      }
-    },
-    {
-      "id": 1789,
-      "name": "A store room",
-      "exits": {
-        "East": 1787,
-        "South": 1791
-      }
-    },
-    {
-      "id": 1790,
-      "name": "A hallway",
-      "exits": {
-        "North": 1788,
-        "South": 1793
-      }
-    },
-    {
-      "id": 1791,
-      "name": "A very hot room",
-      "exits": {
-        "North": 1789,
-        "East": 1788,
-        "South": 1792,
-        "Up": 1822
-      }
-    },
-    {
-      "id": 1792,
-      "name": "The master Enchanter\u0027s chamber",
-      "exits": {
-        "North": 1791
-      }
-    },
-    {
-      "id": 1793,
-      "name": "A bend in the hallway",
-      "exits": {
-        "North": 1790,
-        "East": 1794
-      }
-    },
-    {
-      "id": 1794,
-      "name": "A hallway",
-      "exits": {
-        "East": 1795,
-        "South": 1796,
-        "West": 1793
-      }
-    },
-    {
-      "id": 1795,
-      "name": "A hallway",
-      "exits": {
-        "East": 1797,
-        "West": 1794
-      }
-    },
-    {
-      "id": 1796,
-      "name": "A laboratory",
-      "exits": {
-        "North": 1794,
-        "East": 1798
-      }
-    },
-    {
-      "id": 1797,
-      "name": "A hallway",
-      "exits": {
-        "East": 1799,
-        "South": 1800,
-        "West": 1795
-      }
-    },
-    {
-      "id": 1798,
-      "name": "The Mad Alchemist\u0027s workroom",
-      "exits": {
-        "West": 1796
-      }
-    },
-    {
-      "id": 1799,
-      "name": "A bend in the hallway",
-      "exits": {
-        "North": 1801,
-        "West": 1797
-      }
-    },
-    {
-      "id": 1800,
-      "name": "The pentagram chamber",
-      "exits": {
-        "North": 1797,
-        "South": 1802
-      }
-    },
-    {
-      "id": 1801,
-      "name": "A hallway",
-      "exits": {
-        "North": 1803,
-        "East": 1804,
-        "South": 1799
-      }
-    },
-    {
-      "id": 1802,
-      "name": "Inside the Energy Field",
-      "exits": {
-        "East": 893,
-        "South": 1021,
-        "West": 3440,
-        "Up": 3018,
-        "Down": 451
-      }
-    },
-    {
-      "id": 1803,
-      "name": "A hallway",
-      "exits": {
-        "North": 1806,
-        "East": 1805,
-        "South": 1801
-      }
-    },
-    {
-      "id": 1804,
-      "name": "An empty room",
-      "exits": {
-        "West": 1801
-      }
-    },
-    {
-      "id": 1805,
-      "name": "The charm master\u0027s chamber",
-      "exits": {
-        "North": 1807,
-        "West": 1803
-      }
-    },
-    {
-      "id": 1806,
-      "name": "A hallway",
-      "exits": {
-        "North": 1808,
-        "South": 1803
-      }
-    },
-    {
-      "id": 1807,
-      "name": "The animal pens",
-      "exits": {
-        "South": 1805
-      }
-    },
-    {
-      "id": 1808,
-      "name": "The end of the hallway",
-      "exits": {
-        "South": 1806,
-        "Up": 1809
-      }
-    },
-    {
-      "id": 1809,
-      "name": "Atop the stairway",
-      "exits": {
-        "West": 1810,
-        "Down": 1808
-      }
-    },
-    {
-      "id": 1810,
-      "name": "A hallway",
-      "exits": {
-        "North": 1811,
-        "East": 1809,
-        "West": 1814
-      }
-    },
-    {
-      "id": 1811,
-      "name": "A store room",
-      "exits": {
-        "South": 1810,
-        "West": 1812
-      }
-    },
-    {
-      "id": 1812,
-      "name": "The master spellbinder\u0027s chamber",
-      "exits": {
-        "East": 1811,
-        "West": 1813
-      }
-    },
-    {
-      "id": 1813,
-      "name": "The spellbinder\u0027s cache",
-      "exits": {
-        "East": 1812,
-        "South": 1815
-      }
-    },
-    {
-      "id": 1814,
-      "name": "A hallway",
-      "exits": {
-        "East": 1810,
-        "West": 1815
-      }
-    },
-    {
-      "id": 1815,
-      "name": "A hallway",
-      "exits": {
-        "North": 1813,
-        "East": 1814,
-        "West": 1816
-      }
-    },
-    {
-      "id": 1816,
-      "name": "A bend in the hallway",
-      "exits": {
-        "East": 1815,
-        "South": 1817
-      }
-    },
-    {
-      "id": 1817,
-      "name": "A hallway",
-      "exits": {
-        "North": 1816,
-        "South": 1818
-      }
-    },
-    {
-      "id": 1818,
-      "name": "A hallway",
-      "exits": {
-        "North": 1817,
-        "South": 1823,
-        "West": 1819
-      }
-    },
-    {
-      "id": 1819,
-      "name": "The golem master\u0027s workshop",
-      "exits": {
-        "North": 1820,
-        "East": 1818,
-        "South": 1821,
-        "Down": 1822
-      }
-    },
-    {
-      "id": 1820,
-      "name": "A store room",
-      "exits": {
-        "South": 1819
-      }
-    },
-    {
-      "id": 1821,
-      "name": "The golem chamber",
-      "exits": {
-        "North": 1819
-      }
-    },
-    {
-      "id": 1822,
-      "name": "It is very dark here...",
-      "exits": {
-        "Up": 1819,
-        "Down": 1791
-      }
-    },
-    {
-      "id": 1823,
-      "name": "A hallway",
-      "exits": {
-        "North": 1818,
-        "South": 1824
-      }
-    },
-    {
-      "id": 1824,
-      "name": "A bend in the hallway",
-      "exits": {
-        "North": 1823,
-        "East": 1825
-      }
-    },
-    {
-      "id": 1825,
-      "name": "A hallway",
-      "exits": {
-        "East": 1826,
-        "West": 1824
-      }
-    },
-    {
-      "id": 1826,
-      "name": "A hallway",
-      "exits": {
-        "East": 1829,
-        "South": 1827,
-        "West": 1825
-      }
-    },
-    {
-      "id": 1827,
-      "name": "The master of illusion\u0027s chamber",
-      "exits": {
-        "North": 1826,
-        "West": 1828
-      }
-    },
-    {
-      "id": 1828,
-      "name": "A bedroom",
-      "exits": {
-        "East": 1827
-      }
-    },
-    {
-      "id": 1829,
-      "name": "A hallway",
-      "exits": {
-        "East": 1831,
-        "South": 1830,
-        "West": 1826
-      }
-    },
-    {
-      "id": 1830,
-      "name": "The meditation chamber",
-      "exits": {
-        "North": 1829
-      }
-    },
-    {
-      "id": 1831,
-      "name": "A bend in the hallway",
-      "exits": {
-        "North": 1832,
-        "West": 1829
-      }
-    },
-    {
-      "id": 1832,
-      "name": "A hallway",
-      "exits": {
-        "North": 1836,
-        "East": 1833,
-        "South": 1831
-      }
-    },
-    {
-      "id": 1833,
-      "name": "A dark room",
-      "exits": {
-        "North": 1834,
-        "West": 1832
-      }
-    },
-    {
-      "id": 1834,
-      "name": "A dark room",
-      "exits": {
-        "North": 1835,
-        "South": 1833
-      }
-    },
-    {
-      "id": 1835,
-      "name": "The Necromancer\u0027s Lair",
-      "exits": {
-        "South": 1834
-      }
-    },
-    {
-      "id": 1836,
-      "name": "A hallway",
-      "exits": {
-        "North": 1837,
-        "South": 1832
-      }
-    },
-    {
-      "id": 1837,
-      "name": "A hallway",
-      "exits": {
-        "North": 1838,
-        "South": 1836
-      }
-    },
-    {
-      "id": 1838,
-      "name": "The end of the hallway",
-      "exits": {
-        "South": 1837,
-        "Up": 1839
-      }
-    },
-    {
-      "id": 1839,
-      "name": "A corridor",
-      "exits": {
-        "West": 1840,
-        "Down": 1838
-      }
-    },
-    {
-      "id": 1840,
-      "name": "A corridor",
-      "exits": {
-        "East": 1839,
-        "West": 1841
-      }
-    },
-    {
-      "id": 1841,
-      "name": "A bend in the corridor",
-      "exits": {
-        "East": 1840,
-        "South": 1842
-      }
-    },
-    {
-      "id": 1842,
-      "name": "A corridor",
-      "exits": {
-        "North": 1841,
-        "South": 1843
-      }
-    },
-    {
-      "id": 1843,
-      "name": "An intersection",
-      "exits": {
-        "North": 1842,
-        "East": 1844,
-        "South": 1856,
-        "West": 1846
-      }
-    },
-    {
-      "id": 1844,
-      "name": "A corridor",
-      "exits": {
-        "East": 1845,
-        "West": 1843
-      }
-    },
-    {
-      "id": 1845,
-      "name": "The scrying chamber",
-      "exits": {
-        "West": 1844
-      }
-    },
-    {
-      "id": 1846,
-      "name": "A corridor",
-      "exits": {
-        "East": 1843,
-        "West": 1847
-      }
-    },
-    {
-      "id": 1847,
-      "name": "The entrance to the library",
-      "exits": {
-        "North": 1849,
-        "East": 1846,
-        "South": 1850,
-        "West": 1848
-      }
-    },
-    {
-      "id": 1848,
-      "name": "In the library",
-      "exits": {
-        "North": 1851,
-        "East": 1847,
-        "South": 1852,
-        "West": 1853
-      }
-    },
-    {
-      "id": 1849,
-      "name": "In the library",
-      "exits": {
-        "North": 1850,
-        "East": 1852,
-        "South": 1847,
-        "West": 1851
-      }
-    },
-    {
-      "id": 1850,
-      "name": "In the library",
-      "exits": {
-        "North": 1847,
-        "East": 1851,
-        "South": 1849,
-        "West": 1852
-      }
-    },
-    {
-      "id": 1851,
-      "name": "In the library",
-      "exits": {
-        "North": 1852,
-        "East": 1849,
-        "South": 1848,
-        "West": 1850
-      }
-    },
-    {
-      "id": 1852,
-      "name": "In the library",
-      "exits": {
-        "North": 1848,
-        "East": 1850,
-        "South": 1851,
-        "West": 1849
-      }
-    },
-    {
-      "id": 1853,
-      "name": "In the library",
-      "exits": {
-        "East": 1848,
-        "West": 1854
-      }
-    },
-    {
-      "id": 1854,
-      "name": "Between the shelves",
-      "exits": {
-        "North": 1855,
-        "East": 1853
-      }
-    },
-    {
-      "id": 1855,
-      "name": "The reading room",
-      "exits": {
-        "South": 1854
-      }
-    },
-    {
-      "id": 1856,
-      "name": "A corridor",
-      "exits": {
-        "North": 1843,
-        "South": 1857
-      }
-    },
-    {
-      "id": 1857,
-      "name": "The end of the corridor",
-      "exits": {
-        "North": 1856,
-        "South": 1858
-      }
-    },
-    {
-      "id": 1858,
-      "name": "The arched entrance",
-      "exits": {
-        "North": 1857,
-        "Up": 1859
-      }
-    },
-    {
-      "id": 1859,
-      "name": "The landing",
-      "exits": {
-        "Down": 1858,
-        "Up": 1860
-      }
-    },
-    {
-      "id": 1860,
-      "name": "An intersection",
-      "exits": {
-        "North": 1882,
-        "East": 1868,
-        "South": 1861,
-        "West": 1875,
-        "Down": 1859
-      }
-    },
-    {
-      "id": 1861,
-      "name": "A grey tiled hallway",
-      "exits": {
-        "North": 1860,
-        "South": 1862
-      }
-    },
-    {
-      "id": 1862,
-      "name": "A grey tiled hallway",
-      "exits": {
-        "North": 1861,
-        "South": 1863
-      }
-    },
-    {
-      "id": 1863,
-      "name": "The antechamber",
-      "exits": {
-        "North": 1862,
-        "South": 1864
-      }
-    },
-    {
-      "id": 1864,
-      "name": "The main chamber",
-      "exits": {
-        "North": 1863,
-        "East": 1866,
-        "South": 1867,
-        "West": 1865
-      }
-    },
-    {
-      "id": 1865,
-      "name": "The study",
-      "exits": {
-        "East": 1864
-      }
-    },
-    {
-      "id": 1866,
-      "name": "A closet",
-      "exits": {
-        "West": 1864
-      }
-    },
-    {
-      "id": 1867,
-      "name": "A bedroom",
-      "exits": {
-        "North": 1864
-      }
-    },
-    {
-      "id": 1868,
-      "name": "A dark hallway",
-      "exits": {
-        "West": 1860,
-        "East": 1869
-      }
-    },
-    {
-      "id": 1869,
-      "name": "A dark hallway",
-      "exits": {
-        "East": 1870,
-        "West": 1868
-      }
-    },
-    {
-      "id": 1870,
-      "name": "The end of the hallway",
-      "exits": {
-        "East": 1871,
-        "West": 1869
-      }
-    },
-    {
-      "id": 1871,
-      "name": "The chamber of darkness",
-      "exits": {
-        "North": 1872,
-        "South": 1873,
-        "East": 1874,
-        "West": 1870
-      }
-    },
-    {
-      "id": 1872,
-      "name": "It is very dark here...",
-      "exits": {
-        "South": 1871
-      }
-    },
-    {
-      "id": 1873,
-      "name": "Torture chamber",
-      "exits": {
-        "North": 1871
-      }
-    },
-    {
-      "id": 1874,
-      "name": "The inner chamber",
-      "exits": {
-        "West": 1871
-      }
-    },
-    {
-      "id": 1875,
-      "name": "A bright hallway",
-      "exits": {
-        "East": 1860,
-        "West": 1876
-      }
-    },
-    {
-      "id": 1876,
-      "name": "A bright hallway",
-      "exits": {
-        "East": 1875,
-        "West": 1877
-      }
-    },
-    {
-      "id": 1877,
-      "name": "An antechamber",
-      "exits": {
-        "East": 1876,
-        "West": 1878
-      }
-    },
-    {
-      "id": 1878,
-      "name": "The chamber of the white light",
-      "exits": {
-        "North": 1879,
-        "South": 1880,
-        "East": 1877,
-        "West": 1881
-      }
-    },
-    {
-      "id": 1879,
-      "name": "The meditation chamber",
-      "exits": {
-        "South": 1878
-      }
-    },
-    {
-      "id": 1880,
-      "name": "A study",
-      "exits": {
-        "North": 1878
-      }
-    },
-    {
-      "id": 1881,
-      "name": "A closet",
-      "exits": {
-        "East": 1878
-      }
-    },
-    {
-      "id": 1882,
-      "name": "A wide hallway",
-      "exits": {
-        "North": 1883,
-        "South": 1860
-      }
-    },
-    {
-      "id": 1883,
-      "name": "A wide hallway",
-      "exits": {
-        "North": 1884,
-        "South": 1882
-      }
-    },
-    {
-      "id": 1884,
-      "name": "A wide hallway",
-      "exits": {
-        "North": 1885,
-        "South": 1883
-      }
-    },
-    {
-      "id": 1885,
-      "name": "The entranceway",
-      "exits": {
-        "North": 1886,
-        "South": 1884
-      }
-    },
-    {
-      "id": 1886,
-      "name": "The audience chamber",
-      "exits": {
-        "North": 1889,
-        "East": 1887,
-        "South": 1885,
-        "West": 1888
-      }
-    },
-    {
-      "id": 1887,
-      "name": "A dressing room",
-      "exits": {
-        "West": 1886
-      }
-    },
-    {
-      "id": 1888,
-      "name": "The library",
-      "exits": {
-        "East": 1886
-      }
-    },
-    {
-      "id": 1889,
-      "name": "The altar",
-      "exits": {
-        "East": 1890,
-        "South": 1886,
-        "West": 1891
-      }
-    },
-    {
-      "id": 1890,
-      "name": "The treasury",
-      "exits": {
-        "West": 1889
-      }
-    },
-    {
-      "id": 1891,
-      "name": "A passage",
-      "exits": {
-        "West": 1892
-      }
-    },
-    {
-      "id": 1892,
-      "name": "In the light",
-      "exits": {
-        "Up": 2247
-      }
-    },
-    {
-      "id": 1893,
-      "name": "Skylar\u0027s Hideout",
-      "exits": {}
-    },
-    {
-      "id": 1468,
-      "name": "To Haon Dor",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 1711,
-        "East": 1467
-      }
-    },
-    {
-      "id": 800,
-      "name": "To Dragon Tower",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 801,
-        "East": 1715
-      }
-    },
-    {
-      "id": 1148,
-      "name": "To Galaxy",
-      "otherAreaExit": true,
-      "exits": {
-        "Down": 1149,
-        "West": 1717
-      }
-    },
-    {
-      "id": 893,
-      "name": "To Drow City",
-      "otherAreaExit": true,
-      "exits": {
-        "South": 892
-      }
-    },
-    {
-      "id": 1021,
-      "name": "To Dylan\u0027s Area",
-      "otherAreaExit": true,
-      "exits": {
-        "East": 2247,
-        "Down": 1020
-      }
-    },
-    {
-      "id": 3440,
-      "name": "To Sewer",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 3441,
-        "West": 3439
-      }
-    },
-    {
-      "id": 3018,
-      "name": "To Olympus",
-      "otherAreaExit": true,
-      "exits": {
-        "East": 3017,
-        "North": 3030
-      }
-    },
-    {
-      "id": 451,
-      "name": "To Chapel Catacombs",
-      "otherAreaExit": true,
-      "exits": {
-        "East": 450,
-        "Down": 464
-      }
-    },
-    {
-      "id": 2247,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2296,
-        "South": 2251,
-        "Up": 3222
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

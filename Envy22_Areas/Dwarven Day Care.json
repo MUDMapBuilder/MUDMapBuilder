@@ -1,181 +1,224 @@
 {
-  "name": "Dwarven Day Care",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Dwarven Day Care",
+    "Rooms": [
+      {
+        "Id": 640,
+        "Name": "The Dwarven Drop Off",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 641,
+          "North": 931
+        }
+      },
+      {
+        "Id": 641,
+        "Name": "Day Care Center",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 640,
+          "West": 642,
+          "South": 643,
+          "East": 657
+        }
+      },
+      {
+        "Id": 642,
+        "Name": "Day Care Center",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 641,
+          "South": 644,
+          "West": 645
+        }
+      },
+      {
+        "Id": 643,
+        "Name": "Day Care Center",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 641,
+          "East": 649,
+          "West": 644
+        }
+      },
+      {
+        "Id": 644,
+        "Name": "Day Care Center",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 642,
+          "East": 643,
+          "West": 646
+        }
+      },
+      {
+        "Id": 645,
+        "Name": "The Messy Bathroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 642
+        }
+      },
+      {
+        "Id": 646,
+        "Name": "The Staircase",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 644,
+          "Down": 651
+        }
+      },
+      {
+        "Id": 647,
+        "Name": "The Playground",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 648,
+          "South": 649
+        }
+      },
+      {
+        "Id": 648,
+        "Name": "The Playground",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 650,
+          "West": 647
+        }
+      },
+      {
+        "Id": 649,
+        "Name": "The Playground",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 647,
+          "East": 650,
+          "West": 643
+        }
+      },
+      {
+        "Id": 650,
+        "Name": "The Playground",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 648,
+          "West": 649
+        }
+      },
+      {
+        "Id": 651,
+        "Name": "Entrance to the Mini-Maze",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 652,
+          "Up": 646
+        }
+      },
+      {
+        "Id": 652,
+        "Name": "Mini-Maze",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 651,
+          "South": 654,
+          "East": 653
+        }
+      },
+      {
+        "Id": 653,
+        "Name": "Mini-Maze",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 655,
+          "West": 652
+        }
+      },
+      {
+        "Id": 654,
+        "Name": "Mini-Maze",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 652,
+          "East": 655
+        }
+      },
+      {
+        "Id": 655,
+        "Name": "Mini-Maze",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 654,
+          "North": 653,
+          "South": 656
+        }
+      },
+      {
+        "Id": 656,
+        "Name": "End of the Mini-Maze",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 655,
+          "South": 658
+        }
+      },
+      {
+        "Id": 657,
+        "Name": "Messy Kitchen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 641
+        }
+      },
+      {
+        "Id": 658,
+        "Name": "The End?",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 656
+        }
+      },
+      {
+        "Id": 931,
+        "Name": "To Dwarven Kingdom",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "Up": 2203,
+          "North": 932,
+          "South": 640
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 640,
-      "name": "The Dwarven Drop Off",
-      "exits": {
-        "South": 641,
-        "North": 931
-      }
-    },
-    {
-      "id": 641,
-      "name": "Day Care Center",
-      "exits": {
-        "North": 640,
-        "West": 642,
-        "South": 643,
-        "East": 657
-      }
-    },
-    {
-      "id": 642,
-      "name": "Day Care Center",
-      "exits": {
-        "East": 641,
-        "South": 644,
-        "West": 645
-      }
-    },
-    {
-      "id": 643,
-      "name": "Day Care Center",
-      "exits": {
-        "North": 641,
-        "East": 649,
-        "West": 644
-      }
-    },
-    {
-      "id": 644,
-      "name": "Day Care Center",
-      "exits": {
-        "North": 642,
-        "East": 643,
-        "West": 646
-      }
-    },
-    {
-      "id": 645,
-      "name": "The Messy Bathroom",
-      "exits": {
-        "East": 642
-      }
-    },
-    {
-      "id": 646,
-      "name": "The Staircase",
-      "exits": {
-        "East": 644,
-        "Down": 651
-      }
-    },
-    {
-      "id": 647,
-      "name": "The Playground",
-      "exits": {
-        "East": 648,
-        "South": 649
-      }
-    },
-    {
-      "id": 648,
-      "name": "The Playground",
-      "exits": {
-        "South": 650,
-        "West": 647
-      }
-    },
-    {
-      "id": 649,
-      "name": "The Playground",
-      "exits": {
-        "North": 647,
-        "East": 650,
-        "West": 643
-      }
-    },
-    {
-      "id": 650,
-      "name": "The Playground",
-      "exits": {
-        "North": 648,
-        "West": 649
-      }
-    },
-    {
-      "id": 651,
-      "name": "Entrance to the Mini-Maze",
-      "exits": {
-        "East": 652,
-        "Up": 646
-      }
-    },
-    {
-      "id": 652,
-      "name": "Mini-Maze",
-      "exits": {
-        "West": 651,
-        "South": 654,
-        "East": 653
-      }
-    },
-    {
-      "id": 653,
-      "name": "Mini-Maze",
-      "exits": {
-        "South": 655,
-        "West": 652
-      }
-    },
-    {
-      "id": 654,
-      "name": "Mini-Maze",
-      "exits": {
-        "North": 652,
-        "East": 655
-      }
-    },
-    {
-      "id": 655,
-      "name": "Mini-Maze",
-      "exits": {
-        "West": 654,
-        "North": 653,
-        "South": 656
-      }
-    },
-    {
-      "id": 656,
-      "name": "End of the Mini-Maze",
-      "exits": {
-        "North": 655,
-        "South": 658
-      }
-    },
-    {
-      "id": 657,
-      "name": "Messy Kitchen",
-      "exits": {
-        "West": 641
-      }
-    },
-    {
-      "id": 658,
-      "name": "The End?",
-      "exits": {
-        "North": 656
-      }
-    },
-    {
-      "id": 931,
-      "name": "To Dwarven Kingdom",
-      "otherAreaExit": true,
-      "exits": {
-        "Up": 2203,
-        "North": 932,
-        "South": 640
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

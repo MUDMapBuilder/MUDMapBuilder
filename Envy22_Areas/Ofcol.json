@@ -1,105 +1,128 @@
 {
-  "name": "Ofcol",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Ofcol",
+    "Rooms": [
+      {
+        "Id": 2873,
+        "Name": "Village street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2874,
+          "South": 3045
+        }
+      },
+      {
+        "Id": 2874,
+        "Name": "Village street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2875,
+          "East": 2876,
+          "South": 2873
+        }
+      },
+      {
+        "Id": 2875,
+        "Name": "Village square",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2879,
+          "East": 2595,
+          "South": 2874,
+          "West": 2878
+        }
+      },
+      {
+        "Id": 2876,
+        "Name": "The small alley",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2882,
+          "South": 2877,
+          "West": 2874
+        }
+      },
+      {
+        "Id": 2877,
+        "Name": "The future training room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2876
+        }
+      },
+      {
+        "Id": 2878,
+        "Name": "Luxan\u0027s mixed shop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2875
+        }
+      },
+      {
+        "Id": 2879,
+        "Name": "The Local Inn",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2875
+        }
+      },
+      {
+        "Id": 2880,
+        "Name": "Ravan\u0027s hideout",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 3045,
+        "Name": "To Plains of the North",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2873,
+          "South": 3044
+        }
+      },
+      {
+        "Id": 2595,
+        "Name": "To Murky Land",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2596,
+          "West": 2875
+        }
+      },
+      {
+        "Id": 2882,
+        "Name": "To New Ofcol",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2906,
+          "East": 2947,
+          "South": 2883,
+          "West": 2876
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 2873,
-      "name": "Village street",
-      "exits": {
-        "North": 2874,
-        "South": 3045
-      }
-    },
-    {
-      "id": 2874,
-      "name": "Village street",
-      "exits": {
-        "North": 2875,
-        "East": 2876,
-        "South": 2873
-      }
-    },
-    {
-      "id": 2875,
-      "name": "Village square",
-      "exits": {
-        "North": 2879,
-        "East": 2595,
-        "South": 2874,
-        "West": 2878
-      }
-    },
-    {
-      "id": 2876,
-      "name": "The small alley",
-      "exits": {
-        "East": 2882,
-        "South": 2877,
-        "West": 2874
-      }
-    },
-    {
-      "id": 2877,
-      "name": "The future training room",
-      "exits": {
-        "North": 2876
-      }
-    },
-    {
-      "id": 2878,
-      "name": "Luxan\u0027s mixed shop",
-      "exits": {
-        "East": 2875
-      }
-    },
-    {
-      "id": 2879,
-      "name": "The Local Inn",
-      "exits": {
-        "South": 2875
-      }
-    },
-    {
-      "id": 2880,
-      "name": "Ravan\u0027s hideout",
-      "exits": {}
-    },
-    {
-      "id": 3045,
-      "name": "To Plains of the North",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2873,
-        "South": 3044
-      }
-    },
-    {
-      "id": 2595,
-      "name": "To Murky Land",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2596,
-        "West": 2875
-      }
-    },
-    {
-      "id": 2882,
-      "name": "To New Ofcol",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2906,
-        "East": 2947,
-        "South": 2883,
-        "West": 2876
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

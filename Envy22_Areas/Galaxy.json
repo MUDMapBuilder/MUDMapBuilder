@@ -1,538 +1,666 @@
 {
-  "name": "Galaxy",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": false,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Galaxy",
+    "Rooms": [
+      {
+        "Id": 1148,
+        "Name": "Inside a Tavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 1149,
+          "West": 1717
+        }
+      },
+      {
+        "Id": 1149,
+        "Name": "Inside the Crystal Ball",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1150
+        }
+      },
+      {
+        "Id": 1150,
+        "Name": "Inside the Galaxy",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1151,
+          "East": 1154,
+          "South": 1149,
+          "West": 1164
+        }
+      },
+      {
+        "Id": 1151,
+        "Name": "On an InterGalactic Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1152,
+          "South": 1150,
+          "West": 1165
+        }
+      },
+      {
+        "Id": 1152,
+        "Name": "End of the InterGalactic Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1153,
+          "East": 1155,
+          "South": 1151,
+          "West": 1166
+        }
+      },
+      {
+        "Id": 1153,
+        "Name": "At the Undeveloped Part of the Galaxy",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1152,
+          "West": 1167
+        }
+      },
+      {
+        "Id": 1154,
+        "Name": "On the Bridge of Stars",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1174,
+          "East": 1157,
+          "West": 1150
+        }
+      },
+      {
+        "Id": 1155,
+        "Name": "On the Bridge of Nebulae",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1156,
+          "East": 1159,
+          "West": 1152
+        }
+      },
+      {
+        "Id": 1156,
+        "Name": "The Throne Room of the Nebula King",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1155
+        }
+      },
+      {
+        "Id": 1157,
+        "Name": "At the Start of the Milky Way",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1158,
+          "West": 1154
+        }
+      },
+      {
+        "Id": 1158,
+        "Name": "Along the Milky Way",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1159,
+          "East": 1160,
+          "South": 1157
+        }
+      },
+      {
+        "Id": 1159,
+        "Name": "At the End of the Milky Way",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1161,
+          "South": 1158,
+          "West": 1155
+        }
+      },
+      {
+        "Id": 1160,
+        "Name": "A Small Clearing",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1161,
+          "West": 1158
+        }
+      },
+      {
+        "Id": 1161,
+        "Name": "An Edge of the Galaxy",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1160,
+          "West": 1159,
+          "Down": 1162
+        }
+      },
+      {
+        "Id": 1162,
+        "Name": "Very Near to a Gigantic Star",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1163,
+          "East": 1163,
+          "South": 1163,
+          "West": 1163
+        }
+      },
+      {
+        "Id": 1163,
+        "Name": "Too Bright to Tell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 1164,
+        "Name": "The Star Cluster",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1165,
+          "East": 1150
+        }
+      },
+      {
+        "Id": 1165,
+        "Name": "Another Edge of the Galaxy",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1166,
+          "East": 1151,
+          "South": 1164
+        }
+      },
+      {
+        "Id": 1166,
+        "Name": "Corner of the Galaxy",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1167,
+          "East": 1152,
+          "South": 1165
+        }
+      },
+      {
+        "Id": 1167,
+        "Name": "Lost in Space",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1168,
+          "East": 1153,
+          "South": 1166
+        }
+      },
+      {
+        "Id": 1168,
+        "Name": "Black Hole",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 1169,
+        "Name": "The Homes of the Pleiades",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1172,
+          "South": 1170
+        }
+      },
+      {
+        "Id": 1170,
+        "Name": "Western Side of the Temple",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1169,
+          "East": 1173,
+          "South": 1171
+        }
+      },
+      {
+        "Id": 1171,
+        "Name": "Orion\u0027s Hunting Lodge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1170,
+          "East": 1174
+        }
+      },
+      {
+        "Id": 1172,
+        "Name": "Northern Side of the Temple",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1175,
+          "South": 1173,
+          "West": 1169
+        }
+      },
+      {
+        "Id": 1173,
+        "Name": "The Offering Chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1172,
+          "East": 1176,
+          "South": 1174,
+          "West": 1170,
+          "Up": 1178,
+          "Down": 3748
+        }
+      },
+      {
+        "Id": 1174,
+        "Name": "The Entrance of the Ancient Temple",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1173,
+          "East": 1177,
+          "South": 1154,
+          "West": 1171
+        }
+      },
+      {
+        "Id": 1175,
+        "Name": "Hercules\u0027 Mighty Throne",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1176,
+          "West": 1172
+        }
+      },
+      {
+        "Id": 1176,
+        "Name": "Eastern Side of the Temple",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1175,
+          "South": 1177,
+          "West": 1173
+        }
+      },
+      {
+        "Id": 1177,
+        "Name": "Perseus\u0027 Chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1176,
+          "West": 1174
+        }
+      },
+      {
+        "Id": 1178,
+        "Name": "On the Mystic Chains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1185,
+          "East": 1188,
+          "South": 1179,
+          "West": 1182,
+          "Up": 1191,
+          "Down": 1173
+        }
+      },
+      {
+        "Id": 1179,
+        "Name": "On a Hill",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1178,
+          "East": 1190,
+          "West": 1180
+        }
+      },
+      {
+        "Id": 1180,
+        "Name": "Inside a Spanish Bull-Ring",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1179,
+          "West": 1181
+        }
+      },
+      {
+        "Id": 1181,
+        "Name": "Inside a study",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1180
+        }
+      },
+      {
+        "Id": 1182,
+        "Name": "Along the seashore",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1178,
+          "West": 1183
+        }
+      },
+      {
+        "Id": 1183,
+        "Name": "Within the Deep Jungle",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1182
+        }
+      },
+      {
+        "Id": 1184,
+        "Name": "Inside a Luxurious Bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1185
+        }
+      },
+      {
+        "Id": 1185,
+        "Name": "The Supreme Court",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1178,
+          "West": 1186
+        }
+      },
+      {
+        "Id": 1186,
+        "Name": "In the Dry Desert",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1185,
+          "West": 1187
+        }
+      },
+      {
+        "Id": 1187,
+        "Name": "In the Woods",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1186
+        }
+      },
+      {
+        "Id": 1188,
+        "Name": "On a Mountain Peak",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1189,
+          "West": 1178
+        }
+      },
+      {
+        "Id": 1189,
+        "Name": "Inside a Waterfall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1188
+        }
+      },
+      {
+        "Id": 1190,
+        "Name": "Inside a Gigantic Clam",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1179
+        }
+      },
+      {
+        "Id": 1191,
+        "Name": "End of the Mystic Chains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1192,
+          "Down": 1178
+        }
+      },
+      {
+        "Id": 1192,
+        "Name": "On the Draco",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1193,
+          "Down": 1191
+        }
+      },
+      {
+        "Id": 1193,
+        "Name": "Tail of the Draco",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1192,
+          "North": 1194
+        }
+      },
+      {
+        "Id": 1194,
+        "Name": "Path of the Draco",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1195,
+          "South": 1193
+        }
+      },
+      {
+        "Id": 1195,
+        "Name": "Near the Legs of Draco",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1196,
+          "South": 1194
+        }
+      },
+      {
+        "Id": 1196,
+        "Name": "On the Back of Draco",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1197,
+          "South": 1195
+        }
+      },
+      {
+        "Id": 1197,
+        "Name": "Between the Wings of Draco",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1198,
+          "West": 1196
+        }
+      },
+      {
+        "Id": 1198,
+        "Name": "Near the Arms of Draco",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1199,
+          "West": 1197
+        }
+      },
+      {
+        "Id": 1199,
+        "Name": "On the Neck of Draco",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1198,
+          "West": 1200
+        }
+      },
+      {
+        "Id": 1200,
+        "Name": "Approaching the Head of Draco",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1199,
+          "South": 1201
+        }
+      },
+      {
+        "Id": 1201,
+        "Name": "At the Entrance of the Great Dipper",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1200,
+          "South": 1202,
+          "West": 1203
+        }
+      },
+      {
+        "Id": 1202,
+        "Name": "Cassiopeia\u0027s Throne",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1201,
+          "West": 1204
+        }
+      },
+      {
+        "Id": 1203,
+        "Name": "Along the Path of the Dipper",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1201,
+          "South": 1204
+        }
+      },
+      {
+        "Id": 1204,
+        "Name": "Cepheus\u0027 Throne",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1203,
+          "East": 1202,
+          "South": 1205
+        }
+      },
+      {
+        "Id": 1205,
+        "Name": "Along the path of the Dipper",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1204,
+          "West": 1206
+        }
+      },
+      {
+        "Id": 1206,
+        "Name": "Along the path of the Dipper",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1205,
+          "South": 1207
+        }
+      },
+      {
+        "Id": 1207,
+        "Name": "End of the Dipper",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1206,
+          "South": 1208
+        }
+      },
+      {
+        "Id": 1208,
+        "Name": "The Polar Star",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1207
+        }
+      },
+      {
+        "Id": 1717,
+        "Name": "To High Tower of Sorcery",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 1714,
+          "East": 1148,
+          "South": 1720,
+          "West": 1716
+        }
+      },
+      {
+        "Id": 3748,
+        "Name": "To Thalos",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 3704,
+          "East": 3702
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 1148,
-      "name": "Inside a Tavern",
-      "exits": {
-        "Down": 1149,
-        "West": 1717
-      }
-    },
-    {
-      "id": 1149,
-      "name": "Inside the Crystal Ball",
-      "exits": {
-        "North": 1150
-      }
-    },
-    {
-      "id": 1150,
-      "name": "Inside the Galaxy",
-      "exits": {
-        "North": 1151,
-        "East": 1154,
-        "South": 1149,
-        "West": 1164
-      }
-    },
-    {
-      "id": 1151,
-      "name": "On an InterGalactic Walkway",
-      "exits": {
-        "North": 1152,
-        "South": 1150,
-        "West": 1165
-      }
-    },
-    {
-      "id": 1152,
-      "name": "End of the InterGalactic Walkway",
-      "exits": {
-        "North": 1153,
-        "East": 1155,
-        "South": 1151,
-        "West": 1166
-      }
-    },
-    {
-      "id": 1153,
-      "name": "At the Undeveloped Part of the Galaxy",
-      "exits": {
-        "South": 1152,
-        "West": 1167
-      }
-    },
-    {
-      "id": 1154,
-      "name": "On the Bridge of Stars",
-      "exits": {
-        "North": 1174,
-        "East": 1157,
-        "West": 1150
-      }
-    },
-    {
-      "id": 1155,
-      "name": "On the Bridge of Nebulae",
-      "exits": {
-        "North": 1156,
-        "East": 1159,
-        "West": 1152
-      }
-    },
-    {
-      "id": 1156,
-      "name": "The Throne Room of the Nebula King",
-      "exits": {
-        "South": 1155
-      }
-    },
-    {
-      "id": 1157,
-      "name": "At the Start of the Milky Way",
-      "exits": {
-        "North": 1158,
-        "West": 1154
-      }
-    },
-    {
-      "id": 1158,
-      "name": "Along the Milky Way",
-      "exits": {
-        "North": 1159,
-        "East": 1160,
-        "South": 1157
-      }
-    },
-    {
-      "id": 1159,
-      "name": "At the End of the Milky Way",
-      "exits": {
-        "East": 1161,
-        "South": 1158,
-        "West": 1155
-      }
-    },
-    {
-      "id": 1160,
-      "name": "A Small Clearing",
-      "exits": {
-        "North": 1161,
-        "West": 1158
-      }
-    },
-    {
-      "id": 1161,
-      "name": "An Edge of the Galaxy",
-      "exits": {
-        "South": 1160,
-        "West": 1159,
-        "Down": 1162
-      }
-    },
-    {
-      "id": 1162,
-      "name": "Very Near to a Gigantic Star",
-      "exits": {
-        "North": 1163,
-        "East": 1163,
-        "South": 1163,
-        "West": 1163
-      }
-    },
-    {
-      "id": 1163,
-      "name": "Too Bright to Tell",
-      "exits": {}
-    },
-    {
-      "id": 1164,
-      "name": "The Star Cluster",
-      "exits": {
-        "North": 1165,
-        "East": 1150
-      }
-    },
-    {
-      "id": 1165,
-      "name": "Another Edge of the Galaxy",
-      "exits": {
-        "North": 1166,
-        "East": 1151,
-        "South": 1164
-      }
-    },
-    {
-      "id": 1166,
-      "name": "Corner of the Galaxy",
-      "exits": {
-        "North": 1167,
-        "East": 1152,
-        "South": 1165
-      }
-    },
-    {
-      "id": 1167,
-      "name": "Lost in Space",
-      "exits": {
-        "North": 1168,
-        "East": 1153,
-        "South": 1166
-      }
-    },
-    {
-      "id": 1168,
-      "name": "Black Hole",
-      "exits": {}
-    },
-    {
-      "id": 1169,
-      "name": "The Homes of the Pleiades",
-      "exits": {
-        "East": 1172,
-        "South": 1170
-      }
-    },
-    {
-      "id": 1170,
-      "name": "Western Side of the Temple",
-      "exits": {
-        "North": 1169,
-        "East": 1173,
-        "South": 1171
-      }
-    },
-    {
-      "id": 1171,
-      "name": "Orion\u0027s Hunting Lodge",
-      "exits": {
-        "North": 1170,
-        "East": 1174
-      }
-    },
-    {
-      "id": 1172,
-      "name": "Northern Side of the Temple",
-      "exits": {
-        "East": 1175,
-        "South": 1173,
-        "West": 1169
-      }
-    },
-    {
-      "id": 1173,
-      "name": "The Offering Chamber",
-      "exits": {
-        "North": 1172,
-        "East": 1176,
-        "South": 1174,
-        "West": 1170,
-        "Up": 1178,
-        "Down": 3748
-      }
-    },
-    {
-      "id": 1174,
-      "name": "The Entrance of the Ancient Temple",
-      "exits": {
-        "North": 1173,
-        "East": 1177,
-        "South": 1154,
-        "West": 1171
-      }
-    },
-    {
-      "id": 1175,
-      "name": "Hercules\u0027 Mighty Throne",
-      "exits": {
-        "South": 1176,
-        "West": 1172
-      }
-    },
-    {
-      "id": 1176,
-      "name": "Eastern Side of the Temple",
-      "exits": {
-        "North": 1175,
-        "South": 1177,
-        "West": 1173
-      }
-    },
-    {
-      "id": 1177,
-      "name": "Perseus\u0027 Chamber",
-      "exits": {
-        "North": 1176,
-        "West": 1174
-      }
-    },
-    {
-      "id": 1178,
-      "name": "On the Mystic Chains",
-      "exits": {
-        "North": 1185,
-        "East": 1188,
-        "South": 1179,
-        "West": 1182,
-        "Up": 1191,
-        "Down": 1173
-      }
-    },
-    {
-      "id": 1179,
-      "name": "On a Hill",
-      "exits": {
-        "North": 1178,
-        "East": 1190,
-        "West": 1180
-      }
-    },
-    {
-      "id": 1180,
-      "name": "Inside a Spanish Bull-Ring",
-      "exits": {
-        "East": 1179,
-        "West": 1181
-      }
-    },
-    {
-      "id": 1181,
-      "name": "Inside a study",
-      "exits": {
-        "East": 1180
-      }
-    },
-    {
-      "id": 1182,
-      "name": "Along the seashore",
-      "exits": {
-        "East": 1178,
-        "West": 1183
-      }
-    },
-    {
-      "id": 1183,
-      "name": "Within the Deep Jungle",
-      "exits": {
-        "East": 1182
-      }
-    },
-    {
-      "id": 1184,
-      "name": "Inside a Luxurious Bedroom",
-      "exits": {
-        "West": 1185
-      }
-    },
-    {
-      "id": 1185,
-      "name": "The Supreme Court",
-      "exits": {
-        "South": 1178,
-        "West": 1186
-      }
-    },
-    {
-      "id": 1186,
-      "name": "In the Dry Desert",
-      "exits": {
-        "East": 1185,
-        "West": 1187
-      }
-    },
-    {
-      "id": 1187,
-      "name": "In the Woods",
-      "exits": {
-        "East": 1186
-      }
-    },
-    {
-      "id": 1188,
-      "name": "On a Mountain Peak",
-      "exits": {
-        "East": 1189,
-        "West": 1178
-      }
-    },
-    {
-      "id": 1189,
-      "name": "Inside a Waterfall",
-      "exits": {
-        "West": 1188
-      }
-    },
-    {
-      "id": 1190,
-      "name": "Inside a Gigantic Clam",
-      "exits": {
-        "West": 1179
-      }
-    },
-    {
-      "id": 1191,
-      "name": "End of the Mystic Chains",
-      "exits": {
-        "Up": 1192,
-        "Down": 1178
-      }
-    },
-    {
-      "id": 1192,
-      "name": "On the Draco",
-      "exits": {
-        "North": 1193,
-        "Down": 1191
-      }
-    },
-    {
-      "id": 1193,
-      "name": "Tail of the Draco",
-      "exits": {
-        "South": 1192,
-        "North": 1194
-      }
-    },
-    {
-      "id": 1194,
-      "name": "Path of the Draco",
-      "exits": {
-        "North": 1195,
-        "South": 1193
-      }
-    },
-    {
-      "id": 1195,
-      "name": "Near the Legs of Draco",
-      "exits": {
-        "North": 1196,
-        "South": 1194
-      }
-    },
-    {
-      "id": 1196,
-      "name": "On the Back of Draco",
-      "exits": {
-        "East": 1197,
-        "South": 1195
-      }
-    },
-    {
-      "id": 1197,
-      "name": "Between the Wings of Draco",
-      "exits": {
-        "East": 1198,
-        "West": 1196
-      }
-    },
-    {
-      "id": 1198,
-      "name": "Near the Arms of Draco",
-      "exits": {
-        "South": 1199,
-        "West": 1197
-      }
-    },
-    {
-      "id": 1199,
-      "name": "On the Neck of Draco",
-      "exits": {
-        "North": 1198,
-        "West": 1200
-      }
-    },
-    {
-      "id": 1200,
-      "name": "Approaching the Head of Draco",
-      "exits": {
-        "East": 1199,
-        "South": 1201
-      }
-    },
-    {
-      "id": 1201,
-      "name": "At the Entrance of the Great Dipper",
-      "exits": {
-        "North": 1200,
-        "South": 1202,
-        "West": 1203
-      }
-    },
-    {
-      "id": 1202,
-      "name": "Cassiopeia\u0027s Throne",
-      "exits": {
-        "North": 1201,
-        "West": 1204
-      }
-    },
-    {
-      "id": 1203,
-      "name": "Along the Path of the Dipper",
-      "exits": {
-        "East": 1201,
-        "South": 1204
-      }
-    },
-    {
-      "id": 1204,
-      "name": "Cepheus\u0027 Throne",
-      "exits": {
-        "North": 1203,
-        "East": 1202,
-        "South": 1205
-      }
-    },
-    {
-      "id": 1205,
-      "name": "Along the path of the Dipper",
-      "exits": {
-        "North": 1204,
-        "West": 1206
-      }
-    },
-    {
-      "id": 1206,
-      "name": "Along the path of the Dipper",
-      "exits": {
-        "East": 1205,
-        "South": 1207
-      }
-    },
-    {
-      "id": 1207,
-      "name": "End of the Dipper",
-      "exits": {
-        "North": 1206,
-        "South": 1208
-      }
-    },
-    {
-      "id": 1208,
-      "name": "The Polar Star",
-      "exits": {
-        "North": 1207
-      }
-    },
-    {
-      "id": 1717,
-      "name": "To High Tower of Sorcery",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 1714,
-        "East": 1148,
-        "South": 1720,
-        "West": 1716
-      }
-    },
-    {
-      "id": 3748,
-      "name": "To Thalos",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 3704,
-        "East": 3702
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

@@ -746,16 +746,28 @@ namespace MUDMapBuilder
 		private MapBuilderResult Process()
 		{
 			// Erase positions
-			foreach (var room in Area)
+			foreach (var room in Area.Rooms)
 			{
 				room.Position = null;
 			}
 
 			Area.ClearMarks();
 
-			// Remove single exit rooms
 			if (!Options.KeepSolitaryRooms)
 			{
+				// Remove solitary rooms
+				var toDelete = (from r in Area.Rooms where r.Connections.Count == 0 select r).ToList();
+
+				foreach (var room in toDelete)
+				{
+					Log($"Removed solitary room {room}");
+					Area.DeleteRoom(room);
+				}
+			}
+
+			if (!Options.KeepRoomsWithSingleOutsideExit)
+			{
+				// Remove single outside exit rooms
 				var toDelete = new List<MMBRoom>();
 				foreach (var room in Area.Rooms)
 				{
@@ -775,7 +787,7 @@ namespace MUDMapBuilder
 
 				foreach (var room in toDelete)
 				{
-					Log($"Removed solitary room {room}");
+					Log($"Removed single exit room {room}");
 					Area.DeleteRoom(room);
 				}
 			}
@@ -786,7 +798,7 @@ namespace MUDMapBuilder
 			}
 
 			MMBRoom firstRoom = null;
-			foreach (var room in Area)
+			foreach (var room in Area.Rooms)
 			{
 				firstRoom = room;
 			}
@@ -896,7 +908,7 @@ namespace MUDMapBuilder
 				}
 
 				// Update removed rooms
-				foreach (var room in Area)
+				foreach (var room in Area.Rooms)
 				{
 					if (room.Position == null)
 					{
@@ -940,7 +952,7 @@ namespace MUDMapBuilder
 				}
 
 				// Finally deal with rooms that weren't reached
-				foreach (var room in Area)
+				foreach (var room in Area.Rooms)
 				{
 					if (room.Position != null)
 					{

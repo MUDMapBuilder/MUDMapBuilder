@@ -1,455 +1,563 @@
 {
-  "name": "Dwarven Kingdom",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Dwarven Kingdom",
+    "Rooms": [
+      {
+        "Id": 931,
+        "Name": "Path to Dwarven Village",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 2203,
+          "North": 932,
+          "South": 640
+        }
+      },
+      {
+        "Id": 932,
+        "Name": "Path, base of mountain",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 933,
+          "South": 931
+        }
+      },
+      {
+        "Id": 933,
+        "Name": "Path, middle of mountain",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 934,
+          "South": 932
+        }
+      },
+      {
+        "Id": 934,
+        "Name": "Top of mountain",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 933,
+          "East": 966,
+          "West": 936
+        }
+      },
+      {
+        "Id": 935,
+        "Name": "Narrow Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 937,
+          "South": 966
+        }
+      },
+      {
+        "Id": 936,
+        "Name": "Entrance to Mountain",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 944,
+          "East": 934
+        }
+      },
+      {
+        "Id": 937,
+        "Name": "Bend in Narrow Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 938,
+          "South": 935
+        }
+      },
+      {
+        "Id": 938,
+        "Name": "Narrow path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 939,
+          "West": 937
+        }
+      },
+      {
+        "Id": 939,
+        "Name": "Narrow north-south path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 940,
+          "South": 938
+        }
+      },
+      {
+        "Id": 940,
+        "Name": "Door to Kingdom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 941,
+          "West": 953,
+          "South": 939
+        }
+      },
+      {
+        "Id": 941,
+        "Name": "Path to the Castle",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 940,
+          "North": 942
+        }
+      },
+      {
+        "Id": 942,
+        "Name": "Still on the path to the Castle",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 941,
+          "North": 943
+        }
+      },
+      {
+        "Id": 943,
+        "Name": "Door to Castle",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 956,
+          "South": 942
+        }
+      },
+      {
+        "Id": 944,
+        "Name": "Inside the entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 957,
+          "North": 945,
+          "East": 936
+        }
+      },
+      {
+        "Id": 945,
+        "Name": "Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 944,
+          "North": 946
+        }
+      },
+      {
+        "Id": 946,
+        "Name": "Turn in road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 947,
+          "South": 945
+        }
+      },
+      {
+        "Id": 947,
+        "Name": "Hide \u0026 Tooth Shop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 946,
+          "North": 948
+        }
+      },
+      {
+        "Id": 948,
+        "Name": "Path to the north of shop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 949,
+          "South": 947,
+          "West": 965
+        }
+      },
+      {
+        "Id": 949,
+        "Name": "North of Shops",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 950,
+          "South": 948
+        }
+      },
+      {
+        "Id": 950,
+        "Name": "Path by Hospital",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 964,
+          "East": 951,
+          "West": 949
+        }
+      },
+      {
+        "Id": 951,
+        "Name": "Path next to barracks",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 952,
+          "West": 950
+        }
+      },
+      {
+        "Id": 952,
+        "Name": "Entrance to barracks",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 951,
+          "South": 954
+        }
+      },
+      {
+        "Id": 953,
+        "Name": "Guard House",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 940
+        }
+      },
+      {
+        "Id": 954,
+        "Name": "First Barrack room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 952,
+          "South": 955
+        }
+      },
+      {
+        "Id": 955,
+        "Name": "Back of Barracks",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 954,
+          "Down": 329
+        }
+      },
+      {
+        "Id": 956,
+        "Name": "Inside of Castle Strangelove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 943,
+          "Up": 959
+        }
+      },
+      {
+        "Id": 957,
+        "Name": "A store room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 944,
+          "Down": 958
+        }
+      },
+      {
+        "Id": 958,
+        "Name": "Wine cellar",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 957,
+          "Down": 393
+        }
+      },
+      {
+        "Id": 959,
+        "Name": "Stairs in castle",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 956,
+          "Up": 960
+        }
+      },
+      {
+        "Id": 960,
+        "Name": "Stairs",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 959,
+          "Up": 961
+        }
+      },
+      {
+        "Id": 961,
+        "Name": "Top of stairs",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 960,
+          "East": 962
+        }
+      },
+      {
+        "Id": 962,
+        "Name": "Queen\u0027s waiting room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 961,
+          "North": 963
+        }
+      },
+      {
+        "Id": 963,
+        "Name": "Bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 962
+        }
+      },
+      {
+        "Id": 964,
+        "Name": "Hospital",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 950
+        }
+      },
+      {
+        "Id": 965,
+        "Name": "Granite Head\u0027s Bakery",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 948
+        }
+      },
+      {
+        "Id": 966,
+        "Name": "Dark path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 967,
+          "North": 935,
+          "West": 934
+        }
+      },
+      {
+        "Id": 967,
+        "Name": "Mine entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 968,
+          "West": 966
+        }
+      },
+      {
+        "Id": 968,
+        "Name": "Inside the mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 967,
+          "Down": 980
+        }
+      },
+      {
+        "Id": 969,
+        "Name": "Path in the mine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 980,
+          "East": 970
+        }
+      },
+      {
+        "Id": 970,
+        "Name": "Mine crossroad",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 971,
+          "West": 969,
+          "North": 972,
+          "South": 977
+        }
+      },
+      {
+        "Id": 971,
+        "Name": "Coal Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 970
+        }
+      },
+      {
+        "Id": 972,
+        "Name": "Mine Maze",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 970,
+          "East": 973
+        }
+      },
+      {
+        "Id": 973,
+        "Name": "Maze inscription",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 974,
+          "West": 972
+        }
+      },
+      {
+        "Id": 974,
+        "Name": "Maze",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 975,
+          "South": 973
+        }
+      },
+      {
+        "Id": 975,
+        "Name": "Maze",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 976,
+          "West": 974
+        }
+      },
+      {
+        "Id": 976,
+        "Name": "Maze",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 975,
+          "West": 978
+        }
+      },
+      {
+        "Id": 977,
+        "Name": "Mining equipment room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 970
+        }
+      },
+      {
+        "Id": 978,
+        "Name": "Solved the Maze.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 976,
+          "West": 979
+        }
+      },
+      {
+        "Id": 979,
+        "Name": "The Mazekeeper\u0027s Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 978
+        }
+      },
+      {
+        "Id": 980,
+        "Name": "Bottom of mineshaft",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 968,
+          "East": 969
+        }
+      },
+      {
+        "Id": 2203,
+        "Name": "To Miden\u0027nir",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2202,
+          "East": 1390,
+          "South": 3759,
+          "West": 2204,
+          "Down": 931
+        }
+      },
+      {
+        "Id": 640,
+        "Name": "To Dwarven Day Care",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "South": 641,
+          "North": 931
+        }
+      },
+      {
+        "Id": 329,
+        "Name": "To Dwarven Catacombs",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "South": 330,
+          "Up": 955
+        }
+      },
+      {
+        "Id": 393,
+        "Name": "To Dwarven Catacombs",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "Up": 958,
+          "North": 392
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 931,
-      "name": "Path to Dwarven Village",
-      "exits": {
-        "Up": 2203,
-        "North": 932,
-        "South": 640
-      }
-    },
-    {
-      "id": 932,
-      "name": "Path, base of mountain",
-      "exits": {
-        "North": 933,
-        "South": 931
-      }
-    },
-    {
-      "id": 933,
-      "name": "Path, middle of mountain",
-      "exits": {
-        "North": 934,
-        "South": 932
-      }
-    },
-    {
-      "id": 934,
-      "name": "Top of mountain",
-      "exits": {
-        "South": 933,
-        "East": 966,
-        "West": 936
-      }
-    },
-    {
-      "id": 935,
-      "name": "Narrow Path",
-      "exits": {
-        "North": 937,
-        "South": 966
-      }
-    },
-    {
-      "id": 936,
-      "name": "Entrance to Mountain",
-      "exits": {
-        "West": 944,
-        "East": 934
-      }
-    },
-    {
-      "id": 937,
-      "name": "Bend in Narrow Path",
-      "exits": {
-        "East": 938,
-        "South": 935
-      }
-    },
-    {
-      "id": 938,
-      "name": "Narrow path",
-      "exits": {
-        "North": 939,
-        "West": 937
-      }
-    },
-    {
-      "id": 939,
-      "name": "Narrow north-south path",
-      "exits": {
-        "North": 940,
-        "South": 938
-      }
-    },
-    {
-      "id": 940,
-      "name": "Door to Kingdom",
-      "exits": {
-        "East": 941,
-        "West": 953,
-        "South": 939
-      }
-    },
-    {
-      "id": 941,
-      "name": "Path to the Castle",
-      "exits": {
-        "West": 940,
-        "North": 942
-      }
-    },
-    {
-      "id": 942,
-      "name": "Still on the path to the Castle",
-      "exits": {
-        "South": 941,
-        "North": 943
-      }
-    },
-    {
-      "id": 943,
-      "name": "Door to Castle",
-      "exits": {
-        "East": 956,
-        "South": 942
-      }
-    },
-    {
-      "id": 944,
-      "name": "Inside the entrance",
-      "exits": {
-        "West": 957,
-        "North": 945,
-        "East": 936
-      }
-    },
-    {
-      "id": 945,
-      "name": "Path",
-      "exits": {
-        "South": 944,
-        "North": 946
-      }
-    },
-    {
-      "id": 946,
-      "name": "Turn in road",
-      "exits": {
-        "West": 947,
-        "South": 945
-      }
-    },
-    {
-      "id": 947,
-      "name": "Hide \u0026 Tooth Shop",
-      "exits": {
-        "East": 946,
-        "North": 948
-      }
-    },
-    {
-      "id": 948,
-      "name": "Path to the north of shop",
-      "exits": {
-        "North": 949,
-        "South": 947,
-        "West": 965
-      }
-    },
-    {
-      "id": 949,
-      "name": "North of Shops",
-      "exits": {
-        "East": 950,
-        "South": 948
-      }
-    },
-    {
-      "id": 950,
-      "name": "Path by Hospital",
-      "exits": {
-        "North": 964,
-        "East": 951,
-        "West": 949
-      }
-    },
-    {
-      "id": 951,
-      "name": "Path next to barracks",
-      "exits": {
-        "East": 952,
-        "West": 950
-      }
-    },
-    {
-      "id": 952,
-      "name": "Entrance to barracks",
-      "exits": {
-        "West": 951,
-        "South": 954
-      }
-    },
-    {
-      "id": 953,
-      "name": "Guard House",
-      "exits": {
-        "East": 940
-      }
-    },
-    {
-      "id": 954,
-      "name": "First Barrack room",
-      "exits": {
-        "North": 952,
-        "South": 955
-      }
-    },
-    {
-      "id": 955,
-      "name": "Back of Barracks",
-      "exits": {
-        "North": 954,
-        "Down": 329
-      }
-    },
-    {
-      "id": 956,
-      "name": "Inside of Castle Strangelove",
-      "exits": {
-        "West": 943,
-        "Up": 959
-      }
-    },
-    {
-      "id": 957,
-      "name": "A store room",
-      "exits": {
-        "East": 944,
-        "Down": 958
-      }
-    },
-    {
-      "id": 958,
-      "name": "Wine cellar",
-      "exits": {
-        "Up": 957,
-        "Down": 393
-      }
-    },
-    {
-      "id": 959,
-      "name": "Stairs in castle",
-      "exits": {
-        "Down": 956,
-        "Up": 960
-      }
-    },
-    {
-      "id": 960,
-      "name": "Stairs",
-      "exits": {
-        "Down": 959,
-        "Up": 961
-      }
-    },
-    {
-      "id": 961,
-      "name": "Top of stairs",
-      "exits": {
-        "Down": 960,
-        "East": 962
-      }
-    },
-    {
-      "id": 962,
-      "name": "Queen\u0027s waiting room",
-      "exits": {
-        "West": 961,
-        "North": 963
-      }
-    },
-    {
-      "id": 963,
-      "name": "Bedroom",
-      "exits": {
-        "South": 962
-      }
-    },
-    {
-      "id": 964,
-      "name": "Hospital",
-      "exits": {
-        "South": 950
-      }
-    },
-    {
-      "id": 965,
-      "name": "Granite Head\u0027s Bakery",
-      "exits": {
-        "East": 948
-      }
-    },
-    {
-      "id": 966,
-      "name": "Dark path",
-      "exits": {
-        "East": 967,
-        "North": 935,
-        "West": 934
-      }
-    },
-    {
-      "id": 967,
-      "name": "Mine entrance",
-      "exits": {
-        "Down": 968,
-        "West": 966
-      }
-    },
-    {
-      "id": 968,
-      "name": "Inside the mine",
-      "exits": {
-        "Up": 967,
-        "Down": 980
-      }
-    },
-    {
-      "id": 969,
-      "name": "Path in the mine",
-      "exits": {
-        "West": 980,
-        "East": 970
-      }
-    },
-    {
-      "id": 970,
-      "name": "Mine crossroad",
-      "exits": {
-        "East": 971,
-        "West": 969,
-        "North": 972,
-        "South": 977
-      }
-    },
-    {
-      "id": 971,
-      "name": "Coal Room",
-      "exits": {
-        "West": 970
-      }
-    },
-    {
-      "id": 972,
-      "name": "Mine Maze",
-      "exits": {
-        "South": 970,
-        "East": 973
-      }
-    },
-    {
-      "id": 973,
-      "name": "Maze inscription",
-      "exits": {
-        "North": 974,
-        "West": 972
-      }
-    },
-    {
-      "id": 974,
-      "name": "Maze",
-      "exits": {
-        "North": 975,
-        "South": 973
-      }
-    },
-    {
-      "id": 975,
-      "name": "Maze",
-      "exits": {
-        "North": 976,
-        "West": 974
-      }
-    },
-    {
-      "id": 976,
-      "name": "Maze",
-      "exits": {
-        "South": 975,
-        "West": 978
-      }
-    },
-    {
-      "id": 977,
-      "name": "Mining equipment room",
-      "exits": {
-        "North": 970
-      }
-    },
-    {
-      "id": 978,
-      "name": "Solved the Maze.",
-      "exits": {
-        "East": 976,
-        "West": 979
-      }
-    },
-    {
-      "id": 979,
-      "name": "The Mazekeeper\u0027s Room",
-      "exits": {
-        "East": 978
-      }
-    },
-    {
-      "id": 980,
-      "name": "Bottom of mineshaft",
-      "exits": {
-        "Up": 968,
-        "East": 969
-      }
-    },
-    {
-      "id": 2203,
-      "name": "To Miden\u0027nir",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2202,
-        "East": 1390,
-        "South": 3759,
-        "West": 2204,
-        "Down": 931
-      }
-    },
-    {
-      "id": 640,
-      "name": "To Dwarven Day Care",
-      "otherAreaExit": true,
-      "exits": {
-        "South": 641,
-        "North": 931
-      }
-    },
-    {
-      "id": 329,
-      "name": "To Dwarven Catacombs",
-      "otherAreaExit": true,
-      "exits": {
-        "South": 330,
-        "Up": 955
-      }
-    },
-    {
-      "id": 393,
-      "name": "To Dwarven Catacombs",
-      "otherAreaExit": true,
-      "exits": {
-        "Up": 958,
-        "North": 392
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

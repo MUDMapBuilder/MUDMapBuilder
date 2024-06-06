@@ -28,6 +28,9 @@
         <CheckButton IsChecked="True" Id="_checkKeepSolitaryRooms">
           <Label Text="Keep Solitary Rooms" />
         </CheckButton>
+        <CheckButton IsChecked="True" Id="_checkKeepRoomsWithSingleOutsideExit">
+          <Label Text="Keep Rooms With Single Outside Exit" />
+        </CheckButton>
         <CheckButton IsChecked="True" Id="_checkFixObstacles">
           <Label Text="Fix Obstacles" />
         </CheckButton>

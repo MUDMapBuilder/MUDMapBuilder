@@ -1,501 +1,623 @@
 {
-  "name": "The Shire",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "The Shire",
+    "Rooms": [
+      {
+        "Id": 3495,
+        "Name": "A dimly lit path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1407,
+          "North": 3496
+        }
+      },
+      {
+        "Id": 3496,
+        "Name": "A dimly lit path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3497,
+          "South": 3495
+        }
+      },
+      {
+        "Id": 3497,
+        "Name": "A dimly lit path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3496,
+          "North": 3498
+        }
+      },
+      {
+        "Id": 3498,
+        "Name": "Entrance to the Shire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3497,
+          "East": 3499,
+          "West": 3513
+        }
+      },
+      {
+        "Id": 3499,
+        "Name": "Bywater Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3498,
+          "North": 3500,
+          "East": 3501
+        }
+      },
+      {
+        "Id": 3500,
+        "Name": "The General Store",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3499
+        }
+      },
+      {
+        "Id": 3501,
+        "Name": "Bywater Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3499,
+          "East": 3504,
+          "North": 3502,
+          "South": 3503
+        }
+      },
+      {
+        "Id": 3502,
+        "Name": "The House of Arms",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3501
+        }
+      },
+      {
+        "Id": 3503,
+        "Name": "Kid\u0027n Keep",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3501
+        }
+      },
+      {
+        "Id": 3504,
+        "Name": "A bend in the road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3501,
+          "South": 3507,
+          "East": 3505
+        }
+      },
+      {
+        "Id": 3505,
+        "Name": "Shiriff Post of the Eastern Shire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3504,
+          "East": 3506
+        }
+      },
+      {
+        "Id": 3506,
+        "Name": "Thain\u0027s Office",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3505
+        }
+      },
+      {
+        "Id": 3507,
+        "Name": "Bywater Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3504,
+          "South": 3508,
+          "East": 3512
+        }
+      },
+      {
+        "Id": 3508,
+        "Name": "Bywater Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3507,
+          "East": 3510,
+          "South": 3511,
+          "West": 3509
+        }
+      },
+      {
+        "Id": 3509,
+        "Name": "A smial",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3508
+        }
+      },
+      {
+        "Id": 3510,
+        "Name": "A smial",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3508
+        }
+      },
+      {
+        "Id": 3511,
+        "Name": "The Ivy Bush",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3508
+        }
+      },
+      {
+        "Id": 3512,
+        "Name": "Shiriff Training Grounds",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3507
+        }
+      },
+      {
+        "Id": 3513,
+        "Name": "Bywater Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3498,
+          "South": 3514,
+          "West": 3515
+        }
+      },
+      {
+        "Id": 3514,
+        "Name": "Shiriff Post of the Bridge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3513
+        }
+      },
+      {
+        "Id": 3515,
+        "Name": "Bywater Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3526,
+          "East": 3513,
+          "South": 3516,
+          "West": 3517
+        }
+      },
+      {
+        "Id": 3516,
+        "Name": "The Grocer\u0027s Delight",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3515
+        }
+      },
+      {
+        "Id": 3517,
+        "Name": "Bywater Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3515,
+          "South": 3518,
+          "West": 3521
+        }
+      },
+      {
+        "Id": 3518,
+        "Name": "Entrance to Watermill",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3517,
+          "South": 3519
+        }
+      },
+      {
+        "Id": 3519,
+        "Name": "The Watermill",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3518,
+          "South": 3520
+        }
+      },
+      {
+        "Id": 3520,
+        "Name": "Rear of watermill",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3519,
+          "Down": 3541
+        }
+      },
+      {
+        "Id": 3521,
+        "Name": "Took Hill",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3517,
+          "West": 3523
+        }
+      },
+      {
+        "Id": 3522,
+        "Name": "Northern end of grassy field",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3523
+        }
+      },
+      {
+        "Id": 3523,
+        "Name": "A grassy field",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3522,
+          "East": 3521,
+          "South": 3524,
+          "West": 3525
+        }
+      },
+      {
+        "Id": 3524,
+        "Name": "Southern end of grassy field",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3523
+        }
+      },
+      {
+        "Id": 3525,
+        "Name": "Western end of grassy field",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3523
+        }
+      },
+      {
+        "Id": 3526,
+        "Name": "Brandywine Bridge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3527,
+          "South": 3515
+        }
+      },
+      {
+        "Id": 3527,
+        "Name": "Delving Lane",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3528,
+          "South": 3526,
+          "East": 3539
+        }
+      },
+      {
+        "Id": 3528,
+        "Name": "Delving Lane",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3529,
+          "East": 3540,
+          "South": 3527,
+          "West": 3533
+        }
+      },
+      {
+        "Id": 3529,
+        "Name": "Delving Lane",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3530,
+          "South": 3528
+        }
+      },
+      {
+        "Id": 3530,
+        "Name": "Bag End",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3532,
+          "South": 3529,
+          "West": 3531
+        }
+      },
+      {
+        "Id": 3531,
+        "Name": "Bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3530
+        }
+      },
+      {
+        "Id": 3532,
+        "Name": "Pantry",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3530,
+          "Down": 3551
+        }
+      },
+      {
+        "Id": 3533,
+        "Name": "A grassy field",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3537,
+          "East": 3528,
+          "South": 3534
+        }
+      },
+      {
+        "Id": 3534,
+        "Name": "Pig pen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3533,
+          "West": 3535
+        }
+      },
+      {
+        "Id": 3535,
+        "Name": "A stony path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3536,
+          "East": 3534
+        }
+      },
+      {
+        "Id": 3536,
+        "Name": "Gamgee Residence",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3535
+        }
+      },
+      {
+        "Id": 3537,
+        "Name": "A barn",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3538,
+          "South": 3533
+        }
+      },
+      {
+        "Id": 3538,
+        "Name": "A chicken coop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3537
+        }
+      },
+      {
+        "Id": 3539,
+        "Name": "The Green Dragon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3527,
+          "Up": 3552
+        }
+      },
+      {
+        "Id": 3540,
+        "Name": "Shiriff Post of Delving Lane",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3528
+        }
+      },
+      {
+        "Id": 3541,
+        "Name": "A dark tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3542,
+          "Up": 3520
+        }
+      },
+      {
+        "Id": 3542,
+        "Name": "A dark tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3543,
+          "West": 3541
+        }
+      },
+      {
+        "Id": 3543,
+        "Name": "A dark tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3544,
+          "West": 3542
+        }
+      },
+      {
+        "Id": 3544,
+        "Name": "A three way intersection",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3546,
+          "East": 3545,
+          "West": 3543
+        }
+      },
+      {
+        "Id": 3545,
+        "Name": "End of a dark tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3544,
+          "Up": 2247
+        }
+      },
+      {
+        "Id": 3546,
+        "Name": "A dark tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3547,
+          "East": 3549,
+          "South": 3544,
+          "West": 3548
+        }
+      },
+      {
+        "Id": 3547,
+        "Name": "A dark tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3551,
+          "South": 3546,
+          "West": 3550
+        }
+      },
+      {
+        "Id": 3548,
+        "Name": "Shiriff Post of the Lower Shire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3546
+        }
+      },
+      {
+        "Id": 3549,
+        "Name": "A halfling hole",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3546
+        }
+      },
+      {
+        "Id": 3550,
+        "Name": "A halfling hole",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3547
+        }
+      },
+      {
+        "Id": 3551,
+        "Name": "End of a dark tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3547,
+          "Up": 3532
+        }
+      },
+      {
+        "Id": 3552,
+        "Name": "The Inn of the Green Dragon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 3539
+        }
+      },
+      {
+        "Id": 1407,
+        "Name": "To Haon Dor",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 3495,
+          "East": 2294,
+          "South": 514,
+          "West": 1408
+        }
+      },
+      {
+        "Id": 2247,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2296,
+          "South": 2251,
+          "Up": 3222
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 3495,
-      "name": "A dimly lit path",
-      "exits": {
-        "South": 1407,
-        "North": 3496
-      }
-    },
-    {
-      "id": 3496,
-      "name": "A dimly lit path",
-      "exits": {
-        "North": 3497,
-        "South": 3495
-      }
-    },
-    {
-      "id": 3497,
-      "name": "A dimly lit path",
-      "exits": {
-        "South": 3496,
-        "North": 3498
-      }
-    },
-    {
-      "id": 3498,
-      "name": "Entrance to the Shire",
-      "exits": {
-        "South": 3497,
-        "East": 3499,
-        "West": 3513
-      }
-    },
-    {
-      "id": 3499,
-      "name": "Bywater Road",
-      "exits": {
-        "West": 3498,
-        "North": 3500,
-        "East": 3501
-      }
-    },
-    {
-      "id": 3500,
-      "name": "The General Store",
-      "exits": {
-        "South": 3499
-      }
-    },
-    {
-      "id": 3501,
-      "name": "Bywater Road",
-      "exits": {
-        "West": 3499,
-        "East": 3504,
-        "North": 3502,
-        "South": 3503
-      }
-    },
-    {
-      "id": 3502,
-      "name": "The House of Arms",
-      "exits": {
-        "South": 3501
-      }
-    },
-    {
-      "id": 3503,
-      "name": "Kid\u0027n Keep",
-      "exits": {
-        "North": 3501
-      }
-    },
-    {
-      "id": 3504,
-      "name": "A bend in the road",
-      "exits": {
-        "West": 3501,
-        "South": 3507,
-        "East": 3505
-      }
-    },
-    {
-      "id": 3505,
-      "name": "Shiriff Post of the Eastern Shire",
-      "exits": {
-        "West": 3504,
-        "East": 3506
-      }
-    },
-    {
-      "id": 3506,
-      "name": "Thain\u0027s Office",
-      "exits": {
-        "West": 3505
-      }
-    },
-    {
-      "id": 3507,
-      "name": "Bywater Road",
-      "exits": {
-        "North": 3504,
-        "South": 3508,
-        "East": 3512
-      }
-    },
-    {
-      "id": 3508,
-      "name": "Bywater Road",
-      "exits": {
-        "North": 3507,
-        "East": 3510,
-        "South": 3511,
-        "West": 3509
-      }
-    },
-    {
-      "id": 3509,
-      "name": "A smial",
-      "exits": {
-        "East": 3508
-      }
-    },
-    {
-      "id": 3510,
-      "name": "A smial",
-      "exits": {
-        "West": 3508
-      }
-    },
-    {
-      "id": 3511,
-      "name": "The Ivy Bush",
-      "exits": {
-        "North": 3508
-      }
-    },
-    {
-      "id": 3512,
-      "name": "Shiriff Training Grounds",
-      "exits": {
-        "West": 3507
-      }
-    },
-    {
-      "id": 3513,
-      "name": "Bywater Road",
-      "exits": {
-        "East": 3498,
-        "South": 3514,
-        "West": 3515
-      }
-    },
-    {
-      "id": 3514,
-      "name": "Shiriff Post of the Bridge",
-      "exits": {
-        "North": 3513
-      }
-    },
-    {
-      "id": 3515,
-      "name": "Bywater Road",
-      "exits": {
-        "North": 3526,
-        "East": 3513,
-        "South": 3516,
-        "West": 3517
-      }
-    },
-    {
-      "id": 3516,
-      "name": "The Grocer\u0027s Delight",
-      "exits": {
-        "North": 3515
-      }
-    },
-    {
-      "id": 3517,
-      "name": "Bywater Road",
-      "exits": {
-        "East": 3515,
-        "South": 3518,
-        "West": 3521
-      }
-    },
-    {
-      "id": 3518,
-      "name": "Entrance to Watermill",
-      "exits": {
-        "North": 3517,
-        "South": 3519
-      }
-    },
-    {
-      "id": 3519,
-      "name": "The Watermill",
-      "exits": {
-        "North": 3518,
-        "South": 3520
-      }
-    },
-    {
-      "id": 3520,
-      "name": "Rear of watermill",
-      "exits": {
-        "North": 3519,
-        "Down": 3541
-      }
-    },
-    {
-      "id": 3521,
-      "name": "Took Hill",
-      "exits": {
-        "East": 3517,
-        "West": 3523
-      }
-    },
-    {
-      "id": 3522,
-      "name": "Northern end of grassy field",
-      "exits": {
-        "South": 3523
-      }
-    },
-    {
-      "id": 3523,
-      "name": "A grassy field",
-      "exits": {
-        "North": 3522,
-        "East": 3521,
-        "South": 3524,
-        "West": 3525
-      }
-    },
-    {
-      "id": 3524,
-      "name": "Southern end of grassy field",
-      "exits": {
-        "North": 3523
-      }
-    },
-    {
-      "id": 3525,
-      "name": "Western end of grassy field",
-      "exits": {
-        "East": 3523
-      }
-    },
-    {
-      "id": 3526,
-      "name": "Brandywine Bridge",
-      "exits": {
-        "North": 3527,
-        "South": 3515
-      }
-    },
-    {
-      "id": 3527,
-      "name": "Delving Lane",
-      "exits": {
-        "North": 3528,
-        "South": 3526,
-        "East": 3539
-      }
-    },
-    {
-      "id": 3528,
-      "name": "Delving Lane",
-      "exits": {
-        "North": 3529,
-        "East": 3540,
-        "South": 3527,
-        "West": 3533
-      }
-    },
-    {
-      "id": 3529,
-      "name": "Delving Lane",
-      "exits": {
-        "North": 3530,
-        "South": 3528
-      }
-    },
-    {
-      "id": 3530,
-      "name": "Bag End",
-      "exits": {
-        "East": 3532,
-        "South": 3529,
-        "West": 3531
-      }
-    },
-    {
-      "id": 3531,
-      "name": "Bedroom",
-      "exits": {
-        "East": 3530
-      }
-    },
-    {
-      "id": 3532,
-      "name": "Pantry",
-      "exits": {
-        "West": 3530,
-        "Down": 3551
-      }
-    },
-    {
-      "id": 3533,
-      "name": "A grassy field",
-      "exits": {
-        "North": 3537,
-        "East": 3528,
-        "South": 3534
-      }
-    },
-    {
-      "id": 3534,
-      "name": "Pig pen",
-      "exits": {
-        "North": 3533,
-        "West": 3535
-      }
-    },
-    {
-      "id": 3535,
-      "name": "A stony path",
-      "exits": {
-        "North": 3536,
-        "East": 3534
-      }
-    },
-    {
-      "id": 3536,
-      "name": "Gamgee Residence",
-      "exits": {
-        "South": 3535
-      }
-    },
-    {
-      "id": 3537,
-      "name": "A barn",
-      "exits": {
-        "North": 3538,
-        "South": 3533
-      }
-    },
-    {
-      "id": 3538,
-      "name": "A chicken coop",
-      "exits": {
-        "South": 3537
-      }
-    },
-    {
-      "id": 3539,
-      "name": "The Green Dragon",
-      "exits": {
-        "West": 3527,
-        "Up": 3552
-      }
-    },
-    {
-      "id": 3540,
-      "name": "Shiriff Post of Delving Lane",
-      "exits": {
-        "West": 3528
-      }
-    },
-    {
-      "id": 3541,
-      "name": "A dark tunnel",
-      "exits": {
-        "East": 3542,
-        "Up": 3520
-      }
-    },
-    {
-      "id": 3542,
-      "name": "A dark tunnel",
-      "exits": {
-        "East": 3543,
-        "West": 3541
-      }
-    },
-    {
-      "id": 3543,
-      "name": "A dark tunnel",
-      "exits": {
-        "East": 3544,
-        "West": 3542
-      }
-    },
-    {
-      "id": 3544,
-      "name": "A three way intersection",
-      "exits": {
-        "North": 3546,
-        "East": 3545,
-        "West": 3543
-      }
-    },
-    {
-      "id": 3545,
-      "name": "End of a dark tunnel",
-      "exits": {
-        "West": 3544,
-        "Up": 2247
-      }
-    },
-    {
-      "id": 3546,
-      "name": "A dark tunnel",
-      "exits": {
-        "North": 3547,
-        "East": 3549,
-        "South": 3544,
-        "West": 3548
-      }
-    },
-    {
-      "id": 3547,
-      "name": "A dark tunnel",
-      "exits": {
-        "North": 3551,
-        "South": 3546,
-        "West": 3550
-      }
-    },
-    {
-      "id": 3548,
-      "name": "Shiriff Post of the Lower Shire",
-      "exits": {
-        "East": 3546
-      }
-    },
-    {
-      "id": 3549,
-      "name": "A halfling hole",
-      "exits": {
-        "West": 3546
-      }
-    },
-    {
-      "id": 3550,
-      "name": "A halfling hole",
-      "exits": {
-        "East": 3547
-      }
-    },
-    {
-      "id": 3551,
-      "name": "End of a dark tunnel",
-      "exits": {
-        "South": 3547,
-        "Up": 3532
-      }
-    },
-    {
-      "id": 3552,
-      "name": "The Inn of the Green Dragon",
-      "exits": {
-        "Down": 3539
-      }
-    },
-    {
-      "id": 1407,
-      "name": "To Haon Dor",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 3495,
-        "East": 2294,
-        "South": 514,
-        "West": 1408
-      }
-    },
-    {
-      "id": 2247,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2296,
-        "South": 2251,
-        "Up": 3222
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

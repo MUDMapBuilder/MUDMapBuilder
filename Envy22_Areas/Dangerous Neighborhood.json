@@ -1,648 +1,798 @@
 {
-  "name": "Dangerous Neighborhood",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Dangerous Neighborhood",
+    "Rooms": [
+      {
+        "Id": 1894,
+        "Name": "A Dark Alleyway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1965,
+          "East": 1895
+        }
+      },
+      {
+        "Id": 1895,
+        "Name": "Beginning of White Dragon Boulevard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1896,
+          "South": 1902,
+          "West": 1894
+        }
+      },
+      {
+        "Id": 1896,
+        "Name": "Along White Dragon Boulevard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1897,
+          "South": 1903,
+          "West": 1895
+        }
+      },
+      {
+        "Id": 1897,
+        "Name": "White Dragon Boulevard at Armory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1898,
+          "South": 1904,
+          "West": 1896
+        }
+      },
+      {
+        "Id": 1898,
+        "Name": "White Dragon Blvd.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1899,
+          "West": 1897
+        }
+      },
+      {
+        "Id": 1899,
+        "Name": "Corner of Ice and White Dragon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1900,
+          "South": 1906,
+          "West": 1898
+        }
+      },
+      {
+        "Id": 1900,
+        "Name": "White Dragon Boulevard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1901,
+          "West": 1899
+        }
+      },
+      {
+        "Id": 1901,
+        "Name": "Corner of Bronze and White Dragon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1908,
+          "West": 1900
+        }
+      },
+      {
+        "Id": 1902,
+        "Name": "An over-grown lot",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1895,
+          "East": 1903
+        }
+      },
+      {
+        "Id": 1903,
+        "Name": "East end of an over-grown plot of land",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1896,
+          "South": 1909,
+          "West": 1902
+        }
+      },
+      {
+        "Id": 1904,
+        "Name": "Armory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1897,
+          "South": 1910
+        }
+      },
+      {
+        "Id": 1905,
+        "Name": "A Bend in the Way",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1906,
+          "South": 1911
+        }
+      },
+      {
+        "Id": 1906,
+        "Name": "Ice Dragon Bend",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1899,
+          "East": 1907,
+          "West": 1905
+        }
+      },
+      {
+        "Id": 1907,
+        "Name": "The remains of the magic shop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1908,
+          "West": 1906
+        }
+      },
+      {
+        "Id": 1908,
+        "Name": "Bronze Dragon Street at wizard\u0027s back door",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1901,
+          "South": 1913,
+          "West": 1907
+        }
+      },
+      {
+        "Id": 1909,
+        "Name": "Dracolich Plaza",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1903,
+          "East": 1910
+        }
+      },
+      {
+        "Id": 1910,
+        "Name": "Shortcut",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1904,
+          "South": 1914,
+          "West": 1909
+        }
+      },
+      {
+        "Id": 1911,
+        "Name": "Ice Dragon Way",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1905,
+          "East": 1912,
+          "South": 1915
+        }
+      },
+      {
+        "Id": 1912,
+        "Name": "Courtyard North",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1916,
+          "West": 1911
+        }
+      },
+      {
+        "Id": 1913,
+        "Name": "Bronze Dragon Street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1908,
+          "South": 1918
+        }
+      },
+      {
+        "Id": 1914,
+        "Name": "Shortcut",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1910,
+          "East": 1915
+        }
+      },
+      {
+        "Id": 1915,
+        "Name": "Ice Dragon Way",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1911,
+          "South": 1920,
+          "West": 1914
+        }
+      },
+      {
+        "Id": 1916,
+        "Name": "Courtyard South",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1912,
+          "South": 1921
+        }
+      },
+      {
+        "Id": 1917,
+        "Name": "Old Abandoned Warehouse",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1918
+        }
+      },
+      {
+        "Id": 1918,
+        "Name": "Bronze Dragon Street at Warehouse",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1913,
+          "South": 1923,
+          "West": 1917
+        }
+      },
+      {
+        "Id": 1919,
+        "Name": "Yellow Dragon Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1920,
+          "South": 1924
+        }
+      },
+      {
+        "Id": 1920,
+        "Name": "Yellow Dragon Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1915,
+          "East": 1921,
+          "West": 1919
+        }
+      },
+      {
+        "Id": 1921,
+        "Name": "Yellow Dragon Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1916,
+          "East": 1922,
+          "South": 1926,
+          "West": 1920
+        }
+      },
+      {
+        "Id": 1922,
+        "Name": "Yellow Dragon Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1923,
+          "South": 1927,
+          "West": 1921
+        }
+      },
+      {
+        "Id": 1923,
+        "Name": "Yellow Dragon Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1918,
+          "West": 1922
+        }
+      },
+      {
+        "Id": 1924,
+        "Name": "NO MAN\u0027S LAND",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1919,
+          "East": 1925,
+          "South": 1929
+        }
+      },
+      {
+        "Id": 1925,
+        "Name": "NO MAN\u0027S LAND",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1926,
+          "South": 1930,
+          "West": 1924
+        }
+      },
+      {
+        "Id": 1926,
+        "Name": "NO MAN\u0027S LAND",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1921,
+          "East": 1927,
+          "South": 1931,
+          "West": 1925
+        }
+      },
+      {
+        "Id": 1927,
+        "Name": "NO MAN\u0027S LAND",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1922,
+          "East": 1928,
+          "South": 1932,
+          "West": 1926
+        }
+      },
+      {
+        "Id": 1928,
+        "Name": "NO MAN\u0027S LAND",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1933,
+          "West": 1927
+        }
+      },
+      {
+        "Id": 1929,
+        "Name": "NO MAN\u0027S LAND",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1924,
+          "East": 1930,
+          "South": 1934
+        }
+      },
+      {
+        "Id": 1930,
+        "Name": "NO MAN\u0027S LAND",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1925,
+          "East": 1931,
+          "West": 1929
+        }
+      },
+      {
+        "Id": 1931,
+        "Name": "NO MAN\u0027S LAND",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1926,
+          "East": 1932,
+          "South": 1936,
+          "West": 1930
+        }
+      },
+      {
+        "Id": 1932,
+        "Name": "NO MAN\u0027S LAND",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1927,
+          "East": 1933,
+          "West": 1931
+        }
+      },
+      {
+        "Id": 1933,
+        "Name": "NO MAN\u0027S LAND",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1928,
+          "South": 1938,
+          "West": 1932
+        }
+      },
+      {
+        "Id": 1934,
+        "Name": "Bend in Hector Street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1929,
+          "East": 1935,
+          "South": 1939
+        }
+      },
+      {
+        "Id": 1935,
+        "Name": "Hector Street at Bakery",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1936,
+          "West": 1934
+        }
+      },
+      {
+        "Id": 1936,
+        "Name": "Another corner of Hector and Achilles streets",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1931,
+          "East": 1937,
+          "South": 1940,
+          "West": 1935
+        }
+      },
+      {
+        "Id": 1937,
+        "Name": "Hector Street at Jeweler",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1938,
+          "West": 1936
+        }
+      },
+      {
+        "Id": 1938,
+        "Name": "Corner of Ajax and Hector",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1933,
+          "South": 1942,
+          "West": 1937
+        }
+      },
+      {
+        "Id": 1939,
+        "Name": "Hector Street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1934,
+          "South": 1943
+        }
+      },
+      {
+        "Id": 1940,
+        "Name": "Achilles Avenue",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1936,
+          "South": 1945
+        }
+      },
+      {
+        "Id": 1941,
+        "Name": "A small ruined chapel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1942
+        }
+      },
+      {
+        "Id": 1942,
+        "Name": "Ajax Avenue at chapel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1938,
+          "South": 1947,
+          "West": 1941
+        }
+      },
+      {
+        "Id": 1943,
+        "Name": "First intersection of Hector and Achilles",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1939,
+          "East": 1944,
+          "South": 1949
+        }
+      },
+      {
+        "Id": 1944,
+        "Name": "Hector street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1945,
+          "West": 1943
+        }
+      },
+      {
+        "Id": 1945,
+        "Name": "A bend in the road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1940,
+          "South": 1950,
+          "West": 1944
+        }
+      },
+      {
+        "Id": 1946,
+        "Name": "What is left of the weaponshop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1947
+        }
+      },
+      {
+        "Id": 1947,
+        "Name": "Ajax street at Weaponshop (or whats left of it)",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1942,
+          "South": 1952,
+          "West": 1946
+        }
+      },
+      {
+        "Id": 1948,
+        "Name": "Khan Park",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1949,
+          "South": 1955
+        }
+      },
+      {
+        "Id": 1949,
+        "Name": "Achilles avenue at entrance to park",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1943,
+          "South": 1956,
+          "West": 1948
+        }
+      },
+      {
+        "Id": 1950,
+        "Name": "A bend in Ajax",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1945,
+          "East": 1951,
+          "South": 1957
+        }
+      },
+      {
+        "Id": 1951,
+        "Name": "Ajax street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1952,
+          "South": 1958,
+          "West": 1950
+        }
+      },
+      {
+        "Id": 1952,
+        "Name": "Curve in the road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1947,
+          "West": 1951
+        }
+      },
+      {
+        "Id": 1953,
+        "Name": "A wide alleyway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1954
+        }
+      },
+      {
+        "Id": 1954,
+        "Name": "Alexander Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1955,
+          "West": 1953
+        }
+      },
+      {
+        "Id": 1955,
+        "Name": "Alexander Street at park entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1948,
+          "South": 1959,
+          "West": 1954
+        }
+      },
+      {
+        "Id": 1956,
+        "Name": "Achilles Avenue",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1949,
+          "South": 1960
+        }
+      },
+      {
+        "Id": 1957,
+        "Name": "Ajax Street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1950,
+          "South": 1962
+        }
+      },
+      {
+        "Id": 1958,
+        "Name": "The inn/pub",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1951,
+          "South": 1963
+        }
+      },
+      {
+        "Id": 1959,
+        "Name": "Solomon Street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1955,
+          "East": 1960
+        }
+      },
+      {
+        "Id": 1960,
+        "Name": "Intersection of Achilles and Solomon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1956,
+          "East": 1961,
+          "West": 1959
+        }
+      },
+      {
+        "Id": 1961,
+        "Name": "Solomon Street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1962,
+          "West": 1960
+        }
+      },
+      {
+        "Id": 1962,
+        "Name": "Intersection of Ajax and Solomon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1957,
+          "East": 1963,
+          "West": 1961
+        }
+      },
+      {
+        "Id": 1963,
+        "Name": "Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1958,
+          "West": 1962
+        }
+      },
+      {
+        "Id": 1964,
+        "Name": "Wall Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2283,
+          "South": 1965
+        }
+      },
+      {
+        "Id": 1965,
+        "Name": "Wall Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1964,
+          "East": 1894,
+          "South": 465
+        }
+      },
+      {
+        "Id": 2283,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2350,
+          "East": 2295,
+          "West": 2262,
+          "South": 1964
+        }
+      },
+      {
+        "Id": 465,
+        "Name": "To The Circus",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 1965,
+          "South": 466
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 1894,
-      "name": "A Dark Alleyway",
-      "exits": {
-        "West": 1965,
-        "East": 1895
-      }
-    },
-    {
-      "id": 1895,
-      "name": "Beginning of White Dragon Boulevard",
-      "exits": {
-        "East": 1896,
-        "South": 1902,
-        "West": 1894
-      }
-    },
-    {
-      "id": 1896,
-      "name": "Along White Dragon Boulevard",
-      "exits": {
-        "East": 1897,
-        "South": 1903,
-        "West": 1895
-      }
-    },
-    {
-      "id": 1897,
-      "name": "White Dragon Boulevard at Armory",
-      "exits": {
-        "East": 1898,
-        "South": 1904,
-        "West": 1896
-      }
-    },
-    {
-      "id": 1898,
-      "name": "White Dragon Blvd.",
-      "exits": {
-        "East": 1899,
-        "West": 1897
-      }
-    },
-    {
-      "id": 1899,
-      "name": "Corner of Ice and White Dragon",
-      "exits": {
-        "East": 1900,
-        "South": 1906,
-        "West": 1898
-      }
-    },
-    {
-      "id": 1900,
-      "name": "White Dragon Boulevard",
-      "exits": {
-        "East": 1901,
-        "West": 1899
-      }
-    },
-    {
-      "id": 1901,
-      "name": "Corner of Bronze and White Dragon",
-      "exits": {
-        "South": 1908,
-        "West": 1900
-      }
-    },
-    {
-      "id": 1902,
-      "name": "An over-grown lot",
-      "exits": {
-        "North": 1895,
-        "East": 1903
-      }
-    },
-    {
-      "id": 1903,
-      "name": "East end of an over-grown plot of land",
-      "exits": {
-        "North": 1896,
-        "South": 1909,
-        "West": 1902
-      }
-    },
-    {
-      "id": 1904,
-      "name": "Armory",
-      "exits": {
-        "North": 1897,
-        "South": 1910
-      }
-    },
-    {
-      "id": 1905,
-      "name": "A Bend in the Way",
-      "exits": {
-        "East": 1906,
-        "South": 1911
-      }
-    },
-    {
-      "id": 1906,
-      "name": "Ice Dragon Bend",
-      "exits": {
-        "North": 1899,
-        "East": 1907,
-        "West": 1905
-      }
-    },
-    {
-      "id": 1907,
-      "name": "The remains of the magic shop",
-      "exits": {
-        "East": 1908,
-        "West": 1906
-      }
-    },
-    {
-      "id": 1908,
-      "name": "Bronze Dragon Street at wizard\u0027s back door",
-      "exits": {
-        "North": 1901,
-        "South": 1913,
-        "West": 1907
-      }
-    },
-    {
-      "id": 1909,
-      "name": "Dracolich Plaza",
-      "exits": {
-        "North": 1903,
-        "East": 1910
-      }
-    },
-    {
-      "id": 1910,
-      "name": "Shortcut",
-      "exits": {
-        "North": 1904,
-        "South": 1914,
-        "West": 1909
-      }
-    },
-    {
-      "id": 1911,
-      "name": "Ice Dragon Way",
-      "exits": {
-        "North": 1905,
-        "East": 1912,
-        "South": 1915
-      }
-    },
-    {
-      "id": 1912,
-      "name": "Courtyard North",
-      "exits": {
-        "South": 1916,
-        "West": 1911
-      }
-    },
-    {
-      "id": 1913,
-      "name": "Bronze Dragon Street",
-      "exits": {
-        "North": 1908,
-        "South": 1918
-      }
-    },
-    {
-      "id": 1914,
-      "name": "Shortcut",
-      "exits": {
-        "North": 1910,
-        "East": 1915
-      }
-    },
-    {
-      "id": 1915,
-      "name": "Ice Dragon Way",
-      "exits": {
-        "North": 1911,
-        "South": 1920,
-        "West": 1914
-      }
-    },
-    {
-      "id": 1916,
-      "name": "Courtyard South",
-      "exits": {
-        "North": 1912,
-        "South": 1921
-      }
-    },
-    {
-      "id": 1917,
-      "name": "Old Abandoned Warehouse",
-      "exits": {
-        "East": 1918
-      }
-    },
-    {
-      "id": 1918,
-      "name": "Bronze Dragon Street at Warehouse",
-      "exits": {
-        "North": 1913,
-        "South": 1923,
-        "West": 1917
-      }
-    },
-    {
-      "id": 1919,
-      "name": "Yellow Dragon Road",
-      "exits": {
-        "East": 1920,
-        "South": 1924
-      }
-    },
-    {
-      "id": 1920,
-      "name": "Yellow Dragon Road",
-      "exits": {
-        "North": 1915,
-        "East": 1921,
-        "West": 1919
-      }
-    },
-    {
-      "id": 1921,
-      "name": "Yellow Dragon Road",
-      "exits": {
-        "North": 1916,
-        "East": 1922,
-        "South": 1926,
-        "West": 1920
-      }
-    },
-    {
-      "id": 1922,
-      "name": "Yellow Dragon Road",
-      "exits": {
-        "East": 1923,
-        "South": 1927,
-        "West": 1921
-      }
-    },
-    {
-      "id": 1923,
-      "name": "Yellow Dragon Road",
-      "exits": {
-        "North": 1918,
-        "West": 1922
-      }
-    },
-    {
-      "id": 1924,
-      "name": "NO MAN\u0027S LAND",
-      "exits": {
-        "North": 1919,
-        "East": 1925,
-        "South": 1929
-      }
-    },
-    {
-      "id": 1925,
-      "name": "NO MAN\u0027S LAND",
-      "exits": {
-        "East": 1926,
-        "South": 1930,
-        "West": 1924
-      }
-    },
-    {
-      "id": 1926,
-      "name": "NO MAN\u0027S LAND",
-      "exits": {
-        "North": 1921,
-        "East": 1927,
-        "South": 1931,
-        "West": 1925
-      }
-    },
-    {
-      "id": 1927,
-      "name": "NO MAN\u0027S LAND",
-      "exits": {
-        "North": 1922,
-        "East": 1928,
-        "South": 1932,
-        "West": 1926
-      }
-    },
-    {
-      "id": 1928,
-      "name": "NO MAN\u0027S LAND",
-      "exits": {
-        "South": 1933,
-        "West": 1927
-      }
-    },
-    {
-      "id": 1929,
-      "name": "NO MAN\u0027S LAND",
-      "exits": {
-        "North": 1924,
-        "East": 1930,
-        "South": 1934
-      }
-    },
-    {
-      "id": 1930,
-      "name": "NO MAN\u0027S LAND",
-      "exits": {
-        "North": 1925,
-        "East": 1931,
-        "West": 1929
-      }
-    },
-    {
-      "id": 1931,
-      "name": "NO MAN\u0027S LAND",
-      "exits": {
-        "North": 1926,
-        "East": 1932,
-        "South": 1936,
-        "West": 1930
-      }
-    },
-    {
-      "id": 1932,
-      "name": "NO MAN\u0027S LAND",
-      "exits": {
-        "North": 1927,
-        "East": 1933,
-        "West": 1931
-      }
-    },
-    {
-      "id": 1933,
-      "name": "NO MAN\u0027S LAND",
-      "exits": {
-        "North": 1928,
-        "South": 1938,
-        "West": 1932
-      }
-    },
-    {
-      "id": 1934,
-      "name": "Bend in Hector Street",
-      "exits": {
-        "North": 1929,
-        "East": 1935,
-        "South": 1939
-      }
-    },
-    {
-      "id": 1935,
-      "name": "Hector Street at Bakery",
-      "exits": {
-        "East": 1936,
-        "West": 1934
-      }
-    },
-    {
-      "id": 1936,
-      "name": "Another corner of Hector and Achilles streets",
-      "exits": {
-        "North": 1931,
-        "East": 1937,
-        "South": 1940,
-        "West": 1935
-      }
-    },
-    {
-      "id": 1937,
-      "name": "Hector Street at Jeweler",
-      "exits": {
-        "East": 1938,
-        "West": 1936
-      }
-    },
-    {
-      "id": 1938,
-      "name": "Corner of Ajax and Hector",
-      "exits": {
-        "North": 1933,
-        "South": 1942,
-        "West": 1937
-      }
-    },
-    {
-      "id": 1939,
-      "name": "Hector Street",
-      "exits": {
-        "North": 1934,
-        "South": 1943
-      }
-    },
-    {
-      "id": 1940,
-      "name": "Achilles Avenue",
-      "exits": {
-        "North": 1936,
-        "South": 1945
-      }
-    },
-    {
-      "id": 1941,
-      "name": "A small ruined chapel",
-      "exits": {
-        "East": 1942
-      }
-    },
-    {
-      "id": 1942,
-      "name": "Ajax Avenue at chapel",
-      "exits": {
-        "North": 1938,
-        "South": 1947,
-        "West": 1941
-      }
-    },
-    {
-      "id": 1943,
-      "name": "First intersection of Hector and Achilles",
-      "exits": {
-        "North": 1939,
-        "East": 1944,
-        "South": 1949
-      }
-    },
-    {
-      "id": 1944,
-      "name": "Hector street",
-      "exits": {
-        "East": 1945,
-        "West": 1943
-      }
-    },
-    {
-      "id": 1945,
-      "name": "A bend in the road",
-      "exits": {
-        "North": 1940,
-        "South": 1950,
-        "West": 1944
-      }
-    },
-    {
-      "id": 1946,
-      "name": "What is left of the weaponshop",
-      "exits": {
-        "East": 1947
-      }
-    },
-    {
-      "id": 1947,
-      "name": "Ajax street at Weaponshop (or whats left of it)",
-      "exits": {
-        "North": 1942,
-        "South": 1952,
-        "West": 1946
-      }
-    },
-    {
-      "id": 1948,
-      "name": "Khan Park",
-      "exits": {
-        "East": 1949,
-        "South": 1955
-      }
-    },
-    {
-      "id": 1949,
-      "name": "Achilles avenue at entrance to park",
-      "exits": {
-        "North": 1943,
-        "South": 1956,
-        "West": 1948
-      }
-    },
-    {
-      "id": 1950,
-      "name": "A bend in Ajax",
-      "exits": {
-        "North": 1945,
-        "East": 1951,
-        "South": 1957
-      }
-    },
-    {
-      "id": 1951,
-      "name": "Ajax street",
-      "exits": {
-        "East": 1952,
-        "South": 1958,
-        "West": 1950
-      }
-    },
-    {
-      "id": 1952,
-      "name": "Curve in the road",
-      "exits": {
-        "North": 1947,
-        "West": 1951
-      }
-    },
-    {
-      "id": 1953,
-      "name": "A wide alleyway",
-      "exits": {
-        "East": 1954
-      }
-    },
-    {
-      "id": 1954,
-      "name": "Alexander Road",
-      "exits": {
-        "East": 1955,
-        "West": 1953
-      }
-    },
-    {
-      "id": 1955,
-      "name": "Alexander Street at park entrance",
-      "exits": {
-        "North": 1948,
-        "South": 1959,
-        "West": 1954
-      }
-    },
-    {
-      "id": 1956,
-      "name": "Achilles Avenue",
-      "exits": {
-        "North": 1949,
-        "South": 1960
-      }
-    },
-    {
-      "id": 1957,
-      "name": "Ajax Street",
-      "exits": {
-        "North": 1950,
-        "South": 1962
-      }
-    },
-    {
-      "id": 1958,
-      "name": "The inn/pub",
-      "exits": {
-        "North": 1951,
-        "South": 1963
-      }
-    },
-    {
-      "id": 1959,
-      "name": "Solomon Street",
-      "exits": {
-        "North": 1955,
-        "East": 1960
-      }
-    },
-    {
-      "id": 1960,
-      "name": "Intersection of Achilles and Solomon",
-      "exits": {
-        "North": 1956,
-        "East": 1961,
-        "West": 1959
-      }
-    },
-    {
-      "id": 1961,
-      "name": "Solomon Street",
-      "exits": {
-        "East": 1962,
-        "West": 1960
-      }
-    },
-    {
-      "id": 1962,
-      "name": "Intersection of Ajax and Solomon",
-      "exits": {
-        "North": 1957,
-        "East": 1963,
-        "West": 1961
-      }
-    },
-    {
-      "id": 1963,
-      "name": "Hallway",
-      "exits": {
-        "North": 1958,
-        "West": 1962
-      }
-    },
-    {
-      "id": 1964,
-      "name": "Wall Road",
-      "exits": {
-        "North": 2283,
-        "South": 1965
-      }
-    },
-    {
-      "id": 1965,
-      "name": "Wall Road",
-      "exits": {
-        "North": 1964,
-        "East": 1894,
-        "South": 465
-      }
-    },
-    {
-      "id": 2283,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2350,
-        "East": 2295,
-        "West": 2262,
-        "South": 1964
-      }
-    },
-    {
-      "id": 465,
-      "name": "To The Circus",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 1965,
-        "South": 466
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

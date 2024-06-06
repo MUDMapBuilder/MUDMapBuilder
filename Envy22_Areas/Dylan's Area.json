@@ -1,755 +1,937 @@
 {
-  "name": "Dylan\u0027s Area",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": false,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Dylan\u0027s Area",
+    "Rooms": [
+      {
+        "Id": 981,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3205,
+          "Up": 982
+        }
+      },
+      {
+        "Id": 982,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 983,
+          "Down": 981
+        }
+      },
+      {
+        "Id": 983,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1008,
+          "South": 984,
+          "West": 982
+        }
+      },
+      {
+        "Id": 984,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 983,
+          "East": 985
+        }
+      },
+      {
+        "Id": 985,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 986,
+          "West": 984
+        }
+      },
+      {
+        "Id": 986,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 987,
+          "West": 985
+        }
+      },
+      {
+        "Id": 987,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 988,
+          "South": 986,
+          "Down": 1006
+        }
+      },
+      {
+        "Id": 988,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 989,
+          "West": 987
+        }
+      },
+      {
+        "Id": 989,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 988,
+          "Down": 990
+        }
+      },
+      {
+        "Id": 990,
+        "Name": "An ominous storm cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 991,
+          "West": 1005,
+          "Up": 989
+        }
+      },
+      {
+        "Id": 991,
+        "Name": "High and perilous cliff",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 992,
+          "West": 990
+        }
+      },
+      {
+        "Id": 992,
+        "Name": "Narrow rocky trail.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 991,
+          "Down": 993
+        }
+      },
+      {
+        "Id": 993,
+        "Name": "Small valley.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 994,
+          "Up": 992
+        }
+      },
+      {
+        "Id": 994,
+        "Name": "Small valley.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 993,
+          "Down": 995
+        }
+      },
+      {
+        "Id": 995,
+        "Name": "Deep, slippery crevice.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 997,
+          "West": 996,
+          "Up": 994
+        }
+      },
+      {
+        "Id": 996,
+        "Name": "Incredibly slippery crevice.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 995,
+          "Down": 1068
+        }
+      },
+      {
+        "Id": 997,
+        "Name": "Steep mountainside.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 995,
+          "Up": 998
+        }
+      },
+      {
+        "Id": 998,
+        "Name": "Steep mountainside.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 999,
+          "Down": 997
+        }
+      },
+      {
+        "Id": 999,
+        "Name": "Treacherous Cliff.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 998,
+          "Up": 1000
+        }
+      },
+      {
+        "Id": 1000,
+        "Name": "Cliff Face.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1001,
+          "Up": 1002,
+          "Down": 999
+        }
+      },
+      {
+        "Id": 1001,
+        "Name": "Dank, dark, smelly hole.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1000
+        }
+      },
+      {
+        "Id": 1002,
+        "Name": "Large, sturdy ledge.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1004,
+          "West": 1003,
+          "Down": 1000
+        }
+      },
+      {
+        "Id": 1003,
+        "Name": "Absolutely disgusting lair.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1002
+        }
+      },
+      {
+        "Id": 1004,
+        "Name": "Absolutely disgusting lair.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1002
+        }
+      },
+      {
+        "Id": 1005,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 990,
+          "Up": 1006
+        }
+      },
+      {
+        "Id": 1006,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1011,
+          "West": 1007,
+          "Up": 987,
+          "Down": 1005
+        }
+      },
+      {
+        "Id": 1007,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1010,
+          "East": 1006,
+          "Up": 1008
+        }
+      },
+      {
+        "Id": 1008,
+        "Name": "A fluffy white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 983,
+          "Down": 1007
+        }
+      },
+      {
+        "Id": 1009,
+        "Name": "Sleepy little cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1012,
+          "East": 1010
+        }
+      },
+      {
+        "Id": 1010,
+        "Name": "Grumpy little cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1011,
+          "South": 1007,
+          "West": 1009
+        }
+      },
+      {
+        "Id": 1011,
+        "Name": "Happy little cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1016,
+          "South": 1006,
+          "West": 1010
+        }
+      },
+      {
+        "Id": 1012,
+        "Name": "Bashful little cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1013,
+          "South": 1009,
+          "West": 1022
+        }
+      },
+      {
+        "Id": 1013,
+        "Name": "Sneezing little cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1025,
+          "East": 1014,
+          "South": 1012,
+          "West": 1023
+        }
+      },
+      {
+        "Id": 1014,
+        "Name": "Dopey little cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1015,
+          "West": 1013
+        }
+      },
+      {
+        "Id": 1015,
+        "Name": "Doc-like little cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1016,
+          "West": 1014
+        }
+      },
+      {
+        "Id": 1016,
+        "Name": "Snowy, white cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1015,
+          "South": 1011,
+          "West": 1017
+        }
+      },
+      {
+        "Id": 1017,
+        "Name": "Cold, damp cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1016,
+          "Up": 1018
+        }
+      },
+      {
+        "Id": 1018,
+        "Name": "Mysterious rock outcropping.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1019,
+          "Down": 1017
+        }
+      },
+      {
+        "Id": 1019,
+        "Name": "Foyer.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1020,
+          "South": 1018
+        }
+      },
+      {
+        "Id": 1020,
+        "Name": "Tower.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1019,
+          "Up": 1021
+        }
+      },
+      {
+        "Id": 1021,
+        "Name": "Witches Tower",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2247,
+          "Down": 1020
+        }
+      },
+      {
+        "Id": 1022,
+        "Name": "Suspicious little raincloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1023,
+          "East": 1012
+        }
+      },
+      {
+        "Id": 1023,
+        "Name": "Cirrus maximus cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1013,
+          "South": 1022
+        }
+      },
+      {
+        "Id": 1024,
+        "Name": "Raging hurricane.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1028,
+          "Down": 1026
+        }
+      },
+      {
+        "Id": 1025,
+        "Name": "Raging hurricane.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1013,
+          "West": 1030,
+          "Down": 1028
+        }
+      },
+      {
+        "Id": 1026,
+        "Name": "Raging hurricane.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1027,
+          "East": 1024
+        }
+      },
+      {
+        "Id": 1027,
+        "Name": "Raging hurricane.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1026,
+          "East": 1028
+        }
+      },
+      {
+        "Id": 1028,
+        "Name": "Raging hurricane.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1025,
+          "South": 1024,
+          "West": 1027
+        }
+      },
+      {
+        "Id": 1029,
+        "Name": "Raging hurricane.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1032,
+          "East": 1030,
+          "Down": 1037
+        }
+      },
+      {
+        "Id": 1030,
+        "Name": "Raging hurricane.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1031,
+          "East": 1025,
+          "West": 1029
+        }
+      },
+      {
+        "Id": 1031,
+        "Name": "Raging hurricane.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1030,
+          "West": 1032
+        }
+      },
+      {
+        "Id": 1032,
+        "Name": "Raging hurricane.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1031,
+          "South": 1029
+        }
+      },
+      {
+        "Id": 1033,
+        "Name": "Calm cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 1034,
+          "Up": 1032
+        }
+      },
+      {
+        "Id": 1034,
+        "Name": "Mountainside.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1033,
+          "West": 1035
+        }
+      },
+      {
+        "Id": 1035,
+        "Name": "Mountainside.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1034,
+          "Up": 1036
+        }
+      },
+      {
+        "Id": 1036,
+        "Name": "Roc\u0027s Nest.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 1035
+        }
+      },
+      {
+        "Id": 1037,
+        "Name": "Cumulative nimbus cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1039,
+          "West": 1038,
+          "Up": 1029
+        }
+      },
+      {
+        "Id": 1038,
+        "Name": "Dark hidden cloud.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1037
+        }
+      },
+      {
+        "Id": 1039,
+        "Name": "Yet another cloud",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1037,
+          "Up": 1040
+        }
+      },
+      {
+        "Id": 1040,
+        "Name": "Front gate",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1041,
+          "Down": 1039
+        }
+      },
+      {
+        "Id": 1041,
+        "Name": "Lawn",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1040,
+          "South": 1043,
+          "West": 1042
+        }
+      },
+      {
+        "Id": 1042,
+        "Name": "Croquet game",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1041,
+          "South": 1044
+        }
+      },
+      {
+        "Id": 1043,
+        "Name": "Huge, gorgeous fountain.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1041,
+          "West": 1044
+        }
+      },
+      {
+        "Id": 1044,
+        "Name": "Patio.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1042,
+          "East": 1043,
+          "Up": 1045
+        }
+      },
+      {
+        "Id": 1045,
+        "Name": "Long stairway.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 1046,
+          "Down": 1044
+        }
+      },
+      {
+        "Id": 1046,
+        "Name": "Front door",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1053,
+          "South": 1057,
+          "West": 1047,
+          "Down": 1045
+        }
+      },
+      {
+        "Id": 1047,
+        "Name": "Lawn northwest of house.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1046,
+          "South": 1048
+        }
+      },
+      {
+        "Id": 1048,
+        "Name": "Lawn west of house.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1047,
+          "South": 1049
+        }
+      },
+      {
+        "Id": 1049,
+        "Name": "Lawn southwest of house.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1048,
+          "East": 1050,
+          "Down": 1054
+        }
+      },
+      {
+        "Id": 1050,
+        "Name": "Lawn south of house.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1051,
+          "West": 1049
+        }
+      },
+      {
+        "Id": 1051,
+        "Name": "Lawn southeast of house.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1052,
+          "West": 1050
+        }
+      },
+      {
+        "Id": 1052,
+        "Name": "Lawn east of house.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1053,
+          "South": 1051
+        }
+      },
+      {
+        "Id": 1053,
+        "Name": "Lawn northeast of house.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1052,
+          "West": 1046
+        }
+      },
+      {
+        "Id": 1054,
+        "Name": "Dirty, dusty tunnel.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1055,
+          "Up": 1049
+        }
+      },
+      {
+        "Id": 1055,
+        "Name": "Basement.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1056,
+          "West": 1054
+        }
+      },
+      {
+        "Id": 1056,
+        "Name": "Bottom of the stairs.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1055,
+          "Up": 1057
+        }
+      },
+      {
+        "Id": 1057,
+        "Name": "Foyer.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1046,
+          "East": 1063,
+          "West": 1058,
+          "Down": 1056
+        }
+      },
+      {
+        "Id": 1058,
+        "Name": "Elegant hallway.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1057,
+          "South": 1059,
+          "West": 1060
+        }
+      },
+      {
+        "Id": 1059,
+        "Name": "Library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1058
+        }
+      },
+      {
+        "Id": 1060,
+        "Name": "Arboretum.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1058,
+          "South": 1061
+        }
+      },
+      {
+        "Id": 1061,
+        "Name": "Western tower.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1060,
+          "Up": 1062
+        }
+      },
+      {
+        "Id": 1062,
+        "Name": "Western tower.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 1061
+        }
+      },
+      {
+        "Id": 1063,
+        "Name": "Elegant hallway.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 1065,
+          "West": 1057,
+          "South": 1064
+        }
+      },
+      {
+        "Id": 1064,
+        "Name": "Conservatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1063
+        }
+      },
+      {
+        "Id": 1065,
+        "Name": "Office",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 1066,
+          "West": 1063
+        }
+      },
+      {
+        "Id": 1066,
+        "Name": "Eastern tower.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1065,
+          "Up": 1067
+        }
+      },
+      {
+        "Id": 1067,
+        "Name": "Eastern tower.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 1066
+        }
+      },
+      {
+        "Id": 1068,
+        "Name": "Mid-Air.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 3205,
+        "Name": "To Redferne\u0027s Residence",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 3206,
+          "South": 981,
+          "Down": 3221
+        }
+      },
+      {
+        "Id": 2247,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2296,
+          "South": 2251,
+          "Up": 3222
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 981,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "North": 3205,
-        "Up": 982
-      }
-    },
-    {
-      "id": 982,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "East": 983,
-        "Down": 981
-      }
-    },
-    {
-      "id": 983,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "North": 1008,
-        "South": 984,
-        "West": 982
-      }
-    },
-    {
-      "id": 984,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "North": 983,
-        "East": 985
-      }
-    },
-    {
-      "id": 985,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "East": 986,
-        "West": 984
-      }
-    },
-    {
-      "id": 986,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "North": 987,
-        "West": 985
-      }
-    },
-    {
-      "id": 987,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "East": 988,
-        "South": 986,
-        "Down": 1006
-      }
-    },
-    {
-      "id": 988,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "East": 989,
-        "West": 987
-      }
-    },
-    {
-      "id": 989,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "West": 988,
-        "Down": 990
-      }
-    },
-    {
-      "id": 990,
-      "name": "An ominous storm cloud.",
-      "exits": {
-        "East": 991,
-        "West": 1005,
-        "Up": 989
-      }
-    },
-    {
-      "id": 991,
-      "name": "High and perilous cliff",
-      "exits": {
-        "South": 992,
-        "West": 990
-      }
-    },
-    {
-      "id": 992,
-      "name": "Narrow rocky trail.",
-      "exits": {
-        "North": 991,
-        "Down": 993
-      }
-    },
-    {
-      "id": 993,
-      "name": "Small valley.",
-      "exits": {
-        "South": 994,
-        "Up": 992
-      }
-    },
-    {
-      "id": 994,
-      "name": "Small valley.",
-      "exits": {
-        "North": 993,
-        "Down": 995
-      }
-    },
-    {
-      "id": 995,
-      "name": "Deep, slippery crevice.",
-      "exits": {
-        "South": 997,
-        "West": 996,
-        "Up": 994
-      }
-    },
-    {
-      "id": 996,
-      "name": "Incredibly slippery crevice.",
-      "exits": {
-        "East": 995,
-        "Down": 1068
-      }
-    },
-    {
-      "id": 997,
-      "name": "Steep mountainside.",
-      "exits": {
-        "North": 995,
-        "Up": 998
-      }
-    },
-    {
-      "id": 998,
-      "name": "Steep mountainside.",
-      "exits": {
-        "East": 999,
-        "Down": 997
-      }
-    },
-    {
-      "id": 999,
-      "name": "Treacherous Cliff.",
-      "exits": {
-        "West": 998,
-        "Up": 1000
-      }
-    },
-    {
-      "id": 1000,
-      "name": "Cliff Face.",
-      "exits": {
-        "East": 1001,
-        "Up": 1002,
-        "Down": 999
-      }
-    },
-    {
-      "id": 1001,
-      "name": "Dank, dark, smelly hole.",
-      "exits": {
-        "West": 1000
-      }
-    },
-    {
-      "id": 1002,
-      "name": "Large, sturdy ledge.",
-      "exits": {
-        "North": 1004,
-        "West": 1003,
-        "Down": 1000
-      }
-    },
-    {
-      "id": 1003,
-      "name": "Absolutely disgusting lair.",
-      "exits": {
-        "East": 1002
-      }
-    },
-    {
-      "id": 1004,
-      "name": "Absolutely disgusting lair.",
-      "exits": {
-        "South": 1002
-      }
-    },
-    {
-      "id": 1005,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "East": 990,
-        "Up": 1006
-      }
-    },
-    {
-      "id": 1006,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "North": 1011,
-        "West": 1007,
-        "Up": 987,
-        "Down": 1005
-      }
-    },
-    {
-      "id": 1007,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "North": 1010,
-        "East": 1006,
-        "Up": 1008
-      }
-    },
-    {
-      "id": 1008,
-      "name": "A fluffy white cloud.",
-      "exits": {
-        "South": 983,
-        "Down": 1007
-      }
-    },
-    {
-      "id": 1009,
-      "name": "Sleepy little cloud.",
-      "exits": {
-        "North": 1012,
-        "East": 1010
-      }
-    },
-    {
-      "id": 1010,
-      "name": "Grumpy little cloud.",
-      "exits": {
-        "East": 1011,
-        "South": 1007,
-        "West": 1009
-      }
-    },
-    {
-      "id": 1011,
-      "name": "Happy little cloud.",
-      "exits": {
-        "North": 1016,
-        "South": 1006,
-        "West": 1010
-      }
-    },
-    {
-      "id": 1012,
-      "name": "Bashful little cloud.",
-      "exits": {
-        "North": 1013,
-        "South": 1009,
-        "West": 1022
-      }
-    },
-    {
-      "id": 1013,
-      "name": "Sneezing little cloud.",
-      "exits": {
-        "North": 1025,
-        "East": 1014,
-        "South": 1012,
-        "West": 1023
-      }
-    },
-    {
-      "id": 1014,
-      "name": "Dopey little cloud.",
-      "exits": {
-        "East": 1015,
-        "West": 1013
-      }
-    },
-    {
-      "id": 1015,
-      "name": "Doc-like little cloud.",
-      "exits": {
-        "South": 1016,
-        "West": 1014
-      }
-    },
-    {
-      "id": 1016,
-      "name": "Snowy, white cloud.",
-      "exits": {
-        "North": 1015,
-        "South": 1011,
-        "West": 1017
-      }
-    },
-    {
-      "id": 1017,
-      "name": "Cold, damp cloud.",
-      "exits": {
-        "East": 1016,
-        "Up": 1018
-      }
-    },
-    {
-      "id": 1018,
-      "name": "Mysterious rock outcropping.",
-      "exits": {
-        "North": 1019,
-        "Down": 1017
-      }
-    },
-    {
-      "id": 1019,
-      "name": "Foyer.",
-      "exits": {
-        "East": 1020,
-        "South": 1018
-      }
-    },
-    {
-      "id": 1020,
-      "name": "Tower.",
-      "exits": {
-        "West": 1019,
-        "Up": 1021
-      }
-    },
-    {
-      "id": 1021,
-      "name": "Witches Tower",
-      "exits": {
-        "East": 2247,
-        "Down": 1020
-      }
-    },
-    {
-      "id": 1022,
-      "name": "Suspicious little raincloud.",
-      "exits": {
-        "North": 1023,
-        "East": 1012
-      }
-    },
-    {
-      "id": 1023,
-      "name": "Cirrus maximus cloud.",
-      "exits": {
-        "East": 1013,
-        "South": 1022
-      }
-    },
-    {
-      "id": 1024,
-      "name": "Raging hurricane.",
-      "exits": {
-        "North": 1028,
-        "Down": 1026
-      }
-    },
-    {
-      "id": 1025,
-      "name": "Raging hurricane.",
-      "exits": {
-        "South": 1013,
-        "West": 1030,
-        "Down": 1028
-      }
-    },
-    {
-      "id": 1026,
-      "name": "Raging hurricane.",
-      "exits": {
-        "North": 1027,
-        "East": 1024
-      }
-    },
-    {
-      "id": 1027,
-      "name": "Raging hurricane.",
-      "exits": {
-        "South": 1026,
-        "East": 1028
-      }
-    },
-    {
-      "id": 1028,
-      "name": "Raging hurricane.",
-      "exits": {
-        "Up": 1025,
-        "South": 1024,
-        "West": 1027
-      }
-    },
-    {
-      "id": 1029,
-      "name": "Raging hurricane.",
-      "exits": {
-        "North": 1032,
-        "East": 1030,
-        "Down": 1037
-      }
-    },
-    {
-      "id": 1030,
-      "name": "Raging hurricane.",
-      "exits": {
-        "North": 1031,
-        "East": 1025,
-        "West": 1029
-      }
-    },
-    {
-      "id": 1031,
-      "name": "Raging hurricane.",
-      "exits": {
-        "South": 1030,
-        "West": 1032
-      }
-    },
-    {
-      "id": 1032,
-      "name": "Raging hurricane.",
-      "exits": {
-        "East": 1031,
-        "South": 1029
-      }
-    },
-    {
-      "id": 1033,
-      "name": "Calm cloud.",
-      "exits": {
-        "West": 1034,
-        "Up": 1032
-      }
-    },
-    {
-      "id": 1034,
-      "name": "Mountainside.",
-      "exits": {
-        "East": 1033,
-        "West": 1035
-      }
-    },
-    {
-      "id": 1035,
-      "name": "Mountainside.",
-      "exits": {
-        "East": 1034,
-        "Up": 1036
-      }
-    },
-    {
-      "id": 1036,
-      "name": "Roc\u0027s Nest.",
-      "exits": {
-        "Down": 1035
-      }
-    },
-    {
-      "id": 1037,
-      "name": "Cumulative nimbus cloud.",
-      "exits": {
-        "South": 1039,
-        "West": 1038,
-        "Up": 1029
-      }
-    },
-    {
-      "id": 1038,
-      "name": "Dark hidden cloud.",
-      "exits": {
-        "East": 1037
-      }
-    },
-    {
-      "id": 1039,
-      "name": "Yet another cloud",
-      "exits": {
-        "North": 1037,
-        "Up": 1040
-      }
-    },
-    {
-      "id": 1040,
-      "name": "Front gate",
-      "exits": {
-        "South": 1041,
-        "Down": 1039
-      }
-    },
-    {
-      "id": 1041,
-      "name": "Lawn",
-      "exits": {
-        "North": 1040,
-        "South": 1043,
-        "West": 1042
-      }
-    },
-    {
-      "id": 1042,
-      "name": "Croquet game",
-      "exits": {
-        "East": 1041,
-        "South": 1044
-      }
-    },
-    {
-      "id": 1043,
-      "name": "Huge, gorgeous fountain.",
-      "exits": {
-        "North": 1041,
-        "West": 1044
-      }
-    },
-    {
-      "id": 1044,
-      "name": "Patio.",
-      "exits": {
-        "North": 1042,
-        "East": 1043,
-        "Up": 1045
-      }
-    },
-    {
-      "id": 1045,
-      "name": "Long stairway.",
-      "exits": {
-        "Up": 1046,
-        "Down": 1044
-      }
-    },
-    {
-      "id": 1046,
-      "name": "Front door",
-      "exits": {
-        "East": 1053,
-        "South": 1057,
-        "West": 1047,
-        "Down": 1045
-      }
-    },
-    {
-      "id": 1047,
-      "name": "Lawn northwest of house.",
-      "exits": {
-        "East": 1046,
-        "South": 1048
-      }
-    },
-    {
-      "id": 1048,
-      "name": "Lawn west of house.",
-      "exits": {
-        "North": 1047,
-        "South": 1049
-      }
-    },
-    {
-      "id": 1049,
-      "name": "Lawn southwest of house.",
-      "exits": {
-        "North": 1048,
-        "East": 1050,
-        "Down": 1054
-      }
-    },
-    {
-      "id": 1050,
-      "name": "Lawn south of house.",
-      "exits": {
-        "East": 1051,
-        "West": 1049
-      }
-    },
-    {
-      "id": 1051,
-      "name": "Lawn southeast of house.",
-      "exits": {
-        "North": 1052,
-        "West": 1050
-      }
-    },
-    {
-      "id": 1052,
-      "name": "Lawn east of house.",
-      "exits": {
-        "North": 1053,
-        "South": 1051
-      }
-    },
-    {
-      "id": 1053,
-      "name": "Lawn northeast of house.",
-      "exits": {
-        "South": 1052,
-        "West": 1046
-      }
-    },
-    {
-      "id": 1054,
-      "name": "Dirty, dusty tunnel.",
-      "exits": {
-        "East": 1055,
-        "Up": 1049
-      }
-    },
-    {
-      "id": 1055,
-      "name": "Basement.",
-      "exits": {
-        "North": 1056,
-        "West": 1054
-      }
-    },
-    {
-      "id": 1056,
-      "name": "Bottom of the stairs.",
-      "exits": {
-        "South": 1055,
-        "Up": 1057
-      }
-    },
-    {
-      "id": 1057,
-      "name": "Foyer.",
-      "exits": {
-        "North": 1046,
-        "East": 1063,
-        "West": 1058,
-        "Down": 1056
-      }
-    },
-    {
-      "id": 1058,
-      "name": "Elegant hallway.",
-      "exits": {
-        "East": 1057,
-        "South": 1059,
-        "West": 1060
-      }
-    },
-    {
-      "id": 1059,
-      "name": "Library",
-      "exits": {
-        "North": 1058
-      }
-    },
-    {
-      "id": 1060,
-      "name": "Arboretum.",
-      "exits": {
-        "East": 1058,
-        "South": 1061
-      }
-    },
-    {
-      "id": 1061,
-      "name": "Western tower.",
-      "exits": {
-        "North": 1060,
-        "Up": 1062
-      }
-    },
-    {
-      "id": 1062,
-      "name": "Western tower.",
-      "exits": {
-        "Down": 1061
-      }
-    },
-    {
-      "id": 1063,
-      "name": "Elegant hallway.",
-      "exits": {
-        "East": 1065,
-        "West": 1057,
-        "South": 1064
-      }
-    },
-    {
-      "id": 1064,
-      "name": "Conservatory",
-      "exits": {
-        "North": 1063
-      }
-    },
-    {
-      "id": 1065,
-      "name": "Office",
-      "exits": {
-        "South": 1066,
-        "West": 1063
-      }
-    },
-    {
-      "id": 1066,
-      "name": "Eastern tower.",
-      "exits": {
-        "North": 1065,
-        "Up": 1067
-      }
-    },
-    {
-      "id": 1067,
-      "name": "Eastern tower.",
-      "exits": {
-        "Down": 1066
-      }
-    },
-    {
-      "id": 1068,
-      "name": "Mid-Air.",
-      "exits": {}
-    },
-    {
-      "id": 3205,
-      "name": "To Redferne\u0027s Residence",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 3206,
-        "South": 981,
-        "Down": 3221
-      }
-    },
-    {
-      "id": 2247,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2296,
-        "South": 2251,
-        "Up": 3222
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

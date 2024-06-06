@@ -1,556 +1,679 @@
 {
-  "name": "Mud School",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Mud School",
+    "Rooms": [
+      {
+        "Id": 3222,
+        "Name": "Entrance to Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 2247,
+          "North": 3277,
+          "South": 3265
+        }
+      },
+      {
+        "Id": 3223,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3277,
+          "West": 3224
+        }
+      },
+      {
+        "Id": 3224,
+        "Name": "The Center Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3225,
+          "East": 3223,
+          "South": 3227,
+          "West": 3226,
+          "Down": 3228,
+          "Up": 3229
+        }
+      },
+      {
+        "Id": 3225,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3230,
+          "South": 3224
+        }
+      },
+      {
+        "Id": 3226,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3224
+        }
+      },
+      {
+        "Id": 3227,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3224
+        }
+      },
+      {
+        "Id": 3228,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 3224
+        }
+      },
+      {
+        "Id": 3229,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 3224
+        }
+      },
+      {
+        "Id": 3230,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 3231,
+          "West": 3232
+        }
+      },
+      {
+        "Id": 3231,
+        "Name": "The Blob Cage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 3230
+        }
+      },
+      {
+        "Id": 3232,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3230,
+          "Down": 3233
+        }
+      },
+      {
+        "Id": 3233,
+        "Name": "The Cage Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3234,
+          "East": 3237,
+          "South": 3236,
+          "West": 3235,
+          "Down": 3238
+        }
+      },
+      {
+        "Id": 3234,
+        "Name": "A Cage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3233
+        }
+      },
+      {
+        "Id": 3235,
+        "Name": "A Cage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3233
+        }
+      },
+      {
+        "Id": 3236,
+        "Name": "A Cage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3233
+        }
+      },
+      {
+        "Id": 3237,
+        "Name": "A Cage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3233
+        }
+      },
+      {
+        "Id": 3238,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 3233,
+          "South": 3239,
+          "East": 3240
+        }
+      },
+      {
+        "Id": 3239,
+        "Name": "The Store in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3238
+        }
+      },
+      {
+        "Id": 3240,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3238,
+          "North": 3241,
+          "East": 3242
+        }
+      },
+      {
+        "Id": 3241,
+        "Name": "The Darkened Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3240
+        }
+      },
+      {
+        "Id": 3242,
+        "Name": "The End of Mud School!",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3243
+        }
+      },
+      {
+        "Id": 3243,
+        "Name": "South Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3244,
+          "North": 3250,
+          "East": 3246,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3244,
+        "Name": "South Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3245,
+          "North": 3249,
+          "East": 3243,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3245,
+        "Name": "South West Corner of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3248,
+          "East": 3244,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3246,
+        "Name": "South Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3243,
+          "North": 3251,
+          "East": 3247,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3247,
+        "Name": "South East Corner of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3252,
+          "West": 3246,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3248,
+        "Name": "West Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3253,
+          "East": 3249,
+          "South": 3245,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3249,
+        "Name": "Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3254,
+          "East": 3250,
+          "South": 3244,
+          "West": 3248,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3250,
+        "Name": "Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3255,
+          "East": 3251,
+          "South": 3243,
+          "West": 3249,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3251,
+        "Name": "Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3256,
+          "East": 3252,
+          "South": 3246,
+          "West": 3250,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3252,
+        "Name": "East Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3257,
+          "South": 3247,
+          "West": 3251,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3253,
+        "Name": "West Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3258,
+          "East": 3254,
+          "South": 3248,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3254,
+        "Name": "Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3259,
+          "East": 3255,
+          "South": 3249,
+          "West": 3253,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3255,
+        "Name": "Center of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3260,
+          "East": 3256,
+          "South": 3250,
+          "West": 3254,
+          "Up": 3280,
+          "Down": 3268
+        }
+      },
+      {
+        "Id": 3256,
+        "Name": "Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3261,
+          "East": 3257,
+          "South": 3251,
+          "West": 3255,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3257,
+        "Name": "East Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3262,
+          "South": 3252,
+          "West": 3256,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3258,
+        "Name": "West Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3263,
+          "East": 3259,
+          "South": 3253,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3259,
+        "Name": "Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3264,
+          "East": 3260,
+          "South": 3254,
+          "West": 3258,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3260,
+        "Name": "Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3265,
+          "East": 3261,
+          "South": 3255,
+          "West": 3259,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3261,
+        "Name": "Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3266,
+          "East": 3262,
+          "South": 3256,
+          "West": 3260,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3262,
+        "Name": "East Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3267,
+          "South": 3257,
+          "West": 3261,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3263,
+        "Name": "North West Corner of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3264,
+          "South": 3258,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3264,
+        "Name": "North Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3265,
+          "South": 3259,
+          "West": 3263,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3265,
+        "Name": "North Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3266,
+          "South": 3260,
+          "West": 3264,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3266,
+        "Name": "North Wall of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3267,
+          "South": 3261,
+          "West": 3265,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3267,
+        "Name": "North East Corner of Arena",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3262,
+          "West": 3266,
+          "Up": 3280
+        }
+      },
+      {
+        "Id": 3268,
+        "Name": "The Center of the Dungeon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 3255,
+          "North": 3270,
+          "East": 3273,
+          "South": 3275,
+          "West": 3272
+        }
+      },
+      {
+        "Id": 3269,
+        "Name": "The North West Corner of the Dungeon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3270,
+          "South": 3272
+        }
+      },
+      {
+        "Id": 3270,
+        "Name": "The North Wall of the Dungeon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3271,
+          "South": 3268,
+          "West": 3269
+        }
+      },
+      {
+        "Id": 3271,
+        "Name": "The North East Corner of the Dungeon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3273,
+          "West": 3270
+        }
+      },
+      {
+        "Id": 3272,
+        "Name": "The West Wall of the Dungeon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3269,
+          "East": 3268,
+          "South": 3274
+        }
+      },
+      {
+        "Id": 3273,
+        "Name": "The East Wall of the Dungeon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3271,
+          "South": 3276,
+          "West": 3268
+        }
+      },
+      {
+        "Id": 3274,
+        "Name": "The South West Corner of the Dungeon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3272,
+          "East": 3275
+        }
+      },
+      {
+        "Id": 3275,
+        "Name": "The South Wall of the Dungeon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3268,
+          "East": 3276,
+          "West": 3274
+        }
+      },
+      {
+        "Id": 3276,
+        "Name": "The South East Corner of the Dungeon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3273,
+          "West": 3275
+        }
+      },
+      {
+        "Id": 3277,
+        "Name": "A Room in Mud School",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3223,
+          "East": 3279,
+          "South": 3222,
+          "West": 3278
+        }
+      },
+      {
+        "Id": 3278,
+        "Name": "Furey\u0027s Training Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3277
+        }
+      },
+      {
+        "Id": 3279,
+        "Name": "Hatchet\u0027s Guild Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3277
+        }
+      },
+      {
+        "Id": 3280,
+        "Name": "A Safe Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 2247
+        }
+      },
+      {
+        "Id": 2247,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2296,
+          "South": 2251,
+          "Up": 3222
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 3222,
-      "name": "Entrance to Mud School",
-      "exits": {
-        "Down": 2247,
-        "North": 3277,
-        "South": 3265
-      }
-    },
-    {
-      "id": 3223,
-      "name": "A Room in Mud School",
-      "exits": {
-        "South": 3277,
-        "West": 3224
-      }
-    },
-    {
-      "id": 3224,
-      "name": "The Center Room",
-      "exits": {
-        "North": 3225,
-        "East": 3223,
-        "South": 3227,
-        "West": 3226,
-        "Down": 3228,
-        "Up": 3229
-      }
-    },
-    {
-      "id": 3225,
-      "name": "A Room in Mud School",
-      "exits": {
-        "North": 3230,
-        "South": 3224
-      }
-    },
-    {
-      "id": 3226,
-      "name": "A Room in Mud School",
-      "exits": {
-        "East": 3224
-      }
-    },
-    {
-      "id": 3227,
-      "name": "A Room in Mud School",
-      "exits": {
-        "North": 3224
-      }
-    },
-    {
-      "id": 3228,
-      "name": "A Room in Mud School",
-      "exits": {
-        "Up": 3224
-      }
-    },
-    {
-      "id": 3229,
-      "name": "A Room in Mud School",
-      "exits": {
-        "Down": 3224
-      }
-    },
-    {
-      "id": 3230,
-      "name": "A Room in Mud School",
-      "exits": {
-        "Down": 3231,
-        "West": 3232
-      }
-    },
-    {
-      "id": 3231,
-      "name": "The Blob Cage",
-      "exits": {
-        "Up": 3230
-      }
-    },
-    {
-      "id": 3232,
-      "name": "A Room in Mud School",
-      "exits": {
-        "East": 3230,
-        "Down": 3233
-      }
-    },
-    {
-      "id": 3233,
-      "name": "The Cage Room",
-      "exits": {
-        "North": 3234,
-        "East": 3237,
-        "South": 3236,
-        "West": 3235,
-        "Down": 3238
-      }
-    },
-    {
-      "id": 3234,
-      "name": "A Cage",
-      "exits": {
-        "South": 3233
-      }
-    },
-    {
-      "id": 3235,
-      "name": "A Cage",
-      "exits": {
-        "East": 3233
-      }
-    },
-    {
-      "id": 3236,
-      "name": "A Cage",
-      "exits": {
-        "North": 3233
-      }
-    },
-    {
-      "id": 3237,
-      "name": "A Cage",
-      "exits": {
-        "West": 3233
-      }
-    },
-    {
-      "id": 3238,
-      "name": "A Room in Mud School",
-      "exits": {
-        "Up": 3233,
-        "South": 3239,
-        "East": 3240
-      }
-    },
-    {
-      "id": 3239,
-      "name": "The Store in Mud School",
-      "exits": {
-        "North": 3238
-      }
-    },
-    {
-      "id": 3240,
-      "name": "A Room in Mud School",
-      "exits": {
-        "West": 3238,
-        "North": 3241,
-        "East": 3242
-      }
-    },
-    {
-      "id": 3241,
-      "name": "The Darkened Room",
-      "exits": {
-        "South": 3240
-      }
-    },
-    {
-      "id": 3242,
-      "name": "The End of Mud School!",
-      "exits": {
-        "North": 3243
-      }
-    },
-    {
-      "id": 3243,
-      "name": "South Wall of Arena",
-      "exits": {
-        "West": 3244,
-        "North": 3250,
-        "East": 3246,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3244,
-      "name": "South Wall of Arena",
-      "exits": {
-        "West": 3245,
-        "North": 3249,
-        "East": 3243,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3245,
-      "name": "South West Corner of Arena",
-      "exits": {
-        "North": 3248,
-        "East": 3244,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3246,
-      "name": "South Wall of Arena",
-      "exits": {
-        "West": 3243,
-        "North": 3251,
-        "East": 3247,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3247,
-      "name": "South East Corner of Arena",
-      "exits": {
-        "North": 3252,
-        "West": 3246,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3248,
-      "name": "West Wall of Arena",
-      "exits": {
-        "North": 3253,
-        "East": 3249,
-        "South": 3245,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3249,
-      "name": "Arena",
-      "exits": {
-        "North": 3254,
-        "East": 3250,
-        "South": 3244,
-        "West": 3248,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3250,
-      "name": "Arena",
-      "exits": {
-        "North": 3255,
-        "East": 3251,
-        "South": 3243,
-        "West": 3249,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3251,
-      "name": "Arena",
-      "exits": {
-        "North": 3256,
-        "East": 3252,
-        "South": 3246,
-        "West": 3250,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3252,
-      "name": "East Wall of Arena",
-      "exits": {
-        "North": 3257,
-        "South": 3247,
-        "West": 3251,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3253,
-      "name": "West Wall of Arena",
-      "exits": {
-        "North": 3258,
-        "East": 3254,
-        "South": 3248,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3254,
-      "name": "Arena",
-      "exits": {
-        "North": 3259,
-        "East": 3255,
-        "South": 3249,
-        "West": 3253,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3255,
-      "name": "Center of Arena",
-      "exits": {
-        "North": 3260,
-        "East": 3256,
-        "South": 3250,
-        "West": 3254,
-        "Up": 3280,
-        "Down": 3268
-      }
-    },
-    {
-      "id": 3256,
-      "name": "Arena",
-      "exits": {
-        "North": 3261,
-        "East": 3257,
-        "South": 3251,
-        "West": 3255,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3257,
-      "name": "East Wall of Arena",
-      "exits": {
-        "North": 3262,
-        "South": 3252,
-        "West": 3256,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3258,
-      "name": "West Wall of Arena",
-      "exits": {
-        "North": 3263,
-        "East": 3259,
-        "South": 3253,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3259,
-      "name": "Arena",
-      "exits": {
-        "North": 3264,
-        "East": 3260,
-        "South": 3254,
-        "West": 3258,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3260,
-      "name": "Arena",
-      "exits": {
-        "North": 3265,
-        "East": 3261,
-        "South": 3255,
-        "West": 3259,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3261,
-      "name": "Arena",
-      "exits": {
-        "North": 3266,
-        "East": 3262,
-        "South": 3256,
-        "West": 3260,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3262,
-      "name": "East Wall of Arena",
-      "exits": {
-        "North": 3267,
-        "South": 3257,
-        "West": 3261,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3263,
-      "name": "North West Corner of Arena",
-      "exits": {
-        "East": 3264,
-        "South": 3258,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3264,
-      "name": "North Wall of Arena",
-      "exits": {
-        "East": 3265,
-        "South": 3259,
-        "West": 3263,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3265,
-      "name": "North Wall of Arena",
-      "exits": {
-        "East": 3266,
-        "South": 3260,
-        "West": 3264,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3266,
-      "name": "North Wall of Arena",
-      "exits": {
-        "East": 3267,
-        "South": 3261,
-        "West": 3265,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3267,
-      "name": "North East Corner of Arena",
-      "exits": {
-        "South": 3262,
-        "West": 3266,
-        "Up": 3280
-      }
-    },
-    {
-      "id": 3268,
-      "name": "The Center of the Dungeon",
-      "exits": {
-        "Up": 3255,
-        "North": 3270,
-        "East": 3273,
-        "South": 3275,
-        "West": 3272
-      }
-    },
-    {
-      "id": 3269,
-      "name": "The North West Corner of the Dungeon",
-      "exits": {
-        "East": 3270,
-        "South": 3272
-      }
-    },
-    {
-      "id": 3270,
-      "name": "The North Wall of the Dungeon",
-      "exits": {
-        "East": 3271,
-        "South": 3268,
-        "West": 3269
-      }
-    },
-    {
-      "id": 3271,
-      "name": "The North East Corner of the Dungeon",
-      "exits": {
-        "South": 3273,
-        "West": 3270
-      }
-    },
-    {
-      "id": 3272,
-      "name": "The West Wall of the Dungeon",
-      "exits": {
-        "North": 3269,
-        "East": 3268,
-        "South": 3274
-      }
-    },
-    {
-      "id": 3273,
-      "name": "The East Wall of the Dungeon",
-      "exits": {
-        "North": 3271,
-        "South": 3276,
-        "West": 3268
-      }
-    },
-    {
-      "id": 3274,
-      "name": "The South West Corner of the Dungeon",
-      "exits": {
-        "North": 3272,
-        "East": 3275
-      }
-    },
-    {
-      "id": 3275,
-      "name": "The South Wall of the Dungeon",
-      "exits": {
-        "North": 3268,
-        "East": 3276,
-        "West": 3274
-      }
-    },
-    {
-      "id": 3276,
-      "name": "The South East Corner of the Dungeon",
-      "exits": {
-        "North": 3273,
-        "West": 3275
-      }
-    },
-    {
-      "id": 3277,
-      "name": "A Room in Mud School",
-      "exits": {
-        "North": 3223,
-        "East": 3279,
-        "South": 3222,
-        "West": 3278
-      }
-    },
-    {
-      "id": 3278,
-      "name": "Furey\u0027s Training Room",
-      "exits": {
-        "East": 3277
-      }
-    },
-    {
-      "id": 3279,
-      "name": "Hatchet\u0027s Guild Room",
-      "exits": {
-        "West": 3277
-      }
-    },
-    {
-      "id": 3280,
-      "name": "A Safe Room",
-      "exits": {
-        "Up": 2247
-      }
-    },
-    {
-      "id": 2247,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2296,
-        "South": 2251,
-        "Up": 3222
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

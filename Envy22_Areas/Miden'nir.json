@@ -1,478 +1,582 @@
 {
-  "name": "Miden\u0027nir",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Miden\u0027nir",
+    "Rooms": [
+      {
+        "Id": 2201,
+        "Name": "The Plains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2483,
+          "South": 2202
+        }
+      },
+      {
+        "Id": 2202,
+        "Name": "The Lane",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2201,
+          "South": 2203
+        }
+      },
+      {
+        "Id": 2203,
+        "Name": "The Cross Roads",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2202,
+          "East": 1390,
+          "South": 3759,
+          "West": 2204,
+          "Down": 931
+        }
+      },
+      {
+        "Id": 2204,
+        "Name": "City Entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2203,
+          "South": 1209,
+          "West": 2295
+        }
+      },
+      {
+        "Id": 2205,
+        "Name": "The South Bridge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2276,
+          "South": 2206
+        }
+      },
+      {
+        "Id": 2206,
+        "Name": "The Trail to Miden\u0027nir",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2205,
+          "East": 2207,
+          "South": 2208,
+          "West": 2232
+        }
+      },
+      {
+        "Id": 2207,
+        "Name": "The Miden\u0027nir",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2225,
+          "South": 2210,
+          "West": 2206
+        }
+      },
+      {
+        "Id": 2208,
+        "Name": "The Miden\u0027nir",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2206,
+          "South": 2211,
+          "West": 2209
+        }
+      },
+      {
+        "Id": 2209,
+        "Name": "On a Small Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2208,
+          "South": 2212
+        }
+      },
+      {
+        "Id": 2210,
+        "Name": "The Miden\u0027nir",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2207,
+          "East": 2213,
+          "South": 2215
+        }
+      },
+      {
+        "Id": 2211,
+        "Name": "A Crossroads",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2208,
+          "East": 2215,
+          "South": 2217
+        }
+      },
+      {
+        "Id": 2212,
+        "Name": "The Trail",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2209,
+          "South": 2216
+        }
+      },
+      {
+        "Id": 2213,
+        "Name": "The Miden\u0027nir",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2225,
+          "South": 2214,
+          "West": 2210
+        }
+      },
+      {
+        "Id": 2214,
+        "Name": "The Miden\u0027nir",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2213,
+          "West": 2215
+        }
+      },
+      {
+        "Id": 2215,
+        "Name": "Deep Forest",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2210,
+          "East": 2214,
+          "South": 2218,
+          "West": 2211
+        }
+      },
+      {
+        "Id": 2216,
+        "Name": "Light Forest",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2212,
+          "East": 2217,
+          "South": 2219
+        }
+      },
+      {
+        "Id": 2217,
+        "Name": "Muddy Ground",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2211,
+          "East": 2218,
+          "South": 2220,
+          "West": 2216
+        }
+      },
+      {
+        "Id": 2218,
+        "Name": "Near the Mountains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2215,
+          "West": 2217
+        }
+      },
+      {
+        "Id": 2219,
+        "Name": "The Fading Trail",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2216,
+          "South": 2223
+        }
+      },
+      {
+        "Id": 2220,
+        "Name": "The Dark Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2217,
+          "East": 2221,
+          "South": 2222
+        }
+      },
+      {
+        "Id": 2221,
+        "Name": "The Dark Forest",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2224,
+          "West": 2220
+        }
+      },
+      {
+        "Id": 2222,
+        "Name": "Carnage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2220,
+          "East": 2224,
+          "South": 2246,
+          "West": 2223
+        }
+      },
+      {
+        "Id": 2223,
+        "Name": "Deep in the Forest of Miden\u0027nir",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2219,
+          "East": 2222
+        }
+      },
+      {
+        "Id": 2224,
+        "Name": "The Dark Forest",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2221,
+          "East": 2226,
+          "West": 2222
+        }
+      },
+      {
+        "Id": 2225,
+        "Name": "At The Foot of The Mountains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2213,
+          "West": 2207
+        }
+      },
+      {
+        "Id": 2226,
+        "Name": "The Deep in the Forest of Miden\u0027nir",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2227,
+          "West": 2224
+        }
+      },
+      {
+        "Id": 2227,
+        "Name": "A Tunnel in the Mountains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2226,
+          "South": 2228
+        }
+      },
+      {
+        "Id": 2228,
+        "Name": "A Tunnel in the Mountains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2227,
+          "East": 2229,
+          "South": 2230
+        }
+      },
+      {
+        "Id": 2229,
+        "Name": "A Small Alcove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 2228
+        }
+      },
+      {
+        "Id": 2230,
+        "Name": "A Tunnel in the Mountains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2228,
+          "South": 2231
+        }
+      },
+      {
+        "Id": 2231,
+        "Name": "The Goblin Headquarters",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2230
+        }
+      },
+      {
+        "Id": 2232,
+        "Name": "The Front of the Inn",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2233,
+          "East": 2206,
+          "South": 2234,
+          "West": 2236
+        }
+      },
+      {
+        "Id": 2233,
+        "Name": "North of the Inn",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2232
+        }
+      },
+      {
+        "Id": 2234,
+        "Name": "South of the Inn",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2232,
+          "South": 2237,
+          "West": 2235
+        }
+      },
+      {
+        "Id": 2235,
+        "Name": "Behind the Inn",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2234,
+          "West": 2240
+        }
+      },
+      {
+        "Id": 2236,
+        "Name": "The Woodsman Inn",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2238,
+          "East": 2232,
+          "South": 2241,
+          "West": 2239
+        }
+      },
+      {
+        "Id": 2237,
+        "Name": "The Ambush Point",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2234,
+          "West": 2242
+        }
+      },
+      {
+        "Id": 2238,
+        "Name": "The Bar",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 2236
+        }
+      },
+      {
+        "Id": 2239,
+        "Name": "The Bard\u0027s Table",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2236
+        }
+      },
+      {
+        "Id": 2240,
+        "Name": "Garbage dump",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2235
+        }
+      },
+      {
+        "Id": 2241,
+        "Name": "A Quieter Section of the Inn",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2236
+        }
+      },
+      {
+        "Id": 2242,
+        "Name": "On the Trail of the Horsemen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2237,
+          "West": 2243
+        }
+      },
+      {
+        "Id": 2243,
+        "Name": "On the Trail of the Horsemen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2242,
+          "South": 2244
+        }
+      },
+      {
+        "Id": 2244,
+        "Name": "On the Trail of the Horsemen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2243,
+          "West": 2245
+        }
+      },
+      {
+        "Id": 2245,
+        "Name": "A Dead End Trail",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2244
+        }
+      },
+      {
+        "Id": 2246,
+        "Name": "A Desolated Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2222,
+          "West": 232
+        }
+      },
+      {
+        "Id": 2483,
+        "Name": "To Moria",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2484,
+          "East": 2051,
+          "South": 2201
+        }
+      },
+      {
+        "Id": 1390,
+        "Name": "To Holy Grove",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "East": 1391,
+          "North": 1387,
+          "South": 1393,
+          "West": 2203
+        }
+      },
+      {
+        "Id": 3759,
+        "Name": "To Thalos",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2203,
+          "South": 3758
+        }
+      },
+      {
+        "Id": 931,
+        "Name": "To Dwarven Kingdom",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "Up": 2203,
+          "North": 932,
+          "South": 640
+        }
+      },
+      {
+        "Id": 1209,
+        "Name": "To Gnome Village",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2204,
+          "East": 1210
+        }
+      },
+      {
+        "Id": 2295,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2482,
+          "East": 2204,
+          "West": 2283
+        }
+      },
+      {
+        "Id": 2276,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2271,
+          "South": 2205,
+          "Down": 3306
+        }
+      },
+      {
+        "Id": 232,
+        "Name": "To Castle Reinhold",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "East": 2246,
+          "South": 233
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 2201,
-      "name": "The Plains",
-      "exits": {
-        "North": 2483,
-        "South": 2202
-      }
-    },
-    {
-      "id": 2202,
-      "name": "The Lane",
-      "exits": {
-        "North": 2201,
-        "South": 2203
-      }
-    },
-    {
-      "id": 2203,
-      "name": "The Cross Roads",
-      "exits": {
-        "North": 2202,
-        "East": 1390,
-        "South": 3759,
-        "West": 2204,
-        "Down": 931
-      }
-    },
-    {
-      "id": 2204,
-      "name": "City Entrance",
-      "exits": {
-        "East": 2203,
-        "South": 1209,
-        "West": 2295
-      }
-    },
-    {
-      "id": 2205,
-      "name": "The South Bridge",
-      "exits": {
-        "North": 2276,
-        "South": 2206
-      }
-    },
-    {
-      "id": 2206,
-      "name": "The Trail to Miden\u0027nir",
-      "exits": {
-        "North": 2205,
-        "East": 2207,
-        "South": 2208,
-        "West": 2232
-      }
-    },
-    {
-      "id": 2207,
-      "name": "The Miden\u0027nir",
-      "exits": {
-        "East": 2225,
-        "South": 2210,
-        "West": 2206
-      }
-    },
-    {
-      "id": 2208,
-      "name": "The Miden\u0027nir",
-      "exits": {
-        "North": 2206,
-        "South": 2211,
-        "West": 2209
-      }
-    },
-    {
-      "id": 2209,
-      "name": "On a Small Path",
-      "exits": {
-        "East": 2208,
-        "South": 2212
-      }
-    },
-    {
-      "id": 2210,
-      "name": "The Miden\u0027nir",
-      "exits": {
-        "North": 2207,
-        "East": 2213,
-        "South": 2215
-      }
-    },
-    {
-      "id": 2211,
-      "name": "A Crossroads",
-      "exits": {
-        "North": 2208,
-        "East": 2215,
-        "South": 2217
-      }
-    },
-    {
-      "id": 2212,
-      "name": "The Trail",
-      "exits": {
-        "North": 2209,
-        "South": 2216
-      }
-    },
-    {
-      "id": 2213,
-      "name": "The Miden\u0027nir",
-      "exits": {
-        "North": 2225,
-        "South": 2214,
-        "West": 2210
-      }
-    },
-    {
-      "id": 2214,
-      "name": "The Miden\u0027nir",
-      "exits": {
-        "North": 2213,
-        "West": 2215
-      }
-    },
-    {
-      "id": 2215,
-      "name": "Deep Forest",
-      "exits": {
-        "North": 2210,
-        "East": 2214,
-        "South": 2218,
-        "West": 2211
-      }
-    },
-    {
-      "id": 2216,
-      "name": "Light Forest",
-      "exits": {
-        "North": 2212,
-        "East": 2217,
-        "South": 2219
-      }
-    },
-    {
-      "id": 2217,
-      "name": "Muddy Ground",
-      "exits": {
-        "North": 2211,
-        "East": 2218,
-        "South": 2220,
-        "West": 2216
-      }
-    },
-    {
-      "id": 2218,
-      "name": "Near the Mountains",
-      "exits": {
-        "North": 2215,
-        "West": 2217
-      }
-    },
-    {
-      "id": 2219,
-      "name": "The Fading Trail",
-      "exits": {
-        "North": 2216,
-        "South": 2223
-      }
-    },
-    {
-      "id": 2220,
-      "name": "The Dark Path",
-      "exits": {
-        "North": 2217,
-        "East": 2221,
-        "South": 2222
-      }
-    },
-    {
-      "id": 2221,
-      "name": "The Dark Forest",
-      "exits": {
-        "South": 2224,
-        "West": 2220
-      }
-    },
-    {
-      "id": 2222,
-      "name": "Carnage",
-      "exits": {
-        "North": 2220,
-        "East": 2224,
-        "South": 2246,
-        "West": 2223
-      }
-    },
-    {
-      "id": 2223,
-      "name": "Deep in the Forest of Miden\u0027nir",
-      "exits": {
-        "North": 2219,
-        "East": 2222
-      }
-    },
-    {
-      "id": 2224,
-      "name": "The Dark Forest",
-      "exits": {
-        "North": 2221,
-        "East": 2226,
-        "West": 2222
-      }
-    },
-    {
-      "id": 2225,
-      "name": "At The Foot of The Mountains",
-      "exits": {
-        "South": 2213,
-        "West": 2207
-      }
-    },
-    {
-      "id": 2226,
-      "name": "The Deep in the Forest of Miden\u0027nir",
-      "exits": {
-        "South": 2227,
-        "West": 2224
-      }
-    },
-    {
-      "id": 2227,
-      "name": "A Tunnel in the Mountains",
-      "exits": {
-        "North": 2226,
-        "South": 2228
-      }
-    },
-    {
-      "id": 2228,
-      "name": "A Tunnel in the Mountains",
-      "exits": {
-        "North": 2227,
-        "East": 2229,
-        "South": 2230
-      }
-    },
-    {
-      "id": 2229,
-      "name": "A Small Alcove",
-      "exits": {
-        "West": 2228
-      }
-    },
-    {
-      "id": 2230,
-      "name": "A Tunnel in the Mountains",
-      "exits": {
-        "North": 2228,
-        "South": 2231
-      }
-    },
-    {
-      "id": 2231,
-      "name": "The Goblin Headquarters",
-      "exits": {
-        "North": 2230
-      }
-    },
-    {
-      "id": 2232,
-      "name": "The Front of the Inn",
-      "exits": {
-        "North": 2233,
-        "East": 2206,
-        "South": 2234,
-        "West": 2236
-      }
-    },
-    {
-      "id": 2233,
-      "name": "North of the Inn",
-      "exits": {
-        "South": 2232
-      }
-    },
-    {
-      "id": 2234,
-      "name": "South of the Inn",
-      "exits": {
-        "North": 2232,
-        "South": 2237,
-        "West": 2235
-      }
-    },
-    {
-      "id": 2235,
-      "name": "Behind the Inn",
-      "exits": {
-        "East": 2234,
-        "West": 2240
-      }
-    },
-    {
-      "id": 2236,
-      "name": "The Woodsman Inn",
-      "exits": {
-        "North": 2238,
-        "East": 2232,
-        "South": 2241,
-        "West": 2239
-      }
-    },
-    {
-      "id": 2237,
-      "name": "The Ambush Point",
-      "exits": {
-        "North": 2234,
-        "West": 2242
-      }
-    },
-    {
-      "id": 2238,
-      "name": "The Bar",
-      "exits": {
-        "South": 2236
-      }
-    },
-    {
-      "id": 2239,
-      "name": "The Bard\u0027s Table",
-      "exits": {
-        "East": 2236
-      }
-    },
-    {
-      "id": 2240,
-      "name": "Garbage dump",
-      "exits": {
-        "East": 2235
-      }
-    },
-    {
-      "id": 2241,
-      "name": "A Quieter Section of the Inn",
-      "exits": {
-        "North": 2236
-      }
-    },
-    {
-      "id": 2242,
-      "name": "On the Trail of the Horsemen",
-      "exits": {
-        "East": 2237,
-        "West": 2243
-      }
-    },
-    {
-      "id": 2243,
-      "name": "On the Trail of the Horsemen",
-      "exits": {
-        "East": 2242,
-        "South": 2244
-      }
-    },
-    {
-      "id": 2244,
-      "name": "On the Trail of the Horsemen",
-      "exits": {
-        "North": 2243,
-        "West": 2245
-      }
-    },
-    {
-      "id": 2245,
-      "name": "A Dead End Trail",
-      "exits": {
-        "East": 2244
-      }
-    },
-    {
-      "id": 2246,
-      "name": "A Desolated Road",
-      "exits": {
-        "North": 2222,
-        "West": 232
-      }
-    },
-    {
-      "id": 2483,
-      "name": "To Moria",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2484,
-        "East": 2051,
-        "South": 2201
-      }
-    },
-    {
-      "id": 1390,
-      "name": "To Holy Grove",
-      "otherAreaExit": true,
-      "exits": {
-        "East": 1391,
-        "North": 1387,
-        "South": 1393,
-        "West": 2203
-      }
-    },
-    {
-      "id": 3759,
-      "name": "To Thalos",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2203,
-        "South": 3758
-      }
-    },
-    {
-      "id": 931,
-      "name": "To Dwarven Kingdom",
-      "otherAreaExit": true,
-      "exits": {
-        "Up": 2203,
-        "North": 932,
-        "South": 640
-      }
-    },
-    {
-      "id": 1209,
-      "name": "To Gnome Village",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2204,
-        "East": 1210
-      }
-    },
-    {
-      "id": 2295,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2482,
-        "East": 2204,
-        "West": 2283
-      }
-    },
-    {
-      "id": 2276,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2271,
-        "South": 2205,
-        "Down": 3306
-      }
-    },
-    {
-      "id": 232,
-      "name": "To Castle Reinhold",
-      "otherAreaExit": true,
-      "exits": {
-        "East": 2246,
-        "South": 233
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

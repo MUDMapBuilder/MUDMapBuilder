@@ -1,374 +1,467 @@
 {
-  "name": "Dragon Tower",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Dragon Tower",
+    "Rooms": [
+      {
+        "Id": 800,
+        "Name": "The Tower Gates",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 801,
+          "East": 1715
+        }
+      },
+      {
+        "Id": 801,
+        "Name": "The Foyer",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 802,
+          "South": 800
+        }
+      },
+      {
+        "Id": 802,
+        "Name": "Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 801,
+          "North": 803
+        }
+      },
+      {
+        "Id": 803,
+        "Name": "Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 806,
+          "East": 804,
+          "South": 802,
+          "West": 805
+        }
+      },
+      {
+        "Id": 804,
+        "Name": "Nursery",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 803,
+          "East": 822
+        }
+      },
+      {
+        "Id": 805,
+        "Name": "Storage Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 803,
+          "Down": 807
+        }
+      },
+      {
+        "Id": 806,
+        "Name": "End of the Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 803,
+          "Up": 809
+        }
+      },
+      {
+        "Id": 807,
+        "Name": "Guardian\u0027s Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 805,
+          "South": 808
+        }
+      },
+      {
+        "Id": 808,
+        "Name": "The Treasure Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 807,
+          "West": 817
+        }
+      },
+      {
+        "Id": 809,
+        "Name": "The Second Floor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 806,
+          "South": 810
+        }
+      },
+      {
+        "Id": 810,
+        "Name": "The Court",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 809,
+          "South": 812,
+          "East": 811
+        }
+      },
+      {
+        "Id": 811,
+        "Name": "Hall O\u0027 Pleasure",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 810
+        }
+      },
+      {
+        "Id": 812,
+        "Name": "The Court",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 810,
+          "East": 813,
+          "South": 815,
+          "West": 814
+        }
+      },
+      {
+        "Id": 813,
+        "Name": "The Library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 812
+        }
+      },
+      {
+        "Id": 814,
+        "Name": "The Sanctum",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 812
+        }
+      },
+      {
+        "Id": 815,
+        "Name": "The Court Ends",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 812,
+          "East": 816
+        }
+      },
+      {
+        "Id": 816,
+        "Name": "bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 815
+        }
+      },
+      {
+        "Id": 817,
+        "Name": "Entrance to the Crypt",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 808,
+          "West": 818
+        }
+      },
+      {
+        "Id": 818,
+        "Name": "Crypt",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 817,
+          "West": 821
+        }
+      },
+      {
+        "Id": 819,
+        "Name": "The Lair",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 834
+        }
+      },
+      {
+        "Id": 820,
+        "Name": "A Lair",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 840
+        }
+      },
+      {
+        "Id": 821,
+        "Name": "The Crypt Ends",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 818,
+          "West": 831
+        }
+      },
+      {
+        "Id": 822,
+        "Name": "Entrance to the Great Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 804,
+          "East": 823
+        }
+      },
+      {
+        "Id": 823,
+        "Name": "The Great Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 824,
+          "East": 828
+        }
+      },
+      {
+        "Id": 824,
+        "Name": "A Narrow Passageway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 825,
+          "South": 823
+        }
+      },
+      {
+        "Id": 825,
+        "Name": "Lair",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 824,
+          "Down": 826
+        }
+      },
+      {
+        "Id": 826,
+        "Name": "Underground Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 827,
+          "Up": 825
+        }
+      },
+      {
+        "Id": 827,
+        "Name": "Underground Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 826
+        }
+      },
+      {
+        "Id": 828,
+        "Name": "The Great Hall Ends.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 823,
+          "East": 829
+        }
+      },
+      {
+        "Id": 829,
+        "Name": "THE Lair",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 828
+        }
+      },
+      {
+        "Id": 830,
+        "Name": "The End...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 842
+        }
+      },
+      {
+        "Id": 831,
+        "Name": "Stairwell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 821,
+          "Down": 832
+        }
+      },
+      {
+        "Id": 832,
+        "Name": "Wine cellar",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 831,
+          "East": 833
+        }
+      },
+      {
+        "Id": 833,
+        "Name": "Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 834,
+          "West": 832,
+          "East": 835
+        }
+      },
+      {
+        "Id": 834,
+        "Name": "A cave opening",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 819,
+          "South": 833
+        }
+      },
+      {
+        "Id": 835,
+        "Name": "The End of the tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 833,
+          "Up": 801,
+          "South": 836
+        }
+      },
+      {
+        "Id": 836,
+        "Name": "The Bridge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 835,
+          "South": 837
+        }
+      },
+      {
+        "Id": 837,
+        "Name": "A small opening",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 836,
+          "South": 838
+        }
+      },
+      {
+        "Id": 838,
+        "Name": "Clearing",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 837,
+          "Up": 839,
+          "Down": 843
+        }
+      },
+      {
+        "Id": 839,
+        "Name": "A path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 840,
+          "Down": 838,
+          "Up": 841
+        }
+      },
+      {
+        "Id": 840,
+        "Name": "A cave opening",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 820,
+          "East": 839
+        }
+      },
+      {
+        "Id": 841,
+        "Name": "The path continues",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 842,
+          "Down": 839
+        }
+      },
+      {
+        "Id": 842,
+        "Name": "The top of the mountain",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 841,
+          "North": 830
+        }
+      },
+      {
+        "Id": 843,
+        "Name": "Well",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 1715,
+        "Name": "To High Tower of Sorcery",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 1712,
+          "East": 1716,
+          "South": 1718,
+          "West": 800
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 800,
-      "name": "The Tower Gates",
-      "exits": {
-        "North": 801,
-        "East": 1715
-      }
-    },
-    {
-      "id": 801,
-      "name": "The Foyer",
-      "exits": {
-        "North": 802,
-        "South": 800
-      }
-    },
-    {
-      "id": 802,
-      "name": "Hallway",
-      "exits": {
-        "South": 801,
-        "North": 803
-      }
-    },
-    {
-      "id": 803,
-      "name": "Hallway",
-      "exits": {
-        "North": 806,
-        "East": 804,
-        "South": 802,
-        "West": 805
-      }
-    },
-    {
-      "id": 804,
-      "name": "Nursery",
-      "exits": {
-        "West": 803,
-        "East": 822
-      }
-    },
-    {
-      "id": 805,
-      "name": "Storage Room",
-      "exits": {
-        "East": 803,
-        "Down": 807
-      }
-    },
-    {
-      "id": 806,
-      "name": "End of the Hallway",
-      "exits": {
-        "South": 803,
-        "Up": 809
-      }
-    },
-    {
-      "id": 807,
-      "name": "Guardian\u0027s Room",
-      "exits": {
-        "Up": 805,
-        "South": 808
-      }
-    },
-    {
-      "id": 808,
-      "name": "The Treasure Room",
-      "exits": {
-        "North": 807,
-        "West": 817
-      }
-    },
-    {
-      "id": 809,
-      "name": "The Second Floor",
-      "exits": {
-        "Down": 806,
-        "South": 810
-      }
-    },
-    {
-      "id": 810,
-      "name": "The Court",
-      "exits": {
-        "North": 809,
-        "South": 812,
-        "East": 811
-      }
-    },
-    {
-      "id": 811,
-      "name": "Hall O\u0027 Pleasure",
-      "exits": {
-        "West": 810
-      }
-    },
-    {
-      "id": 812,
-      "name": "The Court",
-      "exits": {
-        "North": 810,
-        "East": 813,
-        "South": 815,
-        "West": 814
-      }
-    },
-    {
-      "id": 813,
-      "name": "The Library",
-      "exits": {
-        "West": 812
-      }
-    },
-    {
-      "id": 814,
-      "name": "The Sanctum",
-      "exits": {
-        "East": 812
-      }
-    },
-    {
-      "id": 815,
-      "name": "The Court Ends",
-      "exits": {
-        "North": 812,
-        "East": 816
-      }
-    },
-    {
-      "id": 816,
-      "name": "bedroom",
-      "exits": {
-        "West": 815
-      }
-    },
-    {
-      "id": 817,
-      "name": "Entrance to the Crypt",
-      "exits": {
-        "East": 808,
-        "West": 818
-      }
-    },
-    {
-      "id": 818,
-      "name": "Crypt",
-      "exits": {
-        "East": 817,
-        "West": 821
-      }
-    },
-    {
-      "id": 819,
-      "name": "The Lair",
-      "exits": {
-        "South": 834
-      }
-    },
-    {
-      "id": 820,
-      "name": "A Lair",
-      "exits": {
-        "North": 840
-      }
-    },
-    {
-      "id": 821,
-      "name": "The Crypt Ends",
-      "exits": {
-        "East": 818,
-        "West": 831
-      }
-    },
-    {
-      "id": 822,
-      "name": "Entrance to the Great Hall",
-      "exits": {
-        "West": 804,
-        "East": 823
-      }
-    },
-    {
-      "id": 823,
-      "name": "The Great Hall",
-      "exits": {
-        "North": 824,
-        "East": 828
-      }
-    },
-    {
-      "id": 824,
-      "name": "A Narrow Passageway",
-      "exits": {
-        "North": 825,
-        "South": 823
-      }
-    },
-    {
-      "id": 825,
-      "name": "Lair",
-      "exits": {
-        "South": 824,
-        "Down": 826
-      }
-    },
-    {
-      "id": 826,
-      "name": "Underground Tunnel",
-      "exits": {
-        "North": 827,
-        "Up": 825
-      }
-    },
-    {
-      "id": 827,
-      "name": "Underground Tunnel",
-      "exits": {
-        "South": 826
-      }
-    },
-    {
-      "id": 828,
-      "name": "The Great Hall Ends.",
-      "exits": {
-        "West": 823,
-        "East": 829
-      }
-    },
-    {
-      "id": 829,
-      "name": "THE Lair",
-      "exits": {
-        "West": 828
-      }
-    },
-    {
-      "id": 830,
-      "name": "The End...",
-      "exits": {
-        "South": 842
-      }
-    },
-    {
-      "id": 831,
-      "name": "Stairwell",
-      "exits": {
-        "East": 821,
-        "Down": 832
-      }
-    },
-    {
-      "id": 832,
-      "name": "Wine cellar",
-      "exits": {
-        "Up": 831,
-        "East": 833
-      }
-    },
-    {
-      "id": 833,
-      "name": "Tunnel",
-      "exits": {
-        "North": 834,
-        "West": 832,
-        "East": 835
-      }
-    },
-    {
-      "id": 834,
-      "name": "A cave opening",
-      "exits": {
-        "North": 819,
-        "South": 833
-      }
-    },
-    {
-      "id": 835,
-      "name": "The End of the tunnel",
-      "exits": {
-        "West": 833,
-        "Up": 801,
-        "South": 836
-      }
-    },
-    {
-      "id": 836,
-      "name": "The Bridge",
-      "exits": {
-        "North": 835,
-        "South": 837
-      }
-    },
-    {
-      "id": 837,
-      "name": "A small opening",
-      "exits": {
-        "North": 836,
-        "South": 838
-      }
-    },
-    {
-      "id": 838,
-      "name": "Clearing",
-      "exits": {
-        "North": 837,
-        "Up": 839,
-        "Down": 843
-      }
-    },
-    {
-      "id": 839,
-      "name": "A path",
-      "exits": {
-        "West": 840,
-        "Down": 838,
-        "Up": 841
-      }
-    },
-    {
-      "id": 840,
-      "name": "A cave opening",
-      "exits": {
-        "South": 820,
-        "East": 839
-      }
-    },
-    {
-      "id": 841,
-      "name": "The path continues",
-      "exits": {
-        "Up": 842,
-        "Down": 839
-      }
-    },
-    {
-      "id": 842,
-      "name": "The top of the mountain",
-      "exits": {
-        "Down": 841,
-        "North": 830
-      }
-    },
-    {
-      "id": 843,
-      "name": "Well",
-      "exits": {}
-    },
-    {
-      "id": 1715,
-      "name": "To High Tower of Sorcery",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 1712,
-        "East": 1716,
-        "South": 1718,
-        "West": 800
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

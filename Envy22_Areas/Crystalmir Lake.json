@@ -1,774 +1,940 @@
 {
-  "name": "Crystalmir Lake",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Crystalmir Lake",
+    "Rooms": [
+      {
+        "Id": 514,
+        "Name": "Rock Outcropping",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1407,
+          "Down": 515
+        }
+      },
+      {
+        "Id": 515,
+        "Name": "Small Grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 542,
+          "West": 516,
+          "Up": 514
+        }
+      },
+      {
+        "Id": 516,
+        "Name": "Entrance to the Town of Solace",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3582,
+          "East": 515,
+          "South": 535,
+          "West": 517
+        }
+      },
+      {
+        "Id": 517,
+        "Name": "East shore of Crystalmir Lake",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 520,
+          "East": 516,
+          "South": 524,
+          "West": 518
+        }
+      },
+      {
+        "Id": 518,
+        "Name": "Middle of Crystalmir Lake",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 519,
+          "East": 517,
+          "South": 523,
+          "West": 521,
+          "Down": 558
+        }
+      },
+      {
+        "Id": 519,
+        "Name": "North shore of Crystalmir Lake",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 527,
+          "East": 520,
+          "South": 518,
+          "West": 522
+        }
+      },
+      {
+        "Id": 520,
+        "Name": "Path along lake",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 526,
+          "South": 517,
+          "West": 519
+        }
+      },
+      {
+        "Id": 521,
+        "Name": "West shore of Crystalmir Lake",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 522,
+          "East": 518,
+          "South": 525,
+          "West": 534
+        }
+      },
+      {
+        "Id": 522,
+        "Name": "Path along the Lake",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 528,
+          "East": 519,
+          "South": 521,
+          "West": 532
+        }
+      },
+      {
+        "Id": 523,
+        "Name": "South shore of Crystalmir Lake",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 518,
+          "East": 524,
+          "South": 538,
+          "West": 525
+        }
+      },
+      {
+        "Id": 524,
+        "Name": "Path along the lakeshore",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 517,
+          "East": 535,
+          "West": 523
+        }
+      },
+      {
+        "Id": 525,
+        "Name": "Path along the lakeshore",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 521,
+          "East": 523
+        }
+      },
+      {
+        "Id": 526,
+        "Name": "Nearfields",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 549,
+          "South": 520,
+          "West": 527
+        }
+      },
+      {
+        "Id": 527,
+        "Name": "Northfields",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 544,
+          "East": 526,
+          "South": 519,
+          "West": 528
+        }
+      },
+      {
+        "Id": 528,
+        "Name": "Twin Flat",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 527,
+          "South": 522,
+          "West": 529
+        }
+      },
+      {
+        "Id": 529,
+        "Name": "Jakanth Vale",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 530,
+          "East": 528,
+          "South": 532
+        }
+      },
+      {
+        "Id": 530,
+        "Name": "Trail through forest",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 529,
+          "West": 531
+        }
+      },
+      {
+        "Id": 531,
+        "Name": "Smoldering Campsite",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 530
+        }
+      },
+      {
+        "Id": 532,
+        "Name": "Sentinal Gap",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 529,
+          "East": 522,
+          "South": 534,
+          "West": 533
+        }
+      },
+      {
+        "Id": 533,
+        "Name": "Twin Peaks Vale",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 532
+        }
+      },
+      {
+        "Id": 534,
+        "Name": "Prayers Eye Peak",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 532,
+          "East": 521,
+          "South": 541
+        }
+      },
+      {
+        "Id": 535,
+        "Name": "Road through the forest",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 516,
+          "East": 542,
+          "South": 536,
+          "West": 524
+        }
+      },
+      {
+        "Id": 536,
+        "Name": "Stone bridge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 535,
+          "East": 543,
+          "West": 537
+        }
+      },
+      {
+        "Id": 537,
+        "Name": "Road among the Vallenwoods.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 536,
+          "West": 538
+        }
+      },
+      {
+        "Id": 538,
+        "Name": "Mountain Trail",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 523,
+          "East": 537,
+          "West": 539
+        }
+      },
+      {
+        "Id": 539,
+        "Name": "In the Mountains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 538,
+          "West": 540
+        }
+      },
+      {
+        "Id": 540,
+        "Name": "In the Mountains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 541,
+          "East": 539
+        }
+      },
+      {
+        "Id": 541,
+        "Name": "In the Mountains",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 534,
+          "South": 540
+        }
+      },
+      {
+        "Id": 542,
+        "Name": "Among the Vallenwoods",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 515,
+          "South": 543,
+          "West": 535
+        }
+      },
+      {
+        "Id": 543,
+        "Name": "Solace East Woods",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 542,
+          "South": 3779,
+          "West": 536
+        }
+      },
+      {
+        "Id": 544,
+        "Name": "Northfields",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 547,
+          "East": 549,
+          "South": 527,
+          "West": 545
+        }
+      },
+      {
+        "Id": 545,
+        "Name": "Northfields",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 546,
+          "East": 544,
+          "South": 551,
+          "West": 551
+        }
+      },
+      {
+        "Id": 546,
+        "Name": "Northfields",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 547,
+          "South": 545,
+          "West": 550
+        }
+      },
+      {
+        "Id": 547,
+        "Name": "Northfields",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 548,
+          "South": 544,
+          "West": 546
+        }
+      },
+      {
+        "Id": 548,
+        "Name": "Northfields",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 551,
+          "South": 549,
+          "West": 547
+        }
+      },
+      {
+        "Id": 549,
+        "Name": "Northfields",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 548,
+          "East": 550,
+          "South": 526,
+          "West": 544
+        }
+      },
+      {
+        "Id": 550,
+        "Name": "Northfields",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 551,
+          "East": 546,
+          "South": 552,
+          "West": 549
+        }
+      },
+      {
+        "Id": 551,
+        "Name": "Northfields",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 545,
+          "East": 545,
+          "South": 550,
+          "West": 548
+        }
+      },
+      {
+        "Id": 552,
+        "Name": "A Farmer\u0027s House",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 550,
+          "East": 553
+        }
+      },
+      {
+        "Id": 553,
+        "Name": "Living Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 552,
+          "Up": 554
+        }
+      },
+      {
+        "Id": 554,
+        "Name": "Top of Stairs",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 555,
+          "East": 556,
+          "Down": 553
+        }
+      },
+      {
+        "Id": 555,
+        "Name": "Bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 557,
+          "South": 554
+        }
+      },
+      {
+        "Id": 556,
+        "Name": "Kids Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 592,
+          "West": 554
+        }
+      },
+      {
+        "Id": 557,
+        "Name": "In the closet",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 555
+        }
+      },
+      {
+        "Id": 558,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 565,
+          "East": 559,
+          "South": 561,
+          "West": 563,
+          "Up": 518
+        }
+      },
+      {
+        "Id": 559,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 566,
+          "East": 568,
+          "South": 560,
+          "West": 558
+        }
+      },
+      {
+        "Id": 560,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 559,
+          "East": 569,
+          "South": 571,
+          "West": 561
+        }
+      },
+      {
+        "Id": 561,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 558,
+          "East": 560,
+          "South": 572,
+          "West": 562
+        }
+      },
+      {
+        "Id": 562,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 563,
+          "East": 561,
+          "South": 573,
+          "West": 575
+        }
+      },
+      {
+        "Id": 563,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 564,
+          "East": 558,
+          "South": 562,
+          "West": 576
+        }
+      },
+      {
+        "Id": 564,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 579,
+          "East": 565,
+          "South": 563,
+          "West": 577
+        }
+      },
+      {
+        "Id": 565,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 580,
+          "East": 566,
+          "South": 558,
+          "West": 564
+        }
+      },
+      {
+        "Id": 566,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 581,
+          "East": 567,
+          "South": 559,
+          "West": 565
+        }
+      },
+      {
+        "Id": 567,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 582,
+          "East": 577,
+          "South": 568,
+          "West": 566
+        }
+      },
+      {
+        "Id": 568,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 567,
+          "East": 583,
+          "South": 569,
+          "West": 559
+        }
+      },
+      {
+        "Id": 569,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 568,
+          "South": 570,
+          "West": 560
+        }
+      },
+      {
+        "Id": 570,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 569,
+          "East": 574,
+          "South": 582,
+          "West": 571
+        }
+      },
+      {
+        "Id": 571,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 560,
+          "East": 570,
+          "South": 581,
+          "West": 572
+        }
+      },
+      {
+        "Id": 572,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 561,
+          "East": 571,
+          "South": 580,
+          "West": 573
+        }
+      },
+      {
+        "Id": 573,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 562,
+          "East": 572,
+          "South": 579,
+          "West": 574
+        }
+      },
+      {
+        "Id": 574,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 575,
+          "East": 573,
+          "South": 578,
+          "West": 570
+        }
+      },
+      {
+        "Id": 575,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 576,
+          "East": 562,
+          "South": 574,
+          "West": 584
+        }
+      },
+      {
+        "Id": 576,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 577,
+          "East": 563,
+          "South": 575
+        }
+      },
+      {
+        "Id": 577,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 578,
+          "East": 564,
+          "South": 576,
+          "West": 567
+        }
+      },
+      {
+        "Id": 578,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 574,
+          "East": 579,
+          "South": 577,
+          "West": 587
+        }
+      },
+      {
+        "Id": 579,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 573,
+          "East": 580,
+          "South": 564,
+          "West": 578
+        }
+      },
+      {
+        "Id": 580,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 572,
+          "East": 581,
+          "South": 565,
+          "West": 579
+        }
+      },
+      {
+        "Id": 581,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 571,
+          "East": 582,
+          "South": 566,
+          "West": 580
+        }
+      },
+      {
+        "Id": 582,
+        "Name": "Underwater",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 570,
+          "South": 567,
+          "West": 581
+        }
+      },
+      {
+        "Id": 583,
+        "Name": "Underwater Cave",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 568
+        }
+      },
+      {
+        "Id": 584,
+        "Name": "Underwater Passageway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 575,
+          "West": 585
+        }
+      },
+      {
+        "Id": 585,
+        "Name": "Underwater Passageway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 584,
+          "South": 586
+        }
+      },
+      {
+        "Id": 586,
+        "Name": "Cave of the Turtle Dragon",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 585
+        }
+      },
+      {
+        "Id": 587,
+        "Name": "Narrow Crack in the rock.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 578,
+          "West": 588
+        }
+      },
+      {
+        "Id": 588,
+        "Name": "Small Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 590,
+          "East": 587,
+          "South": 589
+        }
+      },
+      {
+        "Id": 589,
+        "Name": "Dead end",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 588
+        }
+      },
+      {
+        "Id": 590,
+        "Name": "Nest Entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 591
+        }
+      },
+      {
+        "Id": 591,
+        "Name": "Barracuda Nest",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 590
+        }
+      },
+      {
+        "Id": 592,
+        "Name": "Kids Closet.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 556,
+          "South": 659
+        }
+      },
+      {
+        "Id": 1407,
+        "Name": "To Haon Dor",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 3495,
+          "East": 2294,
+          "South": 514,
+          "West": 1408
+        }
+      },
+      {
+        "Id": 3582,
+        "Name": "To Town Of Solace",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 3583,
+          "East": 3597,
+          "South": 516,
+          "West": 3598
+        }
+      },
+      {
+        "Id": 3779,
+        "Name": "To Yggdrasil",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 543,
+          "Up": 3780,
+          "Down": 3786
+        }
+      },
+      {
+        "Id": 659,
+        "Name": "To Descent to Hell",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 592,
+          "West": 660
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 514,
-      "name": "Rock Outcropping",
-      "exits": {
-        "North": 1407,
-        "Down": 515
-      }
-    },
-    {
-      "id": 515,
-      "name": "Small Grove",
-      "exits": {
-        "South": 542,
-        "West": 516,
-        "Up": 514
-      }
-    },
-    {
-      "id": 516,
-      "name": "Entrance to the Town of Solace",
-      "exits": {
-        "North": 3582,
-        "East": 515,
-        "South": 535,
-        "West": 517
-      }
-    },
-    {
-      "id": 517,
-      "name": "East shore of Crystalmir Lake",
-      "exits": {
-        "North": 520,
-        "East": 516,
-        "South": 524,
-        "West": 518
-      }
-    },
-    {
-      "id": 518,
-      "name": "Middle of Crystalmir Lake",
-      "exits": {
-        "North": 519,
-        "East": 517,
-        "South": 523,
-        "West": 521,
-        "Down": 558
-      }
-    },
-    {
-      "id": 519,
-      "name": "North shore of Crystalmir Lake",
-      "exits": {
-        "North": 527,
-        "East": 520,
-        "South": 518,
-        "West": 522
-      }
-    },
-    {
-      "id": 520,
-      "name": "Path along lake",
-      "exits": {
-        "North": 526,
-        "South": 517,
-        "West": 519
-      }
-    },
-    {
-      "id": 521,
-      "name": "West shore of Crystalmir Lake",
-      "exits": {
-        "North": 522,
-        "East": 518,
-        "South": 525,
-        "West": 534
-      }
-    },
-    {
-      "id": 522,
-      "name": "Path along the Lake",
-      "exits": {
-        "North": 528,
-        "East": 519,
-        "South": 521,
-        "West": 532
-      }
-    },
-    {
-      "id": 523,
-      "name": "South shore of Crystalmir Lake",
-      "exits": {
-        "North": 518,
-        "East": 524,
-        "South": 538,
-        "West": 525
-      }
-    },
-    {
-      "id": 524,
-      "name": "Path along the lakeshore",
-      "exits": {
-        "North": 517,
-        "East": 535,
-        "West": 523
-      }
-    },
-    {
-      "id": 525,
-      "name": "Path along the lakeshore",
-      "exits": {
-        "North": 521,
-        "East": 523
-      }
-    },
-    {
-      "id": 526,
-      "name": "Nearfields",
-      "exits": {
-        "North": 549,
-        "South": 520,
-        "West": 527
-      }
-    },
-    {
-      "id": 527,
-      "name": "Northfields",
-      "exits": {
-        "North": 544,
-        "East": 526,
-        "South": 519,
-        "West": 528
-      }
-    },
-    {
-      "id": 528,
-      "name": "Twin Flat",
-      "exits": {
-        "East": 527,
-        "South": 522,
-        "West": 529
-      }
-    },
-    {
-      "id": 529,
-      "name": "Jakanth Vale",
-      "exits": {
-        "North": 530,
-        "East": 528,
-        "South": 532
-      }
-    },
-    {
-      "id": 530,
-      "name": "Trail through forest",
-      "exits": {
-        "South": 529,
-        "West": 531
-      }
-    },
-    {
-      "id": 531,
-      "name": "Smoldering Campsite",
-      "exits": {
-        "East": 530
-      }
-    },
-    {
-      "id": 532,
-      "name": "Sentinal Gap",
-      "exits": {
-        "North": 529,
-        "East": 522,
-        "South": 534,
-        "West": 533
-      }
-    },
-    {
-      "id": 533,
-      "name": "Twin Peaks Vale",
-      "exits": {
-        "East": 532
-      }
-    },
-    {
-      "id": 534,
-      "name": "Prayers Eye Peak",
-      "exits": {
-        "North": 532,
-        "East": 521,
-        "South": 541
-      }
-    },
-    {
-      "id": 535,
-      "name": "Road through the forest",
-      "exits": {
-        "North": 516,
-        "East": 542,
-        "South": 536,
-        "West": 524
-      }
-    },
-    {
-      "id": 536,
-      "name": "Stone bridge",
-      "exits": {
-        "North": 535,
-        "East": 543,
-        "West": 537
-      }
-    },
-    {
-      "id": 537,
-      "name": "Road among the Vallenwoods.",
-      "exits": {
-        "East": 536,
-        "West": 538
-      }
-    },
-    {
-      "id": 538,
-      "name": "Mountain Trail",
-      "exits": {
-        "North": 523,
-        "East": 537,
-        "West": 539
-      }
-    },
-    {
-      "id": 539,
-      "name": "In the Mountains",
-      "exits": {
-        "East": 538,
-        "West": 540
-      }
-    },
-    {
-      "id": 540,
-      "name": "In the Mountains",
-      "exits": {
-        "North": 541,
-        "East": 539
-      }
-    },
-    {
-      "id": 541,
-      "name": "In the Mountains",
-      "exits": {
-        "North": 534,
-        "South": 540
-      }
-    },
-    {
-      "id": 542,
-      "name": "Among the Vallenwoods",
-      "exits": {
-        "North": 515,
-        "South": 543,
-        "West": 535
-      }
-    },
-    {
-      "id": 543,
-      "name": "Solace East Woods",
-      "exits": {
-        "North": 542,
-        "South": 3779,
-        "West": 536
-      }
-    },
-    {
-      "id": 544,
-      "name": "Northfields",
-      "exits": {
-        "North": 547,
-        "East": 549,
-        "South": 527,
-        "West": 545
-      }
-    },
-    {
-      "id": 545,
-      "name": "Northfields",
-      "exits": {
-        "North": 546,
-        "East": 544,
-        "South": 551,
-        "West": 551
-      }
-    },
-    {
-      "id": 546,
-      "name": "Northfields",
-      "exits": {
-        "East": 547,
-        "South": 545,
-        "West": 550
-      }
-    },
-    {
-      "id": 547,
-      "name": "Northfields",
-      "exits": {
-        "East": 548,
-        "South": 544,
-        "West": 546
-      }
-    },
-    {
-      "id": 548,
-      "name": "Northfields",
-      "exits": {
-        "East": 551,
-        "South": 549,
-        "West": 547
-      }
-    },
-    {
-      "id": 549,
-      "name": "Northfields",
-      "exits": {
-        "North": 548,
-        "East": 550,
-        "South": 526,
-        "West": 544
-      }
-    },
-    {
-      "id": 550,
-      "name": "Northfields",
-      "exits": {
-        "North": 551,
-        "East": 546,
-        "South": 552,
-        "West": 549
-      }
-    },
-    {
-      "id": 551,
-      "name": "Northfields",
-      "exits": {
-        "North": 545,
-        "East": 545,
-        "South": 550,
-        "West": 548
-      }
-    },
-    {
-      "id": 552,
-      "name": "A Farmer\u0027s House",
-      "exits": {
-        "North": 550,
-        "East": 553
-      }
-    },
-    {
-      "id": 553,
-      "name": "Living Room",
-      "exits": {
-        "West": 552,
-        "Up": 554
-      }
-    },
-    {
-      "id": 554,
-      "name": "Top of Stairs",
-      "exits": {
-        "North": 555,
-        "East": 556,
-        "Down": 553
-      }
-    },
-    {
-      "id": 555,
-      "name": "Bedroom",
-      "exits": {
-        "East": 557,
-        "South": 554
-      }
-    },
-    {
-      "id": 556,
-      "name": "Kids Room",
-      "exits": {
-        "South": 592,
-        "West": 554
-      }
-    },
-    {
-      "id": 557,
-      "name": "In the closet",
-      "exits": {
-        "West": 555
-      }
-    },
-    {
-      "id": 558,
-      "name": "Underwater",
-      "exits": {
-        "North": 565,
-        "East": 559,
-        "South": 561,
-        "West": 563,
-        "Up": 518
-      }
-    },
-    {
-      "id": 559,
-      "name": "Underwater",
-      "exits": {
-        "North": 566,
-        "East": 568,
-        "South": 560,
-        "West": 558
-      }
-    },
-    {
-      "id": 560,
-      "name": "Underwater",
-      "exits": {
-        "North": 559,
-        "East": 569,
-        "South": 571,
-        "West": 561
-      }
-    },
-    {
-      "id": 561,
-      "name": "Underwater",
-      "exits": {
-        "North": 558,
-        "East": 560,
-        "South": 572,
-        "West": 562
-      }
-    },
-    {
-      "id": 562,
-      "name": "Underwater",
-      "exits": {
-        "North": 563,
-        "East": 561,
-        "South": 573,
-        "West": 575
-      }
-    },
-    {
-      "id": 563,
-      "name": "Underwater",
-      "exits": {
-        "North": 564,
-        "East": 558,
-        "South": 562,
-        "West": 576
-      }
-    },
-    {
-      "id": 564,
-      "name": "Underwater",
-      "exits": {
-        "North": 579,
-        "East": 565,
-        "South": 563,
-        "West": 577
-      }
-    },
-    {
-      "id": 565,
-      "name": "Underwater",
-      "exits": {
-        "North": 580,
-        "East": 566,
-        "South": 558,
-        "West": 564
-      }
-    },
-    {
-      "id": 566,
-      "name": "Underwater",
-      "exits": {
-        "North": 581,
-        "East": 567,
-        "South": 559,
-        "West": 565
-      }
-    },
-    {
-      "id": 567,
-      "name": "Underwater",
-      "exits": {
-        "North": 582,
-        "East": 577,
-        "South": 568,
-        "West": 566
-      }
-    },
-    {
-      "id": 568,
-      "name": "Underwater",
-      "exits": {
-        "North": 567,
-        "East": 583,
-        "South": 569,
-        "West": 559
-      }
-    },
-    {
-      "id": 569,
-      "name": "Underwater",
-      "exits": {
-        "North": 568,
-        "South": 570,
-        "West": 560
-      }
-    },
-    {
-      "id": 570,
-      "name": "Underwater",
-      "exits": {
-        "North": 569,
-        "East": 574,
-        "South": 582,
-        "West": 571
-      }
-    },
-    {
-      "id": 571,
-      "name": "Underwater",
-      "exits": {
-        "North": 560,
-        "East": 570,
-        "South": 581,
-        "West": 572
-      }
-    },
-    {
-      "id": 572,
-      "name": "Underwater",
-      "exits": {
-        "North": 561,
-        "East": 571,
-        "South": 580,
-        "West": 573
-      }
-    },
-    {
-      "id": 573,
-      "name": "Underwater",
-      "exits": {
-        "North": 562,
-        "East": 572,
-        "South": 579,
-        "West": 574
-      }
-    },
-    {
-      "id": 574,
-      "name": "Underwater",
-      "exits": {
-        "North": 575,
-        "East": 573,
-        "South": 578,
-        "West": 570
-      }
-    },
-    {
-      "id": 575,
-      "name": "Underwater",
-      "exits": {
-        "North": 576,
-        "East": 562,
-        "South": 574,
-        "West": 584
-      }
-    },
-    {
-      "id": 576,
-      "name": "Underwater",
-      "exits": {
-        "North": 577,
-        "East": 563,
-        "South": 575
-      }
-    },
-    {
-      "id": 577,
-      "name": "Underwater",
-      "exits": {
-        "North": 578,
-        "East": 564,
-        "South": 576,
-        "West": 567
-      }
-    },
-    {
-      "id": 578,
-      "name": "Underwater",
-      "exits": {
-        "North": 574,
-        "East": 579,
-        "South": 577,
-        "West": 587
-      }
-    },
-    {
-      "id": 579,
-      "name": "Underwater",
-      "exits": {
-        "North": 573,
-        "East": 580,
-        "South": 564,
-        "West": 578
-      }
-    },
-    {
-      "id": 580,
-      "name": "Underwater",
-      "exits": {
-        "North": 572,
-        "East": 581,
-        "South": 565,
-        "West": 579
-      }
-    },
-    {
-      "id": 581,
-      "name": "Underwater",
-      "exits": {
-        "North": 571,
-        "East": 582,
-        "South": 566,
-        "West": 580
-      }
-    },
-    {
-      "id": 582,
-      "name": "Underwater",
-      "exits": {
-        "North": 570,
-        "South": 567,
-        "West": 581
-      }
-    },
-    {
-      "id": 583,
-      "name": "Underwater Cave",
-      "exits": {
-        "West": 568
-      }
-    },
-    {
-      "id": 584,
-      "name": "Underwater Passageway",
-      "exits": {
-        "East": 575,
-        "West": 585
-      }
-    },
-    {
-      "id": 585,
-      "name": "Underwater Passageway",
-      "exits": {
-        "East": 584,
-        "South": 586
-      }
-    },
-    {
-      "id": 586,
-      "name": "Cave of the Turtle Dragon",
-      "exits": {
-        "North": 585
-      }
-    },
-    {
-      "id": 587,
-      "name": "Narrow Crack in the rock.",
-      "exits": {
-        "East": 578,
-        "West": 588
-      }
-    },
-    {
-      "id": 588,
-      "name": "Small Tunnel",
-      "exits": {
-        "North": 590,
-        "East": 587,
-        "South": 589
-      }
-    },
-    {
-      "id": 589,
-      "name": "Dead end",
-      "exits": {
-        "North": 588
-      }
-    },
-    {
-      "id": 590,
-      "name": "Nest Entrance",
-      "exits": {
-        "North": 591
-      }
-    },
-    {
-      "id": 591,
-      "name": "Barracuda Nest",
-      "exits": {
-        "South": 590
-      }
-    },
-    {
-      "id": 592,
-      "name": "Kids Closet.",
-      "exits": {
-        "North": 556,
-        "South": 659
-      }
-    },
-    {
-      "id": 1407,
-      "name": "To Haon Dor",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 3495,
-        "East": 2294,
-        "South": 514,
-        "West": 1408
-      }
-    },
-    {
-      "id": 3582,
-      "name": "To Town Of Solace",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 3583,
-        "East": 3597,
-        "South": 516,
-        "West": 3598
-      }
-    },
-    {
-      "id": 3779,
-      "name": "To Yggdrasil",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 543,
-        "Up": 3780,
-        "Down": 3786
-      }
-    },
-    {
-      "id": 659,
-      "name": "To Descent to Hell",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 592,
-        "West": 660
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

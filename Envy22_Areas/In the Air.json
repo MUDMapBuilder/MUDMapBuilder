@@ -1,438 +1,524 @@
 {
-  "name": "In the Air",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "In the Air",
+    "Rooms": [
+      {
+        "Id": 1,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 6,
+          "South": 2,
+          "Up": 21
+        }
+      },
+      {
+        "Id": 2,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 1,
+          "East": 7,
+          "South": 3,
+          "Up": 22
+        }
+      },
+      {
+        "Id": 3,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 2,
+          "East": 8,
+          "South": 4,
+          "Up": 23
+        }
+      },
+      {
+        "Id": 4,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3,
+          "East": 9,
+          "South": 5,
+          "Up": 24
+        }
+      },
+      {
+        "Id": 5,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 4,
+          "East": 10,
+          "Up": 25
+        }
+      },
+      {
+        "Id": 6,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 11,
+          "South": 7,
+          "West": 1,
+          "Up": 26
+        }
+      },
+      {
+        "Id": 7,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 6,
+          "East": 12,
+          "South": 8,
+          "West": 2,
+          "Up": 27
+        }
+      },
+      {
+        "Id": 8,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 7,
+          "East": 13,
+          "South": 9,
+          "West": 3,
+          "Up": 28
+        }
+      },
+      {
+        "Id": 9,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 8,
+          "East": 14,
+          "South": 10,
+          "West": 4,
+          "Up": 29
+        }
+      },
+      {
+        "Id": 10,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 9,
+          "East": 15,
+          "West": 5,
+          "Up": 30
+        }
+      },
+      {
+        "Id": 11,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 16,
+          "South": 12,
+          "West": 6,
+          "Up": 31
+        }
+      },
+      {
+        "Id": 12,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 11,
+          "East": 17,
+          "South": 13,
+          "West": 7,
+          "Up": 32
+        }
+      },
+      {
+        "Id": 13,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 12,
+          "East": 18,
+          "South": 14,
+          "West": 8,
+          "Up": 33
+        }
+      },
+      {
+        "Id": 14,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 13,
+          "East": 19,
+          "South": 15,
+          "West": 9,
+          "Up": 34
+        }
+      },
+      {
+        "Id": 15,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 14,
+          "East": 20,
+          "West": 10,
+          "Up": 35
+        }
+      },
+      {
+        "Id": 16,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 17,
+          "West": 11,
+          "Up": 36
+        }
+      },
+      {
+        "Id": 17,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 16,
+          "South": 18,
+          "West": 12,
+          "Up": 37,
+          "Down": 2297
+        }
+      },
+      {
+        "Id": 18,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 17,
+          "South": 19,
+          "West": 13,
+          "Up": 38
+        }
+      },
+      {
+        "Id": 19,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 18,
+          "South": 20,
+          "West": 14,
+          "Up": 39
+        }
+      },
+      {
+        "Id": 20,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 19,
+          "West": 15,
+          "Up": 40
+        }
+      },
+      {
+        "Id": 21,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 26,
+          "South": 22,
+          "Down": 1
+        }
+      },
+      {
+        "Id": 22,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 21,
+          "East": 27,
+          "South": 23,
+          "Down": 2
+        }
+      },
+      {
+        "Id": 23,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 22,
+          "East": 28,
+          "South": 24,
+          "Down": 3
+        }
+      },
+      {
+        "Id": 24,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 23,
+          "East": 29,
+          "South": 25,
+          "Down": 4
+        }
+      },
+      {
+        "Id": 25,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 24,
+          "East": 30,
+          "Down": 5
+        }
+      },
+      {
+        "Id": 26,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 31,
+          "South": 27,
+          "West": 21,
+          "Down": 6
+        }
+      },
+      {
+        "Id": 27,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 26,
+          "East": 32,
+          "South": 28,
+          "West": 22,
+          "Down": 7
+        }
+      },
+      {
+        "Id": 28,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 27,
+          "East": 33,
+          "South": 29,
+          "West": 23,
+          "Down": 8
+        }
+      },
+      {
+        "Id": 29,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 28,
+          "East": 34,
+          "South": 30,
+          "West": 24,
+          "Down": 9
+        }
+      },
+      {
+        "Id": 30,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 29,
+          "East": 35,
+          "West": 25,
+          "Down": 10
+        }
+      },
+      {
+        "Id": 31,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 36,
+          "South": 32,
+          "West": 26,
+          "Down": 11
+        }
+      },
+      {
+        "Id": 32,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 31,
+          "East": 37,
+          "South": 33,
+          "West": 27,
+          "Down": 12
+        }
+      },
+      {
+        "Id": 33,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 32,
+          "East": 38,
+          "South": 34,
+          "West": 28,
+          "Down": 13
+        }
+      },
+      {
+        "Id": 34,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 33,
+          "East": 39,
+          "South": 35,
+          "West": 29,
+          "Down": 14
+        }
+      },
+      {
+        "Id": 35,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 34,
+          "East": 40,
+          "West": 30,
+          "Down": 15
+        }
+      },
+      {
+        "Id": 36,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 37,
+          "West": 31,
+          "Up": 97,
+          "Down": 16
+        }
+      },
+      {
+        "Id": 37,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 36,
+          "South": 38,
+          "West": 32,
+          "Down": 17
+        }
+      },
+      {
+        "Id": 38,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 37,
+          "South": 39,
+          "West": 33,
+          "Down": 18
+        }
+      },
+      {
+        "Id": 39,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 38,
+          "South": 40,
+          "West": 34,
+          "Down": 19
+        }
+      },
+      {
+        "Id": 40,
+        "Name": "In the air ...",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 39,
+          "West": 35,
+          "Down": 20
+        }
+      },
+      {
+        "Id": 2297,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "Up": 17,
+          "Down": 2251
+        }
+      },
+      {
+        "Id": 97,
+        "Name": "To The Astral Plane",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "Up": 98,
+          "Down": 36
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 1,
-      "name": "In the air ...",
-      "exits": {
-        "East": 6,
-        "South": 2,
-        "Up": 21
-      }
-    },
-    {
-      "id": 2,
-      "name": "In the air ...",
-      "exits": {
-        "North": 1,
-        "East": 7,
-        "South": 3,
-        "Up": 22
-      }
-    },
-    {
-      "id": 3,
-      "name": "In the air ...",
-      "exits": {
-        "North": 2,
-        "East": 8,
-        "South": 4,
-        "Up": 23
-      }
-    },
-    {
-      "id": 4,
-      "name": "In the air ...",
-      "exits": {
-        "North": 3,
-        "East": 9,
-        "South": 5,
-        "Up": 24
-      }
-    },
-    {
-      "id": 5,
-      "name": "In the air ...",
-      "exits": {
-        "North": 4,
-        "East": 10,
-        "Up": 25
-      }
-    },
-    {
-      "id": 6,
-      "name": "In the air ...",
-      "exits": {
-        "East": 11,
-        "South": 7,
-        "West": 1,
-        "Up": 26
-      }
-    },
-    {
-      "id": 7,
-      "name": "In the air ...",
-      "exits": {
-        "North": 6,
-        "East": 12,
-        "South": 8,
-        "West": 2,
-        "Up": 27
-      }
-    },
-    {
-      "id": 8,
-      "name": "In the air ...",
-      "exits": {
-        "North": 7,
-        "East": 13,
-        "South": 9,
-        "West": 3,
-        "Up": 28
-      }
-    },
-    {
-      "id": 9,
-      "name": "In the air ...",
-      "exits": {
-        "North": 8,
-        "East": 14,
-        "South": 10,
-        "West": 4,
-        "Up": 29
-      }
-    },
-    {
-      "id": 10,
-      "name": "In the air ...",
-      "exits": {
-        "North": 9,
-        "East": 15,
-        "West": 5,
-        "Up": 30
-      }
-    },
-    {
-      "id": 11,
-      "name": "In the air ...",
-      "exits": {
-        "East": 16,
-        "South": 12,
-        "West": 6,
-        "Up": 31
-      }
-    },
-    {
-      "id": 12,
-      "name": "In the air ...",
-      "exits": {
-        "North": 11,
-        "East": 17,
-        "South": 13,
-        "West": 7,
-        "Up": 32
-      }
-    },
-    {
-      "id": 13,
-      "name": "In the air ...",
-      "exits": {
-        "North": 12,
-        "East": 18,
-        "South": 14,
-        "West": 8,
-        "Up": 33
-      }
-    },
-    {
-      "id": 14,
-      "name": "In the air ...",
-      "exits": {
-        "North": 13,
-        "East": 19,
-        "South": 15,
-        "West": 9,
-        "Up": 34
-      }
-    },
-    {
-      "id": 15,
-      "name": "In the air ...",
-      "exits": {
-        "North": 14,
-        "East": 20,
-        "West": 10,
-        "Up": 35
-      }
-    },
-    {
-      "id": 16,
-      "name": "In the air ...",
-      "exits": {
-        "South": 17,
-        "West": 11,
-        "Up": 36
-      }
-    },
-    {
-      "id": 17,
-      "name": "In the air ...",
-      "exits": {
-        "North": 16,
-        "South": 18,
-        "West": 12,
-        "Up": 37,
-        "Down": 2297
-      }
-    },
-    {
-      "id": 18,
-      "name": "In the air ...",
-      "exits": {
-        "North": 17,
-        "South": 19,
-        "West": 13,
-        "Up": 38
-      }
-    },
-    {
-      "id": 19,
-      "name": "In the air ...",
-      "exits": {
-        "North": 18,
-        "South": 20,
-        "West": 14,
-        "Up": 39
-      }
-    },
-    {
-      "id": 20,
-      "name": "In the air ...",
-      "exits": {
-        "North": 19,
-        "West": 15,
-        "Up": 40
-      }
-    },
-    {
-      "id": 21,
-      "name": "In the air ...",
-      "exits": {
-        "East": 26,
-        "South": 22,
-        "Down": 1
-      }
-    },
-    {
-      "id": 22,
-      "name": "In the air ...",
-      "exits": {
-        "North": 21,
-        "East": 27,
-        "South": 23,
-        "Down": 2
-      }
-    },
-    {
-      "id": 23,
-      "name": "In the air ...",
-      "exits": {
-        "North": 22,
-        "East": 28,
-        "South": 24,
-        "Down": 3
-      }
-    },
-    {
-      "id": 24,
-      "name": "In the air ...",
-      "exits": {
-        "North": 23,
-        "East": 29,
-        "South": 25,
-        "Down": 4
-      }
-    },
-    {
-      "id": 25,
-      "name": "In the air ...",
-      "exits": {
-        "North": 24,
-        "East": 30,
-        "Down": 5
-      }
-    },
-    {
-      "id": 26,
-      "name": "In the air ...",
-      "exits": {
-        "East": 31,
-        "South": 27,
-        "West": 21,
-        "Down": 6
-      }
-    },
-    {
-      "id": 27,
-      "name": "In the air ...",
-      "exits": {
-        "North": 26,
-        "East": 32,
-        "South": 28,
-        "West": 22,
-        "Down": 7
-      }
-    },
-    {
-      "id": 28,
-      "name": "In the air ...",
-      "exits": {
-        "North": 27,
-        "East": 33,
-        "South": 29,
-        "West": 23,
-        "Down": 8
-      }
-    },
-    {
-      "id": 29,
-      "name": "In the air ...",
-      "exits": {
-        "North": 28,
-        "East": 34,
-        "South": 30,
-        "West": 24,
-        "Down": 9
-      }
-    },
-    {
-      "id": 30,
-      "name": "In the air ...",
-      "exits": {
-        "North": 29,
-        "East": 35,
-        "West": 25,
-        "Down": 10
-      }
-    },
-    {
-      "id": 31,
-      "name": "In the air ...",
-      "exits": {
-        "East": 36,
-        "South": 32,
-        "West": 26,
-        "Down": 11
-      }
-    },
-    {
-      "id": 32,
-      "name": "In the air ...",
-      "exits": {
-        "North": 31,
-        "East": 37,
-        "South": 33,
-        "West": 27,
-        "Down": 12
-      }
-    },
-    {
-      "id": 33,
-      "name": "In the air ...",
-      "exits": {
-        "North": 32,
-        "East": 38,
-        "South": 34,
-        "West": 28,
-        "Down": 13
-      }
-    },
-    {
-      "id": 34,
-      "name": "In the air ...",
-      "exits": {
-        "North": 33,
-        "East": 39,
-        "South": 35,
-        "West": 29,
-        "Down": 14
-      }
-    },
-    {
-      "id": 35,
-      "name": "In the air ...",
-      "exits": {
-        "North": 34,
-        "East": 40,
-        "West": 30,
-        "Down": 15
-      }
-    },
-    {
-      "id": 36,
-      "name": "In the air ...",
-      "exits": {
-        "South": 37,
-        "West": 31,
-        "Up": 97,
-        "Down": 16
-      }
-    },
-    {
-      "id": 37,
-      "name": "In the air ...",
-      "exits": {
-        "North": 36,
-        "South": 38,
-        "West": 32,
-        "Down": 17
-      }
-    },
-    {
-      "id": 38,
-      "name": "In the air ...",
-      "exits": {
-        "North": 37,
-        "South": 39,
-        "West": 33,
-        "Down": 18
-      }
-    },
-    {
-      "id": 39,
-      "name": "In the air ...",
-      "exits": {
-        "North": 38,
-        "South": 40,
-        "West": 34,
-        "Down": 19
-      }
-    },
-    {
-      "id": 40,
-      "name": "In the air ...",
-      "exits": {
-        "North": 39,
-        "West": 35,
-        "Down": 20
-      }
-    },
-    {
-      "id": 2297,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "Up": 17,
-        "Down": 2251
-      }
-    },
-    {
-      "id": 97,
-      "name": "To The Astral Plane",
-      "otherAreaExit": true,
-      "exits": {
-        "Up": 98,
-        "Down": 36
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

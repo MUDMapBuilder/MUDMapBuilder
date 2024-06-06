@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace MUDMapBuilder
 {
@@ -25,13 +26,19 @@ namespace MUDMapBuilder
 
 	public class MMBRoomConnection
 	{
-		public MMBDirection Direction { get; private set; }
-		public int RoomId { get; private set; }
-		public MMBConnectionType ConnectionType { get; internal set; }
+		public MMBDirection Direction { get; set; }
+		public int RoomId { get; set; }
 
-		public MMBRoomConnection(MMBDirection direction, int roomId)
+		[JsonIgnore]
+		public MMBConnectionType ConnectionType { get; set; }
+
+		public MMBRoomConnection()
 		{
-			Direction = direction;
+		}
+
+		public MMBRoomConnection(MMBDirection dir,  int roomId)
+		{
+			Direction = dir;
 			RoomId = roomId;
 		}
 
@@ -45,7 +52,7 @@ namespace MUDMapBuilder
 		private SKColor? _markColor;
 		private Point? _forceMark;
 
-		public int Id { get; private set; }
+		public int Id { get; set; }
 		public string Name { get; set; }
 		public bool IsExitToOtherArea { get; set; }
 
@@ -64,6 +71,7 @@ namespace MUDMapBuilder
 			}
 		}
 
+		[JsonIgnore]
 		public SKColor? MarkColor
 		{
 			get => _markColor;
@@ -80,6 +88,7 @@ namespace MUDMapBuilder
 			}
 		}
 
+		[JsonIgnore]
 		public Point? ForceMark
 		{
 			get => _forceMark;
@@ -95,7 +104,7 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public Dictionary<MMBDirection, MMBRoomConnection> Connections { get; } = new Dictionary<MMBDirection, MMBRoomConnection>();
+		public Dictionary<MMBDirection, MMBRoomConnection> Connections { get; set; } = new Dictionary<MMBDirection, MMBRoomConnection>();
 
 		public event EventHandler RoomInvalid;
 

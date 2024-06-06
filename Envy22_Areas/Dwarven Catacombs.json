@@ -1,601 +1,745 @@
 {
-  "name": "Dwarven Catacombs",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Dwarven Catacombs",
+    "Rooms": [
+      {
+        "Id": 329,
+        "Name": "North entrance to the catacombs",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 330,
+          "Up": 955
+        }
+      },
+      {
+        "Id": 330,
+        "Name": "North/south tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 329,
+          "South": 335
+        }
+      },
+      {
+        "Id": 331,
+        "Name": "Weapon training area",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 332,
+          "South": 336
+        }
+      },
+      {
+        "Id": 332,
+        "Name": "Prayer training area",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 331,
+          "East": 333
+        }
+      },
+      {
+        "Id": 333,
+        "Name": "Junction of hallways",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 332,
+          "East": 334,
+          "South": 338
+        }
+      },
+      {
+        "Id": 334,
+        "Name": "Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 333,
+          "East": 335
+        }
+      },
+      {
+        "Id": 335,
+        "Name": "Intersection",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 334,
+          "South": 340,
+          "North": 330
+        }
+      },
+      {
+        "Id": 336,
+        "Name": "Pages\u0027 sleeping quarters",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 337,
+          "North": 331
+        }
+      },
+      {
+        "Id": 337,
+        "Name": "Templar Knights sleeping quarters",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 336,
+          "South": 341
+        }
+      },
+      {
+        "Id": 338,
+        "Name": "N/S hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 339,
+          "South": 342,
+          "North": 333
+        }
+      },
+      {
+        "Id": 339,
+        "Name": "A Middle-aged templar\u0027s room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 338
+        }
+      },
+      {
+        "Id": 340,
+        "Name": "Humid, damp tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 347,
+          "North": 335
+        }
+      },
+      {
+        "Id": 341,
+        "Name": "Administration room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 397,
+          "South": 344,
+          "North": 337
+        }
+      },
+      {
+        "Id": 342,
+        "Name": "N/S hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 343,
+          "South": 345,
+          "North": 338
+        }
+      },
+      {
+        "Id": 343,
+        "Name": "Mid-level leader\u0027s room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 342
+        }
+      },
+      {
+        "Id": 344,
+        "Name": "Mess hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 351,
+          "North": 341
+        }
+      },
+      {
+        "Id": 345,
+        "Name": "N/S hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 346,
+          "South": 352,
+          "North": 342
+        }
+      },
+      {
+        "Id": 346,
+        "Name": "High officer\u0027s room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 345
+        }
+      },
+      {
+        "Id": 347,
+        "Name": "Mossy intersection",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 348,
+          "South": 354,
+          "North": 340
+        }
+      },
+      {
+        "Id": 348,
+        "Name": "The holy grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 347,
+          "East": 349
+        }
+      },
+      {
+        "Id": 349,
+        "Name": "The holy grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 348,
+          "East": 350,
+          "South": 355,
+          "North": 396
+        }
+      },
+      {
+        "Id": 350,
+        "Name": "The holy grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 349,
+          "South": 356
+        }
+      },
+      {
+        "Id": 351,
+        "Name": "Mess hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 352,
+          "North": 344
+        }
+      },
+      {
+        "Id": 352,
+        "Name": "End of a hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 351,
+          "East": 353,
+          "North": 345
+        }
+      },
+      {
+        "Id": 353,
+        "Name": "Grand Templar\u0027s room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 352
+        }
+      },
+      {
+        "Id": 354,
+        "Name": "Very dark passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 358,
+          "North": 347
+        }
+      },
+      {
+        "Id": 355,
+        "Name": "The holy grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 356,
+          "North": 349
+        }
+      },
+      {
+        "Id": 356,
+        "Name": "The holy grove",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 355,
+          "South": 360,
+          "North": 350
+        }
+      },
+      {
+        "Id": 357,
+        "Name": "Very dark caveway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 361,
+          "East": 358
+        }
+      },
+      {
+        "Id": 358,
+        "Name": "Deep within the catacombs",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 357,
+          "East": 359,
+          "North": 354
+        }
+      },
+      {
+        "Id": 359,
+        "Name": "Very dark cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 358,
+          "South": 362
+        }
+      },
+      {
+        "Id": 360,
+        "Name": "The holy place",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 356
+        }
+      },
+      {
+        "Id": 361,
+        "Name": "Misty passageway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 370,
+          "North": 357
+        }
+      },
+      {
+        "Id": 362,
+        "Name": "Intersection of caverns",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 363,
+          "South": 372,
+          "North": 359
+        }
+      },
+      {
+        "Id": 363,
+        "Name": "Entrance to the burial grounds",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 362,
+          "East": 364
+        }
+      },
+      {
+        "Id": 364,
+        "Name": "The burial grounds",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 363,
+          "East": 365,
+          "South": 373
+        }
+      },
+      {
+        "Id": 365,
+        "Name": "The burial grounds",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 364,
+          "East": 366
+        }
+      },
+      {
+        "Id": 366,
+        "Name": "The burial grounds",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 365,
+          "East": 367
+        }
+      },
+      {
+        "Id": 367,
+        "Name": "New graves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 366,
+          "South": 375
+        }
+      },
+      {
+        "Id": 368,
+        "Name": "Misty cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 369,
+          "South": 376
+        }
+      },
+      {
+        "Id": 369,
+        "Name": "Misty cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 368,
+          "East": 370
+        }
+      },
+      {
+        "Id": 370,
+        "Name": "Mist cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 369,
+          "East": 371,
+          "North": 361
+        }
+      },
+      {
+        "Id": 371,
+        "Name": "Waterfall of mist",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 370
+        }
+      },
+      {
+        "Id": 372,
+        "Name": "Huge multicolored tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 378,
+          "North": 362
+        }
+      },
+      {
+        "Id": 373,
+        "Name": "Desolate ruins",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 379
+        }
+      },
+      {
+        "Id": 374,
+        "Name": "Curators place",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 380,
+          "East": 375
+        }
+      },
+      {
+        "Id": 375,
+        "Name": "Fresh graves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 374,
+          "South": 381,
+          "North": 367
+        }
+      },
+      {
+        "Id": 376,
+        "Name": "Twisty cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 377,
+          "South": 384,
+          "North": 368
+        }
+      },
+      {
+        "Id": 377,
+        "Name": "Striped tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 376,
+          "East": 378
+        }
+      },
+      {
+        "Id": 378,
+        "Name": "Prism cave",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 377,
+          "East": 386,
+          "South": 385,
+          "North": 372
+        }
+      },
+      {
+        "Id": 379,
+        "Name": "Ruined monument",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 380,
+          "South": 382,
+          "North": 373
+        }
+      },
+      {
+        "Id": 380,
+        "Name": "Basement",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 374,
+          "West": 379
+        }
+      },
+      {
+        "Id": 381,
+        "Name": "Fresh graves",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 383,
+          "North": 375
+        }
+      },
+      {
+        "Id": 382,
+        "Name": "Southern gate",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 394,
+          "South": 387,
+          "North": 379
+        }
+      },
+      {
+        "Id": 383,
+        "Name": "Scene of ghastly horror",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 390,
+          "North": 381
+        }
+      },
+      {
+        "Id": 384,
+        "Name": "Twisty passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 385,
+          "North": 376
+        }
+      },
+      {
+        "Id": 385,
+        "Name": "Cross of caverns",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 384,
+          "South": 394,
+          "North": 378
+        }
+      },
+      {
+        "Id": 386,
+        "Name": "Lonely tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 387,
+          "West": 378
+        }
+      },
+      {
+        "Id": 387,
+        "Name": "Lonely tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 386,
+          "East": 388,
+          "North": 382
+        }
+      },
+      {
+        "Id": 388,
+        "Name": "Bend in the lonely tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 387,
+          "South": 389
+        }
+      },
+      {
+        "Id": 389,
+        "Name": "Lonely tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 390,
+          "North": 388
+        }
+      },
+      {
+        "Id": 390,
+        "Name": "Intersection",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 389,
+          "South": 391,
+          "North": 383
+        }
+      },
+      {
+        "Id": 391,
+        "Name": "Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 392,
+          "North": 390
+        }
+      },
+      {
+        "Id": 392,
+        "Name": "Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 393,
+          "North": 391
+        }
+      },
+      {
+        "Id": 393,
+        "Name": "Southern entrance to the catacombs",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 958,
+          "North": 392
+        }
+      },
+      {
+        "Id": 394,
+        "Name": "Unknown passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 395,
+          "South": 396
+        }
+      },
+      {
+        "Id": 395,
+        "Name": "Unknown passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 394,
+          "South": 397
+        }
+      },
+      {
+        "Id": 396,
+        "Name": "Unknown passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 397,
+          "North": 394
+        }
+      },
+      {
+        "Id": 397,
+        "Name": "Unknown passage",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 396,
+          "North": 395
+        }
+      },
+      {
+        "Id": 955,
+        "Name": "To Dwarven Kingdom",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 954,
+          "Down": 329
+        }
+      },
+      {
+        "Id": 958,
+        "Name": "To Dwarven Kingdom",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "Up": 957,
+          "Down": 393
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 329,
-      "name": "North entrance to the catacombs",
-      "exits": {
-        "South": 330,
-        "Up": 955
-      }
-    },
-    {
-      "id": 330,
-      "name": "North/south tunnel",
-      "exits": {
-        "North": 329,
-        "South": 335
-      }
-    },
-    {
-      "id": 331,
-      "name": "Weapon training area",
-      "exits": {
-        "East": 332,
-        "South": 336
-      }
-    },
-    {
-      "id": 332,
-      "name": "Prayer training area",
-      "exits": {
-        "West": 331,
-        "East": 333
-      }
-    },
-    {
-      "id": 333,
-      "name": "Junction of hallways",
-      "exits": {
-        "West": 332,
-        "East": 334,
-        "South": 338
-      }
-    },
-    {
-      "id": 334,
-      "name": "Hallway",
-      "exits": {
-        "West": 333,
-        "East": 335
-      }
-    },
-    {
-      "id": 335,
-      "name": "Intersection",
-      "exits": {
-        "West": 334,
-        "South": 340,
-        "North": 330
-      }
-    },
-    {
-      "id": 336,
-      "name": "Pages\u0027 sleeping quarters",
-      "exits": {
-        "East": 337,
-        "North": 331
-      }
-    },
-    {
-      "id": 337,
-      "name": "Templar Knights sleeping quarters",
-      "exits": {
-        "West": 336,
-        "South": 341
-      }
-    },
-    {
-      "id": 338,
-      "name": "N/S hallway",
-      "exits": {
-        "East": 339,
-        "South": 342,
-        "North": 333
-      }
-    },
-    {
-      "id": 339,
-      "name": "A Middle-aged templar\u0027s room",
-      "exits": {
-        "West": 338
-      }
-    },
-    {
-      "id": 340,
-      "name": "Humid, damp tunnel",
-      "exits": {
-        "South": 347,
-        "North": 335
-      }
-    },
-    {
-      "id": 341,
-      "name": "Administration room",
-      "exits": {
-        "West": 397,
-        "South": 344,
-        "North": 337
-      }
-    },
-    {
-      "id": 342,
-      "name": "N/S hallway",
-      "exits": {
-        "East": 343,
-        "South": 345,
-        "North": 338
-      }
-    },
-    {
-      "id": 343,
-      "name": "Mid-level leader\u0027s room",
-      "exits": {
-        "West": 342
-      }
-    },
-    {
-      "id": 344,
-      "name": "Mess hall",
-      "exits": {
-        "South": 351,
-        "North": 341
-      }
-    },
-    {
-      "id": 345,
-      "name": "N/S hallway",
-      "exits": {
-        "East": 346,
-        "South": 352,
-        "North": 342
-      }
-    },
-    {
-      "id": 346,
-      "name": "High officer\u0027s room",
-      "exits": {
-        "West": 345
-      }
-    },
-    {
-      "id": 347,
-      "name": "Mossy intersection",
-      "exits": {
-        "East": 348,
-        "South": 354,
-        "North": 340
-      }
-    },
-    {
-      "id": 348,
-      "name": "The holy grove",
-      "exits": {
-        "West": 347,
-        "East": 349
-      }
-    },
-    {
-      "id": 349,
-      "name": "The holy grove",
-      "exits": {
-        "West": 348,
-        "East": 350,
-        "South": 355,
-        "North": 396
-      }
-    },
-    {
-      "id": 350,
-      "name": "The holy grove",
-      "exits": {
-        "West": 349,
-        "South": 356
-      }
-    },
-    {
-      "id": 351,
-      "name": "Mess hall",
-      "exits": {
-        "East": 352,
-        "North": 344
-      }
-    },
-    {
-      "id": 352,
-      "name": "End of a hallway",
-      "exits": {
-        "West": 351,
-        "East": 353,
-        "North": 345
-      }
-    },
-    {
-      "id": 353,
-      "name": "Grand Templar\u0027s room",
-      "exits": {
-        "West": 352
-      }
-    },
-    {
-      "id": 354,
-      "name": "Very dark passage",
-      "exits": {
-        "South": 358,
-        "North": 347
-      }
-    },
-    {
-      "id": 355,
-      "name": "The holy grove",
-      "exits": {
-        "East": 356,
-        "North": 349
-      }
-    },
-    {
-      "id": 356,
-      "name": "The holy grove",
-      "exits": {
-        "West": 355,
-        "South": 360,
-        "North": 350
-      }
-    },
-    {
-      "id": 357,
-      "name": "Very dark caveway",
-      "exits": {
-        "West": 361,
-        "East": 358
-      }
-    },
-    {
-      "id": 358,
-      "name": "Deep within the catacombs",
-      "exits": {
-        "West": 357,
-        "East": 359,
-        "North": 354
-      }
-    },
-    {
-      "id": 359,
-      "name": "Very dark cavern",
-      "exits": {
-        "West": 358,
-        "South": 362
-      }
-    },
-    {
-      "id": 360,
-      "name": "The holy place",
-      "exits": {
-        "North": 356
-      }
-    },
-    {
-      "id": 361,
-      "name": "Misty passageway",
-      "exits": {
-        "South": 370,
-        "North": 357
-      }
-    },
-    {
-      "id": 362,
-      "name": "Intersection of caverns",
-      "exits": {
-        "East": 363,
-        "South": 372,
-        "North": 359
-      }
-    },
-    {
-      "id": 363,
-      "name": "Entrance to the burial grounds",
-      "exits": {
-        "West": 362,
-        "East": 364
-      }
-    },
-    {
-      "id": 364,
-      "name": "The burial grounds",
-      "exits": {
-        "West": 363,
-        "East": 365,
-        "South": 373
-      }
-    },
-    {
-      "id": 365,
-      "name": "The burial grounds",
-      "exits": {
-        "West": 364,
-        "East": 366
-      }
-    },
-    {
-      "id": 366,
-      "name": "The burial grounds",
-      "exits": {
-        "West": 365,
-        "East": 367
-      }
-    },
-    {
-      "id": 367,
-      "name": "New graves",
-      "exits": {
-        "West": 366,
-        "South": 375
-      }
-    },
-    {
-      "id": 368,
-      "name": "Misty cavern",
-      "exits": {
-        "East": 369,
-        "South": 376
-      }
-    },
-    {
-      "id": 369,
-      "name": "Misty cavern",
-      "exits": {
-        "West": 368,
-        "East": 370
-      }
-    },
-    {
-      "id": 370,
-      "name": "Mist cavern",
-      "exits": {
-        "West": 369,
-        "East": 371,
-        "North": 361
-      }
-    },
-    {
-      "id": 371,
-      "name": "Waterfall of mist",
-      "exits": {
-        "West": 370
-      }
-    },
-    {
-      "id": 372,
-      "name": "Huge multicolored tunnel",
-      "exits": {
-        "South": 378,
-        "North": 362
-      }
-    },
-    {
-      "id": 373,
-      "name": "Desolate ruins",
-      "exits": {
-        "South": 379
-      }
-    },
-    {
-      "id": 374,
-      "name": "Curators place",
-      "exits": {
-        "Down": 380,
-        "East": 375
-      }
-    },
-    {
-      "id": 375,
-      "name": "Fresh graves",
-      "exits": {
-        "West": 374,
-        "South": 381,
-        "North": 367
-      }
-    },
-    {
-      "id": 376,
-      "name": "Twisty cavern",
-      "exits": {
-        "East": 377,
-        "South": 384,
-        "North": 368
-      }
-    },
-    {
-      "id": 377,
-      "name": "Striped tunnel",
-      "exits": {
-        "West": 376,
-        "East": 378
-      }
-    },
-    {
-      "id": 378,
-      "name": "Prism cave",
-      "exits": {
-        "West": 377,
-        "East": 386,
-        "South": 385,
-        "North": 372
-      }
-    },
-    {
-      "id": 379,
-      "name": "Ruined monument",
-      "exits": {
-        "East": 380,
-        "South": 382,
-        "North": 373
-      }
-    },
-    {
-      "id": 380,
-      "name": "Basement",
-      "exits": {
-        "Up": 374,
-        "West": 379
-      }
-    },
-    {
-      "id": 381,
-      "name": "Fresh graves",
-      "exits": {
-        "South": 383,
-        "North": 375
-      }
-    },
-    {
-      "id": 382,
-      "name": "Southern gate",
-      "exits": {
-        "East": 394,
-        "South": 387,
-        "North": 379
-      }
-    },
-    {
-      "id": 383,
-      "name": "Scene of ghastly horror",
-      "exits": {
-        "South": 390,
-        "North": 381
-      }
-    },
-    {
-      "id": 384,
-      "name": "Twisty passage",
-      "exits": {
-        "East": 385,
-        "North": 376
-      }
-    },
-    {
-      "id": 385,
-      "name": "Cross of caverns",
-      "exits": {
-        "West": 384,
-        "South": 394,
-        "North": 378
-      }
-    },
-    {
-      "id": 386,
-      "name": "Lonely tunnel",
-      "exits": {
-        "East": 387,
-        "West": 378
-      }
-    },
-    {
-      "id": 387,
-      "name": "Lonely tunnel",
-      "exits": {
-        "West": 386,
-        "East": 388,
-        "North": 382
-      }
-    },
-    {
-      "id": 388,
-      "name": "Bend in the lonely tunnel",
-      "exits": {
-        "West": 387,
-        "South": 389
-      }
-    },
-    {
-      "id": 389,
-      "name": "Lonely tunnel",
-      "exits": {
-        "East": 390,
-        "North": 388
-      }
-    },
-    {
-      "id": 390,
-      "name": "Intersection",
-      "exits": {
-        "West": 389,
-        "South": 391,
-        "North": 383
-      }
-    },
-    {
-      "id": 391,
-      "name": "Tunnel",
-      "exits": {
-        "South": 392,
-        "North": 390
-      }
-    },
-    {
-      "id": 392,
-      "name": "Tunnel",
-      "exits": {
-        "South": 393,
-        "North": 391
-      }
-    },
-    {
-      "id": 393,
-      "name": "Southern entrance to the catacombs",
-      "exits": {
-        "Up": 958,
-        "North": 392
-      }
-    },
-    {
-      "id": 394,
-      "name": "Unknown passage",
-      "exits": {
-        "East": 395,
-        "South": 396
-      }
-    },
-    {
-      "id": 395,
-      "name": "Unknown passage",
-      "exits": {
-        "West": 394,
-        "South": 397
-      }
-    },
-    {
-      "id": 396,
-      "name": "Unknown passage",
-      "exits": {
-        "East": 397,
-        "North": 394
-      }
-    },
-    {
-      "id": 397,
-      "name": "Unknown passage",
-      "exits": {
-        "West": 396,
-        "North": 395
-      }
-    },
-    {
-      "id": 955,
-      "name": "To Dwarven Kingdom",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 954,
-        "Down": 329
-      }
-    },
-    {
-      "id": 958,
-      "name": "To Dwarven Kingdom",
-      "otherAreaExit": true,
-      "exits": {
-        "Up": 957,
-        "Down": 393
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

@@ -1,1175 +1,1462 @@
 {
-  "name": "Descent to Hell",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Descent to Hell",
+    "Rooms": [
+      {
+        "Id": 659,
+        "Name": "Stone Archway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 592,
+          "West": 660
+        }
+      },
+      {
+        "Id": 660,
+        "Name": "Ancient Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 659,
+          "West": 676,
+          "Down": 661
+        }
+      },
+      {
+        "Id": 661,
+        "Name": "Dark Stairway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 662,
+          "Up": 660
+        }
+      },
+      {
+        "Id": 662,
+        "Name": "Landing",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 661,
+          "West": 663
+        }
+      },
+      {
+        "Id": 663,
+        "Name": "Gateway to Hell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 674,
+          "East": 662,
+          "South": 684,
+          "West": 664
+        }
+      },
+      {
+        "Id": 664,
+        "Name": "Hall of the Damned",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 673,
+          "East": 663,
+          "South": 683,
+          "West": 665
+        }
+      },
+      {
+        "Id": 665,
+        "Name": "Hall of the Damned",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 672,
+          "East": 664,
+          "South": 682,
+          "West": 666
+        }
+      },
+      {
+        "Id": 666,
+        "Name": "Hall of the Damned",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 671,
+          "East": 665,
+          "South": 681,
+          "West": 667
+        }
+      },
+      {
+        "Id": 667,
+        "Name": "Hall of the Damned",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 670,
+          "East": 666,
+          "South": 680,
+          "West": 668,
+          "Down": 679
+        }
+      },
+      {
+        "Id": 668,
+        "Name": "Hall of the Damned",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 669,
+          "East": 667
+        }
+      },
+      {
+        "Id": 669,
+        "Name": "Mural of the Dead",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 670,
+          "South": 668
+        }
+      },
+      {
+        "Id": 670,
+        "Name": "Living Walls",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 671,
+          "South": 667,
+          "West": 669
+        }
+      },
+      {
+        "Id": 671,
+        "Name": "Trapped souls",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 672,
+          "South": 666,
+          "West": 670
+        }
+      },
+      {
+        "Id": 672,
+        "Name": "Tortured Beings",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 673,
+          "South": 665,
+          "West": 671
+        }
+      },
+      {
+        "Id": 673,
+        "Name": "Gluttony",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 674,
+          "South": 664,
+          "West": 672
+        }
+      },
+      {
+        "Id": 674,
+        "Name": "Greed",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 675,
+          "South": 663,
+          "West": 673
+        }
+      },
+      {
+        "Id": 675,
+        "Name": "Bedroom.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 674
+        }
+      },
+      {
+        "Id": 676,
+        "Name": "Ancient Shrine",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 660
+        }
+      },
+      {
+        "Id": 677,
+        "Name": "Room full of Body Parts.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 678,
+          "South": 687
+        }
+      },
+      {
+        "Id": 678,
+        "Name": "Fountain of Blood.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 688,
+          "West": 677
+        }
+      },
+      {
+        "Id": 679,
+        "Name": "Bloody Stairway.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 667,
+          "Down": 689
+        }
+      },
+      {
+        "Id": 680,
+        "Name": "Ancient Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 667,
+          "East": 681
+        }
+      },
+      {
+        "Id": 681,
+        "Name": "Room of Lost Souls",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 666,
+          "East": 682,
+          "West": 680
+        }
+      },
+      {
+        "Id": 682,
+        "Name": "Room of Lost Souls",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 665,
+          "East": 683,
+          "West": 681
+        }
+      },
+      {
+        "Id": 683,
+        "Name": "Pit of Fire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 664,
+          "East": 684,
+          "West": 682
+        }
+      },
+      {
+        "Id": 684,
+        "Name": "Blackened Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 663,
+          "East": 685,
+          "West": 683
+        }
+      },
+      {
+        "Id": 685,
+        "Name": "Blackened Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 686,
+          "West": 684
+        }
+      },
+      {
+        "Id": 686,
+        "Name": "Blood Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 687,
+          "West": 685
+        }
+      },
+      {
+        "Id": 687,
+        "Name": "Living Walls",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 677,
+          "East": 688,
+          "West": 686
+        }
+      },
+      {
+        "Id": 688,
+        "Name": "Skeleton Factory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 678,
+          "West": 687
+        }
+      },
+      {
+        "Id": 689,
+        "Name": "Bottom of Stairway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 690
+        }
+      },
+      {
+        "Id": 690,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 700,
+          "West": 689
+        }
+      },
+      {
+        "Id": 691,
+        "Name": "Cell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 701
+        }
+      },
+      {
+        "Id": 692,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 693,
+          "South": 702
+        }
+      },
+      {
+        "Id": 693,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 694,
+          "South": 703,
+          "West": 692
+        }
+      },
+      {
+        "Id": 694,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 704,
+          "West": 693
+        }
+      },
+      {
+        "Id": 695,
+        "Name": "Cell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 705
+        }
+      },
+      {
+        "Id": 696,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 697,
+          "West": 706
+        }
+      },
+      {
+        "Id": 697,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 698,
+          "South": 707,
+          "West": 696,
+          "Down": 708
+        }
+      },
+      {
+        "Id": 698,
+        "Name": "Cell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 697
+        }
+      },
+      {
+        "Id": 699,
+        "Name": "Hidden Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 709
+        }
+      },
+      {
+        "Id": 700,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 690,
+          "East": 701
+        }
+      },
+      {
+        "Id": 701,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 691,
+          "East": 702,
+          "West": 700
+        }
+      },
+      {
+        "Id": 702,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 692,
+          "West": 701
+        }
+      },
+      {
+        "Id": 703,
+        "Name": "Cell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 693
+        }
+      },
+      {
+        "Id": 704,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 694,
+          "East": 705
+        }
+      },
+      {
+        "Id": 705,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 695,
+          "East": 706,
+          "West": 704
+        }
+      },
+      {
+        "Id": 706,
+        "Name": "Stone Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 696,
+          "West": 705
+        }
+      },
+      {
+        "Id": 707,
+        "Name": "Cell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 697
+        }
+      },
+      {
+        "Id": 708,
+        "Name": "Hot Stairs",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 697,
+          "Down": 719
+        }
+      },
+      {
+        "Id": 709,
+        "Name": "Crack in Wall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 699,
+          "West": 708
+        }
+      },
+      {
+        "Id": 710,
+        "Name": "Stone Arch",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 711,
+          "South": 720,
+          "Down": 721
+        }
+      },
+      {
+        "Id": 711,
+        "Name": "Hall of Fire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 712,
+          "West": 710
+        }
+      },
+      {
+        "Id": 712,
+        "Name": "Hall of Fire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 722,
+          "West": 711
+        }
+      },
+      {
+        "Id": 713,
+        "Name": "Construction Area",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 714,
+          "South": 723
+        }
+      },
+      {
+        "Id": 714,
+        "Name": "Construction Area",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 715,
+          "South": 713
+        }
+      },
+      {
+        "Id": 715,
+        "Name": "Construction Area",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 725,
+          "West": 714
+        }
+      },
+      {
+        "Id": 716,
+        "Name": "Hall of Fire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 717,
+          "South": 726
+        }
+      },
+      {
+        "Id": 717,
+        "Name": "Hall of Fire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 718,
+          "South": 727,
+          "West": 716
+        }
+      },
+      {
+        "Id": 718,
+        "Name": "Fire Pits of Hades",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 728,
+          "West": 717
+        }
+      },
+      {
+        "Id": 719,
+        "Name": "Fire Mural",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 729
+        }
+      },
+      {
+        "Id": 720,
+        "Name": "Foreman\u0027s Office",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 710
+        }
+      },
+      {
+        "Id": 721,
+        "Name": "Cold Stairway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 710,
+          "Down": 734
+        }
+      },
+      {
+        "Id": 722,
+        "Name": "Hall of Fire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 712,
+          "East": 723
+        }
+      },
+      {
+        "Id": 723,
+        "Name": "Construction Area",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 713,
+          "East": 724,
+          "West": 722
+        }
+      },
+      {
+        "Id": 724,
+        "Name": "Construction Area",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 725,
+          "West": 723
+        }
+      },
+      {
+        "Id": 725,
+        "Name": "Construction Area",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 715,
+          "East": 726,
+          "West": 724
+        }
+      },
+      {
+        "Id": 726,
+        "Name": "Hall of Fire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 716,
+          "West": 725
+        }
+      },
+      {
+        "Id": 727,
+        "Name": "Wall of Fire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 717,
+          "East": 728
+        }
+      },
+      {
+        "Id": 728,
+        "Name": "Lake of Fire",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 718,
+          "East": 729,
+          "West": 727
+        }
+      },
+      {
+        "Id": 729,
+        "Name": "Hot Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 719,
+          "West": 728
+        }
+      },
+      {
+        "Id": 730,
+        "Name": "Icy Landing",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 799
+        }
+      },
+      {
+        "Id": 731,
+        "Name": "Ice Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 741,
+          "West": 799
+        }
+      },
+      {
+        "Id": 732,
+        "Name": "Meat Locker",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 733,
+          "South": 742
+        }
+      },
+      {
+        "Id": 733,
+        "Name": "Meat Locker",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 734,
+          "South": 743
+        }
+      },
+      {
+        "Id": 734,
+        "Name": "Penguin Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 735,
+          "South": 744,
+          "West": 733
+        }
+      },
+      {
+        "Id": 735,
+        "Name": "Penguin Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 745,
+          "West": 734
+        }
+      },
+      {
+        "Id": 736,
+        "Name": "Ice Creamery",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 737,
+          "South": 746
+        }
+      },
+      {
+        "Id": 737,
+        "Name": "Ice Creamery",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 738,
+          "South": 747,
+          "West": 736
+        }
+      },
+      {
+        "Id": 738,
+        "Name": "White Marble Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 748,
+          "West": 737
+        }
+      },
+      {
+        "Id": 739,
+        "Name": "Refrigerator Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 740
+        }
+      },
+      {
+        "Id": 740,
+        "Name": "Ice Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 799,
+          "East": 741,
+          "West": 739
+        }
+      },
+      {
+        "Id": 741,
+        "Name": "Ice Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 731,
+          "East": 742,
+          "West": 740
+        }
+      },
+      {
+        "Id": 742,
+        "Name": "Meat Locker",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 732,
+          "East": 743,
+          "West": 741
+        }
+      },
+      {
+        "Id": 743,
+        "Name": "Meat Locker",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 733,
+          "West": 742
+        }
+      },
+      {
+        "Id": 744,
+        "Name": "Penguin Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 734,
+          "East": 745
+        }
+      },
+      {
+        "Id": 745,
+        "Name": "Penguin Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 735,
+          "East": 746
+        }
+      },
+      {
+        "Id": 746,
+        "Name": "Ice-Creamery",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 736,
+          "East": 747,
+          "West": 745
+        }
+      },
+      {
+        "Id": 747,
+        "Name": "Ice-Creamery",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 737,
+          "West": 746
+        }
+      },
+      {
+        "Id": 748,
+        "Name": "Marble Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 738,
+          "South": 758
+        }
+      },
+      {
+        "Id": 749,
+        "Name": "Records Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 750
+        }
+      },
+      {
+        "Id": 750,
+        "Name": "Records Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 751,
+          "South": 760,
+          "West": 749
+        }
+      },
+      {
+        "Id": 751,
+        "Name": "Records Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 752,
+          "West": 750
+        }
+      },
+      {
+        "Id": 752,
+        "Name": "Records Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 751
+        }
+      },
+      {
+        "Id": 753,
+        "Name": "Small Altar",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 754
+        }
+      },
+      {
+        "Id": 754,
+        "Name": "Blackened Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 755,
+          "South": 764,
+          "West": 753
+        }
+      },
+      {
+        "Id": 755,
+        "Name": "Office of the High Priest",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 754
+        }
+      },
+      {
+        "Id": 756,
+        "Name": "Blackened Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 757,
+          "South": 766
+        }
+      },
+      {
+        "Id": 757,
+        "Name": "Blackened Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 758,
+          "West": 756
+        }
+      },
+      {
+        "Id": 758,
+        "Name": "Administration of Hell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 748,
+          "South": 768,
+          "West": 757,
+          "Down": 767
+        }
+      },
+      {
+        "Id": 759,
+        "Name": "Halls of Judgement",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 760,
+          "South": 769
+        }
+      },
+      {
+        "Id": 760,
+        "Name": "Halls of Judgement",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 750,
+          "East": 761,
+          "West": 759
+        }
+      },
+      {
+        "Id": 761,
+        "Name": "Halls of Judgement",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 762,
+          "South": 771,
+          "West": 760
+        }
+      },
+      {
+        "Id": 762,
+        "Name": "Halls of Judgement",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 763,
+          "West": 761
+        }
+      },
+      {
+        "Id": 763,
+        "Name": "Halls of Judgement",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 764,
+          "West": 762
+        }
+      },
+      {
+        "Id": 764,
+        "Name": "Blackened Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 754,
+          "East": 765,
+          "South": 774,
+          "West": 763
+        }
+      },
+      {
+        "Id": 765,
+        "Name": "Blackened Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 766,
+          "West": 764
+        }
+      },
+      {
+        "Id": 766,
+        "Name": "Blackened Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 756,
+          "West": 765
+        }
+      },
+      {
+        "Id": 767,
+        "Name": "Stairs to the Abyss",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 776
+        }
+      },
+      {
+        "Id": 768,
+        "Name": "Maintenance Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 758,
+          "South": 778
+        }
+      },
+      {
+        "Id": 769,
+        "Name": "Court Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 759,
+          "South": 779
+        }
+      },
+      {
+        "Id": 770,
+        "Name": "Lawyers Office",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 771,
+          "South": 780
+        }
+      },
+      {
+        "Id": 771,
+        "Name": "Office of Complaints",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 761,
+          "West": 770
+        }
+      },
+      {
+        "Id": 772,
+        "Name": "Pawn Shop",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 773
+        }
+      },
+      {
+        "Id": 773,
+        "Name": "Hallway of The Mall from Hell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 774,
+          "South": 783,
+          "West": 772
+        }
+      },
+      {
+        "Id": 774,
+        "Name": "Hallway of The Mall from Hell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 764,
+          "East": 775,
+          "West": 773
+        }
+      },
+      {
+        "Id": 775,
+        "Name": "The Office of Big Mouth",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 774,
+          "Down": 784
+        }
+      },
+      {
+        "Id": 776,
+        "Name": "Stairs to the Abyss",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 785
+        }
+      },
+      {
+        "Id": 777,
+        "Name": "Maintenance Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 778,
+          "South": 787
+        }
+      },
+      {
+        "Id": 778,
+        "Name": "Maintenance Walkway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 768,
+          "West": 777
+        }
+      },
+      {
+        "Id": 779,
+        "Name": "Judge\u0027s Chambers",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 769
+        }
+      },
+      {
+        "Id": 780,
+        "Name": "Courtyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 770,
+          "East": 781,
+          "South": 790
+        }
+      },
+      {
+        "Id": 781,
+        "Name": "Courtyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 782,
+          "South": 791,
+          "West": 780
+        }
+      },
+      {
+        "Id": 782,
+        "Name": "Stanely\u0027s Magical Steeds",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 792,
+          "West": 781
+        }
+      },
+      {
+        "Id": 783,
+        "Name": "Hallway of The Mall from Hell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 773,
+          "East": 793
+        }
+      },
+      {
+        "Id": 784,
+        "Name": "Inside Big Mouth\u0027s Stomach",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 775
+        }
+      },
+      {
+        "Id": 785,
+        "Name": "Stairs to the Abyss",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 794
+        }
+      },
+      {
+        "Id": 786,
+        "Name": "Reactor Control Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 787,
+          "South": 796
+        }
+      },
+      {
+        "Id": 787,
+        "Name": "Maintenance Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 777,
+          "East": 788,
+          "South": 797,
+          "West": 786
+        }
+      },
+      {
+        "Id": 788,
+        "Name": "Break Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 798,
+          "West": 787
+        }
+      },
+      {
+        "Id": 789,
+        "Name": "Hell\u0027s Kitchen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 790
+        }
+      },
+      {
+        "Id": 790,
+        "Name": "Courtyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 780,
+          "East": 791,
+          "West": 789
+        }
+      },
+      {
+        "Id": 791,
+        "Name": "Courtyard",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 781,
+          "West": 790
+        }
+      },
+      {
+        "Id": 792,
+        "Name": "Hallway of The Mall from Hell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 782,
+          "East": 793
+        }
+      },
+      {
+        "Id": 793,
+        "Name": "Hallway of The Mall from Hell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 783,
+          "East": 792
+        }
+      },
+      {
+        "Id": 794,
+        "Name": "Stairs to the Abyss",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 795,
+        "Name": "Inside the Reactor Core",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 796
+        }
+      },
+      {
+        "Id": 796,
+        "Name": "Reactor Room Floor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 786,
+          "West": 795
+        }
+      },
+      {
+        "Id": 797,
+        "Name": "Secondary Control Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 787
+        }
+      },
+      {
+        "Id": 798,
+        "Name": "Office of the Chief Engineer",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 788
+        }
+      },
+      {
+        "Id": 799,
+        "Name": "Ice Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 731,
+          "South": 740,
+          "West": 730
+        }
+      },
+      {
+        "Id": 592,
+        "Name": "To Crystalmir Lake",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 556,
+          "South": 659
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 659,
-      "name": "Stone Archway",
-      "exits": {
-        "North": 592,
-        "West": 660
-      }
-    },
-    {
-      "id": 660,
-      "name": "Ancient Room",
-      "exits": {
-        "East": 659,
-        "West": 676,
-        "Down": 661
-      }
-    },
-    {
-      "id": 661,
-      "name": "Dark Stairway",
-      "exits": {
-        "West": 662,
-        "Up": 660
-      }
-    },
-    {
-      "id": 662,
-      "name": "Landing",
-      "exits": {
-        "East": 661,
-        "West": 663
-      }
-    },
-    {
-      "id": 663,
-      "name": "Gateway to Hell",
-      "exits": {
-        "North": 674,
-        "East": 662,
-        "South": 684,
-        "West": 664
-      }
-    },
-    {
-      "id": 664,
-      "name": "Hall of the Damned",
-      "exits": {
-        "North": 673,
-        "East": 663,
-        "South": 683,
-        "West": 665
-      }
-    },
-    {
-      "id": 665,
-      "name": "Hall of the Damned",
-      "exits": {
-        "North": 672,
-        "East": 664,
-        "South": 682,
-        "West": 666
-      }
-    },
-    {
-      "id": 666,
-      "name": "Hall of the Damned",
-      "exits": {
-        "North": 671,
-        "East": 665,
-        "South": 681,
-        "West": 667
-      }
-    },
-    {
-      "id": 667,
-      "name": "Hall of the Damned",
-      "exits": {
-        "North": 670,
-        "East": 666,
-        "South": 680,
-        "West": 668,
-        "Down": 679
-      }
-    },
-    {
-      "id": 668,
-      "name": "Hall of the Damned",
-      "exits": {
-        "North": 669,
-        "East": 667
-      }
-    },
-    {
-      "id": 669,
-      "name": "Mural of the Dead",
-      "exits": {
-        "East": 670,
-        "South": 668
-      }
-    },
-    {
-      "id": 670,
-      "name": "Living Walls",
-      "exits": {
-        "East": 671,
-        "South": 667,
-        "West": 669
-      }
-    },
-    {
-      "id": 671,
-      "name": "Trapped souls",
-      "exits": {
-        "East": 672,
-        "South": 666,
-        "West": 670
-      }
-    },
-    {
-      "id": 672,
-      "name": "Tortured Beings",
-      "exits": {
-        "East": 673,
-        "South": 665,
-        "West": 671
-      }
-    },
-    {
-      "id": 673,
-      "name": "Gluttony",
-      "exits": {
-        "East": 674,
-        "South": 664,
-        "West": 672
-      }
-    },
-    {
-      "id": 674,
-      "name": "Greed",
-      "exits": {
-        "East": 675,
-        "South": 663,
-        "West": 673
-      }
-    },
-    {
-      "id": 675,
-      "name": "Bedroom.",
-      "exits": {
-        "West": 674
-      }
-    },
-    {
-      "id": 676,
-      "name": "Ancient Shrine",
-      "exits": {
-        "East": 660
-      }
-    },
-    {
-      "id": 677,
-      "name": "Room full of Body Parts.",
-      "exits": {
-        "East": 678,
-        "South": 687
-      }
-    },
-    {
-      "id": 678,
-      "name": "Fountain of Blood.",
-      "exits": {
-        "South": 688,
-        "West": 677
-      }
-    },
-    {
-      "id": 679,
-      "name": "Bloody Stairway.",
-      "exits": {
-        "Up": 667,
-        "Down": 689
-      }
-    },
-    {
-      "id": 680,
-      "name": "Ancient Room",
-      "exits": {
-        "North": 667,
-        "East": 681
-      }
-    },
-    {
-      "id": 681,
-      "name": "Room of Lost Souls",
-      "exits": {
-        "North": 666,
-        "East": 682,
-        "West": 680
-      }
-    },
-    {
-      "id": 682,
-      "name": "Room of Lost Souls",
-      "exits": {
-        "North": 665,
-        "East": 683,
-        "West": 681
-      }
-    },
-    {
-      "id": 683,
-      "name": "Pit of Fire",
-      "exits": {
-        "North": 664,
-        "East": 684,
-        "West": 682
-      }
-    },
-    {
-      "id": 684,
-      "name": "Blackened Hallway",
-      "exits": {
-        "North": 663,
-        "East": 685,
-        "West": 683
-      }
-    },
-    {
-      "id": 685,
-      "name": "Blackened Hallway",
-      "exits": {
-        "East": 686,
-        "West": 684
-      }
-    },
-    {
-      "id": 686,
-      "name": "Blood Room",
-      "exits": {
-        "East": 687,
-        "West": 685
-      }
-    },
-    {
-      "id": 687,
-      "name": "Living Walls",
-      "exits": {
-        "North": 677,
-        "East": 688,
-        "West": 686
-      }
-    },
-    {
-      "id": 688,
-      "name": "Skeleton Factory",
-      "exits": {
-        "North": 678,
-        "West": 687
-      }
-    },
-    {
-      "id": 689,
-      "name": "Bottom of Stairway",
-      "exits": {
-        "East": 690
-      }
-    },
-    {
-      "id": 690,
-      "name": "Stone Hall",
-      "exits": {
-        "South": 700,
-        "West": 689
-      }
-    },
-    {
-      "id": 691,
-      "name": "Cell",
-      "exits": {
-        "South": 701
-      }
-    },
-    {
-      "id": 692,
-      "name": "Stone Hall",
-      "exits": {
-        "East": 693,
-        "South": 702
-      }
-    },
-    {
-      "id": 693,
-      "name": "Stone Hall",
-      "exits": {
-        "East": 694,
-        "South": 703,
-        "West": 692
-      }
-    },
-    {
-      "id": 694,
-      "name": "Stone Hall",
-      "exits": {
-        "South": 704,
-        "West": 693
-      }
-    },
-    {
-      "id": 695,
-      "name": "Cell",
-      "exits": {
-        "South": 705
-      }
-    },
-    {
-      "id": 696,
-      "name": "Stone Hall",
-      "exits": {
-        "East": 697,
-        "West": 706
-      }
-    },
-    {
-      "id": 697,
-      "name": "Stone Hall",
-      "exits": {
-        "East": 698,
-        "South": 707,
-        "West": 696,
-        "Down": 708
-      }
-    },
-    {
-      "id": 698,
-      "name": "Cell",
-      "exits": {
-        "West": 697
-      }
-    },
-    {
-      "id": 699,
-      "name": "Hidden Room",
-      "exits": {
-        "South": 709
-      }
-    },
-    {
-      "id": 700,
-      "name": "Stone Hall",
-      "exits": {
-        "North": 690,
-        "East": 701
-      }
-    },
-    {
-      "id": 701,
-      "name": "Stone Hall",
-      "exits": {
-        "North": 691,
-        "East": 702,
-        "West": 700
-      }
-    },
-    {
-      "id": 702,
-      "name": "Stone Hall",
-      "exits": {
-        "North": 692,
-        "West": 701
-      }
-    },
-    {
-      "id": 703,
-      "name": "Cell",
-      "exits": {
-        "North": 693
-      }
-    },
-    {
-      "id": 704,
-      "name": "Stone Hall",
-      "exits": {
-        "North": 694,
-        "East": 705
-      }
-    },
-    {
-      "id": 705,
-      "name": "Stone Hall",
-      "exits": {
-        "North": 695,
-        "East": 706,
-        "West": 704
-      }
-    },
-    {
-      "id": 706,
-      "name": "Stone Hall",
-      "exits": {
-        "North": 696,
-        "West": 705
-      }
-    },
-    {
-      "id": 707,
-      "name": "Cell",
-      "exits": {
-        "North": 697
-      }
-    },
-    {
-      "id": 708,
-      "name": "Hot Stairs",
-      "exits": {
-        "Up": 697,
-        "Down": 719
-      }
-    },
-    {
-      "id": 709,
-      "name": "Crack in Wall",
-      "exits": {
-        "North": 699,
-        "West": 708
-      }
-    },
-    {
-      "id": 710,
-      "name": "Stone Arch",
-      "exits": {
-        "East": 711,
-        "South": 720,
-        "Down": 721
-      }
-    },
-    {
-      "id": 711,
-      "name": "Hall of Fire",
-      "exits": {
-        "East": 712,
-        "West": 710
-      }
-    },
-    {
-      "id": 712,
-      "name": "Hall of Fire",
-      "exits": {
-        "South": 722,
-        "West": 711
-      }
-    },
-    {
-      "id": 713,
-      "name": "Construction Area",
-      "exits": {
-        "East": 714,
-        "South": 723
-      }
-    },
-    {
-      "id": 714,
-      "name": "Construction Area",
-      "exits": {
-        "East": 715,
-        "South": 713
-      }
-    },
-    {
-      "id": 715,
-      "name": "Construction Area",
-      "exits": {
-        "South": 725,
-        "West": 714
-      }
-    },
-    {
-      "id": 716,
-      "name": "Hall of Fire",
-      "exits": {
-        "East": 717,
-        "South": 726
-      }
-    },
-    {
-      "id": 717,
-      "name": "Hall of Fire",
-      "exits": {
-        "East": 718,
-        "South": 727,
-        "West": 716
-      }
-    },
-    {
-      "id": 718,
-      "name": "Fire Pits of Hades",
-      "exits": {
-        "South": 728,
-        "West": 717
-      }
-    },
-    {
-      "id": 719,
-      "name": "Fire Mural",
-      "exits": {
-        "South": 729
-      }
-    },
-    {
-      "id": 720,
-      "name": "Foreman\u0027s Office",
-      "exits": {
-        "North": 710
-      }
-    },
-    {
-      "id": 721,
-      "name": "Cold Stairway",
-      "exits": {
-        "Up": 710,
-        "Down": 734
-      }
-    },
-    {
-      "id": 722,
-      "name": "Hall of Fire",
-      "exits": {
-        "North": 712,
-        "East": 723
-      }
-    },
-    {
-      "id": 723,
-      "name": "Construction Area",
-      "exits": {
-        "North": 713,
-        "East": 724,
-        "West": 722
-      }
-    },
-    {
-      "id": 724,
-      "name": "Construction Area",
-      "exits": {
-        "East": 725,
-        "West": 723
-      }
-    },
-    {
-      "id": 725,
-      "name": "Construction Area",
-      "exits": {
-        "North": 715,
-        "East": 726,
-        "West": 724
-      }
-    },
-    {
-      "id": 726,
-      "name": "Hall of Fire",
-      "exits": {
-        "North": 716,
-        "West": 725
-      }
-    },
-    {
-      "id": 727,
-      "name": "Wall of Fire",
-      "exits": {
-        "North": 717,
-        "East": 728
-      }
-    },
-    {
-      "id": 728,
-      "name": "Lake of Fire",
-      "exits": {
-        "North": 718,
-        "East": 729,
-        "West": 727
-      }
-    },
-    {
-      "id": 729,
-      "name": "Hot Hall",
-      "exits": {
-        "North": 719,
-        "West": 728
-      }
-    },
-    {
-      "id": 730,
-      "name": "Icy Landing",
-      "exits": {
-        "East": 799
-      }
-    },
-    {
-      "id": 731,
-      "name": "Ice Room",
-      "exits": {
-        "South": 741,
-        "West": 799
-      }
-    },
-    {
-      "id": 732,
-      "name": "Meat Locker",
-      "exits": {
-        "East": 733,
-        "South": 742
-      }
-    },
-    {
-      "id": 733,
-      "name": "Meat Locker",
-      "exits": {
-        "East": 734,
-        "South": 743
-      }
-    },
-    {
-      "id": 734,
-      "name": "Penguin Room",
-      "exits": {
-        "East": 735,
-        "South": 744,
-        "West": 733
-      }
-    },
-    {
-      "id": 735,
-      "name": "Penguin Room",
-      "exits": {
-        "South": 745,
-        "West": 734
-      }
-    },
-    {
-      "id": 736,
-      "name": "Ice Creamery",
-      "exits": {
-        "East": 737,
-        "South": 746
-      }
-    },
-    {
-      "id": 737,
-      "name": "Ice Creamery",
-      "exits": {
-        "East": 738,
-        "South": 747,
-        "West": 736
-      }
-    },
-    {
-      "id": 738,
-      "name": "White Marble Hall",
-      "exits": {
-        "South": 748,
-        "West": 737
-      }
-    },
-    {
-      "id": 739,
-      "name": "Refrigerator Room",
-      "exits": {
-        "East": 740
-      }
-    },
-    {
-      "id": 740,
-      "name": "Ice Room",
-      "exits": {
-        "North": 799,
-        "East": 741,
-        "West": 739
-      }
-    },
-    {
-      "id": 741,
-      "name": "Ice Room",
-      "exits": {
-        "North": 731,
-        "East": 742,
-        "West": 740
-      }
-    },
-    {
-      "id": 742,
-      "name": "Meat Locker",
-      "exits": {
-        "North": 732,
-        "East": 743,
-        "West": 741
-      }
-    },
-    {
-      "id": 743,
-      "name": "Meat Locker",
-      "exits": {
-        "North": 733,
-        "West": 742
-      }
-    },
-    {
-      "id": 744,
-      "name": "Penguin Room",
-      "exits": {
-        "North": 734,
-        "East": 745
-      }
-    },
-    {
-      "id": 745,
-      "name": "Penguin Room",
-      "exits": {
-        "North": 735,
-        "East": 746
-      }
-    },
-    {
-      "id": 746,
-      "name": "Ice-Creamery",
-      "exits": {
-        "North": 736,
-        "East": 747,
-        "West": 745
-      }
-    },
-    {
-      "id": 747,
-      "name": "Ice-Creamery",
-      "exits": {
-        "North": 737,
-        "West": 746
-      }
-    },
-    {
-      "id": 748,
-      "name": "Marble Hall",
-      "exits": {
-        "North": 738,
-        "South": 758
-      }
-    },
-    {
-      "id": 749,
-      "name": "Records Hall",
-      "exits": {
-        "East": 750
-      }
-    },
-    {
-      "id": 750,
-      "name": "Records Hall",
-      "exits": {
-        "East": 751,
-        "South": 760,
-        "West": 749
-      }
-    },
-    {
-      "id": 751,
-      "name": "Records Hall",
-      "exits": {
-        "East": 752,
-        "West": 750
-      }
-    },
-    {
-      "id": 752,
-      "name": "Records Hall",
-      "exits": {
-        "West": 751
-      }
-    },
-    {
-      "id": 753,
-      "name": "Small Altar",
-      "exits": {
-        "East": 754
-      }
-    },
-    {
-      "id": 754,
-      "name": "Blackened Hall",
-      "exits": {
-        "East": 755,
-        "South": 764,
-        "West": 753
-      }
-    },
-    {
-      "id": 755,
-      "name": "Office of the High Priest",
-      "exits": {
-        "West": 754
-      }
-    },
-    {
-      "id": 756,
-      "name": "Blackened Hall",
-      "exits": {
-        "East": 757,
-        "South": 766
-      }
-    },
-    {
-      "id": 757,
-      "name": "Blackened Hall",
-      "exits": {
-        "East": 758,
-        "West": 756
-      }
-    },
-    {
-      "id": 758,
-      "name": "Administration of Hell",
-      "exits": {
-        "North": 748,
-        "South": 768,
-        "West": 757,
-        "Down": 767
-      }
-    },
-    {
-      "id": 759,
-      "name": "Halls of Judgement",
-      "exits": {
-        "East": 760,
-        "South": 769
-      }
-    },
-    {
-      "id": 760,
-      "name": "Halls of Judgement",
-      "exits": {
-        "North": 750,
-        "East": 761,
-        "West": 759
-      }
-    },
-    {
-      "id": 761,
-      "name": "Halls of Judgement",
-      "exits": {
-        "East": 762,
-        "South": 771,
-        "West": 760
-      }
-    },
-    {
-      "id": 762,
-      "name": "Halls of Judgement",
-      "exits": {
-        "East": 763,
-        "West": 761
-      }
-    },
-    {
-      "id": 763,
-      "name": "Halls of Judgement",
-      "exits": {
-        "East": 764,
-        "West": 762
-      }
-    },
-    {
-      "id": 764,
-      "name": "Blackened Hall",
-      "exits": {
-        "North": 754,
-        "East": 765,
-        "South": 774,
-        "West": 763
-      }
-    },
-    {
-      "id": 765,
-      "name": "Blackened Hall",
-      "exits": {
-        "East": 766,
-        "West": 764
-      }
-    },
-    {
-      "id": 766,
-      "name": "Blackened Hall",
-      "exits": {
-        "North": 756,
-        "West": 765
-      }
-    },
-    {
-      "id": 767,
-      "name": "Stairs to the Abyss",
-      "exits": {
-        "Down": 776
-      }
-    },
-    {
-      "id": 768,
-      "name": "Maintenance Walkway",
-      "exits": {
-        "North": 758,
-        "South": 778
-      }
-    },
-    {
-      "id": 769,
-      "name": "Court Room",
-      "exits": {
-        "North": 759,
-        "South": 779
-      }
-    },
-    {
-      "id": 770,
-      "name": "Lawyers Office",
-      "exits": {
-        "East": 771,
-        "South": 780
-      }
-    },
-    {
-      "id": 771,
-      "name": "Office of Complaints",
-      "exits": {
-        "North": 761,
-        "West": 770
-      }
-    },
-    {
-      "id": 772,
-      "name": "Pawn Shop",
-      "exits": {
-        "East": 773
-      }
-    },
-    {
-      "id": 773,
-      "name": "Hallway of The Mall from Hell",
-      "exits": {
-        "East": 774,
-        "South": 783,
-        "West": 772
-      }
-    },
-    {
-      "id": 774,
-      "name": "Hallway of The Mall from Hell",
-      "exits": {
-        "North": 764,
-        "East": 775,
-        "West": 773
-      }
-    },
-    {
-      "id": 775,
-      "name": "The Office of Big Mouth",
-      "exits": {
-        "West": 774,
-        "Down": 784
-      }
-    },
-    {
-      "id": 776,
-      "name": "Stairs to the Abyss",
-      "exits": {
-        "Down": 785
-      }
-    },
-    {
-      "id": 777,
-      "name": "Maintenance Walkway",
-      "exits": {
-        "East": 778,
-        "South": 787
-      }
-    },
-    {
-      "id": 778,
-      "name": "Maintenance Walkway",
-      "exits": {
-        "North": 768,
-        "West": 777
-      }
-    },
-    {
-      "id": 779,
-      "name": "Judge\u0027s Chambers",
-      "exits": {
-        "North": 769
-      }
-    },
-    {
-      "id": 780,
-      "name": "Courtyard",
-      "exits": {
-        "North": 770,
-        "East": 781,
-        "South": 790
-      }
-    },
-    {
-      "id": 781,
-      "name": "Courtyard",
-      "exits": {
-        "East": 782,
-        "South": 791,
-        "West": 780
-      }
-    },
-    {
-      "id": 782,
-      "name": "Stanely\u0027s Magical Steeds",
-      "exits": {
-        "South": 792,
-        "West": 781
-      }
-    },
-    {
-      "id": 783,
-      "name": "Hallway of The Mall from Hell",
-      "exits": {
-        "North": 773,
-        "East": 793
-      }
-    },
-    {
-      "id": 784,
-      "name": "Inside Big Mouth\u0027s Stomach",
-      "exits": {
-        "Up": 775
-      }
-    },
-    {
-      "id": 785,
-      "name": "Stairs to the Abyss",
-      "exits": {
-        "Down": 794
-      }
-    },
-    {
-      "id": 786,
-      "name": "Reactor Control Room",
-      "exits": {
-        "East": 787,
-        "South": 796
-      }
-    },
-    {
-      "id": 787,
-      "name": "Maintenance Room",
-      "exits": {
-        "North": 777,
-        "East": 788,
-        "South": 797,
-        "West": 786
-      }
-    },
-    {
-      "id": 788,
-      "name": "Break Room",
-      "exits": {
-        "South": 798,
-        "West": 787
-      }
-    },
-    {
-      "id": 789,
-      "name": "Hell\u0027s Kitchen",
-      "exits": {
-        "East": 790
-      }
-    },
-    {
-      "id": 790,
-      "name": "Courtyard",
-      "exits": {
-        "North": 780,
-        "East": 791,
-        "West": 789
-      }
-    },
-    {
-      "id": 791,
-      "name": "Courtyard",
-      "exits": {
-        "North": 781,
-        "West": 790
-      }
-    },
-    {
-      "id": 792,
-      "name": "Hallway of The Mall from Hell",
-      "exits": {
-        "North": 782,
-        "East": 793
-      }
-    },
-    {
-      "id": 793,
-      "name": "Hallway of The Mall from Hell",
-      "exits": {
-        "North": 783,
-        "East": 792
-      }
-    },
-    {
-      "id": 794,
-      "name": "Stairs to the Abyss",
-      "exits": {}
-    },
-    {
-      "id": 795,
-      "name": "Inside the Reactor Core",
-      "exits": {
-        "East": 796
-      }
-    },
-    {
-      "id": 796,
-      "name": "Reactor Room Floor",
-      "exits": {
-        "North": 786,
-        "West": 795
-      }
-    },
-    {
-      "id": 797,
-      "name": "Secondary Control Room",
-      "exits": {
-        "North": 787
-      }
-    },
-    {
-      "id": 798,
-      "name": "Office of the Chief Engineer",
-      "exits": {
-        "North": 788
-      }
-    },
-    {
-      "id": 799,
-      "name": "Ice Room",
-      "exits": {
-        "East": 731,
-        "South": 740,
-        "West": 730
-      }
-    },
-    {
-      "id": 592,
-      "name": "To Crystalmir Lake",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 556,
-        "South": 659
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace MUDMapBuilder
 {
-	public partial class MMBArea : IEnumerable<MMBRoom>
+	public partial class MMBArea
 	{
 		private enum ConnectionBrokenType
 		{
@@ -16,18 +17,49 @@ namespace MUDMapBuilder
 			Long
 		}
 
+		private MMBRoom[] _rooms = null;
 		private readonly Dictionary<int, MMBRoom> _roomsByIds = new Dictionary<int, MMBRoom>();
 		private Rectangle _roomsRectangle;
 		private MMBRoom[,] _roomsByPositions = null;
 		private MMBConnectionsList[,] _connectionsGrid = null;
 		private BrokenConnectionsInfo _brokenConnections;
 
+		public string Name { get; set; }
+
+		public MMBRoom[] Rooms
+		{
+			get => _rooms;
+
+			set
+			{
+				if (_rooms != null)
+				{
+					foreach(var room in _rooms)
+					{
+						room.RoomInvalid -= OnRoomInvalid;
+					}
+				}
+
+				_rooms = value;
+				_roomsByIds.Clear();
+
+				if (_rooms != null)
+				{
+					foreach (var room in _rooms)
+					{
+						room.RoomInvalid += OnRoomInvalid;
+						_roomsByIds[room.Id] = room;
+					}
+				}
+
+				InvalidatePositions();
+			}
+		}
+
 		public int Count => _roomsByIds.Count;
-		public MMBRoom[] Rooms => _roomsByIds.Values.ToArray();
+
 
 		public int PositionedRoomsCount => (from r in _roomsByIds.Values where r.Position != null select r).Count();
-
-		public string Name { get; set; }
 
 		public BrokenConnectionsInfo BrokenConnections
 		{
@@ -49,8 +81,10 @@ namespace MUDMapBuilder
 		}
 
 		public int Width => RoomsRectangle.Width;
+
 		public int Height => RoomsRectangle.Height;
 
+		[JsonIgnore]
 		public int? SelectedRoomId { get; set; }
 
 		public MMBArea()
@@ -61,16 +95,40 @@ namespace MUDMapBuilder
 
 		public void Add(MMBRoom room)
 		{
+			// Subscribe
 			room.RoomInvalid += OnRoomInvalid;
 
+			// Update internal array
+			var list = new List<MMBRoom>();
+			if (_rooms != null)
+			{
+				list.AddRange(_rooms);
+			}
+			list.Add(room);
+			_rooms = list.ToArray();
+
+			// Update internal cache
 			_roomsByIds[room.Id] = room;
+
+			// Invalidate positions
 			InvalidatePositions();
 		}
 
 		public void DeleteRoom(MMBRoom room)
 		{
+			// Unsubscribe
 			room.RoomInvalid -= OnRoomInvalid;
 
+			// Update internal array
+			var list = new List<MMBRoom>();
+			if (_rooms != null)
+			{
+				list.AddRange(_rooms);
+			}
+			list.Remove(room);
+			_rooms = list.ToArray();
+
+			// Update internal cache
 			_roomsByIds.Remove(room.Id);
 			InvalidatePositions();
 		}
@@ -1068,10 +1126,6 @@ namespace MUDMapBuilder
 
 			return result;
 		}
-
-		public IEnumerator<MMBRoom> GetEnumerator() => _roomsByIds.Values.GetEnumerator();
-
-		IEnumerator IEnumerable.GetEnumerator() => _roomsByIds.Values.GetEnumerator();
 
 		public static bool AreEqual(MMBArea a, MMBArea b)
 		{

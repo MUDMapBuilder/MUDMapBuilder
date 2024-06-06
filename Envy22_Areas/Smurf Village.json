@@ -1,262 +1,325 @@
 {
-  "name": "Smurf Village",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Smurf Village",
+    "Rooms": [
+      {
+        "Id": 3553,
+        "Name": "Dimly Lit Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3554,
+          "South": 2282
+        }
+      },
+      {
+        "Id": 3554,
+        "Name": "Dimly Lit Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3555,
+          "South": 3553
+        }
+      },
+      {
+        "Id": 3555,
+        "Name": "Dimly Lit Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3556,
+          "South": 3554
+        }
+      },
+      {
+        "Id": 3556,
+        "Name": "Entrance to Smurf Village",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3557,
+          "South": 3555
+        }
+      },
+      {
+        "Id": 3557,
+        "Name": "Smurfy Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3558,
+          "East": 3562,
+          "South": 3556,
+          "West": 3563
+        }
+      },
+      {
+        "Id": 3558,
+        "Name": "Smurfy Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3559,
+          "East": 3572,
+          "South": 3557,
+          "West": 3564
+        }
+      },
+      {
+        "Id": 3559,
+        "Name": "Smurfy Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3560,
+          "East": 3568,
+          "South": 3558,
+          "West": 3581
+        }
+      },
+      {
+        "Id": 3560,
+        "Name": "Smurfy Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3561,
+          "East": 3569,
+          "South": 3559,
+          "West": 3565
+        }
+      },
+      {
+        "Id": 3561,
+        "Name": "Smurfy Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3570,
+          "South": 3560,
+          "West": 3566
+        }
+      },
+      {
+        "Id": 3562,
+        "Name": "Smurfy Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3571,
+          "West": 3557
+        }
+      },
+      {
+        "Id": 3563,
+        "Name": "Smurfy Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3564,
+          "East": 3557,
+          "South": 3573
+        }
+      },
+      {
+        "Id": 3564,
+        "Name": "Smurfy Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3558,
+          "South": 3563,
+          "West": 3574
+        }
+      },
+      {
+        "Id": 3565,
+        "Name": "Stone Path",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3560,
+          "South": 3577,
+          "West": 3575
+        }
+      },
+      {
+        "Id": 3566,
+        "Name": "Smurfy Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3561,
+          "West": 3567
+        }
+      },
+      {
+        "Id": 3567,
+        "Name": "Smurfy Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3578,
+          "East": 3566,
+          "South": 3576
+        }
+      },
+      {
+        "Id": 3568,
+        "Name": "Smurfberry Patch",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3569,
+          "West": 3559
+        }
+      },
+      {
+        "Id": 3569,
+        "Name": "Smurfberry Patch",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3570,
+          "South": 3568,
+          "West": 3560
+        }
+      },
+      {
+        "Id": 3570,
+        "Name": "Smurfberry Patch",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3569,
+          "West": 3561
+        }
+      },
+      {
+        "Id": 3571,
+        "Name": "Brainy Smurf\u0027s Home",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3562
+        }
+      },
+      {
+        "Id": 3572,
+        "Name": "Handy Smurf\u0027s Home",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 3558
+        }
+      },
+      {
+        "Id": 3573,
+        "Name": "Hefty Smurf\u0027s Home",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3563
+        }
+      },
+      {
+        "Id": 3574,
+        "Name": "Sleepy Smurf\u0027s Home",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3564
+        }
+      },
+      {
+        "Id": 3575,
+        "Name": "Grumpy Smurf\u0027s Home",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3565
+        }
+      },
+      {
+        "Id": 3576,
+        "Name": "Jokey Smurf\u0027s Home",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3567
+        }
+      },
+      {
+        "Id": 3577,
+        "Name": "Papa Smurf\u0027s Home",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3565
+        }
+      },
+      {
+        "Id": 3578,
+        "Name": "Path to Gargamel\u0027s Castle",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3579,
+          "South": 3567
+        }
+      },
+      {
+        "Id": 3579,
+        "Name": "Outside Gargamel\u0027s Castle",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3580,
+          "South": 3578
+        }
+      },
+      {
+        "Id": 3580,
+        "Name": "Gargamel\u0027s Castle",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 3579
+        }
+      },
+      {
+        "Id": 3581,
+        "Name": "Smurfette\u0027s House",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3559
+        }
+      },
+      {
+        "Id": 2282,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 3553,
+          "East": 2258,
+          "South": 2284,
+          "West": 2294
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 3553,
-      "name": "Dimly Lit Path",
-      "exits": {
-        "North": 3554,
-        "South": 2282
-      }
-    },
-    {
-      "id": 3554,
-      "name": "Dimly Lit Path",
-      "exits": {
-        "North": 3555,
-        "South": 3553
-      }
-    },
-    {
-      "id": 3555,
-      "name": "Dimly Lit Path",
-      "exits": {
-        "North": 3556,
-        "South": 3554
-      }
-    },
-    {
-      "id": 3556,
-      "name": "Entrance to Smurf Village",
-      "exits": {
-        "North": 3557,
-        "South": 3555
-      }
-    },
-    {
-      "id": 3557,
-      "name": "Smurfy Road",
-      "exits": {
-        "North": 3558,
-        "East": 3562,
-        "South": 3556,
-        "West": 3563
-      }
-    },
-    {
-      "id": 3558,
-      "name": "Smurfy Road",
-      "exits": {
-        "North": 3559,
-        "East": 3572,
-        "South": 3557,
-        "West": 3564
-      }
-    },
-    {
-      "id": 3559,
-      "name": "Smurfy Road",
-      "exits": {
-        "North": 3560,
-        "East": 3568,
-        "South": 3558,
-        "West": 3581
-      }
-    },
-    {
-      "id": 3560,
-      "name": "Smurfy Road",
-      "exits": {
-        "North": 3561,
-        "East": 3569,
-        "South": 3559,
-        "West": 3565
-      }
-    },
-    {
-      "id": 3561,
-      "name": "Smurfy Road",
-      "exits": {
-        "East": 3570,
-        "South": 3560,
-        "West": 3566
-      }
-    },
-    {
-      "id": 3562,
-      "name": "Smurfy Road",
-      "exits": {
-        "North": 3571,
-        "West": 3557
-      }
-    },
-    {
-      "id": 3563,
-      "name": "Smurfy Road",
-      "exits": {
-        "North": 3564,
-        "East": 3557,
-        "South": 3573
-      }
-    },
-    {
-      "id": 3564,
-      "name": "Smurfy Road",
-      "exits": {
-        "East": 3558,
-        "South": 3563,
-        "West": 3574
-      }
-    },
-    {
-      "id": 3565,
-      "name": "Stone Path",
-      "exits": {
-        "East": 3560,
-        "South": 3577,
-        "West": 3575
-      }
-    },
-    {
-      "id": 3566,
-      "name": "Smurfy Road",
-      "exits": {
-        "East": 3561,
-        "West": 3567
-      }
-    },
-    {
-      "id": 3567,
-      "name": "Smurfy Road",
-      "exits": {
-        "North": 3578,
-        "East": 3566,
-        "South": 3576
-      }
-    },
-    {
-      "id": 3568,
-      "name": "Smurfberry Patch",
-      "exits": {
-        "North": 3569,
-        "West": 3559
-      }
-    },
-    {
-      "id": 3569,
-      "name": "Smurfberry Patch",
-      "exits": {
-        "North": 3570,
-        "South": 3568,
-        "West": 3560
-      }
-    },
-    {
-      "id": 3570,
-      "name": "Smurfberry Patch",
-      "exits": {
-        "South": 3569,
-        "West": 3561
-      }
-    },
-    {
-      "id": 3571,
-      "name": "Brainy Smurf\u0027s Home",
-      "exits": {
-        "South": 3562
-      }
-    },
-    {
-      "id": 3572,
-      "name": "Handy Smurf\u0027s Home",
-      "exits": {
-        "West": 3558
-      }
-    },
-    {
-      "id": 3573,
-      "name": "Hefty Smurf\u0027s Home",
-      "exits": {
-        "North": 3563
-      }
-    },
-    {
-      "id": 3574,
-      "name": "Sleepy Smurf\u0027s Home",
-      "exits": {
-        "East": 3564
-      }
-    },
-    {
-      "id": 3575,
-      "name": "Grumpy Smurf\u0027s Home",
-      "exits": {
-        "East": 3565
-      }
-    },
-    {
-      "id": 3576,
-      "name": "Jokey Smurf\u0027s Home",
-      "exits": {
-        "North": 3567
-      }
-    },
-    {
-      "id": 3577,
-      "name": "Papa Smurf\u0027s Home",
-      "exits": {
-        "North": 3565
-      }
-    },
-    {
-      "id": 3578,
-      "name": "Path to Gargamel\u0027s Castle",
-      "exits": {
-        "North": 3579,
-        "South": 3567
-      }
-    },
-    {
-      "id": 3579,
-      "name": "Outside Gargamel\u0027s Castle",
-      "exits": {
-        "North": 3580,
-        "South": 3578
-      }
-    },
-    {
-      "id": 3580,
-      "name": "Gargamel\u0027s Castle",
-      "exits": {
-        "South": 3579
-      }
-    },
-    {
-      "id": 3581,
-      "name": "Smurfette\u0027s House",
-      "exits": {
-        "East": 3559
-      }
-    },
-    {
-      "id": 2282,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 3553,
-        "East": 2258,
-        "South": 2284,
-        "West": 2294
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

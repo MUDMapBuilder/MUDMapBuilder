@@ -1,436 +1,543 @@
 {
-  "name": "Drow City",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Drow City",
+    "Rooms": [
+      {
+        "Id": 880,
+        "Name": "City Entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 881,
+          "Up": 3768
+        }
+      },
+      {
+        "Id": 881,
+        "Name": "City street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 903,
+          "East": 880,
+          "South": 882,
+          "West": 902
+        }
+      },
+      {
+        "Id": 882,
+        "Name": "City street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 881,
+          "West": 883
+        }
+      },
+      {
+        "Id": 883,
+        "Name": "City street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 882,
+          "South": 884,
+          "West": 886
+        }
+      },
+      {
+        "Id": 884,
+        "Name": "3rd House",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 883,
+          "South": 885
+        }
+      },
+      {
+        "Id": 885,
+        "Name": "Throne Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 884
+        }
+      },
+      {
+        "Id": 886,
+        "Name": "City street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 898,
+          "East": 883,
+          "West": 887
+        }
+      },
+      {
+        "Id": 887,
+        "Name": "City street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 890,
+          "East": 886,
+          "South": 888
+        }
+      },
+      {
+        "Id": 888,
+        "Name": "2nd House",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 887,
+          "West": 889
+        }
+      },
+      {
+        "Id": 889,
+        "Name": "Throne Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 888
+        }
+      },
+      {
+        "Id": 890,
+        "Name": "Main Gate",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 894,
+          "South": 887,
+          "West": 891
+        }
+      },
+      {
+        "Id": 891,
+        "Name": "1st House",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 890,
+          "West": 892
+        }
+      },
+      {
+        "Id": 892,
+        "Name": "Throne Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 893,
+          "East": 891
+        }
+      },
+      {
+        "Id": 893,
+        "Name": "Main Chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 892
+        }
+      },
+      {
+        "Id": 894,
+        "Name": "City street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 895,
+          "East": 897,
+          "South": 890
+        }
+      },
+      {
+        "Id": 895,
+        "Name": "City street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 894,
+          "West": 896
+        }
+      },
+      {
+        "Id": 896,
+        "Name": "Cleric Academy",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 895
+        }
+      },
+      {
+        "Id": 897,
+        "Name": "City street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 899,
+          "East": 901,
+          "West": 894
+        }
+      },
+      {
+        "Id": 898,
+        "Name": "Warrior\u0027s Academy",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 886
+        }
+      },
+      {
+        "Id": 899,
+        "Name": "Entrance to the Temple of Lloth",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 897,
+          "Down": 906
+        }
+      },
+      {
+        "Id": 900,
+        "Name": "Mage\u0027s Academy",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 901
+        }
+      },
+      {
+        "Id": 901,
+        "Name": "City street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 900,
+          "East": 903,
+          "South": 902,
+          "West": 897
+        }
+      },
+      {
+        "Id": 902,
+        "Name": "Slave Chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 901,
+          "East": 881
+        }
+      },
+      {
+        "Id": 903,
+        "Name": "City street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 904,
+          "South": 881,
+          "West": 901
+        }
+      },
+      {
+        "Id": 904,
+        "Name": "4th house",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 905,
+          "South": 903
+        }
+      },
+      {
+        "Id": 905,
+        "Name": "Throne Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 904
+        }
+      },
+      {
+        "Id": 906,
+        "Name": "Entrance Way",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 907,
+          "Up": 899
+        }
+      },
+      {
+        "Id": 907,
+        "Name": "Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 915,
+          "South": 906,
+          "East": 908,
+          "West": 911
+        }
+      },
+      {
+        "Id": 908,
+        "Name": "Long Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 909,
+          "West": 907
+        }
+      },
+      {
+        "Id": 909,
+        "Name": "Long Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 930,
+          "East": 910,
+          "West": 908
+        }
+      },
+      {
+        "Id": 910,
+        "Name": "Long Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 914,
+          "West": 909
+        }
+      },
+      {
+        "Id": 911,
+        "Name": "Long Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 907,
+          "West": 912
+        }
+      },
+      {
+        "Id": 912,
+        "Name": "Long Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 911,
+          "South": 913,
+          "West": 914
+        }
+      },
+      {
+        "Id": 913,
+        "Name": "Warrior\u0027s Barracks",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 912
+        }
+      },
+      {
+        "Id": 914,
+        "Name": "Long Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 912,
+          "West": 910
+        }
+      },
+      {
+        "Id": 915,
+        "Name": "Grand Stairway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 907,
+          "Up": 916
+        }
+      },
+      {
+        "Id": 916,
+        "Name": "Grand Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 918,
+          "East": 917,
+          "Down": 915
+        }
+      },
+      {
+        "Id": 917,
+        "Name": "Mage\u0027s Barracks",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 916
+        }
+      },
+      {
+        "Id": 918,
+        "Name": "Grand Hallway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 916,
+          "West": 919,
+          "Down": 920
+        }
+      },
+      {
+        "Id": 919,
+        "Name": "Cleric\u0027s Barracks",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 918
+        }
+      },
+      {
+        "Id": 920,
+        "Name": "Grand Stairway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 921,
+          "Up": 918
+        }
+      },
+      {
+        "Id": 921,
+        "Name": "Main Chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 922,
+          "South": 920,
+          "West": 924
+        }
+      },
+      {
+        "Id": 922,
+        "Name": "Eastern side of Chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 925,
+          "East": 926,
+          "South": 921
+        }
+      },
+      {
+        "Id": 923,
+        "Name": "Sacrificial Pit",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 924,
+        "Name": "Western side of Chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 925,
+          "South": 921
+        }
+      },
+      {
+        "Id": 925,
+        "Name": "The Altar",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 928,
+          "East": 922,
+          "West": 924,
+          "Down": 923
+        }
+      },
+      {
+        "Id": 926,
+        "Name": "Slave Cells",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 927,
+          "West": 922
+        }
+      },
+      {
+        "Id": 927,
+        "Name": "Slave Pen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 926
+        }
+      },
+      {
+        "Id": 928,
+        "Name": "Dais",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 925,
+          "West": 929
+        }
+      },
+      {
+        "Id": 929,
+        "Name": "The Treasury",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 928
+        }
+      },
+      {
+        "Id": 930,
+        "Name": "Weaponsmaster\u0027s Chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 909
+        }
+      },
+      {
+        "Id": 3768,
+        "Name": "To Thalos",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "Up": 3767,
+          "Down": 880
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 880,
-      "name": "City Entrance",
-      "exits": {
-        "West": 881,
-        "Up": 3768
-      }
-    },
-    {
-      "id": 881,
-      "name": "City street",
-      "exits": {
-        "North": 903,
-        "East": 880,
-        "South": 882,
-        "West": 902
-      }
-    },
-    {
-      "id": 882,
-      "name": "City street",
-      "exits": {
-        "North": 881,
-        "West": 883
-      }
-    },
-    {
-      "id": 883,
-      "name": "City street",
-      "exits": {
-        "East": 882,
-        "South": 884,
-        "West": 886
-      }
-    },
-    {
-      "id": 884,
-      "name": "3rd House",
-      "exits": {
-        "North": 883,
-        "South": 885
-      }
-    },
-    {
-      "id": 885,
-      "name": "Throne Room",
-      "exits": {
-        "North": 884
-      }
-    },
-    {
-      "id": 886,
-      "name": "City street",
-      "exits": {
-        "North": 898,
-        "East": 883,
-        "West": 887
-      }
-    },
-    {
-      "id": 887,
-      "name": "City street",
-      "exits": {
-        "North": 890,
-        "East": 886,
-        "South": 888
-      }
-    },
-    {
-      "id": 888,
-      "name": "2nd House",
-      "exits": {
-        "North": 887,
-        "West": 889
-      }
-    },
-    {
-      "id": 889,
-      "name": "Throne Room",
-      "exits": {
-        "East": 888
-      }
-    },
-    {
-      "id": 890,
-      "name": "Main Gate",
-      "exits": {
-        "North": 894,
-        "South": 887,
-        "West": 891
-      }
-    },
-    {
-      "id": 891,
-      "name": "1st House",
-      "exits": {
-        "East": 890,
-        "West": 892
-      }
-    },
-    {
-      "id": 892,
-      "name": "Throne Room",
-      "exits": {
-        "North": 893,
-        "East": 891
-      }
-    },
-    {
-      "id": 893,
-      "name": "Main Chamber",
-      "exits": {
-        "South": 892
-      }
-    },
-    {
-      "id": 894,
-      "name": "City street",
-      "exits": {
-        "North": 895,
-        "East": 897,
-        "South": 890
-      }
-    },
-    {
-      "id": 895,
-      "name": "City street",
-      "exits": {
-        "South": 894,
-        "West": 896
-      }
-    },
-    {
-      "id": 896,
-      "name": "Cleric Academy",
-      "exits": {
-        "East": 895
-      }
-    },
-    {
-      "id": 897,
-      "name": "City street",
-      "exits": {
-        "North": 899,
-        "East": 901,
-        "West": 894
-      }
-    },
-    {
-      "id": 898,
-      "name": "Warrior\u0027s Academy",
-      "exits": {
-        "South": 886
-      }
-    },
-    {
-      "id": 899,
-      "name": "Entrance to the Temple of Lloth",
-      "exits": {
-        "South": 897,
-        "Down": 906
-      }
-    },
-    {
-      "id": 900,
-      "name": "Mage\u0027s Academy",
-      "exits": {
-        "South": 901
-      }
-    },
-    {
-      "id": 901,
-      "name": "City street",
-      "exits": {
-        "North": 900,
-        "East": 903,
-        "South": 902,
-        "West": 897
-      }
-    },
-    {
-      "id": 902,
-      "name": "Slave Chamber",
-      "exits": {
-        "North": 901,
-        "East": 881
-      }
-    },
-    {
-      "id": 903,
-      "name": "City street",
-      "exits": {
-        "North": 904,
-        "South": 881,
-        "West": 901
-      }
-    },
-    {
-      "id": 904,
-      "name": "4th house",
-      "exits": {
-        "East": 905,
-        "South": 903
-      }
-    },
-    {
-      "id": 905,
-      "name": "Throne Room",
-      "exits": {
-        "West": 904
-      }
-    },
-    {
-      "id": 906,
-      "name": "Entrance Way",
-      "exits": {
-        "North": 907,
-        "Up": 899
-      }
-    },
-    {
-      "id": 907,
-      "name": "Hallway",
-      "exits": {
-        "North": 915,
-        "South": 906,
-        "East": 908,
-        "West": 911
-      }
-    },
-    {
-      "id": 908,
-      "name": "Long Hallway",
-      "exits": {
-        "East": 909,
-        "West": 907
-      }
-    },
-    {
-      "id": 909,
-      "name": "Long Hallway",
-      "exits": {
-        "North": 930,
-        "East": 910,
-        "West": 908
-      }
-    },
-    {
-      "id": 910,
-      "name": "Long Hallway",
-      "exits": {
-        "East": 914,
-        "West": 909
-      }
-    },
-    {
-      "id": 911,
-      "name": "Long Hallway",
-      "exits": {
-        "East": 907,
-        "West": 912
-      }
-    },
-    {
-      "id": 912,
-      "name": "Long Hallway",
-      "exits": {
-        "East": 911,
-        "South": 913,
-        "West": 914
-      }
-    },
-    {
-      "id": 913,
-      "name": "Warrior\u0027s Barracks",
-      "exits": {
-        "North": 912
-      }
-    },
-    {
-      "id": 914,
-      "name": "Long Hallway",
-      "exits": {
-        "East": 912,
-        "West": 910
-      }
-    },
-    {
-      "id": 915,
-      "name": "Grand Stairway",
-      "exits": {
-        "South": 907,
-        "Up": 916
-      }
-    },
-    {
-      "id": 916,
-      "name": "Grand Hallway",
-      "exits": {
-        "North": 918,
-        "East": 917,
-        "Down": 915
-      }
-    },
-    {
-      "id": 917,
-      "name": "Mage\u0027s Barracks",
-      "exits": {
-        "West": 916
-      }
-    },
-    {
-      "id": 918,
-      "name": "Grand Hallway",
-      "exits": {
-        "South": 916,
-        "West": 919,
-        "Down": 920
-      }
-    },
-    {
-      "id": 919,
-      "name": "Cleric\u0027s Barracks",
-      "exits": {
-        "East": 918
-      }
-    },
-    {
-      "id": 920,
-      "name": "Grand Stairway",
-      "exits": {
-        "North": 921,
-        "Up": 918
-      }
-    },
-    {
-      "id": 921,
-      "name": "Main Chamber",
-      "exits": {
-        "East": 922,
-        "South": 920,
-        "West": 924
-      }
-    },
-    {
-      "id": 922,
-      "name": "Eastern side of Chamber",
-      "exits": {
-        "North": 925,
-        "East": 926,
-        "South": 921
-      }
-    },
-    {
-      "id": 923,
-      "name": "Sacrificial Pit",
-      "exits": {}
-    },
-    {
-      "id": 924,
-      "name": "Western side of Chamber",
-      "exits": {
-        "North": 925,
-        "South": 921
-      }
-    },
-    {
-      "id": 925,
-      "name": "The Altar",
-      "exits": {
-        "North": 928,
-        "East": 922,
-        "West": 924,
-        "Down": 923
-      }
-    },
-    {
-      "id": 926,
-      "name": "Slave Cells",
-      "exits": {
-        "North": 927,
-        "West": 922
-      }
-    },
-    {
-      "id": 927,
-      "name": "Slave Pen",
-      "exits": {
-        "South": 926
-      }
-    },
-    {
-      "id": 928,
-      "name": "Dais",
-      "exits": {
-        "South": 925,
-        "West": 929
-      }
-    },
-    {
-      "id": 929,
-      "name": "The Treasury",
-      "exits": {
-        "East": 928
-      }
-    },
-    {
-      "id": 930,
-      "name": "Weaponsmaster\u0027s Chamber",
-      "exits": {
-        "South": 909
-      }
-    },
-    {
-      "id": 3768,
-      "name": "To Thalos",
-      "otherAreaExit": true,
-      "exits": {
-        "Up": 3767,
-        "Down": 880
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

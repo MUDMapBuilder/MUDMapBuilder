@@ -1,805 +1,1004 @@
 {
-  "name": "Castle Reinhold",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Castle Reinhold",
+    "Rooms": [
+      {
+        "Id": 232,
+        "Name": "Field of Death",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 2246,
+          "South": 233
+        }
+      },
+      {
+        "Id": 233,
+        "Name": "Burnt Village",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 232,
+          "South": 234
+        }
+      },
+      {
+        "Id": 234,
+        "Name": "Road to Castle",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 233,
+          "South": 235
+        }
+      },
+      {
+        "Id": 235,
+        "Name": "Bridge over Rhein River",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 234,
+          "East": 236,
+          "South": 238
+        }
+      },
+      {
+        "Id": 236,
+        "Name": "A path along the river.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 237,
+          "West": 235
+        }
+      },
+      {
+        "Id": 237,
+        "Name": "Logging Camp",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 236,
+          "Down": 240
+        }
+      },
+      {
+        "Id": 238,
+        "Name": "Cobblestone Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 235,
+          "South": 239
+        }
+      },
+      {
+        "Id": 239,
+        "Name": "Scenic Overlook",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 238,
+          "South": 256
+        }
+      },
+      {
+        "Id": 240,
+        "Name": "Rope Ladder",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 237,
+          "Down": 241
+        }
+      },
+      {
+        "Id": 241,
+        "Name": "Tree Bridge",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 242,
+          "Up": 240
+        }
+      },
+      {
+        "Id": 242,
+        "Name": "The Cave Entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 241,
+          "East": 243,
+          "South": 246
+        }
+      },
+      {
+        "Id": 243,
+        "Name": "A tiny tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 244,
+          "West": 242
+        }
+      },
+      {
+        "Id": 244,
+        "Name": "Crystal Cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 245,
+          "West": 243
+        }
+      },
+      {
+        "Id": 245,
+        "Name": "Too Dark to tell.  Scary huh.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 319,
+          "West": 244
+        }
+      },
+      {
+        "Id": 246,
+        "Name": "An underground River",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 242,
+          "East": 247
+        }
+      },
+      {
+        "Id": 247,
+        "Name": "River ride.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 248,
+          "West": 246
+        }
+      },
+      {
+        "Id": 248,
+        "Name": "Dark cold river.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 321,
+          "South": 249,
+          "West": 247
+        }
+      },
+      {
+        "Id": 249,
+        "Name": "Inside the mountain.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 248,
+          "Up": 250
+        }
+      },
+      {
+        "Id": 250,
+        "Name": "Plaza Well",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 255,
+          "South": 268,
+          "West": 251,
+          "Down": 249
+        }
+      },
+      {
+        "Id": 251,
+        "Name": "Western Plaza",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 250,
+          "South": 253,
+          "West": 252
+        }
+      },
+      {
+        "Id": 252,
+        "Name": "Small Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 251,
+          "West": 254
+        }
+      },
+      {
+        "Id": 253,
+        "Name": "The Armorer",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 251,
+          "South": 267
+        }
+      },
+      {
+        "Id": 254,
+        "Name": "A Small Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 320,
+          "East": 252,
+          "West": 265
+        }
+      },
+      {
+        "Id": 255,
+        "Name": "Eastern Plaza",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 270,
+          "West": 250
+        }
+      },
+      {
+        "Id": 256,
+        "Name": "Preamble to evil.",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 239,
+          "East": 257
+        }
+      },
+      {
+        "Id": 257,
+        "Name": "Downward Slope",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 258,
+          "West": 256
+        }
+      },
+      {
+        "Id": 258,
+        "Name": "Battle Zone",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 257,
+          "South": 259
+        }
+      },
+      {
+        "Id": 259,
+        "Name": "Before the Gates",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 258,
+          "South": 260
+        }
+      },
+      {
+        "Id": 260,
+        "Name": "Castle Entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 259,
+          "South": 261
+        }
+      },
+      {
+        "Id": 261,
+        "Name": "Palace Road",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 260,
+          "East": 265,
+          "South": 264,
+          "West": 262
+        }
+      },
+      {
+        "Id": 262,
+        "Name": "Park Avenue",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 261,
+          "South": 263
+        }
+      },
+      {
+        "Id": 263,
+        "Name": "South End of Park",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 262
+        }
+      },
+      {
+        "Id": 264,
+        "Name": "Palace Entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 261
+        }
+      },
+      {
+        "Id": 265,
+        "Name": "Grendel Avenue",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 254,
+          "South": 266,
+          "West": 261
+        }
+      },
+      {
+        "Id": 266,
+        "Name": "The Bakery",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 265
+        }
+      },
+      {
+        "Id": 267,
+        "Name": "The Weaponsmith",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 253,
+          "East": 269
+        }
+      },
+      {
+        "Id": 268,
+        "Name": "Southern Plaza",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 250,
+          "South": 269
+        }
+      },
+      {
+        "Id": 269,
+        "Name": "Parade Grounds",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 268,
+          "East": 272,
+          "South": 273,
+          "West": 267
+        }
+      },
+      {
+        "Id": 270,
+        "Name": "Dark Tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 255,
+          "South": 271
+        }
+      },
+      {
+        "Id": 271,
+        "Name": "The LIGHT",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 270,
+          "South": 272
+        }
+      },
+      {
+        "Id": 272,
+        "Name": "Peace Garden",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 271,
+          "South": 276,
+          "West": 269
+        }
+      },
+      {
+        "Id": 273,
+        "Name": "First Floor Barracks",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 269,
+          "Up": 274
+        }
+      },
+      {
+        "Id": 274,
+        "Name": "The Second Floor",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 275,
+          "Down": 273
+        }
+      },
+      {
+        "Id": 275,
+        "Name": "The Armory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 274
+        }
+      },
+      {
+        "Id": 276,
+        "Name": "Crowbar Street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 272,
+          "South": 277
+        }
+      },
+      {
+        "Id": 277,
+        "Name": "Kiki Street",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 276,
+          "South": 278
+        }
+      },
+      {
+        "Id": 278,
+        "Name": "Keep Entrance",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 277,
+          "South": 279
+        }
+      },
+      {
+        "Id": 279,
+        "Name": "Main Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 278,
+          "South": 289,
+          "West": 280
+        }
+      },
+      {
+        "Id": 280,
+        "Name": "Forest Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 279,
+          "South": 285,
+          "West": 281
+        }
+      },
+      {
+        "Id": 281,
+        "Name": "Dining Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 280,
+          "South": 284,
+          "West": 283
+        }
+      },
+      {
+        "Id": 282,
+        "Name": "Ceptic Tank",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 283,
+        "Name": "The Indoor Toilets",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 281,
+          "Down": 282
+        }
+      },
+      {
+        "Id": 284,
+        "Name": "The Kitchen",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 281
+        }
+      },
+      {
+        "Id": 285,
+        "Name": "Flight of stairs",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 280,
+          "Up": 286
+        }
+      },
+      {
+        "Id": 286,
+        "Name": "The First Ring ",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 287,
+          "Down": 285
+        }
+      },
+      {
+        "Id": 287,
+        "Name": "The Second Ring",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 318,
+          "Up": 288,
+          "Down": 286
+        }
+      },
+      {
+        "Id": 288,
+        "Name": "Third Ring",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 287
+        }
+      },
+      {
+        "Id": 289,
+        "Name": "Red Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 279,
+          "South": 290
+        }
+      },
+      {
+        "Id": 290,
+        "Name": "Grand Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 289,
+          "South": 291
+        }
+      },
+      {
+        "Id": 291,
+        "Name": "Audience Chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 290,
+          "South": 292
+        }
+      },
+      {
+        "Id": 292,
+        "Name": "Grand Staircase",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 291,
+          "South": 301,
+          "West": 293
+        }
+      },
+      {
+        "Id": 293,
+        "Name": "Great Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 292,
+          "South": 300,
+          "West": 294
+        }
+      },
+      {
+        "Id": 294,
+        "Name": "The Great Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 293,
+          "South": 299,
+          "West": 295
+        }
+      },
+      {
+        "Id": 295,
+        "Name": "Middle Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 294,
+          "South": 298,
+          "West": 296
+        }
+      },
+      {
+        "Id": 296,
+        "Name": "End of the Hall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 295,
+          "South": 297
+        }
+      },
+      {
+        "Id": 297,
+        "Name": "Large Bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 296
+        }
+      },
+      {
+        "Id": 298,
+        "Name": "Visitor\u0027s Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 295
+        }
+      },
+      {
+        "Id": 299,
+        "Name": "Master Bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 294
+        }
+      },
+      {
+        "Id": 300,
+        "Name": "Mistress Bedroom",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 293
+        }
+      },
+      {
+        "Id": 301,
+        "Name": "Great Library",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 292,
+          "South": 302
+        }
+      },
+      {
+        "Id": 302,
+        "Name": "A Bookshelf",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 301,
+          "South": 303
+        }
+      },
+      {
+        "Id": 303,
+        "Name": "Dirty passageway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 302,
+          "South": 306,
+          "West": 304
+        }
+      },
+      {
+        "Id": 304,
+        "Name": "A narrow passageway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 303,
+          "Down": 305
+        }
+      },
+      {
+        "Id": 305,
+        "Name": "Shaky stairway",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 314,
+          "Up": 304
+        }
+      },
+      {
+        "Id": 306,
+        "Name": "Natural Cave",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 303,
+          "South": 307
+        }
+      },
+      {
+        "Id": 307,
+        "Name": "The Dead Cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 306,
+          "South": 308,
+          "West": 313
+        }
+      },
+      {
+        "Id": 308,
+        "Name": "Small cave",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 307,
+          "South": 309,
+          "West": 311
+        }
+      },
+      {
+        "Id": 309,
+        "Name": "Overlook cave",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 308,
+          "Down": 236,
+          "West": 310
+        }
+      },
+      {
+        "Id": 310,
+        "Name": "The Lair",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 309
+        }
+      },
+      {
+        "Id": 311,
+        "Name": "A dark dangerous cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 308,
+          "Up": 312
+        }
+      },
+      {
+        "Id": 312,
+        "Name": "Treasure Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 311
+        }
+      },
+      {
+        "Id": 313,
+        "Name": "Side cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 307
+        }
+      },
+      {
+        "Id": 314,
+        "Name": "The Torturer\u0027s Pit",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 305,
+          "West": 315
+        }
+      },
+      {
+        "Id": 315,
+        "Name": "Torture Chamber",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 314,
+          "West": 317
+        }
+      },
+      {
+        "Id": 316,
+        "Name": "Dungeon Cell",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {}
+      },
+      {
+        "Id": 317,
+        "Name": "The Last Mile",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 316,
+          "East": 315,
+          "South": 316,
+          "West": 316
+        }
+      },
+      {
+        "Id": 318,
+        "Name": "Inside the Summoning Ring",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 328,
+          "South": 237,
+          "West": 287,
+          "Up": 327
+        }
+      },
+      {
+        "Id": 319,
+        "Name": "The Way Out",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 245,
+          "East": 232
+        }
+      },
+      {
+        "Id": 320,
+        "Name": "Mercantile",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 254
+        }
+      },
+      {
+        "Id": 321,
+        "Name": "A Dangerous Fall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 248,
+          "Down": 322
+        }
+      },
+      {
+        "Id": 322,
+        "Name": "No exit blackness",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 323,
+          "Up": 321
+        }
+      },
+      {
+        "Id": 323,
+        "Name": "Under the waterfall",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 324,
+          "East": 322
+        }
+      },
+      {
+        "Id": 324,
+        "Name": "The waterfall tunnel",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "South": 323,
+          "West": 325
+        }
+      },
+      {
+        "Id": 325,
+        "Name": "A Large underground cavern",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 324,
+          "Up": 326
+        }
+      },
+      {
+        "Id": 326,
+        "Name": "God\u0027s Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 325
+        }
+      },
+      {
+        "Id": 327,
+        "Name": "Hall of Horrors",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Down": 318
+        }
+      },
+      {
+        "Id": 328,
+        "Name": "The Dark Abyss",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "West": 318
+        }
+      },
+      {
+        "Id": 2246,
+        "Name": "To Miden\u0027nir",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "North": 2222,
+          "West": 232
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 232,
-      "name": "Field of Death",
-      "exits": {
-        "East": 2246,
-        "South": 233
-      }
-    },
-    {
-      "id": 233,
-      "name": "Burnt Village",
-      "exits": {
-        "North": 232,
-        "South": 234
-      }
-    },
-    {
-      "id": 234,
-      "name": "Road to Castle",
-      "exits": {
-        "North": 233,
-        "South": 235
-      }
-    },
-    {
-      "id": 235,
-      "name": "Bridge over Rhein River",
-      "exits": {
-        "North": 234,
-        "East": 236,
-        "South": 238
-      }
-    },
-    {
-      "id": 236,
-      "name": "A path along the river.",
-      "exits": {
-        "East": 237,
-        "West": 235
-      }
-    },
-    {
-      "id": 237,
-      "name": "Logging Camp",
-      "exits": {
-        "West": 236,
-        "Down": 240
-      }
-    },
-    {
-      "id": 238,
-      "name": "Cobblestone Road",
-      "exits": {
-        "North": 235,
-        "South": 239
-      }
-    },
-    {
-      "id": 239,
-      "name": "Scenic Overlook",
-      "exits": {
-        "North": 238,
-        "South": 256
-      }
-    },
-    {
-      "id": 240,
-      "name": "Rope Ladder",
-      "exits": {
-        "Up": 237,
-        "Down": 241
-      }
-    },
-    {
-      "id": 241,
-      "name": "Tree Bridge",
-      "exits": {
-        "South": 242,
-        "Up": 240
-      }
-    },
-    {
-      "id": 242,
-      "name": "The Cave Entrance",
-      "exits": {
-        "North": 241,
-        "East": 243,
-        "South": 246
-      }
-    },
-    {
-      "id": 243,
-      "name": "A tiny tunnel",
-      "exits": {
-        "East": 244,
-        "West": 242
-      }
-    },
-    {
-      "id": 244,
-      "name": "Crystal Cavern",
-      "exits": {
-        "East": 245,
-        "West": 243
-      }
-    },
-    {
-      "id": 245,
-      "name": "Too Dark to tell.  Scary huh.",
-      "exits": {
-        "South": 319,
-        "West": 244
-      }
-    },
-    {
-      "id": 246,
-      "name": "An underground River",
-      "exits": {
-        "North": 242,
-        "East": 247
-      }
-    },
-    {
-      "id": 247,
-      "name": "River ride.",
-      "exits": {
-        "East": 248,
-        "West": 246
-      }
-    },
-    {
-      "id": 248,
-      "name": "Dark cold river.",
-      "exits": {
-        "East": 321,
-        "South": 249,
-        "West": 247
-      }
-    },
-    {
-      "id": 249,
-      "name": "Inside the mountain.",
-      "exits": {
-        "North": 248,
-        "Up": 250
-      }
-    },
-    {
-      "id": 250,
-      "name": "Plaza Well",
-      "exits": {
-        "East": 255,
-        "South": 268,
-        "West": 251,
-        "Down": 249
-      }
-    },
-    {
-      "id": 251,
-      "name": "Western Plaza",
-      "exits": {
-        "East": 250,
-        "South": 253,
-        "West": 252
-      }
-    },
-    {
-      "id": 252,
-      "name": "Small Tunnel",
-      "exits": {
-        "East": 251,
-        "West": 254
-      }
-    },
-    {
-      "id": 253,
-      "name": "The Armorer",
-      "exits": {
-        "North": 251,
-        "South": 267
-      }
-    },
-    {
-      "id": 254,
-      "name": "A Small Tunnel",
-      "exits": {
-        "North": 320,
-        "East": 252,
-        "West": 265
-      }
-    },
-    {
-      "id": 255,
-      "name": "Eastern Plaza",
-      "exits": {
-        "South": 270,
-        "West": 250
-      }
-    },
-    {
-      "id": 256,
-      "name": "Preamble to evil.",
-      "exits": {
-        "North": 239,
-        "East": 257
-      }
-    },
-    {
-      "id": 257,
-      "name": "Downward Slope",
-      "exits": {
-        "South": 258,
-        "West": 256
-      }
-    },
-    {
-      "id": 258,
-      "name": "Battle Zone",
-      "exits": {
-        "North": 257,
-        "South": 259
-      }
-    },
-    {
-      "id": 259,
-      "name": "Before the Gates",
-      "exits": {
-        "North": 258,
-        "South": 260
-      }
-    },
-    {
-      "id": 260,
-      "name": "Castle Entrance",
-      "exits": {
-        "North": 259,
-        "South": 261
-      }
-    },
-    {
-      "id": 261,
-      "name": "Palace Road",
-      "exits": {
-        "North": 260,
-        "East": 265,
-        "South": 264,
-        "West": 262
-      }
-    },
-    {
-      "id": 262,
-      "name": "Park Avenue",
-      "exits": {
-        "East": 261,
-        "South": 263
-      }
-    },
-    {
-      "id": 263,
-      "name": "South End of Park",
-      "exits": {
-        "North": 262
-      }
-    },
-    {
-      "id": 264,
-      "name": "Palace Entrance",
-      "exits": {
-        "North": 261
-      }
-    },
-    {
-      "id": 265,
-      "name": "Grendel Avenue",
-      "exits": {
-        "East": 254,
-        "South": 266,
-        "West": 261
-      }
-    },
-    {
-      "id": 266,
-      "name": "The Bakery",
-      "exits": {
-        "North": 265
-      }
-    },
-    {
-      "id": 267,
-      "name": "The Weaponsmith",
-      "exits": {
-        "North": 253,
-        "East": 269
-      }
-    },
-    {
-      "id": 268,
-      "name": "Southern Plaza",
-      "exits": {
-        "North": 250,
-        "South": 269
-      }
-    },
-    {
-      "id": 269,
-      "name": "Parade Grounds",
-      "exits": {
-        "North": 268,
-        "East": 272,
-        "South": 273,
-        "West": 267
-      }
-    },
-    {
-      "id": 270,
-      "name": "Dark Tunnel",
-      "exits": {
-        "North": 255,
-        "South": 271
-      }
-    },
-    {
-      "id": 271,
-      "name": "The LIGHT",
-      "exits": {
-        "North": 270,
-        "South": 272
-      }
-    },
-    {
-      "id": 272,
-      "name": "Peace Garden",
-      "exits": {
-        "North": 271,
-        "South": 276,
-        "West": 269
-      }
-    },
-    {
-      "id": 273,
-      "name": "First Floor Barracks",
-      "exits": {
-        "North": 269,
-        "Up": 274
-      }
-    },
-    {
-      "id": 274,
-      "name": "The Second Floor",
-      "exits": {
-        "Up": 275,
-        "Down": 273
-      }
-    },
-    {
-      "id": 275,
-      "name": "The Armory",
-      "exits": {
-        "Down": 274
-      }
-    },
-    {
-      "id": 276,
-      "name": "Crowbar Street",
-      "exits": {
-        "North": 272,
-        "South": 277
-      }
-    },
-    {
-      "id": 277,
-      "name": "Kiki Street",
-      "exits": {
-        "North": 276,
-        "South": 278
-      }
-    },
-    {
-      "id": 278,
-      "name": "Keep Entrance",
-      "exits": {
-        "North": 277,
-        "South": 279
-      }
-    },
-    {
-      "id": 279,
-      "name": "Main Hall",
-      "exits": {
-        "North": 278,
-        "South": 289,
-        "West": 280
-      }
-    },
-    {
-      "id": 280,
-      "name": "Forest Hall",
-      "exits": {
-        "East": 279,
-        "South": 285,
-        "West": 281
-      }
-    },
-    {
-      "id": 281,
-      "name": "Dining Hall",
-      "exits": {
-        "East": 280,
-        "South": 284,
-        "West": 283
-      }
-    },
-    {
-      "id": 282,
-      "name": "Ceptic Tank",
-      "exits": {}
-    },
-    {
-      "id": 283,
-      "name": "The Indoor Toilets",
-      "exits": {
-        "East": 281,
-        "Down": 282
-      }
-    },
-    {
-      "id": 284,
-      "name": "The Kitchen",
-      "exits": {
-        "North": 281
-      }
-    },
-    {
-      "id": 285,
-      "name": "Flight of stairs",
-      "exits": {
-        "North": 280,
-        "Up": 286
-      }
-    },
-    {
-      "id": 286,
-      "name": "The First Ring ",
-      "exits": {
-        "Up": 287,
-        "Down": 285
-      }
-    },
-    {
-      "id": 287,
-      "name": "The Second Ring",
-      "exits": {
-        "East": 318,
-        "Up": 288,
-        "Down": 286
-      }
-    },
-    {
-      "id": 288,
-      "name": "Third Ring",
-      "exits": {
-        "Down": 287
-      }
-    },
-    {
-      "id": 289,
-      "name": "Red Hall",
-      "exits": {
-        "North": 279,
-        "South": 290
-      }
-    },
-    {
-      "id": 290,
-      "name": "Grand Hall",
-      "exits": {
-        "North": 289,
-        "South": 291
-      }
-    },
-    {
-      "id": 291,
-      "name": "Audience Chamber",
-      "exits": {
-        "North": 290,
-        "South": 292
-      }
-    },
-    {
-      "id": 292,
-      "name": "Grand Staircase",
-      "exits": {
-        "North": 291,
-        "South": 301,
-        "West": 293
-      }
-    },
-    {
-      "id": 293,
-      "name": "Great Hall",
-      "exits": {
-        "East": 292,
-        "South": 300,
-        "West": 294
-      }
-    },
-    {
-      "id": 294,
-      "name": "The Great Hall",
-      "exits": {
-        "East": 293,
-        "South": 299,
-        "West": 295
-      }
-    },
-    {
-      "id": 295,
-      "name": "Middle Hall",
-      "exits": {
-        "East": 294,
-        "South": 298,
-        "West": 296
-      }
-    },
-    {
-      "id": 296,
-      "name": "End of the Hall",
-      "exits": {
-        "East": 295,
-        "South": 297
-      }
-    },
-    {
-      "id": 297,
-      "name": "Large Bedroom",
-      "exits": {
-        "North": 296
-      }
-    },
-    {
-      "id": 298,
-      "name": "Visitor\u0027s Room",
-      "exits": {
-        "North": 295
-      }
-    },
-    {
-      "id": 299,
-      "name": "Master Bedroom",
-      "exits": {
-        "North": 294
-      }
-    },
-    {
-      "id": 300,
-      "name": "Mistress Bedroom",
-      "exits": {
-        "North": 293
-      }
-    },
-    {
-      "id": 301,
-      "name": "Great Library",
-      "exits": {
-        "North": 292,
-        "South": 302
-      }
-    },
-    {
-      "id": 302,
-      "name": "A Bookshelf",
-      "exits": {
-        "North": 301,
-        "South": 303
-      }
-    },
-    {
-      "id": 303,
-      "name": "Dirty passageway",
-      "exits": {
-        "North": 302,
-        "South": 306,
-        "West": 304
-      }
-    },
-    {
-      "id": 304,
-      "name": "A narrow passageway",
-      "exits": {
-        "East": 303,
-        "Down": 305
-      }
-    },
-    {
-      "id": 305,
-      "name": "Shaky stairway",
-      "exits": {
-        "West": 314,
-        "Up": 304
-      }
-    },
-    {
-      "id": 306,
-      "name": "Natural Cave",
-      "exits": {
-        "North": 303,
-        "South": 307
-      }
-    },
-    {
-      "id": 307,
-      "name": "The Dead Cavern",
-      "exits": {
-        "North": 306,
-        "South": 308,
-        "West": 313
-      }
-    },
-    {
-      "id": 308,
-      "name": "Small cave",
-      "exits": {
-        "North": 307,
-        "South": 309,
-        "West": 311
-      }
-    },
-    {
-      "id": 309,
-      "name": "Overlook cave",
-      "exits": {
-        "North": 308,
-        "Down": 236,
-        "West": 310
-      }
-    },
-    {
-      "id": 310,
-      "name": "The Lair",
-      "exits": {
-        "East": 309
-      }
-    },
-    {
-      "id": 311,
-      "name": "A dark dangerous cavern",
-      "exits": {
-        "East": 308,
-        "Up": 312
-      }
-    },
-    {
-      "id": 312,
-      "name": "Treasure Room",
-      "exits": {
-        "Down": 311
-      }
-    },
-    {
-      "id": 313,
-      "name": "Side cavern",
-      "exits": {
-        "East": 307
-      }
-    },
-    {
-      "id": 314,
-      "name": "The Torturer\u0027s Pit",
-      "exits": {
-        "East": 305,
-        "West": 315
-      }
-    },
-    {
-      "id": 315,
-      "name": "Torture Chamber",
-      "exits": {
-        "East": 314,
-        "West": 317
-      }
-    },
-    {
-      "id": 316,
-      "name": "Dungeon Cell",
-      "exits": {}
-    },
-    {
-      "id": 317,
-      "name": "The Last Mile",
-      "exits": {
-        "North": 316,
-        "East": 315,
-        "South": 316,
-        "West": 316
-      }
-    },
-    {
-      "id": 318,
-      "name": "Inside the Summoning Ring",
-      "exits": {
-        "East": 328,
-        "South": 237,
-        "West": 287,
-        "Up": 327
-      }
-    },
-    {
-      "id": 319,
-      "name": "The Way Out",
-      "exits": {
-        "North": 245,
-        "East": 232
-      }
-    },
-    {
-      "id": 320,
-      "name": "Mercantile",
-      "exits": {
-        "South": 254
-      }
-    },
-    {
-      "id": 321,
-      "name": "A Dangerous Fall",
-      "exits": {
-        "West": 248,
-        "Down": 322
-      }
-    },
-    {
-      "id": 322,
-      "name": "No exit blackness",
-      "exits": {
-        "West": 323,
-        "Up": 321
-      }
-    },
-    {
-      "id": 323,
-      "name": "Under the waterfall",
-      "exits": {
-        "North": 324,
-        "East": 322
-      }
-    },
-    {
-      "id": 324,
-      "name": "The waterfall tunnel",
-      "exits": {
-        "South": 323,
-        "West": 325
-      }
-    },
-    {
-      "id": 325,
-      "name": "A Large underground cavern",
-      "exits": {
-        "East": 324,
-        "Up": 326
-      }
-    },
-    {
-      "id": 326,
-      "name": "God\u0027s Room",
-      "exits": {
-        "Down": 325
-      }
-    },
-    {
-      "id": 327,
-      "name": "Hall of Horrors",
-      "exits": {
-        "Down": 318
-      }
-    },
-    {
-      "id": 328,
-      "name": "The Dark Abyss",
-      "exits": {
-        "West": 318
-      }
-    },
-    {
-      "id": 2246,
-      "name": "To Miden\u0027nir",
-      "otherAreaExit": true,
-      "exits": {
-        "North": 2222,
-        "West": 232
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

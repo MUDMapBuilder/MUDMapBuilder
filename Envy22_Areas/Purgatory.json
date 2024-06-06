@@ -1,328 +1,387 @@
 {
-  "name": "Purgatory",
-  "buildOptions": {
-    "maxSteps": 1000,
-    "fixObstacles": true,
-    "fixNonStraight": true,
-    "fixIntersected": true,
-    "compactMap": true,
-    "addDebugInfo": false,
-    "colorizeConnectionIssues": true
+  "Area": {
+    "Name": "Purgatory",
+    "Rooms": [
+      {
+        "Id": 3075,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 3084,
+          "Down": 3084
+        }
+      },
+      {
+        "Id": 3076,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3080,
+          "East": 3077,
+          "South": 3084,
+          "West": 3079,
+          "Up": 3088,
+          "Down": 3088
+        }
+      },
+      {
+        "Id": 3077,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3081,
+          "East": 3078,
+          "South": 3085,
+          "West": 3076,
+          "Up": 3089,
+          "Down": 3089
+        }
+      },
+      {
+        "Id": 3078,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3082,
+          "East": 3079,
+          "South": 3086,
+          "West": 3077,
+          "Up": 3090,
+          "Down": 3090
+        }
+      },
+      {
+        "Id": 3079,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3083,
+          "East": 3076,
+          "South": 3087,
+          "West": 3078,
+          "Up": 3091,
+          "Down": 3091
+        }
+      },
+      {
+        "Id": 3080,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3084,
+          "East": 3081,
+          "South": 3076,
+          "West": 3083,
+          "Up": 3092,
+          "Down": 3092
+        }
+      },
+      {
+        "Id": 3081,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3085,
+          "East": 3082,
+          "South": 3077,
+          "West": 3080,
+          "Up": 3093,
+          "Down": 3093
+        }
+      },
+      {
+        "Id": 3082,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3086,
+          "East": 3083,
+          "South": 3078,
+          "West": 3081,
+          "Up": 3094,
+          "Down": 3094
+        }
+      },
+      {
+        "Id": 3083,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3087,
+          "East": 3080,
+          "South": 3079,
+          "West": 3082,
+          "Up": 3095,
+          "Down": 3095
+        }
+      },
+      {
+        "Id": 3084,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3076,
+          "East": 3085,
+          "South": 3080,
+          "West": 3087,
+          "Up": 3075,
+          "Down": 3075
+        }
+      },
+      {
+        "Id": 3085,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3077,
+          "East": 3086,
+          "South": 3081,
+          "West": 3084,
+          "Up": 3097,
+          "Down": 3097
+        }
+      },
+      {
+        "Id": 3086,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3078,
+          "East": 3087,
+          "South": 3082,
+          "West": 3085,
+          "Up": 3098,
+          "Down": 3098
+        }
+      },
+      {
+        "Id": 3087,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3079,
+          "East": 3084,
+          "South": 3083,
+          "West": 3086,
+          "Up": 3099,
+          "Down": 3099
+        }
+      },
+      {
+        "Id": 3088,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3092,
+          "East": 3089,
+          "West": 3091,
+          "Up": 3076,
+          "Down": 3076
+        }
+      },
+      {
+        "Id": 3089,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3093,
+          "East": 3090,
+          "South": 3097,
+          "West": 3088,
+          "Up": 3077,
+          "Down": 3077
+        }
+      },
+      {
+        "Id": 3090,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3094,
+          "East": 3091,
+          "South": 3098,
+          "West": 3089,
+          "Up": 3078,
+          "Down": 3078
+        }
+      },
+      {
+        "Id": 3091,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3095,
+          "East": 3088,
+          "South": 3099,
+          "West": 3090,
+          "Up": 3079,
+          "Down": 3079
+        }
+      },
+      {
+        "Id": 3092,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3096,
+          "East": 3093,
+          "South": 3088,
+          "West": 3095,
+          "Up": 3080,
+          "Down": 3080
+        }
+      },
+      {
+        "Id": 3093,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3097,
+          "East": 3094,
+          "South": 3089,
+          "West": 3092,
+          "Up": 3081,
+          "Down": 3081
+        }
+      },
+      {
+        "Id": 3094,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3098,
+          "East": 3095,
+          "South": 3090,
+          "West": 3093,
+          "Up": 3082,
+          "Down": 3082
+        }
+      },
+      {
+        "Id": 3095,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3099,
+          "East": 3092,
+          "South": 3091,
+          "West": 3094,
+          "Up": 3083,
+          "Down": 3083
+        }
+      },
+      {
+        "Id": 3096,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3100,
+          "East": 3097,
+          "South": 3092
+        }
+      },
+      {
+        "Id": 3097,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3089,
+          "East": 3098,
+          "South": 3093,
+          "West": 3096,
+          "Up": 3085,
+          "Down": 3085
+        }
+      },
+      {
+        "Id": 3098,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3090,
+          "East": 3099,
+          "South": 3094,
+          "West": 3097,
+          "Up": 3086,
+          "Down": 3086
+        }
+      },
+      {
+        "Id": 3099,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "North": 3091,
+          "South": 3095,
+          "West": 3098,
+          "Up": 3087,
+          "Down": 3087
+        }
+      },
+      {
+        "Id": 3100,
+        "Name": "The Purgatory",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "East": 3101
+        }
+      },
+      {
+        "Id": 3101,
+        "Name": "The Judgement Room",
+        "IsExitToOtherArea": false,
+        "Position": null,
+        "Connections": {
+          "Up": 2296
+        }
+      },
+      {
+        "Id": 2296,
+        "Name": "To Midgaard",
+        "IsExitToOtherArea": true,
+        "Position": null,
+        "Connections": {
+          "South": 2247,
+          "Up": 2298
+        }
+      }
+    ]
   },
-  "rooms": [
-    {
-      "id": 3075,
-      "name": "The Purgatory",
-      "exits": {
-        "Up": 3084,
-        "Down": 3084
-      }
-    },
-    {
-      "id": 3076,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3080,
-        "East": 3077,
-        "South": 3084,
-        "West": 3079,
-        "Up": 3088,
-        "Down": 3088
-      }
-    },
-    {
-      "id": 3077,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3081,
-        "East": 3078,
-        "South": 3085,
-        "West": 3076,
-        "Up": 3089,
-        "Down": 3089
-      }
-    },
-    {
-      "id": 3078,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3082,
-        "East": 3079,
-        "South": 3086,
-        "West": 3077,
-        "Up": 3090,
-        "Down": 3090
-      }
-    },
-    {
-      "id": 3079,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3083,
-        "East": 3076,
-        "South": 3087,
-        "West": 3078,
-        "Up": 3091,
-        "Down": 3091
-      }
-    },
-    {
-      "id": 3080,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3084,
-        "East": 3081,
-        "South": 3076,
-        "West": 3083,
-        "Up": 3092,
-        "Down": 3092
-      }
-    },
-    {
-      "id": 3081,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3085,
-        "East": 3082,
-        "South": 3077,
-        "West": 3080,
-        "Up": 3093,
-        "Down": 3093
-      }
-    },
-    {
-      "id": 3082,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3086,
-        "East": 3083,
-        "South": 3078,
-        "West": 3081,
-        "Up": 3094,
-        "Down": 3094
-      }
-    },
-    {
-      "id": 3083,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3087,
-        "East": 3080,
-        "South": 3079,
-        "West": 3082,
-        "Up": 3095,
-        "Down": 3095
-      }
-    },
-    {
-      "id": 3084,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3076,
-        "East": 3085,
-        "South": 3080,
-        "West": 3087,
-        "Up": 3075,
-        "Down": 3075
-      }
-    },
-    {
-      "id": 3085,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3077,
-        "East": 3086,
-        "South": 3081,
-        "West": 3084,
-        "Up": 3097,
-        "Down": 3097
-      }
-    },
-    {
-      "id": 3086,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3078,
-        "East": 3087,
-        "South": 3082,
-        "West": 3085,
-        "Up": 3098,
-        "Down": 3098
-      }
-    },
-    {
-      "id": 3087,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3079,
-        "East": 3084,
-        "South": 3083,
-        "West": 3086,
-        "Up": 3099,
-        "Down": 3099
-      }
-    },
-    {
-      "id": 3088,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3092,
-        "East": 3089,
-        "West": 3091,
-        "Up": 3076,
-        "Down": 3076
-      }
-    },
-    {
-      "id": 3089,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3093,
-        "East": 3090,
-        "South": 3097,
-        "West": 3088,
-        "Up": 3077,
-        "Down": 3077
-      }
-    },
-    {
-      "id": 3090,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3094,
-        "East": 3091,
-        "South": 3098,
-        "West": 3089,
-        "Up": 3078,
-        "Down": 3078
-      }
-    },
-    {
-      "id": 3091,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3095,
-        "East": 3088,
-        "South": 3099,
-        "West": 3090,
-        "Up": 3079,
-        "Down": 3079
-      }
-    },
-    {
-      "id": 3092,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3096,
-        "East": 3093,
-        "South": 3088,
-        "West": 3095,
-        "Up": 3080,
-        "Down": 3080
-      }
-    },
-    {
-      "id": 3093,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3097,
-        "East": 3094,
-        "South": 3089,
-        "West": 3092,
-        "Up": 3081,
-        "Down": 3081
-      }
-    },
-    {
-      "id": 3094,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3098,
-        "East": 3095,
-        "South": 3090,
-        "West": 3093,
-        "Up": 3082,
-        "Down": 3082
-      }
-    },
-    {
-      "id": 3095,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3099,
-        "East": 3092,
-        "South": 3091,
-        "West": 3094,
-        "Up": 3083,
-        "Down": 3083
-      }
-    },
-    {
-      "id": 3096,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3100,
-        "East": 3097,
-        "South": 3092
-      }
-    },
-    {
-      "id": 3097,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3089,
-        "East": 3098,
-        "South": 3093,
-        "West": 3096,
-        "Up": 3085,
-        "Down": 3085
-      }
-    },
-    {
-      "id": 3098,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3090,
-        "East": 3099,
-        "South": 3094,
-        "West": 3097,
-        "Up": 3086,
-        "Down": 3086
-      }
-    },
-    {
-      "id": 3099,
-      "name": "The Purgatory",
-      "exits": {
-        "North": 3091,
-        "South": 3095,
-        "West": 3098,
-        "Up": 3087,
-        "Down": 3087
-      }
-    },
-    {
-      "id": 3100,
-      "name": "The Purgatory",
-      "exits": {
-        "East": 3101
-      }
-    },
-    {
-      "id": 3101,
-      "name": "The Judgement Room",
-      "exits": {
-        "Up": 2296
-      }
-    },
-    {
-      "id": 2296,
-      "name": "To Midgaard",
-      "otherAreaExit": true,
-      "exits": {
-        "South": 2247,
-        "Up": 2298
-      }
-    }
-  ]
+  "BuildOptions": {
+    "MaxSteps": 1000,
+    "KeepSolitaryRooms": true,
+    "KeepRoomsWithSingleOutsideExit": true,
+    "FixObstacles": true,
+    "FixNonStraight": true,
+    "FixIntersected": true,
+    "CompactMap": true,
+    "AddDebugInfo": false,
+    "ColorizeConnectionIssues": true
+  }
 }

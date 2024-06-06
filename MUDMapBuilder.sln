@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUDMapBuilder.Editor", "MUD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUDMapBuilder.Console", "MUDMapBuilder.Console\MUDMapBuilder.Console.csproj", "{B8503F49-CBB6-456A-8CDE-D96C6FCB1639}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUDMapBuilder.BatchConverter", "MUDMapBuilder.BatchConverter\MUDMapBuilder.BatchConverter.csproj", "{6384351C-AA08-4D86-845E-461F06F49E42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUDMapBuilder.BatchConverter", "MUDMapBuilder.BatchConverter\MUDMapBuilder.BatchConverter.csproj", "{6384351C-AA08-4D86-845E-461F06F49E42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUDMapBuilder.Import.Diku", "MUDMapBuilder.Import.Diku\MUDMapBuilder.Import.Diku.csproj", "{CFC71E02-2620-476E-B3C7-A0D4F17AAC91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUDMapBuilder.Import.Console", "MUDMapBuilder.Import.Console\MUDMapBuilder.Import.Console.csproj", "{CEBF114E-4718-4202-A475-35D04E11E1A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,22 @@ Global
 		{6384351C-AA08-4D86-845E-461F06F49E42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6384351C-AA08-4D86-845E-461F06F49E42}.Release|x64.ActiveCfg = Release|Any CPU
 		{6384351C-AA08-4D86-845E-461F06F49E42}.Release|x64.Build.0 = Release|Any CPU
+		{CFC71E02-2620-476E-B3C7-A0D4F17AAC91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFC71E02-2620-476E-B3C7-A0D4F17AAC91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFC71E02-2620-476E-B3C7-A0D4F17AAC91}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CFC71E02-2620-476E-B3C7-A0D4F17AAC91}.Debug|x64.Build.0 = Debug|Any CPU
+		{CFC71E02-2620-476E-B3C7-A0D4F17AAC91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFC71E02-2620-476E-B3C7-A0D4F17AAC91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFC71E02-2620-476E-B3C7-A0D4F17AAC91}.Release|x64.ActiveCfg = Release|Any CPU
+		{CFC71E02-2620-476E-B3C7-A0D4F17AAC91}.Release|x64.Build.0 = Release|Any CPU
+		{CEBF114E-4718-4202-A475-35D04E11E1A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEBF114E-4718-4202-A475-35D04E11E1A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEBF114E-4718-4202-A475-35D04E11E1A1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CEBF114E-4718-4202-A475-35D04E11E1A1}.Debug|x64.Build.0 = Debug|Any CPU
+		{CEBF114E-4718-4202-A475-35D04E11E1A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEBF114E-4718-4202-A475-35D04E11E1A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEBF114E-4718-4202-A475-35D04E11E1A1}.Release|x64.ActiveCfg = Release|Any CPU
+		{CEBF114E-4718-4202-A475-35D04E11E1A1}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

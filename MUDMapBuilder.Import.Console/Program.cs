@@ -9,9 +9,37 @@ namespace MUDMapBuilder.Import
 {
 	internal class Program
 	{
-		private const string OutputFolder = "output";
+		private static int AreaNumericValue(MMBArea area)
+		{
+			if (string.IsNullOrEmpty(area.MinimumLevel))
+			{
+				return int.MinValue;
+			}
 
-		static void Process(string folder)
+			int minimumLevel;
+			if (!int.TryParse(area.MinimumLevel, out minimumLevel))
+			{
+				if (area.MinimumLevel.Equals("all", StringComparison.OrdinalIgnoreCase))
+				{
+					return int.MaxValue / 2;
+				}
+
+				return int.MaxValue;
+			}
+
+			int maximumLevel;
+			if (!int.TryParse(area.MaximumLevel, out maximumLevel))
+			{
+				maximumLevel = 150;
+			}
+
+			var result = maximumLevel * 1000;
+			result += minimumLevel;
+
+			return result;
+		}
+
+		static void Process(string mudName, string folder)
 		{
 			var areas = new List<MMBArea>();
 			/*			var folder = @"D:\Projects\chaos\Crimson-2-MUD\prod\lib";
@@ -88,20 +116,18 @@ namespace MUDMapBuilder.Import
 				}
 			}
 
-			if (Directory.Exists(OutputFolder))
+			var outputFolder = $"data/{mudName}/maps/json/";
+			if (Directory.Exists(outputFolder))
 			{
-				Directory.Delete(OutputFolder, true);
-
+				Directory.Delete(outputFolder, true);
 			}
 
-			Directory.CreateDirectory(OutputFolder);
+			Directory.CreateDirectory(outputFolder);
 
-			// Save all areas and generate conversion script
-			var sb = new StringBuilder();
+			// Save all areas
 			foreach (var area in areas)
 			{
-				var fileName = $"output/{area.Name}.json";
-
+				var fileName = $"{area.Name}.json";
 				if (fileName.StartsWith("Adria"))
 				{
 					continue;
@@ -118,26 +144,39 @@ namespace MUDMapBuilder.Import
 								oldProject.BuildOptions.CopyTo(project.BuildOptions);*/
 
 				var data = project.ToJson();
-				File.WriteAllText(fileName, data);
-
-				var pngFileName = Path.ChangeExtension(fileName, "png");
-				sb.AppendLine($"mmb \"circle_Areas\\{fileName}\" \"circle_Maps\\{pngFileName}\"");
+				File.WriteAllText(Path.Combine(outputFolder, fileName), data);
 			}
 
-			File.WriteAllText("convertTba.bat", sb.ToString());
+			// Generate area table
+			var sb = new StringBuilder();
+
+			sb.AppendLine("---");
+			sb.AppendLine("layout: page");
+			sb.AppendLine("---");
+			sb.AppendLine();
+			sb.AppendLine("Name|Credits|Minimum Level|Maximum Level");
+
+			var orderedAreas = (from a in areas orderby AreaNumericValue(a) select a).ToList();
+			foreach (var area in orderedAreas)
+			{
+				sb.AppendLine($"[{area.Name}](/data/{mudName}/maps/png/{area.Name}.png)|{area.Credits}|{area.MinimumLevel}|{area.MaximumLevel}");
+			}
+
+			File.WriteAllText($"{mudName}_Maps.markdown", sb.ToString());
 		}
 
 		static void Main(string[] args)
 		{
 			try
 			{
-				if (args.Length < 1)
+				if (args.Length < 2)
 				{
-					Console.WriteLine("Usage: mmb-import <inputFolder>");
+					Console.WriteLine("Usage: mmb-import <mudName> <inputFolder>");
+					Console.WriteLine("Example: mmb-import tbaMUD \"D:\\Projects\\chaos\\tbamud\\lib\\world\"");
 					return;
 				}
 
-				Process(args[0]);
+				Process(args[0], args[1]);
 			}
 			catch (Exception ex)
 			{

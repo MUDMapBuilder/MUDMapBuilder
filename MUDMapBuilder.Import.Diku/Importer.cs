@@ -17,10 +17,31 @@ namespace MUDMapBuilder.Import.Diku
 			var credits = stream.ReadDikuString();
 			var name = stream.ReadDikuString();
 
-			return new MMBArea
+			var result =            new MMBArea
 			{
-				Name = name.Replace('/', '_')
+				Name = name.Replace('/', '_'),
+				Credits = credits,
 			};
+
+			if (stream.EndOfStream())
+			{
+				return result;
+			}
+
+			var line = stream.ReadLine();
+			var parts = line.Split(' ');
+
+			if (parts.Length > 8)
+			{
+				result.MinimumLevel = parts[8].Trim();
+			}
+
+			if (parts.Length > 9)
+			{
+				result.MaximumLevel = parts[9].Trim();
+			}
+
+			return result;
 		}
 
 		private static MMBRoom[] ProcessMMBRooms(Stream stream)
@@ -132,15 +153,15 @@ namespace MUDMapBuilder.Import.Diku
 					Log($"Area name is '{result.Name}'");
 				}
 			}
-            else
-            {
+			else
+			{
 				result = new MMBArea
 				{
 					Name = Path.GetFileName(areaFile).Replace('/', '_')
 				};
-            }
+			}
 
-            using (var stream = File.OpenRead(areaFile))
+			using (var stream = File.OpenRead(areaFile))
 			{
 				var rooms = ProcessMMBRooms(stream);
 				foreach (var room in rooms)

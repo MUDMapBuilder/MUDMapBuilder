@@ -25,6 +25,9 @@ namespace MUDMapBuilder
 		private BrokenConnectionsInfo _brokenConnections;
 
 		public string Name { get; set; }
+		public string Credits { get; set; }
+		public string MinimumLevel { get; set; }
+		public string MaximumLevel { get; set; }
 
 		public MMBRoom[] Rooms
 		{

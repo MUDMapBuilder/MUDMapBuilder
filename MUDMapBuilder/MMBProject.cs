@@ -74,52 +74,6 @@ namespace MUDMapBuilder
 				}
 			}
 
-			area.RemoveNonExistantConnections();
-
-			// Set connections types
-			foreach (var room in area.Rooms)
-			{
-				foreach (var connection in room.Connections.Values)
-				{
-					if (connection.RoomId == room.Id || connection.ConnectionType == MMBConnectionType.Backward)
-					{
-						continue;
-					}
-
-					var dir = connection.Direction;
-					var oppDir = dir.GetOppositeDirection();
-
-					var targetRoom = area.GetRoomById(connection.RoomId);
-					if (targetRoom == null)
-					{
-						continue;
-					}
-
-					var foundOpposite = false;
-					var oppositeConnection = targetRoom.FindConnection(room.Id);
-					if (oppositeConnection != null &&
-						oppDir == oppositeConnection.Direction)
-					{
-						foundOpposite = true;
-					}
-
-					if (foundOpposite)
-					{
-						connection.ConnectionType = MMBConnectionType.TwoWay;
-					}
-					else if (!targetRoom.Connections.ContainsKey(oppDir))
-					{
-						// Establish opposite backwards connection
-						targetRoom.Connections[oppDir] = new MMBRoomConnection
-						{
-							Direction = oppDir,
-							RoomId = room.Id,
-							ConnectionType = MMBConnectionType.Backward
-						};
-					}
-				}
-			}
-
 			return project;
 		}
 

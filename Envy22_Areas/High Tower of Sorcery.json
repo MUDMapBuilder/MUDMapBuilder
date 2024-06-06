@@ -1964,7 +1964,7 @@
     "KeepRoomsWithSingleOutsideExit": true,
     "FixObstacles": true,
     "FixNonStraight": true,
-    "FixIntersected": true,
+    "FixIntersected": false,
     "CompactMap": true,
     "AddDebugInfo": false,
     "ColorizeConnectionIssues": true

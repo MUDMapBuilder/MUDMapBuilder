@@ -61,7 +61,7 @@ namespace MUDMapBuilder
 
 		public void Add(MMBRoom room)
 		{
-			room.Invalid += OnRoomInvalid;
+			room.RoomInvalid += OnRoomInvalid;
 
 			_roomsByIds[room.Id] = room;
 			InvalidatePositions();
@@ -69,7 +69,7 @@ namespace MUDMapBuilder
 
 		public void DeleteRoom(MMBRoom room)
 		{
-			room.Invalid -= OnRoomInvalid;
+			room.RoomInvalid -= OnRoomInvalid;
 
 			_roomsByIds.Remove(room.Id);
 			InvalidatePositions();
@@ -340,7 +340,7 @@ namespace MUDMapBuilder
 						}
 					}
 
-					foreach(var k in keepRooms)
+					foreach (var k in keepRooms)
 					{
 						obstacles.Remove(k);
 					}
@@ -638,21 +638,16 @@ namespace MUDMapBuilder
 				}
 
 				// Create new part with this room and all its connections
-				var newPart = new HashSet<int>();
-				var toProcess = new List<MMBRoom>
+				var processor = new IdQueue(room.Id);
+				while (processor.Count > 0)
 				{
-					room
-				};
-
-				while (toProcess.Count > 0)
-				{
-					var r = toProcess[0];
-					toProcess.RemoveAt(0);
-					newPart.Add(r.Id);
+					var id = processor.Pop();
+					var r = GetRoomById(id);
 
 					foreach (var exit in r.Connections)
 					{
-						if (newPart.Contains(exit.Value.RoomId))
+						var targetRoomId = exit.Value.RoomId;
+						if (processor.WasProcessed(targetRoomId))
 						{
 							continue;
 						}
@@ -663,11 +658,11 @@ namespace MUDMapBuilder
 							continue;
 						}
 
-						toProcess.Add(targetRoom);
+						processor.Add(targetRoomId);
 					}
 				}
 
-				parts.Add(newPart);
+				parts.Add(processor.Processed);
 			finish:;
 			}
 
@@ -874,11 +869,11 @@ namespace MUDMapBuilder
 					deletedRooms.Add(existingRoom);
 				}
 			}
-			
+
 			return new MeasurePushRoomResult(movedRoomsList.ToArray(), deletedRooms.ToArray());
 		}
 
-		private void MeasureCompactPushAddConnectionNeighbours(MMBDirection pushDirection, MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir, HashSet<int> movedRooms, List<MMBRoom> toProcess)
+		private void MeasureCompactPushAddConnectionNeighbours(MMBDirection pushDirection, MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir, IdQueue processor)
 		{
 			var doCheck = ((pushDirection == MMBDirection.North || pushDirection == MMBDirection.South) &&
 						(exitDir == MMBDirection.West || exitDir == MMBDirection.East)) ||
@@ -921,9 +916,9 @@ namespace MUDMapBuilder
 				for (var x = startX; x <= endX; x++)
 				{
 					var neighbourRoom = GetRoomByPosition(new Point(x, y));
-					if (neighbourRoom != null && !movedRooms.Contains(neighbourRoom.Id))
+					if (neighbourRoom != null && !processor.WasProcessed(neighbourRoom.Id))
 					{
-						toProcess.Add(neighbourRoom);
+						processor.Add(neighbourRoom.Id);
 					}
 				}
 			}
@@ -955,9 +950,9 @@ namespace MUDMapBuilder
 				for (var y = startY; y <= endY; y++)
 				{
 					var neighbourRoom = GetRoomByPosition(new Point(x, y));
-					if (neighbourRoom != null && !movedRooms.Contains(neighbourRoom.Id))
+					if (neighbourRoom != null && !processor.WasProcessed(neighbourRoom.Id))
 					{
-						toProcess.Add(neighbourRoom);
+						processor.Add(neighbourRoom.Id);
 					}
 				}
 			}
@@ -967,19 +962,12 @@ namespace MUDMapBuilder
 		{
 			// Determine rooms movement
 			var delta = direction.GetDelta();
-			var movedRooms = new HashSet<int>();
-			var firstRoom = GetRoomById(firstRoomId);
-			var toProcess = new List<MMBRoom>
-			{
-				firstRoom
-			};
+			var toProcess = new IdQueue(firstRoomId);
 
 			while (toProcess.Count > 0)
 			{
-				var room = toProcess[0];
-				toProcess.RemoveAt(0);
-
-				movedRooms.Add(room.Id);
+				var id = toProcess.Pop();
+				var room = GetRoomById(id);
 
 				// Process connected rooms
 				var sourcePos = room.Position.Value;
@@ -987,7 +975,7 @@ namespace MUDMapBuilder
 				{
 					var exitDir = pair.Key;
 					var targetRoom = GetRoomById(pair.Value.RoomId);
-					if (targetRoom == null || targetRoom.Position == null || movedRooms.Contains(pair.Value.RoomId))
+					if (targetRoom == null || targetRoom.Position == null || toProcess.WasProcessed(pair.Value.RoomId))
 					{
 						continue;
 					}
@@ -1023,26 +1011,26 @@ namespace MUDMapBuilder
 
 					if (doAdd)
 					{
-						toProcess.Add(targetRoom);
+						toProcess.Add(targetRoom.Id);
 					}
 
 					// Add rooms neighbor to connection
-					MeasureCompactPushAddConnectionNeighbours(direction, room, targetRoom, exitDir, movedRooms, toProcess);
+					MeasureCompactPushAddConnectionNeighbours(direction, room, targetRoom, exitDir, toProcess);
 				}
 
 				// Add neighbor room
 				var neighbourPos = new Point(sourcePos.X + delta.X, sourcePos.Y + delta.Y);
 				var neighbourRoom = GetRoomByPosition(neighbourPos);
-				if (neighbourRoom != null && !movedRooms.Contains(neighbourRoom.Id))
+				if (neighbourRoom != null && !toProcess.WasProcessed(neighbourRoom.Id))
 				{
-					toProcess.Add(neighbourRoom);
+					toProcess.Add(neighbourRoom.Id);
 				}
 			}
 
 			// Determine deleted rooms
 			var movedRoomsList = new List<MeasurePushRoomMovement>();
 			var deletedRooms = new List<MMBRoom>();
-			foreach (var pair in movedRooms)
+			foreach (var pair in toProcess.Processed)
 			{
 				var room = GetRoomById(pair);
 
@@ -1051,7 +1039,7 @@ namespace MUDMapBuilder
 				var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
 
 				var existingRoom = GetRoomByPosition(newPos);
-				if (existingRoom != null && !movedRooms.Contains(existingRoom.Id))
+				if (existingRoom != null && !toProcess.WasProcessed(existingRoom.Id))
 				{
 					deletedRooms.Add(existingRoom);
 				}

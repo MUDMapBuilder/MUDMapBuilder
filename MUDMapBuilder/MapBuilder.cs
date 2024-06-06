@@ -40,8 +40,9 @@ namespace MUDMapBuilder
 			}
 		}
 
+		private ResultType _resultType = ResultType.Success;
 		private readonly MMBProject _project;
-		private readonly List<MMBRoom> _toProcess = new List<MMBRoom>();
+		private readonly IdQueue _roomsQueue = new IdQueue();
 		private readonly HashSet<int> _removedRooms = new HashSet<int>();
 		private readonly List<MMBArea> _history = new List<MMBArea>();
 		private readonly Action<string> _log;
@@ -98,7 +99,20 @@ namespace MUDMapBuilder
 		private bool AddRunStep()
 		{
 			_history.Add(Area.Clone());
-			return Options.MaxSteps > _history.Count;
+
+			if (Area.Width > Area.Count * 2 || Area.Height > Area.Count * 2)
+			{
+				_resultType = ResultType.MapTooBig;
+				return false;
+			}
+
+			if(Options.MaxSteps <= _history.Count)
+			{
+				_resultType = ResultType.OutOfSteps;
+				return false;
+			}
+
+			return true;
 		}
 
 		private bool PushRoom(MMBArea rooms, int firstRoomId, Point firstForceVector, bool measureRun, out int roomsRemoved)
@@ -109,6 +123,7 @@ namespace MUDMapBuilder
 
 			if (!measureRun)
 			{
+				Log($"Step: {_history.Count}. Grid Size: {Area.Width}x{Area.Height}. Push room {Area.GetRoomById(firstRoomId)} to {firstForceVector}");
 				if (measure.DeletedRooms.Length > 0)
 				{
 					if (!RemoveRooms(measure.DeletedRooms, false))
@@ -229,7 +244,8 @@ namespace MUDMapBuilder
 			{
 				var idsToRemove = BuildRemoveList((from r in toRemove select r.Id).ToArray());
 				roomsToRemove = (from id in idsToRemove select Area.GetRoomById(id)).ToArray();
-			} else
+			}
+			else
 			{
 				roomsToRemove = toRemove;
 			}
@@ -251,7 +267,7 @@ namespace MUDMapBuilder
 				// Remove
 				room.MarkColor = null;
 				room.Position = null;
-				_toProcess.Remove(room);
+				_roomsQueue.Remove(room.Id);
 				_removedRooms.Add(room.Id);
 			}
 
@@ -260,7 +276,7 @@ namespace MUDMapBuilder
 
 		private bool ExistsInHistory(MMBArea area)
 		{
-			for(var i = 0; i < _history.Count; ++i)
+			for (var i = 0; i < _history.Count; ++i)
 			{
 				var h = _history[i];
 				if (MMBArea.AreEqual(area, h))
@@ -303,7 +319,8 @@ namespace MUDMapBuilder
 			if (existInHistory1)
 			{
 				moveSecond = true;
-			} else
+			}
+			else
 			if (existInHistory2)
 			{
 				moveSecond = false;
@@ -775,15 +792,15 @@ namespace MUDMapBuilder
 			}
 
 			firstRoom.Position = new Point(0, 0);
-			_toProcess.Add(firstRoom);
+			_roomsQueue.Add(firstRoom.Id);
 
 			BrokenConnectionsInfo vc;
-			while (_toProcess.Count > 0 && Options.MaxSteps > _history.Count)
+			while (_roomsQueue.Count > 0 && Options.MaxSteps > _history.Count)
 			{
-				while (_toProcess.Count > 0 && Options.MaxSteps > _history.Count)
+				while (_roomsQueue.Count > 0 && Options.MaxSteps > _history.Count)
 				{
-					var room = _toProcess[0];
-					_toProcess.RemoveAt(0);
+					var id = _roomsQueue.Pop();
+					var room = Area.GetRoomById(id);
 
 					Log($"Processed {Area.PositionedRoomsCount}/{Area.Count} rooms. Step {_history.Count}. Grid Size: {Area.Width}x{Area.Height}");
 
@@ -796,7 +813,7 @@ namespace MUDMapBuilder
 						}
 
 						var newRoom = Area.GetRoomById(pair.Value.RoomId);
-						if (newRoom == null || newRoom.Position != null || _toProcess.Contains(newRoom))
+						if (newRoom == null || newRoom.Position != null || _roomsQueue.WasAdded(pair.Value.RoomId))
 						{
 							continue;
 						}
@@ -851,7 +868,7 @@ namespace MUDMapBuilder
 						}
 
 						newRoom.Position = newPos;
-						_toProcess.Add(newRoom);
+						_roomsQueue.Add(newRoom.Id);
 
 						if (!AddRunStep())
 						{
@@ -898,26 +915,26 @@ namespace MUDMapBuilder
 					var sourceRoom = Area.GetRoomById(roomId);
 					foreach (var pair in sourceRoom.Connections)
 					{
-						foreach(var room in Area.Rooms)
+						foreach (var connectedRoom in Area.Rooms)
 						{
-							if (room.Id == roomId || room.Position == null)
+							if (connectedRoom.Id == roomId || connectedRoom.Position == null)
 							{
 								continue;
 							}
 
-							var conn = room.FindConnection(roomId);
-							if (conn == null || _toProcess.Contains(room))
+							var conn = connectedRoom.FindConnection(roomId);
+							if (conn == null || _roomsQueue.WasAdded(connectedRoom.Id))
 							{
 								continue;
 							}
 
-							_toProcess.Add(room);
+							_roomsQueue.Add(connectedRoom.Id);
 							break;
 						}
 					}
 				}
 
-				if (_toProcess.Count > 0 || _removedRooms.Count > 0)
+				if (_roomsQueue.Count > 0 || _removedRooms.Count > 0)
 				{
 					continue;
 				}
@@ -931,15 +948,18 @@ namespace MUDMapBuilder
 					}
 
 					// Unprocessed room
-					// Ignore if it has no connections
-					if (room.Connections.Count == 0)
+					if (!Options.KeepSolitaryRooms)
 					{
-						continue;
+						// Ignore if it has no connections
+						if (room.Connections.Count == 0)
+						{
+							continue;
+						}
 					}
 
 					// Put it to the bottom left
 					room.Position = new Point(Area.RoomsRectangle.Left, Area.RoomsRectangle.Bottom + 1);
-					_toProcess.Add(room);
+					_roomsQueue.Add(room.Id);
 
 					break;
 				}
@@ -979,8 +999,8 @@ namespace MUDMapBuilder
 			}
 
 		finish2:;
-			Log("Finished.");
-			return new MapBuilderResult(_history.ToArray(), startCompactStep);
+			Log(_resultType.ToString());
+			return new MapBuilderResult(_resultType, _history.ToArray(), startCompactStep);
 		}
 
 		public static MapBuilderResult Build(MMBProject project, Action<string> log)

@@ -60,7 +60,7 @@ namespace MUDMapBuilder
 				}
 
 				_position = value;
-				FireInvalid();
+				FireRoomInvalid();
 			}
 		}
 
@@ -76,7 +76,7 @@ namespace MUDMapBuilder
 				}
 
 				_markColor = value;
-				FireInvalid();
+				FireRoomInvalid();
 			}
 		}
 
@@ -91,13 +91,13 @@ namespace MUDMapBuilder
 				}
 
 				_forceMark = value;
-				FireInvalid();
+				FireRoomInvalid();
 			}
 		}
 
 		public Dictionary<MMBDirection, MMBRoomConnection> Connections { get; } = new Dictionary<MMBDirection, MMBRoomConnection>();
 
-		public event EventHandler Invalid;
+		public event EventHandler RoomInvalid;
 
 		public MMBRoom(int id, string name, bool isExitToOtherArea)
 		{
@@ -148,7 +148,7 @@ namespace MUDMapBuilder
 
 		public override string ToString() => $"{Name} (#{Id}), {Position}";
 
-		private void FireInvalid() => Invalid?.Invoke(this, EventArgs.Empty);
+		private void FireRoomInvalid() => RoomInvalid?.Invoke(this, EventArgs.Empty);
 	}
 
 }

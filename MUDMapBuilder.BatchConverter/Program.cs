@@ -37,9 +37,9 @@ namespace MUDMapBuilder.BatchConverter
 					continue;
 				}
 
-				if (buildResult.History.Length >= project.BuildOptions.MaxSteps)
+				if (buildResult.ResultType != ResultType.Success)
 				{
-					throw new Exception($"WARNING: The process wasn't completed for {areaFileName}. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected).");
+					throw new Exception($"WARNING: The process wasn't completed for {areaFileName}. Result Type: {buildResult.ResultType}. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected).");
 				}
 
 				var options = project.BuildOptions;

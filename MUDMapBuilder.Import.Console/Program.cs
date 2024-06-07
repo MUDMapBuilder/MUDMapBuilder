@@ -9,36 +9,6 @@ namespace MUDMapBuilder.Import
 {
 	internal class Program
 	{
-		private static int AreaNumericValue(MMBArea area)
-		{
-			if (string.IsNullOrEmpty(area.MinimumLevel))
-			{
-				return int.MinValue;
-			}
-
-			int minimumLevel;
-			if (!int.TryParse(area.MinimumLevel, out minimumLevel))
-			{
-				if (area.MinimumLevel.Equals("all", StringComparison.OrdinalIgnoreCase))
-				{
-					return int.MaxValue / 2;
-				}
-
-				return int.MaxValue;
-			}
-
-			int maximumLevel;
-			if (!int.TryParse(area.MaximumLevel, out maximumLevel))
-			{
-				maximumLevel = 150;
-			}
-
-			var result = maximumLevel * 1000;
-			result += minimumLevel;
-
-			return result;
-		}
-
 		static void Process(string mudName, string folder)
 		{
 			var areas = new List<MMBArea>();
@@ -162,23 +132,25 @@ namespace MUDMapBuilder.Import
 			// Generate area table
 			var sb = new StringBuilder();
 
-			sb.AppendLine("---");
-			sb.AppendLine("layout: page");
-			sb.AppendLine("---");
-			sb.AppendLine();
-			sb.AppendLine("Name|Credits|Minimum Level|Maximum Level|Source JSON");
-
-			var orderedAreas = (from a in areas orderby AreaNumericValue(a) select a).ToList();
-			foreach (var area in orderedAreas)
+			sb.AppendLine("var data = [");
+			foreach (var area in areas)
 			{
-				sb.AppendLine($"[{area.Name}](/data/{mudName}/maps/png/{area.Name}.png)|{area.Credits}|{area.MinimumLevel}|{area.MaximumLevel}|[json](/data/{mudName}/maps/json/{area.Name}.json)");
+				var pngLink = $"data/{mudName}/maps/png/{area.Name}.png";
+				var jsonLink = $"data/{mudName}/maps/json/{area.Name}.json";
+				sb.AppendLine($"[[\"{area.Name}\", \"{pngLink}\"], \"{area.Credits}\", \"{area.MinimumLevel}\", \"{area.MaximumLevel}\", \"{jsonLink}\"],");
 			}
+			sb.AppendLine("];");
 
-			File.WriteAllText($"{mudName}_Maps.markdown", sb.ToString());
+			var page = Resources.MapsPageTemplate;
+			page = page.Replace("%title", $"{mudName}'s Maps");
+			page = page.Replace("%data%", sb.ToString());
+			File.WriteAllText($"{mudName}_Maps.html", page);
 
-			// Group equipment by wear type
-			var eq = new Dictionary<WearFlags, List<MMBObject>>();
-			foreach (var area in orderedAreas)
+			// Generate eqlist table
+			sb.Clear();
+
+			sb.AppendLine("var data = [");
+			foreach (var area in areas)
 			{
 				foreach (var obj in area.Objects)
 				{
@@ -187,43 +159,24 @@ namespace MUDMapBuilder.Import
 						continue;
 					}
 
-					obj.AreaName = area.Name;
 					var flag = obj.WearFlags;
 					flag &= ~WearFlags.Take;
-					List<MMBObject> list;
-					if (!eq.TryGetValue(flag, out list))
+					if (flag == 0)
 					{
-						list = new List<MMBObject>();
-						eq[flag] = list;
+						continue;
 					}
 
-					list.Add(obj);
+					sb.AppendLine($"[\"{obj.Name}\", \"{area.Name}\", \"{flag.ToString()}\", \"{obj.Level}\", \"{obj.BuildStringValue()}\", \"{obj.ExtraFlags}\", \"{obj.BuildEffectsValue()}\"],");
 				}
 			}
+			sb.AppendLine("];");
 
-			// Generate eqlist table
-			sb.Clear();
-			sb.AppendLine("---");
-			sb.AppendLine("layout: page");
-			sb.AppendLine("---");
-			sb.AppendLine();
 
-			foreach (var pair in eq)
-			{
-				sb.AppendLine($"### {pair.Key}");
-				sb.AppendLine();
-				sb.AppendLine("Name|Area|Level|Value|Extra|Effects");
+			page = Resources.EqPageTemplate;
+			page = page.Replace("%title", $"{mudName}'s Equipment");
+			page = page.Replace("%data%", sb.ToString());
 
-				var orderedEq = (from obj in pair.Value orderby obj.Level descending select obj).ToList();
-				foreach (var obj in orderedEq)
-				{
-					sb.AppendLine($"{obj.Name}|{obj.AreaName}|{obj.Level}|{obj.BuildStringValue()}|{obj.ExtraFlags}|{obj.BuildEffectsValue()}");
-				}
-
-				sb.AppendLine();
-			}
-
-			File.WriteAllText($"{mudName}_Eq.markdown", sb.ToString());
+			File.WriteAllText($"{mudName}_Eq.html", page);
 		}
 
 		static void Main(string[] args)
@@ -233,7 +186,7 @@ namespace MUDMapBuilder.Import
 				if (args.Length < 2)
 				{
 					Console.WriteLine("Usage: mmb-import <mudName> <inputFolder>");
-					Console.WriteLine("Example: mmb-import tbaMUD \"D:\\Projects\\chaos\\tbamud\\lib\\world\"");
+					Console.WriteLine("Example: mmb-import tbaMUD \"D:\\Projects\\chaos\\tbamud\\lib\\world\\");
 					return;
 				}
 

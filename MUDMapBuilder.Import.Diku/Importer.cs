@@ -398,7 +398,6 @@ namespace MUDMapBuilder.Import.Diku
 					else if (c == 'R' || c == 'D' || c == 'O' || c == 'X' || c == 'M' ||
 						c == 'Y' || c == 'J' || c == 'G' || c == 'K' || c == 'V' || c == 'P' || c == 'd')
 					{
-						var k = 5;
 					}
 					else if (c == 'T')
 					{

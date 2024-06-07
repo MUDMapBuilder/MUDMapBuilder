@@ -404,9 +404,6 @@ namespace MUDMapBuilder
 		public string ExtraDescription { get; set; }
 		public List<MMBEffect> Effects { get; set; } = new List<MMBEffect>();
 
-		[JsonIgnore]
-		public string AreaName { get; set; }
-
 		public string BuildStringValue()
 		{
 			switch (ItemType)

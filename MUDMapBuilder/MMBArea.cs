@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace MUDMapBuilder
 			Long
 		}
 
-		private MMBRoom[] _rooms = null;
+		private MMBRoom[] _rooms = new MMBRoom[0];
 		private readonly Dictionary<int, MMBRoom> _roomsByIds = new Dictionary<int, MMBRoom>();
 		private Rectangle _roomsRectangle;
 		private MMBRoom[,] _roomsByPositions = null;
@@ -58,8 +57,6 @@ namespace MUDMapBuilder
 				InvalidatePositions();
 			}
 		}
-
-		public MMBObject[] Objects { get; set; }
 
 		public int Count => _roomsByIds.Count;
 

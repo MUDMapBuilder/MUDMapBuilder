@@ -1,4 +1,5 @@
-﻿using MUDMapBuilder.Import.Diku;
+﻿using AbarimMUD.Import.Envy;
+using DikuLoad.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,13 +10,12 @@ namespace MUDMapBuilder.Import
 {
 	internal class Program
 	{
-		static void Process(string mudName, string folder)
+		static void Process(string mudName, string folder, string outputFolder)
 		{
-			var areas = new List<MMBArea>();
 			/*			var folder = @"D:\Projects\chaos\Crimson-2-MUD\prod\lib";
 
 						var zonesTable = File.ReadAllText(Path.Combine(folder, "zones.tbl"));
-						var lines = zonesTable.Split('\n');
+						var lines = zonesTable.Split(\"\n\");
 						foreach (var line in lines)
 						{
 							var s = line.Trim();
@@ -24,7 +24,7 @@ namespace MUDMapBuilder.Import
 								break;
 							}
 
-							var parts = s.Split(' ');
+							var parts = s.Split(\" \");
 
 							var path = Path.Combine(folder, "areas");
 							path = Path.Combine(path, parts[0]);
@@ -34,13 +34,27 @@ namespace MUDMapBuilder.Import
 							areas.Add(area);
 
 						}*/
-			var settings = new ImporterSettings(folder, SourceType.Circle);
 
-			var files = Directory.EnumerateFiles(folder, "*.wld", SearchOption.AllDirectories);
-			foreach (var path in files)
+			var sourceType = SourceType.ROM;
+			if (mudName.Contains("tba", StringComparison.OrdinalIgnoreCase))
 			{
-				var area = Importer.ProcessFile(settings, path);
-				areas.Add(area);
+				sourceType = SourceType.Circle;
+			}
+			else if (mudName.Contains("envy", StringComparison.OrdinalIgnoreCase))
+			{
+				sourceType = SourceType.Envy;
+			}
+
+			var settings = new ImporterSettings(folder, sourceType);
+			var importer = new Importer(settings);
+
+			importer.Process();
+
+			// Convert DikuLoad areas to MMB Areas
+			var areas = new List<MMBArea>();
+			foreach (var dikuArea in importer.Areas)
+			{
+				areas.Add(dikuArea.ToMMBArea());
 			}
 
 			// Build complete dictionary of rooms
@@ -87,13 +101,10 @@ namespace MUDMapBuilder.Import
 				}
 			}
 
-			var outputFolder = $"data/{mudName}/maps/json/";
-/*			if (Directory.Exists(outputFolder))
+			if (!Directory.Exists(outputFolder))
 			{
-				Directory.Delete(outputFolder, true);
+				Directory.CreateDirectory(outputFolder);
 			}
-
-			Directory.CreateDirectory(outputFolder);*/
 
 			// Save all areas
 			foreach (var area in areas)
@@ -150,7 +161,7 @@ namespace MUDMapBuilder.Import
 			sb.Clear();
 
 			sb.AppendLine("var data = [");
-			foreach (var area in areas)
+			foreach (var area in importer.Areas)
 			{
 				foreach (var obj in area.Objects)
 				{
@@ -159,14 +170,81 @@ namespace MUDMapBuilder.Import
 						continue;
 					}
 
-					var flag = obj.WearFlags;
-					flag &= ~WearFlags.Take;
-					if (flag == 0)
+					var resets = area.RelatedResets(obj.VNum).ToArray();
+					if (resets.Length == 0)
 					{
 						continue;
 					}
 
-					sb.AppendLine($"[\"{obj.Name}\", \"{area.Name}\", \"{flag.ToString()}\", \"{obj.Level}\", \"{obj.BuildStringValue()}\", \"{obj.ExtraFlags}\", \"{obj.BuildEffectsValue()}\"],");
+					var wearFlags = obj.WearFlags;
+					wearFlags &= ~ItemWearFlags.Take;
+					if (wearFlags == 0)
+					{
+						continue;
+					}
+
+					var lines = new HashSet<string>();
+					foreach(var r in resets)
+					{
+						switch (r.ResetType)
+						{
+							case AreaResetType.Item:
+								// Load object in room
+								{
+									var room = importer.GetRoomByVnum(r.Value4);
+									if (room == null)
+									{
+										Console.WriteLine($"WARNING: Can't find reset room {r.Value4}");
+										continue;
+									}
+
+									lines.Add($"Room '{room}'");
+								}
+
+								break;
+							case AreaResetType.Put:
+								{
+									var container = importer.GetObjectByVnum(r.Value4);
+									if (container == null)
+									{
+										Console.WriteLine($"WARNING: Can't find container {r.Value4}");
+										continue;
+									}
+
+									lines.Add($"Container '{container}'");
+								}
+								break;
+							case AreaResetType.Give:
+								{
+									var mobile = importer.GetMobileByVnum(r.MobileVNum);
+									if (mobile == null)
+									{
+										Console.WriteLine($"WARNING: Can't find mobile {r.MobileVNum}");
+										continue;
+									}
+
+									lines.Add($"{mobile}");
+								}
+								break;
+							case AreaResetType.Equip:
+								{
+									var mobile = importer.GetMobileByVnum(r.MobileVNum);
+									if (mobile == null)
+									{
+										Console.WriteLine($"WARNING: Can't find mobile {r.MobileVNum}");
+										continue;
+									}
+
+									lines.Add($"{mobile}");
+								}
+								break;
+						}
+					}
+
+					var name = obj.ShortDescription.Replace("\"", "");
+					var locationsStr = string.Join("<br>", lines);
+
+					sb.AppendLine($"[\"{name}\", \"{area.Name}\", \"{locationsStr}\", \"{wearFlags.BuildFlagsValue()}\", \"{obj.Level}\", \"{obj.BuildStringValue()}\", \"{obj.ExtraFlags.BuildFlagsValue()}\", \"{obj.BuildEffectsValue()}\"],");
 				}
 			}
 			sb.AppendLine("];");
@@ -183,14 +261,14 @@ namespace MUDMapBuilder.Import
 		{
 			try
 			{
-				if (args.Length < 2)
+				if (args.Length < 3)
 				{
-					Console.WriteLine("Usage: mmb-import <mudName> <inputFolder>");
-					Console.WriteLine("Example: mmb-import tbaMUD \"D:\\Projects\\chaos\\tbamud\\lib\\world\\");
+					Console.WriteLine("Usage: mmb-import <mudName> <inputFolder> <outputFolder>");
+					Console.WriteLine("Example: mmb-import tbaMUD \"D:\\Projects\\chaos\\tbamud\\lib\\world\"");
 					return;
 				}
 
-				Process(args[0], args[1]);
+				Process(args[0], args[1], args[2]);
 			}
 			catch (Exception ex)
 			{

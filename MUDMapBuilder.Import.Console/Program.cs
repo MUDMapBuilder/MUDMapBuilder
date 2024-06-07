@@ -36,7 +36,8 @@ namespace MUDMapBuilder.Import
 						}*/
 
 			var sourceType = SourceType.ROM;
-			if (mudName.Contains("tba", StringComparison.OrdinalIgnoreCase))
+			if (mudName.Contains("tba", StringComparison.OrdinalIgnoreCase) ||
+				mudName.Contains("circle", StringComparison.OrdinalIgnoreCase))
 			{
 				sourceType = SourceType.Circle;
 			}
@@ -107,6 +108,7 @@ namespace MUDMapBuilder.Import
 			}
 
 			// Save all areas
+			var outputAreasCount = 0;
 			foreach (var area in areas)
 			{
 				var fileName = $"{area.Name}.json";
@@ -121,7 +123,7 @@ namespace MUDMapBuilder.Import
 				var outputPath = Path.Combine(outputFolder, fileName);
 				if (File.Exists(outputPath))
 				{
-					Console.Write($"File '{fileName}' exists already. Trying to copy the build options...");
+					Console.WriteLine($"File '{fileName}' exists already. Trying to copy the build options...");
 
 					// Copy build options
 					try
@@ -138,6 +140,8 @@ namespace MUDMapBuilder.Import
 
 				var data = project.ToJson();
 				File.WriteAllText(outputPath, data);
+
+				++outputAreasCount;
 			}
 
 			// Generate area table
@@ -161,6 +165,8 @@ namespace MUDMapBuilder.Import
 			sb.Clear();
 
 			sb.AppendLine("var data = [");
+
+			var outputItemsCount = 0;
 			foreach (var area in importer.Areas)
 			{
 				foreach (var obj in area.Objects)
@@ -245,6 +251,7 @@ namespace MUDMapBuilder.Import
 					var locationsStr = string.Join("<br>", lines);
 
 					sb.AppendLine($"[\"{name}\", \"{area.Name}\", \"{locationsStr}\", \"{wearFlags.BuildFlagsValue()}\", \"{obj.Level}\", \"{obj.BuildStringValue()}\", \"{obj.ExtraFlags.BuildFlagsValue()}\", \"{obj.BuildEffectsValue()}\"],");
+					++outputItemsCount;
 				}
 			}
 			sb.AppendLine("];");
@@ -255,6 +262,8 @@ namespace MUDMapBuilder.Import
 			page = page.Replace("%data%", sb.ToString());
 
 			File.WriteAllText($"{mudName}_Eq.html", page);
+
+			Console.WriteLine($"Wrote {outputAreasCount} areas and {outputItemsCount} items.");
 		}
 
 		static void Main(string[] args)

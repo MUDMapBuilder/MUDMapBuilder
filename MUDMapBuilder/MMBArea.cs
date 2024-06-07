@@ -1149,6 +1149,8 @@ namespace MUDMapBuilder
 			return result;
 		}
 
+		public override string ToString() => Name;
+
 		public static bool AreEqual(MMBArea a, MMBArea b)
 		{
 			if (a.Width != b.Width || a.Height != b.Height)

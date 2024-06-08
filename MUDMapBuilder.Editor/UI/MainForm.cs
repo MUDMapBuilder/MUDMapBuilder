@@ -312,6 +312,13 @@ namespace MUDMapBuilder.Editor.UI
 				var data = File.ReadAllText(path);
 				Project = MMBProject.Parse(data);
 
+				if (Project.Area == null || Project.Area.Rooms == null || Project.Area.Rooms.Length == 0)
+				{
+					var dialog = Dialog.CreateMessageBox("Error", $"Area '{Project.Area.Name}' has no rooms");
+					dialog.ShowModal(Desktop);
+					return;
+				}
+
 				try
 				{
 					_suspendUi = true;

@@ -69,6 +69,12 @@ namespace MUDMapBuilder.Import
 			var areas = new List<MMBArea>();
 			foreach (var dikuArea in importer.Areas)
 			{
+				if (dikuArea.Rooms == null || dikuArea.Rooms.Count == 0)
+				{
+					Console.WriteLine($"Warning: Area '{dikuArea.Name} has no rooms. Skipping.");
+					continue;
+				}
+
 				areas.Add(dikuArea.ToMMBArea());
 			}
 

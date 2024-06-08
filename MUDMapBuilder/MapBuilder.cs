@@ -220,15 +220,10 @@ namespace MUDMapBuilder
 			var roomsToRemove = new List<int>();
 			roomsToRemove.AddRange(toRemove);
 
-			// Add all parts except the last one with size below 10
+			// Add all parts except the last one
 			for (var i = 0; i < sortedParts.Length - 1; ++i)
 			{
 				var p = sortedParts[i];
-				if (p.Count >= 10)
-				{
-					continue;
-				}
-
 				foreach (var id in p)
 				{
 					roomsToRemove.Add(id);
@@ -241,11 +236,6 @@ namespace MUDMapBuilder
 		private bool RemoveRooms(MMBRoom[] toRemove, bool addAjancent = true)
 		{
 			MMBRoom[] roomsToRemove;
-
-			if (toRemove.Length == 1 && toRemove[0].Id == 7199)
-			{
-				var k = 5;
-			}
 
 			if (addAjancent)
 			{

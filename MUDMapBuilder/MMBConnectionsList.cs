@@ -77,6 +77,8 @@ namespace MUDMapBuilder
 
 		public void RemoveAt(int index) => _connections.RemoveAt(index);
 
+		public void Clear() => _connections.Clear();
+
 		public IEnumerator<MMBConnection> GetEnumerator() => _connections.GetEnumerator();
 
 		IEnumerator IEnumerable.GetEnumerator() => _connections.GetEnumerator();

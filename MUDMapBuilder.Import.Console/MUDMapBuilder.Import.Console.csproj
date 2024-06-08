@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\DikuLoad\DikuLoad.Import.Ascii\DikuLoad.Import.Ascii.csproj" />
+    <ProjectReference Include="..\..\DikuLoad\DikuLoad.Import.CSL\DikuLoad.Import.CSL.csproj" />
     <ProjectReference Include="..\MUDMapBuilder\MUDMapBuilder.csproj" />
   </ItemGroup>
 

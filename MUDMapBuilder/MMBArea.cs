@@ -28,6 +28,9 @@ namespace MUDMapBuilder
 		public string MinimumLevel { get; set; }
 		public string MaximumLevel { get; set; }
 
+		[JsonIgnore]
+		public MMBConnectionsList[,] ConnectionsGrid => _connectionsGrid;
+
 		public MMBRoom[] Rooms
 		{
 			get => _rooms;
@@ -364,59 +367,31 @@ namespace MUDMapBuilder
 
 				if (obstacles.Count > 0)
 				{
-					// Remove obstacles that couldn't be fixed
-					// Determine which rooms should be kept
+					// Keep single-exit rooms with the same direction connection
+					// As those couldn't be fixed
 					var keepRooms = new HashSet<int> { sourceRoom.Id, targetRoom.Id };
-					while (true)
+					foreach (var o in obstacles)
 					{
-						var roomsAdded = false;
-						foreach (var o in obstacles)
+						if (keepRooms.Contains(o))
 						{
-							if (keepRooms.Contains(o))
-							{
-								continue;
-							}
-
-							var obstacleRoom = GetRoomById(o);
-							foreach (var kr in keepRooms)
-							{
-								var keepRoom = GetRoomById(kr);
-								var conn = keepRoom.FindConnection(o);
-								if (conn == null)
-								{
-									continue;
-								}
-
-								if ((exitDir.IsHorizontal() && conn.Direction.IsHorizontal()) ||
-									(exitDir.IsVertical() && conn.Direction.IsVertical()))
-								{
-									// Do not delete obstacle rooms that has same direction connections
-									roomsAdded = true;
-									keepRooms.Add(o);
-									goto finish;
-								}
-
-								conn = (from c in obstacleRoom.Connections where keepRooms.Contains(c.Value.RoomId) select c.Value).FirstOrDefault();
-								if (conn == null)
-								{
-									continue;
-								}
-
-								if ((exitDir.IsHorizontal() && conn.Direction.IsHorizontal()) ||
-									(exitDir.IsVertical() && conn.Direction.IsVertical()))
-								{
-									// Do not delete obstacle rooms that has same direction connections
-									roomsAdded = true;
-									keepRooms.Add(o);
-									goto finish;
-								}
-							}
+							continue;
 						}
-					finish:;
 
-						if (!roomsAdded)
+						var obstacleRoom = GetRoomById(o);
+						if (obstacleRoom.Connections.Count != 1)
 						{
-							break;
+							continue;
+						}
+
+						foreach (var conn in obstacleRoom.Connections)
+						{
+							var connDir = conn.Value.Direction;
+							if ((exitDir.IsHorizontal() && connDir.IsHorizontal()) ||
+								(exitDir.IsVertical() && connDir.IsVertical()))
+							{
+								keepRooms.Add(o);
+								break;
+							}
 						}
 					}
 
@@ -750,24 +725,6 @@ namespace MUDMapBuilder
 			return (from p in parts orderby p.Count select p).ToArray();
 		}
 
-		public static bool IsSingleExitRoom(MMBRoom room, out MMBRoomConnection connection)
-		{
-			connection = null;
-			if (room.Connections == null)
-			{
-				return false;
-			}
-
-			var realConnections = (from c in room.Connections select c.Value).ToArray();
-			if (realConnections.Length != 1)
-			{
-				return false;
-			}
-
-			connection = realConnections[0];
-			return connection.ConnectionType == MMBConnectionType.TwoWay;
-		}
-
 		public void FixPlacementOfSingleExitRooms()
 		{
 			foreach (var ri in _roomsByIds)
@@ -793,8 +750,7 @@ namespace MUDMapBuilder
 						continue;
 					}
 
-					MMBRoomConnection conn;
-					if (!IsSingleExitRoom(targetRoom, out conn))
+					if (targetRoom.Connections.Count != 1)
 					{
 						continue;
 					}
@@ -824,28 +780,24 @@ namespace MUDMapBuilder
 		public MeasurePushRoomResult MeasurePushRoom(int firstRoomId, Point firstForceVector)
 		{
 			// Determine rooms movement
-			var movedRooms = new Dictionary<int, Point>();
-
-			var firstRoom = GetRoomById(firstRoomId);
-			var toProcess = new List<Tuple<MMBRoom, Point>>
+			var movedRooms = new Dictionary<int, Point>
 			{
-				new Tuple<MMBRoom, Point>(firstRoom, firstForceVector)
+				[firstRoomId] = firstForceVector
 			};
+
+			var toProcess = new IdQueue(firstRoomId);
 
 			while (toProcess.Count > 0)
 			{
-				var item = toProcess[0];
-				var room = item.Item1;
+				var id = toProcess.Pop();
+				var room = GetRoomById(id);
 				var pos = room.Position.Value;
-				toProcess.RemoveAt(0);
-
-				movedRooms[room.Id] = item.Item2;
 
 				// Process neighbour rooms
 				foreach (var pair in room.Connections)
 				{
 					var exitDir = pair.Key;
-					var forceVector = item.Item2;
+					var forceVector = movedRooms[id];
 
 					var targetRoom = GetRoomById(pair.Value.RoomId);
 					if (targetRoom.Position == null || movedRooms.ContainsKey(pair.Value.RoomId))
@@ -927,7 +879,8 @@ namespace MUDMapBuilder
 
 					if (forceVector.X != 0 || forceVector.Y != 0)
 					{
-						toProcess.Add(new Tuple<MMBRoom, Point>(targetRoom, forceVector));
+						movedRooms[targetRoom.Id] = forceVector;
+						toProcess.Add(targetRoom.Id);
 					}
 				}
 			}
@@ -1140,7 +1093,11 @@ namespace MUDMapBuilder
 
 		public MMBArea Clone()
 		{
-			var result = new MMBArea();
+			var result = new MMBArea
+			{
+				Name = Name,
+			};
+
 			foreach (var r in _roomsByIds)
 			{
 				result.Add(r.Value.Clone());
@@ -1153,16 +1110,16 @@ namespace MUDMapBuilder
 
 		public static bool AreEqual(MMBArea a, MMBArea b)
 		{
-			if (a.Width != b.Width || a.Height != b.Height)
-			{
-				return false;
-			}
-
 			a = a.Clone();
 			a.DeleteEmptyColsRows();
 
 			b = b.Clone();
 			b.DeleteEmptyColsRows();
+
+			if (a.Width != b.Width || a.Height != b.Height)
+			{
+				return false;
+			}
 
 			for (var x = 0; x < a.Width; ++x)
 			{

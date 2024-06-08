@@ -1,5 +1,6 @@
 ﻿using AbarimMUD.Import.Envy;
 using DikuLoad.Data;
+using DikuLoad.Import;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,7 +36,9 @@ namespace MUDMapBuilder.Import
 
 						}*/
 
-			var sourceType = SourceType.ROM;
+			BaseImporter importer;
+
+			SourceType? sourceType = null;
 			if (mudName.Contains("tba", StringComparison.OrdinalIgnoreCase) ||
 				mudName.Contains("circle", StringComparison.OrdinalIgnoreCase))
 			{
@@ -45,9 +48,20 @@ namespace MUDMapBuilder.Import
 			{
 				sourceType = SourceType.Envy;
 			}
+			else if (mudName.Contains("ROM", StringComparison.OrdinalIgnoreCase))
+			{
+				sourceType = SourceType.ROM;
+			}
 
-			var settings = new ImporterSettings(folder, sourceType);
-			var importer = new Importer(settings);
+			if (sourceType != null)
+			{
+				var settings = new ImporterSettings(folder, sourceType.Value);
+				importer = new Importer(settings);
+			}
+			else
+			{
+				importer = new DikuLoad.Import.CSL.Importer(folder);
+			}
 
 			importer.Process();
 
@@ -66,7 +80,7 @@ namespace MUDMapBuilder.Import
 				{
 					if (allRooms.ContainsKey(room.Id))
 					{
-						throw new Exception($"Dublicate room id: {room.Id}");
+						throw new Exception($"Dublicate room id. New room: {room}. Old room: {allRooms[room.Id]}");
 					}
 
 					var areaExit = room.Clone();
@@ -190,7 +204,7 @@ namespace MUDMapBuilder.Import
 					}
 
 					var lines = new HashSet<string>();
-					foreach(var r in resets)
+					foreach (var r in resets)
 					{
 						switch (r.ResetType)
 						{

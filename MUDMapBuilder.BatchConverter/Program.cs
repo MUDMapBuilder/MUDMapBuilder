@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace MUDMapBuilder.BatchConverter
 {
@@ -56,7 +57,8 @@ namespace MUDMapBuilder.BatchConverter
 
 			Parallel.ForEach(areaFiles, areaFile => ProcessFile(areaFile));
 
-			foreach(var pair in _errors)
+			var orderedErrors = (from e in _errors orderby e.Key select e);
+			foreach(var pair in orderedErrors)
 			{
 				Log($"Error in {pair.Key}: {pair.Value}");
 			}

@@ -132,11 +132,6 @@ namespace MUDMapBuilder.Import
 			foreach (var area in areas)
 			{
 				var fileName = $"{area.Name}.json";
-				if (fileName.StartsWith("Adria"))
-				{
-					continue;
-				}
-
 				Console.WriteLine($"Saving {fileName}...");
 
 				var project = new MMBProject(area, new BuildOptions());
@@ -177,7 +172,7 @@ namespace MUDMapBuilder.Import
 			sb.AppendLine("];");
 
 			var page = Resources.MapsPageTemplate;
-			page = page.Replace("%title", $"{mudName}'s Maps");
+			page = page.Replace("%title%", $"{mudName}'s Maps");
 			page = page.Replace("%data%", sb.ToString());
 			File.WriteAllText($"{mudName}_Maps.html", page);
 

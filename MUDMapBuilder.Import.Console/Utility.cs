@@ -12,7 +12,19 @@ namespace MUDMapBuilder
 			switch (obj.ItemType)
 			{
 				case ItemType.Weapon:
-					return $"{obj.Value2}d{obj.Value3}";
+					var r = $"{obj.Value2}d{obj.Value3}";
+					if (!string.IsNullOrEmpty(obj.Value5) && obj.Value5 != "0")
+					{
+						if (obj.Value5.StartsWith("-"))
+						{
+							r += obj.Value5;
+						} else
+						{
+							r += "+" + obj.Value5;
+						}
+					}
+
+					return r;
 
 				case ItemType.Armor:
 					return obj.Value1.ToString();

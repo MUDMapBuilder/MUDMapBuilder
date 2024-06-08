@@ -194,6 +194,7 @@ namespace MUDMapBuilder.Editor.UI
 				_labelNonStraightConnections.Text = $"Non Straight Connections: {brokenConnections.NonStraight.Count}";
 				_labelConnectionsWithObstacles.Text = $"Connections With Obstacles: {brokenConnections.WithObstacles.Count}";
 				_labelLongConnections.Text = $"Long Connections: {brokenConnections.Long.Count}";
+				_labelStatus.Text = Area.LogMessage;
 			}
 			else
 			{

@@ -8,6 +8,12 @@ namespace MUDMapBuilder
 {
 	public partial class MMBArea
 	{
+		public class DeleteColsRowsResult
+		{
+			public List<int> Columns { get; } = new List<int>();
+			public List<int> Rows { get; } = new List<int>();
+		}
+
 		private enum ConnectionBrokenType
 		{
 			Normal,
@@ -30,6 +36,9 @@ namespace MUDMapBuilder
 
 		[JsonIgnore]
 		public MMBConnectionsList[,] ConnectionsGrid => _connectionsGrid;
+
+		[JsonIgnore]
+		public string LogMessage { get; set; }
 
 		public MMBRoom[] Rooms
 		{
@@ -587,42 +596,49 @@ namespace MUDMapBuilder
 			_brokenConnections = CalculateBrokenConnections();
 		}
 
-		public void DeleteEmptyColsRows()
+		public DeleteColsRowsResult DeleteEmptyColsRows()
 		{
 			UpdatePositions();
+
+			var result = new DeleteColsRowsResult();
 
 			// Remove empty columns
 			for (var x = 0; x < _roomsRectangle.Width; ++x)
 			{
-				var isEmpty = true;
-				for (var y = 0; y < _roomsRectangle.Height; ++y)
+				while (true)
 				{
-					if (_roomsByPositions[x, y] != null)
+					// Check whether current column is empty
+					var isEmpty = true;
+					for (var y = 0; y < _roomsRectangle.Height; ++y)
 					{
-						isEmpty = false;
+						if (_roomsByPositions[x, y] != null)
+						{
+							isEmpty = false;
+							break;
+						}
+					}
+
+					if (!isEmpty)
+					{
 						break;
 					}
-				}
 
-				if (isEmpty)
-				{
-					// Do the shift
-					for (var x2 = x + 1; x2 < _roomsRectangle.Width; ++x2)
+					result.Columns.Add(x);
+
+					// Delete empty column
+					for (var x2 = x; x2 < _roomsRectangle.Width - 1; ++x2)
 					{
 						for (var y = 0; y < _roomsRectangle.Height; ++y)
 						{
-							var room = _roomsByPositions[x2, y];
-							if (room == null)
+							var nextRoom = _roomsByPositions[x2 + 1, y];
+							_roomsByPositions[x2, y] = nextRoom;
+
+							if (nextRoom != null)
 							{
-								continue;
+								// Set field directly to prevent the rebuilding of the grid
+								var pos = new Point(x2 + _roomsRectangle.X, y + _roomsRectangle.Y);
+								nextRoom._position = pos;
 							}
-
-							_roomsByPositions[x2, y] = null;
-							_roomsByPositions[x2 - 1, y] = room;
-							var pos = room.Position.Value;
-
-							// Set field directly to prevent the rebuilding of the grid
-							room._position = new Point(pos.X - 1, pos.Y);
 						}
 					}
 
@@ -633,35 +649,40 @@ namespace MUDMapBuilder
 			// Remove empty rows
 			for (var y = 0; y < _roomsRectangle.Height; ++y)
 			{
-				var isEmpty = true;
-				for (var x = 0; x < _roomsRectangle.Width; ++x)
+				while (true)
 				{
-					if (_roomsByPositions[x, y] != null)
+					// Check whether current row is empty
+					var isEmpty = true;
+					for (var x = 0; x < _roomsRectangle.Width; ++x)
 					{
-						isEmpty = false;
+						if (_roomsByPositions[x, y] != null)
+						{
+							isEmpty = false;
+							break;
+						}
+					}
+
+					if (!isEmpty)
+					{
 						break;
 					}
-				}
 
-				if (isEmpty)
-				{
-					// Do the shift
-					for (var y2 = y + 1; y2 < _roomsRectangle.Height; ++y2)
+					result.Rows.Add(y);
+
+					// Delete empty row
+					for (var y2 = y; y2 < _roomsRectangle.Height - 1; ++y2)
 					{
 						for (var x = 0; x < _roomsRectangle.Width; ++x)
 						{
-							var room = _roomsByPositions[x, y2];
-							if (room == null)
+							var nextRoom = _roomsByPositions[x, y2 + 1];
+							_roomsByPositions[x, y2] = nextRoom;
+
+							if (nextRoom != null)
 							{
-								continue;
+								// Set field directly to prevent the rebuilding of the grid
+								var pos = new Point(x + _roomsRectangle.X, y2 + _roomsRectangle.Y);
+								nextRoom._position = pos;
 							}
-
-							_roomsByPositions[x, y2] = null;
-							_roomsByPositions[x, y2 - 1] = room;
-							var pos = room.Position.Value;
-
-							// Set field directly to prevent the rebuilding of the grid
-							room._position = new Point(pos.X, pos.Y - 1);
 						}
 					}
 
@@ -670,6 +691,8 @@ namespace MUDMapBuilder
 			}
 
 			InvalidatePositions();
+
+			return result;
 		}
 
 		public HashSet<int>[] GroupPositionedRooms()
@@ -1096,6 +1119,7 @@ namespace MUDMapBuilder
 			var result = new MMBArea
 			{
 				Name = Name,
+				LogMessage = LogMessage,
 			};
 
 			foreach (var r in _roomsByIds)

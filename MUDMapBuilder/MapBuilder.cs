@@ -60,12 +60,14 @@ namespace MUDMapBuilder
 
 		private void Log(string message)
 		{
+			Area.LogMessage = BuildLogPrefix() + message;
+
 			if (_log == null)
 			{
 				return;
 			}
 
-			_log(BuildLogPrefix() + message);
+			_log(Area.LogMessage);
 		}
 
 		private static Point CalculateDesiredPosition(Point sourcePos, Point targetPos, MMBDirection direction)
@@ -524,9 +526,11 @@ namespace MUDMapBuilder
 				}
 			}
 
-			Area.FixPlacementOfSingleExitRooms();
+			var result = Area.DeleteEmptyColsRows();
 
-			return true;
+			Log($"Deleted columns '{string.Join(", ", result.Columns)}' and rows '{string.Join(", ", result.Rows)}'");
+
+			return AddRunStep();
 		}
 
 		private bool ObstacleFixRun(out bool fixes)

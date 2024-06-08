@@ -643,58 +643,57 @@ namespace MUDMapBuilder
 				var connectionFixed = false;
 				for (var i = 0; i < vc.Intersections.Count; ++i)
 				{
-					var intersection = vc.Intersections[0];
-					if (newRoom.Id != intersection.SourceRoomId)
+					var intersection = vc.Intersections[i];
+					if (newRoom.Id == intersection.SourceRoomId || newRoom.Id == intersection.TargetRoomId)
 					{
-						// Try to delete first room
-						var rooms = Area.Clone();
-						var deleteList = BuildRemoveList(new int[] { intersection.SourceRoomId });
-						foreach (var id in deleteList)
-						{
-							rooms.GetRoomById(id).Position = null;
-						}
+						continue;
+					}
 
-						if (!ExistsInHistory(rooms))
+					// Try to delete first room
+					var rooms = Area.Clone();
+					var deleteList = BuildRemoveList(new int[] { intersection.SourceRoomId });
+					foreach (var id in deleteList)
+					{
+						rooms.GetRoomById(id).Position = null;
+					}
+
+					if (!ExistsInHistory(rooms))
+					{
+						var vc2 = rooms.BrokenConnections;
+						if (vc2.Intersections.Count < vc.Intersections.Count)
 						{
-							var vc2 = rooms.BrokenConnections;
-							if (vc2.Intersections.Count < vc.Intersections.Count)
+							if (!RemoveRooms((from id in deleteList select Area.GetRoomById(id)).ToArray()))
 							{
-								if (!RemoveRooms((from id in deleteList select Area.GetRoomById(id)).ToArray()))
-								{
-									return false;
-								}
-
-								fixes = true;
-								connectionFixed = true;
-								break;
+								return false;
 							}
+
+							fixes = true;
+							connectionFixed = true;
+							break;
 						}
 					}
 
 					// Try to delete the second room
-					if (newRoom.Id != intersection.TargetRoomId)
+					rooms = Area.Clone();
+					deleteList = BuildRemoveList(new int[] { intersection.TargetRoomId });
+					foreach (var id in deleteList)
 					{
-						var rooms = Area.Clone();
-						var deleteList = BuildRemoveList(new int[] { intersection.TargetRoomId });
-						foreach (var id in deleteList)
-						{
-							rooms.GetRoomById(id).Position = null;
-						}
+						rooms.GetRoomById(id).Position = null;
+					}
 
-						if (!ExistsInHistory(rooms))
+					if (!ExistsInHistory(rooms))
+					{
+						var vc2 = rooms.BrokenConnections;
+						if (vc2.Intersections.Count < vc.Intersections.Count)
 						{
-							var vc2 = rooms.BrokenConnections;
-							if (vc2.Intersections.Count < vc.Intersections.Count)
+							if (!RemoveRooms((from id in deleteList select Area.GetRoomById(id)).ToArray()))
 							{
-								if (!RemoveRooms((from id in deleteList select Area.GetRoomById(id)).ToArray()))
-								{
-									return false;
-								}
-
-								fixes = true;
-								connectionFixed = true;
-								break;
+								return false;
 							}
+
+							fixes = true;
+							connectionFixed = true;
+							break;
 						}
 					}
 				}

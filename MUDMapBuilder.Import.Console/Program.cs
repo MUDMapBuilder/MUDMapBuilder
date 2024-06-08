@@ -250,7 +250,7 @@ namespace MUDMapBuilder.Import
 					var name = obj.ShortDescription.Replace("\"", "");
 					var locationsStr = string.Join("<br>", lines);
 
-					sb.AppendLine($"[\"{name}\", \"{area.Name}\", \"{locationsStr}\", \"{wearFlags.BuildFlagsValue()}\", \"{obj.Level}\", \"{obj.BuildStringValue()}\", \"{obj.ExtraFlags.BuildFlagsValue()}\", \"{obj.BuildEffectsValue()}\"],");
+					sb.AppendLine($"[\"{name}\", \"{area.Name}\", \"{locationsStr}\", \"{obj.Level}\", \"{wearFlags.BuildFlagsValue()}\", \"{obj.BuildStringValue()}\", \"{obj.ExtraFlags.BuildFlagsValue()}\", \"{obj.BuildEffectsValue()}\"],");
 					++outputItemsCount;
 				}
 			}
@@ -258,7 +258,7 @@ namespace MUDMapBuilder.Import
 
 
 			page = Resources.EqPageTemplate;
-			page = page.Replace("%title", $"{mudName}'s Equipment");
+			page = page.Replace("%title%", $"{mudName}'s Equipment");
 			page = page.Replace("%data%", sb.ToString());
 
 			File.WriteAllText($"{mudName}_Eq.html", page);

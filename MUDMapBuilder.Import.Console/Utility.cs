@@ -66,7 +66,7 @@ namespace MUDMapBuilder
 			var result = new MMBArea
 			{
 				Name = area.Name,
-				Credits = area.Credits,
+				Credits = area.Builders,
 				MinimumLevel = area.MinimumLevel,
 				MaximumLevel = area.MaximumLevel
 			};

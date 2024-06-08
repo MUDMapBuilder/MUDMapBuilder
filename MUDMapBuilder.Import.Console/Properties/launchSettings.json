@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "MUDMapBuilder.Import.Console": {
-      "commandName": "Project",
-      "commandLineArgs": "tbaMUD \"D:\\Projects\\chaos\\tbamud\\lib\\world\""
-    }
-  }
-}

@@ -15,6 +15,8 @@
 		public void CopyTo(BuildOptions other)
 		{
 			other.MaxSteps = MaxSteps;
+			other.KeepSolitaryRooms = KeepSolitaryRooms;
+			other.KeepRoomsWithSingleOutsideExit = KeepRoomsWithSingleOutsideExit;
 			other.FixObstacles = FixObstacles;
 			other.FixNonStraight = FixNonStraight;
 			other.FixIntersected = FixIntersected;

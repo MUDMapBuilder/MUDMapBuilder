@@ -13,6 +13,26 @@ namespace MUDMapBuilder.BatchConverter
 
 		private static void Log(string message) => Console.WriteLine(message);
 
+		static MapBuilderResult Rerun(string areaFile, MMBProject project, bool fixObstacles, bool fixNonStraight, bool fixIntersected)
+		{
+			Log($"Rerunning with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersected={fixIntersected}");
+
+			project.BuildOptions.FixObstacles = fixObstacles;
+			project.BuildOptions.FixNonStraight = fixNonStraight;
+			project.BuildOptions.FixIntersected = fixIntersected;
+
+			var result = MapBuilder.Build(project, Log);
+
+			if (result.ResultType == ResultType.Success)
+			{
+				// Save project with the new options
+				Log($"Success. Saving project options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersected={fixIntersected}");
+				File.WriteAllText(areaFile, project.ToJson());
+			}
+
+			return result;
+		}
+
 		static void ProcessFile(string areaFile)
 		{
 			var areaFileName = Path.GetFileName(areaFile);
@@ -25,11 +45,54 @@ namespace MUDMapBuilder.BatchConverter
 
 			Log($"Processing file {areaFileName}...");
 			var project = MMBProject.Parse(File.ReadAllText(areaFile));
+
+			// Enable all options
+			project.BuildOptions.FixIntersected = true;
+			project.BuildOptions.FixNonStraight = true;
+			project.BuildOptions.FixObstacles = true;
+
 			var buildResult = MapBuilder.Build(project, Log);
 			if (buildResult == null)
 			{
 				_errors[areaFile] = "Mo rooms to process.";
 				return;
+			}
+
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				Log($"{buildResult.ResultType}");
+				buildResult = Rerun(areaFile, project, true, true, false);
+			}
+
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				Log($"{buildResult.ResultType}");
+				buildResult = Rerun(areaFile, project, false, true, true);
+			}
+
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				Log($"{buildResult.ResultType}");
+				buildResult = Rerun(areaFile, project, false, true, false);
+			}
+
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				Log($"{buildResult.ResultType}");
+				buildResult = Rerun(areaFile, project, true, false, true);
+			}
+
+
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				Log($"{buildResult.ResultType}");
+				buildResult = Rerun(areaFile, project, true, false, false);
+			}
+
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				Log($"{buildResult.ResultType}");
+				buildResult = Rerun(areaFile, project, false, false, false);
 			}
 
 			if (buildResult.ResultType != ResultType.Success)

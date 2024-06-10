@@ -1104,6 +1104,36 @@ namespace MUDMapBuilder
 			return new MeasurePushRoomResult(movedRoomsList.ToArray(), deletedRooms.ToArray());
 		}
 
+		public bool IsReachable(int firstRoomId, int secondRoomId)
+		{
+			var toProcess = new IdQueue(firstRoomId);
+
+			while (toProcess.Count > 0)
+			{
+				var id = toProcess.Pop();
+				var room = GetRoomById(id);
+
+				foreach (var pair in room.Connections)
+				{
+					var targetId = pair.Value.RoomId;
+					if (targetId == secondRoomId)
+					{
+						return true;
+					}
+
+					var targetRoom = GetRoomById(targetId);
+					if (toProcess.WasProcessed(targetId))
+					{
+						continue;
+					}
+
+					toProcess.Add(targetId);
+				}
+			}
+
+			return false;
+		}
+
 		public void ClearMarks()
 		{
 			foreach (var pair in _roomsByIds)

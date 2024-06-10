@@ -29,6 +29,14 @@
 %data%
 
     $('#table').DataTable({
+        columnDefs: [
+            {
+                targets: 1,
+                render: function (data, type) {
+                    return '<a href="' + data[1] + '">' + data[0] + '</a>';
+                }
+            }
+        ],
         paging: false,
         data: data
     });

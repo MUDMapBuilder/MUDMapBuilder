@@ -265,7 +265,8 @@ namespace MUDMapBuilder.Import
 					var name = obj.ShortDescription.Replace("\"", "");
 					var locationsStr = string.Join("<br>", lines);
 
-					sb.AppendLine($"[\"{name}\", \"{area.Name}\", \"{locationsStr}\", \"{obj.Level}\", \"{wearFlags.BuildFlagsValue()}\", \"{obj.BuildStringValue()}\", \"{obj.ExtraFlags.BuildFlagsValue()}\", \"{obj.BuildEffectsValue()}\"],");
+					var pngLink = $"data/{mudName}/maps/png/{area.Name}.png";
+					sb.AppendLine($"[\"{name}\", [\"{area.Name}\", \"{pngLink}\"], \"{locationsStr}\", \"{obj.Level}\", \"{wearFlags.BuildFlagsValue()}\", \"{obj.BuildStringValue()}\", \"{obj.ExtraFlags.BuildFlagsValue()}\", \"{obj.BuildEffectsValue()}\"],");
 					++outputItemsCount;
 				}
 			}

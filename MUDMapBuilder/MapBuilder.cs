@@ -43,7 +43,6 @@ namespace MUDMapBuilder
 		private ResultType _resultType = ResultType.Success;
 		private readonly MMBProject _project;
 		private readonly IdQueue _roomsQueue = new IdQueue();
-		private readonly HashSet<int> _removedRooms = new HashSet<int>();
 		private readonly List<MMBArea> _history = new List<MMBArea>();
 		private readonly Action<string> _log;
 
@@ -267,7 +266,6 @@ namespace MUDMapBuilder
 				room.MarkColor = null;
 				room.Position = null;
 				_roomsQueue.Remove(room.Id);
-				_removedRooms.Add(room.Id);
 			}
 
 			return AddRunStep();
@@ -766,19 +764,63 @@ namespace MUDMapBuilder
 				return null;
 			}
 
-			MMBRoom firstRoom = null;
-			foreach (var room in Area.Rooms)
-			{
-				firstRoom = room;
-			}
-
-			firstRoom.Position = new Point(0, 0);
-			_roomsQueue.Add(firstRoom.Id);
-
 			BrokenConnectionsInfo vc;
-			while (_roomsQueue.Count > 0 && Options.MaxSteps > _history.Count)
+
+			// Run while there are rooms to position
+			while (Area.PositionedRoomsCount < Area.Rooms.Length)
 			{
-				while (_roomsQueue.Count > 0 && Options.MaxSteps > _history.Count)
+				if (_roomsQueue.Count == 0)
+				{
+					// Get first non-positioned room
+					var firstNonPositionedRoom = (from r in Area.Rooms where r.Position == null select r).First();
+
+					// Check if any connected room was positioned
+					var roomId = firstNonPositionedRoom.Id;
+					var connectedRooms = (from r in Area.Rooms where r.Id != roomId && r.Position != null && r.FindConnection(roomId) != null select r).ToList();
+					if (connectedRooms.Count == 1)
+					{
+						// Use only existing connection
+						_roomsQueue.Add(connectedRooms[0].Id);
+					}
+					else if (connectedRooms.Count > 1)
+					{
+						// If there are multiple connections
+						// Choose one that introduces least amount of broken connections
+						vc = Area.BrokenConnections;
+						var bestConnectedRoomIndex = 0;
+						int? bestBrokenConnections = null;
+						for (var i = 0; i < connectedRooms.Count; ++i)
+						{
+							var connectedRoom = connectedRooms[i];
+							var clone = Area.Clone();
+
+							var pos = connectedRoom.Position.Value;
+							var connection = connectedRoom.FindConnection(roomId);
+							var delta = connection.Direction.GetDelta();
+							var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
+
+							var roomClone = clone.GetRoomById(roomId);
+							roomClone.Position = desiredPos;
+
+							var vc2 = clone.BrokenConnections;
+							if (bestBrokenConnections == null || vc2.WithObstacles.Count < bestBrokenConnections.Value)
+							{
+								bestConnectedRoomIndex = i;
+								bestBrokenConnections = vc2.WithObstacles.Count;
+							}
+						}
+
+						_roomsQueue.Add(connectedRooms[bestConnectedRoomIndex].Id);
+					} else
+					{
+						// No connected rooms
+						// Position and add to queue
+						firstNonPositionedRoom.Position = new Point(Area.RoomsRectangle.Left, Area.RoomsRectangle.Bottom + 1);
+						_roomsQueue.Add(firstNonPositionedRoom.Id);
+					}
+				}
+
+				while (_roomsQueue.Count > 0)
 				{
 					var id = _roomsQueue.Pop();
 					var room = Area.GetRoomById(id);
@@ -812,8 +854,8 @@ namespace MUDMapBuilder
 						{
 							if (!IsSingleExitUpDownRoom(newRoom) && IsSingleExitUpDownRoom(existingRoom))
 							{
-								// Delete such rooms instead of expanding the grid
-								if (!RemoveRooms(new[] { existingRoom }))
+                                // Delete such rooms instead of expanding the grid
+                                if (!RemoveRooms(new[] { existingRoom }, false))
 								{
 									goto finish;
 								}
@@ -873,90 +915,6 @@ namespace MUDMapBuilder
 				{
 					break;
 				}
-
-				// Update removed rooms
-				foreach (var room in Area.Rooms)
-				{
-					if (room.Position == null)
-					{
-						continue;
-					}
-
-					if (_removedRooms.Contains(room.Id))
-					{
-						_removedRooms.Remove(room.Id);
-					}
-				}
-
-				foreach (var roomId in _removedRooms)
-				{
-					var connectedRooms = (from r in Area.Rooms where r.Id != roomId && r.Position != null && r.FindConnection(roomId) != null select r).ToList();
-					if (connectedRooms.Count == 1)
-					{
-						// Use only existing connection
-						_roomsQueue.Add(connectedRooms[0].Id);
-					}
-					else if (connectedRooms.Count > 1)
-					{
-						// If there are multiple connections
-						// Choose one that introduces least amount of broken connections
-						vc = Area.BrokenConnections;
-						var bestConnectedRoomIndex = 0;
-						int? bestBrokenConnections = null;
-						for (var i = 0; i < connectedRooms.Count; ++i)
-						{
-							var connectedRoom = connectedRooms[i];
-							var clone = Area.Clone();
-
-							var pos = connectedRoom.Position.Value;
-							var connection = connectedRoom.FindConnection(roomId);
-							var delta = connection.Direction.GetDelta();
-							var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
-
-							var roomClone = clone.GetRoomById(roomId);
-							roomClone.Position = desiredPos;
-
-							var vc2 = clone.BrokenConnections;
-							if (bestBrokenConnections == null || vc2.WithObstacles.Count < bestBrokenConnections.Value)
-							{
-								bestConnectedRoomIndex = i;
-								bestBrokenConnections = vc2.WithObstacles.Count;
-							}
-						}
-
-						_roomsQueue.Add(connectedRooms[bestConnectedRoomIndex].Id);
-					}
-				}
-
-				if (_roomsQueue.Count > 0 || _removedRooms.Count > 0)
-				{
-					continue;
-				}
-
-				// Finally deal with rooms that weren't reached
-				foreach (var room in Area.Rooms)
-				{
-					if (room.Position != null)
-					{
-						continue;
-					}
-
-					// Unprocessed room
-					if (!Options.KeepSolitaryRooms)
-					{
-						// Ignore if it has no connections
-						if (room.Connections.Count == 0)
-						{
-							continue;
-						}
-					}
-
-					// Put it to the bottom left
-					room.Position = new Point(Area.RoomsRectangle.Left, Area.RoomsRectangle.Bottom + 1);
-					_roomsQueue.Add(room.Id);
-
-					break;
-				}
 			}
 
 		finish:;
@@ -994,6 +952,7 @@ namespace MUDMapBuilder
 
 		finish2:;
 			Log(_resultType.ToString());
+			AddRunStep();
 			return new MapBuilderResult(_resultType, _history.ToArray(), startCompactStep);
 		}
 

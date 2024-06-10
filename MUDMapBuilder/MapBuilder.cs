@@ -160,6 +160,8 @@ namespace MUDMapBuilder
 					room.Position = newPos;
 				}
 
+				Area.FixPlacementOfSingleExitRooms();
+
 				if (!AddRunStep())
 				{
 					return false;
@@ -771,52 +773,64 @@ namespace MUDMapBuilder
 			{
 				if (_roomsQueue.Count == 0)
 				{
-					// Get first non-positioned room
-					var firstNonPositionedRoom = (from r in Area.Rooms where r.Position == null select r).First();
+					// Get all non positioned rooms
+					var nonPositionedRooms = (from r in Area.Rooms where r.Position == null select r).ToArray();
 
-					// Check if any connected room was positioned
-					var roomId = firstNonPositionedRoom.Id;
-					var connectedRooms = (from r in Area.Rooms where r.Id != roomId && r.Position != null && r.FindConnection(roomId) != null select r).ToList();
-					if (connectedRooms.Count == 1)
+					foreach(var nonPositionedRoom in nonPositionedRooms)
 					{
-						// Use only existing connection
-						_roomsQueue.Add(connectedRooms[0].Id);
-					}
-					else if (connectedRooms.Count > 1)
-					{
-						// If there are multiple connections
-						// Choose one that introduces least amount of broken connections
-						vc = Area.BrokenConnections;
-						var bestConnectedRoomIndex = 0;
-						int? bestBrokenConnections = null;
-						for (var i = 0; i < connectedRooms.Count; ++i)
+						// Check if any connected room was positioned
+						var roomId = nonPositionedRoom.Id;
+						var connectedRooms = (from r in Area.Rooms where r.Id != roomId && r.Position != null && r.FindConnection(roomId) != null select r).ToList();
+						if (connectedRooms.Count == 1)
 						{
-							var connectedRoom = connectedRooms[i];
-							var clone = Area.Clone();
-
-							var pos = connectedRoom.Position.Value;
-							var connection = connectedRoom.FindConnection(roomId);
-							var delta = connection.Direction.GetDelta();
-							var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
-
-							var roomClone = clone.GetRoomById(roomId);
-							roomClone.Position = desiredPos;
-
-							var vc2 = clone.BrokenConnections;
-							if (bestBrokenConnections == null || vc2.WithObstacles.Count < bestBrokenConnections.Value)
-							{
-								bestConnectedRoomIndex = i;
-								bestBrokenConnections = vc2.WithObstacles.Count;
-							}
+							// Use only existing connection
+							_roomsQueue.Add(connectedRooms[0].Id);
+							break;
 						}
+						else if (connectedRooms.Count > 1)
+						{
+							// If there are multiple connections
+							// Choose one that introduces least amount of broken connections
+							vc = Area.BrokenConnections;
+							var bestConnectedRoomIndex = 0;
+							int? bestBrokenConnections = null;
+							for (var i = 0; i < connectedRooms.Count; ++i)
+							{
+								var connectedRoom = connectedRooms[i];
+								var clone = Area.Clone();
 
-						_roomsQueue.Add(connectedRooms[bestConnectedRoomIndex].Id);
-					} else
+								var pos = connectedRoom.Position.Value;
+								var connection = connectedRoom.FindConnection(roomId);
+								var delta = connection.Direction.GetDelta();
+								var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
+
+								var roomClone = clone.GetRoomById(roomId);
+								roomClone.Position = desiredPos;
+
+								var vc2 = clone.BrokenConnections;
+								if (bestBrokenConnections == null || vc2.WithObstacles.Count < bestBrokenConnections.Value)
+								{
+									bestConnectedRoomIndex = i;
+									bestBrokenConnections = vc2.WithObstacles.Count;
+								}
+							}
+
+							_roomsQueue.Add(connectedRooms[bestConnectedRoomIndex].Id);
+							break;
+						}
+						else
+						{
+							// No connected rooms
+							// Position and add to queue
+						}
+					}
+
+					// If we didnt find any connected room than manually place first non-positioned room
+					if (_roomsQueue.Count == 0)
 					{
-						// No connected rooms
-						// Position and add to queue
-						firstNonPositionedRoom.Position = new Point(Area.RoomsRectangle.Left, Area.RoomsRectangle.Bottom + 1);
-						_roomsQueue.Add(firstNonPositionedRoom.Id);
+						var nonPositionedRoom = nonPositionedRooms[0];
+						nonPositionedRoom.Position = new Point(Area.RoomsRectangle.Left, Area.RoomsRectangle.Bottom + 1);
+						_roomsQueue.Add(nonPositionedRoom.Id);
 					}
 				}
 

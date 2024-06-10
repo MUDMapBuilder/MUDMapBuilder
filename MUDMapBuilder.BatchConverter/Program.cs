@@ -108,11 +108,11 @@ namespace MUDMapBuilder.BatchConverter
 			File.WriteAllBytes(imageFile, pngData);
 		}
 
-		static void Process(string folder)
+		static void Process(string folder, string outputFolder)
 		{
 			var areaFiles = Directory.EnumerateFiles(folder, "*.json");
 
-			_outputFolder = Path.Combine(folder, "png");
+			_outputFolder = outputFolder;
 			if (!Directory.Exists(_outputFolder))
 			{
 				Directory.CreateDirectory(_outputFolder);
@@ -139,13 +139,13 @@ namespace MUDMapBuilder.BatchConverter
 		{
 			try
 			{
-				if (args.Length == 0)
+				if (args.Length < 2)
 				{
-					Log("Usage: mmb-bc <inputFolder>");
+					Log("Usage: mmb-bc <inputFolder> <outputFolder>");
 					return;
 				}
 
-				Process(args[0]);
+				Process(args[0], args[1]);
 			}
 			catch (Exception ex)
 			{

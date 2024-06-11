@@ -96,14 +96,14 @@ namespace MUDMapBuilder.Editor.UI
 					return;
 				}
 
-				_mapViewer.Redraw(Area, Options);
+				_mapViewer.Redraw(Area, Options, _checkColorizeConnectionIssues.IsChecked);
 				UpdateNumbers();
 			};
 
 			_mapViewer.SelectedIndexChanged += (s, e) => UpdateEnabled();
 
-			_checkKeepSolitaryRooms.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
-			_checkKeepRoomsWithSingleOutsideExit.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
+			_checkRemoveSolitaryRooms.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
+			_checkRemoveRoomsWithSingleOutsideExit.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 			_checkFixObstacles.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 			_checkFixNonStraight.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
 			_checkFixIntersected.IsCheckedChanged += (s, e) => SetDirtyAndRebuild();
@@ -231,15 +231,17 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			Utility.QueueUIAction(() =>
 			{
-				_mapViewer.Redraw(null, null);
+				_mapViewer.Redraw(null, null, _checkColorizeConnectionIssues.IsChecked);
 			});
 
-			var result = MapBuilder.Build(Project, Utility.SetStatusMessage);
+			var result = MapBuilder.SingleRun(Project, Utility.SetStatusMessage, 
+				_checkFixObstacles.IsChecked, _checkFixNonStraight.IsChecked,
+				_checkFixIntersected.IsChecked, _checkCompactMap.IsChecked);
 
 			Utility.QueueUIAction(() =>
 			{
 				Result = result;
-				_mapViewer.Redraw(Area, Options);
+				_mapViewer.Redraw(Area, Options, _checkColorizeConnectionIssues.IsChecked);
 				var maxSteps = Result.History.Length;
 				_spinButtonStep.Maximum = maxSteps;
 				_spinButtonStep.Value = maxSteps;
@@ -259,14 +261,9 @@ namespace MUDMapBuilder.Editor.UI
 
 		private void SetBuildOptionsFromUI()
 		{
-			Project.BuildOptions.KeepSolitaryRooms = _checkKeepSolitaryRooms.IsChecked;
-			Project.BuildOptions.KeepRoomsWithSingleOutsideExit = _checkKeepRoomsWithSingleOutsideExit.IsChecked;
-			Project.BuildOptions.FixObstacles = _checkFixObstacles.IsChecked;
-			Project.BuildOptions.FixNonStraight = _checkFixNonStraight.IsChecked;
-			Project.BuildOptions.FixIntersected = _checkFixIntersected.IsChecked;
-			Project.BuildOptions.CompactMap = _checkCompactMap.IsChecked;
+			Project.BuildOptions.RemoveSolitaryRooms = _checkRemoveSolitaryRooms.IsChecked;
+			Project.BuildOptions.RemoveRoomsWithSingleOutsideExit = _checkRemoveRoomsWithSingleOutsideExit.IsChecked;
 			Project.BuildOptions.AddDebugInfo = _checkAddDebugInfo.IsChecked;
-			Project.BuildOptions.ColorizeConnectionIssues = _checkColorizeConnectionIssues.IsChecked;
 		}
 
 		private void SetDirtyAndRebuild()
@@ -289,7 +286,7 @@ namespace MUDMapBuilder.Editor.UI
 
 			IsDirty = true;
 			SetBuildOptionsFromUI();
-			_mapViewer.Redraw(Area, Options);
+			_mapViewer.Redraw(Area, Options, _checkColorizeConnectionIssues.IsChecked);
 		}
 
 		private void Rebuild()
@@ -325,14 +322,9 @@ namespace MUDMapBuilder.Editor.UI
 					_suspendUi = true;
 
 					var options = Project.BuildOptions;
-					_checkKeepSolitaryRooms.IsChecked = options.KeepSolitaryRooms;
-					_checkKeepRoomsWithSingleOutsideExit.IsChecked = options.KeepRoomsWithSingleOutsideExit;
-					_checkFixObstacles.IsChecked = options.FixObstacles;
-					_checkFixNonStraight.IsChecked = options.FixNonStraight;
-					_checkFixIntersected.IsChecked = options.FixIntersected;
-					_checkCompactMap.IsChecked = options.CompactMap;
+					_checkRemoveSolitaryRooms.IsChecked = options.RemoveSolitaryRooms;
+					_checkRemoveRoomsWithSingleOutsideExit.IsChecked = options.RemoveRoomsWithSingleOutsideExit;
 					_checkAddDebugInfo.IsChecked = options.AddDebugInfo;
-					_checkColorizeConnectionIssues.IsChecked = options.ColorizeConnectionIssues;
 				}
 				finally
 				{

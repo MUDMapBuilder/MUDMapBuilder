@@ -13,26 +13,6 @@ namespace MUDMapBuilder.BatchConverter
 
 		private static void Log(string message) => Console.WriteLine(message);
 
-		static MapBuilderResult Rerun(string areaFile, MMBProject project, bool fixObstacles, bool fixNonStraight, bool fixIntersected)
-		{
-			Log($"Rerunning with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersected={fixIntersected}");
-
-			project.BuildOptions.FixObstacles = fixObstacles;
-			project.BuildOptions.FixNonStraight = fixNonStraight;
-			project.BuildOptions.FixIntersected = fixIntersected;
-
-			var result = MapBuilder.Build(project, Log);
-
-			if (result.ResultType == ResultType.Success)
-			{
-				// Save project with the new options
-				Log($"Success. Saving project options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersected={fixIntersected}");
-				File.WriteAllText(areaFile, project.ToJson());
-			}
-
-			return result;
-		}
-
 		static void ProcessFile(string areaFile)
 		{
 			var areaFileName = Path.GetFileName(areaFile);
@@ -46,65 +26,20 @@ namespace MUDMapBuilder.BatchConverter
 			Log($"Processing file {areaFileName}...");
 			var project = MMBProject.Parse(File.ReadAllText(areaFile));
 
-			// Enable all options
-			project.BuildOptions.FixIntersected = true;
-			project.BuildOptions.FixNonStraight = true;
-			project.BuildOptions.FixObstacles = true;
-
-			var buildResult = MapBuilder.Build(project, Log);
+			var buildResult = MapBuilder.MultiRun(project, Log);
 			if (buildResult == null)
 			{
-				_errors[areaFile] = "Mo rooms to process.";
+				_errors[areaFile] = "No rooms to process.";
 				return;
 			}
 
 			if (buildResult.ResultType != ResultType.Success)
 			{
-				Log($"{buildResult.ResultType}");
-				buildResult = Rerun(areaFile, project, true, true, false);
-			}
-
-			if (buildResult.ResultType != ResultType.Success)
-			{
-				Log($"{buildResult.ResultType}");
-				buildResult = Rerun(areaFile, project, false, true, true);
-			}
-
-			if (buildResult.ResultType != ResultType.Success)
-			{
-				Log($"{buildResult.ResultType}");
-				buildResult = Rerun(areaFile, project, false, true, false);
-			}
-
-			if (buildResult.ResultType != ResultType.Success)
-			{
-				Log($"{buildResult.ResultType}");
-				buildResult = Rerun(areaFile, project, true, false, true);
-			}
-
-
-			if (buildResult.ResultType != ResultType.Success)
-			{
-				Log($"{buildResult.ResultType}");
-				buildResult = Rerun(areaFile, project, true, false, false);
-			}
-
-			if (buildResult.ResultType != ResultType.Success)
-			{
-				Log($"{buildResult.ResultType}");
-				buildResult = Rerun(areaFile, project, false, false, false);
-			}
-
-			if (buildResult.ResultType != ResultType.Success)
-			{
-				_errors[areaFile] = $"{buildResult.ResultType}. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected) for this file.";
+				_errors[areaFile] = $"{buildResult.ResultType}. Try raising amount of MaxSteps in the BuildOptions.";
 				return;
 			}
 
-			var options = project.BuildOptions;
-			options.ColorizeConnectionIssues = false;
-
-			var pngData = buildResult.Last.BuildPng(options).PngData;
+			var pngData = buildResult.Last.BuildPng(project.BuildOptions, false).PngData;
 			File.WriteAllBytes(imageFile, pngData);
 		}
 
@@ -121,7 +56,7 @@ namespace MUDMapBuilder.BatchConverter
 			Parallel.ForEach(areaFiles, areaFile => ProcessFile(areaFile));
 
 			var orderedErrors = (from e in _errors orderby e.Key select e);
-			foreach(var pair in orderedErrors)
+			foreach (var pair in orderedErrors)
 			{
 				Log($"Error in {pair.Key}: {pair.Value}");
 			}
@@ -129,7 +64,8 @@ namespace MUDMapBuilder.BatchConverter
 			if (_errors.Count > 0)
 			{
 				Log($"Total errors count: {_errors.Count}");
-			} else
+			}
+			else
 			{
 				Log("Success");
 			}

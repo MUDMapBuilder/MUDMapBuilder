@@ -25,11 +25,11 @@
         </Button>
       </HorizontalStackPanel>
       <HorizontalStackPanel Spacing="8">
-        <CheckButton IsChecked="True" Id="_checkKeepSolitaryRooms">
-          <Label Text="Keep Solitary Rooms" />
+        <CheckButton Id="_checkRemoveSolitaryRooms">
+          <Label Text="Remove Solitary Rooms" />
         </CheckButton>
-        <CheckButton IsChecked="True" Id="_checkKeepRoomsWithSingleOutsideExit">
-          <Label Text="Keep Rooms With Single Outside Exit" />
+        <CheckButton Id="_checkRemoveRoomsWithSingleOutsideExit">
+          <Label Text="Remove Rooms With Single Outside Exit" />
         </CheckButton>
         <CheckButton IsChecked="True" Id="_checkFixObstacles">
           <Label Text="Fix Obstacles" />

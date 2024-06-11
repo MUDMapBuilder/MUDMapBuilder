@@ -40,7 +40,7 @@ namespace MUDMapBuilder
 			return false;
 		}
 
-		public MMBImageResult BuildPng(BuildOptions options)
+		public MMBImageResult BuildPng(BuildOptions options, bool colorizeConnectionIssues = true)
 		{
 			var roomInfos = new List<MMBImageRoomInfo>();
 
@@ -194,7 +194,7 @@ namespace MUDMapBuilder
 									isStraight = false;
 								}
 
-								if (options.ColorizeConnectionIssues)
+								if (colorizeConnectionIssues)
 								{
 									if (BrokenConnections.WithObstacles.Find(room.Id, targetRoom.Id, exitDir) != null)
 									{

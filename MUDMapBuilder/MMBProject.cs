@@ -41,8 +41,8 @@ namespace MUDMapBuilder
 			var result = new JsonSerializerOptions
 			{
 				WriteIndented = true,
-				DefaultIgnoreCondition = JsonIgnoreCondition.Never,
 				IncludeFields = true,
+				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
 				IgnoreReadOnlyFields = true,
 				IgnoreReadOnlyProperties = true,
 			};

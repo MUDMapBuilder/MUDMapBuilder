@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 
 namespace MUDMapBuilder
 {
@@ -13,17 +12,19 @@ namespace MUDMapBuilder
 			var data = File.ReadAllText(inputPath);
 			var project = MMBProject.Parse(data);
 
-			var buildResult = MapBuilder.Build(project, Log);
+			var buildResult = MapBuilder.MultiRun(project, Log);
+			if (buildResult == null)
+			{
+				Log("Error: No rooms to process");
+				return;
+			}
 
-			var options = project.BuildOptions;
-			options.ColorizeConnectionIssues = false;
-
-			var pngData = buildResult.Last.BuildPng(options).PngData;
+			var pngData = buildResult.Last.BuildPng(project.BuildOptions, false).PngData;
 			File.WriteAllBytes(outputPath, pngData);
 
-			if (buildResult.History.Length >= project.BuildOptions.MaxSteps)
+			if (buildResult.ResultType != ResultType.Success)
 			{
-				Log($"WARNING: The process wasn't completed. Try turning off fix options(fixObstacles/fixNonStraight/fixIntersected)");
+				Log($"Error: {buildResult.ResultType}. Try raising amount of MaxSteps in the BuildOptions.");
 			}
 		}
 

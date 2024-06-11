@@ -3,26 +3,17 @@
 	public class BuildOptions
 	{
 		public int MaxSteps { get; set; } = 1000;
-		public bool KeepSolitaryRooms { get; set; } = true;
-		public bool KeepRoomsWithSingleOutsideExit { get; set; } = true;
-		public bool FixObstacles { get; set; } = true;
-		public bool FixNonStraight { get; set; } = true;
-		public bool FixIntersected { get; set; } = true;
-		public bool CompactMap { get; set; } = true;
-		public bool AddDebugInfo { get; set; } = false;
-		public bool ColorizeConnectionIssues { get; set; } = true;
+		public bool RemoveSolitaryRooms { get; set; }
+		public bool RemoveRoomsWithSingleOutsideExit { get; set; }
+		public bool AddDebugInfo { get; set; }
+
 
 		public void CopyTo(BuildOptions other)
 		{
 			other.MaxSteps = MaxSteps;
-			other.KeepSolitaryRooms = KeepSolitaryRooms;
-			other.KeepRoomsWithSingleOutsideExit = KeepRoomsWithSingleOutsideExit;
-			other.FixObstacles = FixObstacles;
-			other.FixNonStraight = FixNonStraight;
-			other.FixIntersected = FixIntersected;
-			other.CompactMap = CompactMap;
+			other.RemoveSolitaryRooms = RemoveSolitaryRooms;
+			other.RemoveRoomsWithSingleOutsideExit = RemoveRoomsWithSingleOutsideExit;
 			other.AddDebugInfo = AddDebugInfo;
-			other.ColorizeConnectionIssues = ColorizeConnectionIssues;
 		}
 	}
 }

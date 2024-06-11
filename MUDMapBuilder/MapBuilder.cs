@@ -48,10 +48,14 @@ namespace MUDMapBuilder
 
 		private MMBArea Area => _project.Area;
 		private BuildOptions Options => _project.BuildOptions;
+		private bool FixObstacles { get; set; }
+		private bool FixNonStraight { get; set; }
+		private bool FixIntersections { get; set; }
+		private bool CompactMap { get; set; }
 
 		private MapBuilder(MMBProject project, Action<string> log)
 		{
-			_project = project;
+			_project = project.Clone();
 			_log = log;
 		}
 
@@ -305,7 +309,7 @@ namespace MUDMapBuilder
 
 			// Determine which room of two to move
 			bool? moveSecond = null;
-			
+
 			/*
 				var existInHistory2 = ExistsInHistory(result1.NewArea);
 				var existInHistory1 = ExistsInHistory(result2.NewArea);
@@ -536,7 +540,7 @@ namespace MUDMapBuilder
 		private bool ObstacleFixRun(out bool fixes)
 		{
 			fixes = false;
-			if (!Options.FixObstacles)
+			if (!FixObstacles)
 			{
 				return true;
 			}
@@ -579,7 +583,7 @@ namespace MUDMapBuilder
 		private bool NonStraightFixRun(out bool fixes)
 		{
 			fixes = false;
-			if (!Options.FixNonStraight)
+			if (!FixNonStraight)
 			{
 				return true;
 			}
@@ -616,7 +620,7 @@ namespace MUDMapBuilder
 		private bool IntersectionsFixRun(out bool fixes)
 		{
 			fixes = false;
-			if (!Options.FixIntersected)
+			if (!FixIntersections)
 			{
 				return true;
 			}
@@ -722,7 +726,7 @@ namespace MUDMapBuilder
 
 			Area.ClearMarks();
 
-			if (!Options.KeepSolitaryRooms)
+			if (Options.RemoveSolitaryRooms)
 			{
 				// Remove solitary rooms
 				var toDelete = (from r in Area.Rooms where r.Connections.Count == 0 select r).ToList();
@@ -734,7 +738,7 @@ namespace MUDMapBuilder
 				}
 			}
 
-			if (!Options.KeepRoomsWithSingleOutsideExit)
+			if (Options.RemoveRoomsWithSingleOutsideExit)
 			{
 				// Remove single outside exit rooms
 				var toDelete = new List<MMBRoom>();
@@ -776,7 +780,7 @@ namespace MUDMapBuilder
 					// Get all non positioned rooms
 					var nonPositionedRooms = (from r in Area.Rooms where r.Position == null select r).ToArray();
 
-					foreach(var nonPositionedRoom in nonPositionedRooms)
+					foreach (var nonPositionedRoom in nonPositionedRooms)
 					{
 						// Check if any connected room was positioned
 						var roomId = nonPositionedRoom.Id;
@@ -868,8 +872,8 @@ namespace MUDMapBuilder
 						{
 							if (!IsSingleExitUpDownRoom(newRoom) && IsSingleExitUpDownRoom(existingRoom))
 							{
-                                // Delete such rooms instead of expanding the grid
-                                if (!RemoveRooms(new[] { existingRoom }, false))
+								// Delete such rooms instead of expanding the grid
+								if (!RemoveRooms(new[] { existingRoom }, false))
 								{
 									goto finish;
 								}
@@ -934,7 +938,7 @@ namespace MUDMapBuilder
 		finish:;
 			var startCompactStep = _history.Count;
 
-			if (Options.CompactMap)
+			if (CompactMap)
 			{
 				var continueCompactRun = true;
 				while (continueCompactRun)
@@ -970,7 +974,7 @@ namespace MUDMapBuilder
 			return new MapBuilderResult(_resultType, _history.ToArray(), startCompactStep);
 		}
 
-		public static MapBuilderResult Build(MMBProject project, Action<string> log)
+		private static MMBProject Prepare(MMBProject project)
 		{
 			var clone = project.Clone();
 
@@ -1021,8 +1025,97 @@ namespace MUDMapBuilder
 				}
 			}
 
-			var mapBuilder = new MapBuilder(clone, log);
-			return mapBuilder.Process();
+			return clone;
+		}
+
+		public static MapBuilderResult InternalSingleRun(MMBProject project, Action<string> log,
+			bool fixObstacles, bool fixNonStraight, bool fixIntersections, bool compactMap = true)
+		{
+			log?.Invoke($"Building for area '{project.Area.Name}' with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersections={fixIntersections}");
+
+			var mapBuilder = new MapBuilder(project, log)
+			{
+				FixObstacles = fixObstacles,
+				FixNonStraight = fixNonStraight,
+				FixIntersections = fixIntersections,
+				CompactMap = compactMap
+			};
+
+			var result = mapBuilder.Process();
+
+			if (result.ResultType == ResultType.Success)
+			{
+				log?.Invoke($"Success for area '{project.Area.Name}' with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersections={fixIntersections}");
+			} else
+			{
+				log?.Invoke($"Error: {result.ResultType} for area '{project.Area.Name}' with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersections={fixIntersections}");
+			}
+
+			return result;
+		}
+
+		public static MapBuilderResult SingleRun(MMBProject project, Action<string> log,
+			bool fixObstacles = true, bool fixNonStraight = true, bool fixIntersections = true, bool compactMap = true)
+		{
+			var clone = Prepare(project);
+
+			return InternalSingleRun(clone, log, fixObstacles, fixNonStraight, fixIntersections, compactMap);
+		}
+
+		public static MapBuilderResult MultiRun(MMBProject project, Action<string> log)
+		{
+			var clone = Prepare(project);
+
+			// #1
+			var buildResult = InternalSingleRun(clone, log, true, true, true, true);
+			if (buildResult == null)
+			{
+				return null;
+			}
+
+			// #2
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				buildResult = InternalSingleRun(clone, log, true, true, false);
+			}
+
+			// #3
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				buildResult = InternalSingleRun(clone, log, false, true, true);
+			}
+
+			// #4
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				buildResult = InternalSingleRun(clone, log, false, true, false);
+			}
+
+			// #5
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				buildResult = InternalSingleRun(clone, log, true, false, true);
+			}
+
+			// #6
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				buildResult = InternalSingleRun(clone, log, true, false, false);
+			}
+
+			// #7
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				buildResult = InternalSingleRun(clone, log, false, false, true);
+			}
+
+			// #8
+			if (buildResult.ResultType != ResultType.Success)
+			{
+				buildResult = InternalSingleRun(clone, log, false, false, false);
+			}
+
+			return buildResult;
 		}
 	}
 }

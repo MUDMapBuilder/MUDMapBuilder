@@ -16,6 +16,7 @@ namespace MUDMapBuilder.Editor.UI
 		private MMBArea _area;
 		private BuildOptions _options;
 		private MMBImageResult _imageResult;
+		private bool _colorizeConnectoinIssues;
 
 		public int? SelectedRoomId
 		{
@@ -38,8 +39,10 @@ namespace MUDMapBuilder.Editor.UI
 			Background = new SolidBrush(Color.White);
 		}
 
-		public void Redraw(MMBArea area, BuildOptions options)
+		public void Redraw(MMBArea area, BuildOptions options, bool colorizeConnectionIssues)
 		{
+			_colorizeConnectoinIssues = colorizeConnectionIssues;
+
 			Renderable = null;
 
 			_area = area;
@@ -49,7 +52,7 @@ namespace MUDMapBuilder.Editor.UI
 				return;
 			}
 
-			_imageResult = area.BuildPng(options);
+			_imageResult = area.BuildPng(options, colorizeConnectionIssues);
 			Texture2D texture;
 			using (var ms = new MemoryStream(_imageResult.PngData))
 			{
@@ -74,7 +77,7 @@ namespace MUDMapBuilder.Editor.UI
 				if (room.Rectangle.Contains(pos.X, pos.Y))
 				{
 					SelectedRoomId = room.Room.Id;
-					Redraw(_area, _options);
+					Redraw(_area, _options, _colorizeConnectoinIssues);
 					break;
 				}
 			}

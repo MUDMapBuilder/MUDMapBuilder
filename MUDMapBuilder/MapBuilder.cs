@@ -980,6 +980,7 @@ namespace MUDMapBuilder
 
 			var area = clone.Area;
 			area.RemoveNonExistantConnections();
+			area.RemoveEmptyRooms();
 
 			// Set connections types
 			foreach (var room in area.Rooms)
@@ -1043,10 +1044,10 @@ namespace MUDMapBuilder
 
 			var result = mapBuilder.Process();
 
-			if (result.ResultType == ResultType.Success)
+			if (result != null && result.ResultType == ResultType.Success)
 			{
 				log?.Invoke($"Success for area '{project.Area.Name}' with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersections={fixIntersections}");
-			} else
+			} else if (result != null)
 			{
 				log?.Invoke($"Error: {result.ResultType} for area '{project.Area.Name}' with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersections={fixIntersections}");
 			}

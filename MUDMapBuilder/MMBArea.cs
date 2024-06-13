@@ -175,6 +175,16 @@ namespace MUDMapBuilder
 			}
 		}
 
+		public void RemoveEmptyRooms()
+		{
+			var toDelete = (from r in _rooms where string.IsNullOrEmpty(r.Name) && r.Connections.Count == 0 select r).ToList();
+
+			foreach (var r in toDelete)
+			{
+				DeleteRoom(r);
+			}
+		}
+
 		public void ExpandGrid(Point pos, Point vec)
 		{
 			foreach (var pair in _roomsByIds)

@@ -103,7 +103,7 @@ namespace MUDMapBuilder
 			return desiredPos;
 		}
 
-		private bool AddRunStep()
+		private bool InternalAddRunStep(int maxSteps)
 		{
 			_history.Add(Area.Clone());
 
@@ -113,7 +113,7 @@ namespace MUDMapBuilder
 				return false;
 			}
 
-			if (Options.MaxSteps <= _history.Count)
+			if (maxSteps <= _history.Count)
 			{
 				_resultType = ResultType.OutOfSteps;
 				return false;
@@ -121,6 +121,9 @@ namespace MUDMapBuilder
 
 			return true;
 		}
+
+		private bool AddRunStep() => InternalAddRunStep(Options.MaxSteps);
+		private bool AddCompactRunStep() => InternalAddRunStep(Options.MaxCompactSteps);
 
 		private bool PushRoom(MMBArea rooms, int firstRoomId, Point firstForceVector, bool measureRun, out int roomsRemoved)
 		{
@@ -504,7 +507,7 @@ namespace MUDMapBuilder
 								m.Room.ForceMark = m.Delta;
 							}
 
-							if (!AddRunStep())
+							if (!AddCompactRunStep())
 							{
 								return false;
 							}
@@ -519,7 +522,7 @@ namespace MUDMapBuilder
 								m.Room.Position = newPos;
 							}
 
-							if (!AddRunStep())
+							if (!AddCompactRunStep())
 							{
 								return false;
 							}
@@ -534,7 +537,7 @@ namespace MUDMapBuilder
 
 			Log($"Deleted columns '{string.Join(", ", result.Columns)}' and rows '{string.Join(", ", result.Rows)}'");
 
-			return AddRunStep();
+			return AddCompactRunStep();
 		}
 
 		private bool ObstacleFixRun(out bool fixes)
@@ -771,6 +774,7 @@ namespace MUDMapBuilder
 			}
 
 			BrokenConnectionsInfo vc;
+			int? startCompactStep = null;
 
 			// Run while there are rooms to position
 			while (Area.PositionedRoomsCount < Area.Rooms.Length)
@@ -919,7 +923,7 @@ namespace MUDMapBuilder
 						// Connections fix run
 						if (!FixRun())
 						{
-							break;
+							goto finish;
 						}
 
 						if (room.Position == null)
@@ -935,9 +939,7 @@ namespace MUDMapBuilder
 				}
 			}
 
-		finish:;
-			var startCompactStep = _history.Count;
-
+			startCompactStep = _history.Count;
 			if (CompactMap)
 			{
 				var continueCompactRun = true;
@@ -946,21 +948,21 @@ namespace MUDMapBuilder
 					var roomsClone = Area.Clone();
 					if (!CompactRun(MMBDirection.East))
 					{
-						goto finish2;
+						goto finish;
 					}
 
 					if (!CompactRun(MMBDirection.South))
 					{
-						goto finish2;
+						goto finish;
 					}
 					if (!CompactRun(MMBDirection.West))
 					{
-						goto finish2;
+						goto finish;
 					}
 
 					if (!CompactRun(MMBDirection.North))
 					{
-						goto finish2;
+						goto finish;
 					}
 
 					continueCompactRun = !MMBArea.AreEqual(roomsClone, Area);
@@ -968,9 +970,9 @@ namespace MUDMapBuilder
 				}
 			}
 
-		finish2:;
+		finish:;
 			Log(_resultType.ToString());
-			AddRunStep();
+			_history.Add(Area.Clone());
 			return new MapBuilderResult(_resultType, _history.ToArray(), startCompactStep);
 		}
 

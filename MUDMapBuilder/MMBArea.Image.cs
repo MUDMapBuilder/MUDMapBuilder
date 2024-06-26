@@ -9,6 +9,13 @@ namespace MUDMapBuilder
 {
 	partial class MMBArea
 	{
+		private enum ConnectionType
+		{
+			Straight,
+			NonStraight,
+			Obstacled
+		}
+
 		private static readonly SKColor DefaultColor = SKColors.Black;
 		private static readonly SKColor SelectedColor = SKColors.Green;
 		private static readonly SKColor ExitToOtherAreaColor = SKColors.Blue;
@@ -22,6 +29,7 @@ namespace MUDMapBuilder
 		private const int ArrowRadius = 8;
 		private static readonly Point RoomSpace = new Point(32, 32);
 		private int[] _cellsWidths;
+		private bool[,] _nsConnections;
 
 		private bool AreRoomsConnected(Point a, Point b, MMBDirection direction)
 		{
@@ -49,6 +57,8 @@ namespace MUDMapBuilder
 			var mapRect = CalculateRectangle();
 			var width = mapRect.Width;
 			var height = mapRect.Height;
+
+			_nsConnections = new bool[width, height];
 			using (SKPaint paint = new SKPaint())
 			{
 				paint.Color = SKColors.Black;
@@ -160,38 +170,105 @@ namespace MUDMapBuilder
 									continue;
 								}
 
-								var isStraight = true;
+								var ct = ConnectionType.Straight;
 								switch (exitDir)
 								{
-									case MMBDirection.North:
-										if (x == targetPos.X && y < targetPos.Y)
-										{
-											isStraight = false;
-										}
-										break;
 									case MMBDirection.East:
-										if (x > targetPos.X && y == targetPos.Y)
+										if (y != targetPos.Y)
 										{
-											isStraight = false;
+											break;
+										}
+
+										if (x > targetPos.X)
+										{
+											ct = ConnectionType.NonStraight;
+										}
+										else
+										{
+											for(var i = x + 1; i < targetPos.X; ++i)
+											{
+												if (GetRoomByZeroBasedPosition(new Point(i, y)) != null)
+												{
+													ct = ConnectionType.Obstacled;
+													break;
+												}
+											}
 										}
 										break;
-									case MMBDirection.South:
-										if (x == targetPos.X && y > targetPos.Y)
-										{
-											isStraight = false;
-										}
-										break;
+
 									case MMBDirection.West:
-										if (x < targetPos.X && y == targetPos.Y)
+										if (y != targetPos.Y)
 										{
-											isStraight = false;
+											break;
+										}
+
+										if (x < targetPos.X)
+										{
+											ct = ConnectionType.NonStraight;
+										}
+										else
+										{
+											for (var i = x - 1; i > targetPos.X; --i)
+											{
+												if (GetRoomByZeroBasedPosition(new Point(i, y)) != null)
+												{
+													ct = ConnectionType.Obstacled;
+													break;
+												}
+											}
+										}
+										break;
+
+									case MMBDirection.North:
+										if (x != targetPos.X)
+										{
+											break;
+										}
+
+										if (y < targetPos.Y)
+										{
+											ct = ConnectionType.NonStraight;
+										}
+										else
+										{
+											for (var i = y - 1; i > targetPos.Y; --i)
+											{
+												if (GetRoomByZeroBasedPosition(new Point(x, i)) != null)
+												{
+													ct = ConnectionType.Obstacled;
+													break;
+												}
+											}
+										}
+										break;
+
+									case MMBDirection.South:
+										if (x != targetPos.X)
+										{
+											break;
+										}
+
+										if (y > targetPos.Y)
+										{
+											ct = ConnectionType.NonStraight;
+										}
+										else
+										{
+											for (var i = y + 1; i < targetPos.Y; ++i)
+											{
+												if (GetRoomByZeroBasedPosition(new Point(x, i)) != null)
+												{
+													ct = ConnectionType.Obstacled;
+													break;
+												}
+											}
 										}
 										break;
 								}
 
 								if (room.Id == targetRoom.Id)
 								{
-									isStraight = false;
+									ct = ConnectionType.NonStraight;
 								}
 
 								if (colorizeConnectionIssues)
@@ -216,7 +293,8 @@ namespace MUDMapBuilder
 									{
 										paint.Color = DefaultColor;
 									}
-								} else
+								}
+								else
 								{
 									paint.Color = DefaultColor;
 								}
@@ -224,7 +302,7 @@ namespace MUDMapBuilder
 								var sourceScreen = GetConnectionPoint(rect, exitDir);
 								var targetRect = GetRoomRect(targetPos);
 								var targetScreen = GetConnectionPoint(targetRect, exitDir.GetOppositeDirection());
-								if (isStraight)
+								if (ct == ConnectionType.Straight)
 								{
 									// Straight connection
 									// Source and target room are close to each other, hence draw the simple line
@@ -235,10 +313,17 @@ namespace MUDMapBuilder
 									// In other case we might have to use A* to draw the path
 									// Basic idea is to consider every cell(spaces between rooms are cells too) as grid 2x2
 									// Where 1 means center
-									var steps = BuildPath(new Point(x, y), targetPos, exitDir);
+									List<Point> steps;
+
+									if (ct == ConnectionType.NonStraight)
+									{
+										steps = BuildNsPath(new Point(x, y), targetPos, exitDir);
+									} else
+									{
+										steps = BuildObstacledPath(new Point(x, y), targetPos, exitDir);
+									}
 
 									var src = steps[0];
-
 									var points = new List<SKPoint>();
 									for (var j = 1; j < steps.Count; j++)
 									{
@@ -248,6 +333,9 @@ namespace MUDMapBuilder
 
 										src = dest;
 									}
+
+									sourceScreen = steps[0];
+									targetScreen = steps[steps.Count - 1];
 								}
 
 								if (pair.Value.ConnectionType == MMBConnectionType.Forward)
@@ -324,87 +412,217 @@ namespace MUDMapBuilder
 			return new MMBImageResult(imageBytes, roomInfos.ToArray());
 		}
 
-		private List<Point> BuildPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction)
+		private void UpdateNsIntersects(Point p, ref bool intersects)
 		{
+			if (_nsConnections[p.X, p.Y])
+			{
+				intersects = true;
+			}
+
+			_nsConnections[p.X, p.Y] = true;
+		}
+
+		private List<Point> BuildNsPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction)
+		{
+			var pathRadius = RoomSpace.X / 4;
+
 			var sourceRoomRect = GetRoomRect(sourceGridPos);
+			var sourcePos = GetConnectionPoint(sourceRoomRect, direction);
+
+			var targetRoomRect = GetRoomRect(targetGridPos);
+			var targetConnectionPos = GetConnectionPoint(targetRoomRect, direction.GetOppositeDirection());
+			var targetPos = targetConnectionPos;
+			var delta = direction.GetOppositeDirection().GetDelta();
+			targetPos.X += delta.X * pathRadius;
+			targetPos.Y += delta.Y * pathRadius;
 
 			// Add source connection point
-			var sourcePos = GetConnectionPoint(sourceRoomRect, direction);
 			var result = new List<Point>
 			{
 				sourcePos
 			};
 
-			var pathRadius = RoomSpace.X / 4;
-
 			// Firstly add direction movement
-			var delta = direction.GetDelta();
+			delta = direction.GetDelta();
 			sourcePos.X += delta.X * pathRadius;
 			sourcePos.Y += delta.Y * pathRadius;
 			result.Add(sourcePos);
 
-			var targetRoomRect = GetRoomRect(targetGridPos);
-			var targetConnectionPos = GetConnectionPoint(targetRoomRect, direction.GetOppositeDirection());
-			var targetPos = targetConnectionPos;
-			delta = direction.GetOppositeDirection().GetDelta();
-			targetPos.X += delta.X * pathRadius;
-			targetPos.Y += delta.Y * pathRadius;
+			var intersects = false;
+
+			// Set intersection flags and check if we intersect other ns connection
+			var p = sourceGridPos;
+			switch (direction)
+			{
+				case MMBDirection.East:
+					for (; p.X <= targetGridPos.X; ++p.X)
+					{
+						UpdateNsIntersects(p, ref intersects);
+					}
+					break;
+
+				case MMBDirection.West:
+					for (; p.X >= targetGridPos.X; --p.X)
+					{
+						UpdateNsIntersects(p, ref intersects);
+					}
+					break;
+
+				case MMBDirection.North:
+					for (; p.Y >= targetGridPos.Y; --p.Y)
+					{
+						UpdateNsIntersects(p, ref intersects);
+					}
+					break;
+
+				case MMBDirection.South:
+					for (; p.Y <= targetGridPos.Y; ++p.Y)
+					{
+						UpdateNsIntersects(p, ref intersects);
+					}
+					break;
+
+				default:
+					throw new Exception($"Direction {direction} isn't supported");
+			}
 
 			if (direction == MMBDirection.West || direction == MMBDirection.East)
 			{
-				if (sourceGridPos.Y == targetGridPos.Y)
+				// Go either up or down
+				if (intersects)
 				{
-					// Go either up or down
-					if (targetPos.Y < sourcePos.Y)
-					{
-						sourcePos = new Point(sourcePos.X, sourcePos.Y - pathRadius);
-					}
-					else
-					{
-						sourcePos = new Point(sourcePos.X, sourcePos.Y + pathRadius);
-					}
-					result.Add(sourcePos);
+					sourcePos = new Point(sourcePos.X, sourcePos.Y - pathRadius);
 				}
 				else
 				{
-					// Half of the vertical movement
-					sourcePos = new Point(sourcePos.X, sourcePos.Y + (targetPos.Y - sourcePos.Y) / 2);
-					result.Add(sourcePos);
+					sourcePos = new Point(sourcePos.X, sourcePos.Y + pathRadius);
 				}
 
-				// Horizontal movement
+				result.Add(sourcePos);
+
 				sourcePos = new Point(targetPos.X, sourcePos.Y);
 				result.Add(sourcePos);
 			}
 			else
 			{
-				if (sourceGridPos.X == targetGridPos.X)
+				// Go either left or right
+				if (intersects)
 				{
-					// Go either left or right
-					if (targetPos.X < sourcePos.X)
-					{
-						sourcePos = new Point(sourcePos.X - pathRadius, sourcePos.Y);
-					}
-					else
-					{
-						sourcePos = new Point(sourcePos.X + pathRadius, sourcePos.Y);
-					}
-					result.Add(sourcePos);
+					sourcePos = new Point(sourcePos.X - pathRadius, sourcePos.Y);
 				}
 				else
 				{
-					// Half of horizontal movement
-					sourcePos = new Point(sourcePos.X + (targetPos.X - sourcePos.X) / 2, sourcePos.Y);
-					result.Add(sourcePos);
+					sourcePos = new Point(sourcePos.X + pathRadius, sourcePos.Y);
 				}
 
-				// Vertical movement
+				result.Add(sourcePos);
+
 				sourcePos = new Point(sourcePos.X, targetPos.Y);
+
 				result.Add(sourcePos);
 			}
 
 			result.Add(targetPos);
 			result.Add(targetConnectionPos);
+
+			return result;
+		}
+
+		private List<Point> BuildObstacledPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction)
+		{
+			var sourceRoomRect = GetRoomRect(sourceGridPos);
+			var sourcePos = GetConnectionPoint(sourceRoomRect, direction);
+
+			int pathRadius;
+			if (direction == MMBDirection.East || direction == MMBDirection.West)
+			{
+				pathRadius = RoomSpace.X / 4;
+			} else
+			{
+				pathRadius = sourceRoomRect.Width / 8;
+			}
+
+
+			var targetRoomRect = GetRoomRect(targetGridPos);
+			var targetConnectionPos = GetConnectionPoint(targetRoomRect, direction.GetOppositeDirection());
+
+			var result = new List<Point>();
+
+			var intersects = false;
+
+			// Set intersection flags and check if we intersect other ns connection
+			var p = sourceGridPos;
+			switch (direction)
+			{
+				case MMBDirection.East:
+					for (; p.X <= targetGridPos.X; ++p.X)
+					{
+						UpdateNsIntersects(p, ref intersects);
+					}
+					break;
+
+				case MMBDirection.West:
+					for (; p.X >= targetGridPos.X; --p.X)
+					{
+						UpdateNsIntersects(p, ref intersects);
+					}
+					break;
+
+				case MMBDirection.North:
+					for (; p.Y >= targetGridPos.Y; --p.Y)
+					{
+						UpdateNsIntersects(p, ref intersects);
+					}
+					break;
+
+				case MMBDirection.South:
+					for (; p.Y <= targetGridPos.Y; ++p.Y)
+					{
+						UpdateNsIntersects(p, ref intersects);
+					}
+					break;
+
+				default:
+					throw new Exception($"Direction {direction} isn't supported");
+			}
+
+			if (direction == MMBDirection.West || direction == MMBDirection.East)
+			{
+				// Go either up or down
+				if (intersects)
+				{
+					sourcePos = new Point(sourcePos.X, sourcePos.Y - pathRadius);
+				}
+				else
+				{
+					sourcePos = new Point(sourcePos.X, sourcePos.Y + pathRadius);
+				}
+
+				result.Add(sourcePos);
+
+				sourcePos = new Point(targetConnectionPos.X, sourcePos.Y);
+
+				result.Add(sourcePos);
+			}
+			else
+			{
+				// Go either left or right
+				if (intersects)
+				{
+					sourcePos = new Point(sourcePos.X - pathRadius, sourcePos.Y);
+				}
+				else
+				{
+					sourcePos = new Point(sourcePos.X + pathRadius, sourcePos.Y);
+				}
+
+				result.Add(sourcePos);
+
+				// Vertical movement
+				sourcePos = new Point(sourcePos.X, targetConnectionPos.Y);
+
+				result.Add(sourcePos);
+			}
 
 			return result;
 		}

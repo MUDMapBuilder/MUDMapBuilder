@@ -45,6 +45,7 @@ namespace MUDMapBuilder
 		private readonly IdQueue _roomsQueue = new IdQueue();
 		private readonly List<MMBArea> _history = new List<MMBArea>();
 		private readonly Action<string> _log;
+		private readonly Dictionary<int, HashSet<int>> _addHistory = new Dictionary<int, HashSet<int>>();
 
 		private MMBArea Area => _project.Area;
 		private BuildOptions Options => _project.BuildOptions;
@@ -789,48 +790,31 @@ namespace MUDMapBuilder
 						// Check if any connected room was positioned
 						var roomId = nonPositionedRoom.Id;
 						var connectedRooms = (from r in Area.Rooms where r.Id != roomId && r.Position != null && r.FindConnection(roomId) != null select r).ToList();
-						if (connectedRooms.Count == 1)
+						if (connectedRooms.Count == 0)
 						{
-							// Use only existing connection
-							_roomsQueue.Add(connectedRooms[0].Id);
-							break;
+							continue;
 						}
-						else if (connectedRooms.Count > 1)
+
+						HashSet<int> addHistoryRecord;
+						if (!_addHistory.TryGetValue(roomId, out addHistoryRecord))
 						{
-							// If there are multiple connections
-							// Choose one that introduces least amount of broken connections
-							vc = Area.BrokenConnections;
-							var bestConnectedRoomIndex = 0;
-							int? bestBrokenConnections = null;
-							for (var i = 0; i < connectedRooms.Count; ++i)
-							{
-								var connectedRoom = connectedRooms[i];
-								var clone = Area.Clone();
-
-								var pos = connectedRoom.Position.Value;
-								var connection = connectedRoom.FindConnection(roomId);
-								var delta = connection.Direction.GetDelta();
-								var desiredPos = new Point(pos.X + delta.X, pos.Y + delta.Y);
-
-								var roomClone = clone.GetRoomById(roomId);
-								roomClone.Position = desiredPos;
-
-								var vc2 = clone.BrokenConnections;
-								if (bestBrokenConnections == null || vc2.WithObstacles.Count < bestBrokenConnections.Value)
-								{
-									bestConnectedRoomIndex = i;
-									bestBrokenConnections = vc2.WithObstacles.Count;
-								}
-							}
-
-							_roomsQueue.Add(connectedRooms[bestConnectedRoomIndex].Id);
-							break;
+							addHistoryRecord = new HashSet<int>();
+							_addHistory[roomId] = addHistoryRecord;
 						}
-						else
+
+						var connectedRoom = (from r in connectedRooms where !addHistoryRecord.Contains(r.Id) select r).FirstOrDefault();
+						if (connectedRoom == null)
 						{
-							// No connected rooms
-							// Position and add to queue
+							// All connected rooms were tried already
+							// Clear the list and use first room
+							addHistoryRecord.Clear();
+
+							connectedRoom = connectedRooms[0];
 						}
+
+						_roomsQueue.Add(connectedRoom.Id);
+						addHistoryRecord.Add(connectedRoom.Id);
+						break;
 					}
 
 					// If we didnt find any connected room than manually place first non-positioned room

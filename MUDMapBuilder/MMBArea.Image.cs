@@ -4,6 +4,9 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Numerics;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
+using System.Net.NetworkInformation;
 
 namespace MUDMapBuilder
 {
@@ -89,9 +92,35 @@ namespace MUDMapBuilder
 					}
 				}
 
-
 				// Second run - draw the map
-				var imageWidth = 0;
+				// But first, assign points of interest
+				var pointOfInterestIdentifier = 1;
+				var pointOfInterestRoomIdentifiers = new Dictionary<MMBRoom, int>();
+				var pointOfInterestTextStringBuilder = new StringBuilder();
+
+				var imageHeight = height * RoomHeight + (height + 1) * RoomSpace.Y;
+
+                for (var x = 0; x < width; ++x)
+				{
+					for (var y = 0; y < height; ++y)
+					{
+						var room = GetRoomByZeroBasedPosition(x, y);
+						if (room == null)
+						{
+							continue;
+						}
+
+						if (!string.IsNullOrEmpty(room.PointOfInterestText))
+						{
+							pointOfInterestRoomIdentifiers.Add(room, pointOfInterestIdentifier);
+							pointOfInterestTextStringBuilder.AppendLine(string.Format("{0}*:\n{1}", pointOfInterestIdentifier, room.PointOfInterestText));
+                            pointOfInterestIdentifier++;
+						}
+					}
+				}
+				var pointOfInterestStartY = imageHeight + 10;
+				var pointOfInterestText = pointOfInterestTextStringBuilder.ToString();
+                var imageWidth = 0;
 				for (var i = 0; i < _cellsWidths.Length; ++i)
 				{
 					imageWidth += _cellsWidths[i];
@@ -99,8 +128,11 @@ namespace MUDMapBuilder
 
 				imageWidth += (width + 1) * RoomSpace.X;
 
-				SKImageInfo imageInfo = new SKImageInfo(imageWidth,
-														height * RoomHeight + (height + 1) * RoomSpace.Y);
+				if (!string.IsNullOrEmpty(pointOfInterestText) && imageWidth > 100) {
+					imageHeight += 20 + (int)SkiaMeasureMultilineTextHeightAdjustment(paint, pointOfInterestText, imageWidth - 10);
+				}
+                SKImageInfo imageInfo = new SKImageInfo(imageWidth,
+														imageHeight);
 
 
 				using (SKSurface surface = SKSurface.Create(imageInfo))
@@ -376,8 +408,16 @@ namespace MUDMapBuilder
 
 							paint.Color = room.IsExitToOtherArea ? ExitToOtherAreaColor : DefaultColor;
 							paint.StrokeWidth = 1;
+
+							var hasPointOfInterest = pointOfInterestRoomIdentifiers.TryGetValue(room, out var roomPointOfInterest);
+
 							var text = options.AddDebugInfo ? room.ToString() : room.Name;
-							canvas.DrawText(text, rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
+							
+							if (hasPointOfInterest)
+								text = text + "\n" + roomPointOfInterest.ToString() + "*";
+
+                            //canvas.DrawText(text, rect.X + rect.Width / 2, rect.Y + rect.Height / 2, paint);
+                            SkiaDrawMultilineText(canvas, text, new SKRect(rect.Left, rect.Top, rect.Right, rect.Bottom), paint);
 
 							if (room.ForceMark != null)
 							{
@@ -399,7 +439,21 @@ namespace MUDMapBuilder
 						}
 					}
 
-					using (SKImage image = surface.Snapshot())
+                    if (!string.IsNullOrEmpty(pointOfInterestText))
+                    {
+						paint.Color = SKColors.Black;
+						paint.StrokeWidth = 1;
+						paint.Style = SKPaintStyle.Stroke;
+
+
+						canvas.DrawRect(5, pointOfInterestStartY, imageWidth - 10, imageHeight - pointOfInterestStartY - 20, paint);
+
+						SkiaDrawMultilineText(canvas, pointOfInterestText, 
+							new SKRect(5, pointOfInterestStartY, imageWidth - 10, imageHeight - 10),
+							paint, centerOnLine: false);
+                    }
+
+                    using (SKImage image = surface.Snapshot())
 					using (SKData data = image.Encode(SKEncodedImageFormat.Png, 100))
 					using (MemoryStream mStream = new MemoryStream(data.ToArray()))
 					{
@@ -670,5 +724,85 @@ namespace MUDMapBuilder
 
 			throw new Exception($"Unknown direction {direction}");
 		}
-	}
+
+        private void SkiaDrawMultilineText(SKCanvas canvas, string text, SKRect rect, SKPaint paint, bool centerOnLine = true)
+        {
+            float spaceWidth = paint.MeasureText(" ");
+            float wordY = rect.Top + paint.TextSize;
+            string[] lines = text.Split('\n');
+
+            foreach (string line in lines)
+            {
+                List<string> lineWords = new List<string>();
+                float lineWidth = 0;
+
+                foreach (string word in line.Split(' '))
+                {
+                    float wordWidth = paint.MeasureText(word);
+                    if (lineWidth + wordWidth <= rect.Width)
+                    {
+                        lineWords.Add(word);
+                        lineWidth += wordWidth + spaceWidth;
+                    }
+                    else
+                    {
+                        SkiaDrawLine(canvas, lineWords, rect, paint, ref wordY, centerOnLine);
+                        lineWords.Clear();
+                        lineWidth = 0;
+                        lineWords.Add(word);
+                        lineWidth = wordWidth + spaceWidth;
+                    }
+                }
+
+				if (lineWords.Count > 0)
+				{
+                    SkiaDrawLine(canvas, lineWords, rect, paint, ref wordY, centerOnLine);
+				}
+				else
+				{
+					wordY += paint.FontSpacing;
+				}
+            }
+        }
+
+        private void SkiaDrawLine(SKCanvas canvas, List<string> words, SKRect rect, SKPaint paint, ref float wordY, bool centerText = true)
+        {
+            string line = string.Join(" ", words);
+            float startX = centerText? rect.Left + rect.Width / 2 : rect.Left + paint.MeasureText(line) / 2;
+            canvas.DrawText(line, startX, wordY, paint);
+            wordY += paint.FontSpacing;
+        }
+
+		private float SkiaMeasureMultilineTextHeightAdjustment(SKPaint paint, string text, int width)
+		{
+            float spaceWidth = paint.MeasureText(" ");
+			var rect = new SKRect(0, 0, width, paint.TextSize);
+            float wordY = rect.Top + paint.TextSize;
+            string[] lines = text.Split('\n');
+
+            foreach (string line in lines)
+            {
+                float lineWidth = 0;
+
+                foreach (string word in line.Split(' '))
+                {
+                    float wordWidth = paint.MeasureText(word);
+                    if (lineWidth + wordWidth <= rect.Width)
+                    {
+                        lineWidth += wordWidth + spaceWidth;
+                    }
+                    else
+                    {
+                        wordY += paint.FontSpacing;
+                        lineWidth = 0;
+                        lineWidth = wordWidth + spaceWidth;
+                    }
+                }
+
+
+				wordY += paint.FontSpacing;
+            }
+			return wordY;
+        }
+    }
 }

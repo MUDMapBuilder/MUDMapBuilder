@@ -111,7 +111,12 @@ namespace MUDMapBuilder
 
 		public event EventHandler RoomInvalid;
 
-		public MMBRoom(int id, string name, bool isExitToOtherArea, string pointOfInterestText = null)
+        public MMBRoom(int id, string name, bool isExitToOtherArea) : this(id, name, isExitToOtherArea, null)
+		{
+
+		}
+
+        public MMBRoom(int id, string name, bool isExitToOtherArea, string pointOfInterestText)
 		{
 			Id = id;
 			Name = name;

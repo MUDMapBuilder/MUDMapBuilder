@@ -54,6 +54,9 @@ namespace MUDMapBuilder
 
 		public int Id { get; set; }
 		public string Name { get; set; }
+
+		public string PointOfInterestText { get; set; } = string.Empty;
+
 		public bool IsExitToOtherArea { get; set; }
 
 		public Point? Position
@@ -108,10 +111,16 @@ namespace MUDMapBuilder
 
 		public event EventHandler RoomInvalid;
 
-		public MMBRoom(int id, string name, bool isExitToOtherArea)
+        public MMBRoom(int id, string name, bool isExitToOtherArea) : this(id, name, isExitToOtherArea, null)
+		{
+
+		}
+
+        public MMBRoom(int id, string name, bool isExitToOtherArea, string pointOfInterestText)
 		{
 			Id = id;
 			Name = name;
+			PointOfInterestText = pointOfInterestText;
 			IsExitToOtherArea = isExitToOtherArea;
 		}
 
@@ -140,7 +149,7 @@ namespace MUDMapBuilder
 
 		public MMBRoom Clone()
 		{
-			var result = new MMBRoom(Id, Name, IsExitToOtherArea)
+			var result = new MMBRoom(Id, Name, IsExitToOtherArea, PointOfInterestText)
 			{
 				Position = Position,
 				MarkColor = MarkColor,

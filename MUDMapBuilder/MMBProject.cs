@@ -28,7 +28,7 @@ namespace MUDMapBuilder
 				var name = ColorStorage.GetColorName(value);
 				if (!string.IsNullOrEmpty(name))
 				{
-					str = name;
+					str = name.ToLower();
 				} else
 				{
 					str = ColorStorage.ToHexString(value);

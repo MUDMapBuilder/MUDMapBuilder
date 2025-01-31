@@ -36,7 +36,7 @@ namespace MUDMapBuilder
 		{
 		}
 
-		public MMBRoomConnection(MMBDirection dir,  int roomId)
+		public MMBRoomConnection(MMBDirection dir, int roomId)
 		{
 			Direction = dir;
 			RoomId = roomId;
@@ -54,6 +54,7 @@ namespace MUDMapBuilder
 
 		public int Id { get; set; }
 		public string Name { get; set; }
+		public string NameWithId => $"{Name} #{Id}";
 
 		public string PointOfInterestText { get; set; } = string.Empty;
 
@@ -108,15 +109,20 @@ namespace MUDMapBuilder
 		}
 
 		public Dictionary<MMBDirection, MMBRoomConnection> Connections { get; set; } = new Dictionary<MMBDirection, MMBRoomConnection>();
+		public List<string> Contents { get; set; }
 
 		public event EventHandler RoomInvalid;
 
-        public MMBRoom(int id, string name, bool isExitToOtherArea) : this(id, name, isExitToOtherArea, null)
+		public MMBRoom()
+		{
+		}
+
+		public MMBRoom(int id, string name, bool isExitToOtherArea) : this(id, name, isExitToOtherArea, null)
 		{
 
 		}
 
-        public MMBRoom(int id, string name, bool isExitToOtherArea, string pointOfInterestText)
+		public MMBRoom(int id, string name, bool isExitToOtherArea, string pointOfInterestText)
 		{
 			Id = id;
 			Name = name;
@@ -161,10 +167,19 @@ namespace MUDMapBuilder
 				result.Connections[pair.Key] = pair.Value;
 			}
 
+			if (Contents != null)
+			{
+				result.Contents = new List<string>();
+				result.Contents.AddRange(Contents);
+			} else
+			{
+				result.Contents = Contents;
+			}
+
 			return result;
 		}
 
-		public override string ToString() => $"{Name} (#{Id}), {Position}";
+		public override string ToString() => $"{NameWithId}, {Position}";
 
 		private void FireRoomInvalid() => RoomInvalid?.Invoke(this, EventArgs.Empty);
 	}

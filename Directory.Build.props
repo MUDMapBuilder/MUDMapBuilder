@@ -6,7 +6,7 @@
     <PackageProjectUrl>https://github.com/rds1983/MUDMapBuilder</PackageProjectUrl>
     <RootNamespace>MUDMapBuilder</RootNamespace>
     <Description>.NET Library for Generating Map images for MUDs</Description>
-    <VersionPrefix>0.3.0</VersionPrefix>
+    <VersionPrefix>0.3.1</VersionPrefix>
     <MonoGameVersion>3.8.1.303</MonoGameVersion>
   </PropertyGroup>
 </Project>

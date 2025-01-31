@@ -1,6 +1,6 @@
-﻿using AbarimMUD.Import.Envy;
-using DikuLoad.Data;
+﻿using DikuLoad.Data;
 using DikuLoad.Import;
+using DikuLoad.Import.Ascii;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,12 +39,19 @@ namespace MUDMapBuilder.Import
 			BaseImporter importer;
 
 			SourceType? sourceType = null;
+			SubSourceType subSourceType = SubSourceType.Default;
 			if (mudName.Contains("tba", StringComparison.OrdinalIgnoreCase) ||
 				mudName.Contains("circle", StringComparison.OrdinalIgnoreCase))
 			{
 				sourceType = SourceType.Circle;
+
+				if (mudName.Contains("31"))
+				{
+					subSourceType = SubSourceType.Circle31;
+				}
 			}
-			else if (mudName.Contains("envy", StringComparison.OrdinalIgnoreCase))
+			else if (mudName.Contains("envy", StringComparison.OrdinalIgnoreCase) ||
+				mudName.Contains("mael", StringComparison.OrdinalIgnoreCase))
 			{
 				sourceType = SourceType.Envy;
 			}
@@ -55,7 +62,7 @@ namespace MUDMapBuilder.Import
 
 			if (sourceType != null)
 			{
-				var settings = new ImporterSettings(folder, sourceType.Value);
+				var settings = new ImporterSettings(folder, sourceType.Value, subSourceType);
 				importer = new Importer(settings);
 			}
 			else
@@ -192,11 +199,6 @@ namespace MUDMapBuilder.Import
 					}
 
 					var resets = area.RelatedResets(obj.VNum).ToArray();
-					if (resets.Length == 0)
-					{
-						continue;
-					}
-
 					var wearFlags = obj.WearFlags;
 					wearFlags &= ~ItemWearFlags.Take;
 					if (wearFlags == 0)
@@ -266,18 +268,42 @@ namespace MUDMapBuilder.Import
 					var locationsStr = string.Join("<br>", lines);
 
 					var pngLink = $"data/{mudName}/maps/png/{area.Name}.png";
-					sb.AppendLine($"[\"{name}\", [\"{area.Name}\", \"{pngLink}\"], \"{locationsStr}\", \"{obj.Level}\", \"{wearFlags.BuildFlagsValue()}\", \"{obj.BuildStringValue()}\", \"{obj.ExtraFlags.BuildFlagsValue()}\", \"{obj.BuildEffectsValue()}\"],");
+					sb.AppendLine($"[\"{name}\", [\"{area.Name}\", \"{pngLink}\"], \"{locationsStr}\", \"{obj.Level}\", \"{wearFlags.BuildFlagsValue()}\", \"{obj.BuildStringValue()}\", \"{obj.ExtraFlags.BuildFlagsValue()}\"],");
 					++outputItemsCount;
 				}
 			}
 			sb.AppendLine("];");
-
 
 			page = Resources.EqPageTemplate;
 			page = page.Replace("%title%", $"{mudName}'s Equipment");
 			page = page.Replace("%data%", sb.ToString());
 
 			File.WriteAllText($"{mudName}_Eq.html", page);
+
+			// Generate eqlist table
+			sb.Clear();
+
+			sb.AppendLine("var data = [");
+
+			foreach (var area in importer.Areas)
+			{
+				foreach (var mob in area.Mobiles)
+				{
+					var name = mob.ShortDescription.Replace("\"", "");
+
+					var pngLink = $"data/{mudName}/maps/png/{area.Name}.png";
+					sb.AppendLine($"[\"{name}\", [\"{area.Name}\", \"{pngLink}\"], \"{mob.Race}\", \"{mob.Level}\", \"{mob.ArmorClass}\", \"{mob.HitDice}\", \"{mob.HitRoll}\", \"{mob.DamageDice}\", \"{mob.Xp}\", \"{mob.Flags}\"],");
+					++outputItemsCount;
+				}
+			}
+			sb.AppendLine("];");
+
+
+			page = Resources.MobilePageTemplate;
+			page = page.Replace("%title%", $"{mudName}'s Mobiles");
+			page = page.Replace("%data%", sb.ToString());
+
+			File.WriteAllText($"{mudName}_Mobs.html", page);
 
 			Console.WriteLine($"Wrote {outputAreasCount} areas and {outputItemsCount} items.");
 		}

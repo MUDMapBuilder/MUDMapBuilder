@@ -58,7 +58,7 @@ namespace MUDMapBuilder
 
 		public static MMBDirection ToMMBDirection(this Direction dir) => (MMBDirection)dir;
 
-		public static MMBRoom ToMMBRoom(this Room room, Area area)
+		public static MMBRoom ToMMBRoom(this Room room)
 		{
 			var result = new MMBRoom(room.VNum, room.Name, false);
 
@@ -70,34 +70,6 @@ namespace MUDMapBuilder
 				}
 
 				result.Connections[exit.Key.ToMMBDirection()] = new MMBRoomConnection(exit.Key.ToMMBDirection(), exit.Value.TargetRoom.VNum);
-			}
-
-			foreach (var reset in area.Resets)
-			{
-				if (reset.ResetType != AreaResetType.NPC || reset.Value4 != room.VNum)
-				{
-					continue;
-				}
-
-				var mobile = (from m in area.Mobiles where m.VNum == reset.MobileVNum select m).FirstOrDefault();
-				if (mobile == null)
-				{
-					continue;
-				}
-
-				if (result.Contents == null)
-				{
-					result.Contents = new List<MMBRoomContentRecord>();
-				}
-
-				var color = Color.Green;
-
-				if (mobile.Flags.Contains(MobileFlags.Aggressive) && !mobile.Flags.Contains(MobileFlags.Wimpy))
-				{
-					color = Color.Red;
-				}
-
-				result.Contents.Add(new MMBRoomContentRecord($"{mobile.ShortDescription} #{mobile.VNum}", color));
 			}
 
 			return result;
@@ -115,7 +87,7 @@ namespace MUDMapBuilder
 
 			foreach (var room in area.Rooms)
 			{
-				result.Add(room.ToMMBRoom(area));
+				result.Add(room.ToMMBRoom());
 			}
 
 			return result;

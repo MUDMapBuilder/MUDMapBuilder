@@ -3,8 +3,10 @@ using DikuLoad.Import;
 using DikuLoad.Import.Ascii;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace MUDMapBuilder.Import
@@ -73,7 +75,9 @@ namespace MUDMapBuilder.Import
 			importer.Process();
 
 			// Convert DikuLoad areas to MMB Areas
+			// And build dict of all mobiles
 			var areas = new List<MMBArea>();
+			var allMobiles = new Dictionary<int, Mobile>();
 			foreach (var dikuArea in importer.Areas)
 			{
 				if (dikuArea.Rooms == null || dikuArea.Rooms.Count == 0)
@@ -83,10 +87,21 @@ namespace MUDMapBuilder.Import
 				}
 
 				areas.Add(dikuArea.ToMMBArea());
+
+				foreach(var mobile in dikuArea.Mobiles)
+				{
+					if (allMobiles.ContainsKey(mobile.VNum))
+					{
+						throw new Exception($"Dublicate mobile. New mobile: {mobile}. Old mobile: {allMobiles[mobile.VNum]}");
+					}
+
+					allMobiles[mobile.VNum] = mobile;
+				}
 			}
 
-			// Build complete dictionary of rooms
+			// Build complete dictionary of rooms, mobiles and area exits
 			var allRooms = new Dictionary<int, MMBRoom>();
+			var allAreaExits = new Dictionary<int, MMBRoom>();
 			foreach (var area in areas)
 			{
 				foreach (var room in area.Rooms)
@@ -96,17 +111,15 @@ namespace MUDMapBuilder.Import
 						throw new Exception($"Dublicate room id. New room: {room}. Old room: {allRooms[room.Id]}");
 					}
 
+					allRooms[room.Id] = room;
+
 					var areaExit = room.Clone();
 
 					areaExit.Name = $"To {area.Name}";
 					areaExit.IsExitToOtherArea = true;
 
-					if (areaExit.Contents != null)
-					{
-						areaExit.Contents.Clear();
-					}
 
-					allRooms[room.Id] = areaExit;
+					allAreaExits[room.Id] = areaExit;
 				}
 			}
 
@@ -125,13 +138,52 @@ namespace MUDMapBuilder.Import
 							continue;
 						}
 
-						areaExits[exit.Value.RoomId] = allRooms[exit.Value.RoomId];
+						areaExits[exit.Value.RoomId] = allAreaExits[exit.Value.RoomId];
 					}
 				}
 
 				foreach (var pair in areaExits)
 				{
 					area.Add(pair.Value);
+				}
+			}
+
+			// Finally add mobiles as content
+			foreach (var dikuArea in importer.Areas)
+			{
+				foreach(var reset in dikuArea.Resets)
+				{
+					if (reset.ResetType != AreaResetType.NPC)
+					{
+						continue;
+					}
+
+					Mobile mobile;
+					if (!allMobiles.TryGetValue(reset.MobileVNum, out mobile))
+					{
+						Console.WriteLine($"Warning: Unable to find mobile with vnum {reset.MobileVNum}.");
+						continue;
+					}
+
+					MMBRoom room;
+					if (!allRooms.TryGetValue(reset.Value4, out room))
+					{
+						Console.WriteLine($"Warning: Unable to find room with vnum {reset.Value4}.");
+						continue;
+					}
+
+					if (room.Contents == null)
+					{
+						room.Contents = new List<MMBRoomContentRecord>();
+					}
+					
+					var color = Color.Green;
+					if (mobile.Flags.Contains(MobileFlags.Aggressive) && !mobile.Flags.Contains(MobileFlags.Wimpy))
+					{
+						color = Color.Red;
+					}
+					
+					room.Contents.Add(new MMBRoomContentRecord($"{mobile.ShortDescription} #{mobile.VNum}", color));
 				}
 			}
 

@@ -97,8 +97,14 @@ namespace MUDMapBuilder.Import
 					}
 
 					var areaExit = room.Clone();
+
 					areaExit.Name = $"To {area.Name}";
 					areaExit.IsExitToOtherArea = true;
+
+					if (areaExit.Contents != null)
+					{
+						areaExit.Contents.Clear();
+					}
 
 					allRooms[room.Id] = areaExit;
 				}

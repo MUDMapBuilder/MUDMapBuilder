@@ -1,6 +1,7 @@
 ﻿using DikuLoad.Data;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace MUDMapBuilder
@@ -18,7 +19,8 @@ namespace MUDMapBuilder
 						if (obj.Value5.StartsWith("-"))
 						{
 							r += obj.Value5;
-						} else
+						}
+						else
 						{
 							r += "+" + obj.Value5;
 						}
@@ -70,7 +72,7 @@ namespace MUDMapBuilder
 				result.Connections[exit.Key.ToMMBDirection()] = new MMBRoomConnection(exit.Key.ToMMBDirection(), exit.Value.TargetRoom.VNum);
 			}
 
-			foreach(var reset in area.Resets)
+			foreach (var reset in area.Resets)
 			{
 				if (reset.ResetType != AreaResetType.NPC || reset.Value4 != room.VNum)
 				{
@@ -85,10 +87,17 @@ namespace MUDMapBuilder
 
 				if (result.Contents == null)
 				{
-					result.Contents = new List<string>();
+					result.Contents = new List<MMBRoomContentRecord>();
 				}
 
-				result.Contents.Add($"{mobile.ShortDescription} #{mobile.VNum}");
+				var color = Color.Green;
+
+				if (mobile.Flags.Contains(MobileFlags.Aggressive) && !mobile.Flags.Contains(MobileFlags.Wimpy))
+				{
+					color = Color.Red;
+				}
+
+				result.Contents.Add(new MMBRoomContentRecord($"{mobile.ShortDescription} #{mobile.VNum}", color));
 			}
 
 			return result;

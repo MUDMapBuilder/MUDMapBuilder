@@ -1,11 +1,43 @@
 ﻿using System.Text.Json;
 using System;
 using System.Text.Json.Serialization;
+using System.Drawing;
 
 namespace MUDMapBuilder
 {
 	public class MMBProject
 	{
+		public class ColorJsonConverter : JsonConverter<Color>
+		{
+			public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+			{
+				var str = reader.GetString();
+				var result = ColorStorage.FromName(str);
+				if (result == null )
+				{
+					throw new Exception($"Can't parse color '{str}'");
+				}
+
+				return result.Value;
+			}
+
+			public override void Write(Utf8JsonWriter writer, Color value, JsonSerializerOptions options)
+			{
+				var str = string.Empty;
+
+				var name = ColorStorage.GetColorName(value);
+				if (!string.IsNullOrEmpty(name))
+				{
+					str = name;
+				} else
+				{
+					str = ColorStorage.ToHexString(value);
+				}
+
+				writer.WriteStringValue(str);
+			}
+		}
+
 		private class RoomConnectionConverter : JsonConverter<MMBRoomConnection>
 		{
 			public override MMBRoomConnection Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -48,6 +80,7 @@ namespace MUDMapBuilder
 			};
 
 			result.Converters.Add(new JsonStringEnumConverter());
+			result.Converters.Add(new ColorJsonConverter());
 			result.Converters.Add(new RoomConnectionConverter());
 
 			return result;

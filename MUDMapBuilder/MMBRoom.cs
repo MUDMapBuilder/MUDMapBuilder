@@ -45,6 +45,27 @@ namespace MUDMapBuilder
 		public override string ToString() => $"{RoomId}, {ConnectionType}";
 	}
 
+	public class MMBRoomContentRecord
+	{
+		public string Text { get; set; }
+		public Color Color { get; set; } = Color.Black;
+
+		public MMBRoomContentRecord()
+		{
+		}
+
+		public MMBRoomContentRecord(string text, Color color)
+		{
+			Text = text;
+			Color = color;
+		}
+
+		public MMBRoomContentRecord(string text)
+		{
+			Text = text;
+		}
+	}
+
 	public class MMBRoom
 	{
 		private Dictionary<MMBDirection, Point> _drawnConnections = new Dictionary<MMBDirection, Point>();
@@ -109,7 +130,7 @@ namespace MUDMapBuilder
 		}
 
 		public Dictionary<MMBDirection, MMBRoomConnection> Connections { get; set; } = new Dictionary<MMBDirection, MMBRoomConnection>();
-		public List<string> Contents { get; set; }
+		public List<MMBRoomContentRecord> Contents { get; set; }
 
 		public event EventHandler RoomInvalid;
 
@@ -169,9 +190,10 @@ namespace MUDMapBuilder
 
 			if (Contents != null)
 			{
-				result.Contents = new List<string>();
+				result.Contents = new List<MMBRoomContentRecord>();
 				result.Contents.AddRange(Contents);
-			} else
+			}
+			else
 			{
 				result.Contents = Contents;
 			}

@@ -96,7 +96,7 @@ namespace MUDMapBuilder
 						{
 							for (var i = 0; i < room.Contents.Count; ++i)
 							{
-								sz = paint.MeasureText(room.Contents[i]) + TextHorizontalPadding * 2 + 0.5f;
+								sz = paint.MeasureText(room.Contents[i].Text) + TextHorizontalPadding * 2 + 0.5f;
 
 								if (sz > _cellsWidths[x])
 								{
@@ -133,7 +133,7 @@ namespace MUDMapBuilder
 				imageWidth += (width + 1) * RoomSpace.X;
 
 				var imageHeight = 0;
-				for(var i = 0; i < _cellHeights.Length; ++i)
+				for (var i = 0; i < _cellHeights.Length; ++i)
 				{
 					imageHeight += _cellHeights[i];
 				}
@@ -144,7 +144,7 @@ namespace MUDMapBuilder
 				// But first, assign points of interest
 				var pointOfInterestIdentifier = 1;
 				var pointOfInterestRoomIdentifiers = new Dictionary<MMBRoom, int>();
-				var pointOfInterestTextStringBuilder = new StringBuilder();
+				var pointOfInterestLines = new List<MMBRoomContentRecord>();
 
 				for (var x = 0; x < width; ++x)
 				{
@@ -159,18 +159,17 @@ namespace MUDMapBuilder
 						if (!string.IsNullOrEmpty(room.PointOfInterestText))
 						{
 							pointOfInterestRoomIdentifiers.Add(room, pointOfInterestIdentifier);
-							pointOfInterestTextStringBuilder.AppendLine(string.Format("{0}*:\n{1}", pointOfInterestIdentifier, room.PointOfInterestText));
+							pointOfInterestLines.Add(new MMBRoomContentRecord(string.Format("{0}*:\n{1}", pointOfInterestIdentifier, room.PointOfInterestText)));
 							pointOfInterestIdentifier++;
 						}
 					}
 				}
 				var pointOfInterestStartY = imageHeight + 10;
-				var pointOfInterestText = pointOfInterestTextStringBuilder.ToString();
 				(float height, float maxRequiredLineWidth) requiredSpaceForPointsOfInterest = (0, 0);
 
-				if (!string.IsNullOrEmpty(pointOfInterestText) && imageWidth > 100)
+				if (pointOfInterestLines.Count > 0 && imageWidth > 100)
 				{
-					requiredSpaceForPointsOfInterest = SkiaMeasureMultilineText(paint, pointOfInterestText, imageWidth - 10);
+					requiredSpaceForPointsOfInterest = SkiaMeasureMultilineText(paint, pointOfInterestLines, imageWidth - 10);
 
 					imageHeight += 30 + (int)requiredSpaceForPointsOfInterest.height;
 				}
@@ -452,25 +451,24 @@ namespace MUDMapBuilder
 
 							var hasPointOfInterest = pointOfInterestRoomIdentifiers.TryGetValue(room, out var roomPointOfInterest);
 
-							var text = options.AddDebugInfo ? room.ToString() : room.NameWithId;
+							var lines = new List<MMBRoomContentRecord>();
+							lines.Add(new MMBRoomContentRecord(options.AddDebugInfo ? room.ToString() : room.NameWithId, paint.Color.ToColor()));
 
 							if (hasPointOfInterest)
 							{
-								text = text + "\n" + roomPointOfInterest.ToString() + "*";
+								lines.Add(new MMBRoomContentRecord(roomPointOfInterest.ToString() + "*"));
 							}
 
 							if (room.Contents != null && room.Contents.Count > 0)
 							{
-								text += "\n\n";
+								// Empty line before content
+								lines.Add(new MMBRoomContentRecord());
 
-								for(var i = 0; i < room.Contents.Count; i++)
-								{
-									text += room.Contents[i].ToString();
-									text += "\n";
-								}
+								// Content
+								lines.AddRange(room.Contents);
 							}
 
-							SkiaDrawMultilineText(canvas, text, new SKRect(rect.Left, rect.Top, rect.Right, rect.Bottom), paint);
+							SkiaDrawMultilineText(canvas, lines, new SKRect(rect.Left, rect.Top, rect.Right, rect.Bottom), paint);
 
 							if (room.ForceMark != null)
 							{
@@ -492,7 +490,7 @@ namespace MUDMapBuilder
 						}
 					}
 
-					if (!string.IsNullOrEmpty(pointOfInterestText))
+					if (pointOfInterestLines.Count > 0)
 					{
 						paint.Color = SKColors.Black;
 						paint.StrokeWidth = 1;
@@ -510,7 +508,7 @@ namespace MUDMapBuilder
 						canvas.DrawRect(borderlocation, paint);
 
 						paint.Style = SKPaintStyle.Fill;
-						SkiaDrawMultilineText(canvas, pointOfInterestText, textlocation, paint, centerOnLine: false);
+						SkiaDrawMultilineText(canvas, pointOfInterestLines, textlocation, paint, centerOnLine: false);
 					}
 
 					using (SKImage image = surface.Snapshot())
@@ -762,7 +760,7 @@ namespace MUDMapBuilder
 			}
 
 			var screenY = RoomSpace.Y;
-			for(var y = 0; y < pos.Y; ++y)
+			for (var y = 0; y < pos.Y; ++y)
 			{
 				screenY += _cellHeights[y];
 				screenY += RoomSpace.Y;
@@ -798,41 +796,48 @@ namespace MUDMapBuilder
 			throw new Exception($"Unknown direction {direction}");
 		}
 
-		private void SkiaDrawMultilineText(SKCanvas canvas, string text, SKRect rect, SKPaint paint, bool centerOnLine = true)
+		private void SkiaDrawMultilineText(SKCanvas canvas, List<MMBRoomContentRecord> lines, SKRect rect, SKPaint paint, bool centerOnLine = true)
 		{
-			var (totalHeight, maxRequiredLineWidth) = SkiaMeasureMultilineText(paint, text, (int)rect.Width);
+			var oldColor = paint.Color;
+
+			var (totalHeight, maxRequiredLineWidth) = SkiaMeasureMultilineText(paint, lines, (int)rect.Width);
 			float wordY = paint.TextSize + rect.Top + (rect.Height / 2) - ((totalHeight - paint.FontSpacing) / 2);
 			var spaceWidth = paint.MeasureText(" ");
-			string[] lines = text.Split('\n');
-			foreach (string line in lines)
+			foreach (var line in lines)
 			{
 				List<string> lineWords = new List<string>();
 				float lineWidth = 0;
-				foreach (string word in line.Split(' '))
+
+				if (!string.IsNullOrEmpty(line.Text))
 				{
-					var alteredword = word;
-					float wordWidth = paint.MeasureText(word);
-					if (wordWidth == 0)
+					foreach (string word in line.Text.Split(' '))
 					{
-						wordWidth = spaceWidth;
-						alteredword = " ";
-					}
-					if (lineWidth + wordWidth <= rect.Width)
-					{
-						lineWords.Add(alteredword);
-						lineWidth += wordWidth + spaceWidth;
-					}
-					else
-					{
-						SkiaDrawLine(canvas, lineWords, rect, paint, ref wordY, centerOnLine);
-						lineWords.Clear();
-						lineWidth = 0;
-						lineWords.Add(alteredword);
-						lineWidth = wordWidth + spaceWidth;
+						var alteredword = word;
+						float wordWidth = paint.MeasureText(word);
+						if (wordWidth == 0)
+						{
+							wordWidth = spaceWidth;
+							alteredword = " ";
+						}
+						if (lineWidth + wordWidth <= rect.Width)
+						{
+							lineWords.Add(alteredword);
+							lineWidth += wordWidth + spaceWidth;
+						}
+						else
+						{
+							SkiaDrawLine(canvas, lineWords, rect, paint, ref wordY, centerOnLine);
+							lineWords.Clear();
+							lineWidth = 0;
+							lineWords.Add(alteredword);
+							lineWidth = wordWidth + spaceWidth;
+						}
 					}
 				}
+
 				if (lineWords.Count > 0)
 				{
+					paint.Color = line.Color.ToSKColor();
 					SkiaDrawLine(canvas, lineWords, rect, paint, ref wordY, centerOnLine);
 				}
 				else
@@ -840,6 +845,8 @@ namespace MUDMapBuilder
 					wordY += paint.FontSpacing;
 				}
 			}
+
+			paint.Color = oldColor;
 		}
 
 		private void SkiaDrawLine(SKCanvas canvas, List<string> words, SKRect rect, SKPaint paint, ref float wordY, bool centerText = true)
@@ -851,30 +858,34 @@ namespace MUDMapBuilder
 			wordY += paint.FontSpacing;
 		}
 
-		private (float height, float maxRequiredLineWidth) SkiaMeasureMultilineText(SKPaint paint, string text, int width)
+		private (float height, float maxRequiredLineWidth) SkiaMeasureMultilineText(SKPaint paint, List<MMBRoomContentRecord> lines, int width)
 		{
 			float spaceWidth = paint.MeasureText(" ");
 			float wordY = paint.TextSize;
 			float maxRequiredLineWidth = 0;
-			string[] lines = text.Split('\n');
-			foreach (string line in lines)
+			foreach (var line in lines)
 			{
 				float lineWidth = 0;
-				foreach (string word in line.Split(' '))
+
+				if (!string.IsNullOrEmpty(line.Text))
 				{
-					float wordWidth = paint.MeasureText(word);
-					if (wordWidth == 0) wordWidth = spaceWidth;
-					if (lineWidth + wordWidth <= width)
+					foreach (string word in line.Text.Split(' '))
 					{
-						lineWidth += wordWidth + spaceWidth;
-					}
-					else
-					{
-						maxRequiredLineWidth = Math.Max(maxRequiredLineWidth, lineWidth - spaceWidth);
-						wordY += paint.FontSpacing;
-						lineWidth = wordWidth + spaceWidth;
+						float wordWidth = paint.MeasureText(word);
+						if (wordWidth == 0) wordWidth = spaceWidth;
+						if (lineWidth + wordWidth <= width)
+						{
+							lineWidth += wordWidth + spaceWidth;
+						}
+						else
+						{
+							maxRequiredLineWidth = Math.Max(maxRequiredLineWidth, lineWidth - spaceWidth);
+							wordY += paint.FontSpacing;
+							lineWidth = wordWidth + spaceWidth;
+						}
 					}
 				}
+
 				maxRequiredLineWidth = Math.Max(maxRequiredLineWidth, lineWidth - spaceWidth);
 				wordY += paint.FontSpacing;
 			}

@@ -7,6 +7,12 @@ namespace MUDMapBuilder
 {
 	public class MMBProject
 	{
+		private static JsonSerializerOptions _jsonOptions1 = CreateJsonOptions1();
+		private static JsonSerializerOptions _jsonOptions2 = CreateJsonOptions2();
+
+		public static JsonSerializerOptions JsonOptions1 => _jsonOptions1;
+		public static JsonSerializerOptions JsonOptions2 => _jsonOptions2;
+
 		public class ColorJsonConverter : JsonConverter<Color>
 		{
 			public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -42,16 +48,28 @@ namespace MUDMapBuilder
 		{
 			public override MMBRoomConnection Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 			{
-				var vnum = reader.GetInt32();
-				return new MMBRoomConnection
+				if (reader.TokenType == JsonTokenType.Number)
 				{
-					RoomId = vnum
-				};
+					var vnum = reader.GetInt32();
+					return new MMBRoomConnection
+					{
+						RoomId = vnum
+					};
+				}
+
+				var doc = JsonDocument.ParseValue(ref reader);
+				return JsonSerializer.Deserialize<MMBRoomConnection>(doc, JsonOptions1);
 			}
 
 			public override void Write(Utf8JsonWriter writer, MMBRoomConnection value, JsonSerializerOptions options)
 			{
-				writer.WriteNumberValue(value.RoomId);
+				if (!value.IsDoor)
+				{
+					writer.WriteNumberValue(value.RoomId);
+				} else
+				{
+					JsonSerializer.Serialize(writer, value, JsonOptions1);
+				}
 			}
 		}
 
@@ -68,19 +86,27 @@ namespace MUDMapBuilder
 			BuildOptions = buildOptions;
 		}
 
-		private static JsonSerializerOptions CreateJsonOptions()
+		private static JsonSerializerOptions CreateJsonOptions1()
 		{
 			var result = new JsonSerializerOptions
 			{
 				WriteIndented = true,
 				IncludeFields = true,
-				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 				IgnoreReadOnlyFields = true,
 				IgnoreReadOnlyProperties = true,
 			};
 
 			result.Converters.Add(new JsonStringEnumConverter());
 			result.Converters.Add(new ColorJsonConverter());
+
+			return result;
+		}
+
+		private static JsonSerializerOptions CreateJsonOptions2()
+		{
+			var result = CreateJsonOptions1();
+
 			result.Converters.Add(new RoomConnectionConverter());
 
 			return result;
@@ -88,13 +114,13 @@ namespace MUDMapBuilder
 
 		public string ToJson()
 		{
-			var options = CreateJsonOptions();
+			var options = JsonOptions2;
 			return JsonSerializer.Serialize(this, options);
 		}
 
 		public static MMBProject Parse(string data)
 		{
-			var options = CreateJsonOptions();
+			var options = JsonOptions2;
 			var project = JsonSerializer.Deserialize<MMBProject>(data, options);
 			var area = project.Area;
 

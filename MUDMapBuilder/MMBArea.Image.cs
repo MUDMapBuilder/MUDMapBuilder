@@ -26,6 +26,7 @@ namespace MUDMapBuilder
 		private const int TextHorizontalPadding = 8;
 		private const int TextVerticalPadding = 8;
 		private const int ArrowRadius = 8;
+		private const int DoorSize = 32;
 		private static readonly Point RoomSpace = new Point(32, 32);
 		private int[] _cellHeights;
 		private int[] _cellsWidths;
@@ -370,11 +371,19 @@ namespace MUDMapBuilder
 								var sourceScreen = GetConnectionPoint(rect, exitDir);
 								var targetRect = GetRoomRect(targetPos);
 								var targetScreen = GetConnectionPoint(targetRect, exitDir.GetOppositeDirection());
+
+								Point? startWithDoor = null, endWithDoor = null;
 								if (ct == ConnectionType.Straight)
 								{
 									// Straight connection
 									// Source and target room are close to each other, hence draw the simple line
 									canvas.DrawLine(sourceScreen.X, sourceScreen.Y, targetScreen.X, targetScreen.Y, paint);
+
+									if (pair.Value.IsDoor)
+									{
+										startWithDoor = sourceScreen;
+										endWithDoor = targetScreen;
+									}
 								}
 								else
 								{
@@ -402,6 +411,56 @@ namespace MUDMapBuilder
 
 									sourceScreen = steps[0];
 									targetScreen = steps[steps.Count - 1];
+
+									if (pair.Value.IsDoor)
+									{
+										var k = 5;
+									}
+								}
+
+								if (startWithDoor != null && endWithDoor != null)
+								{
+									// Draw door
+									var src = startWithDoor.Value;
+									var dest = endWithDoor.Value;
+
+									// Normalized direction
+									var v = new Vector2(dest.X - src.X, dest.Y - src.Y);
+									v = Vector2.Normalize(v);
+
+									// Make perpendecular to original
+									v = new Vector2(v.Y, -v.X);
+
+									// Determine center
+									var center = new SKPoint(src.X + (dest.X - src.X) / 2,
+										src.Y + (dest.Y - src.Y) / 2);
+
+									var doorStart = new SKPoint(center.X - (v.X) * DoorSize / 2,
+										center.Y - (v.Y) * DoorSize / 2);
+									var doorEnd = new SKPoint(doorStart.X + v.X * DoorSize,
+										doorStart.Y + v.Y * DoorSize);
+
+									var oldColor = paint.Color;
+
+									paint.Color = pair.Value.DoorColor.ToSKColor();
+									canvas.DrawLine(doorStart.X, doorStart.Y, doorEnd.X, doorEnd.Y, paint);
+									paint.Color = oldColor;
+
+									if (pair.Value.DoorSigns != null)
+									{
+										var oldStrokeWidth = paint.StrokeWidth;
+										paint.StrokeWidth = 1;
+
+										var sz = SkiaMeasureMultilineText(paint, pair.Value.DoorSigns, 10000);
+
+										center.X -= sz.maxRequiredLineWidth / 2.0f;
+										center.Y -= (sz.height + 4.0f);
+
+										SkiaDrawMultilineText(canvas, pair.Value.DoorSigns,
+											new SKRect(center.X, center.Y, center.X + sz.maxRequiredLineWidth, center.Y + sz.height), paint);
+
+										paint.StrokeWidth = oldStrokeWidth;
+									}
 								}
 
 								if (pair.Value.ConnectionType == MMBConnectionType.Forward)

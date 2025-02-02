@@ -339,31 +339,6 @@ namespace MUDMapBuilder.Import
 
 			File.WriteAllText($"{mudName}_Eq.html", page);
 
-			// Generate eqlist table
-			sb.Clear();
-
-			sb.AppendLine("var data = [");
-
-			foreach (var area in importer.Areas)
-			{
-				foreach (var mob in area.Mobiles)
-				{
-					var name = mob.ShortDescription.Replace("\"", "");
-
-					var pngLink = $"data/{mudName}/maps/png/{area.Name}.png";
-					sb.AppendLine($"[\"{name}\", [\"{area.Name}\", \"{pngLink}\"], \"{mob.Race}\", \"{mob.Level}\", \"{mob.ArmorClass}\", \"{mob.HitDice}\", \"{mob.HitRoll}\", \"{mob.DamageDice}\", \"{mob.Xp}\", \"{mob.Flags}\"],");
-					++outputItemsCount;
-				}
-			}
-			sb.AppendLine("];");
-
-
-			page = Resources.MobilePageTemplate;
-			page = page.Replace("%title%", $"{mudName}'s Mobiles");
-			page = page.Replace("%data%", sb.ToString());
-
-			File.WriteAllText($"{mudName}_Mobs.html", page);
-
 			Console.WriteLine($"Wrote {outputAreasCount} areas and {outputItemsCount} items.");
 		}
 

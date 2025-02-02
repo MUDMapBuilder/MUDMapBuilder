@@ -58,18 +58,51 @@ namespace MUDMapBuilder
 
 		public static MMBDirection ToMMBDirection(this Direction dir) => (MMBDirection)dir;
 
-		public static MMBRoom ToMMBRoom(this Room room)
+		public static MMBRoom ToMMBRoom(this Room room, Area area)
 		{
 			var result = new MMBRoom(room.VNum, $"{room.Name} #{room.VNum}");
 
-			foreach (var exit in room.Exits)
+			foreach (var pair in room.Exits)
 			{
-				if (exit.Value == null || exit.Value.TargetRoom == null)
+				var exit = pair.Value;
+				if (exit == null || exit.TargetRoom == null)
 				{
 					continue;
 				}
 
-				result.Connections[exit.Key.ToMMBDirection()] = new MMBRoomConnection(exit.Key.ToMMBDirection(), exit.Value.TargetRoom.VNum);
+				var conn = new MMBRoomConnection(pair.Key.ToMMBDirection(), exit.TargetRoom.VNum);
+
+				foreach(var reset in area.Resets)
+				{
+					if (reset.ResetType != AreaResetType.Door || reset.Value2 != room.VNum || reset.Value3 != (int)pair.Key || reset.Value4 != 2)
+					{
+						continue;
+					}
+
+					conn.IsDoor = true;
+
+					// Add locked door
+					if (conn.DoorSigns == null)
+					{
+						conn.DoorSigns = new List<MMBRoomContentRecord>();
+					}
+
+					if (!exit.Flags.Contains(RoomExitFlags.PickProof))
+					{
+						conn.DoorColor = Color.LightGreen;
+					} else
+					{
+						conn.DoorColor = Color.IndianRed;
+					}
+
+					if (exit.KeyObject != null)
+					{
+						conn.DoorSigns.Add(new MMBRoomContentRecord(exit.KeyObject.ShortDescription, conn.DoorColor));
+					}
+				}
+
+				result.Connections[pair.Key.ToMMBDirection()] = conn;
+
 			}
 
 			return result;
@@ -87,7 +120,7 @@ namespace MUDMapBuilder
 
 			foreach (var room in area.Rooms)
 			{
-				result.Add(room.ToMMBRoom());
+				result.Add(room.ToMMBRoom(area));
 			}
 
 			return result;

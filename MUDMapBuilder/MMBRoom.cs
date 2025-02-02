@@ -24,27 +24,6 @@ namespace MUDMapBuilder
 		TwoWay
 	}
 
-	public class MMBRoomConnection
-	{
-		public MMBDirection Direction { get; set; }
-		public int RoomId { get; set; }
-
-		[JsonIgnore]
-		public MMBConnectionType ConnectionType { get; set; }
-
-		public MMBRoomConnection()
-		{
-		}
-
-		public MMBRoomConnection(MMBDirection dir, int roomId)
-		{
-			Direction = dir;
-			RoomId = roomId;
-		}
-
-		public override string ToString() => $"{RoomId}, {ConnectionType}";
-	}
-
 	public class MMBRoomContentRecord
 	{
 		public string Text { get; set; }
@@ -64,6 +43,35 @@ namespace MUDMapBuilder
 		{
 			Text = text;
 		}
+
+		public override string ToString() => $"{Text}, {Color}";
+	}
+
+	public class MMBRoomConnection
+	{
+		[JsonIgnore]
+		public MMBDirection Direction { get; set; }
+		public int RoomId { get; set; }
+
+		public bool IsDoor { get; set; }
+		public Color DoorColor { get; set; } = Color.Black;
+
+		public List<MMBRoomContentRecord> DoorSigns { get; set; }
+
+		[JsonIgnore]
+		public MMBConnectionType ConnectionType { get; set; }
+
+		public MMBRoomConnection()
+		{
+		}
+
+		public MMBRoomConnection(MMBDirection dir, int roomId)
+		{
+			Direction = dir;
+			RoomId = roomId;
+		}
+
+		public override string ToString() => $"{RoomId}, {ConnectionType}";
 	}
 
 	public class MMBRoom
@@ -192,15 +200,7 @@ namespace MUDMapBuilder
 				result.Connections[pair.Key] = pair.Value;
 			}
 
-			if (Contents != null)
-			{
-				result.Contents = new List<MMBRoomContentRecord>();
-				result.Contents.AddRange(Contents);
-			}
-			else
-			{
-				result.Contents = Contents;
-			}
+			result.Contents = Contents;
 
 			return result;
 		}

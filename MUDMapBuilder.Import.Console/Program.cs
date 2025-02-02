@@ -115,7 +115,7 @@ namespace MUDMapBuilder.Import
 
 					var areaExit = room.Clone();
 
-					areaExit.Name = $"To {area.Name} #{areaExit.Id}	";
+					areaExit.Name = $"To {area.Name} #{areaExit.Id}";
 					areaExit.FrameColor = Color.Blue;
 					areaExit.Color = Color.Blue;
 

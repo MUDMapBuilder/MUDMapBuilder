@@ -60,7 +60,7 @@ namespace MUDMapBuilder
 
 		public static MMBRoom ToMMBRoom(this Room room)
 		{
-			var result = new MMBRoom(room.VNum, room.Name, false);
+			var result = new MMBRoom(room.VNum, $"{room.Name} #{room.VNum}");
 
 			foreach (var exit in room.Exits)
 			{

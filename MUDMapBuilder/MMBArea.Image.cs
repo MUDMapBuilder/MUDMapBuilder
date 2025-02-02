@@ -17,9 +17,7 @@ namespace MUDMapBuilder
 			Obstacled
 		}
 
-		private static readonly SKColor DefaultColor = SKColors.Black;
 		private static readonly SKColor SelectedColor = SKColors.Green;
-		private static readonly SKColor ExitToOtherAreaColor = SKColors.Blue;
 		private static readonly SKColor ConnectionWithObstacles = SKColors.Red;
 		private static readonly SKColor NonStraightConnection = SKColors.Yellow;
 		private static readonly SKColor Intersection = SKColors.Magenta;
@@ -84,7 +82,7 @@ namespace MUDMapBuilder
 						room.ClearDrawnConnections();
 
 						// Width
-						var text = options.AddDebugInfo ? room.ToString() : room.NameWithId;
+						var text = options.AddDebugInfo ? room.ToString() : room.Name;
 
 						var sz = paint.MeasureText(text) + TextHorizontalPadding * 2 + 0.5f;
 						if (sz > _cellsWidths[x])
@@ -181,7 +179,7 @@ namespace MUDMapBuilder
 				{
 					SKCanvas canvas = surface.Canvas;
 
-					canvas.Clear(SKColors.White);
+					canvas.Clear(BackgroundColor.ToSKColor());
 					for (var x = 0; x < width; ++x)
 					{
 						for (var y = 0; y < height; ++y)
@@ -204,13 +202,9 @@ namespace MUDMapBuilder
 							{
 								paint.Color = room.MarkColor.Value;
 							}
-							else if (room.IsExitToOtherArea)
-							{
-								paint.Color = ExitToOtherAreaColor;
-							}
 							else
 							{
-								paint.Color = DefaultColor;
+								paint.Color = room.FrameColor.ToSKColor();
 							}
 
 							canvas.DrawRect(rect.X, rect.Y, rect.Width, rect.Height, paint);
@@ -365,12 +359,12 @@ namespace MUDMapBuilder
 									}
 									else
 									{
-										paint.Color = DefaultColor;
+										paint.Color = ConnectionsColor.ToSKColor();
 									}
 								}
 								else
 								{
-									paint.Color = DefaultColor;
+									paint.Color = ConnectionsColor.ToSKColor();
 								}
 
 								var sourceScreen = GetConnectionPoint(rect, exitDir);
@@ -446,13 +440,12 @@ namespace MUDMapBuilder
 								room.AddDrawnConnection(exitDir, targetPos);
 							}
 
-							paint.Color = room.IsExitToOtherArea ? ExitToOtherAreaColor : DefaultColor;
 							paint.StrokeWidth = 1;
 
 							var hasPointOfInterest = pointOfInterestRoomIdentifiers.TryGetValue(room, out var roomPointOfInterest);
 
 							var lines = new List<MMBRoomContentRecord>();
-							lines.Add(new MMBRoomContentRecord(options.AddDebugInfo ? room.ToString() : room.NameWithId, paint.Color.ToColor()));
+							lines.Add(new MMBRoomContentRecord(options.AddDebugInfo ? room.ToString() : room.Name, room.Color));
 
 							if (hasPointOfInterest)
 							{

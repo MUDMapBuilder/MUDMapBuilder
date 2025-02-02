@@ -74,12 +74,11 @@ namespace MUDMapBuilder
 		private Point? _forceMark;
 
 		public int Id { get; set; }
+		public Color FrameColor { get; set; } = Color.Black;
 		public string Name { get; set; }
-		public string NameWithId => $"{Name} #{Id}";
+		public Color Color { get; set; } = Color.Black;
 
 		public string PointOfInterestText { get; set; } = string.Empty;
-
-		public bool IsExitToOtherArea { get; set; }
 
 		public Point? Position
 		{
@@ -132,23 +131,25 @@ namespace MUDMapBuilder
 		public Dictionary<MMBDirection, MMBRoomConnection> Connections { get; set; } = new Dictionary<MMBDirection, MMBRoomConnection>();
 		public List<MMBRoomContentRecord> Contents { get; set; }
 
+		[JsonIgnore]
+		public object Tag { get; set; }
+
 		public event EventHandler RoomInvalid;
 
 		public MMBRoom()
 		{
 		}
 
-		public MMBRoom(int id, string name, bool isExitToOtherArea) : this(id, name, isExitToOtherArea, null)
+		public MMBRoom(int id, string name) : this(id, name, null)
 		{
 
 		}
 
-		public MMBRoom(int id, string name, bool isExitToOtherArea, string pointOfInterestText)
+		public MMBRoom(int id, string name, string pointOfInterestText)
 		{
 			Id = id;
 			Name = name;
 			PointOfInterestText = pointOfInterestText;
-			IsExitToOtherArea = isExitToOtherArea;
 		}
 
 		public MMBRoomConnection FindConnection(int targetRoomId)
@@ -176,11 +177,14 @@ namespace MUDMapBuilder
 
 		public MMBRoom Clone()
 		{
-			var result = new MMBRoom(Id, Name, IsExitToOtherArea, PointOfInterestText)
+			var result = new MMBRoom(Id, Name, PointOfInterestText)
 			{
+				FrameColor = FrameColor,
+				Color = Color,
 				Position = Position,
 				MarkColor = MarkColor,
 				ForceMark = ForceMark,
+				Tag = Tag
 			};
 
 			foreach (var pair in Connections)
@@ -201,7 +205,7 @@ namespace MUDMapBuilder
 			return result;
 		}
 
-		public override string ToString() => $"{NameWithId}, {Position}";
+		public override string ToString() => $"{Name} #{Id}, {Position}";
 
 		private void FireRoomInvalid() => RoomInvalid?.Invoke(this, EventArgs.Empty);
 	}

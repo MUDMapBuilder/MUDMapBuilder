@@ -34,6 +34,10 @@ namespace MUDMapBuilder
 		public string MinimumLevel { get; set; }
 		public string MaximumLevel { get; set; }
 
+		public Color BackgroundColor { get; set; } = Color.White;
+		public Color ConnectionsColor { get; set; } = Color.Black;
+
+
 		[JsonIgnore]
 		public MMBConnectionsList[,] ConnectionsGrid => _connectionsGrid;
 
@@ -72,7 +76,6 @@ namespace MUDMapBuilder
 
 		public int Count => _roomsByIds.Count;
 
-
 		public int PositionedRoomsCount => (from r in _roomsByIds.Values where r.Position != null select r).Count();
 
 		public BrokenConnectionsInfo BrokenConnections
@@ -100,6 +103,9 @@ namespace MUDMapBuilder
 
 		[JsonIgnore]
 		public int? SelectedRoomId { get; set; }
+
+		[JsonIgnore]
+		public object Tag { get; set; }
 
 		public MMBArea()
 		{
@@ -1159,7 +1165,10 @@ namespace MUDMapBuilder
 			var result = new MMBArea
 			{
 				Name = Name,
+				ConnectionsColor = ConnectionsColor,
+				BackgroundColor = BackgroundColor,
 				LogMessage = LogMessage,
+				Tag = Tag
 			};
 
 			foreach (var r in _roomsByIds)

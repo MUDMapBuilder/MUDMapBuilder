@@ -389,13 +389,14 @@ namespace MUDMapBuilder
 								{
 									List<Point> steps;
 
+									Point mainLineStart, mainLineEnd;
 									if (ct == ConnectionType.NonStraight)
 									{
-										steps = BuildNsPath(new Point(x, y), targetPos, exitDir);
+										steps = BuildNsPath(new Point(x, y), targetPos, exitDir, out mainLineStart, out mainLineEnd);
 									}
 									else
 									{
-										steps = BuildObstacledPath(new Point(x, y), targetPos, exitDir);
+										steps = BuildObstacledPath(new Point(x, y), targetPos, exitDir, out mainLineStart, out mainLineEnd);
 									}
 
 									var src = steps[0];
@@ -414,7 +415,8 @@ namespace MUDMapBuilder
 
 									if (pair.Value.IsDoor)
 									{
-										var k = 5;
+										startWithDoor = mainLineStart;
+										endWithDoor = mainLineEnd;
 									}
 								}
 
@@ -586,7 +588,7 @@ namespace MUDMapBuilder
 			_nsConnections[p.X, p.Y] = true;
 		}
 
-		private List<Point> BuildNsPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction)
+		private List<Point> BuildNsPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction, out Point mainLineStart, out Point mainLineEnd)
 		{
 			var pathRadius = RoomSpace.X / 4;
 
@@ -663,9 +665,11 @@ namespace MUDMapBuilder
 				}
 
 				result.Add(sourcePos);
+				mainLineStart = sourcePos;
 
 				sourcePos = new Point(targetPos.X, sourcePos.Y);
 				result.Add(sourcePos);
+				mainLineEnd = sourcePos;
 			}
 			else
 			{
@@ -680,10 +684,12 @@ namespace MUDMapBuilder
 				}
 
 				result.Add(sourcePos);
+				mainLineStart = sourcePos;
 
 				sourcePos = new Point(sourcePos.X, targetPos.Y);
 
 				result.Add(sourcePos);
+				mainLineEnd = sourcePos;
 			}
 
 			result.Add(targetPos);
@@ -692,7 +698,7 @@ namespace MUDMapBuilder
 			return result;
 		}
 
-		private List<Point> BuildObstacledPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction)
+		private List<Point> BuildObstacledPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction, out Point mainLineStart, out Point mainLineEnd)
 		{
 			var sourceRoomRect = GetRoomRect(sourceGridPos);
 			var sourcePos = GetConnectionPoint(sourceRoomRect, direction);
@@ -764,10 +770,12 @@ namespace MUDMapBuilder
 				}
 
 				result.Add(sourcePos);
+				mainLineStart = sourcePos;
 
 				sourcePos = new Point(targetConnectionPos.X, sourcePos.Y);
 
 				result.Add(sourcePos);
+				mainLineEnd = sourcePos;
 			}
 			else
 			{
@@ -782,11 +790,13 @@ namespace MUDMapBuilder
 				}
 
 				result.Add(sourcePos);
+				mainLineStart = sourcePos;
 
 				// Vertical movement
 				sourcePos = new Point(sourcePos.X, targetConnectionPos.Y);
 
 				result.Add(sourcePos);
+				mainLineEnd = sourcePos;
 			}
 
 			return result;

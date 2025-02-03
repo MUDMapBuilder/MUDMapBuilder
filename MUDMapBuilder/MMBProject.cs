@@ -92,7 +92,7 @@ namespace MUDMapBuilder
 			{
 				WriteIndented = true,
 				IncludeFields = true,
-				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+				DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
 				IgnoreReadOnlyFields = true,
 				IgnoreReadOnlyProperties = true,
 			};

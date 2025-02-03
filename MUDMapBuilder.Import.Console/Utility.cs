@@ -89,7 +89,7 @@ namespace MUDMapBuilder
 
 					if (!exit.Flags.Contains(RoomExitFlags.PickProof))
 					{
-						conn.DoorColor = Color.LightGreen;
+						conn.DoorColor = Color.CornflowerBlue;
 					} else
 					{
 						conn.DoorColor = Color.IndianRed;
@@ -97,7 +97,7 @@ namespace MUDMapBuilder
 
 					if (exit.KeyObject != null)
 					{
-						conn.DoorSigns.Add(new MMBRoomContentRecord(exit.KeyObject.ShortDescription, conn.DoorColor));
+						conn.DoorSigns.Add(new MMBRoomContentRecord($"{exit.KeyObject.ShortDescription} #{exit.KeyObject.VNum}", conn.DoorColor));
 					}
 				}
 

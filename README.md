@@ -21,7 +21,7 @@ The utility is used like this: `mmb Midgaard.json Midgaard.png`
 
 The input json contains the area data and looks like this: https://mudmapbuilder.github.io/data/tbaMUD/maps/json/Southern%20Midgaard.json
 
-This json was used to generate the image at the beginning.
+That json was used to generate the image at the beginning of this document.
 
 # Usage of mmb-bc
 `mmb-bc` is utility to generate all maps for jsons in the specified folder

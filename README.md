@@ -1,6 +1,7 @@
 # About
 [![Discord](https://img.shields.io/discord/1335801517856264264)](https://discord.gg/BNSrPSgkYc)
-![image](https://github.com/rds1983/MUDMapBuilder/assets/1057289/3f233fc8-510b-4125-a0c5-7e89d372b62e)
+![image](https://github.com/user-attachments/assets/0f4aeb43-31d8-46b7-9ef2-91c49e439e9b)
+
 
 MUDMapBuilder is utility to generate map images for MUDs(Multi-User Dungeons) areas.
 
@@ -18,7 +19,9 @@ For now, it works only under Windows.
 # Usage of mmb
 The utility is used like this: `mmb Midgaard.json Midgaard.png`
 
-The input json contains the area data and looks like this: https://mudmapbuilder.github.io/data/Envy22/maps/json/Arachnos.json
+The input json contains the area data and looks like this: https://mudmapbuilder.github.io/data/tbaMUD/maps/json/Southern%20Midgaard.json
+
+This json was used to generate the image at the beginning.
 
 # Usage of mmb-bc
 `mmb-bc` is utility to generate all maps for jsons in the specified folder

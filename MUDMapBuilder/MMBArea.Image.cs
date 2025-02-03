@@ -175,7 +175,7 @@ namespace MUDMapBuilder
 				SKImageInfo imageInfo = new SKImageInfo(imageWidth,
 														imageHeight);
 
-
+				var doorsSigns = new List<Tuple<SKRect, MMBRoomConnection>>();
 				using (SKSurface surface = SKSurface.Create(imageInfo))
 				{
 					SKCanvas canvas = surface.Canvas;
@@ -420,55 +420,6 @@ namespace MUDMapBuilder
 									}
 								}
 
-								if (startWithDoor != null && endWithDoor != null)
-								{
-									// Draw door
-									var src = startWithDoor.Value;
-									var dest = endWithDoor.Value;
-
-									// Normalized direction
-									var v = new Vector2(dest.X - src.X, dest.Y - src.Y);
-									v = Vector2.Normalize(v);
-
-									// Make perpendecular to original
-									v = new Vector2(v.Y, -v.X);
-
-									// Determine center
-									var center = new SKPoint(src.X + (dest.X - src.X) / 2,
-										src.Y + (dest.Y - src.Y) / 2);
-
-									var doorStart = new SKPoint(center.X - (v.X) * DoorSize / 2,
-										center.Y - (v.Y) * DoorSize / 2);
-									var doorEnd = new SKPoint(doorStart.X + v.X * DoorSize,
-										doorStart.Y + v.Y * DoorSize);
-
-									var oldColor = paint.Color;
-
-									paint.Color = pair.Value.DoorColor.ToSKColor();
-									canvas.DrawLine(doorStart.X, doorStart.Y, doorEnd.X, doorEnd.Y, paint);
-									paint.Color = oldColor;
-
-									if (pair.Value.DoorSigns != null)
-									{
-										var oldStrokeWidth = paint.StrokeWidth;
-										paint.StrokeWidth = 1;
-
-										var sz = SkiaMeasureMultilineText(paint, pair.Value.DoorSigns, 10000);
-
-
-
-										center.X -= sz.maxRequiredLineWidth / 2.0f;
-
-										center.Y = Math.Min(doorStart.Y, doorEnd.Y);
-										center.Y -= (sz.height / 2.0f + 4.0f);
-
-										SkiaDrawMultilineText(canvas, pair.Value.DoorSigns,
-											new SKRect(center.X, center.Y, center.X + sz.maxRequiredLineWidth, center.Y + sz.height), paint);
-
-										paint.StrokeWidth = oldStrokeWidth;
-									}
-								}
-
 								if (pair.Value.ConnectionType == MMBConnectionType.Forward)
 								{
 									// Draw single-way arrow
@@ -500,6 +451,50 @@ namespace MUDMapBuilder
 									paint.Style = SKPaintStyle.Stroke;
 									paint.Color = oldColor;
 									canvas.DrawPath(skPath, paint);
+								}
+
+								if (startWithDoor != null && endWithDoor != null)
+								{
+									// Draw door
+									var src = startWithDoor.Value;
+									var dest = endWithDoor.Value;
+
+									// Normalized direction
+									var v = new Vector2(dest.X - src.X, dest.Y - src.Y);
+									v = Vector2.Normalize(v);
+
+									// Make perpendecular to original
+									v = new Vector2(v.Y, -v.X);
+
+									// Determine center
+									var center = new SKPoint(src.X + (dest.X - src.X) / 2,
+										src.Y + (dest.Y - src.Y) / 2);
+
+									var doorStart = new SKPoint(center.X - (v.X) * DoorSize / 2,
+										center.Y - (v.Y) * DoorSize / 2);
+									var doorEnd = new SKPoint(doorStart.X + v.X * DoorSize,
+										doorStart.Y + v.Y * DoorSize);
+
+									var oldColor = paint.Color;
+
+									paint.Color = pair.Value.DoorColor.ToSKColor();
+									canvas.DrawLine(doorStart.X, doorStart.Y, doorEnd.X, doorEnd.Y, paint);
+									paint.Color = oldColor;
+
+									if (pair.Value.DoorSigns != null && pair.Value.DoorSigns.Count > 0)
+									{
+										// Build rectangle for the door signs
+										var sz = SkiaMeasureMultilineText(paint, pair.Value.DoorSigns, 10000);
+
+										center.X -= sz.maxRequiredLineWidth / 2.0f;
+										center.Y = Math.Min(doorStart.Y, doorEnd.Y);
+										center.Y -= (sz.height / 2.0f + 4.0f);
+
+										var srect = new SKRect(center.X, center.Y, center.X + sz.maxRequiredLineWidth, center.Y + sz.height);
+										
+										// Save for the later use
+										doorsSigns.Add(new Tuple<SKRect, MMBRoomConnection>(srect, pair.Value));
+									}
 								}
 
 								room.AddDrawnConnection(exitDir, targetPos);
@@ -546,6 +541,14 @@ namespace MUDMapBuilder
 									targetScreen.Y + rect.Height / 2, paint);
 							}
 						}
+					}
+
+					// Draw door signs
+					foreach(var doorSign in doorsSigns)
+					{
+						paint.StrokeWidth = 1;
+
+						SkiaDrawMultilineText(canvas, doorSign.Item2.DoorSigns, doorSign.Item1, paint);
 					}
 
 					if (pointOfInterestLines.Count > 0)

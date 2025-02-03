@@ -455,8 +455,12 @@ namespace MUDMapBuilder
 
 										var sz = SkiaMeasureMultilineText(paint, pair.Value.DoorSigns, 10000);
 
+
+
 										center.X -= sz.maxRequiredLineWidth / 2.0f;
-										center.Y -= (sz.height + 4.0f);
+
+										center.Y = Math.Min(doorStart.Y, doorEnd.Y);
+										center.Y -= (sz.height / 2.0f + 4.0f);
 
 										SkiaDrawMultilineText(canvas, pair.Value.DoorSigns,
 											new SKRect(center.X, center.Y, center.X + sz.maxRequiredLineWidth, center.Y + sz.height), paint);

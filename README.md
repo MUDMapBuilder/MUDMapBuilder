@@ -1,4 +1,5 @@
 # About
+[![Discord](https://img.shields.io/discord/1335801517856264264)](https://discord.gg/BNSrPSgkYc)
 ![image](https://github.com/rds1983/MUDMapBuilder/assets/1057289/3f233fc8-510b-4125-a0c5-7e89d372b62e)
 
 MUDMapBuilder is utility to generate map images for MUDs(Multi-User Dungeons) areas.
@@ -23,3 +24,6 @@ The input json contains the area data and looks like this: https://mudmapbuilder
 `mmb-bc` is utility to generate all maps for jsons in the specified folder
 
 It is used like this: `mmb-bc maps/json maps/png`
+
+# Support
+https://discord.gg/BNSrPSgkYc

@@ -1,7 +1,7 @@
 # About
 [![Discord](https://img.shields.io/discord/1335801517856264264)](https://discord.gg/BNSrPSgkYc)
-![image](https://github.com/user-attachments/assets/0f4aeb43-31d8-46b7-9ef2-91c49e439e9b)
 
+![image](https://github.com/user-attachments/assets/4e6bbb60-717d-439b-9a5d-d8574be32c1b)
 
 MUDMapBuilder is utility to generate map images for MUDs(Multi-User Dungeons) areas.
 

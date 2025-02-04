@@ -208,7 +208,7 @@ namespace MUDMapBuilder
 			return result;
 		}
 
-		public override string ToString() => $"{Name} #{Id}, {Position}";
+		public override string ToString() => $"{Name}, {Position}";
 
 		private void FireRoomInvalid() => RoomInvalid?.Invoke(this, EventArgs.Empty);
 	}

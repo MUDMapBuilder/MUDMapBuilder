@@ -123,8 +123,8 @@ namespace MUDMapBuilder
 			return true;
 		}
 
-		private bool AddRunStep() => InternalAddRunStep(Options.MaxSteps);
-		private bool AddCompactRunStep() => InternalAddRunStep(Options.MaxCompactSteps);
+		private bool AddRunStep() => InternalAddRunStep(Options.MaxSteps ?? 1000);
+		private bool AddCompactRunStep() => InternalAddRunStep(Options.MaxCompactSteps ?? 10000);
 
 		private bool PushRoom(MMBArea rooms, int firstRoomId, Point firstForceVector, bool measureRun, out int roomsRemoved)
 		{
@@ -963,6 +963,10 @@ namespace MUDMapBuilder
 		private static MMBProject Prepare(MMBProject project)
 		{
 			var clone = project.Clone();
+			if (clone.BuildOptions == null)
+			{
+				clone.BuildOptions = new BuildOptions();
+			}
 
 			var area = clone.Area;
 			area.RemoveNonExistantConnections();

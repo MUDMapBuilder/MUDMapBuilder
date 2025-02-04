@@ -19,7 +19,7 @@ namespace MUDMapBuilder
 				return;
 			}
 
-			var pngData = buildResult.Last.BuildPng(project.BuildOptions, false).PngData;
+			var pngData = buildResult.Last.BuildPng().PngData;
 			File.WriteAllBytes(outputPath, pngData);
 
 			if (buildResult.ResultType != ResultType.Success)

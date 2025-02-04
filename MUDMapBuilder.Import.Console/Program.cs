@@ -200,7 +200,7 @@ namespace MUDMapBuilder.Import
 				var fileName = $"{area.Name}.json";
 				Console.WriteLine($"Saving {fileName}...");
 
-				var project = new MMBProject(area, new BuildOptions());
+				var project = new MMBProject(area);
 				var outputPath = Path.Combine(outputFolder, fileName);
 				if (File.Exists(outputPath))
 				{
@@ -211,7 +211,12 @@ namespace MUDMapBuilder.Import
 					{
 						var oldData = File.ReadAllText(outputPath);
 						var oldProject = MMBProject.Parse(oldData);
-						oldProject.BuildOptions.CopyTo(project.BuildOptions);
+
+						if (oldProject.BuildOptions != null)
+						{
+							project.BuildOptions = new BuildOptions();
+							oldProject.BuildOptions.CopyTo(project.BuildOptions);
+						}
 					}
 					catch (Exception)
 					{

@@ -80,7 +80,7 @@ namespace MUDMapBuilder
 		{
 		}
 
-		public MMBProject(MMBArea area, BuildOptions buildOptions)
+		public MMBProject(MMBArea area, BuildOptions buildOptions = null)
 		{
 			Area = area;
 			BuildOptions = buildOptions;

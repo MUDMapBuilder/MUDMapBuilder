@@ -96,7 +96,7 @@ namespace MUDMapBuilder.Editor.UI
 					return;
 				}
 
-				_mapViewer.Redraw(Area, Options, _checkColorizeConnectionIssues.IsChecked);
+				_mapViewer.Redraw(Area, _checkAddDebugInfo.IsChecked, _checkColorizeConnectionIssues.IsChecked);
 				UpdateNumbers();
 			};
 
@@ -231,17 +231,17 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			Utility.QueueUIAction(() =>
 			{
-				_mapViewer.Redraw(null, null, _checkColorizeConnectionIssues.IsChecked);
+				_mapViewer.Redraw(null, _checkAddDebugInfo.IsChecked, _checkColorizeConnectionIssues.IsChecked);
 			});
 
-			var result = MapBuilder.SingleRun(Project, Utility.SetStatusMessage, 
+			var result = MapBuilder.SingleRun(Project, Utility.SetStatusMessage,
 				_checkFixObstacles.IsChecked, _checkFixNonStraight.IsChecked,
 				_checkFixIntersected.IsChecked, _checkCompactMap.IsChecked);
 
 			Utility.QueueUIAction(() =>
 			{
 				Result = result;
-				_mapViewer.Redraw(Area, Options, _checkColorizeConnectionIssues.IsChecked);
+				_mapViewer.Redraw(Area, _checkAddDebugInfo.IsChecked, _checkColorizeConnectionIssues.IsChecked);
 				var maxSteps = Result.History.Length;
 				_spinButtonStep.Maximum = maxSteps;
 				_spinButtonStep.Value = maxSteps;
@@ -263,7 +263,6 @@ namespace MUDMapBuilder.Editor.UI
 		{
 			Project.BuildOptions.RemoveSolitaryRooms = _checkRemoveSolitaryRooms.IsChecked;
 			Project.BuildOptions.RemoveRoomsWithSingleOutsideExit = _checkRemoveRoomsWithSingleOutsideExit.IsChecked;
-			Project.BuildOptions.AddDebugInfo = _checkAddDebugInfo.IsChecked;
 		}
 
 		private void SetDirtyAndRebuild()
@@ -286,7 +285,7 @@ namespace MUDMapBuilder.Editor.UI
 
 			IsDirty = true;
 			SetBuildOptionsFromUI();
-			_mapViewer.Redraw(Area, Options, _checkColorizeConnectionIssues.IsChecked);
+			_mapViewer.Redraw(Area, _checkAddDebugInfo.IsChecked, _checkColorizeConnectionIssues.IsChecked);
 		}
 
 		private void Rebuild()
@@ -310,6 +309,11 @@ namespace MUDMapBuilder.Editor.UI
 				var data = File.ReadAllText(path);
 				Project = MMBProject.Parse(data);
 
+				if (Project.BuildOptions == null)
+				{
+					Project.BuildOptions = new BuildOptions();
+				}
+
 				if (Project.Area == null || Project.Area.Rooms == null || Project.Area.Rooms.Length == 0)
 				{
 					var dialog = Dialog.CreateMessageBox("Error", $"Area '{Project.Area.Name}' has no rooms");
@@ -324,7 +328,6 @@ namespace MUDMapBuilder.Editor.UI
 					var options = Project.BuildOptions;
 					_checkRemoveSolitaryRooms.IsChecked = options.RemoveSolitaryRooms;
 					_checkRemoveRoomsWithSingleOutsideExit.IsChecked = options.RemoveRoomsWithSingleOutsideExit;
-					_checkAddDebugInfo.IsChecked = options.AddDebugInfo;
 				}
 				finally
 				{

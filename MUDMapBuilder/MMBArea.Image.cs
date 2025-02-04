@@ -49,7 +49,7 @@ namespace MUDMapBuilder
 			return false;
 		}
 
-		public MMBImageResult BuildPng(BuildOptions options, bool colorizeConnectionIssues = true)
+		public MMBImageResult BuildPng(bool addDebugInfo = false, bool colorizeConnectionIssues = false)
 		{
 			var roomInfos = new List<MMBImageRoomInfo>();
 
@@ -83,7 +83,7 @@ namespace MUDMapBuilder
 						room.ClearDrawnConnections();
 
 						// Width
-						var text = options.AddDebugInfo ? room.ToString() : room.Name;
+						var text = addDebugInfo ? room.ToString() : room.Name;
 
 						var sz = paint.MeasureText(text) + TextHorizontalPadding * 2 + 0.5f;
 						if (sz > _cellsWidths[x])
@@ -505,7 +505,7 @@ namespace MUDMapBuilder
 							var hasPointOfInterest = pointOfInterestRoomIdentifiers.TryGetValue(room, out var roomPointOfInterest);
 
 							var lines = new List<MMBRoomContentRecord>();
-							lines.Add(new MMBRoomContentRecord(options.AddDebugInfo ? room.ToString() : room.Name, room.Color));
+							lines.Add(new MMBRoomContentRecord(addDebugInfo ? room.ToString() : room.Name, room.Color));
 
 							if (hasPointOfInterest)
 							{

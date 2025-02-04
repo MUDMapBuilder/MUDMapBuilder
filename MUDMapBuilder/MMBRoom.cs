@@ -27,13 +27,14 @@ namespace MUDMapBuilder
 	public class MMBRoomContentRecord
 	{
 		public string Text { get; set; }
-		public Color Color { get; set; } = Color.Black;
+
+		public Color? Color { get; set; } = null;
 
 		public MMBRoomContentRecord()
 		{
 		}
 
-		public MMBRoomContentRecord(string text, Color color)
+		public MMBRoomContentRecord(string text, Color? color)
 		{
 			Text = text;
 			Color = color;
@@ -53,8 +54,10 @@ namespace MUDMapBuilder
 		public MMBDirection Direction { get; set; }
 		public int RoomId { get; set; }
 
+		public Color? Color { get; set; } = null;
+
 		public bool IsDoor { get; set; }
-		public Color DoorColor { get; set; } = Color.Black;
+		public Color? DoorColor { get; set; } = null;
 
 		public List<MMBRoomContentRecord> DoorSigns { get; set; }
 
@@ -82,9 +85,9 @@ namespace MUDMapBuilder
 		private Point? _forceMark;
 
 		public int Id { get; set; }
-		public Color FrameColor { get; set; } = Color.Black;
+		public Color? FrameColor { get; set; } = null;
 		public string Name { get; set; }
-		public Color Color { get; set; } = Color.Black;
+		public Color? Color { get; set; } = null;
 
 		public string PointOfInterestText { get; set; } = string.Empty;
 

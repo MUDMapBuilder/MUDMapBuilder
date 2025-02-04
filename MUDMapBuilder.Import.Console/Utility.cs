@@ -95,6 +95,8 @@ namespace MUDMapBuilder
 						conn.DoorColor = Color.IndianRed;
 					}
 
+					conn.Color = conn.DoorColor;
+
 					if (exit.KeyObject != null)
 					{
 						conn.DoorSigns.Add(new MMBRoomContentRecord($"{exit.KeyObject.ShortDescription} #{exit.KeyObject.VNum}", conn.DoorColor));

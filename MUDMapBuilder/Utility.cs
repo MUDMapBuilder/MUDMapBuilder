@@ -53,6 +53,16 @@ namespace MUDMapBuilder
 
 		public static int CalculateArea(this Rectangle r) => r.Width * r.Height;
 
+		public static SKColor ToSKColor(this Color? color)
+		{
+			if (color == null)
+			{
+				return SKColors.Black;
+			}
+
+			return color.Value.ToSKColor();
+		}
+
 		public static SKColor ToSKColor(this Color color) => new SKColor(color.R, color.G, color.B, color.A);
 
 		public static Color ToColor(this SKColor color) => Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);

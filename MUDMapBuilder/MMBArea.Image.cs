@@ -360,12 +360,12 @@ namespace MUDMapBuilder
 									}
 									else
 									{
-										paint.Color = ConnectionsColor.ToSKColor();
+										paint.Color = pair.Value.Color.ToSKColor();
 									}
 								}
 								else
 								{
-									paint.Color = ConnectionsColor.ToSKColor();
+									paint.Color = pair.Value.Color.ToSKColor();
 								}
 
 								var sourceScreen = GetConnectionPoint(rect, exitDir);

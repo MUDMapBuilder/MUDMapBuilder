@@ -35,8 +35,6 @@ namespace MUDMapBuilder
 		public string MaximumLevel { get; set; }
 
 		public Color BackgroundColor { get; set; } = Color.White;
-		public Color ConnectionsColor { get; set; } = Color.Black;
-
 
 		[JsonIgnore]
 		public MMBConnectionsList[,] ConnectionsGrid => _connectionsGrid;
@@ -1165,7 +1163,6 @@ namespace MUDMapBuilder
 			var result = new MMBArea
 			{
 				Name = Name,
-				ConnectionsColor = ConnectionsColor,
 				BackgroundColor = BackgroundColor,
 				LogMessage = LogMessage,
 				Tag = Tag

@@ -17,6 +17,14 @@ namespace MUDMapBuilder
 			Obstacled
 		}
 
+		private struct ArrowInfo
+		{
+			public Vector2 Start;
+			public Vector2 End;
+			public SKColor Color;
+			public ConnectionType ConnectionType;
+		}
+
 		private static readonly SKColor SelectedColor = SKColors.Green;
 		private static readonly SKColor ConnectionWithObstacles = SKColors.Red;
 		private static readonly SKColor NonStraightConnection = SKColors.Yellow;
@@ -176,6 +184,7 @@ namespace MUDMapBuilder
 														imageHeight);
 
 				var doorsSigns = new List<Tuple<SKRect, MMBRoomConnection>>();
+				var arrows = new List<ArrowInfo>();
 				using (SKSurface surface = SKSurface.Create(imageInfo))
 				{
 					SKCanvas canvas = surface.Canvas;
@@ -429,46 +438,14 @@ namespace MUDMapBuilder
 
 								if (pair.Value.ConnectionType == MMBConnectionType.Forward)
 								{
-									// Normalized direction
-									var v = new Vector2(lastEnd.X - lastStart.X, lastEnd.Y - lastStart.Y);
-									v = Vector2.Normalize(v);
-
-									// Make perpendecular to original
-									var vp = new Vector2(v.Y, -v.X);
-
-									// Draw single-way arrow
-									var skPath = new SKPath
+									var arrowInfo = new ArrowInfo
 									{
-										FillType = SKPathFillType.EvenOdd
+										Start = new Vector2(lastStart.X, lastStart.Y),
+										End = new Vector2(lastEnd.X, lastEnd.Y),
+										Color = paint.Color,
+										ConnectionType = ct
 									};
-
-									skPath.MoveTo(0, 0);
-									skPath.LineTo(ArrowRadius * vp.X, ArrowRadius * vp.Y);
-									skPath.LineTo(v.X * ArrowRadius, v.Y * ArrowRadius);
-									skPath.LineTo(-ArrowRadius * vp.X, -ArrowRadius * vp.Y);
-									skPath.LineTo(0, 0);
-									skPath.Close();
-
-									Vector2 arrowStart;
-									if (ct == ConnectionType.NonStraight)
-									{
-										arrowStart = new Vector2(lastEnd.X, lastEnd.Y);
-									}
-									else
-									{
-										arrowStart = new Vector2(lastEnd.X - v.X * ArrowRadius, lastEnd.Y - v.Y * ArrowRadius);
-									}
-
-									var tr = SKMatrix.CreateTranslation(arrowStart.X, arrowStart.Y);
-									skPath.Transform(tr);
-
-									var oldColor = paint.Color;
-									paint.Style = SKPaintStyle.Fill;
-									paint.Color = SKColors.White;
-									canvas.DrawPath(skPath, paint);
-									paint.Style = SKPaintStyle.Stroke;
-									paint.Color = oldColor;
-									canvas.DrawPath(skPath, paint);
+									arrows.Add(arrowInfo);
 								}
 
 								if (startWithDoor != null && endWithDoor != null)
@@ -561,11 +538,55 @@ namespace MUDMapBuilder
 						}
 					}
 
-					// Draw door signs
-					foreach(var doorSign in doorsSigns)
+					// Draw arrows
+					paint.StrokeWidth = 2;
+					foreach(var arrow in arrows)
 					{
-						paint.StrokeWidth = 1;
+						// Normalized direction
+						var v = arrow.End - arrow.Start;
+						v = Vector2.Normalize(v);
 
+						// Make perpendecular to original
+						var vp = new Vector2(v.Y, -v.X);
+
+						// Draw single-way arrow
+						var skPath = new SKPath
+						{
+							FillType = SKPathFillType.EvenOdd
+						};
+
+						skPath.MoveTo(0, 0);
+						skPath.LineTo(ArrowRadius * vp.X, ArrowRadius * vp.Y);
+						skPath.LineTo(v.X * ArrowRadius, v.Y * ArrowRadius);
+						skPath.LineTo(-ArrowRadius * vp.X, -ArrowRadius * vp.Y);
+						skPath.LineTo(0, 0);
+						skPath.Close();
+
+						Vector2 arrowStart;
+						if (arrow.ConnectionType == ConnectionType.NonStraight)
+						{
+							arrowStart = arrow.End;
+						}
+						else
+						{
+							arrowStart = arrow.End - new Vector2(v.X * ArrowRadius, v.Y * ArrowRadius);
+						}
+
+						var tr = SKMatrix.CreateTranslation(arrowStart.X, arrowStart.Y);
+						skPath.Transform(tr);
+
+						paint.Style = SKPaintStyle.Fill;
+						paint.Color = BackgroundColor.ToSKColor();
+						canvas.DrawPath(skPath, paint);
+						paint.Color = arrow.Color;
+						paint.Style = SKPaintStyle.Stroke;
+						canvas.DrawPath(skPath, paint);
+					}
+
+					// Draw door signs
+					paint.StrokeWidth = 1;
+					foreach (var doorSign in doorsSigns)
+					{
 						SkiaDrawMultilineText(canvas, doorSign.Item2.DoorSigns, doorSign.Item1, paint);
 					}
 

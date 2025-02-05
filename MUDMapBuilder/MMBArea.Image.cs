@@ -662,53 +662,25 @@ namespace MUDMapBuilder
 			var intersects = false;
 
 			// Set intersection flags and check if we intersect other ns connection
-			var p = sourceGridPos;
-
 			var moveDelta = new Point();
-			switch (direction)
-			{
-				case MMBDirection.East:
-					for (; p.X <= targetGridPos.X; ++p.X)
-					{
-						UpdateNsIntersects(p, ref intersects);
-					}
-					break;
-
-				case MMBDirection.West:
-					for (; p.X >= targetGridPos.X; --p.X)
-					{
-						UpdateNsIntersects(p, ref intersects);
-					}
-					break;
-
-				case MMBDirection.North:
-					for (; p.Y >= targetGridPos.Y; --p.Y)
-					{
-						UpdateNsIntersects(p, ref intersects);
-					}
-					break;
-
-				case MMBDirection.South:
-					for (; p.Y <= targetGridPos.Y; ++p.Y)
-					{
-						UpdateNsIntersects(p, ref intersects);
-					}
-					break;
-
-				default:
-					throw new Exception($"Direction {direction} isn't supported");
-			}
-
 			if (direction == MMBDirection.West || direction == MMBDirection.East)
 			{
+				// Set intersection flags and check if we intersect other ns connection
+				for (var x = Math.Min(sourceGridPos.X, targetGridPos.X);
+					x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
+				{
+					UpdateNsIntersects(new Point(x, sourceGridPos.Y), ref intersects);
+				}
+
 				// Go either up or down
+				var pathRadius2 = Math.Max(sourceRoomRect.Height / 4, pathRadius);
 				if (intersects)
 				{
-					moveDelta.Y = -pathRadius;
+					moveDelta.Y = -pathRadius2;
 				}
 				else
 				{
-					moveDelta.Y = pathRadius;
+					moveDelta.Y = pathRadius2;
 				}
 
 				sourcePos.Y += moveDelta.Y;
@@ -723,14 +695,22 @@ namespace MUDMapBuilder
 			}
 			else
 			{
+				// Set intersection flags and check if we intersect other ns connection
+				for (var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
+					y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
+				{
+					UpdateNsIntersects(new Point(sourceGridPos.X, y), ref intersects);
+				}
+
 				// Go either left or right
+				var pathRadius2 = Math.Max(sourceRoomRect.Width / 8, pathRadius);
 				if (intersects)
 				{
-					moveDelta.X = -pathRadius;
+					moveDelta.X = -pathRadius2;
 				}
 				else
 				{
-					moveDelta.X = pathRadius;
+					moveDelta.X = pathRadius2;
 				}
 
 				sourcePos.X += moveDelta.X;
@@ -782,7 +762,6 @@ namespace MUDMapBuilder
 				pathRadius = sourceRoomRect.Width / 8;
 			}
 
-
 			var targetRoomRect = GetRoomRect(targetGridPos);
 			var targetConnectionPos = GetConnectionPoint(targetRoomRect, direction.GetOppositeDirection());
 
@@ -791,43 +770,15 @@ namespace MUDMapBuilder
 			var intersects = false;
 
 			// Set intersection flags and check if we intersect other ns connection
-			var p = sourceGridPos;
-			switch (direction)
-			{
-				case MMBDirection.East:
-					for (; p.X <= targetGridPos.X; ++p.X)
-					{
-						UpdateNsIntersects(p, ref intersects);
-					}
-					break;
-
-				case MMBDirection.West:
-					for (; p.X >= targetGridPos.X; --p.X)
-					{
-						UpdateNsIntersects(p, ref intersects);
-					}
-					break;
-
-				case MMBDirection.North:
-					for (; p.Y >= targetGridPos.Y; --p.Y)
-					{
-						UpdateNsIntersects(p, ref intersects);
-					}
-					break;
-
-				case MMBDirection.South:
-					for (; p.Y <= targetGridPos.Y; ++p.Y)
-					{
-						UpdateNsIntersects(p, ref intersects);
-					}
-					break;
-
-				default:
-					throw new Exception($"Direction {direction} isn't supported");
-			}
-
 			if (direction == MMBDirection.West || direction == MMBDirection.East)
 			{
+				// Set intersection flags and check if we intersect other ns connection
+				for (var x = Math.Min(sourceGridPos.X, targetGridPos.X);
+					x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
+				{
+					UpdateNsIntersects(new Point(x, sourceGridPos.Y), ref intersects);
+				}
+
 				// Go either up or down
 				if (intersects)
 				{
@@ -848,6 +799,13 @@ namespace MUDMapBuilder
 			}
 			else
 			{
+				// Set intersection flags and check if we intersect other ns connection
+				for (var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
+					y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
+				{
+					UpdateNsIntersects(new Point(sourceGridPos.X, y), ref intersects);
+				}
+
 				// Go either left or right
 				if (intersects)
 				{

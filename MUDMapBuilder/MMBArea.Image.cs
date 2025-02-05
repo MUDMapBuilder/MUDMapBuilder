@@ -373,6 +373,8 @@ namespace MUDMapBuilder
 								var targetScreen = GetConnectionPoint(targetRect, exitDir.GetOppositeDirection());
 
 								Point? startWithDoor = null, endWithDoor = null;
+								var lastStart = new Point();
+								var lastEnd = new Point(1, 0);
 								if (ct == ConnectionType.Straight)
 								{
 									// Straight connection
@@ -384,6 +386,9 @@ namespace MUDMapBuilder
 										startWithDoor = sourceScreen;
 										endWithDoor = targetScreen;
 									}
+
+									lastStart = sourceScreen;
+									lastEnd = targetScreen;
 								}
 								else
 								{
@@ -405,6 +410,8 @@ namespace MUDMapBuilder
 									{
 										var dest = steps[j];
 
+										lastStart = src;
+										lastEnd = dest;
 										canvas.DrawLine(src.X, src.Y, dest.X, dest.Y, paint);
 
 										src = dest;
@@ -422,26 +429,37 @@ namespace MUDMapBuilder
 
 								if (pair.Value.ConnectionType == MMBConnectionType.Forward)
 								{
+									// Normalized direction
+									var v = new Vector2(lastEnd.X - lastStart.X, lastEnd.Y - lastStart.Y);
+									v = Vector2.Normalize(v);
+
+									// Make perpendecular to original
+									var vp = new Vector2(v.Y, -v.X);
+
 									// Draw single-way arrow
-									var skPath = new SKPath();
-									skPath.FillType = SKPathFillType.EvenOdd;
+									var skPath = new SKPath
+									{
+										FillType = SKPathFillType.EvenOdd
+									};
+
 									skPath.MoveTo(0, 0);
-									skPath.LineTo(-ArrowRadius, ArrowRadius);
-									skPath.LineTo(-ArrowRadius, -ArrowRadius);
+									skPath.LineTo(ArrowRadius * vp.X, ArrowRadius * vp.Y);
+									skPath.LineTo(v.X * ArrowRadius, v.Y * ArrowRadius);
+									skPath.LineTo(-ArrowRadius * vp.X, -ArrowRadius * vp.Y);
 									skPath.LineTo(0, 0);
 									skPath.Close();
 
-									// Determine angle between two vectors
-									var v1 = new Vector2(targetScreen.X - sourceScreen.X,
-										targetScreen.Y - sourceScreen.Y);
-									v1 = Vector2.Normalize(v1);
-									var v2 = new Vector2(1, 0);
-									var cosA = Vector2.Dot(v1, v2);
-									var sinA = v1.X * v2.Y - v2.X * v1.Y;
-									var angleInRads = (float)Math.Atan2(sinA, cosA);
+									Vector2 arrowStart;
+									if (ct == ConnectionType.NonStraight)
+									{
+										arrowStart = new Vector2(lastEnd.X, lastEnd.Y);
+									}
+									else
+									{
+										arrowStart = new Vector2(lastEnd.X - v.X * ArrowRadius, lastEnd.Y - v.Y * ArrowRadius);
+									}
 
-									var tr = SKMatrix.Concat(SKMatrix.CreateTranslation(targetScreen.X, targetScreen.Y),
-										SKMatrix.CreateRotation(-angleInRads));
+									var tr = SKMatrix.CreateTranslation(arrowStart.X, arrowStart.Y);
 									skPath.Transform(tr);
 
 									var oldColor = paint.Color;

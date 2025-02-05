@@ -406,11 +406,14 @@ namespace MUDMapBuilder
 									Point mainLineStart, mainLineEnd;
 									if (ct == ConnectionType.NonStraight)
 									{
-										steps = BuildNsPath(new Point(x, y), targetPos, exitDir, out mainLineStart, out mainLineEnd);
+										steps = BuildNsPath(new Point(x, y), targetPos, exitDir,
+											pair.Value.ConnectionType == MMBConnectionType.Forward,
+											out mainLineStart, out mainLineEnd);
 									}
 									else
 									{
-										steps = BuildObstacledPath(new Point(x, y), targetPos, exitDir, out mainLineStart, out mainLineEnd);
+										steps = BuildObstacledPath(new Point(x, y), targetPos, exitDir, 
+											out mainLineStart, out mainLineEnd);
 									}
 
 									var src = steps[0];
@@ -634,19 +637,13 @@ namespace MUDMapBuilder
 			_nsConnections[p.X, p.Y] = true;
 		}
 
-		private List<Point> BuildNsPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction, out Point mainLineStart, out Point mainLineEnd)
+		private List<Point> BuildNsPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction, bool isSingleWay, out Point mainLineStart, out Point mainLineEnd)
 		{
-			var pathRadius = RoomSpace.X / 4;
-
 			var sourceRoomRect = GetRoomRect(sourceGridPos);
 			var sourcePos = GetConnectionPoint(sourceRoomRect, direction);
 
 			var targetRoomRect = GetRoomRect(targetGridPos);
 			var targetConnectionPos = GetConnectionPoint(targetRoomRect, direction.GetOppositeDirection());
-			var targetPos = targetConnectionPos;
-			var delta = direction.GetOppositeDirection().GetDelta();
-			targetPos.X += delta.X * pathRadius;
-			targetPos.Y += delta.Y * pathRadius;
 
 			// Add source connection point
 			var result = new List<Point>
@@ -655,7 +652,9 @@ namespace MUDMapBuilder
 			};
 
 			// Firstly add direction movement
-			delta = direction.GetDelta();
+			var delta = direction.GetDelta();
+
+			var pathRadius = 8;
 			sourcePos.X += delta.X * pathRadius;
 			sourcePos.Y += delta.Y * pathRadius;
 			result.Add(sourcePos);
@@ -664,6 +663,8 @@ namespace MUDMapBuilder
 
 			// Set intersection flags and check if we intersect other ns connection
 			var p = sourceGridPos;
+
+			var moveDelta = new Point();
 			switch (direction)
 			{
 				case MMBDirection.East:
@@ -703,17 +704,20 @@ namespace MUDMapBuilder
 				// Go either up or down
 				if (intersects)
 				{
-					sourcePos = new Point(sourcePos.X, sourcePos.Y - pathRadius);
+					moveDelta.Y = -pathRadius;
 				}
 				else
 				{
-					sourcePos = new Point(sourcePos.X, sourcePos.Y + pathRadius);
+					moveDelta.Y = pathRadius;
 				}
+
+				sourcePos.Y += moveDelta.Y;
 
 				result.Add(sourcePos);
 				mainLineStart = sourcePos;
 
-				sourcePos = new Point(targetPos.X, sourcePos.Y);
+				var oppDelta = direction.GetOppositeDirection().GetDelta();
+				sourcePos = new Point(targetConnectionPos.X + oppDelta.X * pathRadius, sourcePos.Y);
 				result.Add(sourcePos);
 				mainLineEnd = sourcePos;
 			}
@@ -722,24 +726,43 @@ namespace MUDMapBuilder
 				// Go either left or right
 				if (intersects)
 				{
-					sourcePos = new Point(sourcePos.X - pathRadius, sourcePos.Y);
+					moveDelta.X = -pathRadius;
 				}
 				else
 				{
-					sourcePos = new Point(sourcePos.X + pathRadius, sourcePos.Y);
+					moveDelta.X = pathRadius;
 				}
 
+				sourcePos.X += moveDelta.X;
 				result.Add(sourcePos);
 				mainLineStart = sourcePos;
 
-				sourcePos = new Point(sourcePos.X, targetPos.Y);
+				var oppDelta = direction.GetOppositeDirection().GetDelta();
+				sourcePos = new Point(sourcePos.X, targetConnectionPos.Y + oppDelta.Y * pathRadius);
 
 				result.Add(sourcePos);
 				mainLineEnd = sourcePos;
 			}
 
-			result.Add(targetPos);
-			result.Add(targetConnectionPos);
+			if (isSingleWay)
+			{
+				// Continue moving that direction
+				sourcePos.X += moveDelta.X;
+				sourcePos.Y += moveDelta.Y;
+				result.Add(sourcePos);
+
+				sourcePos.X += delta.X * pathRadius;
+				sourcePos.Y += delta.Y * pathRadius;
+				result.Add(sourcePos);
+			} else
+			{
+				// Return
+				sourcePos.X -= moveDelta.X;
+				sourcePos.Y -= moveDelta.Y;
+				result.Add(sourcePos);
+
+				result.Add(targetConnectionPos);
+			}
 
 			return result;
 		}

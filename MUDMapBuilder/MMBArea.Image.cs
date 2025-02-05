@@ -713,7 +713,7 @@ namespace MUDMapBuilder
 			int pathRadius;
 			if (direction == MMBDirection.East || direction == MMBDirection.West)
 			{
-				pathRadius = RoomSpace.X / 4;
+				pathRadius = sourceRoomRect.Height / 8;
 			}
 			else
 			{

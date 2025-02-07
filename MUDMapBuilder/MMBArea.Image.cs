@@ -420,7 +420,7 @@ namespace MUDMapBuilder
 									}
 									else
 									{
-										steps = BuildObstacledPath(new Point(x, y), targetPos, exitDir, 
+										steps = BuildObstacledPath(new Point(x, y), targetPos, exitDir,
 											out mainLineStart, out mainLineEnd);
 									}
 
@@ -497,7 +497,7 @@ namespace MUDMapBuilder
 										center.Y -= (sz.height / 2.0f + 4.0f);
 
 										var srect = new SKRect(center.X, center.Y, center.X + sz.maxRequiredLineWidth, center.Y + sz.height);
-										
+
 										// Save for the later use
 										doorsSigns.Add(new Tuple<SKRect, MMBRoomConnection>(srect, pair.Value));
 									}
@@ -551,7 +551,7 @@ namespace MUDMapBuilder
 
 					// Draw arrows
 					paint.StrokeWidth = 2;
-					foreach(var arrow in arrows)
+					foreach (var arrow in arrows)
 					{
 						// Normalized direction
 						var v = arrow.End - arrow.Start;
@@ -637,26 +637,24 @@ namespace MUDMapBuilder
 
 		private void UpdateNsIntersectsHorizontal(Point p, bool left, bool right, ref bool intersects)
 		{
-			var cellInfo = _nsConnections[p.X, p.Y];
-			if ((cellInfo.Left && left) || (cellInfo.Right && right))
+			if ((_nsConnections[p.X, p.Y].Left && left) || (_nsConnections[p.X, p.Y].Right && right))
 			{
 				intersects = true;
 			}
 
-			cellInfo.Left = left;
-			cellInfo.Right = right;
+			_nsConnections[p.X, p.Y].Left = left;
+			_nsConnections[p.X, p.Y].Right = right;
 		}
 
 		private void UpdateNsIntersectsVertical(Point p, bool top, bool bottom, ref bool intersects)
 		{
-			var cellInfo = _nsConnections[p.X, p.Y];
-			if ((cellInfo.Top && top) || (cellInfo.Bottom && bottom))
+			if ((_nsConnections[p.X, p.Y].Top && top) || (_nsConnections[p.X, p.Y].Bottom && bottom))
 			{
 				intersects = true;
 			}
 
-			cellInfo.Top = top;
-			cellInfo.Bottom = bottom;
+			_nsConnections[p.X, p.Y].Top = top;
+			_nsConnections[p.X, p.Y].Bottom = bottom;
 		}
 
 		private List<Point> BuildNsPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction, bool isSingleWay, out Point mainLineStart, out Point mainLineEnd)
@@ -688,15 +686,11 @@ namespace MUDMapBuilder
 			if (direction == MMBDirection.West || direction == MMBDirection.East)
 			{
 				// Set intersection flags and check if we intersect other ns connection
-				int x;
-				for (x = Math.Min(sourceGridPos.X, targetGridPos.X);
-					x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
+				for (var x = Math.Min(sourceGridPos.X, targetGridPos.X);
+					x <= Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
 				{
 					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), true, true, ref intersects);
 				}
-
-				// Last cell intersect only left
-				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), true, false, ref intersects);
 
 				// Go either up or down
 				var pathRadius2 = Math.Max(sourceRoomRect.Height / 4, pathRadius);
@@ -722,16 +716,11 @@ namespace MUDMapBuilder
 			else
 			{
 				// Set intersection flags and check if we intersect other ns connection
-				int y;
-				for (y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
-					y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
+				for (var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
+					y <= Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
 				{
 					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), true, true, ref intersects);
 				}
-
-				// Last cell intersect only top
-				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), true, false, ref intersects);
-
 
 				// Go either left or right
 				var pathRadius2 = Math.Max(sourceRoomRect.Width / 8, pathRadius);
@@ -765,7 +754,8 @@ namespace MUDMapBuilder
 				sourcePos.X += delta.X * pathRadius;
 				sourcePos.Y += delta.Y * pathRadius;
 				result.Add(sourcePos);
-			} else
+			}
+			else
 			{
 				// Return
 				sourcePos.X -= moveDelta.X;
@@ -808,8 +798,9 @@ namespace MUDMapBuilder
 
 				// First cell intersects only right
 				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), false, true, ref intersects);
+				++x;
 
-				for (;x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
+				for (; x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
 				{
 					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), true, true, ref intersects);
 				}
@@ -842,6 +833,7 @@ namespace MUDMapBuilder
 
 				// First cell intersect only bottom
 				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), false, true, ref intersects);
+				++y;
 
 				for (; y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
 				{

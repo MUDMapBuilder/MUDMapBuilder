@@ -3,7 +3,7 @@
     <Authors>MUDMapBuilderTeam</Authors>
     <Product>MUDMapBuilder</Product>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/rds1983/MUDMapBuilder</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/MUDMapBuilder/MUDMapBuilder</PackageProjectUrl>
     <RootNamespace>MUDMapBuilder</RootNamespace>
     <Description>.NET Library for Generating Map images for MUDs</Description>
     <VersionPrefix>0.4.0</VersionPrefix>

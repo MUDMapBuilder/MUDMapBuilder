@@ -30,7 +30,7 @@ jobs:
     - name: Install NuGet
       uses: NuGet/setup-nuget@v2
     - name: Publish MUDMapBuilder to NuGet
-      run: nuget.exe push MUDMapBuilder\MUDMapBuilder\bin\Release\MUDMapBuilder.*.nupkg ${{secrets.NUGET_APIKEY}} -Source https://api.nuget.org/v3/index.json
+      run: nuget.exe push MUDMapBuilder\bin\Release\MUDMapBuilder.*.nupkg ${{secrets.NUGET_APIKEY}} -Source https://api.nuget.org/v3/index.json
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1

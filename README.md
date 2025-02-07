@@ -1,4 +1,5 @@
 # About
+[![NuGet](https://img.shields.io/nuget/v/MUDMapBuilder.svg)](https://www.nuget.org/packages/MUDMapBuilder/)
 [![Discord](https://img.shields.io/discord/1335801517856264264)](https://discord.gg/BNSrPSgkYc)
 
 ![image](https://github.com/user-attachments/assets/4e6bbb60-717d-439b-9a5d-d8574be32c1b)

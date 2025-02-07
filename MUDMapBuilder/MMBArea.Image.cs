@@ -25,6 +25,14 @@ namespace MUDMapBuilder
 			public ConnectionType ConnectionType;
 		}
 
+		private struct NsCellInfo
+		{
+			public bool Left;
+			public bool Right;
+			public bool Top;
+			public bool Bottom;
+		}
+
 		private static readonly SKColor SelectedColor = SKColors.Green;
 		private static readonly SKColor ConnectionWithObstacles = SKColors.Red;
 		private static readonly SKColor NonStraightConnection = SKColors.Yellow;
@@ -38,7 +46,7 @@ namespace MUDMapBuilder
 		private static readonly Point RoomSpace = new Point(32, 32);
 		private int[] _cellHeights;
 		private int[] _cellsWidths;
-		private bool[,] _nsConnections;
+		private NsCellInfo[,] _nsConnections;
 
 		private bool AreRoomsConnected(Point a, Point b, MMBDirection direction)
 		{
@@ -67,7 +75,7 @@ namespace MUDMapBuilder
 			var width = mapRect.Width;
 			var height = mapRect.Height;
 
-			_nsConnections = new bool[width, height];
+			_nsConnections = new NsCellInfo[width, height];
 			using (SKPaint paint = new SKPaint())
 			{
 				paint.Color = SKColors.Black;
@@ -627,14 +635,28 @@ namespace MUDMapBuilder
 			return new MMBImageResult(imageBytes, roomInfos.ToArray());
 		}
 
-		private void UpdateNsIntersects(Point p, ref bool intersects)
+		private void UpdateNsIntersectsHorizontal(Point p, bool left, bool right, ref bool intersects)
 		{
-			if (_nsConnections[p.X, p.Y])
+			var cellInfo = _nsConnections[p.X, p.Y];
+			if ((cellInfo.Left && left) || (cellInfo.Right && right))
 			{
 				intersects = true;
 			}
 
-			_nsConnections[p.X, p.Y] = true;
+			cellInfo.Left = left;
+			cellInfo.Right = right;
+		}
+
+		private void UpdateNsIntersectsVertical(Point p, bool top, bool bottom, ref bool intersects)
+		{
+			var cellInfo = _nsConnections[p.X, p.Y];
+			if ((cellInfo.Top && top) || (cellInfo.Bottom && bottom))
+			{
+				intersects = true;
+			}
+
+			cellInfo.Top = top;
+			cellInfo.Bottom = bottom;
 		}
 
 		private List<Point> BuildNsPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction, bool isSingleWay, out Point mainLineStart, out Point mainLineEnd)
@@ -666,11 +688,15 @@ namespace MUDMapBuilder
 			if (direction == MMBDirection.West || direction == MMBDirection.East)
 			{
 				// Set intersection flags and check if we intersect other ns connection
-				for (var x = Math.Min(sourceGridPos.X, targetGridPos.X);
+				int x;
+				for (x = Math.Min(sourceGridPos.X, targetGridPos.X);
 					x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
 				{
-					UpdateNsIntersects(new Point(x, sourceGridPos.Y), ref intersects);
+					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), true, true, ref intersects);
 				}
+
+				// Last cell intersect only left
+				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), true, false, ref intersects);
 
 				// Go either up or down
 				var pathRadius2 = Math.Max(sourceRoomRect.Height / 4, pathRadius);
@@ -696,11 +722,16 @@ namespace MUDMapBuilder
 			else
 			{
 				// Set intersection flags and check if we intersect other ns connection
-				for (var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
+				int y;
+				for (y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
 					y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
 				{
-					UpdateNsIntersects(new Point(sourceGridPos.X, y), ref intersects);
+					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), true, true, ref intersects);
 				}
+
+				// Last cell intersect only top
+				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), true, false, ref intersects);
+
 
 				// Go either left or right
 				var pathRadius2 = Math.Max(sourceRoomRect.Width / 8, pathRadius);
@@ -773,11 +804,18 @@ namespace MUDMapBuilder
 			if (direction == MMBDirection.West || direction == MMBDirection.East)
 			{
 				// Set intersection flags and check if we intersect other ns connection
-				for (var x = Math.Min(sourceGridPos.X, targetGridPos.X);
-					x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
+				var x = Math.Min(sourceGridPos.X, targetGridPos.X);
+
+				// First cell intersects only right
+				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), false, true, ref intersects);
+
+				for (;x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
 				{
-					UpdateNsIntersects(new Point(x, sourceGridPos.Y), ref intersects);
+					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), true, true, ref intersects);
 				}
+
+				// Last cell intersect only left
+				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), true, false, ref intersects);
 
 				// Go either up or down
 				if (intersects)
@@ -800,11 +838,18 @@ namespace MUDMapBuilder
 			else
 			{
 				// Set intersection flags and check if we intersect other ns connection
-				for (var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
-					y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
+				var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
+
+				// First cell intersect only bottom
+				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), false, true, ref intersects);
+
+				for (; y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
 				{
-					UpdateNsIntersects(new Point(sourceGridPos.X, y), ref intersects);
+					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), true, true, ref intersects);
 				}
+
+				// Last cell intersect only top
+				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), true, false, ref intersects);
 
 				// Go either left or right
 				if (intersects)

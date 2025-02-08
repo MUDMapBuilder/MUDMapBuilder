@@ -4,7 +4,6 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Numerics;
-using System.Text;
 
 namespace MUDMapBuilder
 {
@@ -17,20 +16,19 @@ namespace MUDMapBuilder
 			Obstacled
 		}
 
-		private struct ArrowInfo
+		private enum IntersectsType
 		{
-			public Vector2 Start;
-			public Vector2 End;
-			public SKColor Color;
-			public ConnectionType ConnectionType;
+			Start,
+			End,
+			Both
 		}
 
 		private struct NsCellInfo
 		{
-			public bool Left;
-			public bool Right;
-			public bool Top;
-			public bool Bottom;
+			public int Left;
+			public int Right;
+			public int Top;
+			public int Bottom;
 		}
 
 		private static readonly SKColor SelectedColor = SKColors.Green;
@@ -192,7 +190,6 @@ namespace MUDMapBuilder
 														imageHeight);
 
 				var doorsSigns = new List<Tuple<SKRect, MMBRoomConnection>>();
-				var arrows = new List<ArrowInfo>();
 				using (SKSurface surface = SKSurface.Create(imageInfo))
 				{
 					SKCanvas canvas = surface.Canvas;
@@ -449,14 +446,43 @@ namespace MUDMapBuilder
 
 								if (pair.Value.ConnectionType == MMBConnectionType.Forward)
 								{
-									var arrowInfo = new ArrowInfo
+									var oldWidth = paint.StrokeWidth;
+									var oldColor = paint.Color;
+									paint.StrokeWidth = 2;
+									
+									// Normalized direction
+									var v = lastEnd.ToVector2() - lastStart.ToVector2();
+									v = Vector2.Normalize(v);
+
+									// Make perpendecular to original
+									var vp = new Vector2(v.Y, -v.X);
+
+									// Draw single-way arrow
+									var skPath = new SKPath
 									{
-										Start = new Vector2(lastStart.X, lastStart.Y),
-										End = new Vector2(lastEnd.X, lastEnd.Y),
-										Color = paint.Color,
-										ConnectionType = ct
+										FillType = SKPathFillType.EvenOdd
 									};
-									arrows.Add(arrowInfo);
+
+									skPath.MoveTo(0, 0);
+									skPath.LineTo(ArrowRadius * vp.X, ArrowRadius * vp.Y);
+									skPath.LineTo(v.X * ArrowRadius, v.Y * ArrowRadius);
+									skPath.LineTo(-ArrowRadius * vp.X, -ArrowRadius * vp.Y);
+									skPath.LineTo(0, 0);
+									skPath.Close();
+
+									var arrowStart = lastEnd.ToVector2() - new Vector2(v.X * ArrowRadius, v.Y * ArrowRadius);
+
+									var tr = SKMatrix.CreateTranslation(arrowStart.X, arrowStart.Y);
+									skPath.Transform(tr);
+
+									paint.Style = SKPaintStyle.Fill;
+									paint.Color = BackgroundColor.ToSKColor();
+									canvas.DrawPath(skPath, paint);
+									paint.Color = oldColor;
+									paint.Style = SKPaintStyle.Stroke;
+									canvas.DrawPath(skPath, paint);
+
+									paint.StrokeWidth = oldWidth;
 								}
 
 								if (startWithDoor != null && endWithDoor != null)
@@ -549,44 +575,6 @@ namespace MUDMapBuilder
 						}
 					}
 
-					// Draw arrows
-					paint.StrokeWidth = 2;
-					foreach (var arrow in arrows)
-					{
-						// Normalized direction
-						var v = arrow.End - arrow.Start;
-						v = Vector2.Normalize(v);
-
-						// Make perpendecular to original
-						var vp = new Vector2(v.Y, -v.X);
-
-						// Draw single-way arrow
-						var skPath = new SKPath
-						{
-							FillType = SKPathFillType.EvenOdd
-						};
-
-						skPath.MoveTo(0, 0);
-						skPath.LineTo(ArrowRadius * vp.X, ArrowRadius * vp.Y);
-						skPath.LineTo(v.X * ArrowRadius, v.Y * ArrowRadius);
-						skPath.LineTo(-ArrowRadius * vp.X, -ArrowRadius * vp.Y);
-						skPath.LineTo(0, 0);
-						skPath.Close();
-
-
-						var arrowStart = arrow.End - new Vector2(v.X * ArrowRadius, v.Y * ArrowRadius);
-
-						var tr = SKMatrix.CreateTranslation(arrowStart.X, arrowStart.Y);
-						skPath.Transform(tr);
-
-						paint.Style = SKPaintStyle.Fill;
-						paint.Color = BackgroundColor.ToSKColor();
-						canvas.DrawPath(skPath, paint);
-						paint.Color = arrow.Color;
-						paint.Style = SKPaintStyle.Stroke;
-						canvas.DrawPath(skPath, paint);
-					}
-
 					// Draw door signs
 					paint.StrokeWidth = 1;
 					foreach (var doorSign in doorsSigns)
@@ -628,26 +616,70 @@ namespace MUDMapBuilder
 			return new MMBImageResult(imageBytes, roomInfos.ToArray());
 		}
 
-		private void UpdateNsIntersectsHorizontal(Point p, bool left, bool right, ref bool intersects)
+		private void UpdateNsIntersectsHorizontal(Point p, IntersectsType type, ref int intersects)
 		{
-			if ((_nsConnections[p.X, p.Y].Left && left) || (_nsConnections[p.X, p.Y].Right && right))
+			switch (type)
 			{
-				intersects = true;
+				case IntersectsType.Start:
+					intersects = Math.Max(intersects, _nsConnections[p.X, p.Y].Left);
+					++_nsConnections[p.X, p.Y].Left;
+					break;
+				case IntersectsType.End:
+					intersects = Math.Max(intersects, _nsConnections[p.X, p.Y].Right);
+					++_nsConnections[p.X, p.Y].Right;
+					break;
+				case IntersectsType.Both:
+					intersects = Math.Max(intersects, Math.Max(_nsConnections[p.X, p.Y].Left, _nsConnections[p.X, p.Y].Right));
+					++_nsConnections[p.X, p.Y].Left;
+					++_nsConnections[p.X, p.Y].Right;
+					break;
 			}
-
-			_nsConnections[p.X, p.Y].Left = left;
-			_nsConnections[p.X, p.Y].Right = right;
 		}
 
-		private void UpdateNsIntersectsVertical(Point p, bool top, bool bottom, ref bool intersects)
+		private void UpdateNsIntersectsVertical(Point p, IntersectsType type, ref int intersects)
 		{
-			if ((_nsConnections[p.X, p.Y].Top && top) || (_nsConnections[p.X, p.Y].Bottom && bottom))
+			switch (type)
 			{
-				intersects = true;
+				case IntersectsType.Start:
+					intersects = Math.Max(intersects, _nsConnections[p.X, p.Y].Top);
+					++_nsConnections[p.X, p.Y].Top;
+					break;
+				case IntersectsType.End:
+					intersects = Math.Max(intersects, _nsConnections[p.X, p.Y].Bottom);
+					++_nsConnections[p.X, p.Y].Bottom;
+					break;
+				case IntersectsType.Both:
+					intersects = Math.Max(intersects, Math.Max(_nsConnections[p.X, p.Y].Top, _nsConnections[p.X, p.Y].Bottom));
+					++_nsConnections[p.X, p.Y].Top;
+					++_nsConnections[p.X, p.Y].Bottom;
+					break;
+			}
+		}
+
+		private static Point GetClosestTargetPoint(Rectangle targetRoomRect, Point sourcePos, MMBDirection direction, bool isSingleWay)
+		{
+			Point result;
+			if (isSingleWay)
+			{
+				// Choose point that is closer
+				var p1 = GetConnectionPoint(targetRoomRect, direction);
+				var p2 = GetConnectionPoint(targetRoomRect, direction.GetOppositeDirection());
+
+				if (sourcePos.SquareDistance(p1) < sourcePos.SquareDistance(p2))
+				{
+					result = p1;
+				}
+				else
+				{
+					result = p2;
+				}
+			}
+			else
+			{
+				result = GetConnectionPoint(targetRoomRect, direction.GetOppositeDirection());
 			}
 
-			_nsConnections[p.X, p.Y].Top = top;
-			_nsConnections[p.X, p.Y].Bottom = bottom;
+			return result;
 		}
 
 		private List<Point> BuildNsPath(Point sourceGridPos, Point targetGridPos, MMBDirection direction, bool isSingleWay, out Point mainLineStart, out Point mainLineEnd)
@@ -656,7 +688,7 @@ namespace MUDMapBuilder
 			var sourcePos = GetConnectionPoint(sourceRoomRect, direction);
 
 			var targetRoomRect = GetRoomRect(targetGridPos);
-			var targetConnectionPos = GetConnectionPoint(targetRoomRect, direction.GetOppositeDirection());
+			var targetConnectionPos = GetClosestTargetPoint(targetRoomRect, sourcePos, direction, isSingleWay);
 
 			// Add source connection point
 			var result = new List<Point>
@@ -672,28 +704,36 @@ namespace MUDMapBuilder
 			sourcePos.Y += delta.Y * pathRadius;
 			result.Add(sourcePos);
 
-			var intersects = false;
+			var intersects = 0;
 
 			// Set intersection flags and check if we intersect other ns connection
 			var moveDelta = new Point();
 			if (direction == MMBDirection.West || direction == MMBDirection.East)
 			{
 				// Set intersection flags and check if we intersect other ns connection
-				for (var x = Math.Min(sourceGridPos.X, targetGridPos.X);
-					x <= Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
+				var x = Math.Min(sourceGridPos.X, targetGridPos.X);
+				for (; x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
 				{
-					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), true, true, ref intersects);
+					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Both, ref intersects);
 				}
 
-				// Go either up or down
-				var pathRadius2 = Math.Max(sourceRoomRect.Height / 4, pathRadius);
-				if (intersects)
+				if (!isSingleWay)
 				{
-					moveDelta.Y = -pathRadius2;
+					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Both, ref intersects);
 				}
 				else
 				{
-					moveDelta.Y = pathRadius2;
+					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Start, ref intersects);
+				}
+
+				++x;
+
+				// Go either up or down
+				moveDelta.Y = Math.Max(sourceRoomRect.Height / 4, pathRadius) * (intersects / 2 + 1);
+
+				if (intersects % 2 != 0)
+				{
+					moveDelta.Y = -moveDelta.Y;
 				}
 
 				sourcePos.Y += moveDelta.Y;
@@ -702,34 +742,43 @@ namespace MUDMapBuilder
 				mainLineStart = sourcePos;
 
 				var oppDelta = direction.GetOppositeDirection().GetDelta();
-
-				var dx = oppDelta.X * pathRadius;
-				if (isSingleWay)
+				if (!isSingleWay)
 				{
-					dx *= 2;
+					sourcePos = new Point(targetConnectionPos.X + oppDelta.X * pathRadius, sourcePos.Y);
 				}
-				sourcePos = new Point(targetConnectionPos.X + dx, sourcePos.Y);
+				else
+				{
+					sourcePos = new Point(targetConnectionPos.X, sourcePos.Y);
+				}
+
 				result.Add(sourcePos);
 				mainLineEnd = sourcePos;
 			}
 			else
 			{
 				// Set intersection flags and check if we intersect other ns connection
-				for (var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
-					y <= Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
+				var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
+				for (; y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
 				{
-					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), true, true, ref intersects);
+					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Both, ref intersects);
 				}
 
-				// Go either left or right
-				var pathRadius2 = Math.Max(sourceRoomRect.Width / 8, pathRadius);
-				if (intersects)
+				if (!isSingleWay)
 				{
-					moveDelta.X = -pathRadius2;
+					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Both, ref intersects);
 				}
 				else
 				{
-					moveDelta.X = pathRadius2;
+					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Start, ref intersects);
+				}
+
+				++y;
+
+				// Go either left or right
+				moveDelta.X = Math.Max(sourceRoomRect.Width / 8, pathRadius) * (intersects / 2 + 1);
+				if (intersects % 2 != 0)
+				{
+					moveDelta.X = -moveDelta.X;
 				}
 
 				sourcePos.X += moveDelta.X;
@@ -737,30 +786,20 @@ namespace MUDMapBuilder
 				mainLineStart = sourcePos;
 
 				var oppDelta = direction.GetOppositeDirection().GetDelta();
-
-				var dy = oppDelta.Y * pathRadius;
-				if (isSingleWay)
+				if (!isSingleWay)
 				{
-					dy *= 2;
+					sourcePos = new Point(sourcePos.X, targetConnectionPos.Y + oppDelta.Y * pathRadius);
 				}
-				sourcePos = new Point(sourcePos.X, targetConnectionPos.Y + dy);
+				else
+				{
+					sourcePos = new Point(sourcePos.X, targetConnectionPos.Y);
+				}
 
 				result.Add(sourcePos);
 				mainLineEnd = sourcePos;
 			}
 
-			if (isSingleWay)
-			{
-				// Continue moving that direction
-				sourcePos.X += moveDelta.X;
-				sourcePos.Y += moveDelta.Y;
-				result.Add(sourcePos);
-
-				sourcePos.X += delta.X * pathRadius * 2;
-				sourcePos.Y += delta.Y * pathRadius * 2;
-				result.Add(sourcePos);
-			}
-			else
+			if (!isSingleWay)
 			{
 				// Return
 				sourcePos.X -= moveDelta.X;
@@ -793,7 +832,7 @@ namespace MUDMapBuilder
 
 			var result = new List<Point>();
 
-			var intersects = false;
+			var intersects = 0;
 
 			// Set intersection flags and check if we intersect other ns connection
 			if (direction == MMBDirection.West || direction == MMBDirection.East)
@@ -802,26 +841,25 @@ namespace MUDMapBuilder
 				var x = Math.Min(sourceGridPos.X, targetGridPos.X);
 
 				// First cell intersects only right
-				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), false, true, ref intersects);
+				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.End, ref intersects);
 				++x;
 
 				for (; x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
 				{
-					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), true, true, ref intersects);
+					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Both, ref intersects);
 				}
 
 				// Last cell intersect only left
-				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), true, false, ref intersects);
+				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Start, ref intersects);
 
+				var delta = pathRadius * (intersects / 2 + 1);
+				if (intersects % 2 != 0)
+				{
+					delta = -delta;
+				}
+				
 				// Go either up or down
-				if (intersects)
-				{
-					sourcePos = new Point(sourcePos.X, sourcePos.Y - pathRadius);
-				}
-				else
-				{
-					sourcePos = new Point(sourcePos.X, sourcePos.Y + pathRadius);
-				}
+				sourcePos = new Point(sourcePos.X, sourcePos.Y+ delta);
 
 				result.Add(sourcePos);
 				mainLineStart = sourcePos;
@@ -837,26 +875,26 @@ namespace MUDMapBuilder
 				var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
 
 				// First cell intersect only bottom
-				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), false, true, ref intersects);
+				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.End, ref intersects);
 				++y;
 
 				for (; y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
 				{
-					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), true, true, ref intersects);
+					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Both, ref intersects);
 				}
 
 				// Last cell intersect only top
-				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), true, false, ref intersects);
+				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Start, ref intersects);
+
+				var delta = pathRadius * (intersects / 2 + 1);
+				if (intersects % 2 != 0)
+				{
+					delta = -delta;
+				}
+
 
 				// Go either left or right
-				if (intersects)
-				{
-					sourcePos = new Point(sourcePos.X - pathRadius, sourcePos.Y);
-				}
-				else
-				{
-					sourcePos = new Point(sourcePos.X + pathRadius, sourcePos.Y);
-				}
+				sourcePos = new Point(sourcePos.X + delta, sourcePos.Y);
 
 				result.Add(sourcePos);
 				mainLineStart = sourcePos;

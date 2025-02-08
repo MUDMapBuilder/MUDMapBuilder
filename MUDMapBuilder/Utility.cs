@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 using System;
 using System.Drawing;
+using System.Numerics;
 
 namespace MUDMapBuilder
 {
@@ -66,5 +67,15 @@ namespace MUDMapBuilder
 		public static SKColor ToSKColor(this Color color) => new SKColor(color.R, color.G, color.B, color.A);
 
 		public static Color ToColor(this SKColor color) => Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);
+
+		public static float SquareDistance(this Point p1, Point p2)
+		{
+			var dx = p1.X - p2.X;
+			var dy = p1.Y - p2.Y;
+
+			return dx * dx + dy * dy;
+		}
+
+		public static Vector2 ToVector2(this Point p) => new Vector2(p.X, p.Y);
 	}
 }

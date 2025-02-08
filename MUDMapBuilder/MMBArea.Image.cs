@@ -573,15 +573,8 @@ namespace MUDMapBuilder
 						skPath.LineTo(0, 0);
 						skPath.Close();
 
-						Vector2 arrowStart;
-						if (arrow.ConnectionType == ConnectionType.NonStraight)
-						{
-							arrowStart = arrow.End;
-						}
-						else
-						{
-							arrowStart = arrow.End - new Vector2(v.X * ArrowRadius, v.Y * ArrowRadius);
-						}
+
+						var arrowStart = arrow.End - new Vector2(v.X * ArrowRadius, v.Y * ArrowRadius);
 
 						var tr = SKMatrix.CreateTranslation(arrowStart.X, arrowStart.Y);
 						skPath.Transform(tr);
@@ -709,7 +702,13 @@ namespace MUDMapBuilder
 				mainLineStart = sourcePos;
 
 				var oppDelta = direction.GetOppositeDirection().GetDelta();
-				sourcePos = new Point(targetConnectionPos.X + oppDelta.X * pathRadius, sourcePos.Y);
+
+				var dx = oppDelta.X * pathRadius;
+				if (isSingleWay)
+				{
+					dx *= 2;
+				}
+				sourcePos = new Point(targetConnectionPos.X + dx, sourcePos.Y);
 				result.Add(sourcePos);
 				mainLineEnd = sourcePos;
 			}
@@ -738,7 +737,13 @@ namespace MUDMapBuilder
 				mainLineStart = sourcePos;
 
 				var oppDelta = direction.GetOppositeDirection().GetDelta();
-				sourcePos = new Point(sourcePos.X, targetConnectionPos.Y + oppDelta.Y * pathRadius);
+
+				var dy = oppDelta.Y * pathRadius;
+				if (isSingleWay)
+				{
+					dy *= 2;
+				}
+				sourcePos = new Point(sourcePos.X, targetConnectionPos.Y + dy);
 
 				result.Add(sourcePos);
 				mainLineEnd = sourcePos;
@@ -751,8 +756,8 @@ namespace MUDMapBuilder
 				sourcePos.Y += moveDelta.Y;
 				result.Add(sourcePos);
 
-				sourcePos.X += delta.X * pathRadius;
-				sourcePos.Y += delta.Y * pathRadius;
+				sourcePos.X += delta.X * pathRadius * 2;
+				sourcePos.Y += delta.Y * pathRadius * 2;
 				result.Add(sourcePos);
 			}
 			else

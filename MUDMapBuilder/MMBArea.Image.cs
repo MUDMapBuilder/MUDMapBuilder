@@ -23,6 +23,14 @@ namespace MUDMapBuilder
 			Both
 		}
 
+		private struct ArrowInfo
+		{
+			public Vector2 Start;
+			public Vector2 End;
+			public SKColor Color;
+			public ConnectionType ConnectionType;
+		}
+
 		private struct NsCellInfo
 		{
 			public int Left;
@@ -190,6 +198,7 @@ namespace MUDMapBuilder
 														imageHeight);
 
 				var doorsSigns = new List<Tuple<SKRect, MMBRoomConnection>>();
+				var arrows = new List<ArrowInfo>();
 				using (SKSurface surface = SKSurface.Create(imageInfo))
 				{
 					SKCanvas canvas = surface.Canvas;
@@ -446,43 +455,14 @@ namespace MUDMapBuilder
 
 								if (pair.Value.ConnectionType == MMBConnectionType.Forward)
 								{
-									var oldWidth = paint.StrokeWidth;
-									var oldColor = paint.Color;
-									paint.StrokeWidth = 2;
-									
-									// Normalized direction
-									var v = lastEnd.ToVector2() - lastStart.ToVector2();
-									v = Vector2.Normalize(v);
-
-									// Make perpendecular to original
-									var vp = new Vector2(v.Y, -v.X);
-
-									// Draw single-way arrow
-									var skPath = new SKPath
+									var arrowInfo = new ArrowInfo
 									{
-										FillType = SKPathFillType.EvenOdd
+										Start = new Vector2(lastStart.X, lastStart.Y),
+										End = new Vector2(lastEnd.X, lastEnd.Y),
+										Color = paint.Color,
+										ConnectionType = ct
 									};
-
-									skPath.MoveTo(0, 0);
-									skPath.LineTo(ArrowRadius * vp.X, ArrowRadius * vp.Y);
-									skPath.LineTo(v.X * ArrowRadius, v.Y * ArrowRadius);
-									skPath.LineTo(-ArrowRadius * vp.X, -ArrowRadius * vp.Y);
-									skPath.LineTo(0, 0);
-									skPath.Close();
-
-									var arrowStart = lastEnd.ToVector2() - new Vector2(v.X * ArrowRadius, v.Y * ArrowRadius);
-
-									var tr = SKMatrix.CreateTranslation(arrowStart.X, arrowStart.Y);
-									skPath.Transform(tr);
-
-									paint.Style = SKPaintStyle.Fill;
-									paint.Color = BackgroundColor.ToSKColor();
-									canvas.DrawPath(skPath, paint);
-									paint.Color = oldColor;
-									paint.Style = SKPaintStyle.Stroke;
-									canvas.DrawPath(skPath, paint);
-
-									paint.StrokeWidth = oldWidth;
+									arrows.Add(arrowInfo);
 								}
 
 								if (startWithDoor != null && endWithDoor != null)
@@ -574,6 +554,38 @@ namespace MUDMapBuilder
 							}
 						}
 					}
+
+					// Draw arrows
+					paint.StrokeWidth = 2;
+					foreach (var arrow in arrows)
+					{
+						// Normalized direction
+						var v = arrow.End - arrow.Start;
+						v = Vector2.Normalize(v);
+						// Make perpendecular to original
+						var vp = new Vector2(v.Y, -v.X);
+						// Draw single-way arrow
+						var skPath = new SKPath
+						{
+							FillType = SKPathFillType.EvenOdd
+						};
+						skPath.MoveTo(0, 0);
+						skPath.LineTo(ArrowRadius * vp.X, ArrowRadius * vp.Y);
+						skPath.LineTo(v.X * ArrowRadius, v.Y * ArrowRadius);
+						skPath.LineTo(-ArrowRadius * vp.X, -ArrowRadius * vp.Y);
+						skPath.LineTo(0, 0);
+						skPath.Close();
+						var arrowStart = arrow.End - new Vector2(v.X * ArrowRadius, v.Y * ArrowRadius);
+						var tr = SKMatrix.CreateTranslation(arrowStart.X, arrowStart.Y);
+						skPath.Transform(tr);
+						paint.Style = SKPaintStyle.Fill;
+						paint.Color = BackgroundColor.ToSKColor();
+						canvas.DrawPath(skPath, paint);
+						paint.Color = arrow.Color;
+						paint.Style = SKPaintStyle.Stroke;
+						canvas.DrawPath(skPath, paint);
+					}
+
 
 					// Draw door signs
 					paint.StrokeWidth = 1;

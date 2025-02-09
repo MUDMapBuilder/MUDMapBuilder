@@ -60,6 +60,10 @@ namespace MUDMapBuilder.Import
 			else if (mudName.Contains("ROM", StringComparison.OrdinalIgnoreCase))
 			{
 				sourceType = SourceType.ROM;
+			} else if (mudName.Equals("crimson2", StringComparison.OrdinalIgnoreCase))
+			{
+				sourceType = SourceType.Circle;
+				subSourceType = SubSourceType.Crimson;
 			}
 
 			if (sourceType != null)

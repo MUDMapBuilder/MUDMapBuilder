@@ -922,10 +922,38 @@ namespace MUDMapBuilder
 				}
 			}
 
-			// Determine deleted rooms
-			var movedRoomsList = new List<MeasurePushRoomMovement>();
+			// Determine whether moved rooms occupy similar cells and mark such rooms for deletion
+			var movedRoomsByPos = new Dictionary<int, int>();
 			var deletedRooms = new List<MMBRoom>();
 
+			var toDelete = new HashSet<int>();
+			foreach (var pair in movedRooms)
+			{
+				var room = GetRoomById(pair.Key);
+				var delta = pair.Value;
+
+				var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
+				var newPosKey = newPos.Y * 10000 + newPos.X;
+
+				if (movedRoomsByPos.ContainsKey(newPosKey))
+				{
+					// Already occupied
+					toDelete.Add(room.Id);
+				}
+				else
+				{
+					movedRoomsByPos[newPosKey] = pair.Key;
+				}
+			}
+
+			foreach(var d in toDelete)
+			{
+				movedRooms.Remove(d);
+				deletedRooms.Add(GetRoomById(d));
+			}
+
+			// Now build deletion list of non-moved rooms
+			var movedRoomsList = new List<MeasurePushRoomMovement>();
 			foreach (var pair in movedRooms)
 			{
 				var room = GetRoomById(pair.Key);

@@ -7,8 +7,6 @@ namespace MUDMapBuilder
 {
 	internal static class Utility
 	{
-		public static readonly Random Random = new Random();
-
 		public static Point GetDelta(this MMBDirection direction)
 		{
 			switch (direction)

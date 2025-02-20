@@ -814,7 +814,59 @@ namespace MUDMapBuilder
 			}
 		}
 
-		public MeasurePushRoomResult MeasurePushRoom(int firstRoomId, Point firstForceVector)
+		private static int CalculateMovedRoomKey(Point pos) => pos.Y * 10000 + pos.X;
+
+		private Dictionary<int, HashSet<int>> ToRoomsByPos(Dictionary<int, Point> movedRooms)
+		{
+			var movedRoomsByPos = new Dictionary<int, HashSet<int>>();
+			foreach (var pair in movedRooms)
+			{
+				var room = GetRoomById(pair.Key);
+				var pos = new Point(room.Position.Value.X + pair.Value.X, room.Position.Value.Y + pair.Value.Y);
+
+				HashSet<int> rooms;
+				var key = CalculateMovedRoomKey(pos);
+				if (!movedRoomsByPos.TryGetValue(key, out rooms))
+				{
+					rooms = new HashSet<int>();
+					movedRoomsByPos[key] = rooms;
+				}
+
+				rooms.Add(room.Id);
+			}
+
+			return movedRoomsByPos;
+		}
+
+		private static bool SetIfFree(bool firstRun, Dictionary<int, HashSet<int>> movedRoomByPos, MMBRoom targetRoom, ref Point forceVector, Func<Point, Point> setter)
+		{
+			var newForceVector = setter(forceVector);
+
+			if (firstRun)
+			{
+				forceVector = newForceVector;
+				return true;
+			}
+
+			var targetPos = targetRoom.Position.Value;
+			var newPos = new Point(targetPos.X + newForceVector.X, targetPos.Y + newForceVector.Y);
+			var newPosKey = CalculateMovedRoomKey(newPos);
+
+			var result = false;
+
+			HashSet<int> rooms;
+			if (movedRoomByPos.TryGetValue(newPosKey, out rooms) && rooms.Count > 1)
+			{
+			} else
+			{
+				forceVector = newForceVector;
+				result = true;
+			}
+
+			return result;
+		}
+
+		private Dictionary<int, Point> MeasurePushRoomRun(Dictionary<int, Point> firstRunMovedRooms, int firstRoomId, Point firstForceVector)
 		{
 			// Determine rooms movement
 			var movedRooms = new Dictionary<int, Point>
@@ -822,8 +874,15 @@ namespace MUDMapBuilder
 				[firstRoomId] = firstForceVector
 			};
 
-			var toProcess = new IdQueue(firstRoomId);
+			var firstRun = firstRunMovedRooms == null;
 
+			Dictionary<int, HashSet<int>> movedRoomsByPos = null;
+			if (firstRunMovedRooms != null)
+			{
+				movedRoomsByPos = ToRoomsByPos(firstRunMovedRooms);
+			}
+
+			var toProcess = new IdQueue(firstRoomId);
 			while (toProcess.Count > 0)
 			{
 				var id = toProcess.Pop();
@@ -855,7 +914,7 @@ namespace MUDMapBuilder
 							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
 							if (forceVector.Y > 0)
 							{
-								forceVector.Y = 0;
+								SetIfFree(firstRun, movedRoomsByPos, targetRoom, ref forceVector, f => new Point(f.X, 0));
 							}
 							break;
 
@@ -863,7 +922,7 @@ namespace MUDMapBuilder
 							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
 							if (forceVector.X < 0)
 							{
-								forceVector.X = 0;
+								SetIfFree(firstRun, movedRoomsByPos, targetRoom, ref forceVector, f => new Point(0, f.Y));
 							}
 							break;
 
@@ -871,7 +930,7 @@ namespace MUDMapBuilder
 							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
 							if (forceVector.Y < 0)
 							{
-								forceVector.Y = 0;
+								SetIfFree(firstRun, movedRoomsByPos, targetRoom, ref forceVector, f => new Point(f.X, 0));
 							}
 							break;
 
@@ -879,7 +938,7 @@ namespace MUDMapBuilder
 							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
 							if (forceVector.X > 0)
 							{
-								forceVector.X = 0;
+								SetIfFree(firstRun, movedRoomsByPos, targetRoom, ref forceVector, f => new Point(0, f.Y));
 							}
 							break;
 
@@ -922,27 +981,39 @@ namespace MUDMapBuilder
 				}
 			}
 
+			return movedRooms;
+		}
+
+		public MeasurePushRoomResult MeasurePushRoom(int firstRoomId, Point firstForceVector)
+		{
+			// First run: evaluation
+			var movedRooms = MeasurePushRoomRun(null, firstRoomId, firstForceVector);
+
+			// Second run: actual
+			movedRooms = MeasurePushRoomRun(movedRooms, firstRoomId, firstForceVector);
+			var movedRoomsByPos = ToRoomsByPos(movedRooms);
+
 			// Determine whether moved rooms occupy similar cells and mark such rooms for deletion
-			var movedRoomsByPos = new Dictionary<int, int>();
 			var deletedRooms = new List<MMBRoom>();
 
+			movedRoomsByPos.Clear();
 			var toDelete = new HashSet<int>();
-			foreach (var pair in movedRooms)
+			foreach (var pair in movedRoomsByPos)
 			{
-				var room = GetRoomById(pair.Key);
-				var delta = pair.Value;
-
-				var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
-				var newPosKey = newPos.Y * 10000 + newPos.X;
-
-				if (movedRoomsByPos.ContainsKey(newPosKey))
+				if (pair.Value.Count < 2)
 				{
-					// Already occupied
-					toDelete.Add(room.Id);
+					continue;
 				}
-				else
+
+				var isFirst = true;
+				foreach(var id in pair.Value)
 				{
-					movedRoomsByPos[newPosKey] = pair.Key;
+					if (!isFirst)
+					{
+						toDelete.Add(id);
+					}
+
+					isFirst = false;
 				}
 			}
 

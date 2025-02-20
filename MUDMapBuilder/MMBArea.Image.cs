@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Numerics;
+using System.Linq;
 
 namespace MUDMapBuilder
 {
@@ -31,12 +32,43 @@ namespace MUDMapBuilder
 			public ConnectionType ConnectionType;
 		}
 
-		private struct NsCellInfo
+		private class NsCellInfo
 		{
-			public int Left;
-			public int Right;
-			public int Top;
-			public int Bottom;
+			public readonly HashSet<int> Left = new HashSet<int>();
+			public readonly HashSet<int> Right = new HashSet<int>();
+			public readonly HashSet<int> Top = new HashSet<int>();
+			public readonly HashSet<int> Bottom = new HashSet<int>();
+		}
+
+		private class SlotGatherer
+		{
+			private readonly HashSet<HashSet<int>> _slots = new HashSet<HashSet<int>>();
+
+			public void AddSlots(HashSet<int> slots)
+			{
+				_slots.Add(slots);
+			}
+
+			public int CreateSlot()
+			{
+				var result = 0;
+				for(;result < 10; ++result)
+				{
+					var used = (from s in _slots where s.Contains(result) select s).FirstOrDefault();
+					if (used == null)
+					{
+						break;
+					}
+				}
+
+				// Add result to all slots
+				foreach(var s in _slots)
+				{
+					s.Add(result);
+				}
+
+				return result;
+			}
 		}
 
 		private static readonly SKColor SelectedColor = SKColors.Green;
@@ -82,6 +114,15 @@ namespace MUDMapBuilder
 			var height = mapRect.Height;
 
 			_nsConnections = new NsCellInfo[width, height];
+
+			for(var x = 0; x < width; ++x)
+			{
+				for(var y = 0; y < height; ++y)
+				{
+					_nsConnections[x, y] = new NsCellInfo();
+				}
+			}
+
 			using (SKPaint paint = new SKPaint())
 			{
 				paint.Color = SKColors.Black;
@@ -628,42 +669,36 @@ namespace MUDMapBuilder
 			return new MMBImageResult(imageBytes, roomInfos.ToArray());
 		}
 
-		private void UpdateNsIntersectsHorizontal(Point p, IntersectsType type, ref int intersects)
+		private void UpdateNsIntersectsHorizontal(Point p, IntersectsType type, SlotGatherer gatherer)
 		{
 			switch (type)
 			{
 				case IntersectsType.Start:
-					intersects = Math.Max(intersects, _nsConnections[p.X, p.Y].Left);
-					++_nsConnections[p.X, p.Y].Left;
+					gatherer.AddSlots(_nsConnections[p.X, p.Y].Left);
 					break;
 				case IntersectsType.End:
-					intersects = Math.Max(intersects, _nsConnections[p.X, p.Y].Right);
-					++_nsConnections[p.X, p.Y].Right;
+					gatherer.AddSlots(_nsConnections[p.X, p.Y].Right);
 					break;
 				case IntersectsType.Both:
-					intersects = Math.Max(intersects, Math.Max(_nsConnections[p.X, p.Y].Left, _nsConnections[p.X, p.Y].Right));
-					++_nsConnections[p.X, p.Y].Left;
-					++_nsConnections[p.X, p.Y].Right;
+					gatherer.AddSlots(_nsConnections[p.X, p.Y].Left);
+					gatherer.AddSlots(_nsConnections[p.X, p.Y].Right);
 					break;
 			}
 		}
 
-		private void UpdateNsIntersectsVertical(Point p, IntersectsType type, ref int intersects)
+		private void UpdateNsIntersectsVertical(Point p, IntersectsType type, SlotGatherer gatherer)
 		{
 			switch (type)
 			{
 				case IntersectsType.Start:
-					intersects = Math.Max(intersects, _nsConnections[p.X, p.Y].Top);
-					++_nsConnections[p.X, p.Y].Top;
+					gatherer.AddSlots(_nsConnections[p.X, p.Y].Top);
 					break;
 				case IntersectsType.End:
-					intersects = Math.Max(intersects, _nsConnections[p.X, p.Y].Bottom);
-					++_nsConnections[p.X, p.Y].Bottom;
+					gatherer.AddSlots(_nsConnections[p.X, p.Y].Bottom);
 					break;
 				case IntersectsType.Both:
-					intersects = Math.Max(intersects, Math.Max(_nsConnections[p.X, p.Y].Top, _nsConnections[p.X, p.Y].Bottom));
-					++_nsConnections[p.X, p.Y].Top;
-					++_nsConnections[p.X, p.Y].Bottom;
+					gatherer.AddSlots(_nsConnections[p.X, p.Y].Top);
+					gatherer.AddSlots(_nsConnections[p.X, p.Y].Bottom);
 					break;
 			}
 		}
@@ -716,7 +751,7 @@ namespace MUDMapBuilder
 			sourcePos.Y += delta.Y * pathRadius;
 			result.Add(sourcePos);
 
-			var intersects = 0;
+			var slotGatherer = new SlotGatherer();
 
 			// Set intersection flags and check if we intersect other ns connection
 			var moveDelta = new Point();
@@ -726,24 +761,25 @@ namespace MUDMapBuilder
 				var x = Math.Min(sourceGridPos.X, targetGridPos.X);
 				for (; x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
 				{
-					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Both, ref intersects);
+					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Both, slotGatherer);
 				}
 
 				if (!isSingleWay)
 				{
-					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Both, ref intersects);
+					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Both, slotGatherer);
 				}
 				else
 				{
-					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Start, ref intersects);
+					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Start, slotGatherer);
 				}
 
 				++x;
 
 				// Go either up or down
-				moveDelta.Y = Math.Max(sourceRoomRect.Height / 4, pathRadius) * (intersects / 2 + 1);
+				var slot = slotGatherer.CreateSlot();
+				moveDelta.Y = Math.Max(sourceRoomRect.Height / 4, pathRadius) * (slot / 2 + 1);
 
-				if (intersects % 2 != 0)
+				if (slot % 2 != 0)
 				{
 					moveDelta.Y = -moveDelta.Y;
 				}
@@ -772,23 +808,24 @@ namespace MUDMapBuilder
 				var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
 				for (; y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
 				{
-					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Both, ref intersects);
+					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Both, slotGatherer);
 				}
 
 				if (!isSingleWay)
 				{
-					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Both, ref intersects);
+					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Both, slotGatherer);
 				}
 				else
 				{
-					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Start, ref intersects);
+					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Start, slotGatherer);
 				}
 
 				++y;
 
 				// Go either left or right
-				moveDelta.X = Math.Max(sourceRoomRect.Width / 8, pathRadius) * (intersects / 2 + 1);
-				if (intersects % 2 != 0)
+				var slot = slotGatherer.CreateSlot();
+				moveDelta.X = Math.Max(sourceRoomRect.Width / 8, pathRadius) * (slot / 2 + 1);
+				if (slot % 2 != 0)
 				{
 					moveDelta.X = -moveDelta.X;
 				}
@@ -844,7 +881,7 @@ namespace MUDMapBuilder
 
 			var result = new List<Point>();
 
-			var intersects = 0;
+			var slotGatherer = new SlotGatherer();
 
 			// Set intersection flags and check if we intersect other ns connection
 			if (direction == MMBDirection.West || direction == MMBDirection.East)
@@ -853,19 +890,20 @@ namespace MUDMapBuilder
 				var x = Math.Min(sourceGridPos.X, targetGridPos.X);
 
 				// First cell intersects only right
-				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.End, ref intersects);
+				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.End, slotGatherer);
 				++x;
 
 				for (; x < Math.Max(sourceGridPos.X, targetGridPos.X); ++x)
 				{
-					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Both, ref intersects);
+					UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Both, slotGatherer);
 				}
 
 				// Last cell intersect only left
-				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Start, ref intersects);
+				UpdateNsIntersectsHorizontal(new Point(x, sourceGridPos.Y), IntersectsType.Start, slotGatherer);
 
-				var delta = pathRadius * (intersects / 2 + 1);
-				if (intersects % 2 != 0)
+				var slot = slotGatherer.CreateSlot();
+				var delta = pathRadius * (slot / 2 + 1);
+				if (slot % 2 != 0)
 				{
 					delta = -delta;
 				}
@@ -887,19 +925,20 @@ namespace MUDMapBuilder
 				var y = Math.Min(sourceGridPos.Y, targetGridPos.Y);
 
 				// First cell intersect only bottom
-				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.End, ref intersects);
+				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.End, slotGatherer);
 				++y;
 
 				for (; y < Math.Max(sourceGridPos.Y, targetGridPos.Y); ++y)
 				{
-					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Both, ref intersects);
+					UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Both, slotGatherer);
 				}
 
 				// Last cell intersect only top
-				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Start, ref intersects);
+				UpdateNsIntersectsVertical(new Point(sourceGridPos.X, y), IntersectsType.Start, slotGatherer);
 
-				var delta = pathRadius * (intersects / 2 + 1);
-				if (intersects % 2 != 0)
+				var slot = slotGatherer.CreateSlot();
+				var delta = pathRadius * (slot / 2 + 1);
+				if (slot % 2 != 0)
 				{
 					delta = -delta;
 				}

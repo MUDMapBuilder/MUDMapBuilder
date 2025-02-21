@@ -48,6 +48,8 @@ namespace MUDMapBuilder
 		public bool WasAdded(int id) => _toProcessSet.Contains(id);
 		public bool WasProcessed(int id) => _processed.Contains(id);
 
+		public bool Contains(int id) => WasAdded(id) || WasProcessed(id);
+
 		public int Pop()
 		{
 			var id = _toProcess[0];

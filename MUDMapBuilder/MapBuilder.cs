@@ -170,36 +170,6 @@ namespace MUDMapBuilder
 
 				rooms.FixPlacementOfSingleExitRooms();
 
-				// Delete rooms occupying same spot
-				var toDelete = new List<MMBRoom>();
-				var roomsByPos = rooms.ToRoomsByPos();
-				foreach(var r in roomsByPos)
-				{
-					if (r.Count < 2)
-					{
-						continue;
-					}
-
-					var isFirst = true;
-					foreach(var r2 in r)
-					{
-						if (!isFirst)
-						{
-							toDelete.Add(r2);
-						}
-
-						isFirst = false;
-					}
-				}
-
-				if (toDelete.Count > 0)
-				{
-					if (!RemoveRooms(toDelete.ToArray(), false))
-					{
-						return false;
-					}
-				}
-
 				if (!AddRunStep())
 				{
 					return false;
@@ -1063,7 +1033,6 @@ namespace MUDMapBuilder
 			};
 
 			var result = mapBuilder.Process();
-
 			if (result != null && result.ResultType == ResultType.Success)
 			{
 				log?.Invoke($"Success for area '{project.Area.Name}' with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersections={fixIntersections}");

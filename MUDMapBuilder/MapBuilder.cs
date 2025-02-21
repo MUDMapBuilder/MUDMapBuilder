@@ -205,7 +205,19 @@ namespace MUDMapBuilder
 			var targetRoom = rooms.GetRoomById(targetRoomId);
 			var sourcePos = sourceRoom.Position.Value;
 			var targetPos = targetRoom.Position.Value;
-			var desiredPos = CalculateDesiredPosition(sourcePos, targetPos, direction);
+
+			Point desiredPos;
+
+			if (pushNeighbors)
+			{
+				desiredPos = CalculateDesiredPosition(sourcePos, targetPos, direction);
+			}
+			else
+			{
+				// If moving without neighbor than try to place it right next to the sourcePos
+				var d = direction.GetDelta();
+				desiredPos = new Point(sourcePos.X + d.X, sourcePos.Y + d.Y);
+			}
 
 			var delta = new Point(desiredPos.X - targetPos.X, desiredPos.Y - targetPos.Y);
 
@@ -1055,6 +1067,38 @@ namespace MUDMapBuilder
 				log?.Invoke($"Error: {result.ResultType} for area '{project.Area.Name}' with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersections={fixIntersections}");
 			}
 
+			var d = new Dictionary<int, List<MMBRoom>>();
+			foreach (var r in result.Last.Rooms)
+			{
+				if (r.Position == null)
+				{
+					continue;
+				}
+
+				var pos = r.Position.Value;
+
+				var key = pos.Y * 1000 + pos.X;
+
+				List<MMBRoom> rooms;
+				if (!d.TryGetValue(key, out rooms))
+				{
+					rooms = new List<MMBRoom>();
+					d[key] = rooms;
+				}
+
+				rooms.Add(r);
+			}
+
+			foreach(var pair in d)
+			{
+				if (pair.Value.Count <= 1)
+				{
+					continue;
+				}
+
+				log?.Invoke($"Warning: {pair.Value.Count} overlapping rooms at position {pair.Value[0].Position.Value}");
+			}
+
 			return result;
 		}
 
@@ -1077,16 +1121,34 @@ namespace MUDMapBuilder
 				return null;
 			}
 
-			// #2
 			if (buildResult.ResultType != ResultType.Success)
 			{
-				buildResult = InternalSingleRun(clone, log, true, true, false);
-			}
+				// Do both runs without intersections and obstacles fixes
+				// #2
+				var br1 = InternalSingleRun(clone, log, true, true, false);
 
-			// #3
-			if (buildResult.ResultType != ResultType.Success)
-			{
-				buildResult = InternalSingleRun(clone, log, false, true, true);
+				// #3
+				var br2 = InternalSingleRun(clone, log, false, true, true);
+
+				if (br1.ResultType == ResultType.Success && br2.ResultType != ResultType.Success)
+				{
+					buildResult = br1;
+				} else if (br1.ResultType != ResultType.Success && br2.ResultType == ResultType.Success)
+				{
+					buildResult = br2;
+				} else if (br1.ResultType == ResultType.Success && br2.ResultType == ResultType.Success)
+				{
+					var last1 = br1.Last;
+					var last2 = br2.Last;
+
+					if (last1.BrokenConnections.NonStraight.Count < last2.BrokenConnections.NonStraight.Count)
+					{
+						buildResult = br1;
+					} else
+					{
+						buildResult = br2;
+					}
+				}
 			}
 
 			// #4

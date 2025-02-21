@@ -134,7 +134,7 @@ namespace MUDMapBuilder
 
 			if (!measureRun)
 			{
-				Log($"Push room {Area.GetRoomById(firstRoomId)} to {firstForceVector}");
+				Log($"Push room {rooms.GetRoomById(firstRoomId)} to {firstForceVector}");
 				if (measure.DeletedRooms.Length > 0)
 				{
 					if (!RemoveRooms(measure.DeletedRooms, false))
@@ -168,11 +168,11 @@ namespace MUDMapBuilder
 					room.Position = newPos;
 				}
 
-				Area.FixPlacementOfSingleExitRooms();
+				rooms.FixPlacementOfSingleExitRooms();
 
 				// Delete rooms occupying same spot
 				var toDelete = new List<MMBRoom>();
-				var roomsByPos = Area.ToRoomsByPos();
+				var roomsByPos = rooms.ToRoomsByPos();
 				foreach(var r in roomsByPos)
 				{
 					if (r.Count < 2)

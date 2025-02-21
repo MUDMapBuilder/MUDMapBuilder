@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace MUDMapBuilder
+﻿namespace MUDMapBuilder
 {
 	public class BuildOptions
 	{

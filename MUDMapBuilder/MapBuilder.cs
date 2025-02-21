@@ -126,9 +126,9 @@ namespace MUDMapBuilder
 		private bool AddRunStep() => InternalAddRunStep(Options.MaxSteps ?? 1000);
 		private bool AddCompactRunStep() => InternalAddRunStep(Options.MaxCompactSteps ?? 10000);
 
-		private bool PushRoom(MMBArea rooms, int firstRoomId, Point firstForceVector, bool measureRun, out int roomsRemoved)
+		private bool PushRoom(MMBArea rooms, int firstRoomId, Point firstForceVector, bool measureRun, bool pushNeighbors, out int roomsRemoved)
 		{
-			var measure = rooms.MeasurePushRoom(firstRoomId, firstForceVector);
+			var measure = rooms.MeasurePushRoom(firstRoomId, firstForceVector, pushNeighbors);
 
 			roomsRemoved = measure.DeletedRooms.Length;
 
@@ -197,7 +197,7 @@ namespace MUDMapBuilder
 			return true;
 		}
 
-		private StraightenConnectionResult TryStraightenConnection(int sourceRoomId, int targetRoomId, MMBDirection direction)
+		private StraightenConnectionResult TryStraightenConnection(int sourceRoomId, int targetRoomId, MMBDirection direction, bool pushNeighbors)
 		{
 			var rooms = Area.Clone();
 
@@ -206,10 +206,11 @@ namespace MUDMapBuilder
 			var sourcePos = sourceRoom.Position.Value;
 			var targetPos = targetRoom.Position.Value;
 			var desiredPos = CalculateDesiredPosition(sourcePos, targetPos, direction);
+
 			var delta = new Point(desiredPos.X - targetPos.X, desiredPos.Y - targetPos.Y);
 
 			int roomsRemoved;
-			PushRoom(rooms, targetRoomId, delta, true, out roomsRemoved);
+			PushRoom(rooms, targetRoomId, delta, true, pushNeighbors, out roomsRemoved);
 
 			var vc = rooms.BrokenConnections;
 			return new StraightenConnectionResult(rooms, delta, roomsRemoved, vc);
@@ -295,12 +296,12 @@ namespace MUDMapBuilder
 			return false;
 		}
 
-		private StraightenRoomResult StraightenConnection(MMBRoom room1, MMBRoom room2, MMBDirection direction)
+		private StraightenRoomResult StraightenConnection(MMBRoom room1, MMBRoom room2, MMBDirection direction, bool pushNeighbors)
 		{
 			// Try to move room2
 			var vc = Area.BrokenConnections;
-			var result1 = TryStraightenConnection(room1.Id, room2.Id, direction);
-			var result2 = TryStraightenConnection(room2.Id, room1.Id, direction.GetOppositeDirection());
+			var result1 = TryStraightenConnection(room1.Id, room2.Id, direction, pushNeighbors);
+			var result2 = TryStraightenConnection(room2.Id, room1.Id, direction.GetOppositeDirection(), pushNeighbors);
 
 			var vc1 = result1.BrokenConnections;
 			var vc2 = result2.BrokenConnections;
@@ -372,7 +373,7 @@ namespace MUDMapBuilder
 			if (moveSecond.Value)
 			{
 				// Move room2
-				if (!PushRoom(Area, room2.Id, result1.Delta, false, out roomsRemoved))
+				if (!PushRoom(Area, room2.Id, result1.Delta, false, pushNeighbors, out roomsRemoved))
 				{
 					return StraightenRoomResult.OutOfSteps;
 				}
@@ -381,7 +382,7 @@ namespace MUDMapBuilder
 			}
 
 			// Move room1
-			if (!PushRoom(Area, room1.Id, result2.Delta, false, out roomsRemoved))
+			if (!PushRoom(Area, room1.Id, result2.Delta, false, pushNeighbors, out roomsRemoved))
 			{
 				return StraightenRoomResult.OutOfSteps;
 			}
@@ -600,8 +601,17 @@ namespace MUDMapBuilder
 				// Try to straighten it
 				var room1 = Area.GetRoomById(ns.SourceRoomId);
 				var room2 = Area.GetRoomById(ns.TargetRoomId);
-				var srr = StraightenConnection(room1, room2, ns.Direction);
 
+				// Firstly try with neighbors
+				var srr = StraightenConnection(room1, room2, ns.Direction, true);
+				if (srr == StraightenRoomResult.Success)
+				{
+					fixes = true;
+					break;
+				}
+
+				// Now without neighbors
+				srr = StraightenConnection(room1, room2, ns.Direction, false);
 				if (srr == StraightenRoomResult.Success)
 				{
 					fixes = true;
@@ -1036,7 +1046,8 @@ namespace MUDMapBuilder
 			if (result != null && result.ResultType == ResultType.Success)
 			{
 				log?.Invoke($"Success for area '{project.Area.Name}' with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersections={fixIntersections}");
-			} else if (result != null)
+			}
+			else if (result != null)
 			{
 				log?.Invoke($"Error: {result.ResultType} for area '{project.Area.Name}' with options fixObstacles={fixObstacles}, fixNonStraight={fixNonStraight}, fixIntersections={fixIntersections}");
 			}

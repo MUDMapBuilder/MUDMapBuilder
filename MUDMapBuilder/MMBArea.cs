@@ -816,71 +816,39 @@ namespace MUDMapBuilder
 
 		private static int CalculateMovedRoomKey(Point pos) => pos.Y * 10000 + pos.X;
 
-		private Dictionary<int, HashSet<int>> ToRoomsByPos(Dictionary<int, Point> movedRooms)
+		public List<List<MMBRoom>> ToRoomsByPos()
 		{
-			var movedRoomsByPos = new Dictionary<int, HashSet<int>>();
-			foreach (var pair in movedRooms)
+			var movedRoomsByPos = new Dictionary<int, List<MMBRoom>>();
+			foreach (var room in Rooms)
 			{
-				var room = GetRoomById(pair.Key);
-				var pos = new Point(room.Position.Value.X + pair.Value.X, room.Position.Value.Y + pair.Value.Y);
+				if (room.Position == null)
+				{
+					continue;
+				}
 
-				HashSet<int> rooms;
+				var pos = room.Position.Value;
+
+				List<MMBRoom> rooms;
 				var key = CalculateMovedRoomKey(pos);
 				if (!movedRoomsByPos.TryGetValue(key, out rooms))
 				{
-					rooms = new HashSet<int>();
+					rooms = new List<MMBRoom>();
 					movedRoomsByPos[key] = rooms;
 				}
 
-				rooms.Add(room.Id);
+				rooms.Add(room);
 			}
 
-			return movedRoomsByPos;
+			return movedRoomsByPos.Values.ToList();
 		}
 
-		private static bool SetIfFree(bool firstRun, Dictionary<int, HashSet<int>> movedRoomByPos, MMBRoom targetRoom, ref Point forceVector, Func<Point, Point> setter)
-		{
-			var newForceVector = setter(forceVector);
-
-			if (firstRun)
-			{
-				forceVector = newForceVector;
-				return true;
-			}
-
-			var targetPos = targetRoom.Position.Value;
-			var newPos = new Point(targetPos.X + newForceVector.X, targetPos.Y + newForceVector.Y);
-			var newPosKey = CalculateMovedRoomKey(newPos);
-
-			var result = false;
-
-			HashSet<int> rooms;
-			if (movedRoomByPos.TryGetValue(newPosKey, out rooms) && rooms.Count > 1)
-			{
-			} else
-			{
-				forceVector = newForceVector;
-				result = true;
-			}
-
-			return result;
-		}
-
-		private Dictionary<int, Point> MeasurePushRoomRun(Dictionary<int, Point> firstRunMovedRooms, int firstRoomId, Point firstForceVector)
+		public MeasurePushRoomResult MeasurePushRoom(int firstRoomId, Point firstForceVector)
 		{
 			// Determine rooms movement
 			var movedRooms = new Dictionary<int, Point>
 			{
 				[firstRoomId] = firstForceVector
 			};
-
-			var firstRun = firstRunMovedRooms == null;
-
-			Dictionary<int, HashSet<int>> movedRoomsByPos = null;
-			if (firstRunMovedRooms != null)
-			{
-				movedRoomsByPos = ToRoomsByPos(firstRunMovedRooms);
-			}
 
 			var toProcess = new IdQueue(firstRoomId);
 			while (toProcess.Count > 0)
@@ -890,6 +858,7 @@ namespace MUDMapBuilder
 				var pos = room.Position.Value;
 
 				// Process neighbour rooms
+				var forcesToIds = new List<Tuple<int, int>>();
 				foreach (var pair in room.Connections)
 				{
 					var exitDir = pair.Key;
@@ -914,7 +883,7 @@ namespace MUDMapBuilder
 							forceVector.Y += Math.Abs(targetPos.Y - pos.Y) - 1;
 							if (forceVector.Y > 0)
 							{
-								SetIfFree(firstRun, movedRoomsByPos, targetRoom, ref forceVector, f => new Point(f.X, 0));
+								forceVector.Y = 0;
 							}
 							break;
 
@@ -922,7 +891,7 @@ namespace MUDMapBuilder
 							forceVector.X -= Math.Abs(targetPos.X - pos.X) - 1;
 							if (forceVector.X < 0)
 							{
-								SetIfFree(firstRun, movedRoomsByPos, targetRoom, ref forceVector, f => new Point(0, f.Y));
+								forceVector.X = 0;
 							}
 							break;
 
@@ -930,7 +899,7 @@ namespace MUDMapBuilder
 							forceVector.Y -= Math.Abs(targetPos.Y - pos.Y) - 1;
 							if (forceVector.Y < 0)
 							{
-								SetIfFree(firstRun, movedRoomsByPos, targetRoom, ref forceVector, f => new Point(f.X, 0));
+								forceVector.Y = 0;
 							}
 							break;
 
@@ -938,7 +907,7 @@ namespace MUDMapBuilder
 							forceVector.X += Math.Abs(targetPos.X - pos.X) - 1;
 							if (forceVector.X > 0)
 							{
-								SetIfFree(firstRun, movedRoomsByPos, targetRoom, ref forceVector, f => new Point(0, f.Y));
+								forceVector.X = 0;
 							}
 							break;
 
@@ -976,70 +945,37 @@ namespace MUDMapBuilder
 					if (forceVector.X != 0 || forceVector.Y != 0)
 					{
 						movedRooms[targetRoom.Id] = forceVector;
-						toProcess.Add(targetRoom.Id);
+
+						forcesToIds.Add(new Tuple<int, int>(forceVector.SquareSize(), targetRoom.Id));
 					}
 				}
-			}
 
-			return movedRooms;
-		}
-
-		public MeasurePushRoomResult MeasurePushRoom(int firstRoomId, Point firstForceVector)
-		{
-			// First run: evaluation
-			var movedRooms = MeasurePushRoomRun(null, firstRoomId, firstForceVector);
-
-			// Second run: actual
-			movedRooms = MeasurePushRoomRun(movedRooms, firstRoomId, firstForceVector);
-			var movedRoomsByPos = ToRoomsByPos(movedRooms);
-
-			// Determine whether moved rooms occupy similar cells and mark such rooms for deletion
-			var deletedRooms = new List<MMBRoom>();
-
-			movedRoomsByPos.Clear();
-			var toDelete = new HashSet<int>();
-			foreach (var pair in movedRoomsByPos)
-			{
-				if (pair.Value.Count < 2)
+				// Add neighbours to queue according their forces - with bigger forces first
+				var ordered = (from f in forcesToIds orderby f.Item1 descending select f.Item2).ToList();
+				foreach (var i in ordered)
 				{
-					continue;
+					toProcess.Add(i);
 				}
-
-				var isFirst = true;
-				foreach(var id in pair.Value)
-				{
-					if (!isFirst)
-					{
-						toDelete.Add(id);
-					}
-
-					isFirst = false;
-				}
-			}
-
-			foreach(var d in toDelete)
-			{
-				movedRooms.Remove(d);
-				deletedRooms.Add(GetRoomById(d));
 			}
 
 			// Now build deletion list of non-moved rooms
-			var movedRoomsList = new List<MeasurePushRoomMovement>();
+			var deletedRooms = new HashSet<int>();
 			foreach (var pair in movedRooms)
 			{
 				var room = GetRoomById(pair.Key);
 				var delta = pair.Value;
 
-				movedRoomsList.Add(new MeasurePushRoomMovement(room, delta));
 				var newPos = new Point(room.Position.Value.X + delta.X, room.Position.Value.Y + delta.Y);
 				var existingRoom = GetRoomByPosition(newPos);
 				if (existingRoom != null && !movedRooms.ContainsKey(existingRoom.Id))
 				{
-					deletedRooms.Add(existingRoom);
+					deletedRooms.Add(existingRoom.Id);
 				}
 			}
 
-			return new MeasurePushRoomResult(movedRoomsList.ToArray(), deletedRooms.ToArray());
+			return new MeasurePushRoomResult(
+				(from pair in movedRooms select new MeasurePushRoomMovement(GetRoomById(pair.Key), pair.Value)).ToArray(),
+				(from d in deletedRooms select GetRoomById(d)).ToArray());
 		}
 
 		private void MeasureCompactPushAddConnectionNeighbours(MMBDirection pushDirection, MMBRoom sourceRoom, MMBRoom targetRoom, MMBDirection exitDir, IdQueue processor)

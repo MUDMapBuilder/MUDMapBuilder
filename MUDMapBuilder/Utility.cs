@@ -75,5 +75,6 @@ namespace MUDMapBuilder
 		}
 
 		public static Vector2 ToVector2(this Point p) => new Vector2(p.X, p.Y);
+		public static int SquareSize(this Point p) => p.X * p.X + p.Y * p.Y;
 	}
 }

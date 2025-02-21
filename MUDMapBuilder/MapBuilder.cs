@@ -610,12 +610,15 @@ namespace MUDMapBuilder
 					break;
 				}
 
-				// Now without neighbors
-				srr = StraightenConnection(room1, room2, ns.Direction, false);
-				if (srr == StraightenRoomResult.Success)
+				if (srr == StraightenRoomResult.Fail)
 				{
-					fixes = true;
-					break;
+					// Now without neighbors
+					srr = StraightenConnection(room1, room2, ns.Direction, false);
+					if (srr == StraightenRoomResult.Success)
+					{
+						fixes = true;
+						break;
+					}
 				}
 
 				switch (srr)

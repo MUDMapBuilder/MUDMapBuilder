@@ -841,182 +841,175 @@ namespace MUDMapBuilder
 
 				rooms.Add(new Tuple<MMBRoom, Point>(room, pos));
 			}
-	
+
 			return movedRoomsByPos.Values.ToList();
 		}
 
-		public MeasurePushRoomResult MeasurePushRoom(int firstRoomId, Point forceVector, bool pushNeighbors)
+		public MeasurePushRoomResult MeasurePushRoom(int firstRoomId, Point forceVector)
 		{
 			// Determine rooms movement
 			var movedRooms = new Dictionary<int, Point>();
 
-			if (pushNeighbors)
+			// Horizontal movement
+			for (var x = 0; x < Math.Abs(forceVector.X); ++x)
 			{
-				// Horizontal movement
-				for (var x = 0; x < Math.Abs(forceVector.X); ++x)
+				var toProcess = new IdQueue(firstRoomId);
+				while (toProcess.Count > 0)
 				{
-					var toProcess = new IdQueue(firstRoomId);
-					while (toProcess.Count > 0)
+					var id = toProcess.Pop();
+					Point sourceForce;
+					if (!movedRooms.TryGetValue(id, out sourceForce))
 					{
-						var id = toProcess.Pop();
-						Point sourceForce;
-						if (!movedRooms.TryGetValue(id, out sourceForce))
-						{
-							sourceForce = new Point();
-						}
-
-						var delta = Math.Sign(forceVector.X);
-
-						var room = GetRoomById(id);
-						var pos = room.Position.Value;
-						pos.X += sourceForce.X;
-						pos.Y += sourceForce.Y;
-
-						// Process neighbour rooms
-						foreach (var pair in room.Connections)
-						{
-							var exitDir = pair.Key;
-
-							var targetRoom = GetRoomById(pair.Value.RoomId);
-							if (targetRoom.Position == null || toProcess.Contains(targetRoom.Id))
-							{
-								continue;
-							}
-
-							// Skip broken connections
-							var targetPos = targetRoom.Position.Value;
-							Point targetForce;
-							if (movedRooms.TryGetValue(targetRoom.Id, out targetForce))
-							{
-								targetPos.X += targetForce.X;
-								targetPos.Y += targetForce.Y;
-							}
-							
-							if (!IsConnectionStraight(pos, targetPos, exitDir))
-							{
-								continue;
-							}
-
-							// Skip horizontal connection to the opposite direction
-							// Or horizontal connection to the same direction longer than 1
-							var dist = Math.Abs(targetPos.X - pos.X);
-							if (delta == 1)
-							{
-								if (exitDir == MMBDirection.West || exitDir == MMBDirection.Down)
-								{
-									continue;
-								}
-
-								if ((exitDir == MMBDirection.East || exitDir == MMBDirection.Up) && dist > 1)
-								{
-									continue;
-								}
-							}
-							else
-							{
-								if (exitDir == MMBDirection.East || exitDir == MMBDirection.Up)
-								{
-									continue;
-								}
-
-								if ((exitDir == MMBDirection.West || exitDir == MMBDirection.Down) && dist > 1)
-								{
-									continue;
-								}
-							}
-
-							toProcess.Add(targetRoom.Id);
-						}
-
-						// Finally move the room
-						sourceForce.X += delta;
-						movedRooms[id] = sourceForce;
+						sourceForce = new Point();
 					}
-				}
 
-				// Vertical movement
-				for (var y = 0; y < Math.Abs(forceVector.Y); ++y)
-				{
-					var toProcess = new IdQueue(firstRoomId);
-					while (toProcess.Count > 0)
+					var delta = Math.Sign(forceVector.X);
+
+					var room = GetRoomById(id);
+					var pos = room.Position.Value;
+					pos.X += sourceForce.X;
+					pos.Y += sourceForce.Y;
+
+					// Process neighbour rooms
+					foreach (var pair in room.Connections)
 					{
-						var id = toProcess.Pop();
-						Point sourceForce;
-						if (!movedRooms.TryGetValue(id, out sourceForce))
+						var exitDir = pair.Key;
+
+						var targetRoom = GetRoomById(pair.Value.RoomId);
+						if (targetRoom.Position == null || toProcess.Contains(targetRoom.Id))
 						{
-							sourceForce = new Point();
+							continue;
 						}
 
-						var delta = Math.Sign(forceVector.Y);
-
-						var room = GetRoomById(id);
-						var pos = room.Position.Value;
-						pos.X += sourceForce.X;
-						pos.Y += sourceForce.Y;
-
-						// Process neighbour rooms
-						foreach (var pair in room.Connections)
+						// Skip broken connections
+						var targetPos = targetRoom.Position.Value;
+						Point targetForce;
+						if (movedRooms.TryGetValue(targetRoom.Id, out targetForce))
 						{
-							var exitDir = pair.Key;
+							targetPos.X += targetForce.X;
+							targetPos.Y += targetForce.Y;
+						}
 
-							var targetRoom = GetRoomById(pair.Value.RoomId);
-							if (targetRoom.Position == null || toProcess.Contains(targetRoom.Id))
+						if (!IsConnectionStraight(pos, targetPos, exitDir))
+						{
+							continue;
+						}
+
+						// Skip horizontal connection to the opposite direction
+						// Or horizontal connection to the same direction longer than 1
+						var dist = Math.Abs(targetPos.X - pos.X);
+						if (delta == 1)
+						{
+							if (exitDir == MMBDirection.West || exitDir == MMBDirection.Down)
 							{
 								continue;
 							}
 
-							// Skip broken connections
-							var targetPos = targetRoom.Position.Value;
-							Point targetForce;
-							if (movedRooms.TryGetValue(targetRoom.Id, out targetForce))
+							if ((exitDir == MMBDirection.East || exitDir == MMBDirection.Up) && dist > 1)
 							{
-								targetPos.X += targetForce.X;
-								targetPos.Y += targetForce.Y;
+								continue;
 							}
-
-							if (!IsConnectionStraight(pos, targetPos, exitDir))
+						}
+						else
+						{
+							if (exitDir == MMBDirection.East || exitDir == MMBDirection.Up)
 							{
 								continue;
 							}
 
-							var dist = Math.Abs(targetPos.Y - pos.Y);
-							if (delta == 1)
+							if ((exitDir == MMBDirection.West || exitDir == MMBDirection.Down) && dist > 1)
 							{
-								if (exitDir == MMBDirection.North || exitDir == MMBDirection.Up)
-								{
-									continue;
-								}
-
-								if ((exitDir == MMBDirection.South || exitDir == MMBDirection.Down) && dist > 1)
-								{
-									continue;
-								}
+								continue;
 							}
-							else
-							{
-								if (exitDir == MMBDirection.South || exitDir == MMBDirection.Down)
-								{
-									continue;
-								}
-
-								if ((exitDir == MMBDirection.North || exitDir == MMBDirection.Up) && dist > 1)
-								{
-									continue;
-								}
-							}
-
-							toProcess.Add(targetRoom.Id);
 						}
 
-						// Finally move the room
-						sourceForce.Y += delta;
-						movedRooms[id] = sourceForce;
+						toProcess.Add(targetRoom.Id);
 					}
+
+					// Finally move the room
+					sourceForce.X += delta;
+					movedRooms[id] = sourceForce;
 				}
-			} else
+			}
+
+			// Vertical movement
+			for (var y = 0; y < Math.Abs(forceVector.Y); ++y)
 			{
-				// Move just the room
-				movedRooms[firstRoomId] = forceVector;
+				var toProcess = new IdQueue(firstRoomId);
+				while (toProcess.Count > 0)
+				{
+					var id = toProcess.Pop();
+					Point sourceForce;
+					if (!movedRooms.TryGetValue(id, out sourceForce))
+					{
+						sourceForce = new Point();
+					}
+
+					var delta = Math.Sign(forceVector.Y);
+
+					var room = GetRoomById(id);
+					var pos = room.Position.Value;
+					pos.X += sourceForce.X;
+					pos.Y += sourceForce.Y;
+
+					// Process neighbour rooms
+					foreach (var pair in room.Connections)
+					{
+						var exitDir = pair.Key;
+
+						var targetRoom = GetRoomById(pair.Value.RoomId);
+						if (targetRoom.Position == null || toProcess.Contains(targetRoom.Id))
+						{
+							continue;
+						}
+
+						// Skip broken connections
+						var targetPos = targetRoom.Position.Value;
+						Point targetForce;
+						if (movedRooms.TryGetValue(targetRoom.Id, out targetForce))
+						{
+							targetPos.X += targetForce.X;
+							targetPos.Y += targetForce.Y;
+						}
+
+						if (!IsConnectionStraight(pos, targetPos, exitDir))
+						{
+							continue;
+						}
+
+						var dist = Math.Abs(targetPos.Y - pos.Y);
+						if (delta == 1)
+						{
+							if (exitDir == MMBDirection.North || exitDir == MMBDirection.Up)
+							{
+								continue;
+							}
+
+							if ((exitDir == MMBDirection.South || exitDir == MMBDirection.Down) && dist > 1)
+							{
+								continue;
+							}
+						}
+						else
+						{
+							if (exitDir == MMBDirection.South || exitDir == MMBDirection.Down)
+							{
+								continue;
+							}
+
+							if ((exitDir == MMBDirection.North || exitDir == MMBDirection.Up) && dist > 1)
+							{
+								continue;
+							}
+						}
+
+						toProcess.Add(targetRoom.Id);
+					}
+
+					// Finally move the room
+					sourceForce.Y += delta;
+					movedRooms[id] = sourceForce;
+				}
 			}
 
 			// Remove overlapped rooms

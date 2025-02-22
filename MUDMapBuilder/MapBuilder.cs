@@ -126,9 +126,9 @@ namespace MUDMapBuilder
 		private bool AddRunStep() => InternalAddRunStep(Options.MaxSteps ?? 1000);
 		private bool AddCompactRunStep() => InternalAddRunStep(Options.MaxCompactSteps ?? 10000);
 
-		private bool PushRoom(MMBArea rooms, int firstRoomId, Point firstForceVector, bool measureRun, bool pushNeighbors, out int roomsRemoved)
+		private bool PushRoom(MMBArea rooms, int firstRoomId, Point firstForceVector, bool measureRun, out int roomsRemoved)
 		{
-			var measure = rooms.MeasurePushRoom(firstRoomId, firstForceVector, pushNeighbors);
+			var measure = rooms.MeasurePushRoom(firstRoomId, firstForceVector);
 
 			roomsRemoved = measure.DeletedRooms.Length;
 
@@ -197,7 +197,7 @@ namespace MUDMapBuilder
 			return true;
 		}
 
-		private StraightenConnectionResult TryStraightenConnection(int sourceRoomId, int targetRoomId, MMBDirection direction, bool pushNeighbors)
+		private StraightenConnectionResult TryStraightenConnection(int sourceRoomId, int targetRoomId, MMBDirection direction)
 		{
 			var rooms = Area.Clone();
 
@@ -206,23 +206,12 @@ namespace MUDMapBuilder
 			var sourcePos = sourceRoom.Position.Value;
 			var targetPos = targetRoom.Position.Value;
 
-			Point desiredPos;
-
-			if (pushNeighbors)
-			{
-				desiredPos = CalculateDesiredPosition(sourcePos, targetPos, direction);
-			}
-			else
-			{
-				// If moving without neighbor than try to place it right next to the sourcePos
-				var d = direction.GetDelta();
-				desiredPos = new Point(sourcePos.X + d.X, sourcePos.Y + d.Y);
-			}
+			var desiredPos = CalculateDesiredPosition(sourcePos, targetPos, direction);
 
 			var delta = new Point(desiredPos.X - targetPos.X, desiredPos.Y - targetPos.Y);
 
 			int roomsRemoved;
-			PushRoom(rooms, targetRoomId, delta, true, pushNeighbors, out roomsRemoved);
+			PushRoom(rooms, targetRoomId, delta, true, out roomsRemoved);
 
 			var vc = rooms.BrokenConnections;
 			return new StraightenConnectionResult(rooms, delta, roomsRemoved, vc);
@@ -308,12 +297,12 @@ namespace MUDMapBuilder
 			return false;
 		}
 
-		private StraightenRoomResult StraightenConnection(MMBRoom room1, MMBRoom room2, MMBDirection direction, bool pushNeighbors)
+		private StraightenRoomResult StraightenConnection(MMBRoom room1, MMBRoom room2, MMBDirection direction)
 		{
 			// Try to move room2
 			var vc = Area.BrokenConnections;
-			var result1 = TryStraightenConnection(room1.Id, room2.Id, direction, pushNeighbors);
-			var result2 = TryStraightenConnection(room2.Id, room1.Id, direction.GetOppositeDirection(), pushNeighbors);
+			var result1 = TryStraightenConnection(room1.Id, room2.Id, direction);
+			var result2 = TryStraightenConnection(room2.Id, room1.Id, direction.GetOppositeDirection());
 
 			var vc1 = result1.BrokenConnections;
 			var vc2 = result2.BrokenConnections;
@@ -348,9 +337,9 @@ namespace MUDMapBuilder
 				}
 			*/
 
-			if (moveSecond == null)
+			// If FixObstacles is set, then it's first criteria
+			if (moveSecond == null && FixObstacles)
 			{
-				// Second criteria - amount of non-obstacle connections fixed
 				if (vc1.WithObstacles.Count < vc2.WithObstacles.Count)
 				{
 					moveSecond = true;
@@ -374,6 +363,19 @@ namespace MUDMapBuilder
 				}
 			}
 
+			// If FixObstacles isn't set, then amount of fixed obstacles is 2nd criteria
+			if (moveSecond == null)
+			{
+				if (vc1.WithObstacles.Count < vc2.WithObstacles.Count)
+				{
+					moveSecond = true;
+				}
+				else if (vc1.WithObstacles.Count > vc2.WithObstacles.Count)
+				{
+					moveSecond = false;
+				}
+			}
+
 			if (moveSecond == null)
 			{
 				// Fourth criteria - amount of removed rooms
@@ -385,7 +387,7 @@ namespace MUDMapBuilder
 			if (moveSecond.Value)
 			{
 				// Move room2
-				if (!PushRoom(Area, room2.Id, result1.Delta, false, pushNeighbors, out roomsRemoved))
+				if (!PushRoom(Area, room2.Id, result1.Delta, false, out roomsRemoved))
 				{
 					return StraightenRoomResult.OutOfSteps;
 				}
@@ -394,7 +396,7 @@ namespace MUDMapBuilder
 			}
 
 			// Move room1
-			if (!PushRoom(Area, room1.Id, result2.Delta, false, pushNeighbors, out roomsRemoved))
+			if (!PushRoom(Area, room1.Id, result2.Delta, false, out roomsRemoved))
 			{
 				return StraightenRoomResult.OutOfSteps;
 			}
@@ -774,22 +776,11 @@ namespace MUDMapBuilder
 				var room2 = Area.GetRoomById(ns.TargetRoomId);
 
 				// Firstly try with neighbors
-				var srr = StraightenConnection(room1, room2, ns.Direction, true);
+				var srr = StraightenConnection(room1, room2, ns.Direction);
 				if (srr == StraightenRoomResult.Success)
 				{
 					fixes = true;
 					break;
-				}
-
-				if (srr == StraightenRoomResult.Fail)
-				{
-					// Now without neighbors
-					srr = StraightenConnection(room1, room2, ns.Direction, false);
-					if (srr == StraightenRoomResult.Success)
-					{
-						fixes = true;
-						break;
-					}
 				}
 
 				switch (srr)

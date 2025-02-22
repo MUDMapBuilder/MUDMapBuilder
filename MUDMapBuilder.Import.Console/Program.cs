@@ -73,7 +73,8 @@ namespace MUDMapBuilder.Import
 			}
 			else
 			{
-				importer = new DikuLoad.Import.CSL.Importer(folder);
+				var settings = new DikuLoad.Import.CSL.ImporterSettings(folder);
+				importer = new DikuLoad.Import.CSL.Importer(settings);
 			}
 
 			importer.Process();

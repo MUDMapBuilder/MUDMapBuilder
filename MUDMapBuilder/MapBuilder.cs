@@ -350,9 +350,9 @@ namespace MUDMapBuilder
 				}
 			}
 
+			// Second criteria - amount of non-straight connections fixed
 			if (moveSecond == null)
 			{
-				// Third criteria - amount of non-straight connections fixed
 				if (vc1.NonStraight.Count < vc2.NonStraight.Count)
 				{
 					moveSecond = true;
@@ -376,9 +376,9 @@ namespace MUDMapBuilder
 				}
 			}
 
+			// Third criteria - amount of removed rooms
 			if (moveSecond == null)
 			{
-				// Fourth criteria - amount of removed rooms
 				moveSecond = result1.RoomsRemoved < result2.RoomsRemoved;
 			}
 

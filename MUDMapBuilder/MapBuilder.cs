@@ -402,6 +402,165 @@ namespace MUDMapBuilder
 			return StraightenRoomResult.Success;
 		}
 
+		/*		private bool CompactRun(MMBDirection pushDirection)
+				{
+					Log($"Compacting map to the {pushDirection}");
+
+					bool continuePush;
+
+					do
+					{
+						continuePush = false;
+						foreach (var room in Area.Rooms)
+						{
+							if (room.Position == null)
+							{
+								continue;
+							}
+
+							var sourcePos = room.Position.Value;
+							foreach (var pair in room.Connections)
+							{
+								if (pair.Key != pushDirection)
+								{
+									continue;
+								}
+
+								var targetRoom = Area.GetRoomById(pair.Value.RoomId);
+								if (targetRoom.Position == null)
+								{
+									continue;
+								}
+
+								var targetPos = targetRoom.Position.Value;
+
+								// Skip broken connections
+								if (!MMBArea.IsConnectionStraight(sourcePos, targetPos, pushDirection))
+								{
+									continue;
+								}
+
+								int delta = 0;
+								if (pushDirection.IsHorizontal())
+								{
+									delta = Math.Abs(targetPos.X - sourcePos.X);
+								}
+								else
+								{
+									delta = Math.Abs(targetPos.Y - sourcePos.Y);
+								}
+
+								if (delta < 2)
+								{
+									continue;
+								}
+
+								if (targetRoom.Id == 5106)
+								{
+									var k = 5;
+								}
+
+								for (var force = delta - 1; force > 0; --force)
+								{
+									Point forceVector;
+									switch (pushDirection)
+									{
+										case MMBDirection.East:
+											forceVector = new Point(-force, 0);
+											break;
+
+										case MMBDirection.South:
+											forceVector = new Point(0, -force);
+											break;
+
+										default:
+											throw new Exception($"Compact direction {pushDirection} isn't supported.");
+									}
+
+									// Test on clone
+									var clone = Area.Clone();
+									var measure = clone.MeasurePushRoom(targetRoom.Id, forceVector, true);
+									if (measure.DeletedRooms.Length > 0)
+									{
+										continue;
+									}
+
+									foreach (var m in measure.MovedRooms)
+									{
+										var newPos = new Point(m.Room.Position.Value.X + m.Delta.X, m.Room.Position.Value.Y + m.Delta.Y);
+
+										m.Room.Position = newPos;
+									}
+
+									// Check whether distance between source and target rooms decreased on the required amount
+									var sourceRoomClone = clone.GetRoomById(room.Id);
+									var targetRoomClone = clone.GetRoomById(targetRoom.Id);
+
+									var newDelta = 0;
+									if (pushDirection.IsHorizontal())
+									{
+										newDelta = Math.Abs(targetRoomClone.Position.Value.X - sourceRoomClone.Position.Value.X);
+									}
+									else
+									{
+										newDelta = Math.Abs(targetRoomClone.Position.Value.Y - sourceRoomClone.Position.Value.Y);
+									}
+
+									if (newDelta != delta - force)
+									{
+										continue;
+									}
+
+									var vc = Area.BrokenConnections;
+									var vc2 = clone.BrokenConnections;
+									if (vc2.WithObstacles.Count > vc.WithObstacles.Count ||
+										vc2.NonStraight.Count > vc.NonStraight.Count ||
+										vc2.Intersections.Count > vc.Intersections.Count)
+									{
+										// Such push would break some room connections
+										// Or introduce new long connections
+										continue;
+									}
+
+									// All checks passed, do the actual push
+									measure = Area.MeasurePushRoom(targetRoom.Id, forceVector, true);
+
+									// Mark the movement
+									foreach (var m in measure.MovedRooms)
+									{
+										m.Room.ForceMark = m.Delta;
+									}
+
+									if (!AddCompactRunStep())
+									{
+										return false;
+									}
+
+									// Do the move
+									Area.ClearMarks();
+									foreach (var m in measure.MovedRooms)
+									{
+										var newPos = new Point(m.Room.Position.Value.X + m.Delta.X,
+										m.Room.Position.Value.Y + m.Delta.Y);
+
+										m.Room.Position = newPos;
+									}
+
+									if (!AddCompactRunStep())
+									{
+										return false;
+									}
+
+									continuePush = true;
+									break;
+								}
+							}
+						}
+					} while (continuePush);
+
+					return AddCompactRunStep();
+				}*/
+
 		private bool CompactRun(MMBDirection pushDirection)
 		{
 			Log($"Compacting map to the {pushDirection}");
@@ -1089,7 +1248,7 @@ namespace MUDMapBuilder
 				rooms.Add(r);
 			}
 
-			foreach(var pair in d)
+			foreach (var pair in d)
 			{
 				if (pair.Value.Count <= 1)
 				{
@@ -1133,10 +1292,12 @@ namespace MUDMapBuilder
 				if (br1.ResultType == ResultType.Success && br2.ResultType != ResultType.Success)
 				{
 					buildResult = br1;
-				} else if (br1.ResultType != ResultType.Success && br2.ResultType == ResultType.Success)
+				}
+				else if (br1.ResultType != ResultType.Success && br2.ResultType == ResultType.Success)
 				{
 					buildResult = br2;
-				} else if (br1.ResultType == ResultType.Success && br2.ResultType == ResultType.Success)
+				}
+				else if (br1.ResultType == ResultType.Success && br2.ResultType == ResultType.Success)
 				{
 					var last1 = br1.Last;
 					var last2 = br2.Last;
@@ -1144,7 +1305,8 @@ namespace MUDMapBuilder
 					if (last1.BrokenConnections.NonStraight.Count < last2.BrokenConnections.NonStraight.Count)
 					{
 						buildResult = br1;
-					} else
+					}
+					else
 					{
 						buildResult = br2;
 					}

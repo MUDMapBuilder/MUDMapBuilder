@@ -859,20 +859,18 @@ namespace MUDMapBuilder
 					while (toProcess.Count > 0)
 					{
 						var id = toProcess.Pop();
-						Point f;
-						if (!movedRooms.TryGetValue(id, out f))
+						Point sourceForce;
+						if (!movedRooms.TryGetValue(id, out sourceForce))
 						{
-							f = new Point();
+							sourceForce = new Point();
 						}
 
 						var delta = Math.Sign(forceVector.X);
-						f.X += delta;
-						movedRooms[id] = f;
 
 						var room = GetRoomById(id);
 						var pos = room.Position.Value;
-						pos.X += f.X;
-						pos.Y += f.Y;
+						pos.X += sourceForce.X;
+						pos.Y += sourceForce.Y;
 
 						// Process neighbour rooms
 						foreach (var pair in room.Connections)
@@ -886,40 +884,42 @@ namespace MUDMapBuilder
 							}
 
 							// Skip broken connections
-							if (!IsConnectionStraight(room.Position.Value, targetRoom.Position.Value, exitDir))
+							var targetPos = targetRoom.Position.Value;
+							Point targetForce;
+							if (movedRooms.TryGetValue(targetRoom.Id, out targetForce))
+							{
+								targetPos.X += targetForce.X;
+								targetPos.Y += targetForce.Y;
+							}
+							
+							if (!IsConnectionStraight(pos, targetPos, exitDir))
 							{
 								continue;
 							}
 
 							// Skip horizontal connection to the opposite direction
 							// Or horizontal connection to the same direction longer than 1
-							var targetPosX = targetRoom.Position.Value.X;
-							if (movedRooms.TryGetValue(targetRoom.Id, out f))
-							{
-								targetPosX += f.X;
-							}
-
-							var dist = Math.Abs(targetPosX - pos.X);
+							var dist = Math.Abs(targetPos.X - pos.X);
 							if (delta == 1)
 							{
-								if (exitDir == MMBDirection.West)
+								if (exitDir == MMBDirection.West || exitDir == MMBDirection.Down)
 								{
 									continue;
 								}
 
-								if (exitDir == MMBDirection.East && dist > 1)
+								if ((exitDir == MMBDirection.East || exitDir == MMBDirection.Up) && dist > 1)
 								{
 									continue;
 								}
 							}
 							else
 							{
-								if (exitDir == MMBDirection.East)
+								if (exitDir == MMBDirection.East || exitDir == MMBDirection.Up)
 								{
 									continue;
 								}
 
-								if (exitDir == MMBDirection.West && dist > 1)
+								if ((exitDir == MMBDirection.West || exitDir == MMBDirection.Down) && dist > 1)
 								{
 									continue;
 								}
@@ -927,6 +927,10 @@ namespace MUDMapBuilder
 
 							toProcess.Add(targetRoom.Id);
 						}
+
+						// Finally move the room
+						sourceForce.X += delta;
+						movedRooms[id] = sourceForce;
 					}
 				}
 
@@ -937,20 +941,18 @@ namespace MUDMapBuilder
 					while (toProcess.Count > 0)
 					{
 						var id = toProcess.Pop();
-						Point f;
-						if (!movedRooms.TryGetValue(id, out f))
+						Point sourceForce;
+						if (!movedRooms.TryGetValue(id, out sourceForce))
 						{
-							f = new Point();
+							sourceForce = new Point();
 						}
 
 						var delta = Math.Sign(forceVector.Y);
-						f.Y += delta;
-						movedRooms[id] = f;
 
 						var room = GetRoomById(id);
 						var pos = room.Position.Value;
-						pos.X += f.X;
-						pos.Y += f.Y;
+						pos.X += sourceForce.X;
+						pos.Y += sourceForce.Y;
 
 						// Process neighbour rooms
 						foreach (var pair in room.Connections)
@@ -964,40 +966,40 @@ namespace MUDMapBuilder
 							}
 
 							// Skip broken connections
-							if (!IsConnectionStraight(room.Position.Value, targetRoom.Position.Value, exitDir))
+							var targetPos = targetRoom.Position.Value;
+							Point targetForce;
+							if (movedRooms.TryGetValue(targetRoom.Id, out targetForce))
+							{
+								targetPos.X += targetForce.X;
+								targetPos.Y += targetForce.Y;
+							}
+
+							if (!IsConnectionStraight(pos, targetPos, exitDir))
 							{
 								continue;
 							}
 
-							// Skip vertical connection to the opposite direction
-							// Or vertical connection to the same direction longer than 1
-							var targetPosY = targetRoom.Position.Value.Y;
-							if (movedRooms.TryGetValue(targetRoom.Id, out f))
-							{
-								targetPosY += f.Y;
-							}
-
-							var dist = Math.Abs(targetPosY - pos.Y);
+							var dist = Math.Abs(targetPos.Y - pos.Y);
 							if (delta == 1)
 							{
-								if (exitDir == MMBDirection.North)
+								if (exitDir == MMBDirection.North || exitDir == MMBDirection.Up)
 								{
 									continue;
 								}
 
-								if (exitDir == MMBDirection.South && dist > 1)
+								if ((exitDir == MMBDirection.South || exitDir == MMBDirection.Down) && dist > 1)
 								{
 									continue;
 								}
 							}
 							else
 							{
-								if (exitDir == MMBDirection.South)
+								if (exitDir == MMBDirection.South || exitDir == MMBDirection.Down)
 								{
 									continue;
 								}
 
-								if (exitDir == MMBDirection.North && dist > 1)
+								if ((exitDir == MMBDirection.North || exitDir == MMBDirection.Up) && dist > 1)
 								{
 									continue;
 								}
@@ -1005,12 +1007,33 @@ namespace MUDMapBuilder
 
 							toProcess.Add(targetRoom.Id);
 						}
+
+						// Finally move the room
+						sourceForce.Y += delta;
+						movedRooms[id] = sourceForce;
 					}
 				}
 			} else
 			{
 				// Move just the room
 				movedRooms[firstRoomId] = forceVector;
+			}
+
+			// Remove overlapped rooms
+			var roomsByPos = ToRoomsByPos(movedRooms);
+			foreach (var rooms in roomsByPos)
+			{
+				if (rooms.Count < 2)
+				{
+					continue;
+				}
+
+				var pos = rooms[0].Item2;
+				for (var i = 1; i < rooms.Count; ++i)
+				{
+					var room = rooms[i];
+					movedRooms.Remove(room.Item1.Id);
+				}
 			}
 
 			// Now build deletion list of non-moved rooms
@@ -1025,23 +1048,6 @@ namespace MUDMapBuilder
 				if (existingRoom != null && !movedRooms.ContainsKey(existingRoom.Id))
 				{
 					deletedRooms.Add(existingRoom.Id);
-				}
-			}
-
-			var roomsByPos = ToRoomsByPos(movedRooms);
-			foreach(var rooms in roomsByPos)
-			{
-				if (rooms.Count < 2)
-				{
-					continue;
-				}
-
-				for(var i = 1; i < rooms.Count; ++i)
-				{
-					var room = rooms[i];
-
-					movedRooms.Remove(room.Item1.Id);
-					deletedRooms.Add(room.Item1.Id);
 				}
 			}
 

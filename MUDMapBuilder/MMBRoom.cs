@@ -64,6 +64,9 @@ namespace MUDMapBuilder
 		[JsonIgnore]
 		public MMBConnectionType ConnectionType { get; set; }
 
+		[JsonIgnore]
+		public bool IsDoorWithKey => IsDoor && DoorSigns != null && DoorSigns.Count > 0;
+
 		public MMBRoomConnection()
 		{
 		}

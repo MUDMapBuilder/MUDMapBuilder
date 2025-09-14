@@ -19,7 +19,8 @@ namespace MUDMapBuilder
 				return;
 			}
 
-			var pngData = buildResult.Last.BuildPng().PngData;
+			var addDebugInfo = project.BuildOptions != null && project.BuildOptions.AddDebugInfo;
+			var pngData = buildResult.Last.BuildPng(addDebugInfo).PngData;
 			File.WriteAllBytes(outputPath, pngData);
 
 			if (buildResult.ResultType != ResultType.Success)

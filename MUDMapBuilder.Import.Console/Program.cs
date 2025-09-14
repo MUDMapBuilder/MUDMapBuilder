@@ -64,6 +64,9 @@ namespace MUDMapBuilder.Import
 			{
 				sourceType = SourceType.Circle;
 				subSourceType = SubSourceType.Crimson;
+			} else if (mudName.Equals("SoulMUD", StringComparison.OrdinalIgnoreCase))
+			{
+				sourceType = SourceType.Soulmud;
 			}
 
 			if (sourceType != null)
@@ -97,7 +100,7 @@ namespace MUDMapBuilder.Import
 				{
 					if (allMobiles.ContainsKey(mobile.VNum))
 					{
-						throw new Exception($"Dublicate mobile. New mobile: {mobile}. Old mobile: {allMobiles[mobile.VNum]}");
+//						throw new Exception($"Dublicate mobile. New mobile: {mobile}. Old mobile: {allMobiles[mobile.VNum]}");
 					}
 
 					allMobiles[mobile.VNum] = mobile;

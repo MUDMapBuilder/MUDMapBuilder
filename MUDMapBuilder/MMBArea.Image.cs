@@ -303,6 +303,15 @@ namespace MUDMapBuilder
 									continue;
 								}
 
+								// If connection is two way and there's door with key on opposite side,
+								// then skip drawing this connection
+								if (pair.Value.ConnectionType == MMBConnectionType.TwoWay &&
+									!pair.Value.IsDoorWithKey &&
+									targetRoom.Connections[exitDir.GetOppositeDirection()].IsDoorWithKey)
+								{
+									continue;
+								}
+
 								var ct = ConnectionType.Straight;
 								switch (exitDir)
 								{
